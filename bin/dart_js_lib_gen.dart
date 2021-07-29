@@ -46,8 +46,8 @@ class Visitor {
   late ClassBuilder cls;
   Map<String, Reference> factoryParams = {};
   Visitor(String libraryName) {
-    lib.body.add(CodeExpression(
-        const Code('// ignore_for_file: non_constant_identifier_names, private_optional_parameter, unused_element\n')));
+    lib.body.add(CodeExpression(const Code(
+        '\n// ignore_for_file: non_constant_identifier_names, private_optional_parameter, unused_element\n')));
     lib.name = libraryName;
     lib.annotations.add(JS.call(const []));
     lib.directives.add(Directive.import("package:js/js.dart"));
@@ -109,6 +109,8 @@ class Visitor {
         return visitGetter(json);
       case 'TsSetterSignature':
         return visitSetter(json);
+      case 'TsIndexSignature':
+        return visitIndexSignature(json);
     }
     print(const JsonEncoder.withIndent("  ").convert(json));
     throw UnimplementedError(json['type']);
@@ -209,6 +211,11 @@ class Visitor {
           }
         }
         return b.build();
+      case 'TsLiteralType':
+        switch (json['literal']['type']) {
+          case 'BooleanLiteral':
+            return refer('bool');
+        }
     }
     print(json);
     throw UnimplementedError('Cannot resolve type ${json['type']}');
@@ -292,6 +299,11 @@ class Visitor {
     return true;
   }
 
+  bool visitIndexSignature(Map<String, dynamic> json) {
+    print('// TODO: TsIndexSignature');
+    return true;
+  }
+
   void visitBody(Map<String, dynamic> json) => AstNode.fromMap(json['body']).accept(this);
 
   void exitElement(Map<String, dynamic> json) {
@@ -338,7 +350,8 @@ class AstNode {
     'VariableDeclarator': null,
     // 'TsMethodSignature': null,
     'TsGetterSignature': null,
-    'TsSetterSignature': null
+    'TsSetterSignature': null,
+    'TsIndexSignature': null,
   };
 
   static AstNode fromMap(dynamic json) => AstNode(json as Map<String, dynamic>);
