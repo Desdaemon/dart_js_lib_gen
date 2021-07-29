@@ -9,3 +9,5 @@ build/
 # Added by cargo
 
 /target
+**/*.swp
+**/*.jit
