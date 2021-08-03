@@ -11,6 +11,7 @@ use swc_common::{
 };
 use swc_ecma_ast::Module;
 use swc_ecma_parser::{lexer::Lexer, Parser, StringInput, Syntax};
+use transform::Transformer;
 
 #[derive(Deserialize)]
 pub struct Config {
@@ -31,6 +32,36 @@ pub extern "C" fn parse(config_json: *const c_char) -> *mut c_char {
     CString::new(serde_json::to_string(&modules).expect("failed to serialize modules"))
         .expect("failed to create CString")
         .into_raw()
+}
+
+#[no_mangle]
+pub extern "C" fn parse_library(config_json: *const c_char) -> *mut c_char {
+    let config = unsafe { CStr::from_ptr(config_json) };
+    let config = serde_json::from_str::<Config>(
+        config.to_str().expect("received config is not valid utf-8"),
+    )
+    .expect("could not deserialize config");
+    let modules = parse_impl(config);
+    let ret: HashMap<PathBuf, String> = modules
+        .into_iter()
+        .map(|(key, val)| {
+            let library_name = path_to_lib_name(&key);
+            (key, Transformer::visit_program(&val, &library_name, None))
+        })
+        .collect();
+    CString::new(serde_json::to_string(&ret).unwrap())
+        .unwrap()
+        .into_raw()
+}
+
+pub fn path_to_lib_name(buf: &PathBuf) -> String {
+    buf.components()
+        .filter_map(|e| match e {
+            std::path::Component::Normal(item) => Some(item.to_string_lossy()),
+            _ => None,
+        })
+        .collect::<Vec<_>>()
+        .join(".")
 }
 
 pub fn parse_impl(config: Config) -> HashMap<PathBuf, Module> {

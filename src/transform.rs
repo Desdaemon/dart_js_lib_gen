@@ -1,11 +1,9 @@
-use std::collections::HashMap;
-
 use swc_ecma_ast::*;
 
 pub struct Transformer {
     path: Vec<String>,
     buf: String,
-    fields: Vec<(String, String)>,
+    fields: Option<(String, Vec<(String, String)>)>,
 }
 impl Transformer {
     pub fn visit_program(module: &Module, library_name: &str, size_hint: Option<usize>) -> String {
@@ -16,12 +14,13 @@ impl Transformer {
         let mut t = Self {
             path: vec![],
             buf,
-            fields: vec![],
+            fields: None,
         };
 
         t.push("@JS() library ");
         t.push(library_name);
-        t.push(";import 'package:js/js.dart';");
+        t.push(";\n// ignore_for_file: non_constant_identifier_names, private_optional_parameter, unused_element\n");
+        t.push("import 'package:js/js.dart';");
         t.visit_module_item(&module.body);
         t.buf
     }
@@ -75,6 +74,9 @@ impl Transformer {
             }
             self.buf.push(',');
         }
+        if !params.is_empty() {
+            self.buf.pop();
+        }
         self.buf.push(')');
     }
 
@@ -99,6 +101,8 @@ impl Transformer {
         if let Some(ann) = &func.function.type_params {
             self.visit_type_params(Some(ann));
         }
+        self.buf.push(' ');
+        self.push(&func.ident.sym);
         self.visit_params(&func.function.params);
         self.semi();
     }
@@ -154,18 +158,22 @@ impl Transformer {
         self.push(&alias.id.sym);
         self.visit_type_params(alias.type_params.as_ref());
         self.buf.push('=');
+        self.visit_type(alias.type_ann.as_ref());
+        self.semi();
     }
 
     fn visit_statement(&mut self, stmt: &Stmt) {
         if let Stmt::Decl(decl) = stmt {
             match decl {
-                swc_ecma_ast::Decl::Class(_) => todo!(),
                 swc_ecma_ast::Decl::Fn(func) => self.visit_function(func),
                 swc_ecma_ast::Decl::Var(var) => self.visit_variable(var),
                 swc_ecma_ast::Decl::TsInterface(intr) => self.visit_interface(intr),
                 swc_ecma_ast::Decl::TsTypeAlias(typ) => self.visit_type_alias(typ),
-                swc_ecma_ast::Decl::TsEnum(_) => todo!(),
                 swc_ecma_ast::Decl::TsModule(module) => self.visit_module(module),
+                other => {
+                    dbg!(other);
+                    todo!();
+                }
             }
         }
     }
@@ -173,31 +181,61 @@ impl Transformer {
     fn visit_interface_body(&mut self, body: &TsInterfaceBody) {
         for item in &body.body {
             match item {
-                swc_ecma_ast::TsTypeElement::TsCallSignatureDecl(_) => todo!(),
-                swc_ecma_ast::TsTypeElement::TsConstructSignatureDecl(_) => todo!(),
                 swc_ecma_ast::TsTypeElement::TsPropertySignature(prop) => {
-                    // external T
-                    self.push("external ");
-                    if let Some(ann) = &prop.type_ann {
-                        self.visit_type(&ann.type_ann);
-                    }
-                    if let Some(param) = &prop.type_params {
-                        self.visit_type_params(Some(param))
-                    }
-                    if prop.optional {
-                        self.buf.push('?');
-                    }
+                    let mut make_prop = |setter: bool| {
+                        self.push("external ");
+                        if !setter {
+                            if let Some(ann) = &prop.type_ann {
+                                self.visit_type(&ann.type_ann);
+                            }
+                            if let Some(param) = &prop.type_params {
+                                self.visit_type_params(Some(param))
+                            }
+                            if prop.optional {
+                                self.buf.push('?');
+                            }
+                        }
+                        self.push(if setter { " set " } else { " get " });
+                        if let Expr::Ident(ident) = &prop.key.as_ref() {
+                            self.push(&ident.sym);
+                        } else {
+                            todo!()
+                        }
+                        if setter {
+                            self.buf.push('(');
+                            if let Some(ann) = &prop.type_ann {
+                                self.visit_type(&ann.type_ann);
+                            }
+                            if let Some(param) = &prop.type_params {
+                                self.visit_type_params(Some(param))
+                            }
+                            if prop.optional {
+                                self.buf.push('?');
+                            }
+                            self.push(" value)");
+                        }
+                        self.semi();
+                    };
+                    make_prop(false);
+                    make_prop(true);
                 }
-                swc_ecma_ast::TsTypeElement::TsGetterSignature(_) => todo!(),
-                swc_ecma_ast::TsTypeElement::TsSetterSignature(_) => todo!(),
-                swc_ecma_ast::TsTypeElement::TsMethodSignature(_) => todo!(),
-                swc_ecma_ast::TsTypeElement::TsIndexSignature(_) => todo!(),
+                swc_ecma_ast::TsTypeElement::TsMethodSignature(met) => self.visit_method(met),
+                other => {
+                    dbg!(other);
+                    todo!();
+                }
             }
         }
     }
 
+    fn visit_method(&mut self, met: &TsMethodSignature) {
+        dbg!(met);
+        todo!();
+    }
+
     fn emit_factory_constr(&mut self) {
         // todo!();
+        self.fields.take();
     }
 
     fn visit_type_params(&mut self, params: Option<&TsTypeParamDecl>) {
@@ -211,6 +249,7 @@ impl Transformer {
                 }
                 self.buf.push(',');
             }
+            self.buf.pop();
             self.buf.push('>');
         }
     }
@@ -242,25 +281,56 @@ impl Transformer {
                 }
                 _ => self.push("dynamic"),
             },
-            TsType::TsFnOrConstructorType(_) => todo!(),
+            TsType::TsFnOrConstructorType(func) => match func {
+                TsFnOrConstructorType::TsFnType(func) => {
+                    // Output Function(..)
+                    self.visit_type(&func.type_ann.type_ann);
+                    self.push(" Function");
+                    if let Some(ann) = &func.type_params {
+                        self.visit_type_params(Some(ann))
+                    }
+                    self.buf.push('(');
+                    for item in &func.params {
+                        match item {
+                            TsFnParam::Ident(ident) => {
+                                if let Some(ann) = &ident.type_ann {
+                                    self.visit_type(&ann.type_ann);
+                                } else {
+                                    self.push("dynamic");
+                                }
+                                self.buf.push(' ');
+                                self.push(&ident.id.sym);
+                            }
+                            TsFnParam::Array(_) => todo!(),
+                            TsFnParam::Rest(_) => todo!(),
+                            TsFnParam::Object(_) => todo!(),
+                        }
+                        self.buf.push(',');
+                    }
+                    self.buf.pop();
+                    self.buf.push(')');
+                }
+                TsFnOrConstructorType::TsConstructorType(_) => todo!(),
+            },
             TsType::TsTypeRef(re) => {
                 self.visit_entity_name(&re.type_name);
                 if let Some(para) = &re.type_params {
                     self.buf.push('<');
                     for item in &para.params {
-                        self.visit_type(&*item);
+                        self.visit_type(&item);
                         self.buf.push(',');
                     }
+                    self.buf.pop();
                     self.buf.push('>');
                 }
             }
             TsType::TsArrayType(arr) => {
                 self.push("List<");
-                self.visit_type(&*arr.elem_type);
+                self.visit_type(&arr.elem_type);
                 self.buf.push('>');
             }
             TsType::TsOptionalType(typ) => {
-                self.visit_type(&*typ.type_ann);
+                self.visit_type(&typ.type_ann);
                 self.buf.push('?');
             }
             TsType::TsLitType(TsLitType { lit, .. }) => match lit {
@@ -268,6 +338,26 @@ impl Transformer {
                 swc_ecma_ast::TsLit::Str(_) | swc_ecma_ast::TsLit::Tpl(_) => self.push("String"),
                 swc_ecma_ast::TsLit::Bool(_) => self.push("bool"),
             },
+            TsType::TsUnionOrIntersectionType(TsUnionOrIntersectionType::TsUnionType(uni)) => {
+                let simple_union: Vec<_> = uni
+                    .types
+                    .iter()
+                    .filter(|e| match e.as_ref() {
+                        TsType::TsKeywordType(TsKeywordType { kind, .. }) => match kind {
+                            TsKeywordTypeKind::TsUndefinedKeyword
+                            | TsKeywordTypeKind::TsNullKeyword => false,
+                            _ => true,
+                        },
+                        _ => true,
+                    })
+                    .collect();
+                if simple_union.len() == 1 {
+                    self.visit_type(simple_union.first().unwrap().as_ref());
+                    self.buf.push('?');
+                } else {
+                    self.push("dynamic");
+                }
+            }
             _ => self.push("dynamic"),
         };
     }
@@ -280,17 +370,16 @@ impl Transformer {
                 swc_ecma_ast::Decl::Var(var) => self.visit_variable(var),
                 swc_ecma_ast::Decl::TsInterface(intr) => self.visit_interface(intr),
                 swc_ecma_ast::Decl::TsModule(module) => self.visit_module(module),
-                swc_ecma_ast::Decl::Class(_) => todo!(),
                 swc_ecma_ast::Decl::TsTypeAlias(alias) => self.visit_type_alias(alias),
-                swc_ecma_ast::Decl::TsEnum(_) => todo!(),
+                other => {
+                    dbg!(other);
+                    todo!();
+                }
             },
-            ModuleDecl::ExportNamed(_) => todo!(),
-            ModuleDecl::ExportDefaultDecl(_) => todo!(),
-            ModuleDecl::ExportDefaultExpr(_) => todo!(),
-            ModuleDecl::ExportAll(_) => todo!(),
-            ModuleDecl::TsImportEquals(_) => todo!(),
-            ModuleDecl::TsExportAssignment(_) => todo!(),
-            ModuleDecl::TsNamespaceExport(_) => todo!(),
+            other => {
+                dbg!(other);
+                todo!();
+            }
         }
     }
 }
