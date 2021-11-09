@@ -25,7 +25,7 @@ impl Transformer {
         t.buf
     }
 
-    fn visit_module_item(&mut self, items: &Vec<ModuleItem>) {
+    fn visit_module_item(&mut self, items: &[ModuleItem]) {
         items.iter().for_each(|e| match e {
             ModuleItem::ModuleDecl(decl) => self.visit_module_decl(decl),
             ModuleItem::Stmt(stmt) => self.visit_statement(stmt),
@@ -37,11 +37,10 @@ impl Transformer {
         self.buf.push_str(input)
     }
 
-    #[inline]
     fn annotate(&mut self, path_end: &str) {
         self.push("@JS('");
         for item in &self.path {
-            self.buf.push_str(&item);
+            self.buf.push_str(item);
             self.buf.push('.');
         }
         self.push(path_end);
@@ -53,7 +52,7 @@ impl Transformer {
         self.buf.push(';')
     }
 
-    fn visit_params(&mut self, params: &Vec<Param>) {
+    fn visit_params(&mut self, params: &[Param]) {
         self.buf.push('(');
         for item in params {
             match &item.pat {
@@ -64,13 +63,7 @@ impl Transformer {
                     self.buf.push(' ');
                     self.push(&ident.id.sym);
                 }
-                swc_ecma_ast::Pat::Array(_) => todo!(),
-                swc_ecma_ast::Pat::Rest(_) => todo!(),
-                swc_ecma_ast::Pat::Object(_) => todo!(),
-                // swc_ecma_ast::Pat::Assign(_) => todo!(),
-                // swc_ecma_ast::Pat::Invalid(_) => todo!(),
-                // swc_ecma_ast::Pat::Expr(_) => todo!(),
-                _ => self.push("dynamic _"),
+                _ => todo!(),
             }
             self.buf.push(',');
         }
@@ -163,17 +156,11 @@ impl Transformer {
     }
 
     fn visit_statement(&mut self, stmt: &Stmt) {
-        if let Stmt::Decl(decl) = stmt {
-            match decl {
-                swc_ecma_ast::Decl::Fn(func) => self.visit_function(func),
-                swc_ecma_ast::Decl::Var(var) => self.visit_variable(var),
-                swc_ecma_ast::Decl::TsInterface(intr) => self.visit_interface(intr),
-                swc_ecma_ast::Decl::TsTypeAlias(typ) => self.visit_type_alias(typ),
-                swc_ecma_ast::Decl::TsModule(module) => self.visit_module(module),
-                other => {
-                    dbg!(other);
-                    todo!();
-                }
+        match stmt {
+            Stmt::Decl(decl) => self.visit_decl(decl),
+            _ => {
+                dbg!(stmt);
+                todo!();
             }
         }
     }
@@ -188,9 +175,7 @@ impl Transformer {
                             if let Some(ann) = &prop.type_ann {
                                 self.visit_type(&ann.type_ann);
                             }
-                            if let Some(param) = &prop.type_params {
-                                self.visit_type_params(Some(param))
-                            }
+                            self.visit_type_params(prop.type_params.as_ref());
                             if prop.optional {
                                 self.buf.push('?');
                             }
@@ -234,8 +219,8 @@ impl Transformer {
     }
 
     fn emit_factory_constr(&mut self) {
-        // todo!();
-        self.fields.take();
+        dbg!(&self.fields);
+        todo!();
     }
 
     fn visit_type_params(&mut self, params: Option<&TsTypeParamDecl>) {
@@ -245,7 +230,7 @@ impl Transformer {
                 self.push(&item.name.sym);
                 if let Some(typ) = &item.constraint {
                     self.push(" extends ");
-                    self.visit_type(&typ);
+                    self.visit_type(typ);
                 }
                 self.buf.push(',');
             }
@@ -317,7 +302,7 @@ impl Transformer {
                 if let Some(para) = &re.type_params {
                     self.buf.push('<');
                     for item in &para.params {
-                        self.visit_type(&item);
+                        self.visit_type(item);
                         self.buf.push(',');
                     }
                     self.buf.pop();
@@ -334,20 +319,20 @@ impl Transformer {
                 self.buf.push('?');
             }
             TsType::TsLitType(TsLitType { lit, .. }) => match lit {
-                swc_ecma_ast::TsLit::Number(_) | swc_ecma_ast::TsLit::BigInt(_) => self.push("num"),
-                swc_ecma_ast::TsLit::Str(_) | swc_ecma_ast::TsLit::Tpl(_) => self.push("String"),
-                swc_ecma_ast::TsLit::Bool(_) => self.push("bool"),
+                TsLit::Number(_) | TsLit::BigInt(_) => self.push("num"),
+                TsLit::Str(_) | TsLit::Tpl(_) => self.push("String"),
+                TsLit::Bool(_) => self.push("bool"),
             },
             TsType::TsUnionOrIntersectionType(TsUnionOrIntersectionType::TsUnionType(uni)) => {
                 let simple_union: Vec<_> = uni
                     .types
                     .iter()
                     .filter(|e| match e.as_ref() {
-                        TsType::TsKeywordType(TsKeywordType { kind, .. }) => match kind {
+                        TsType::TsKeywordType(TsKeywordType { kind, .. }) => !matches!(
+                            kind,
                             TsKeywordTypeKind::TsUndefinedKeyword
-                            | TsKeywordTypeKind::TsNullKeyword => false,
-                            _ => true,
-                        },
+                                | TsKeywordTypeKind::TsNullKeyword
+                        ),
                         _ => true,
                     })
                     .collect();
@@ -362,22 +347,25 @@ impl Transformer {
         };
     }
 
+    fn visit_decl(&mut self, decl: &Decl) {
+        match decl {
+            Decl::Fn(func) => self.visit_function(func),
+            Decl::Var(var) => self.visit_variable(var),
+            Decl::TsInterface(intr) => self.visit_interface(intr),
+            Decl::TsModule(module) => self.visit_module(module),
+            Decl::TsTypeAlias(alias) => self.visit_type_alias(alias),
+            _ => {
+                dbg!(decl);
+                todo!();
+            }
+        }
+    }
+
     fn visit_module_decl(&mut self, decl: &ModuleDecl) {
         match decl {
-            ModuleDecl::Import(_) => todo!(),
-            ModuleDecl::ExportDecl(decl) => match &decl.decl {
-                swc_ecma_ast::Decl::Fn(func) => self.visit_function(func),
-                swc_ecma_ast::Decl::Var(var) => self.visit_variable(var),
-                swc_ecma_ast::Decl::TsInterface(intr) => self.visit_interface(intr),
-                swc_ecma_ast::Decl::TsModule(module) => self.visit_module(module),
-                swc_ecma_ast::Decl::TsTypeAlias(alias) => self.visit_type_alias(alias),
-                other => {
-                    dbg!(other);
-                    todo!();
-                }
-            },
-            other => {
-                dbg!(other);
+            ModuleDecl::ExportDecl(exp) => self.visit_decl(&exp.decl),
+            _ => {
+                dbg!(decl);
                 todo!();
             }
         }
