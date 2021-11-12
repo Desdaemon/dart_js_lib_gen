@@ -16,8 +16,9 @@ Future<void> main(List<String> arguments) async {
   final args = parser.parse(arguments);
   final bool write = args['write'];
   final bool format = args['format'];
-  final config = Config(inputs: args.rest);
-  stderr.writeln("Parsing ${arguments.length} modules.");
+  final rest = args.rest.where((e) => e.endsWith('dart'));
+  final config = Config(inputs: rest.toList(growable: false));
+  stderr.writeln("Parsing ${rest.length} modules.");
   final files = await api.parseLibrary(config: config);
   for (final file in files) {
     stderr.writeln("Formatting ${file.key}");
