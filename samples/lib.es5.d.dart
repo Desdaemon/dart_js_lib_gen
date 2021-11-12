@@ -91,13 +91,13 @@ class ObjectConstructor {
   external List<String> getOwnPropertyNames(dynamic o);
   external dynamic create(dynamic? o);
   external dynamic create(dynamic? o, dynamic properties);
-  external T defineProperty(T o, PropertyKey p, dynamic attributes);
-  external T defineProperties(T o, dynamic properties);
-  external T seal(T o);
-  external dynamic freeze(List<T> a);
-  external T freeze(T f);
-  external Readonly<T> freeze(T o);
-  external T preventExtensions(T o);
+  external T defineProperty<T>(T o, PropertyKey p, dynamic attributes);
+  external T defineProperties<T>(T o, dynamic properties);
+  external T seal<T>(T o);
+  external dynamic freeze<T>(List<T> a);
+  external T freeze<T extends Function>(T f);
+  external Readonly<T> freeze<T>(T o);
+  external T preventExtensions<T>(T o);
   external bool isSealed(dynamic o);
   external bool isFrozen(dynamic o);
   external bool isExtensible(dynamic o);
@@ -138,9 +138,9 @@ typedef OmitThisParameter<T> = dynamic;
 @JS()
 @anonymous
 class CallableFunction {
-  external R apply(T thisArg);
-  external R apply(T thisArg, A args);
-  external R call(
+  external R apply<T, R>(T thisArg);
+  external R apply<T, A extends List<dynamic>, R>(T thisArg, A args);
+  external R call<T, A extends List<dynamic>, R>(
     T thisArg, [
     A? args1,
     A? args2,
@@ -152,7 +152,7 @@ class CallableFunction {
     A? args8,
     A? args9,
   ]);
-  external OmitThisParameter<T> bind(ThisParameterType<T> thisArg);
+  external OmitThisParameter<T> bind<T>(ThisParameterType<T> thisArg);
   external R Function([
     A? args1,
     A? args2,
@@ -163,7 +163,7 @@ class CallableFunction {
     A? args7,
     A? args8,
     A? args9,
-  ]) bind(T thisArg, A0 arg0);
+  ]) bind<T, A0, A extends List<dynamic>, R>(T thisArg, A0 arg0);
   external R Function([
     A? args1,
     A? args2,
@@ -174,7 +174,7 @@ class CallableFunction {
     A? args7,
     A? args8,
     A? args9,
-  ]) bind(T thisArg, A0 arg0, A1 arg1);
+  ]) bind<T, A0, A1, A extends List<dynamic>, R>(T thisArg, A0 arg0, A1 arg1);
   external R Function([
     A? args1,
     A? args2,
@@ -185,7 +185,7 @@ class CallableFunction {
     A? args7,
     A? args8,
     A? args9,
-  ]) bind(T thisArg, A0 arg0, A1 arg1, A2 arg2);
+  ]) bind<T, A0, A1, A2, A extends List<dynamic>, R>(T thisArg, A0 arg0, A1 arg1, A2 arg2);
   external R Function([
     A? args1,
     A? args2,
@@ -196,7 +196,7 @@ class CallableFunction {
     A? args7,
     A? args8,
     A? args9,
-  ]) bind(T thisArg, A0 arg0, A1 arg1, A2 arg2, A3 arg3);
+  ]) bind<T, A0, A1, A2, A3, A extends List<dynamic>, R>(T thisArg, A0 arg0, A1 arg1, A2 arg2, A3 arg3);
   external R Function([
     AX? args1,
     AX? args2,
@@ -207,7 +207,7 @@ class CallableFunction {
     AX? args7,
     AX? args8,
     AX? args9,
-  ]) bind(
+  ]) bind<T, AX, R>(
     T thisArg, [
     AX? args1,
     AX? args2,
@@ -224,9 +224,9 @@ class CallableFunction {
 @JS()
 @anonymous
 class NewableFunction {
-  external dynamic apply(T thisArg);
-  external dynamic apply(T thisArg, A args);
-  external dynamic call(
+  external dynamic apply<T>(T thisArg);
+  external dynamic apply<T, A extends List<dynamic>>(T thisArg, A args);
+  external dynamic call<T, A extends List<dynamic>>(
     T thisArg, [
     A? args1,
     A? args2,
@@ -238,12 +238,13 @@ class NewableFunction {
     A? args8,
     A? args9,
   ]);
-  external T bind(dynamic thisArg);
-  external dynamic Function() bind(dynamic thisArg, A0 arg0);
-  external dynamic Function() bind(dynamic thisArg, A0 arg0, A1 arg1);
-  external dynamic Function() bind(dynamic thisArg, A0 arg0, A1 arg1, A2 arg2);
-  external dynamic Function() bind(dynamic thisArg, A0 arg0, A1 arg1, A2 arg2, A3 arg3);
-  external dynamic Function() bind(
+  external T bind<T>(dynamic thisArg);
+  external dynamic Function() bind<A0, A extends List<dynamic>, R>(dynamic thisArg, A0 arg0);
+  external dynamic Function() bind<A0, A1, A extends List<dynamic>, R>(dynamic thisArg, A0 arg0, A1 arg1);
+  external dynamic Function() bind<A0, A1, A2, A extends List<dynamic>, R>(dynamic thisArg, A0 arg0, A1 arg1, A2 arg2);
+  external dynamic Function() bind<A0, A1, A2, A3, A extends List<dynamic>, R>(
+      dynamic thisArg, A0 arg0, A1 arg1, A2 arg2, A3 arg3);
+  external dynamic Function() bind<AX, R>(
     dynamic thisArg, [
     AX? args1,
     AX? args2,
@@ -770,22 +771,22 @@ class ReadonlyArray<T> {
   external List<T> slice(num start, num end);
   external num indexOf(T searchElement, num fromIndex);
   external num lastIndexOf(T searchElement, num fromIndex);
-  external dynamic every(dynamic Function(T value, num index, dynamic array) predicate, dynamic thisArg);
+  external dynamic every<S extends T>(dynamic Function(T value, num index, dynamic array) predicate, dynamic thisArg);
   external bool every(dynamic Function(T value, num index, dynamic array) predicate, dynamic thisArg);
   external bool some(dynamic Function(T value, num index, dynamic array) predicate, dynamic thisArg);
   external dynamic forEach(dynamic Function(T value, num index, dynamic array) callbackfn, dynamic thisArg);
-  external List<U> map(U Function(T value, num index, dynamic array) callbackfn, dynamic thisArg);
-  external List<S> filter(dynamic Function(T value, num index, dynamic array) predicate, dynamic thisArg);
+  external List<U> map<U>(U Function(T value, num index, dynamic array) callbackfn, dynamic thisArg);
+  external List<S> filter<S extends T>(dynamic Function(T value, num index, dynamic array) predicate, dynamic thisArg);
   external List<T> filter(dynamic Function(T value, num index, dynamic array) predicate, dynamic thisArg);
   external T reduce(T Function(T previousValue, T currentValue, num currentIndex, dynamic array) callbackfn);
   external T reduce(
       T Function(T previousValue, T currentValue, num currentIndex, dynamic array) callbackfn, T initialValue);
-  external U reduce(
+  external U reduce<U>(
       U Function(U previousValue, T currentValue, num currentIndex, dynamic array) callbackfn, U initialValue);
   external T reduceRight(T Function(T previousValue, T currentValue, num currentIndex, dynamic array) callbackfn);
   external T reduceRight(
       T Function(T previousValue, T currentValue, num currentIndex, dynamic array) callbackfn, T initialValue);
-  external U reduceRight(
+  external U reduceRight<U>(
       U Function(U previousValue, T currentValue, num currentIndex, dynamic array) callbackfn, U initialValue);
   external factory ReadonlyArray({
     num length,
@@ -877,22 +878,22 @@ class Array<T> {
   ]);
   external num indexOf(T searchElement, num fromIndex);
   external num lastIndexOf(T searchElement, num fromIndex);
-  external dynamic every(dynamic Function(T value, num index, List<T> array) predicate, dynamic thisArg);
+  external dynamic every<S extends T>(dynamic Function(T value, num index, List<T> array) predicate, dynamic thisArg);
   external bool every(dynamic Function(T value, num index, List<T> array) predicate, dynamic thisArg);
   external bool some(dynamic Function(T value, num index, List<T> array) predicate, dynamic thisArg);
   external dynamic forEach(dynamic Function(T value, num index, List<T> array) callbackfn, dynamic thisArg);
-  external List<U> map(U Function(T value, num index, List<T> array) callbackfn, dynamic thisArg);
-  external List<S> filter(dynamic Function(T value, num index, List<T> array) predicate, dynamic thisArg);
+  external List<U> map<U>(U Function(T value, num index, List<T> array) callbackfn, dynamic thisArg);
+  external List<S> filter<S extends T>(dynamic Function(T value, num index, List<T> array) predicate, dynamic thisArg);
   external List<T> filter(dynamic Function(T value, num index, List<T> array) predicate, dynamic thisArg);
   external T reduce(T Function(T previousValue, T currentValue, num currentIndex, List<T> array) callbackfn);
   external T reduce(
       T Function(T previousValue, T currentValue, num currentIndex, List<T> array) callbackfn, T initialValue);
-  external U reduce(
+  external U reduce<U>(
       U Function(U previousValue, T currentValue, num currentIndex, List<T> array) callbackfn, U initialValue);
   external T reduceRight(T Function(T previousValue, T currentValue, num currentIndex, List<T> array) callbackfn);
   external T reduceRight(
       T Function(T previousValue, T currentValue, num currentIndex, List<T> array) callbackfn, T initialValue);
-  external U reduceRight(
+  external U reduceRight<U>(
       U Function(U previousValue, T currentValue, num currentIndex, List<T> array) callbackfn, U initialValue);
   external factory Array({
     num length,
@@ -960,13 +961,13 @@ typedef PromiseConstructorLike = dynamic Function();
 @JS()
 @anonymous
 class PromiseLike<T> {
-  external PromiseLike<dynamic> then(dynamic? onfulfilled, dynamic? onrejected);
+  external PromiseLike<dynamic> then<TResult1, TResult2>(dynamic? onfulfilled, dynamic? onrejected);
 }
 
 @JS()
 @anonymous
 class Promise<T> {
-  external Promise<dynamic> then(dynamic? onfulfilled, dynamic? onrejected);
+  external Promise<dynamic> then<TResult1, TResult2>(dynamic? onfulfilled, dynamic? onrejected);
 }
 
 @JS()
@@ -1150,14 +1151,14 @@ class Int8Array {
   external num reduce(num Function(num previousValue, num currentValue, num currentIndex, Int8Array array) callbackfn);
   external num reduce(num Function(num previousValue, num currentValue, num currentIndex, Int8Array array) callbackfn,
       num initialValue);
-  external U reduce(
+  external U reduce<U>(
       U Function(U previousValue, num currentValue, num currentIndex, Int8Array array) callbackfn, U initialValue);
   external num reduceRight(
       num Function(num previousValue, num currentValue, num currentIndex, Int8Array array) callbackfn);
   external num reduceRight(
       num Function(num previousValue, num currentValue, num currentIndex, Int8Array array) callbackfn,
       num initialValue);
-  external U reduceRight(
+  external U reduceRight<U>(
       U Function(U previousValue, num currentValue, num currentIndex, Int8Array array) callbackfn, U initialValue);
   external Int8Array reverse();
   external dynamic set(ArrayLike<num> array, num offset);
@@ -1198,7 +1199,7 @@ class Int8ArrayConstructor {
     num? items9,
   ]);
   external Int8Array from(ArrayLike<num> arrayLike);
-  external Int8Array from(ArrayLike<T> arrayLike, num Function(T v, num k) mapfn, dynamic thisArg);
+  external Int8Array from<T>(ArrayLike<T> arrayLike, num Function(T v, num k) mapfn, dynamic thisArg);
   external factory Int8ArrayConstructor({
     Int8Array prototype,
     num BYTES_PER_ELEMENT,
@@ -1235,14 +1236,14 @@ class Uint8Array {
   external num reduce(num Function(num previousValue, num currentValue, num currentIndex, Uint8Array array) callbackfn);
   external num reduce(num Function(num previousValue, num currentValue, num currentIndex, Uint8Array array) callbackfn,
       num initialValue);
-  external U reduce(
+  external U reduce<U>(
       U Function(U previousValue, num currentValue, num currentIndex, Uint8Array array) callbackfn, U initialValue);
   external num reduceRight(
       num Function(num previousValue, num currentValue, num currentIndex, Uint8Array array) callbackfn);
   external num reduceRight(
       num Function(num previousValue, num currentValue, num currentIndex, Uint8Array array) callbackfn,
       num initialValue);
-  external U reduceRight(
+  external U reduceRight<U>(
       U Function(U previousValue, num currentValue, num currentIndex, Uint8Array array) callbackfn, U initialValue);
   external Uint8Array reverse();
   external dynamic set(ArrayLike<num> array, num offset);
@@ -1283,7 +1284,7 @@ class Uint8ArrayConstructor {
     num? items9,
   ]);
   external Uint8Array from(ArrayLike<num> arrayLike);
-  external Uint8Array from(ArrayLike<T> arrayLike, num Function(T v, num k) mapfn, dynamic thisArg);
+  external Uint8Array from<T>(ArrayLike<T> arrayLike, num Function(T v, num k) mapfn, dynamic thisArg);
   external factory Uint8ArrayConstructor({
     Uint8Array prototype,
     num BYTES_PER_ELEMENT,
@@ -1324,14 +1325,15 @@ class Uint8ClampedArray {
   external num reduce(
       num Function(num previousValue, num currentValue, num currentIndex, Uint8ClampedArray array) callbackfn,
       num initialValue);
-  external U reduce(U Function(U previousValue, num currentValue, num currentIndex, Uint8ClampedArray array) callbackfn,
+  external U reduce<U>(
+      U Function(U previousValue, num currentValue, num currentIndex, Uint8ClampedArray array) callbackfn,
       U initialValue);
   external num reduceRight(
       num Function(num previousValue, num currentValue, num currentIndex, Uint8ClampedArray array) callbackfn);
   external num reduceRight(
       num Function(num previousValue, num currentValue, num currentIndex, Uint8ClampedArray array) callbackfn,
       num initialValue);
-  external U reduceRight(
+  external U reduceRight<U>(
       U Function(U previousValue, num currentValue, num currentIndex, Uint8ClampedArray array) callbackfn,
       U initialValue);
   external Uint8ClampedArray reverse();
@@ -1373,7 +1375,7 @@ class Uint8ClampedArrayConstructor {
     num? items9,
   ]);
   external Uint8ClampedArray from(ArrayLike<num> arrayLike);
-  external Uint8ClampedArray from(ArrayLike<T> arrayLike, num Function(T v, num k) mapfn, dynamic thisArg);
+  external Uint8ClampedArray from<T>(ArrayLike<T> arrayLike, num Function(T v, num k) mapfn, dynamic thisArg);
   external factory Uint8ClampedArrayConstructor({
     Uint8ClampedArray prototype,
     num BYTES_PER_ELEMENT,
@@ -1410,14 +1412,14 @@ class Int16Array {
   external num reduce(num Function(num previousValue, num currentValue, num currentIndex, Int16Array array) callbackfn);
   external num reduce(num Function(num previousValue, num currentValue, num currentIndex, Int16Array array) callbackfn,
       num initialValue);
-  external U reduce(
+  external U reduce<U>(
       U Function(U previousValue, num currentValue, num currentIndex, Int16Array array) callbackfn, U initialValue);
   external num reduceRight(
       num Function(num previousValue, num currentValue, num currentIndex, Int16Array array) callbackfn);
   external num reduceRight(
       num Function(num previousValue, num currentValue, num currentIndex, Int16Array array) callbackfn,
       num initialValue);
-  external U reduceRight(
+  external U reduceRight<U>(
       U Function(U previousValue, num currentValue, num currentIndex, Int16Array array) callbackfn, U initialValue);
   external Int16Array reverse();
   external dynamic set(ArrayLike<num> array, num offset);
@@ -1458,7 +1460,7 @@ class Int16ArrayConstructor {
     num? items9,
   ]);
   external Int16Array from(ArrayLike<num> arrayLike);
-  external Int16Array from(ArrayLike<T> arrayLike, num Function(T v, num k) mapfn, dynamic thisArg);
+  external Int16Array from<T>(ArrayLike<T> arrayLike, num Function(T v, num k) mapfn, dynamic thisArg);
   external factory Int16ArrayConstructor({
     Int16Array prototype,
     num BYTES_PER_ELEMENT,
@@ -1496,14 +1498,14 @@ class Uint16Array {
       num Function(num previousValue, num currentValue, num currentIndex, Uint16Array array) callbackfn);
   external num reduce(num Function(num previousValue, num currentValue, num currentIndex, Uint16Array array) callbackfn,
       num initialValue);
-  external U reduce(
+  external U reduce<U>(
       U Function(U previousValue, num currentValue, num currentIndex, Uint16Array array) callbackfn, U initialValue);
   external num reduceRight(
       num Function(num previousValue, num currentValue, num currentIndex, Uint16Array array) callbackfn);
   external num reduceRight(
       num Function(num previousValue, num currentValue, num currentIndex, Uint16Array array) callbackfn,
       num initialValue);
-  external U reduceRight(
+  external U reduceRight<U>(
       U Function(U previousValue, num currentValue, num currentIndex, Uint16Array array) callbackfn, U initialValue);
   external Uint16Array reverse();
   external dynamic set(ArrayLike<num> array, num offset);
@@ -1544,7 +1546,7 @@ class Uint16ArrayConstructor {
     num? items9,
   ]);
   external Uint16Array from(ArrayLike<num> arrayLike);
-  external Uint16Array from(ArrayLike<T> arrayLike, num Function(T v, num k) mapfn, dynamic thisArg);
+  external Uint16Array from<T>(ArrayLike<T> arrayLike, num Function(T v, num k) mapfn, dynamic thisArg);
   external factory Uint16ArrayConstructor({
     Uint16Array prototype,
     num BYTES_PER_ELEMENT,
@@ -1581,14 +1583,14 @@ class Int32Array {
   external num reduce(num Function(num previousValue, num currentValue, num currentIndex, Int32Array array) callbackfn);
   external num reduce(num Function(num previousValue, num currentValue, num currentIndex, Int32Array array) callbackfn,
       num initialValue);
-  external U reduce(
+  external U reduce<U>(
       U Function(U previousValue, num currentValue, num currentIndex, Int32Array array) callbackfn, U initialValue);
   external num reduceRight(
       num Function(num previousValue, num currentValue, num currentIndex, Int32Array array) callbackfn);
   external num reduceRight(
       num Function(num previousValue, num currentValue, num currentIndex, Int32Array array) callbackfn,
       num initialValue);
-  external U reduceRight(
+  external U reduceRight<U>(
       U Function(U previousValue, num currentValue, num currentIndex, Int32Array array) callbackfn, U initialValue);
   external Int32Array reverse();
   external dynamic set(ArrayLike<num> array, num offset);
@@ -1629,7 +1631,7 @@ class Int32ArrayConstructor {
     num? items9,
   ]);
   external Int32Array from(ArrayLike<num> arrayLike);
-  external Int32Array from(ArrayLike<T> arrayLike, num Function(T v, num k) mapfn, dynamic thisArg);
+  external Int32Array from<T>(ArrayLike<T> arrayLike, num Function(T v, num k) mapfn, dynamic thisArg);
   external factory Int32ArrayConstructor({
     Int32Array prototype,
     num BYTES_PER_ELEMENT,
@@ -1667,14 +1669,14 @@ class Uint32Array {
       num Function(num previousValue, num currentValue, num currentIndex, Uint32Array array) callbackfn);
   external num reduce(num Function(num previousValue, num currentValue, num currentIndex, Uint32Array array) callbackfn,
       num initialValue);
-  external U reduce(
+  external U reduce<U>(
       U Function(U previousValue, num currentValue, num currentIndex, Uint32Array array) callbackfn, U initialValue);
   external num reduceRight(
       num Function(num previousValue, num currentValue, num currentIndex, Uint32Array array) callbackfn);
   external num reduceRight(
       num Function(num previousValue, num currentValue, num currentIndex, Uint32Array array) callbackfn,
       num initialValue);
-  external U reduceRight(
+  external U reduceRight<U>(
       U Function(U previousValue, num currentValue, num currentIndex, Uint32Array array) callbackfn, U initialValue);
   external Uint32Array reverse();
   external dynamic set(ArrayLike<num> array, num offset);
@@ -1715,7 +1717,7 @@ class Uint32ArrayConstructor {
     num? items9,
   ]);
   external Uint32Array from(ArrayLike<num> arrayLike);
-  external Uint32Array from(ArrayLike<T> arrayLike, num Function(T v, num k) mapfn, dynamic thisArg);
+  external Uint32Array from<T>(ArrayLike<T> arrayLike, num Function(T v, num k) mapfn, dynamic thisArg);
   external factory Uint32ArrayConstructor({
     Uint32Array prototype,
     num BYTES_PER_ELEMENT,
@@ -1754,14 +1756,14 @@ class Float32Array {
   external num reduce(
       num Function(num previousValue, num currentValue, num currentIndex, Float32Array array) callbackfn,
       num initialValue);
-  external U reduce(
+  external U reduce<U>(
       U Function(U previousValue, num currentValue, num currentIndex, Float32Array array) callbackfn, U initialValue);
   external num reduceRight(
       num Function(num previousValue, num currentValue, num currentIndex, Float32Array array) callbackfn);
   external num reduceRight(
       num Function(num previousValue, num currentValue, num currentIndex, Float32Array array) callbackfn,
       num initialValue);
-  external U reduceRight(
+  external U reduceRight<U>(
       U Function(U previousValue, num currentValue, num currentIndex, Float32Array array) callbackfn, U initialValue);
   external Float32Array reverse();
   external dynamic set(ArrayLike<num> array, num offset);
@@ -1802,7 +1804,7 @@ class Float32ArrayConstructor {
     num? items9,
   ]);
   external Float32Array from(ArrayLike<num> arrayLike);
-  external Float32Array from(ArrayLike<T> arrayLike, num Function(T v, num k) mapfn, dynamic thisArg);
+  external Float32Array from<T>(ArrayLike<T> arrayLike, num Function(T v, num k) mapfn, dynamic thisArg);
   external factory Float32ArrayConstructor({
     Float32Array prototype,
     num BYTES_PER_ELEMENT,
@@ -1841,14 +1843,14 @@ class Float64Array {
   external num reduce(
       num Function(num previousValue, num currentValue, num currentIndex, Float64Array array) callbackfn,
       num initialValue);
-  external U reduce(
+  external U reduce<U>(
       U Function(U previousValue, num currentValue, num currentIndex, Float64Array array) callbackfn, U initialValue);
   external num reduceRight(
       num Function(num previousValue, num currentValue, num currentIndex, Float64Array array) callbackfn);
   external num reduceRight(
       num Function(num previousValue, num currentValue, num currentIndex, Float64Array array) callbackfn,
       num initialValue);
-  external U reduceRight(
+  external U reduceRight<U>(
       U Function(U previousValue, num currentValue, num currentIndex, Float64Array array) callbackfn, U initialValue);
   external Float64Array reverse();
   external dynamic set(ArrayLike<num> array, num offset);
@@ -1888,7 +1890,7 @@ class Float64ArrayConstructor {
     num? items9,
   ]);
   external Float64Array from(ArrayLike<num> arrayLike);
-  external Float64Array from(ArrayLike<T> arrayLike, num Function(T v, num k) mapfn, dynamic thisArg);
+  external Float64Array from<T>(ArrayLike<T> arrayLike, num Function(T v, num k) mapfn, dynamic thisArg);
   external factory Float64ArrayConstructor({
     Float64Array prototype,
     num BYTES_PER_ELEMENT,

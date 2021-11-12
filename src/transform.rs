@@ -412,6 +412,7 @@ impl Transformer {
         self.visit_type_ann(&met.type_ann);
         self.push_char(' ');
         self.push(id);
+        self.visit_type_params(&met.type_params);
         self.push_char('(');
         self.visit_function_params(&met.params);
         self.push_char(')');
