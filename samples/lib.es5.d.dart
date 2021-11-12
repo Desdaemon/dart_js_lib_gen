@@ -52,7 +52,7 @@ class PropertyDescriptor {
   external bool? get writable;
   external set writable(bool? value);
   external dynamic get();
-  external dynamic set(dynamic v);
+  external void set(dynamic v);
   external factory PropertyDescriptor({
     bool? configurable,
     bool? enumerable,
@@ -85,18 +85,14 @@ class Object {
 class ObjectConstructor {
   external factory ObjectConstructor({dynamic value});
   external Object get prototype;
-  external set prototype(Object value);
   external dynamic getPrototypeOf(dynamic o);
   external PropertyDescriptor? getOwnPropertyDescriptor(dynamic o, PropertyKey p);
   external List<String> getOwnPropertyNames(dynamic o);
   external dynamic create(dynamic? o);
-  external dynamic create(dynamic? o, dynamic properties);
   external T defineProperty<T>(T o, PropertyKey p, dynamic attributes);
   external T defineProperties<T>(T o, dynamic properties);
   external T seal<T>(T o);
   external dynamic freeze<T>(List<T> a);
-  external T freeze<T extends Function>(T f);
-  external Readonly<T> freeze<T>(T o);
   external T preventExtensions<T>(T o);
   external bool isSealed(dynamic o);
   external bool isFrozen(dynamic o);
@@ -124,7 +120,6 @@ class FunctionConstructor {
     String? args9,
   ]);
   external Function get prototype;
-  external set prototype(Function value);
   external factory FunctionConstructor({
     Function prototype,
   });
@@ -139,7 +134,6 @@ typedef OmitThisParameter<T> = dynamic;
 @anonymous
 class CallableFunction {
   external R apply<T, R>(T thisArg);
-  external R apply<T, A extends List<dynamic>, R>(T thisArg, A args);
   external R call<T, A extends List<dynamic>, R>(
     T thisArg, [
     A? args1,
@@ -153,80 +147,13 @@ class CallableFunction {
     A? args9,
   ]);
   external OmitThisParameter<T> bind<T>(ThisParameterType<T> thisArg);
-  external R Function([
-    A? args1,
-    A? args2,
-    A? args3,
-    A? args4,
-    A? args5,
-    A? args6,
-    A? args7,
-    A? args8,
-    A? args9,
-  ]) bind<T, A0, A extends List<dynamic>, R>(T thisArg, A0 arg0);
-  external R Function([
-    A? args1,
-    A? args2,
-    A? args3,
-    A? args4,
-    A? args5,
-    A? args6,
-    A? args7,
-    A? args8,
-    A? args9,
-  ]) bind<T, A0, A1, A extends List<dynamic>, R>(T thisArg, A0 arg0, A1 arg1);
-  external R Function([
-    A? args1,
-    A? args2,
-    A? args3,
-    A? args4,
-    A? args5,
-    A? args6,
-    A? args7,
-    A? args8,
-    A? args9,
-  ]) bind<T, A0, A1, A2, A extends List<dynamic>, R>(T thisArg, A0 arg0, A1 arg1, A2 arg2);
-  external R Function([
-    A? args1,
-    A? args2,
-    A? args3,
-    A? args4,
-    A? args5,
-    A? args6,
-    A? args7,
-    A? args8,
-    A? args9,
-  ]) bind<T, A0, A1, A2, A3, A extends List<dynamic>, R>(T thisArg, A0 arg0, A1 arg1, A2 arg2, A3 arg3);
-  external R Function([
-    AX? args1,
-    AX? args2,
-    AX? args3,
-    AX? args4,
-    AX? args5,
-    AX? args6,
-    AX? args7,
-    AX? args8,
-    AX? args9,
-  ]) bind<T, AX, R>(
-    T thisArg, [
-    AX? args1,
-    AX? args2,
-    AX? args3,
-    AX? args4,
-    AX? args5,
-    AX? args6,
-    AX? args7,
-    AX? args8,
-    AX? args9,
-  ]);
 }
 
 @JS()
 @anonymous
 class NewableFunction {
-  external dynamic apply<T>(T thisArg);
-  external dynamic apply<T, A extends List<dynamic>>(T thisArg, A args);
-  external dynamic call<T, A extends List<dynamic>>(
+  external void apply<T>(T thisArg);
+  external void call<T, A extends List<dynamic>>(
     T thisArg, [
     A? args1,
     A? args2,
@@ -239,23 +166,6 @@ class NewableFunction {
     A? args9,
   ]);
   external T bind<T>(dynamic thisArg);
-  external dynamic Function() bind<A0, A extends List<dynamic>, R>(dynamic thisArg, A0 arg0);
-  external dynamic Function() bind<A0, A1, A extends List<dynamic>, R>(dynamic thisArg, A0 arg0, A1 arg1);
-  external dynamic Function() bind<A0, A1, A2, A extends List<dynamic>, R>(dynamic thisArg, A0 arg0, A1 arg1, A2 arg2);
-  external dynamic Function() bind<A0, A1, A2, A3, A extends List<dynamic>, R>(
-      dynamic thisArg, A0 arg0, A1 arg1, A2 arg2, A3 arg3);
-  external dynamic Function() bind<AX, R>(
-    dynamic thisArg, [
-    AX? args1,
-    AX? args2,
-    AX? args3,
-    AX? args4,
-    AX? args5,
-    AX? args6,
-    AX? args7,
-    AX? args8,
-    AX? args9,
-  ]);
 }
 
 @JS()
@@ -275,7 +185,6 @@ class IArguments {
 class StringConstructor {
   external factory StringConstructor({dynamic value});
   external String get prototype;
-  external set prototype(String value);
   external String fromCharCode([
     num? codes1,
     num? codes2,
@@ -302,7 +211,6 @@ class Boolean {
 class BooleanConstructor {
   external factory BooleanConstructor({dynamic value});
   external Boolean get prototype;
-  external set prototype(Boolean value);
   external factory BooleanConstructor({
     Boolean prototype,
   });
@@ -325,17 +233,11 @@ class Number {
 class NumberConstructor {
   external factory NumberConstructor({dynamic value});
   external Number get prototype;
-  external set prototype(Number value);
   external num get MAX_VALUE;
-  external set MAX_VALUE(num value);
   external num get MIN_VALUE;
-  external set MIN_VALUE(num value);
   external num get NaN;
-  external set NaN(num value);
   external num get NEGATIVE_INFINITY;
-  external set NEGATIVE_INFINITY(num value);
   external num get POSITIVE_INFINITY;
-  external set POSITIVE_INFINITY(num value);
   external factory NumberConstructor({
     Number prototype,
     num MAX_VALUE,
@@ -353,7 +255,6 @@ external NumberConstructor Number;
 @anonymous
 class TemplateStringsArray {
   external dynamic get raw;
-  external set raw(dynamic value);
   external factory TemplateStringsArray({
     dynamic raw,
   });
@@ -367,21 +268,13 @@ class ImportMeta {}
 @anonymous
 class Math {
   external num get E;
-  external set E(num value);
   external num get LN10;
-  external set LN10(num value);
   external num get LN2;
-  external set LN2(num value);
   external num get LOG2E;
-  external set LOG2E(num value);
   external num get LOG10E;
-  external set LOG10E(num value);
   external num get PI;
-  external set PI(num value);
   external num get SQRT1_2;
-  external set SQRT1_2(num value);
   external num get SQRT2;
-  external set SQRT2(num value);
   external num abs(num x);
   external num acos(num x);
   external num asin(num x);
@@ -486,10 +379,7 @@ class Date {
 @JS()
 class DateConstructor {
   external factory DateConstructor();
-  external factory DateConstructor({dynamic value});
-  external factory DateConstructor({num year, num month, num date, num hours, num minutes, num seconds, num ms});
   external Date get prototype;
-  external set prototype(Date value);
   external num parse(String s);
   external num UTC(num year, num month, num date, num hours, num minutes, num seconds, num ms);
   external num now();
@@ -533,13 +423,9 @@ class RegExp {
   external RegExpExecArray? exec(String string);
   external bool test(String string);
   external String get source;
-  external set source(String value);
   external bool get global;
-  external set global(bool value);
   external bool get ignoreCase;
-  external set ignoreCase(bool value);
   external bool get multiline;
-  external set multiline(bool value);
   external num get lastIndex;
   external set lastIndex(num value);
   external dynamic compile();
@@ -555,9 +441,7 @@ class RegExp {
 @JS()
 class RegExpConstructor {
   external factory RegExpConstructor({dynamic pattern});
-  external factory RegExpConstructor({String pattern, String flags});
   external RegExp get prototype;
-  external set prototype(RegExp value);
   external String get $1;
   external set $1(String value);
   external String get $2;
@@ -616,7 +500,6 @@ class Error {
 class ErrorConstructor {
   external factory ErrorConstructor({String message});
   external Error get prototype;
-  external set prototype(Error value);
   external factory ErrorConstructor({
     Error prototype,
   });
@@ -633,7 +516,6 @@ class EvalError {}
 class EvalErrorConstructor {
   external factory EvalErrorConstructor({String message});
   external EvalError get prototype;
-  external set prototype(EvalError value);
   external factory EvalErrorConstructor({
     EvalError prototype,
   });
@@ -650,7 +532,6 @@ class RangeError {}
 class RangeErrorConstructor {
   external factory RangeErrorConstructor({String message});
   external RangeError get prototype;
-  external set prototype(RangeError value);
   external factory RangeErrorConstructor({
     RangeError prototype,
   });
@@ -667,7 +548,6 @@ class ReferenceError {}
 class ReferenceErrorConstructor {
   external factory ReferenceErrorConstructor({String message});
   external ReferenceError get prototype;
-  external set prototype(ReferenceError value);
   external factory ReferenceErrorConstructor({
     ReferenceError prototype,
   });
@@ -684,7 +564,6 @@ class SyntaxError {}
 class SyntaxErrorConstructor {
   external factory SyntaxErrorConstructor({String message});
   external SyntaxError get prototype;
-  external set prototype(SyntaxError value);
   external factory SyntaxErrorConstructor({
     SyntaxError prototype,
   });
@@ -701,7 +580,6 @@ class TypeError {}
 class TypeErrorConstructor {
   external factory TypeErrorConstructor({String message});
   external TypeError get prototype;
-  external set prototype(TypeError value);
   external factory TypeErrorConstructor({
     TypeError prototype,
   });
@@ -718,7 +596,6 @@ class URIError {}
 class URIErrorConstructor {
   external factory URIErrorConstructor({String message});
   external URIError get prototype;
-  external set prototype(URIError value);
   external factory URIErrorConstructor({
     URIError prototype,
   });
@@ -732,7 +609,6 @@ external URIErrorConstructor URIError;
 class JSON {
   external dynamic parse(String text, dynamic Function(String key, dynamic value) reviver);
   external String stringify(dynamic value, dynamic Function(String key, dynamic value) replacer, dynamic space);
-  external String stringify(dynamic value, List<dynamic>? replacer, dynamic space);
 }
 
 @JS('JSON')
@@ -742,7 +618,6 @@ external JSON JSON;
 @anonymous
 class ReadonlyArray<T> {
   external num get length;
-  external set length(num value);
   external String toString();
   external String toLocaleString();
   external List<T> concat([
@@ -756,38 +631,17 @@ class ReadonlyArray<T> {
     ConcatArray<T>? items8,
     ConcatArray<T>? items9,
   ]);
-  external List<T> concat([
-    dynamic items1,
-    dynamic items2,
-    dynamic items3,
-    dynamic items4,
-    dynamic items5,
-    dynamic items6,
-    dynamic items7,
-    dynamic items8,
-    dynamic items9,
-  ]);
   external String join(String separator);
   external List<T> slice(num start, num end);
   external num indexOf(T searchElement, num fromIndex);
   external num lastIndexOf(T searchElement, num fromIndex);
   external dynamic every<S extends T>(dynamic Function(T value, num index, dynamic array) predicate, dynamic thisArg);
-  external bool every(dynamic Function(T value, num index, dynamic array) predicate, dynamic thisArg);
   external bool some(dynamic Function(T value, num index, dynamic array) predicate, dynamic thisArg);
-  external dynamic forEach(dynamic Function(T value, num index, dynamic array) callbackfn, dynamic thisArg);
+  external void forEach(void Function(T value, num index, dynamic array) callbackfn, dynamic thisArg);
   external List<U> map<U>(U Function(T value, num index, dynamic array) callbackfn, dynamic thisArg);
   external List<S> filter<S extends T>(dynamic Function(T value, num index, dynamic array) predicate, dynamic thisArg);
-  external List<T> filter(dynamic Function(T value, num index, dynamic array) predicate, dynamic thisArg);
   external T reduce(T Function(T previousValue, T currentValue, num currentIndex, dynamic array) callbackfn);
-  external T reduce(
-      T Function(T previousValue, T currentValue, num currentIndex, dynamic array) callbackfn, T initialValue);
-  external U reduce<U>(
-      U Function(U previousValue, T currentValue, num currentIndex, dynamic array) callbackfn, U initialValue);
   external T reduceRight(T Function(T previousValue, T currentValue, num currentIndex, dynamic array) callbackfn);
-  external T reduceRight(
-      T Function(T previousValue, T currentValue, num currentIndex, dynamic array) callbackfn, T initialValue);
-  external U reduceRight<U>(
-      U Function(U previousValue, T currentValue, num currentIndex, dynamic array) callbackfn, U initialValue);
   external factory ReadonlyArray({
     num length,
   });
@@ -797,7 +651,6 @@ class ReadonlyArray<T> {
 @anonymous
 class ConcatArray<T> {
   external num get length;
-  external set length(num value);
   external String join(String separator);
   external List<T> slice(num start, num end);
   external factory ConcatArray({
@@ -835,36 +688,12 @@ class Array<T> {
     ConcatArray<T>? items8,
     ConcatArray<T>? items9,
   ]);
-  external List<T> concat([
-    dynamic items1,
-    dynamic items2,
-    dynamic items3,
-    dynamic items4,
-    dynamic items5,
-    dynamic items6,
-    dynamic items7,
-    dynamic items8,
-    dynamic items9,
-  ]);
   external String join(String separator);
   external List<T> reverse();
   external T? shift();
   external List<T> slice(num start, num end);
   external dynamic sort(num Function(T a, T b) compareFn);
   external List<T> splice(num start, num deleteCount);
-  external List<T> splice(
-    num start,
-    num deleteCount, [
-    T? items1,
-    T? items2,
-    T? items3,
-    T? items4,
-    T? items5,
-    T? items6,
-    T? items7,
-    T? items8,
-    T? items9,
-  ]);
   external num unshift([
     T? items1,
     T? items2,
@@ -879,22 +708,12 @@ class Array<T> {
   external num indexOf(T searchElement, num fromIndex);
   external num lastIndexOf(T searchElement, num fromIndex);
   external dynamic every<S extends T>(dynamic Function(T value, num index, List<T> array) predicate, dynamic thisArg);
-  external bool every(dynamic Function(T value, num index, List<T> array) predicate, dynamic thisArg);
   external bool some(dynamic Function(T value, num index, List<T> array) predicate, dynamic thisArg);
-  external dynamic forEach(dynamic Function(T value, num index, List<T> array) callbackfn, dynamic thisArg);
+  external void forEach(void Function(T value, num index, List<T> array) callbackfn, dynamic thisArg);
   external List<U> map<U>(U Function(T value, num index, List<T> array) callbackfn, dynamic thisArg);
   external List<S> filter<S extends T>(dynamic Function(T value, num index, List<T> array) predicate, dynamic thisArg);
-  external List<T> filter(dynamic Function(T value, num index, List<T> array) predicate, dynamic thisArg);
   external T reduce(T Function(T previousValue, T currentValue, num currentIndex, List<T> array) callbackfn);
-  external T reduce(
-      T Function(T previousValue, T currentValue, num currentIndex, List<T> array) callbackfn, T initialValue);
-  external U reduce<U>(
-      U Function(U previousValue, T currentValue, num currentIndex, List<T> array) callbackfn, U initialValue);
   external T reduceRight(T Function(T previousValue, T currentValue, num currentIndex, List<T> array) callbackfn);
-  external T reduceRight(
-      T Function(T previousValue, T currentValue, num currentIndex, List<T> array) callbackfn, T initialValue);
-  external U reduceRight<U>(
-      U Function(U previousValue, T currentValue, num currentIndex, List<T> array) callbackfn, U initialValue);
   external factory Array({
     num length,
   });
@@ -903,21 +722,8 @@ class Array<T> {
 @JS()
 class ArrayConstructor {
   external factory ArrayConstructor({num arrayLength});
-  external factory ArrayConstructor({num arrayLength});
-  external factory ArrayConstructor([
-    T? items1,
-    T? items2,
-    T? items3,
-    T? items4,
-    T? items5,
-    T? items6,
-    T? items7,
-    T? items8,
-    T? items9,
-  ]);
   external dynamic isArray(dynamic arg);
   external List<dynamic> get prototype;
-  external set prototype(List<dynamic> value);
   external factory ArrayConstructor({
     List<dynamic> prototype,
   });
@@ -939,23 +745,23 @@ class TypedPropertyDescriptor<T> {
   external set value(T? value);
   external T Function()? get get;
   external set get(T Function()? value);
-  external dynamic Function(T value)? get set;
-  external set set(dynamic Function(T value)? value);
+  external void Function(T value)? get set;
+  external set set(void Function(T value)? value);
   external factory TypedPropertyDescriptor({
     bool? enumerable,
     bool? configurable,
     bool? writable,
     T? value,
     T Function()? get,
-    dynamic Function(T value)? set,
+    void Function(T value)? set,
   });
 }
 
 typedef ClassDecorator = dynamic Function<TFunction extends Function>(TFunction target);
-typedef PropertyDecorator = dynamic Function(Object target, dynamic propertyKey);
+typedef PropertyDecorator = void Function(Object target, dynamic propertyKey);
 typedef MethodDecorator = dynamic Function<T>(
     Object target, dynamic propertyKey, TypedPropertyDescriptor<T> descriptor);
-typedef ParameterDecorator = dynamic Function(Object target, dynamic propertyKey, num parameterIndex);
+typedef ParameterDecorator = void Function(Object target, dynamic propertyKey, num parameterIndex);
 typedef PromiseConstructorLike = dynamic Function();
 
 @JS()
@@ -974,7 +780,6 @@ class Promise<T> {
 @anonymous
 class ArrayLike<T> {
   external num get length;
-  external set length(num value);
   external factory ArrayLike({
     num length,
   });
@@ -1030,7 +835,6 @@ class ThisType<T> {}
 @anonymous
 class ArrayBuffer {
   external num get byteLength;
-  external set byteLength(num value);
   external ArrayBuffer slice(num begin, num end);
   external factory ArrayBuffer({
     num byteLength,
@@ -1052,7 +856,6 @@ typedef ArrayBufferLike = dynamic;
 @JS()
 class ArrayBufferConstructor {
   external ArrayBuffer get prototype;
-  external set prototype(ArrayBuffer value);
   external factory ArrayBufferConstructor({num byteLength});
   external dynamic isView(dynamic arg);
   external factory ArrayBufferConstructor({
@@ -1083,11 +886,8 @@ class ArrayBufferView {
 @anonymous
 class DataView {
   external ArrayBuffer get buffer;
-  external set buffer(ArrayBuffer value);
   external num get byteLength;
-  external set byteLength(num value);
   external num get byteOffset;
-  external set byteOffset(num value);
   external num getFloat32(num byteOffset, bool littleEndian);
   external num getFloat64(num byteOffset, bool littleEndian);
   external num getInt8(num byteOffset);
@@ -1096,14 +896,14 @@ class DataView {
   external num getUint8(num byteOffset);
   external num getUint16(num byteOffset, bool littleEndian);
   external num getUint32(num byteOffset, bool littleEndian);
-  external dynamic setFloat32(num byteOffset, num value, bool littleEndian);
-  external dynamic setFloat64(num byteOffset, num value, bool littleEndian);
-  external dynamic setInt8(num byteOffset, num value);
-  external dynamic setInt16(num byteOffset, num value, bool littleEndian);
-  external dynamic setInt32(num byteOffset, num value, bool littleEndian);
-  external dynamic setUint8(num byteOffset, num value);
-  external dynamic setUint16(num byteOffset, num value, bool littleEndian);
-  external dynamic setUint32(num byteOffset, num value, bool littleEndian);
+  external void setFloat32(num byteOffset, num value, bool littleEndian);
+  external void setFloat64(num byteOffset, num value, bool littleEndian);
+  external void setInt8(num byteOffset, num value);
+  external void setInt16(num byteOffset, num value, bool littleEndian);
+  external void setInt32(num byteOffset, num value, bool littleEndian);
+  external void setUint8(num byteOffset, num value);
+  external void setUint16(num byteOffset, num value, bool littleEndian);
+  external void setUint32(num byteOffset, num value, bool littleEndian);
   external factory DataView({
     ArrayBuffer buffer,
     num byteLength,
@@ -1114,7 +914,6 @@ class DataView {
 @JS()
 class DataViewConstructor {
   external DataView get prototype;
-  external set prototype(DataView value);
   external factory DataViewConstructor({ArrayBufferLike buffer, num byteOffset, num byteLength});
   external factory DataViewConstructor({
     DataView prototype,
@@ -1128,40 +927,26 @@ external DataViewConstructor DataView;
 @anonymous
 class Int8Array {
   external num get BYTES_PER_ELEMENT;
-  external set BYTES_PER_ELEMENT(num value);
   external ArrayBufferLike get buffer;
-  external set buffer(ArrayBufferLike value);
   external num get byteLength;
-  external set byteLength(num value);
   external num get byteOffset;
-  external set byteOffset(num value);
   external dynamic copyWithin(num target, num start, num end);
   external bool every(dynamic Function(num value, num index, Int8Array array) predicate, dynamic thisArg);
   external dynamic fill(num value, num start, num end);
   external Int8Array filter(dynamic Function(num value, num index, Int8Array array) predicate, dynamic thisArg);
   external num? find(bool Function(num value, num index, Int8Array obj) predicate, dynamic thisArg);
   external num findIndex(bool Function(num value, num index, Int8Array obj) predicate, dynamic thisArg);
-  external dynamic forEach(dynamic Function(num value, num index, Int8Array array) callbackfn, dynamic thisArg);
+  external void forEach(void Function(num value, num index, Int8Array array) callbackfn, dynamic thisArg);
   external num indexOf(num searchElement, num fromIndex);
   external String join(String separator);
   external num lastIndexOf(num searchElement, num fromIndex);
   external num get length;
-  external set length(num value);
   external Int8Array map(num Function(num value, num index, Int8Array array) callbackfn, dynamic thisArg);
   external num reduce(num Function(num previousValue, num currentValue, num currentIndex, Int8Array array) callbackfn);
-  external num reduce(num Function(num previousValue, num currentValue, num currentIndex, Int8Array array) callbackfn,
-      num initialValue);
-  external U reduce<U>(
-      U Function(U previousValue, num currentValue, num currentIndex, Int8Array array) callbackfn, U initialValue);
   external num reduceRight(
       num Function(num previousValue, num currentValue, num currentIndex, Int8Array array) callbackfn);
-  external num reduceRight(
-      num Function(num previousValue, num currentValue, num currentIndex, Int8Array array) callbackfn,
-      num initialValue);
-  external U reduceRight<U>(
-      U Function(U previousValue, num currentValue, num currentIndex, Int8Array array) callbackfn, U initialValue);
   external Int8Array reverse();
-  external dynamic set(ArrayLike<num> array, num offset);
+  external void set(ArrayLike<num> array, num offset);
   external Int8Array slice(num start, num end);
   external bool some(dynamic Function(num value, num index, Int8Array array) predicate, dynamic thisArg);
   external dynamic sort(num Function(num a, num b) compareFn);
@@ -1181,12 +966,8 @@ class Int8Array {
 @JS()
 class Int8ArrayConstructor {
   external Int8Array get prototype;
-  external set prototype(Int8Array value);
   external factory Int8ArrayConstructor({num length});
-  external factory Int8ArrayConstructor({dynamic array});
-  external factory Int8ArrayConstructor({ArrayBufferLike buffer, num byteOffset, num length});
   external num get BYTES_PER_ELEMENT;
-  external set BYTES_PER_ELEMENT(num value);
   external Int8Array of([
     num? items1,
     num? items2,
@@ -1199,7 +980,6 @@ class Int8ArrayConstructor {
     num? items9,
   ]);
   external Int8Array from(ArrayLike<num> arrayLike);
-  external Int8Array from<T>(ArrayLike<T> arrayLike, num Function(T v, num k) mapfn, dynamic thisArg);
   external factory Int8ArrayConstructor({
     Int8Array prototype,
     num BYTES_PER_ELEMENT,
@@ -1213,40 +993,26 @@ external Int8ArrayConstructor Int8Array;
 @anonymous
 class Uint8Array {
   external num get BYTES_PER_ELEMENT;
-  external set BYTES_PER_ELEMENT(num value);
   external ArrayBufferLike get buffer;
-  external set buffer(ArrayBufferLike value);
   external num get byteLength;
-  external set byteLength(num value);
   external num get byteOffset;
-  external set byteOffset(num value);
   external dynamic copyWithin(num target, num start, num end);
   external bool every(dynamic Function(num value, num index, Uint8Array array) predicate, dynamic thisArg);
   external dynamic fill(num value, num start, num end);
   external Uint8Array filter(dynamic Function(num value, num index, Uint8Array array) predicate, dynamic thisArg);
   external num? find(bool Function(num value, num index, Uint8Array obj) predicate, dynamic thisArg);
   external num findIndex(bool Function(num value, num index, Uint8Array obj) predicate, dynamic thisArg);
-  external dynamic forEach(dynamic Function(num value, num index, Uint8Array array) callbackfn, dynamic thisArg);
+  external void forEach(void Function(num value, num index, Uint8Array array) callbackfn, dynamic thisArg);
   external num indexOf(num searchElement, num fromIndex);
   external String join(String separator);
   external num lastIndexOf(num searchElement, num fromIndex);
   external num get length;
-  external set length(num value);
   external Uint8Array map(num Function(num value, num index, Uint8Array array) callbackfn, dynamic thisArg);
   external num reduce(num Function(num previousValue, num currentValue, num currentIndex, Uint8Array array) callbackfn);
-  external num reduce(num Function(num previousValue, num currentValue, num currentIndex, Uint8Array array) callbackfn,
-      num initialValue);
-  external U reduce<U>(
-      U Function(U previousValue, num currentValue, num currentIndex, Uint8Array array) callbackfn, U initialValue);
   external num reduceRight(
       num Function(num previousValue, num currentValue, num currentIndex, Uint8Array array) callbackfn);
-  external num reduceRight(
-      num Function(num previousValue, num currentValue, num currentIndex, Uint8Array array) callbackfn,
-      num initialValue);
-  external U reduceRight<U>(
-      U Function(U previousValue, num currentValue, num currentIndex, Uint8Array array) callbackfn, U initialValue);
   external Uint8Array reverse();
-  external dynamic set(ArrayLike<num> array, num offset);
+  external void set(ArrayLike<num> array, num offset);
   external Uint8Array slice(num start, num end);
   external bool some(dynamic Function(num value, num index, Uint8Array array) predicate, dynamic thisArg);
   external dynamic sort(num Function(num a, num b) compareFn);
@@ -1266,12 +1032,8 @@ class Uint8Array {
 @JS()
 class Uint8ArrayConstructor {
   external Uint8Array get prototype;
-  external set prototype(Uint8Array value);
   external factory Uint8ArrayConstructor({num length});
-  external factory Uint8ArrayConstructor({dynamic array});
-  external factory Uint8ArrayConstructor({ArrayBufferLike buffer, num byteOffset, num length});
   external num get BYTES_PER_ELEMENT;
-  external set BYTES_PER_ELEMENT(num value);
   external Uint8Array of([
     num? items1,
     num? items2,
@@ -1284,7 +1046,6 @@ class Uint8ArrayConstructor {
     num? items9,
   ]);
   external Uint8Array from(ArrayLike<num> arrayLike);
-  external Uint8Array from<T>(ArrayLike<T> arrayLike, num Function(T v, num k) mapfn, dynamic thisArg);
   external factory Uint8ArrayConstructor({
     Uint8Array prototype,
     num BYTES_PER_ELEMENT,
@@ -1298,13 +1059,9 @@ external Uint8ArrayConstructor Uint8Array;
 @anonymous
 class Uint8ClampedArray {
   external num get BYTES_PER_ELEMENT;
-  external set BYTES_PER_ELEMENT(num value);
   external ArrayBufferLike get buffer;
-  external set buffer(ArrayBufferLike value);
   external num get byteLength;
-  external set byteLength(num value);
   external num get byteOffset;
-  external set byteOffset(num value);
   external dynamic copyWithin(num target, num start, num end);
   external bool every(dynamic Function(num value, num index, Uint8ClampedArray array) predicate, dynamic thisArg);
   external dynamic fill(num value, num start, num end);
@@ -1312,32 +1069,19 @@ class Uint8ClampedArray {
       dynamic Function(num value, num index, Uint8ClampedArray array) predicate, dynamic thisArg);
   external num? find(bool Function(num value, num index, Uint8ClampedArray obj) predicate, dynamic thisArg);
   external num findIndex(bool Function(num value, num index, Uint8ClampedArray obj) predicate, dynamic thisArg);
-  external dynamic forEach(dynamic Function(num value, num index, Uint8ClampedArray array) callbackfn, dynamic thisArg);
+  external void forEach(void Function(num value, num index, Uint8ClampedArray array) callbackfn, dynamic thisArg);
   external num indexOf(num searchElement, num fromIndex);
   external String join(String separator);
   external num lastIndexOf(num searchElement, num fromIndex);
   external num get length;
-  external set length(num value);
   external Uint8ClampedArray map(
       num Function(num value, num index, Uint8ClampedArray array) callbackfn, dynamic thisArg);
   external num reduce(
       num Function(num previousValue, num currentValue, num currentIndex, Uint8ClampedArray array) callbackfn);
-  external num reduce(
-      num Function(num previousValue, num currentValue, num currentIndex, Uint8ClampedArray array) callbackfn,
-      num initialValue);
-  external U reduce<U>(
-      U Function(U previousValue, num currentValue, num currentIndex, Uint8ClampedArray array) callbackfn,
-      U initialValue);
   external num reduceRight(
       num Function(num previousValue, num currentValue, num currentIndex, Uint8ClampedArray array) callbackfn);
-  external num reduceRight(
-      num Function(num previousValue, num currentValue, num currentIndex, Uint8ClampedArray array) callbackfn,
-      num initialValue);
-  external U reduceRight<U>(
-      U Function(U previousValue, num currentValue, num currentIndex, Uint8ClampedArray array) callbackfn,
-      U initialValue);
   external Uint8ClampedArray reverse();
-  external dynamic set(ArrayLike<num> array, num offset);
+  external void set(ArrayLike<num> array, num offset);
   external Uint8ClampedArray slice(num start, num end);
   external bool some(dynamic Function(num value, num index, Uint8ClampedArray array) predicate, dynamic thisArg);
   external dynamic sort(num Function(num a, num b) compareFn);
@@ -1357,12 +1101,8 @@ class Uint8ClampedArray {
 @JS()
 class Uint8ClampedArrayConstructor {
   external Uint8ClampedArray get prototype;
-  external set prototype(Uint8ClampedArray value);
   external factory Uint8ClampedArrayConstructor({num length});
-  external factory Uint8ClampedArrayConstructor({dynamic array});
-  external factory Uint8ClampedArrayConstructor({ArrayBufferLike buffer, num byteOffset, num length});
   external num get BYTES_PER_ELEMENT;
-  external set BYTES_PER_ELEMENT(num value);
   external Uint8ClampedArray of([
     num? items1,
     num? items2,
@@ -1375,7 +1115,6 @@ class Uint8ClampedArrayConstructor {
     num? items9,
   ]);
   external Uint8ClampedArray from(ArrayLike<num> arrayLike);
-  external Uint8ClampedArray from<T>(ArrayLike<T> arrayLike, num Function(T v, num k) mapfn, dynamic thisArg);
   external factory Uint8ClampedArrayConstructor({
     Uint8ClampedArray prototype,
     num BYTES_PER_ELEMENT,
@@ -1389,40 +1128,26 @@ external Uint8ClampedArrayConstructor Uint8ClampedArray;
 @anonymous
 class Int16Array {
   external num get BYTES_PER_ELEMENT;
-  external set BYTES_PER_ELEMENT(num value);
   external ArrayBufferLike get buffer;
-  external set buffer(ArrayBufferLike value);
   external num get byteLength;
-  external set byteLength(num value);
   external num get byteOffset;
-  external set byteOffset(num value);
   external dynamic copyWithin(num target, num start, num end);
   external bool every(dynamic Function(num value, num index, Int16Array array) predicate, dynamic thisArg);
   external dynamic fill(num value, num start, num end);
   external Int16Array filter(dynamic Function(num value, num index, Int16Array array) predicate, dynamic thisArg);
   external num? find(bool Function(num value, num index, Int16Array obj) predicate, dynamic thisArg);
   external num findIndex(bool Function(num value, num index, Int16Array obj) predicate, dynamic thisArg);
-  external dynamic forEach(dynamic Function(num value, num index, Int16Array array) callbackfn, dynamic thisArg);
+  external void forEach(void Function(num value, num index, Int16Array array) callbackfn, dynamic thisArg);
   external num indexOf(num searchElement, num fromIndex);
   external String join(String separator);
   external num lastIndexOf(num searchElement, num fromIndex);
   external num get length;
-  external set length(num value);
   external Int16Array map(num Function(num value, num index, Int16Array array) callbackfn, dynamic thisArg);
   external num reduce(num Function(num previousValue, num currentValue, num currentIndex, Int16Array array) callbackfn);
-  external num reduce(num Function(num previousValue, num currentValue, num currentIndex, Int16Array array) callbackfn,
-      num initialValue);
-  external U reduce<U>(
-      U Function(U previousValue, num currentValue, num currentIndex, Int16Array array) callbackfn, U initialValue);
   external num reduceRight(
       num Function(num previousValue, num currentValue, num currentIndex, Int16Array array) callbackfn);
-  external num reduceRight(
-      num Function(num previousValue, num currentValue, num currentIndex, Int16Array array) callbackfn,
-      num initialValue);
-  external U reduceRight<U>(
-      U Function(U previousValue, num currentValue, num currentIndex, Int16Array array) callbackfn, U initialValue);
   external Int16Array reverse();
-  external dynamic set(ArrayLike<num> array, num offset);
+  external void set(ArrayLike<num> array, num offset);
   external Int16Array slice(num start, num end);
   external bool some(dynamic Function(num value, num index, Int16Array array) predicate, dynamic thisArg);
   external dynamic sort(num Function(num a, num b) compareFn);
@@ -1442,12 +1167,8 @@ class Int16Array {
 @JS()
 class Int16ArrayConstructor {
   external Int16Array get prototype;
-  external set prototype(Int16Array value);
   external factory Int16ArrayConstructor({num length});
-  external factory Int16ArrayConstructor({dynamic array});
-  external factory Int16ArrayConstructor({ArrayBufferLike buffer, num byteOffset, num length});
   external num get BYTES_PER_ELEMENT;
-  external set BYTES_PER_ELEMENT(num value);
   external Int16Array of([
     num? items1,
     num? items2,
@@ -1460,7 +1181,6 @@ class Int16ArrayConstructor {
     num? items9,
   ]);
   external Int16Array from(ArrayLike<num> arrayLike);
-  external Int16Array from<T>(ArrayLike<T> arrayLike, num Function(T v, num k) mapfn, dynamic thisArg);
   external factory Int16ArrayConstructor({
     Int16Array prototype,
     num BYTES_PER_ELEMENT,
@@ -1474,41 +1194,27 @@ external Int16ArrayConstructor Int16Array;
 @anonymous
 class Uint16Array {
   external num get BYTES_PER_ELEMENT;
-  external set BYTES_PER_ELEMENT(num value);
   external ArrayBufferLike get buffer;
-  external set buffer(ArrayBufferLike value);
   external num get byteLength;
-  external set byteLength(num value);
   external num get byteOffset;
-  external set byteOffset(num value);
   external dynamic copyWithin(num target, num start, num end);
   external bool every(dynamic Function(num value, num index, Uint16Array array) predicate, dynamic thisArg);
   external dynamic fill(num value, num start, num end);
   external Uint16Array filter(dynamic Function(num value, num index, Uint16Array array) predicate, dynamic thisArg);
   external num? find(bool Function(num value, num index, Uint16Array obj) predicate, dynamic thisArg);
   external num findIndex(bool Function(num value, num index, Uint16Array obj) predicate, dynamic thisArg);
-  external dynamic forEach(dynamic Function(num value, num index, Uint16Array array) callbackfn, dynamic thisArg);
+  external void forEach(void Function(num value, num index, Uint16Array array) callbackfn, dynamic thisArg);
   external num indexOf(num searchElement, num fromIndex);
   external String join(String separator);
   external num lastIndexOf(num searchElement, num fromIndex);
   external num get length;
-  external set length(num value);
   external Uint16Array map(num Function(num value, num index, Uint16Array array) callbackfn, dynamic thisArg);
   external num reduce(
       num Function(num previousValue, num currentValue, num currentIndex, Uint16Array array) callbackfn);
-  external num reduce(num Function(num previousValue, num currentValue, num currentIndex, Uint16Array array) callbackfn,
-      num initialValue);
-  external U reduce<U>(
-      U Function(U previousValue, num currentValue, num currentIndex, Uint16Array array) callbackfn, U initialValue);
   external num reduceRight(
       num Function(num previousValue, num currentValue, num currentIndex, Uint16Array array) callbackfn);
-  external num reduceRight(
-      num Function(num previousValue, num currentValue, num currentIndex, Uint16Array array) callbackfn,
-      num initialValue);
-  external U reduceRight<U>(
-      U Function(U previousValue, num currentValue, num currentIndex, Uint16Array array) callbackfn, U initialValue);
   external Uint16Array reverse();
-  external dynamic set(ArrayLike<num> array, num offset);
+  external void set(ArrayLike<num> array, num offset);
   external Uint16Array slice(num start, num end);
   external bool some(dynamic Function(num value, num index, Uint16Array array) predicate, dynamic thisArg);
   external dynamic sort(num Function(num a, num b) compareFn);
@@ -1528,12 +1234,8 @@ class Uint16Array {
 @JS()
 class Uint16ArrayConstructor {
   external Uint16Array get prototype;
-  external set prototype(Uint16Array value);
   external factory Uint16ArrayConstructor({num length});
-  external factory Uint16ArrayConstructor({dynamic array});
-  external factory Uint16ArrayConstructor({ArrayBufferLike buffer, num byteOffset, num length});
   external num get BYTES_PER_ELEMENT;
-  external set BYTES_PER_ELEMENT(num value);
   external Uint16Array of([
     num? items1,
     num? items2,
@@ -1546,7 +1248,6 @@ class Uint16ArrayConstructor {
     num? items9,
   ]);
   external Uint16Array from(ArrayLike<num> arrayLike);
-  external Uint16Array from<T>(ArrayLike<T> arrayLike, num Function(T v, num k) mapfn, dynamic thisArg);
   external factory Uint16ArrayConstructor({
     Uint16Array prototype,
     num BYTES_PER_ELEMENT,
@@ -1560,40 +1261,26 @@ external Uint16ArrayConstructor Uint16Array;
 @anonymous
 class Int32Array {
   external num get BYTES_PER_ELEMENT;
-  external set BYTES_PER_ELEMENT(num value);
   external ArrayBufferLike get buffer;
-  external set buffer(ArrayBufferLike value);
   external num get byteLength;
-  external set byteLength(num value);
   external num get byteOffset;
-  external set byteOffset(num value);
   external dynamic copyWithin(num target, num start, num end);
   external bool every(dynamic Function(num value, num index, Int32Array array) predicate, dynamic thisArg);
   external dynamic fill(num value, num start, num end);
   external Int32Array filter(dynamic Function(num value, num index, Int32Array array) predicate, dynamic thisArg);
   external num? find(bool Function(num value, num index, Int32Array obj) predicate, dynamic thisArg);
   external num findIndex(bool Function(num value, num index, Int32Array obj) predicate, dynamic thisArg);
-  external dynamic forEach(dynamic Function(num value, num index, Int32Array array) callbackfn, dynamic thisArg);
+  external void forEach(void Function(num value, num index, Int32Array array) callbackfn, dynamic thisArg);
   external num indexOf(num searchElement, num fromIndex);
   external String join(String separator);
   external num lastIndexOf(num searchElement, num fromIndex);
   external num get length;
-  external set length(num value);
   external Int32Array map(num Function(num value, num index, Int32Array array) callbackfn, dynamic thisArg);
   external num reduce(num Function(num previousValue, num currentValue, num currentIndex, Int32Array array) callbackfn);
-  external num reduce(num Function(num previousValue, num currentValue, num currentIndex, Int32Array array) callbackfn,
-      num initialValue);
-  external U reduce<U>(
-      U Function(U previousValue, num currentValue, num currentIndex, Int32Array array) callbackfn, U initialValue);
   external num reduceRight(
       num Function(num previousValue, num currentValue, num currentIndex, Int32Array array) callbackfn);
-  external num reduceRight(
-      num Function(num previousValue, num currentValue, num currentIndex, Int32Array array) callbackfn,
-      num initialValue);
-  external U reduceRight<U>(
-      U Function(U previousValue, num currentValue, num currentIndex, Int32Array array) callbackfn, U initialValue);
   external Int32Array reverse();
-  external dynamic set(ArrayLike<num> array, num offset);
+  external void set(ArrayLike<num> array, num offset);
   external Int32Array slice(num start, num end);
   external bool some(dynamic Function(num value, num index, Int32Array array) predicate, dynamic thisArg);
   external dynamic sort(num Function(num a, num b) compareFn);
@@ -1613,12 +1300,8 @@ class Int32Array {
 @JS()
 class Int32ArrayConstructor {
   external Int32Array get prototype;
-  external set prototype(Int32Array value);
   external factory Int32ArrayConstructor({num length});
-  external factory Int32ArrayConstructor({dynamic array});
-  external factory Int32ArrayConstructor({ArrayBufferLike buffer, num byteOffset, num length});
   external num get BYTES_PER_ELEMENT;
-  external set BYTES_PER_ELEMENT(num value);
   external Int32Array of([
     num? items1,
     num? items2,
@@ -1631,7 +1314,6 @@ class Int32ArrayConstructor {
     num? items9,
   ]);
   external Int32Array from(ArrayLike<num> arrayLike);
-  external Int32Array from<T>(ArrayLike<T> arrayLike, num Function(T v, num k) mapfn, dynamic thisArg);
   external factory Int32ArrayConstructor({
     Int32Array prototype,
     num BYTES_PER_ELEMENT,
@@ -1645,41 +1327,27 @@ external Int32ArrayConstructor Int32Array;
 @anonymous
 class Uint32Array {
   external num get BYTES_PER_ELEMENT;
-  external set BYTES_PER_ELEMENT(num value);
   external ArrayBufferLike get buffer;
-  external set buffer(ArrayBufferLike value);
   external num get byteLength;
-  external set byteLength(num value);
   external num get byteOffset;
-  external set byteOffset(num value);
   external dynamic copyWithin(num target, num start, num end);
   external bool every(dynamic Function(num value, num index, Uint32Array array) predicate, dynamic thisArg);
   external dynamic fill(num value, num start, num end);
   external Uint32Array filter(dynamic Function(num value, num index, Uint32Array array) predicate, dynamic thisArg);
   external num? find(bool Function(num value, num index, Uint32Array obj) predicate, dynamic thisArg);
   external num findIndex(bool Function(num value, num index, Uint32Array obj) predicate, dynamic thisArg);
-  external dynamic forEach(dynamic Function(num value, num index, Uint32Array array) callbackfn, dynamic thisArg);
+  external void forEach(void Function(num value, num index, Uint32Array array) callbackfn, dynamic thisArg);
   external num indexOf(num searchElement, num fromIndex);
   external String join(String separator);
   external num lastIndexOf(num searchElement, num fromIndex);
   external num get length;
-  external set length(num value);
   external Uint32Array map(num Function(num value, num index, Uint32Array array) callbackfn, dynamic thisArg);
   external num reduce(
       num Function(num previousValue, num currentValue, num currentIndex, Uint32Array array) callbackfn);
-  external num reduce(num Function(num previousValue, num currentValue, num currentIndex, Uint32Array array) callbackfn,
-      num initialValue);
-  external U reduce<U>(
-      U Function(U previousValue, num currentValue, num currentIndex, Uint32Array array) callbackfn, U initialValue);
   external num reduceRight(
       num Function(num previousValue, num currentValue, num currentIndex, Uint32Array array) callbackfn);
-  external num reduceRight(
-      num Function(num previousValue, num currentValue, num currentIndex, Uint32Array array) callbackfn,
-      num initialValue);
-  external U reduceRight<U>(
-      U Function(U previousValue, num currentValue, num currentIndex, Uint32Array array) callbackfn, U initialValue);
   external Uint32Array reverse();
-  external dynamic set(ArrayLike<num> array, num offset);
+  external void set(ArrayLike<num> array, num offset);
   external Uint32Array slice(num start, num end);
   external bool some(dynamic Function(num value, num index, Uint32Array array) predicate, dynamic thisArg);
   external dynamic sort(num Function(num a, num b) compareFn);
@@ -1699,12 +1367,8 @@ class Uint32Array {
 @JS()
 class Uint32ArrayConstructor {
   external Uint32Array get prototype;
-  external set prototype(Uint32Array value);
   external factory Uint32ArrayConstructor({num length});
-  external factory Uint32ArrayConstructor({dynamic array});
-  external factory Uint32ArrayConstructor({ArrayBufferLike buffer, num byteOffset, num length});
   external num get BYTES_PER_ELEMENT;
-  external set BYTES_PER_ELEMENT(num value);
   external Uint32Array of([
     num? items1,
     num? items2,
@@ -1717,7 +1381,6 @@ class Uint32ArrayConstructor {
     num? items9,
   ]);
   external Uint32Array from(ArrayLike<num> arrayLike);
-  external Uint32Array from<T>(ArrayLike<T> arrayLike, num Function(T v, num k) mapfn, dynamic thisArg);
   external factory Uint32ArrayConstructor({
     Uint32Array prototype,
     num BYTES_PER_ELEMENT,
@@ -1731,42 +1394,27 @@ external Uint32ArrayConstructor Uint32Array;
 @anonymous
 class Float32Array {
   external num get BYTES_PER_ELEMENT;
-  external set BYTES_PER_ELEMENT(num value);
   external ArrayBufferLike get buffer;
-  external set buffer(ArrayBufferLike value);
   external num get byteLength;
-  external set byteLength(num value);
   external num get byteOffset;
-  external set byteOffset(num value);
   external dynamic copyWithin(num target, num start, num end);
   external bool every(dynamic Function(num value, num index, Float32Array array) predicate, dynamic thisArg);
   external dynamic fill(num value, num start, num end);
   external Float32Array filter(dynamic Function(num value, num index, Float32Array array) predicate, dynamic thisArg);
   external num? find(bool Function(num value, num index, Float32Array obj) predicate, dynamic thisArg);
   external num findIndex(bool Function(num value, num index, Float32Array obj) predicate, dynamic thisArg);
-  external dynamic forEach(dynamic Function(num value, num index, Float32Array array) callbackfn, dynamic thisArg);
+  external void forEach(void Function(num value, num index, Float32Array array) callbackfn, dynamic thisArg);
   external num indexOf(num searchElement, num fromIndex);
   external String join(String separator);
   external num lastIndexOf(num searchElement, num fromIndex);
   external num get length;
-  external set length(num value);
   external Float32Array map(num Function(num value, num index, Float32Array array) callbackfn, dynamic thisArg);
   external num reduce(
       num Function(num previousValue, num currentValue, num currentIndex, Float32Array array) callbackfn);
-  external num reduce(
-      num Function(num previousValue, num currentValue, num currentIndex, Float32Array array) callbackfn,
-      num initialValue);
-  external U reduce<U>(
-      U Function(U previousValue, num currentValue, num currentIndex, Float32Array array) callbackfn, U initialValue);
   external num reduceRight(
       num Function(num previousValue, num currentValue, num currentIndex, Float32Array array) callbackfn);
-  external num reduceRight(
-      num Function(num previousValue, num currentValue, num currentIndex, Float32Array array) callbackfn,
-      num initialValue);
-  external U reduceRight<U>(
-      U Function(U previousValue, num currentValue, num currentIndex, Float32Array array) callbackfn, U initialValue);
   external Float32Array reverse();
-  external dynamic set(ArrayLike<num> array, num offset);
+  external void set(ArrayLike<num> array, num offset);
   external Float32Array slice(num start, num end);
   external bool some(dynamic Function(num value, num index, Float32Array array) predicate, dynamic thisArg);
   external dynamic sort(num Function(num a, num b) compareFn);
@@ -1786,12 +1434,8 @@ class Float32Array {
 @JS()
 class Float32ArrayConstructor {
   external Float32Array get prototype;
-  external set prototype(Float32Array value);
   external factory Float32ArrayConstructor({num length});
-  external factory Float32ArrayConstructor({dynamic array});
-  external factory Float32ArrayConstructor({ArrayBufferLike buffer, num byteOffset, num length});
   external num get BYTES_PER_ELEMENT;
-  external set BYTES_PER_ELEMENT(num value);
   external Float32Array of([
     num? items1,
     num? items2,
@@ -1804,7 +1448,6 @@ class Float32ArrayConstructor {
     num? items9,
   ]);
   external Float32Array from(ArrayLike<num> arrayLike);
-  external Float32Array from<T>(ArrayLike<T> arrayLike, num Function(T v, num k) mapfn, dynamic thisArg);
   external factory Float32ArrayConstructor({
     Float32Array prototype,
     num BYTES_PER_ELEMENT,
@@ -1818,42 +1461,27 @@ external Float32ArrayConstructor Float32Array;
 @anonymous
 class Float64Array {
   external num get BYTES_PER_ELEMENT;
-  external set BYTES_PER_ELEMENT(num value);
   external ArrayBufferLike get buffer;
-  external set buffer(ArrayBufferLike value);
   external num get byteLength;
-  external set byteLength(num value);
   external num get byteOffset;
-  external set byteOffset(num value);
   external dynamic copyWithin(num target, num start, num end);
   external bool every(dynamic Function(num value, num index, Float64Array array) predicate, dynamic thisArg);
   external dynamic fill(num value, num start, num end);
   external Float64Array filter(dynamic Function(num value, num index, Float64Array array) predicate, dynamic thisArg);
   external num? find(bool Function(num value, num index, Float64Array obj) predicate, dynamic thisArg);
   external num findIndex(bool Function(num value, num index, Float64Array obj) predicate, dynamic thisArg);
-  external dynamic forEach(dynamic Function(num value, num index, Float64Array array) callbackfn, dynamic thisArg);
+  external void forEach(void Function(num value, num index, Float64Array array) callbackfn, dynamic thisArg);
   external num indexOf(num searchElement, num fromIndex);
   external String join(String separator);
   external num lastIndexOf(num searchElement, num fromIndex);
   external num get length;
-  external set length(num value);
   external Float64Array map(num Function(num value, num index, Float64Array array) callbackfn, dynamic thisArg);
   external num reduce(
       num Function(num previousValue, num currentValue, num currentIndex, Float64Array array) callbackfn);
-  external num reduce(
-      num Function(num previousValue, num currentValue, num currentIndex, Float64Array array) callbackfn,
-      num initialValue);
-  external U reduce<U>(
-      U Function(U previousValue, num currentValue, num currentIndex, Float64Array array) callbackfn, U initialValue);
   external num reduceRight(
       num Function(num previousValue, num currentValue, num currentIndex, Float64Array array) callbackfn);
-  external num reduceRight(
-      num Function(num previousValue, num currentValue, num currentIndex, Float64Array array) callbackfn,
-      num initialValue);
-  external U reduceRight<U>(
-      U Function(U previousValue, num currentValue, num currentIndex, Float64Array array) callbackfn, U initialValue);
   external Float64Array reverse();
-  external dynamic set(ArrayLike<num> array, num offset);
+  external void set(ArrayLike<num> array, num offset);
   external Float64Array slice(num start, num end);
   external bool some(dynamic Function(num value, num index, Float64Array array) predicate, dynamic thisArg);
   external dynamic sort(num Function(num a, num b) compareFn);
@@ -1872,12 +1500,8 @@ class Float64Array {
 @JS()
 class Float64ArrayConstructor {
   external Float64Array get prototype;
-  external set prototype(Float64Array value);
   external factory Float64ArrayConstructor({num length});
-  external factory Float64ArrayConstructor({dynamic array});
-  external factory Float64ArrayConstructor({ArrayBufferLike buffer, num byteOffset, num length});
   external num get BYTES_PER_ELEMENT;
-  external set BYTES_PER_ELEMENT(num value);
   external Float64Array of([
     num? items1,
     num? items2,
@@ -1890,7 +1514,6 @@ class Float64ArrayConstructor {
     num? items9,
   ]);
   external Float64Array from(ArrayLike<num> arrayLike);
-  external Float64Array from<T>(ArrayLike<T> arrayLike, num Function(T v, num k) mapfn, dynamic thisArg);
   external factory Float64ArrayConstructor({
     Float64Array prototype,
     num BYTES_PER_ELEMENT,

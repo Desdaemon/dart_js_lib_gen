@@ -21,6 +21,7 @@ struct Class {
     /// Whether this class only exists on the type level, i.e. a pure interface with
     /// no constructors in TypeScript.
     anonymous: bool,
+    members: HashSet<String>,
 }
 
 /// Parses a pattern as an ident.
@@ -199,6 +200,7 @@ impl Transformer {
             anonymous: true,
             fields: vec![],
             id: String::from(intr.id.sym.as_ref()),
+            members: HashSet::new(),
         });
         self.push("@JS() ");
         let class_body = self.collect(|s| {
@@ -311,8 +313,17 @@ impl Transformer {
         self.push(");");
     }
 
+    /// Returns false is [id] is already a member of the current class.
+    fn register_member(&mut self, id: String) -> bool {
+        self.class.as_mut().unwrap().members.insert(id)
+    }
+
     fn visit_ts_prop_sig(&mut self, prop: &TsPropertySignature) {
         let id = parse_expression(prop.key.as_ref()).unwrap();
+        if !self.register_member(id.to_owned()) {
+            error!("Member already defined: {}", id);
+            return;
+        }
         if id.contains('-') {
             warn!("Invalid character in property name: {}.", id);
             return;
@@ -329,7 +340,9 @@ impl Transformer {
             }
         });
         self.emit_getter(&ty, id);
-        self.emit_setter(&ty, id, None);
+        if !prop.readonly {
+            self.emit_setter(&ty, id, None);
+        }
         self.class
             .as_mut()
             .unwrap()
@@ -349,10 +362,14 @@ impl Transformer {
                     params,
                     ..
                 }) => {
+                    let id = self.class.as_ref().unwrap().id.clone();
+                    if !self.register_member(id.to_owned()) {
+                        error!("Member already defined: {}", id);
+                        continue;
+                    }
                     self.class.as_mut().unwrap().anonymous = false;
                     let params = self.collect(|s| s.visit_function_params(params));
                     self.push("external factory ");
-                    let id = self.class.as_ref().unwrap().id.clone();
                     self.push(&id);
                     self.push_char('(');
                     if !params.is_empty() {
@@ -375,15 +392,25 @@ impl Transformer {
                     debug!("{:?}", call);
                 }
                 TsTypeElement::TsGetterSignature(TsGetterSignature { type_ann, key, .. }) => {
+                    let id = parse_expression(key).unwrap();
+                    if !self.register_member(id.to_owned()) {
+                        error!("Member already defined: {}", id);
+                        continue;
+                    }
                     self.push("external ");
                     self.visit_type_ann(type_ann);
                     self.push(" get ");
-                    self.push(parse_expression(key).unwrap());
+                    self.push(id);
                     self.semi();
                 }
                 TsTypeElement::TsSetterSignature(TsSetterSignature { key, param, .. }) => {
+                    let id = parse_expression(key).unwrap();
+                    if !self.register_member(id.to_owned()) {
+                        error!("Member already defined: {}", id);
+                        continue;
+                    }
                     self.push("external set ");
-                    self.push(parse_expression(key).unwrap());
+                    self.push(id);
                     self.push_char('(');
                     self.visit_function_param_single(param);
                     self.push(");");
@@ -399,6 +426,10 @@ impl Transformer {
             Expr::Ident(id) => id.sym.as_ref(),
             _ => unreachable!(),
         };
+        if !self.register_member(id.to_owned()) {
+            error!("Member already defined: {}", id);
+            return;
+        }
         if ["catch"].contains(&id) {
             // Dart keyword, cannot be called.
             warn!("Forbidden method name: {}.", id);
@@ -535,6 +566,7 @@ impl Transformer {
                 }
                 TsKeywordTypeKind::TsBooleanKeyword => self.push("bool"),
                 TsKeywordTypeKind::TsStringKeyword => self.push("String"),
+                TsKeywordTypeKind::TsVoidKeyword => self.push("void"),
                 _ => self.push("dynamic"),
             },
             TsType::TsFnOrConstructorType(func) => match func {
@@ -598,7 +630,24 @@ impl Transformer {
                     self.push("dynamic");
                 }
             }
-            _ => self.push("dynamic"),
+            TsType::TsTypeOperator(op) if op.op.as_str() == "readonly" => {
+                self.visit_type(&op.type_ann)
+            }
+            TsType::TsThisType(_) => {
+                let ty = self
+                    .class
+                    .as_ref()
+                    .map(|x| x.id.clone())
+                    .unwrap_or_else(|| "dynamic".to_owned());
+                self.push(&ty);
+            }
+            TsType::TsTypePredicate(_) => self.push("bool"), // A is B
+            TsType::TsUnionOrIntersectionType(TsUnionOrIntersectionType::TsIntersectionType(_))
+            | TsType::TsConditionalType(_) => self.push("dynamic"),
+            _ => {
+                warn!("Unhandled type: {:?}", typ);
+                todo!()
+            }
         };
     }
 
@@ -624,6 +673,7 @@ impl Transformer {
             fields: vec![],
             id: id.to_owned(),
             anonymous: false,
+            members: HashSet::new(),
         });
         self.push("@JS() class ");
         self.push(id);
