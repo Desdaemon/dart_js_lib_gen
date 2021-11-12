@@ -68,8 +68,8 @@ class PropertyDescriptorMap {}
 @JS()
 @anonymous
 class Object {
-  external Function get constructor;
-  external set constructor(Function value);
+  external Function() get constructor;
+  external set constructor(Function() value);
   external String toString();
   external String toLocaleString();
   external Object valueOf();
@@ -77,7 +77,7 @@ class Object {
   external bool isPrototypeOf(Object v);
   external bool propertyIsEnumerable(PropertyKey v);
   external factory Object({
-    Function constructor,
+    Function() constructor,
   });
 }
 
@@ -92,7 +92,7 @@ class ObjectConstructor {
   external T defineProperty<T>(T o, PropertyKey p, dynamic attributes);
   external T defineProperties<T>(T o, dynamic properties);
   external T seal<T>(T o);
-  external dynamic freeze<T>(List<T> a);
+  external List<T> freeze<T>(List<T> a);
   external T preventExtensions<T>(T o);
   external bool isSealed(dynamic o);
   external bool isFrozen(dynamic o);
@@ -254,9 +254,9 @@ external NumberConstructor Number;
 @JS()
 @anonymous
 class TemplateStringsArray {
-  external dynamic get raw;
+  external List<String> get raw;
   external factory TemplateStringsArray({
-    dynamic raw,
+    List<String> raw,
   });
 }
 
@@ -428,7 +428,7 @@ class RegExp {
   external bool get multiline;
   external num get lastIndex;
   external set lastIndex(num value);
-  external dynamic compile();
+  external RegExp compile();
   external factory RegExp({
     String source,
     bool global,
@@ -635,13 +635,13 @@ class ReadonlyArray<T> {
   external List<T> slice(num start, num end);
   external num indexOf(T searchElement, num fromIndex);
   external num lastIndexOf(T searchElement, num fromIndex);
-  external dynamic every<S extends T>(dynamic Function(T value, num index, dynamic array) predicate, dynamic thisArg);
-  external bool some(dynamic Function(T value, num index, dynamic array) predicate, dynamic thisArg);
-  external void forEach(void Function(T value, num index, dynamic array) callbackfn, dynamic thisArg);
-  external List<U> map<U>(U Function(T value, num index, dynamic array) callbackfn, dynamic thisArg);
-  external List<S> filter<S extends T>(dynamic Function(T value, num index, dynamic array) predicate, dynamic thisArg);
-  external T reduce(T Function(T previousValue, T currentValue, num currentIndex, dynamic array) callbackfn);
-  external T reduceRight(T Function(T previousValue, T currentValue, num currentIndex, dynamic array) callbackfn);
+  external bool every<S extends T>(bool Function(T value, num index, List<T> array) predicate, dynamic thisArg);
+  external bool some(dynamic Function(T value, num index, List<T> array) predicate, dynamic thisArg);
+  external void forEach(void Function(T value, num index, List<T> array) callbackfn, dynamic thisArg);
+  external List<U> map<U>(U Function(T value, num index, List<T> array) callbackfn, dynamic thisArg);
+  external List<S> filter<S extends T>(bool Function(T value, num index, List<T> array) predicate, dynamic thisArg);
+  external T reduce(T Function(T previousValue, T currentValue, num currentIndex, List<T> array) callbackfn);
+  external T reduceRight(T Function(T previousValue, T currentValue, num currentIndex, List<T> array) callbackfn);
   external factory ReadonlyArray({
     num length,
   });
@@ -692,7 +692,7 @@ class Array<T> {
   external List<T> reverse();
   external T? shift();
   external List<T> slice(num start, num end);
-  external dynamic sort(num Function(T a, T b) compareFn);
+  external Array sort(num Function(T a, T b) compareFn);
   external List<T> splice(num start, num deleteCount);
   external num unshift([
     T? items1,
@@ -707,11 +707,11 @@ class Array<T> {
   ]);
   external num indexOf(T searchElement, num fromIndex);
   external num lastIndexOf(T searchElement, num fromIndex);
-  external dynamic every<S extends T>(dynamic Function(T value, num index, List<T> array) predicate, dynamic thisArg);
+  external bool every<S extends T>(bool Function(T value, num index, List<T> array) predicate, dynamic thisArg);
   external bool some(dynamic Function(T value, num index, List<T> array) predicate, dynamic thisArg);
   external void forEach(void Function(T value, num index, List<T> array) callbackfn, dynamic thisArg);
   external List<U> map<U>(U Function(T value, num index, List<T> array) callbackfn, dynamic thisArg);
-  external List<S> filter<S extends T>(dynamic Function(T value, num index, List<T> array) predicate, dynamic thisArg);
+  external List<S> filter<S extends T>(bool Function(T value, num index, List<T> array) predicate, dynamic thisArg);
   external T reduce(T Function(T previousValue, T currentValue, num currentIndex, List<T> array) callbackfn);
   external T reduceRight(T Function(T previousValue, T currentValue, num currentIndex, List<T> array) callbackfn);
   external factory Array({
@@ -722,7 +722,7 @@ class Array<T> {
 @JS()
 class ArrayConstructor {
   external factory ArrayConstructor({num arrayLength});
-  external dynamic isArray(dynamic arg);
+  external bool isArray(dynamic arg);
   external List<dynamic> get prototype;
   external factory ArrayConstructor({
     List<dynamic> prototype,
@@ -767,13 +767,15 @@ typedef PromiseConstructorLike = dynamic Function();
 @JS()
 @anonymous
 class PromiseLike<T> {
-  external PromiseLike<dynamic> then<TResult1, TResult2>(dynamic? onfulfilled, dynamic? onrejected);
+  external PromiseLike<dynamic> then<TResult1, TResult2>(
+      dynamic Function(T value)? onfulfilled, dynamic Function(dynamic reason)? onrejected);
 }
 
 @JS()
 @anonymous
 class Promise<T> {
-  external Promise<dynamic> then<TResult1, TResult2>(dynamic? onfulfilled, dynamic? onrejected);
+  external Promise<dynamic> then<TResult1, TResult2>(
+      dynamic Function(T value)? onfulfilled, dynamic Function(dynamic reason)? onrejected);
 }
 
 @JS()
@@ -788,11 +790,11 @@ class ArrayLike<T> {
 typedef Partial<T> = dynamic;
 typedef Required<T> = dynamic;
 typedef Readonly<T> = dynamic;
-typedef Pick<T, K extends dynamic> = dynamic;
-typedef Record<K extends dynamic, T> = dynamic;
+typedef Pick<T, K extends String> = dynamic;
+typedef Record<K extends String, T> = dynamic;
 typedef Exclude<T, U> = dynamic;
 typedef Extract<T, U> = dynamic;
-typedef Omit<T, K extends dynamic> = Pick<T, Exclude<dynamic, K>>;
+typedef Omit<T, K extends String> = Pick<T, Exclude<String, K>>;
 typedef NonNullable<T> = dynamic;
 typedef Parameters<
         T extends dynamic Function([
@@ -857,7 +859,7 @@ typedef ArrayBufferLike = dynamic;
 class ArrayBufferConstructor {
   external ArrayBuffer get prototype;
   external factory ArrayBufferConstructor({num byteLength});
-  external dynamic isView(dynamic arg);
+  external bool isView(dynamic arg);
   external factory ArrayBufferConstructor({
     ArrayBuffer prototype,
   });
@@ -930,9 +932,9 @@ class Int8Array {
   external ArrayBufferLike get buffer;
   external num get byteLength;
   external num get byteOffset;
-  external dynamic copyWithin(num target, num start, num end);
+  external Int8Array copyWithin(num target, num start, num end);
   external bool every(dynamic Function(num value, num index, Int8Array array) predicate, dynamic thisArg);
-  external dynamic fill(num value, num start, num end);
+  external Int8Array fill(num value, num start, num end);
   external Int8Array filter(dynamic Function(num value, num index, Int8Array array) predicate, dynamic thisArg);
   external num? find(bool Function(num value, num index, Int8Array obj) predicate, dynamic thisArg);
   external num findIndex(bool Function(num value, num index, Int8Array obj) predicate, dynamic thisArg);
@@ -949,7 +951,7 @@ class Int8Array {
   external void set(ArrayLike<num> array, num offset);
   external Int8Array slice(num start, num end);
   external bool some(dynamic Function(num value, num index, Int8Array array) predicate, dynamic thisArg);
-  external dynamic sort(num Function(num a, num b) compareFn);
+  external Int8Array sort(num Function(num a, num b) compareFn);
   external Int8Array subarray(num begin, num end);
   external String toLocaleString();
   external String toString();
@@ -996,9 +998,9 @@ class Uint8Array {
   external ArrayBufferLike get buffer;
   external num get byteLength;
   external num get byteOffset;
-  external dynamic copyWithin(num target, num start, num end);
+  external Uint8Array copyWithin(num target, num start, num end);
   external bool every(dynamic Function(num value, num index, Uint8Array array) predicate, dynamic thisArg);
-  external dynamic fill(num value, num start, num end);
+  external Uint8Array fill(num value, num start, num end);
   external Uint8Array filter(dynamic Function(num value, num index, Uint8Array array) predicate, dynamic thisArg);
   external num? find(bool Function(num value, num index, Uint8Array obj) predicate, dynamic thisArg);
   external num findIndex(bool Function(num value, num index, Uint8Array obj) predicate, dynamic thisArg);
@@ -1015,7 +1017,7 @@ class Uint8Array {
   external void set(ArrayLike<num> array, num offset);
   external Uint8Array slice(num start, num end);
   external bool some(dynamic Function(num value, num index, Uint8Array array) predicate, dynamic thisArg);
-  external dynamic sort(num Function(num a, num b) compareFn);
+  external Uint8Array sort(num Function(num a, num b) compareFn);
   external Uint8Array subarray(num begin, num end);
   external String toLocaleString();
   external String toString();
@@ -1062,9 +1064,9 @@ class Uint8ClampedArray {
   external ArrayBufferLike get buffer;
   external num get byteLength;
   external num get byteOffset;
-  external dynamic copyWithin(num target, num start, num end);
+  external Uint8ClampedArray copyWithin(num target, num start, num end);
   external bool every(dynamic Function(num value, num index, Uint8ClampedArray array) predicate, dynamic thisArg);
-  external dynamic fill(num value, num start, num end);
+  external Uint8ClampedArray fill(num value, num start, num end);
   external Uint8ClampedArray filter(
       dynamic Function(num value, num index, Uint8ClampedArray array) predicate, dynamic thisArg);
   external num? find(bool Function(num value, num index, Uint8ClampedArray obj) predicate, dynamic thisArg);
@@ -1084,7 +1086,7 @@ class Uint8ClampedArray {
   external void set(ArrayLike<num> array, num offset);
   external Uint8ClampedArray slice(num start, num end);
   external bool some(dynamic Function(num value, num index, Uint8ClampedArray array) predicate, dynamic thisArg);
-  external dynamic sort(num Function(num a, num b) compareFn);
+  external Uint8ClampedArray sort(num Function(num a, num b) compareFn);
   external Uint8ClampedArray subarray(num begin, num end);
   external String toLocaleString();
   external String toString();
@@ -1131,9 +1133,9 @@ class Int16Array {
   external ArrayBufferLike get buffer;
   external num get byteLength;
   external num get byteOffset;
-  external dynamic copyWithin(num target, num start, num end);
+  external Int16Array copyWithin(num target, num start, num end);
   external bool every(dynamic Function(num value, num index, Int16Array array) predicate, dynamic thisArg);
-  external dynamic fill(num value, num start, num end);
+  external Int16Array fill(num value, num start, num end);
   external Int16Array filter(dynamic Function(num value, num index, Int16Array array) predicate, dynamic thisArg);
   external num? find(bool Function(num value, num index, Int16Array obj) predicate, dynamic thisArg);
   external num findIndex(bool Function(num value, num index, Int16Array obj) predicate, dynamic thisArg);
@@ -1150,7 +1152,7 @@ class Int16Array {
   external void set(ArrayLike<num> array, num offset);
   external Int16Array slice(num start, num end);
   external bool some(dynamic Function(num value, num index, Int16Array array) predicate, dynamic thisArg);
-  external dynamic sort(num Function(num a, num b) compareFn);
+  external Int16Array sort(num Function(num a, num b) compareFn);
   external Int16Array subarray(num begin, num end);
   external String toLocaleString();
   external String toString();
@@ -1197,9 +1199,9 @@ class Uint16Array {
   external ArrayBufferLike get buffer;
   external num get byteLength;
   external num get byteOffset;
-  external dynamic copyWithin(num target, num start, num end);
+  external Uint16Array copyWithin(num target, num start, num end);
   external bool every(dynamic Function(num value, num index, Uint16Array array) predicate, dynamic thisArg);
-  external dynamic fill(num value, num start, num end);
+  external Uint16Array fill(num value, num start, num end);
   external Uint16Array filter(dynamic Function(num value, num index, Uint16Array array) predicate, dynamic thisArg);
   external num? find(bool Function(num value, num index, Uint16Array obj) predicate, dynamic thisArg);
   external num findIndex(bool Function(num value, num index, Uint16Array obj) predicate, dynamic thisArg);
@@ -1217,7 +1219,7 @@ class Uint16Array {
   external void set(ArrayLike<num> array, num offset);
   external Uint16Array slice(num start, num end);
   external bool some(dynamic Function(num value, num index, Uint16Array array) predicate, dynamic thisArg);
-  external dynamic sort(num Function(num a, num b) compareFn);
+  external Uint16Array sort(num Function(num a, num b) compareFn);
   external Uint16Array subarray(num begin, num end);
   external String toLocaleString();
   external String toString();
@@ -1264,9 +1266,9 @@ class Int32Array {
   external ArrayBufferLike get buffer;
   external num get byteLength;
   external num get byteOffset;
-  external dynamic copyWithin(num target, num start, num end);
+  external Int32Array copyWithin(num target, num start, num end);
   external bool every(dynamic Function(num value, num index, Int32Array array) predicate, dynamic thisArg);
-  external dynamic fill(num value, num start, num end);
+  external Int32Array fill(num value, num start, num end);
   external Int32Array filter(dynamic Function(num value, num index, Int32Array array) predicate, dynamic thisArg);
   external num? find(bool Function(num value, num index, Int32Array obj) predicate, dynamic thisArg);
   external num findIndex(bool Function(num value, num index, Int32Array obj) predicate, dynamic thisArg);
@@ -1283,7 +1285,7 @@ class Int32Array {
   external void set(ArrayLike<num> array, num offset);
   external Int32Array slice(num start, num end);
   external bool some(dynamic Function(num value, num index, Int32Array array) predicate, dynamic thisArg);
-  external dynamic sort(num Function(num a, num b) compareFn);
+  external Int32Array sort(num Function(num a, num b) compareFn);
   external Int32Array subarray(num begin, num end);
   external String toLocaleString();
   external String toString();
@@ -1330,9 +1332,9 @@ class Uint32Array {
   external ArrayBufferLike get buffer;
   external num get byteLength;
   external num get byteOffset;
-  external dynamic copyWithin(num target, num start, num end);
+  external Uint32Array copyWithin(num target, num start, num end);
   external bool every(dynamic Function(num value, num index, Uint32Array array) predicate, dynamic thisArg);
-  external dynamic fill(num value, num start, num end);
+  external Uint32Array fill(num value, num start, num end);
   external Uint32Array filter(dynamic Function(num value, num index, Uint32Array array) predicate, dynamic thisArg);
   external num? find(bool Function(num value, num index, Uint32Array obj) predicate, dynamic thisArg);
   external num findIndex(bool Function(num value, num index, Uint32Array obj) predicate, dynamic thisArg);
@@ -1350,7 +1352,7 @@ class Uint32Array {
   external void set(ArrayLike<num> array, num offset);
   external Uint32Array slice(num start, num end);
   external bool some(dynamic Function(num value, num index, Uint32Array array) predicate, dynamic thisArg);
-  external dynamic sort(num Function(num a, num b) compareFn);
+  external Uint32Array sort(num Function(num a, num b) compareFn);
   external Uint32Array subarray(num begin, num end);
   external String toLocaleString();
   external String toString();
@@ -1397,9 +1399,9 @@ class Float32Array {
   external ArrayBufferLike get buffer;
   external num get byteLength;
   external num get byteOffset;
-  external dynamic copyWithin(num target, num start, num end);
+  external Float32Array copyWithin(num target, num start, num end);
   external bool every(dynamic Function(num value, num index, Float32Array array) predicate, dynamic thisArg);
-  external dynamic fill(num value, num start, num end);
+  external Float32Array fill(num value, num start, num end);
   external Float32Array filter(dynamic Function(num value, num index, Float32Array array) predicate, dynamic thisArg);
   external num? find(bool Function(num value, num index, Float32Array obj) predicate, dynamic thisArg);
   external num findIndex(bool Function(num value, num index, Float32Array obj) predicate, dynamic thisArg);
@@ -1417,7 +1419,7 @@ class Float32Array {
   external void set(ArrayLike<num> array, num offset);
   external Float32Array slice(num start, num end);
   external bool some(dynamic Function(num value, num index, Float32Array array) predicate, dynamic thisArg);
-  external dynamic sort(num Function(num a, num b) compareFn);
+  external Float32Array sort(num Function(num a, num b) compareFn);
   external Float32Array subarray(num begin, num end);
   external String toLocaleString();
   external String toString();
@@ -1464,9 +1466,9 @@ class Float64Array {
   external ArrayBufferLike get buffer;
   external num get byteLength;
   external num get byteOffset;
-  external dynamic copyWithin(num target, num start, num end);
+  external Float64Array copyWithin(num target, num start, num end);
   external bool every(dynamic Function(num value, num index, Float64Array array) predicate, dynamic thisArg);
-  external dynamic fill(num value, num start, num end);
+  external Float64Array fill(num value, num start, num end);
   external Float64Array filter(dynamic Function(num value, num index, Float64Array array) predicate, dynamic thisArg);
   external num? find(bool Function(num value, num index, Float64Array obj) predicate, dynamic thisArg);
   external num findIndex(bool Function(num value, num index, Float64Array obj) predicate, dynamic thisArg);
@@ -1484,7 +1486,7 @@ class Float64Array {
   external void set(ArrayLike<num> array, num offset);
   external Float64Array slice(num start, num end);
   external bool some(dynamic Function(num value, num index, Float64Array array) predicate, dynamic thisArg);
-  external dynamic sort(num Function(num a, num b) compareFn);
+  external Float64Array sort(num Function(num a, num b) compareFn);
   external Float64Array subarray(num begin, num end);
   external String toString();
   external Float64Array valueOf();
@@ -1584,7 +1586,7 @@ class Collator {
 }
 
 @JS('Intl.Collator')
-external dynamic Collator;
+external ICollator Collator;
 
 @JS()
 @anonymous
@@ -1674,7 +1676,7 @@ class NumberFormat {
 }
 
 @JS('Intl.NumberFormat')
-external dynamic NumberFormat;
+external INumberFormat NumberFormat;
 
 @JS()
 @anonymous
@@ -1779,7 +1781,7 @@ class DateTimeFormat {
 }
 
 @JS('Intl.DateTimeFormat')
-external dynamic DateTimeFormat;
+external IDateTimeFormat DateTimeFormat;
 
 @JS()
 @anonymous
@@ -1793,4 +1795,25 @@ class Date {
   external String toLocaleString(dynamic locales, DateTimeFormatOptions options);
   external String toLocaleDateString(dynamic locales, DateTimeFormatOptions options);
   external String toLocaleTimeString(dynamic locales, DateTimeFormatOptions options);
+}
+
+@JS()
+@anonymous
+class INumberFormat {
+  external factory INumberFormat({dynamic locales, NumberFormatOptions options});
+  external List<String> supportedLocalesOf(dynamic locales, NumberFormatOptions options);
+}
+
+@JS()
+@anonymous
+class IDateTimeFormat {
+  external factory IDateTimeFormat({dynamic locales, DateTimeFormatOptions options});
+  external List<String> supportedLocalesOf(dynamic locales, DateTimeFormatOptions options);
+}
+
+@JS()
+@anonymous
+class ICollator {
+  external factory ICollator({dynamic locales, CollatorOptions options});
+  external List<String> supportedLocalesOf(dynamic locales, CollatorOptions options);
 }

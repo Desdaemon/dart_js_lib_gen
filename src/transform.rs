@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use std::collections::HashSet;
 
 use log::{debug, error, info, warn};
@@ -11,6 +12,9 @@ struct Transformer {
     undecls: HashSet<String>,
     resolved: HashSet<String>,
     resolved_funcs: HashSet<String>,
+    /// Keeps track of the ident of the variable declaration being evaluated.
+    current_ident: Option<String>,
+    type_lits: HashMap<String, String>,
 }
 
 struct Class {
@@ -55,6 +59,8 @@ pub fn visit_program(module: &Module, library_name: &str, size_hint: Option<usiz
         undecls: HashSet::new(),
         resolved: HashSet::new(),
         resolved_funcs: HashSet::new(),
+        current_ident: None,
+        type_lits: HashMap::new(),
     };
 
     t.push("@JS() library ");
@@ -62,12 +68,16 @@ pub fn visit_program(module: &Module, library_name: &str, size_hint: Option<usiz
     t.push(";\n// ignore_for_file: non_constant_identifier_names, private_optional_parameter, unused_element\n");
     t.push("import 'package:js/js.dart';");
     t.visit_module_item(&module.body);
+    for (_, lit) in t.type_lits {
+        t.bufs.last_mut().unwrap().push_str(&lit);
+    }
     if !t.undecls.is_empty() {
         let cls = t.undecls.into_iter().collect::<Vec<_>>().join(", ");
         warn!("The following types were used but not declared:\n{}", cls);
     }
     t.bufs.first().unwrap().clone()
 }
+
 impl Transformer {
     #[inline]
     fn buf(&self) -> &String {
@@ -100,7 +110,7 @@ impl Transformer {
     fn annotate(&mut self, path_end: &str) {
         self.push("@JS('");
         for item in &self.path {
-            let buf = self.bufs.first_mut().unwrap();
+            let buf = self.bufs.last_mut().unwrap();
             buf.push_str(item);
             buf.push('.');
         }
@@ -209,7 +219,7 @@ impl Transformer {
             s.visit_type_params(&intr.type_params);
             s.push_char('{');
             {
-                s.visit_interface_body(&intr.body);
+                s.visit_type_elements(&intr.body.body);
                 s.emit_factory_constr();
             }
             s.push_char('}');
@@ -248,12 +258,14 @@ impl Transformer {
                     warn!("Forbidden variable name: {}.", id);
                     continue;
                 }
+                self.current_ident = Some(id.to_owned());
                 self.annotate(id);
                 self.push("external ");
                 self.visit_type_ann(&ident.type_ann);
                 self.push_char(' ');
                 self.push(id);
                 self.semi();
+                self.current_ident.take().unwrap();
             }
         }
     }
@@ -284,6 +296,7 @@ impl Transformer {
 
     fn visit_type_alias(&mut self, alias: &TsTypeAliasDecl) {
         let id: &str = &alias.id.sym;
+        self.current_ident = Some(id.to_owned());
         self.undecls.remove(id);
         self.resolved.insert(id.to_owned());
         self.push("typedef ");
@@ -292,6 +305,7 @@ impl Transformer {
         self.push_char('=');
         self.visit_type(alias.type_ann.as_ref());
         self.semi();
+        self.current_ident.take().unwrap();
     }
 
     fn emit_getter(&mut self, typ: &str, id: &str) {
@@ -350,9 +364,9 @@ impl Transformer {
             .push((id.to_owned(), ty));
     }
 
-    fn visit_interface_body(&mut self, body: &TsInterfaceBody) {
+    fn visit_type_elements(&mut self, body: &[TsTypeElement]) {
         let mut first = true;
-        for item in &body.body {
+        for item in body {
             match item {
                 TsTypeElement::TsPropertySignature(prop) => self.visit_ts_prop_sig(prop),
                 TsTypeElement::TsMethodSignature(met) => self.visit_method(met),
@@ -630,25 +644,73 @@ impl Transformer {
                     self.push("dynamic");
                 }
             }
-            TsType::TsTypeOperator(op) if op.op.as_str() == "readonly" => {
-                self.visit_type(&op.type_ann)
-            }
+            TsType::TsTypeOperator(op) => match op.op.as_str() {
+                "readonly" => self.visit_type(&op.type_ann),
+                "keyof" => self.push("String"),
+                "unique" => self.push("dynamic"), // unique symbol
+                other => {
+                    warn!("Type operator not handled: {}", other);
+                    self.visit_type(&op.type_ann);
+                }
+            },
             TsType::TsThisType(_) => {
                 let ty = self
                     .class
                     .as_ref()
                     .map(|x| x.id.clone())
+                    .or_else(|| self.current_ident.as_ref().cloned())
                     .unwrap_or_else(|| "dynamic".to_owned());
                 self.push(&ty);
             }
             TsType::TsTypePredicate(_) => self.push("bool"), // A is B
+            TsType::TsParenthesizedType(TsParenthesizedType { type_ann, .. }) => {
+                self.visit_type(type_ann)
+            }
+            TsType::TsTypeLit(type_lit) => self.visit_ts_type_lit(type_lit),
+            TsType::TsTupleType(_) => self.push("List<dynamic>"),
             TsType::TsUnionOrIntersectionType(TsUnionOrIntersectionType::TsIntersectionType(_))
-            | TsType::TsConditionalType(_) => self.push("dynamic"),
+            | TsType::TsConditionalType(_) // T extends .. ? .. : ..
+            | TsType::TsMappedType(_)
+            | TsType::TsIndexedAccessType(_) // { [..]: .. }
+            | TsType::TsTypeQuery(_) // typeof ..
+            => self.push("dynamic"),
             _ => {
-                warn!("Unhandled type: {:?}", typ);
+                error!("Unhandled type: {:?}", typ);
                 todo!()
             }
         };
+    }
+
+    fn visit_ts_type_lit(&mut self, lit: &TsTypeLit) {
+        if let Some(id) = self.current_ident.as_ref().cloned() {
+            let id = format!("I{}", id);
+            if self.type_lits.contains_key(&id) {
+                self.push(&id);
+                return;
+            }
+            let body = self.collect(|s| {
+                let temp = s.class.take();
+                s.class = Some(Class {
+                    id: id.to_owned(),
+                    members: HashSet::new(),
+                    fields: vec![],
+                    anonymous: true,
+                });
+                s.push("@JS() @anonymous class ");
+                s.push(&id);
+                s.push_char('{');
+                {
+                    s.visit_type_elements(&lit.members);
+                }
+                s.push_char('}');
+                s.class = temp;
+            });
+            self.push(&id);
+            self.type_lits.insert(id, body);
+            return;
+        }
+        warn!("No current ident for type literal:\n{:?}", lit);
+        self.push("dynamic");
     }
 
     fn visit_decl(&mut self, decl: &Decl) {

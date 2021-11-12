@@ -29,7 +29,6 @@ typedef JSXElementConstructor<P> = dynamic;
 @anonymous
 class RefObject<T> {
   external T? get current;
-  external set current(T? value);
   external factory RefObject({
     T? current,
   });
@@ -135,20 +134,20 @@ class ReactHTMLElement<T extends HTMLElement> {}
 @JS()
 @anonymous
 class DetailedReactHTMLElement<P extends HTMLAttributes<T>, T extends HTMLElement> {
-  external dynamic get type;
-  external set type(dynamic value);
+  external String get type;
+  external set type(String value);
   external factory DetailedReactHTMLElement({
-    dynamic type,
+    String type,
   });
 }
 
 @JS()
 @anonymous
 class ReactSVGElement {
-  external dynamic get type;
-  external set type(dynamic value);
+  external String get type;
+  external set type(String value);
   external factory ReactSVGElement({
-    dynamic type,
+    String type,
   });
 }
 
@@ -239,7 +238,7 @@ class ReactNodeArray {}
 typedef ReactFragment = dynamic;
 typedef ReactNode = dynamic;
 @JS('React.createFactory')
-external HTMLFactory<T> createFactory<T extends HTMLElement>(dynamic type);
+external HTMLFactory<T> createFactory<T extends HTMLElement>(String type);
 @JS('React.createElement')
 external DetailedReactHTMLElement<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> createElement(
   String type,
@@ -296,7 +295,6 @@ class ConsumerProps<T> {
 @anonymous
 class ExoticComponent<P> {
   external dynamic get $$typeof;
-  external set $$typeof(dynamic value);
   external factory ExoticComponent({
     dynamic $$typeof,
   });
@@ -345,13 +343,13 @@ class Context<T> {
 @JS('React.createContext')
 external Context<T> createContext<T>(T defaultValue);
 @JS('React.isValidElement')
-external dynamic isValidElement<P>(dynamic? object);
+external bool isValidElement<P>(dynamic? object);
 @JS('React.Children')
 external ReactChildren Children;
 @JS('React.Fragment')
-external ExoticComponent<dynamic> Fragment;
+external ExoticComponent<IFragment> Fragment;
 @JS('React.StrictMode')
-external ExoticComponent<dynamic> StrictMode;
+external ExoticComponent<IStrictMode> StrictMode;
 
 @JS()
 @anonymous
@@ -370,7 +368,7 @@ class SuspenseProps {
 external ExoticComponent<SuspenseProps> Suspense;
 @JS('React.version')
 external String version;
-typedef ProfilerOnRenderCallback = dynamic Function(String id, dynamic phase, num actualDuration, num baseDuration,
+typedef ProfilerOnRenderCallback = void Function(String id, dynamic phase, num actualDuration, num baseDuration,
     num startTime, num commitTime, Set<SchedulerInteraction> interactions);
 
 @JS()
@@ -408,8 +406,8 @@ class Component<P, S> {
     P props,
     dynamic context,
   );
-  external dynamic setState<K extends dynamic>(dynamic state, dynamic Function() callback);
-  external dynamic forceUpdate(dynamic Function() callback);
+  external void setState<K extends String>(dynamic state, void Function() callback);
+  external void forceUpdate(void Function() callback);
   external ReactNode render();
   external dynamic props;
   external Readonly<S> state;
@@ -422,7 +420,7 @@ class PureComponent<P, S, SS> extends Component {}
 @JS()
 @anonymous
 class ClassicComponent<P, S> {
-  external dynamic replaceState(S nextState, dynamic Function() callback);
+  external void replaceState(S nextState, void Function() callback);
   external bool isMounted();
   external S getInitialState();
 }
@@ -535,10 +533,10 @@ typedef ClassType<P, T extends Component<P, ComponentState>, C extends Component
 @JS()
 @anonymous
 class ComponentLifecycle<P, S, SS> {
-  external dynamic componentDidMount();
+  external void componentDidMount();
   external bool shouldComponentUpdate(Readonly<P> nextProps, Readonly<S> nextState, dynamic nextContext);
-  external dynamic componentWillUnmount();
-  external dynamic componentDidCatch(Error error, ErrorInfo errorInfo);
+  external void componentWillUnmount();
+  external void componentDidCatch(Error error, ErrorInfo errorInfo);
 }
 
 @JS()
@@ -561,18 +559,18 @@ typedef GetDerivedStateFromError<P, S> = Partial<S>? Function(dynamic error);
 @anonymous
 class NewLifecycle<P, S, SS> {
   external SS? getSnapshotBeforeUpdate(Readonly<P> prevProps, Readonly<S> prevState);
-  external dynamic componentDidUpdate(Readonly<P> prevProps, Readonly<S> prevState, SS snapshot);
+  external void componentDidUpdate(Readonly<P> prevProps, Readonly<S> prevState, SS snapshot);
 }
 
 @JS()
 @anonymous
 class DeprecatedLifecycle<P, S> {
-  external dynamic componentWillMount();
-  external dynamic UNSAFE_componentWillMount();
-  external dynamic componentWillReceiveProps(Readonly<P> nextProps, dynamic nextContext);
-  external dynamic UNSAFE_componentWillReceiveProps(Readonly<P> nextProps, dynamic nextContext);
-  external dynamic componentWillUpdate(Readonly<P> nextProps, Readonly<S> nextState, dynamic nextContext);
-  external dynamic UNSAFE_componentWillUpdate(Readonly<P> nextProps, Readonly<S> nextState, dynamic nextContext);
+  external void componentWillMount();
+  external void UNSAFE_componentWillMount();
+  external void componentWillReceiveProps(Readonly<P> nextProps, dynamic nextContext);
+  external void UNSAFE_componentWillReceiveProps(Readonly<P> nextProps, dynamic nextContext);
+  external void componentWillUpdate(Readonly<P> nextProps, Readonly<S> nextState, dynamic nextContext);
+  external void UNSAFE_componentWillUpdate(Readonly<P> nextProps, Readonly<S> nextState, dynamic nextContext);
 }
 
 @JS()
@@ -641,8 +639,8 @@ typedef LazyExoticComponent<T extends ComponentType<dynamic>> = dynamic;
 @JS('React.lazy')
 external LazyExoticComponent<T> lazy<T extends ComponentType<dynamic>>(Promise<dynamic> Function() factory);
 typedef SetStateAction<S> = dynamic;
-typedef Dispatch<A> = dynamic Function(A value);
-typedef DispatchWithoutAction = dynamic Function();
+typedef Dispatch<A> = void Function(A value);
+typedef DispatchWithoutAction = void Function();
 typedef Reducer<S, A> = S Function(S prevState, A action);
 typedef ReducerWithoutAction<S> = S Function(S prevState);
 typedef ReducerState<R extends Reducer<dynamic, dynamic>> = dynamic;
@@ -664,18 +662,18 @@ class MutableRefObject<T> {
 @JS('React.useContext')
 external T useContext<T>(Context<T> context);
 @JS('React.useState')
-external dynamic useState<S>(dynamic initialState);
+external List<dynamic> useState<S>(dynamic initialState);
 @JS('React.useReducer')
-external dynamic useReducer<R extends ReducerWithoutAction<dynamic>, I>(
+external List<dynamic> useReducer<R extends ReducerWithoutAction<dynamic>, I>(
     R reducer, I initializerArg, ReducerStateWithoutAction<R> Function(I arg) initializer);
 @JS('React.useRef')
 external MutableRefObject<T> useRef<T>(T initialValue);
 @JS('React.useLayoutEffect')
-external dynamic useLayoutEffect(EffectCallback effect, DependencyList deps);
+external void useLayoutEffect(EffectCallback effect, DependencyList deps);
 @JS('React.useEffect')
-external dynamic useEffect(EffectCallback effect, DependencyList deps);
+external void useEffect(EffectCallback effect, DependencyList deps);
 @JS('React.useImperativeHandle')
-external dynamic useImperativeHandle<T, R extends T>(Ref<T>? ref, R Function() init, DependencyList deps);
+external void useImperativeHandle<T, R extends T>(Ref<T>? ref, R Function() init, DependencyList deps);
 @JS('React.useCallback')
 external T useCallback<
     T extends dynamic Function([
@@ -692,7 +690,7 @@ external T useCallback<
 @JS('React.useMemo')
 external T useMemo<T>(T Function() factory, DependencyList? deps);
 @JS('React.useDebugValue')
-external dynamic useDebugValue<T>(T value, dynamic Function(T value) format);
+external void useDebugValue<T>(T value, dynamic Function(T value) format);
 
 @JS()
 @anonymous
@@ -713,11 +711,11 @@ class BaseSyntheticEvent<E, C, T> {
   external set eventPhase(num value);
   external bool get isTrusted;
   external set isTrusted(bool value);
-  external dynamic preventDefault();
+  external void preventDefault();
   external bool isDefaultPrevented();
-  external dynamic stopPropagation();
+  external void stopPropagation();
   external bool isPropagationStopped();
-  external dynamic persist();
+  external void persist();
   external num get timeStamp;
   external set timeStamp(num value);
   external String get type;
@@ -4636,10 +4634,10 @@ class ReactPropTypes {
 @JS()
 @anonymous
 class ReactChildren {
-  external dynamic map(dynamic children, T Function(C child, num index) fn);
-  external dynamic forEach(dynamic children, dynamic Function(C child, num index) fn);
+  external dynamic map<T, C>(dynamic children, T Function(C child, num index) fn);
+  external void forEach<C>(dynamic children, void Function(C child, num index) fn);
   external num count(dynamic children);
-  external dynamic only(C children);
+  external dynamic only<C>(C children);
   external Array<Exclude<ReactNode, bool?>> toArray(dynamic children);
 }
 
@@ -4711,7 +4709,7 @@ class ErrorInfo {
 
 typedef IsExactlyAny<T> = dynamic;
 typedef ExactlyAnyPropertyKeys<T> = dynamic;
-typedef NotExactlyAnyPropertyKeys<T> = Exclude<dynamic, ExactlyAnyPropertyKeys<T>>;
+typedef NotExactlyAnyPropertyKeys<T> = Exclude<String, ExactlyAnyPropertyKeys<T>>;
 typedef MergePropTypes<P, T> = dynamic;
 typedef Defaultize<P, D> = dynamic;
 typedef ReactManagedAttributes<C, P> = dynamic;
@@ -5280,4 +5278,18 @@ class IntrinsicElements {
     SVGProps<SVGUseElement> use,
     SVGProps<SVGViewElement> view,
   });
+}
+
+@JS()
+@anonymous
+class IFragment {
+  external ReactNode? get children;
+  external set children(ReactNode? value);
+}
+
+@JS()
+@anonymous
+class IStrictMode {
+  external ReactNode? get children;
+  external set children(ReactNode? value);
 }
