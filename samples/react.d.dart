@@ -27,7 +27,7 @@ typedef JSXElementConstructor<P> = dynamic;
 
 @JS()
 @anonymous
-class RefObject<T> {
+/*interface*/ class RefObject<T> {
   external T? get current;
   external set current(T? value);
   external factory RefObject({
@@ -44,7 +44,7 @@ typedef Key = dynamic;
 
 @JS()
 @anonymous
-class Attributes {
+/*interface*/ class Attributes {
   external Key? get key;
   external set key(Key? value);
   external factory Attributes({
@@ -54,7 +54,7 @@ class Attributes {
 
 @JS()
 @anonymous
-class RefAttributes<T> {
+/*interface*/ class RefAttributes<T> {
   external Ref<T>? get ref;
   external set ref(Ref<T>? value);
   external factory RefAttributes({
@@ -64,7 +64,7 @@ class RefAttributes<T> {
 
 @JS()
 @anonymous
-class ClassAttributes<T> {
+/*interface*/ class ClassAttributes<T> {
   external LegacyRef<T>? get ref;
   external set ref(LegacyRef<T>? value);
   external factory ClassAttributes({
@@ -74,7 +74,7 @@ class ClassAttributes<T> {
 
 @JS()
 @anonymous
-class ReactElement<P, T extends dynamic> {
+/*interface*/ class ReactElement<P, T extends dynamic> {
   external T get type;
   external set type(T value);
   external P get props;
@@ -90,15 +90,13 @@ class ReactElement<P, T extends dynamic> {
 
 @JS()
 @anonymous
-class ReactComponentElement<T extends dynamic, P> {
-  external factory ReactComponentElement();
-}
+/*interface*/ class ReactComponentElement<T extends dynamic, P> {}
 
 typedef SFCElement<P> = FunctionComponentElement<P>;
 
 @JS()
 @anonymous
-class FunctionComponentElement<P> {
+/*interface*/ class FunctionComponentElement<P> {
   external dynamic? get ref;
   external set ref(dynamic? value);
   external factory FunctionComponentElement({
@@ -106,12 +104,11 @@ class FunctionComponentElement<P> {
   });
 }
 
-typedef CElement<P, T extends Component<P, ComponentState>>
-    = ComponentElement<P, T>;
+typedef CElement<P, T extends Component<P, ComponentState>> = ComponentElement<P, T>;
 
 @JS()
 @anonymous
-class ComponentElement<P, T extends Component<P, ComponentState>> {
+/*interface*/ class ComponentElement<P, T extends Component<P, ComponentState>> {
   external LegacyRef<T>? get ref;
   external set ref(LegacyRef<T>? value);
   external factory ComponentElement({
@@ -123,7 +120,7 @@ typedef ClassicElement<P> = CElement<P, ClassicComponent<P, ComponentState>>;
 
 @JS()
 @anonymous
-class DOMElement<P extends dynamic, T extends Element> {
+/*interface*/ class DOMElement<P extends dynamic, T extends Element> {
   external LegacyRef<T> get ref;
   external set ref(LegacyRef<T> value);
   external factory DOMElement({
@@ -133,14 +130,11 @@ class DOMElement<P extends dynamic, T extends Element> {
 
 @JS()
 @anonymous
-class ReactHTMLElement<T extends HTMLElement> {
-  external factory ReactHTMLElement();
-}
+/*interface*/ class ReactHTMLElement<T extends HTMLElement> {}
 
 @JS()
 @anonymous
-class DetailedReactHTMLElement<P extends HTMLAttributes<T>,
-    T extends HTMLElement> {
+/*interface*/ class DetailedReactHTMLElement<P extends HTMLAttributes<T>, T extends HTMLElement> {
   external dynamic get type;
   external set type(dynamic value);
   external factory DetailedReactHTMLElement({
@@ -150,7 +144,7 @@ class DetailedReactHTMLElement<P extends HTMLAttributes<T>,
 
 @JS()
 @anonymous
-class ReactSVGElement {
+/*interface*/ class ReactSVGElement {
   external dynamic get type;
   external set type(dynamic value);
   external factory ReactSVGElement({
@@ -160,7 +154,7 @@ class ReactSVGElement {
 
 @JS()
 @anonymous
-class ReactPortal {
+/*interface*/ class ReactPortal {
   external Key? get key;
   external set key(Key? value);
   external ReactNode get children;
@@ -188,8 +182,7 @@ typedef FunctionComponentFactory<P> = FunctionComponentElement<P> Function(
   List<ReactNode>? children4,
   List<ReactNode>? children5,
 ]);
-typedef ComponentFactory<P, T extends Component<P, ComponentState>>
-    = CElement<P, T> Function(
+typedef ComponentFactory<P, T extends Component<P, ComponentState>> = CElement<P, T> Function(
   dynamic props, [
   List<ReactNode>? children1,
   List<ReactNode>? children2,
@@ -197,11 +190,9 @@ typedef ComponentFactory<P, T extends Component<P, ComponentState>>
   List<ReactNode>? children4,
   List<ReactNode>? children5,
 ]);
-typedef CFactory<P, T extends Component<P, ComponentState>>
-    = ComponentFactory<P, T>;
+typedef CFactory<P, T extends Component<P, ComponentState>> = ComponentFactory<P, T>;
 typedef ClassicFactory<P> = CFactory<P, ClassicComponent<P, ComponentState>>;
-typedef DOMFactory<P extends DOMAttributes<T>, T extends Element>
-    = DOMElement<P, T> Function(
+typedef DOMFactory<P extends DOMAttributes<T>, T extends Element> = DOMElement<P, T> Function(
   dynamic? props, [
   List<ReactNode>? children1,
   List<ReactNode>? children2,
@@ -212,30 +203,22 @@ typedef DOMFactory<P extends DOMAttributes<T>, T extends Element>
 
 @JS()
 @anonymous
-class HTMLFactory<T extends HTMLElement> {
-  external factory HTMLFactory();
-}
+/*interface*/ class HTMLFactory<T extends HTMLElement> {}
 
 @JS()
 @anonymous
-class DetailedHTMLFactory<P extends HTMLAttributes<T>, T extends HTMLElement> {
-  external factory DetailedHTMLFactory();
-}
+/*interface*/ class DetailedHTMLFactory<P extends HTMLAttributes<T>, T extends HTMLElement> {}
 
 @JS()
 @anonymous
-class SVGFactory {
-  external factory SVGFactory();
-}
+/*interface*/ class SVGFactory {}
 
 typedef ReactText = dynamic;
 typedef ReactChild = dynamic;
 
 @JS()
 @anonymous
-class ReactNodeArray {
-  external factory ReactNodeArray();
-}
+/*interface*/ class ReactNodeArray {}
 
 typedef ReactFragment = dynamic;
 typedef ReactNode = dynamic;
@@ -244,23 +227,19 @@ external HTMLFactory<T> createFactory<T extends HTMLElement>(dynamic type);
 @JS('React.createFactory')
 external SVGFactory createFactory(dynamic type);
 @JS('React.createFactory')
-external DOMFactory<P, T>
-    createFactory<P extends DOMAttributes<T>, T extends Element>(String type);
+external DOMFactory<P, T> createFactory<P extends DOMAttributes<T>, T extends Element>(String type);
 @JS('React.createFactory')
-external FunctionComponentFactory<P> createFactory<P>(
-    FunctionComponent<P> type);
+external FunctionComponentFactory<P> createFactory<P>(FunctionComponent<P> type);
 @JS('React.createFactory')
 external CFactory<P, ClassicComponent<P, ComponentState>> createFactory<P>(
-    ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>>
-        type);
+    ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> type);
 @JS('React.createFactory')
-external CFactory<P, T> createFactory<P, T extends Component<P, ComponentState>,
-    C extends ComponentClass<P>>(ClassType<P, T, C> type);
+external CFactory<P, T> createFactory<P, T extends Component<P, ComponentState>, C extends ComponentClass<P>>(
+    ClassType<P, T, C> type);
 @JS('React.createFactory')
 external Factory<P> createFactory<P>(ComponentClass<P> type);
 @JS('React.createElement')
-external DetailedReactHTMLElement<InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement> createElement(
+external DetailedReactHTMLElement<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> createElement(
   String type,
   dynamic? props, [
   List<ReactNode>? children1,
@@ -270,8 +249,7 @@ external DetailedReactHTMLElement<InputHTMLAttributes<HTMLInputElement>,
   List<ReactNode>? children5,
 ]);
 @JS('React.createElement')
-external DetailedReactHTMLElement<P, T>
-    createElement<P extends HTMLAttributes<T>, T extends HTMLElement>(
+external DetailedReactHTMLElement<P, T> createElement<P extends HTMLAttributes<T>, T extends HTMLElement>(
   dynamic type,
   dynamic? props, [
   List<ReactNode>? children1,
@@ -281,8 +259,7 @@ external DetailedReactHTMLElement<P, T>
   List<ReactNode>? children5,
 ]);
 @JS('React.createElement')
-external ReactSVGElement
-    createElement<P extends SVGAttributes<T>, T extends SVGElement>(
+external ReactSVGElement createElement<P extends SVGAttributes<T>, T extends SVGElement>(
   dynamic type,
   dynamic? props, [
   List<ReactNode>? children1,
@@ -292,8 +269,7 @@ external ReactSVGElement
   List<ReactNode>? children5,
 ]);
 @JS('React.createElement')
-external DOMElement<P, T>
-    createElement<P extends DOMAttributes<T>, T extends Element>(
+external DOMElement<P, T> createElement<P extends DOMAttributes<T>, T extends Element>(
   String type,
   dynamic? props, [
   List<ReactNode>? children1,
@@ -313,10 +289,8 @@ external FunctionComponentElement<P> createElement<P extends dynamic>(
   List<ReactNode>? children5,
 ]);
 @JS('React.createElement')
-external CElement<P, ClassicComponent<P, ComponentState>>
-    createElement<P extends dynamic>(
-  ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>>
-      type,
+external CElement<P, ClassicComponent<P, ComponentState>> createElement<P extends dynamic>(
+  ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> type,
   dynamic? props, [
   List<ReactNode>? children1,
   List<ReactNode>? children2,
@@ -325,8 +299,8 @@ external CElement<P, ClassicComponent<P, ComponentState>>
   List<ReactNode>? children5,
 ]);
 @JS('React.createElement')
-external CElement<P, T> createElement<P extends dynamic,
-    T extends Component<P, ComponentState>, C extends ComponentClass<P>>(
+external CElement<P, T>
+    createElement<P extends dynamic, T extends Component<P, ComponentState>, C extends ComponentClass<P>>(
   ClassType<P, T, C> type,
   dynamic? props, [
   List<ReactNode>? children1,
@@ -346,8 +320,7 @@ external ReactElement<P> createElement<P extends dynamic>(
   List<ReactNode>? children5,
 ]);
 @JS('React.cloneElement')
-external DetailedReactHTMLElement<P, T>
-    cloneElement<P extends HTMLAttributes<T>, T extends HTMLElement>(
+external DetailedReactHTMLElement<P, T> cloneElement<P extends HTMLAttributes<T>, T extends HTMLElement>(
   DetailedReactHTMLElement<P, T> element,
   P props, [
   List<ReactNode>? children1,
@@ -357,8 +330,7 @@ external DetailedReactHTMLElement<P, T>
   List<ReactNode>? children5,
 ]);
 @JS('React.cloneElement')
-external ReactHTMLElement<T>
-    cloneElement<P extends HTMLAttributes<T>, T extends HTMLElement>(
+external ReactHTMLElement<T> cloneElement<P extends HTMLAttributes<T>, T extends HTMLElement>(
   ReactHTMLElement<T> element,
   P props, [
   List<ReactNode>? children1,
@@ -368,8 +340,7 @@ external ReactHTMLElement<T>
   List<ReactNode>? children5,
 ]);
 @JS('React.cloneElement')
-external ReactSVGElement
-    cloneElement<P extends SVGAttributes<T>, T extends SVGElement>(
+external ReactSVGElement cloneElement<P extends SVGAttributes<T>, T extends SVGElement>(
   ReactSVGElement element,
   P props, [
   List<ReactNode>? children1,
@@ -379,8 +350,7 @@ external ReactSVGElement
   List<ReactNode>? children5,
 ]);
 @JS('React.cloneElement')
-external DOMElement<P, T>
-    cloneElement<P extends DOMAttributes<T>, T extends Element>(
+external DOMElement<P, T> cloneElement<P extends DOMAttributes<T>, T extends Element>(
   DOMElement<P, T> element,
   dynamic props, [
   List<ReactNode>? children1,
@@ -422,7 +392,7 @@ external ReactElement<P> cloneElement<P>(
 
 @JS()
 @anonymous
-class ProviderProps<T> {
+/*interface*/ class ProviderProps<T> {
   external T get value;
   external set value(T value);
   external ReactNode? get children;
@@ -435,7 +405,7 @@ class ProviderProps<T> {
 
 @JS()
 @anonymous
-class ConsumerProps<T> {
+/*interface*/ class ConsumerProps<T> {
   external ReactNode Function(T value) get children;
   external set children(ReactNode Function(T value) value);
   external factory ConsumerProps({
@@ -445,7 +415,7 @@ class ConsumerProps<T> {
 
 @JS()
 @anonymous
-class ExoticComponent<P> {
+/*interface*/ class ExoticComponent<P> {
   external dynamic get $$typeof;
   external set $$typeof(dynamic value);
   external factory ExoticComponent({
@@ -455,7 +425,7 @@ class ExoticComponent<P> {
 
 @JS()
 @anonymous
-class NamedExoticComponent<P> {
+/*interface*/ class NamedExoticComponent<P> {
   external String? get displayName;
   external set displayName(String? value);
   external factory NamedExoticComponent({
@@ -465,7 +435,7 @@ class NamedExoticComponent<P> {
 
 @JS()
 @anonymous
-class ProviderExoticComponent<P> {
+/*interface*/ class ProviderExoticComponent<P> {
   external WeakValidationMap<P>? get propTypes;
   external set propTypes(WeakValidationMap<P>? value);
   external factory ProviderExoticComponent({
@@ -479,7 +449,7 @@ typedef Consumer<T> = ExoticComponent<ConsumerProps<T>>;
 
 @JS()
 @anonymous
-class Context<T> {
+/*interface*/ class Context<T> {
   external Provider<T> get Provider;
   external set Provider(Provider<T> value);
   external Consumer<T> get Consumer;
@@ -506,7 +476,7 @@ external ExoticComponent<dynamic> StrictMode;
 
 @JS()
 @anonymous
-class SuspenseProps {
+/*interface*/ class SuspenseProps {
   external ReactNode? get children;
   external set children(ReactNode? value);
   external NonNullable<ReactNode>? get fallback;
@@ -521,18 +491,12 @@ class SuspenseProps {
 external ExoticComponent<SuspenseProps> Suspense;
 @JS('React.version')
 external String version;
-typedef ProfilerOnRenderCallback = dynamic Function(
-    String id,
-    dynamic phase,
-    num actualDuration,
-    num baseDuration,
-    num startTime,
-    num commitTime,
-    Set<SchedulerInteraction> interactions);
+typedef ProfilerOnRenderCallback = dynamic Function(String id, dynamic phase, num actualDuration, num baseDuration,
+    num startTime, num commitTime, Set<SchedulerInteraction> interactions);
 
 @JS()
 @anonymous
-class ProfilerProps {
+/*interface*/ class ProfilerProps {
   external ReactNode? get children;
   external set children(ReactNode? value);
   external String get id;
@@ -552,9 +516,7 @@ typedef ReactInstance = dynamic;
 
 @JS()
 @anonymous
-class Component<P, S, SS> {
-  external factory Component();
-}
+/*interface*/ class Component<P, S, SS> {}
 
 @JS()
 class Component<P, S> {
@@ -567,8 +529,7 @@ class Component<P, S> {
     P props,
     dynamic context,
   );
-  external dynamic setState<K extends dynamic>(
-      dynamic state, dynamic Function() callback);
+  external dynamic setState<K extends dynamic>(dynamic state, dynamic Function() callback);
   external dynamic forceUpdate(dynamic Function() callback);
   external ReactNode render();
   external dynamic props;
@@ -581,18 +542,16 @@ class PureComponent<P, S, SS> extends Component {}
 
 @JS()
 @anonymous
-class ClassicComponent<P, S> {
+/*interface*/ class ClassicComponent<P, S> {
   external dynamic replaceState(S nextState, dynamic Function() callback);
   external bool isMounted();
   external S getInitialState();
-  external factory ClassicComponent();
 }
 
 @JS()
 @anonymous
-class ChildContextProvider<CC> {
+/*interface*/ class ChildContextProvider<CC> {
   external CC getChildContext();
-  external factory ChildContextProvider();
 }
 
 typedef SFC<P> = FunctionComponent<P>;
@@ -601,7 +560,7 @@ typedef FC<P> = FunctionComponent<P>;
 
 @JS()
 @anonymous
-class FunctionComponent<P> {
+/*interface*/ class FunctionComponent<P> {
   external WeakValidationMap<P>? get propTypes;
   external set propTypes(WeakValidationMap<P>? value);
   external ValidationMap<dynamic>? get contextTypes;
@@ -622,7 +581,7 @@ typedef VFC<P> = VoidFunctionComponent<P>;
 
 @JS()
 @anonymous
-class VoidFunctionComponent<P> {
+/*interface*/ class VoidFunctionComponent<P> {
   external WeakValidationMap<P>? get propTypes;
   external set propTypes(WeakValidationMap<P>? value);
   external ValidationMap<dynamic>? get contextTypes;
@@ -643,7 +602,7 @@ typedef ForwardedRef<T> = dynamic;
 
 @JS()
 @anonymous
-class ForwardRefRenderFunction<T, P> {
+/*interface*/ class ForwardRefRenderFunction<T, P> {
   external String? get displayName;
   external set displayName(String? value);
   external dynamic? get defaultProps;
@@ -659,12 +618,10 @@ class ForwardRefRenderFunction<T, P> {
 
 @JS()
 @anonymous
-class RefForwardingComponent<T, P> {
-  external factory RefForwardingComponent();
-}
+/*interface*/ class RefForwardingComponent<T, P> {}
 
 @JS()
-class ComponentClass<P, S> {
+/*interface*/ class ComponentClass<P, S> {
   external factory ComponentClass({P props, dynamic context});
   external WeakValidationMap<P>? get propTypes;
   external set propTypes(WeakValidationMap<P>? value);
@@ -689,30 +646,25 @@ class ComponentClass<P, S> {
 }
 
 @JS()
-class ClassicComponentClass<P> {
+/*interface*/ class ClassicComponentClass<P> {
   external factory ClassicComponentClass({P props, dynamic context});
   external P getDefaultProps();
-  external factory ClassicComponentClass();
 }
 
-typedef ClassType<P, T extends Component<P, ComponentState>,
-        C extends ComponentClass<P>>
-    = dynamic;
+typedef ClassType<P, T extends Component<P, ComponentState>, C extends ComponentClass<P>> = dynamic;
 
 @JS()
 @anonymous
-class ComponentLifecycle<P, S, SS> {
+/*interface*/ class ComponentLifecycle<P, S, SS> {
   external dynamic componentDidMount();
-  external bool shouldComponentUpdate(
-      Readonly<P> nextProps, Readonly<S> nextState, dynamic nextContext);
+  external bool shouldComponentUpdate(Readonly<P> nextProps, Readonly<S> nextState, dynamic nextContext);
   external dynamic componentWillUnmount();
   external dynamic componentDidCatch(Error error, ErrorInfo errorInfo);
-  external factory ComponentLifecycle();
 }
 
 @JS()
 @anonymous
-class StaticLifecycle<P, S> {
+/*interface*/ class StaticLifecycle<P, S> {
   external GetDerivedStateFromProps<P, S>? get getDerivedStateFromProps;
   external set getDerivedStateFromProps(GetDerivedStateFromProps<P, S>? value);
   external GetDerivedStateFromError<P, S>? get getDerivedStateFromError;
@@ -723,39 +675,30 @@ class StaticLifecycle<P, S> {
   });
 }
 
-typedef GetDerivedStateFromProps<P, S> = Partial<S>? Function(
-    Readonly<P> nextProps, S prevState);
+typedef GetDerivedStateFromProps<P, S> = Partial<S>? Function(Readonly<P> nextProps, S prevState);
 typedef GetDerivedStateFromError<P, S> = Partial<S>? Function(dynamic error);
 
 @JS()
 @anonymous
-class NewLifecycle<P, S, SS> {
-  external SS? getSnapshotBeforeUpdate(
-      Readonly<P> prevProps, Readonly<S> prevState);
-  external dynamic componentDidUpdate(
-      Readonly<P> prevProps, Readonly<S> prevState, SS snapshot);
-  external factory NewLifecycle();
+/*interface*/ class NewLifecycle<P, S, SS> {
+  external SS? getSnapshotBeforeUpdate(Readonly<P> prevProps, Readonly<S> prevState);
+  external dynamic componentDidUpdate(Readonly<P> prevProps, Readonly<S> prevState, SS snapshot);
 }
 
 @JS()
 @anonymous
-class DeprecatedLifecycle<P, S> {
+/*interface*/ class DeprecatedLifecycle<P, S> {
   external dynamic componentWillMount();
   external dynamic UNSAFE_componentWillMount();
-  external dynamic componentWillReceiveProps(
-      Readonly<P> nextProps, dynamic nextContext);
-  external dynamic UNSAFE_componentWillReceiveProps(
-      Readonly<P> nextProps, dynamic nextContext);
-  external dynamic componentWillUpdate(
-      Readonly<P> nextProps, Readonly<S> nextState, dynamic nextContext);
-  external dynamic UNSAFE_componentWillUpdate(
-      Readonly<P> nextProps, Readonly<S> nextState, dynamic nextContext);
-  external factory DeprecatedLifecycle();
+  external dynamic componentWillReceiveProps(Readonly<P> nextProps, dynamic nextContext);
+  external dynamic UNSAFE_componentWillReceiveProps(Readonly<P> nextProps, dynamic nextContext);
+  external dynamic componentWillUpdate(Readonly<P> nextProps, Readonly<S> nextState, dynamic nextContext);
+  external dynamic UNSAFE_componentWillUpdate(Readonly<P> nextProps, Readonly<S> nextState, dynamic nextContext);
 }
 
 @JS()
 @anonymous
-class Mixin<P, S> {
+/*interface*/ class Mixin<P, S> {
   external Array<Mixin<P, S>>? get mixins;
   external set mixins(Array<Mixin<P, S>>? value);
   external dynamic? get statics;
@@ -782,9 +725,8 @@ class Mixin<P, S> {
 
 @JS()
 @anonymous
-class ComponentSpec<P, S> {
+/*interface*/ class ComponentSpec<P, S> {
   external ReactNode render();
-  external factory ComponentSpec();
 }
 
 @JS('React.createRef')
@@ -792,7 +734,7 @@ external RefObject<T> createRef<T>();
 
 @JS()
 @anonymous
-class ForwardRefExoticComponent<P> {
+/*interface*/ class ForwardRefExoticComponent<P> {
   external Partial<P>? get defaultProps;
   external set defaultProps(Partial<P>? value);
   external WeakValidationMap<P>? get propTypes;
@@ -804,33 +746,24 @@ class ForwardRefExoticComponent<P> {
 }
 
 @JS('React.forwardRef')
-external ForwardRefExoticComponent<dynamic> forwardRef<T, P>(
-    ForwardRefRenderFunction<T, P> render);
+external ForwardRefExoticComponent<dynamic> forwardRef<T, P>(ForwardRefRenderFunction<T, P> render);
 typedef PropsWithoutRef<P> = dynamic;
 typedef PropsWithRef<P> = dynamic;
 typedef PropsWithChildren<P> = dynamic;
 typedef ComponentProps<T extends dynamic> = dynamic;
 typedef ComponentPropsWithRef<T extends ElementType> = dynamic;
-typedef ComponentPropsWithoutRef<T extends ElementType>
-    = PropsWithoutRef<ComponentProps<T>>;
+typedef ComponentPropsWithoutRef<T extends ElementType> = PropsWithoutRef<ComponentProps<T>>;
 typedef ComponentRef<T extends ElementType> = dynamic;
 typedef MemoExoticComponent<T extends ComponentType<dynamic>> = dynamic;
 @JS('React.memo')
-external NamedExoticComponent<P> memo<P extends dynamic>(
-    FunctionComponent<P> Component,
-    bool Function(Readonly<PropsWithChildren<P>> prevProps,
-            Readonly<PropsWithChildren<P>> nextProps)
-        propsAreEqual);
+external NamedExoticComponent<P> memo<P extends dynamic>(FunctionComponent<P> Component,
+    bool Function(Readonly<PropsWithChildren<P>> prevProps, Readonly<PropsWithChildren<P>> nextProps) propsAreEqual);
 @JS('React.memo')
-external MemoExoticComponent<T> memo<T extends ComponentType<dynamic>>(
-    T Component,
-    bool Function(Readonly<ComponentProps<T>> prevProps,
-            Readonly<ComponentProps<T>> nextProps)
-        propsAreEqual);
+external MemoExoticComponent<T> memo<T extends ComponentType<dynamic>>(T Component,
+    bool Function(Readonly<ComponentProps<T>> prevProps, Readonly<ComponentProps<T>> nextProps) propsAreEqual);
 typedef LazyExoticComponent<T extends ComponentType<dynamic>> = dynamic;
 @JS('React.lazy')
-external LazyExoticComponent<T> lazy<T extends ComponentType<dynamic>>(
-    Promise<dynamic> Function() factory);
+external LazyExoticComponent<T> lazy<T extends ComponentType<dynamic>>(Promise<dynamic> Function() factory);
 typedef SetStateAction<S> = dynamic;
 typedef Dispatch<A> = dynamic Function(A value);
 typedef DispatchWithoutAction = dynamic Function();
@@ -838,14 +771,13 @@ typedef Reducer<S, A> = S Function(S prevState, A action);
 typedef ReducerWithoutAction<S> = S Function(S prevState);
 typedef ReducerState<R extends Reducer<dynamic, dynamic>> = dynamic;
 typedef ReducerAction<R extends Reducer<dynamic, dynamic>> = dynamic;
-typedef ReducerStateWithoutAction<R extends ReducerWithoutAction<dynamic>>
-    = dynamic;
+typedef ReducerStateWithoutAction<R extends ReducerWithoutAction<dynamic>> = dynamic;
 typedef DependencyList = ReadonlyArray<dynamic>;
 typedef EffectCallback = dynamic Function();
 
 @JS()
 @anonymous
-class MutableRefObject<T> {
+/*interface*/ class MutableRefObject<T> {
   external T get current;
   external set current(T value);
   external factory MutableRefObject({
@@ -861,15 +793,13 @@ external dynamic useState<S>(dynamic initialState);
 external dynamic useState<S>();
 @JS('React.useReducer')
 external dynamic useReducer<R extends ReducerWithoutAction<dynamic>, I>(
-    R reducer,
-    I initializerArg,
-    ReducerStateWithoutAction<R> Function(I arg) initializer);
+    R reducer, I initializerArg, ReducerStateWithoutAction<R> Function(I arg) initializer);
 @JS('React.useReducer')
-external dynamic useReducer<R extends ReducerWithoutAction<dynamic>>(R reducer,
-    ReducerStateWithoutAction<R> initializerArg, dynamic initializer);
+external dynamic useReducer<R extends ReducerWithoutAction<dynamic>>(
+    R reducer, ReducerStateWithoutAction<R> initializerArg, dynamic initializer);
 @JS('React.useReducer')
-external dynamic useReducer<R extends Reducer<dynamic, dynamic>, I>(R reducer,
-    dynamic initializerArg, ReducerState<R> Function(dynamic arg) initializer);
+external dynamic useReducer<R extends Reducer<dynamic, dynamic>, I>(
+    R reducer, dynamic initializerArg, ReducerState<R> Function(dynamic arg) initializer);
 @JS('React.useReducer')
 external dynamic useReducer<R extends Reducer<dynamic, dynamic>, I>(
     R reducer, I initializerArg, ReducerState<R> Function(I arg) initializer);
@@ -887,8 +817,7 @@ external dynamic useLayoutEffect(EffectCallback effect, DependencyList deps);
 @JS('React.useEffect')
 external dynamic useEffect(EffectCallback effect, DependencyList deps);
 @JS('React.useImperativeHandle')
-external dynamic useImperativeHandle<T, R extends T>(
-    Ref<T>? ref, R Function() init, DependencyList deps);
+external dynamic useImperativeHandle<T, R extends T>(Ref<T>? ref, R Function() init, DependencyList deps);
 @JS('React.useCallback')
 external T useCallback<
     T extends dynamic Function([
@@ -905,7 +834,7 @@ external dynamic useDebugValue<T>(T value, dynamic Function(T value) format);
 
 @JS()
 @anonymous
-class BaseSyntheticEvent<E, C, T> {
+/*interface*/ class BaseSyntheticEvent<E, C, T> {
   external E get nativeEvent;
   external set nativeEvent(E value);
   external C get currentTarget;
@@ -947,13 +876,11 @@ class BaseSyntheticEvent<E, C, T> {
 
 @JS()
 @anonymous
-class SyntheticEvent<T, E> {
-  external factory SyntheticEvent();
-}
+/*interface*/ class SyntheticEvent<T, E> {}
 
 @JS()
 @anonymous
-class ClipboardEvent<T> {
+/*interface*/ class ClipboardEvent<T> {
   external DataTransfer get clipboardData;
   external set clipboardData(DataTransfer value);
   external factory ClipboardEvent({
@@ -963,7 +890,7 @@ class ClipboardEvent<T> {
 
 @JS()
 @anonymous
-class CompositionEvent<T> {
+/*interface*/ class CompositionEvent<T> {
   external String get data;
   external set data(String value);
   external factory CompositionEvent({
@@ -973,7 +900,7 @@ class CompositionEvent<T> {
 
 @JS()
 @anonymous
-class DragEvent<T> {
+/*interface*/ class DragEvent<T> {
   external DataTransfer get dataTransfer;
   external set dataTransfer(DataTransfer value);
   external factory DragEvent({
@@ -983,7 +910,7 @@ class DragEvent<T> {
 
 @JS()
 @anonymous
-class PointerEvent<T> {
+/*interface*/ class PointerEvent<T> {
   external num get pointerId;
   external set pointerId(num value);
   external num get pressure;
@@ -1020,7 +947,7 @@ class PointerEvent<T> {
 
 @JS()
 @anonymous
-class FocusEvent<Target, RelatedTarget> {
+/*interface*/ class FocusEvent<Target, RelatedTarget> {
   external dynamic? get relatedTarget;
   external set relatedTarget(dynamic? value);
   external dynamic get target;
@@ -1033,13 +960,11 @@ class FocusEvent<Target, RelatedTarget> {
 
 @JS()
 @anonymous
-class FormEvent<T> {
-  external factory FormEvent();
-}
+/*interface*/ class FormEvent<T> {}
 
 @JS()
 @anonymous
-class InvalidEvent<T> {
+/*interface*/ class InvalidEvent<T> {
   external dynamic get target;
   external set target(dynamic value);
   external factory InvalidEvent({
@@ -1049,7 +974,7 @@ class InvalidEvent<T> {
 
 @JS()
 @anonymous
-class ChangeEvent<T> {
+/*interface*/ class ChangeEvent<T> {
   external dynamic get target;
   external set target(dynamic value);
   external factory ChangeEvent({
@@ -1059,7 +984,7 @@ class ChangeEvent<T> {
 
 @JS()
 @anonymous
-class KeyboardEvent<T> {
+/*interface*/ class KeyboardEvent<T> {
   external bool get altKey;
   external set altKey(bool value);
   external num get charCode;
@@ -1103,7 +1028,7 @@ class KeyboardEvent<T> {
 
 @JS()
 @anonymous
-class MouseEvent<T, E> {
+/*interface*/ class MouseEvent<T, E> {
   external bool get altKey;
   external set altKey(bool value);
   external num get button;
@@ -1156,7 +1081,7 @@ class MouseEvent<T, E> {
 
 @JS()
 @anonymous
-class TouchEvent<T> {
+/*interface*/ class TouchEvent<T> {
   external bool get altKey;
   external set altKey(bool value);
   external TouchList get changedTouches;
@@ -1185,7 +1110,7 @@ class TouchEvent<T> {
 
 @JS()
 @anonymous
-class UIEvent<T, E> {
+/*interface*/ class UIEvent<T, E> {
   external num get detail;
   external set detail(num value);
   external AbstractView get view;
@@ -1198,7 +1123,7 @@ class UIEvent<T, E> {
 
 @JS()
 @anonymous
-class WheelEvent<T> {
+/*interface*/ class WheelEvent<T> {
   external num get deltaMode;
   external set deltaMode(num value);
   external num get deltaX;
@@ -1217,7 +1142,7 @@ class WheelEvent<T> {
 
 @JS()
 @anonymous
-class AnimationEvent<T> {
+/*interface*/ class AnimationEvent<T> {
   external String get animationName;
   external set animationName(String value);
   external num get elapsedTime;
@@ -1233,7 +1158,7 @@ class AnimationEvent<T> {
 
 @JS()
 @anonymous
-class TransitionEvent<T> {
+/*interface*/ class TransitionEvent<T> {
   external num get elapsedTime;
   external set elapsedTime(num value);
   external String get propertyName;
@@ -1266,7 +1191,7 @@ typedef TransitionEventHandler<T> = EventHandler<TransitionEvent<T>>;
 
 @JS()
 @anonymous
-class Props<T> {
+/*interface*/ class Props<T> {
   external ReactNode? get children;
   external set children(ReactNode? value);
   external Key? get key;
@@ -1282,21 +1207,17 @@ class Props<T> {
 
 @JS()
 @anonymous
-class HTMLProps<T> {
-  external factory HTMLProps();
-}
+/*interface*/ class HTMLProps<T> {}
 
 typedef DetailedHTMLProps<E extends HTMLAttributes<T>, T> = dynamic;
 
 @JS()
 @anonymous
-class SVGProps<T> {
-  external factory SVGProps();
-}
+/*interface*/ class SVGProps<T> {}
 
 @JS()
 @anonymous
-class DOMAttributes<T> {
+/*interface*/ class DOMAttributes<T> {
   external ReactNode? get children;
   external set children(ReactNode? value);
   external dynamic? get dangerouslySetInnerHTML;
@@ -1789,21 +1710,17 @@ class DOMAttributes<T> {
 
 @JS()
 @anonymous
-class CSSProperties {
-  external factory CSSProperties();
-}
+/*interface*/ class CSSProperties {}
 
 @JS()
 @anonymous
-class AriaAttributes {
-  external factory AriaAttributes();
-}
+/*interface*/ class AriaAttributes {}
 
 typedef AriaRole = dynamic;
 
 @JS()
 @anonymous
-class HTMLAttributes<T> {
+/*interface*/ class HTMLAttributes<T> {
   external bool? get defaultChecked;
   external set defaultChecked(bool? value);
   external dynamic? get defaultValue;
@@ -1939,7 +1856,7 @@ class HTMLAttributes<T> {
 
 @JS()
 @anonymous
-class AllHTMLAttributes<T> {
+/*interface*/ class AllHTMLAttributes<T> {
   external String? get accept;
   external set accept(String? value);
   external String? get acceptCharset;
@@ -2264,7 +2181,7 @@ typedef HTMLAttributeAnchorTarget = dynamic;
 
 @JS()
 @anonymous
-class AnchorHTMLAttributes<T> {
+/*interface*/ class AnchorHTMLAttributes<T> {
   external dynamic? get download;
   external set download(dynamic? value);
   external String? get href;
@@ -2298,13 +2215,11 @@ class AnchorHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class AudioHTMLAttributes<T> {
-  external factory AudioHTMLAttributes();
-}
+/*interface*/ class AudioHTMLAttributes<T> {}
 
 @JS()
 @anonymous
-class AreaHTMLAttributes<T> {
+/*interface*/ class AreaHTMLAttributes<T> {
   external String? get alt;
   external set alt(String? value);
   external String? get coords;
@@ -2341,7 +2256,7 @@ class AreaHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class BaseHTMLAttributes<T> {
+/*interface*/ class BaseHTMLAttributes<T> {
   external String? get href;
   external set href(String? value);
   external String? get target;
@@ -2354,7 +2269,7 @@ class BaseHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class BlockquoteHTMLAttributes<T> {
+/*interface*/ class BlockquoteHTMLAttributes<T> {
   external String? get cite;
   external set cite(String? value);
   external factory BlockquoteHTMLAttributes({
@@ -2364,7 +2279,7 @@ class BlockquoteHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class ButtonHTMLAttributes<T> {
+/*interface*/ class ButtonHTMLAttributes<T> {
   external bool? get autoFocus;
   external set autoFocus(bool? value);
   external bool? get disabled;
@@ -2404,7 +2319,7 @@ class ButtonHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class CanvasHTMLAttributes<T> {
+/*interface*/ class CanvasHTMLAttributes<T> {
   external dynamic? get height;
   external set height(dynamic? value);
   external dynamic? get width;
@@ -2417,7 +2332,7 @@ class CanvasHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class ColHTMLAttributes<T> {
+/*interface*/ class ColHTMLAttributes<T> {
   external num? get span;
   external set span(num? value);
   external dynamic? get width;
@@ -2430,7 +2345,7 @@ class ColHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class ColgroupHTMLAttributes<T> {
+/*interface*/ class ColgroupHTMLAttributes<T> {
   external num? get span;
   external set span(num? value);
   external factory ColgroupHTMLAttributes({
@@ -2440,7 +2355,7 @@ class ColgroupHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class DataHTMLAttributes<T> {
+/*interface*/ class DataHTMLAttributes<T> {
   external dynamic? get value;
   external set value(dynamic? value);
   external factory DataHTMLAttributes({
@@ -2450,7 +2365,7 @@ class DataHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class DetailsHTMLAttributes<T> {
+/*interface*/ class DetailsHTMLAttributes<T> {
   external bool? get open;
   external set open(bool? value);
   external ReactEventHandler<T>? get onToggle;
@@ -2463,7 +2378,7 @@ class DetailsHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class DelHTMLAttributes<T> {
+/*interface*/ class DelHTMLAttributes<T> {
   external String? get cite;
   external set cite(String? value);
   external String? get dateTime;
@@ -2476,7 +2391,7 @@ class DelHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class DialogHTMLAttributes<T> {
+/*interface*/ class DialogHTMLAttributes<T> {
   external bool? get open;
   external set open(bool? value);
   external factory DialogHTMLAttributes({
@@ -2486,7 +2401,7 @@ class DialogHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class EmbedHTMLAttributes<T> {
+/*interface*/ class EmbedHTMLAttributes<T> {
   external dynamic? get height;
   external set height(dynamic? value);
   external String? get src;
@@ -2505,7 +2420,7 @@ class EmbedHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class FieldsetHTMLAttributes<T> {
+/*interface*/ class FieldsetHTMLAttributes<T> {
   external bool? get disabled;
   external set disabled(bool? value);
   external String? get form;
@@ -2521,7 +2436,7 @@ class FieldsetHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class FormHTMLAttributes<T> {
+/*interface*/ class FormHTMLAttributes<T> {
   external String? get acceptCharset;
   external set acceptCharset(String? value);
   external String? get action;
@@ -2552,7 +2467,7 @@ class FormHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class HtmlHTMLAttributes<T> {
+/*interface*/ class HtmlHTMLAttributes<T> {
   external String? get manifest;
   external set manifest(String? value);
   external factory HtmlHTMLAttributes({
@@ -2562,7 +2477,7 @@ class HtmlHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class IframeHTMLAttributes<T> {
+/*interface*/ class IframeHTMLAttributes<T> {
   external String? get allow;
   external set allow(String? value);
   external bool? get allowFullScreen;
@@ -2617,7 +2532,7 @@ class IframeHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class ImgHTMLAttributes<T> {
+/*interface*/ class ImgHTMLAttributes<T> {
   external String? get alt;
   external set alt(String? value);
   external dynamic? get crossOrigin;
@@ -2657,7 +2572,7 @@ class ImgHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class InsHTMLAttributes<T> {
+/*interface*/ class InsHTMLAttributes<T> {
   external String? get cite;
   external set cite(String? value);
   external String? get dateTime;
@@ -2672,7 +2587,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-class InputHTMLAttributes<T> {
+/*interface*/ class InputHTMLAttributes<T> {
   external String? get accept;
   external set accept(String? value);
   external String? get alt;
@@ -2781,7 +2696,7 @@ class InputHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class KeygenHTMLAttributes<T> {
+/*interface*/ class KeygenHTMLAttributes<T> {
   external bool? get autoFocus;
   external set autoFocus(bool? value);
   external String? get challenge;
@@ -2809,7 +2724,7 @@ class KeygenHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class LabelHTMLAttributes<T> {
+/*interface*/ class LabelHTMLAttributes<T> {
   external String? get form;
   external set form(String? value);
   external String? get htmlFor;
@@ -2822,7 +2737,7 @@ class LabelHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class LiHTMLAttributes<T> {
+/*interface*/ class LiHTMLAttributes<T> {
   external dynamic? get value;
   external set value(dynamic? value);
   external factory LiHTMLAttributes({
@@ -2832,7 +2747,7 @@ class LiHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class LinkHTMLAttributes<T> {
+/*interface*/ class LinkHTMLAttributes<T> {
   external String? get as;
   external set as(String? value);
   external String? get crossOrigin;
@@ -2875,7 +2790,7 @@ class LinkHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class MapHTMLAttributes<T> {
+/*interface*/ class MapHTMLAttributes<T> {
   external String? get name;
   external set name(String? value);
   external factory MapHTMLAttributes({
@@ -2885,7 +2800,7 @@ class MapHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class MenuHTMLAttributes<T> {
+/*interface*/ class MenuHTMLAttributes<T> {
   external String? get type;
   external set type(String? value);
   external factory MenuHTMLAttributes({
@@ -2895,7 +2810,7 @@ class MenuHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class MediaHTMLAttributes<T> {
+/*interface*/ class MediaHTMLAttributes<T> {
   external bool? get autoPlay;
   external set autoPlay(bool? value);
   external bool? get controls;
@@ -2932,7 +2847,7 @@ class MediaHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class MetaHTMLAttributes<T> {
+/*interface*/ class MetaHTMLAttributes<T> {
   external String? get charSet;
   external set charSet(String? value);
   external String? get content;
@@ -2954,7 +2869,7 @@ class MetaHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class MeterHTMLAttributes<T> {
+/*interface*/ class MeterHTMLAttributes<T> {
   external String? get form;
   external set form(String? value);
   external num? get high;
@@ -2982,7 +2897,7 @@ class MeterHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class QuoteHTMLAttributes<T> {
+/*interface*/ class QuoteHTMLAttributes<T> {
   external String? get cite;
   external set cite(String? value);
   external factory QuoteHTMLAttributes({
@@ -2992,7 +2907,7 @@ class QuoteHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class ObjectHTMLAttributes<T> {
+/*interface*/ class ObjectHTMLAttributes<T> {
   external String? get classID;
   external set classID(String? value);
   external String? get data;
@@ -3026,7 +2941,7 @@ class ObjectHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class OlHTMLAttributes<T> {
+/*interface*/ class OlHTMLAttributes<T> {
   external bool? get reversed;
   external set reversed(bool? value);
   external num? get start;
@@ -3042,7 +2957,7 @@ class OlHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class OptgroupHTMLAttributes<T> {
+/*interface*/ class OptgroupHTMLAttributes<T> {
   external bool? get disabled;
   external set disabled(bool? value);
   external String? get label;
@@ -3055,7 +2970,7 @@ class OptgroupHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class OptionHTMLAttributes<T> {
+/*interface*/ class OptionHTMLAttributes<T> {
   external bool? get disabled;
   external set disabled(bool? value);
   external String? get label;
@@ -3074,7 +2989,7 @@ class OptionHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class OutputHTMLAttributes<T> {
+/*interface*/ class OutputHTMLAttributes<T> {
   external String? get form;
   external set form(String? value);
   external String? get htmlFor;
@@ -3090,7 +3005,7 @@ class OutputHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class ParamHTMLAttributes<T> {
+/*interface*/ class ParamHTMLAttributes<T> {
   external String? get name;
   external set name(String? value);
   external dynamic? get value;
@@ -3103,7 +3018,7 @@ class ParamHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class ProgressHTMLAttributes<T> {
+/*interface*/ class ProgressHTMLAttributes<T> {
   external dynamic? get max;
   external set max(dynamic? value);
   external dynamic? get value;
@@ -3116,7 +3031,7 @@ class ProgressHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class SlotHTMLAttributes<T> {
+/*interface*/ class SlotHTMLAttributes<T> {
   external String? get name;
   external set name(String? value);
   external factory SlotHTMLAttributes({
@@ -3126,7 +3041,7 @@ class SlotHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class ScriptHTMLAttributes<T> {
+/*interface*/ class ScriptHTMLAttributes<T> {
   external bool? get async;
   external set async(bool? value);
   external String? get charSet;
@@ -3163,7 +3078,7 @@ class ScriptHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class SelectHTMLAttributes<T> {
+/*interface*/ class SelectHTMLAttributes<T> {
   external String? get autoComplete;
   external set autoComplete(String? value);
   external bool? get autoFocus;
@@ -3200,7 +3115,7 @@ class SelectHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class SourceHTMLAttributes<T> {
+/*interface*/ class SourceHTMLAttributes<T> {
   external dynamic? get height;
   external set height(dynamic? value);
   external String? get media;
@@ -3228,7 +3143,7 @@ class SourceHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class StyleHTMLAttributes<T> {
+/*interface*/ class StyleHTMLAttributes<T> {
   external String? get media;
   external set media(String? value);
   external String? get nonce;
@@ -3247,7 +3162,7 @@ class StyleHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class TableHTMLAttributes<T> {
+/*interface*/ class TableHTMLAttributes<T> {
   external dynamic? get cellPadding;
   external set cellPadding(dynamic? value);
   external dynamic? get cellSpacing;
@@ -3266,7 +3181,7 @@ class TableHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class TextareaHTMLAttributes<T> {
+/*interface*/ class TextareaHTMLAttributes<T> {
   external String? get autoComplete;
   external set autoComplete(String? value);
   external bool? get autoFocus;
@@ -3321,7 +3236,7 @@ class TextareaHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class TdHTMLAttributes<T> {
+/*interface*/ class TdHTMLAttributes<T> {
   external dynamic? get align;
   external set align(dynamic? value);
   external num? get colSpan;
@@ -3355,7 +3270,7 @@ class TdHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class ThHTMLAttributes<T> {
+/*interface*/ class ThHTMLAttributes<T> {
   external dynamic? get align;
   external set align(dynamic? value);
   external num? get colSpan;
@@ -3380,7 +3295,7 @@ class ThHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class TimeHTMLAttributes<T> {
+/*interface*/ class TimeHTMLAttributes<T> {
   external String? get dateTime;
   external set dateTime(String? value);
   external factory TimeHTMLAttributes({
@@ -3390,7 +3305,7 @@ class TimeHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class TrackHTMLAttributes<T> {
+/*interface*/ class TrackHTMLAttributes<T> {
   external String? get kind;
   external set kind(String? value);
   external String? get label;
@@ -3409,7 +3324,7 @@ class TrackHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class VideoHTMLAttributes<T> {
+/*interface*/ class VideoHTMLAttributes<T> {
   external dynamic? get height;
   external set height(dynamic? value);
   external bool? get playsInline;
@@ -3434,7 +3349,7 @@ class VideoHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class SVGAttributes<T> {
+/*interface*/ class SVGAttributes<T> {
   external String? get className;
   external set className(String? value);
   external String? get color;
@@ -4215,7 +4130,7 @@ class SVGAttributes<T> {
 
 @JS()
 @anonymous
-class WebViewHTMLAttributes<T> {
+/*interface*/ class WebViewHTMLAttributes<T> {
   external bool? get allowFullScreen;
   external set allowFullScreen(bool? value);
   external bool? get allowpopups;
@@ -4273,771 +4188,359 @@ class WebViewHTMLAttributes<T> {
 
 @JS()
 @anonymous
-class ReactHTML {
-  external DetailedHTMLFactory<AnchorHTMLAttributes<HTMLAnchorElement>,
-      HTMLAnchorElement> get a;
-  external set a(
-      DetailedHTMLFactory<AnchorHTMLAttributes<HTMLAnchorElement>,
-              HTMLAnchorElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get abbr;
-  external set abbr(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get address;
-  external set address(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<AreaHTMLAttributes<HTMLAreaElement>,
-      HTMLAreaElement> get area;
-  external set area(
-      DetailedHTMLFactory<AreaHTMLAttributes<HTMLAreaElement>, HTMLAreaElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get article;
-  external set article(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get aside;
-  external set aside(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<AudioHTMLAttributes<HTMLAudioElement>,
-      HTMLAudioElement> get audio;
-  external set audio(
-      DetailedHTMLFactory<AudioHTMLAttributes<HTMLAudioElement>,
-              HTMLAudioElement>
-          value);
+/*interface*/ class ReactHTML {
+  external DetailedHTMLFactory<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement> get a;
+  external set a(DetailedHTMLFactory<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get abbr;
+  external set abbr(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get address;
+  external set address(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<AreaHTMLAttributes<HTMLAreaElement>, HTMLAreaElement> get area;
+  external set area(DetailedHTMLFactory<AreaHTMLAttributes<HTMLAreaElement>, HTMLAreaElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get article;
+  external set article(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get aside;
+  external set aside(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<AudioHTMLAttributes<HTMLAudioElement>, HTMLAudioElement> get audio;
+  external set audio(DetailedHTMLFactory<AudioHTMLAttributes<HTMLAudioElement>, HTMLAudioElement> value);
   external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get b;
-  external set b(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<BaseHTMLAttributes<HTMLBaseElement>,
-      HTMLBaseElement> get base;
-  external set base(
-      DetailedHTMLFactory<BaseHTMLAttributes<HTMLBaseElement>, HTMLBaseElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get bdi;
-  external set bdi(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get bdo;
-  external set bdo(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get big;
-  external set big(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<BlockquoteHTMLAttributes<HTMLElement>,
-      HTMLElement> get blockquote;
-  external set blockquote(
-      DetailedHTMLFactory<BlockquoteHTMLAttributes<HTMLElement>, HTMLElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLBodyElement>, HTMLBodyElement>
-      get body;
-  external set body(
-      DetailedHTMLFactory<HTMLAttributes<HTMLBodyElement>, HTMLBodyElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLBRElement>, HTMLBRElement>
-      get br;
-  external set br(
-      DetailedHTMLFactory<HTMLAttributes<HTMLBRElement>, HTMLBRElement> value);
-  external DetailedHTMLFactory<ButtonHTMLAttributes<HTMLButtonElement>,
-      HTMLButtonElement> get button;
-  external set button(
-      DetailedHTMLFactory<ButtonHTMLAttributes<HTMLButtonElement>,
-              HTMLButtonElement>
-          value);
-  external DetailedHTMLFactory<CanvasHTMLAttributes<HTMLCanvasElement>,
-      HTMLCanvasElement> get canvas;
-  external set canvas(
-      DetailedHTMLFactory<CanvasHTMLAttributes<HTMLCanvasElement>,
-              HTMLCanvasElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get caption;
-  external set caption(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get cite;
-  external set cite(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get code;
-  external set code(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<ColHTMLAttributes<HTMLTableColElement>,
-      HTMLTableColElement> get col;
-  external set col(
-      DetailedHTMLFactory<ColHTMLAttributes<HTMLTableColElement>,
-              HTMLTableColElement>
-          value);
-  external DetailedHTMLFactory<ColgroupHTMLAttributes<HTMLTableColElement>,
-      HTMLTableColElement> get colgroup;
-  external set colgroup(
-      DetailedHTMLFactory<ColgroupHTMLAttributes<HTMLTableColElement>,
-              HTMLTableColElement>
-          value);
-  external DetailedHTMLFactory<DataHTMLAttributes<HTMLDataElement>,
-      HTMLDataElement> get data;
-  external set data(
-      DetailedHTMLFactory<DataHTMLAttributes<HTMLDataElement>, HTMLDataElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLDataListElement>,
-      HTMLDataListElement> get datalist;
-  external set datalist(
-      DetailedHTMLFactory<HTMLAttributes<HTMLDataListElement>,
-              HTMLDataListElement>
-          value);
+  external set b(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<BaseHTMLAttributes<HTMLBaseElement>, HTMLBaseElement> get base;
+  external set base(DetailedHTMLFactory<BaseHTMLAttributes<HTMLBaseElement>, HTMLBaseElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get bdi;
+  external set bdi(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get bdo;
+  external set bdo(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get big;
+  external set big(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<BlockquoteHTMLAttributes<HTMLElement>, HTMLElement> get blockquote;
+  external set blockquote(DetailedHTMLFactory<BlockquoteHTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLBodyElement>, HTMLBodyElement> get body;
+  external set body(DetailedHTMLFactory<HTMLAttributes<HTMLBodyElement>, HTMLBodyElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLBRElement>, HTMLBRElement> get br;
+  external set br(DetailedHTMLFactory<HTMLAttributes<HTMLBRElement>, HTMLBRElement> value);
+  external DetailedHTMLFactory<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> get button;
+  external set button(DetailedHTMLFactory<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> value);
+  external DetailedHTMLFactory<CanvasHTMLAttributes<HTMLCanvasElement>, HTMLCanvasElement> get canvas;
+  external set canvas(DetailedHTMLFactory<CanvasHTMLAttributes<HTMLCanvasElement>, HTMLCanvasElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get caption;
+  external set caption(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get cite;
+  external set cite(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get code;
+  external set code(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<ColHTMLAttributes<HTMLTableColElement>, HTMLTableColElement> get col;
+  external set col(DetailedHTMLFactory<ColHTMLAttributes<HTMLTableColElement>, HTMLTableColElement> value);
+  external DetailedHTMLFactory<ColgroupHTMLAttributes<HTMLTableColElement>, HTMLTableColElement> get colgroup;
+  external set colgroup(DetailedHTMLFactory<ColgroupHTMLAttributes<HTMLTableColElement>, HTMLTableColElement> value);
+  external DetailedHTMLFactory<DataHTMLAttributes<HTMLDataElement>, HTMLDataElement> get data;
+  external set data(DetailedHTMLFactory<DataHTMLAttributes<HTMLDataElement>, HTMLDataElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLDataListElement>, HTMLDataListElement> get datalist;
+  external set datalist(DetailedHTMLFactory<HTMLAttributes<HTMLDataListElement>, HTMLDataListElement> value);
   external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get dd;
-  external set dd(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<DelHTMLAttributes<HTMLElement>, HTMLElement>
-      get del;
-  external set del(
-      DetailedHTMLFactory<DelHTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<DetailsHTMLAttributes<HTMLElement>, HTMLElement>
-      get details;
-  external set details(
-      DetailedHTMLFactory<DetailsHTMLAttributes<HTMLElement>, HTMLElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get dfn;
-  external set dfn(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<DialogHTMLAttributes<HTMLDialogElement>,
-      HTMLDialogElement> get dialog;
-  external set dialog(
-      DetailedHTMLFactory<DialogHTMLAttributes<HTMLDialogElement>,
-              HTMLDialogElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
-      get div;
-  external set div(
-      DetailedHTMLFactory<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLDListElement>,
-      HTMLDListElement> get dl;
-  external set dl(
-      DetailedHTMLFactory<HTMLAttributes<HTMLDListElement>, HTMLDListElement>
-          value);
+  external set dd(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<DelHTMLAttributes<HTMLElement>, HTMLElement> get del;
+  external set del(DetailedHTMLFactory<DelHTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<DetailsHTMLAttributes<HTMLElement>, HTMLElement> get details;
+  external set details(DetailedHTMLFactory<DetailsHTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get dfn;
+  external set dfn(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<DialogHTMLAttributes<HTMLDialogElement>, HTMLDialogElement> get dialog;
+  external set dialog(DetailedHTMLFactory<DialogHTMLAttributes<HTMLDialogElement>, HTMLDialogElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLDivElement>, HTMLDivElement> get div;
+  external set div(DetailedHTMLFactory<HTMLAttributes<HTMLDivElement>, HTMLDivElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLDListElement>, HTMLDListElement> get dl;
+  external set dl(DetailedHTMLFactory<HTMLAttributes<HTMLDListElement>, HTMLDListElement> value);
   external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get dt;
-  external set dt(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external set dt(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
   external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get em;
-  external set em(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<EmbedHTMLAttributes<HTMLEmbedElement>,
-      HTMLEmbedElement> get embed;
-  external set embed(
-      DetailedHTMLFactory<EmbedHTMLAttributes<HTMLEmbedElement>,
-              HTMLEmbedElement>
-          value);
-  external DetailedHTMLFactory<FieldsetHTMLAttributes<HTMLFieldSetElement>,
-      HTMLFieldSetElement> get fieldset;
-  external set fieldset(
-      DetailedHTMLFactory<FieldsetHTMLAttributes<HTMLFieldSetElement>,
-              HTMLFieldSetElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get figcaption;
-  external set figcaption(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get figure;
-  external set figure(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get footer;
-  external set footer(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<FormHTMLAttributes<HTMLFormElement>,
-      HTMLFormElement> get form;
-  external set form(
-      DetailedHTMLFactory<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>,
-      HTMLHeadingElement> get h1;
-  external set h1(
-      DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>,
-              HTMLHeadingElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>,
-      HTMLHeadingElement> get h2;
-  external set h2(
-      DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>,
-              HTMLHeadingElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>,
-      HTMLHeadingElement> get h3;
-  external set h3(
-      DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>,
-              HTMLHeadingElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>,
-      HTMLHeadingElement> get h4;
-  external set h4(
-      DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>,
-              HTMLHeadingElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>,
-      HTMLHeadingElement> get h5;
-  external set h5(
-      DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>,
-              HTMLHeadingElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>,
-      HTMLHeadingElement> get h6;
-  external set h6(
-      DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>,
-              HTMLHeadingElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLHeadElement>
-      get head;
-  external set head(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLHeadElement> value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get header;
-  external set header(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get hgroup;
-  external set hgroup(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLHRElement>, HTMLHRElement>
-      get hr;
-  external set hr(
-      DetailedHTMLFactory<HTMLAttributes<HTMLHRElement>, HTMLHRElement> value);
-  external DetailedHTMLFactory<HtmlHTMLAttributes<HTMLHtmlElement>,
-      HTMLHtmlElement> get html;
-  external set html(
-      DetailedHTMLFactory<HtmlHTMLAttributes<HTMLHtmlElement>, HTMLHtmlElement>
-          value);
+  external set em(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<EmbedHTMLAttributes<HTMLEmbedElement>, HTMLEmbedElement> get embed;
+  external set embed(DetailedHTMLFactory<EmbedHTMLAttributes<HTMLEmbedElement>, HTMLEmbedElement> value);
+  external DetailedHTMLFactory<FieldsetHTMLAttributes<HTMLFieldSetElement>, HTMLFieldSetElement> get fieldset;
+  external set fieldset(DetailedHTMLFactory<FieldsetHTMLAttributes<HTMLFieldSetElement>, HTMLFieldSetElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get figcaption;
+  external set figcaption(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get figure;
+  external set figure(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get footer;
+  external set footer(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> get form;
+  external set form(DetailedHTMLFactory<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> get h1;
+  external set h1(DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> get h2;
+  external set h2(DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> get h3;
+  external set h3(DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> get h4;
+  external set h4(DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> get h5;
+  external set h5(DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> get h6;
+  external set h6(DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLHeadElement> get head;
+  external set head(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLHeadElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get header;
+  external set header(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get hgroup;
+  external set hgroup(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLHRElement>, HTMLHRElement> get hr;
+  external set hr(DetailedHTMLFactory<HTMLAttributes<HTMLHRElement>, HTMLHRElement> value);
+  external DetailedHTMLFactory<HtmlHTMLAttributes<HTMLHtmlElement>, HTMLHtmlElement> get html;
+  external set html(DetailedHTMLFactory<HtmlHTMLAttributes<HTMLHtmlElement>, HTMLHtmlElement> value);
   external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get i;
-  external set i(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<IframeHTMLAttributes<HTMLIFrameElement>,
-      HTMLIFrameElement> get iframe;
-  external set iframe(
-      DetailedHTMLFactory<IframeHTMLAttributes<HTMLIFrameElement>,
-              HTMLIFrameElement>
-          value);
-  external DetailedHTMLFactory<ImgHTMLAttributes<HTMLImageElement>,
-      HTMLImageElement> get img;
-  external set img(
-      DetailedHTMLFactory<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>
-          value);
-  external DetailedHTMLFactory<InputHTMLAttributes<HTMLInputElement>,
-      HTMLInputElement> get input;
-  external set input(
-      DetailedHTMLFactory<InputHTMLAttributes<HTMLInputElement>,
-              HTMLInputElement>
-          value);
-  external DetailedHTMLFactory<InsHTMLAttributes<HTMLModElement>,
-      HTMLModElement> get ins;
-  external set ins(
-      DetailedHTMLFactory<InsHTMLAttributes<HTMLModElement>, HTMLModElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get kbd;
-  external set kbd(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<KeygenHTMLAttributes<HTMLElement>, HTMLElement>
-      get keygen;
-  external set keygen(
-      DetailedHTMLFactory<KeygenHTMLAttributes<HTMLElement>, HTMLElement>
-          value);
-  external DetailedHTMLFactory<LabelHTMLAttributes<HTMLLabelElement>,
-      HTMLLabelElement> get label;
-  external set label(
-      DetailedHTMLFactory<LabelHTMLAttributes<HTMLLabelElement>,
-              HTMLLabelElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLLegendElement>,
-      HTMLLegendElement> get legend;
-  external set legend(
-      DetailedHTMLFactory<HTMLAttributes<HTMLLegendElement>, HTMLLegendElement>
-          value);
-  external DetailedHTMLFactory<LiHTMLAttributes<HTMLLIElement>, HTMLLIElement>
-      get li;
-  external set li(
-      DetailedHTMLFactory<LiHTMLAttributes<HTMLLIElement>, HTMLLIElement>
-          value);
-  external DetailedHTMLFactory<LinkHTMLAttributes<HTMLLinkElement>,
-      HTMLLinkElement> get link;
-  external set link(
-      DetailedHTMLFactory<LinkHTMLAttributes<HTMLLinkElement>, HTMLLinkElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get main;
-  external set main(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<MapHTMLAttributes<HTMLMapElement>,
-      HTMLMapElement> get map;
-  external set map(
-      DetailedHTMLFactory<MapHTMLAttributes<HTMLMapElement>, HTMLMapElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get mark;
-  external set mark(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<MenuHTMLAttributes<HTMLElement>, HTMLElement>
-      get menu;
-  external set menu(
-      DetailedHTMLFactory<MenuHTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get menuitem;
-  external set menuitem(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<MetaHTMLAttributes<HTMLMetaElement>,
-      HTMLMetaElement> get meta;
-  external set meta(
-      DetailedHTMLFactory<MetaHTMLAttributes<HTMLMetaElement>, HTMLMetaElement>
-          value);
-  external DetailedHTMLFactory<MeterHTMLAttributes<HTMLElement>, HTMLElement>
-      get meter;
-  external set meter(
-      DetailedHTMLFactory<MeterHTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get nav;
-  external set nav(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get noscript;
-  external set noscript(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<ObjectHTMLAttributes<HTMLObjectElement>,
-      HTMLObjectElement> get object;
-  external set object(
-      DetailedHTMLFactory<ObjectHTMLAttributes<HTMLObjectElement>,
-              HTMLObjectElement>
-          value);
-  external DetailedHTMLFactory<OlHTMLAttributes<HTMLOListElement>,
-      HTMLOListElement> get ol;
-  external set ol(
-      DetailedHTMLFactory<OlHTMLAttributes<HTMLOListElement>, HTMLOListElement>
-          value);
-  external DetailedHTMLFactory<OptgroupHTMLAttributes<HTMLOptGroupElement>,
-      HTMLOptGroupElement> get optgroup;
-  external set optgroup(
-      DetailedHTMLFactory<OptgroupHTMLAttributes<HTMLOptGroupElement>,
-              HTMLOptGroupElement>
-          value);
-  external DetailedHTMLFactory<OptionHTMLAttributes<HTMLOptionElement>,
-      HTMLOptionElement> get option;
-  external set option(
-      DetailedHTMLFactory<OptionHTMLAttributes<HTMLOptionElement>,
-              HTMLOptionElement>
-          value);
-  external DetailedHTMLFactory<OutputHTMLAttributes<HTMLElement>, HTMLElement>
-      get output;
-  external set output(
-      DetailedHTMLFactory<OutputHTMLAttributes<HTMLElement>, HTMLElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLParagraphElement>,
-      HTMLParagraphElement> get p;
-  external set p(
-      DetailedHTMLFactory<HTMLAttributes<HTMLParagraphElement>,
-              HTMLParagraphElement>
-          value);
-  external DetailedHTMLFactory<ParamHTMLAttributes<HTMLParamElement>,
-      HTMLParamElement> get param;
-  external set param(
-      DetailedHTMLFactory<ParamHTMLAttributes<HTMLParamElement>,
-              HTMLParamElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get picture;
-  external set picture(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLPreElement>, HTMLPreElement>
-      get pre;
-  external set pre(
-      DetailedHTMLFactory<HTMLAttributes<HTMLPreElement>, HTMLPreElement>
-          value);
-  external DetailedHTMLFactory<ProgressHTMLAttributes<HTMLProgressElement>,
-      HTMLProgressElement> get progress;
-  external set progress(
-      DetailedHTMLFactory<ProgressHTMLAttributes<HTMLProgressElement>,
-              HTMLProgressElement>
-          value);
-  external DetailedHTMLFactory<QuoteHTMLAttributes<HTMLQuoteElement>,
-      HTMLQuoteElement> get q;
-  external set q(
-      DetailedHTMLFactory<QuoteHTMLAttributes<HTMLQuoteElement>,
-              HTMLQuoteElement>
-          value);
+  external set i(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<IframeHTMLAttributes<HTMLIFrameElement>, HTMLIFrameElement> get iframe;
+  external set iframe(DetailedHTMLFactory<IframeHTMLAttributes<HTMLIFrameElement>, HTMLIFrameElement> value);
+  external DetailedHTMLFactory<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement> get img;
+  external set img(DetailedHTMLFactory<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement> value);
+  external DetailedHTMLFactory<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> get input;
+  external set input(DetailedHTMLFactory<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> value);
+  external DetailedHTMLFactory<InsHTMLAttributes<HTMLModElement>, HTMLModElement> get ins;
+  external set ins(DetailedHTMLFactory<InsHTMLAttributes<HTMLModElement>, HTMLModElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get kbd;
+  external set kbd(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<KeygenHTMLAttributes<HTMLElement>, HTMLElement> get keygen;
+  external set keygen(DetailedHTMLFactory<KeygenHTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement> get label;
+  external set label(DetailedHTMLFactory<LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLLegendElement>, HTMLLegendElement> get legend;
+  external set legend(DetailedHTMLFactory<HTMLAttributes<HTMLLegendElement>, HTMLLegendElement> value);
+  external DetailedHTMLFactory<LiHTMLAttributes<HTMLLIElement>, HTMLLIElement> get li;
+  external set li(DetailedHTMLFactory<LiHTMLAttributes<HTMLLIElement>, HTMLLIElement> value);
+  external DetailedHTMLFactory<LinkHTMLAttributes<HTMLLinkElement>, HTMLLinkElement> get link;
+  external set link(DetailedHTMLFactory<LinkHTMLAttributes<HTMLLinkElement>, HTMLLinkElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get main;
+  external set main(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<MapHTMLAttributes<HTMLMapElement>, HTMLMapElement> get map;
+  external set map(DetailedHTMLFactory<MapHTMLAttributes<HTMLMapElement>, HTMLMapElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get mark;
+  external set mark(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<MenuHTMLAttributes<HTMLElement>, HTMLElement> get menu;
+  external set menu(DetailedHTMLFactory<MenuHTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get menuitem;
+  external set menuitem(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<MetaHTMLAttributes<HTMLMetaElement>, HTMLMetaElement> get meta;
+  external set meta(DetailedHTMLFactory<MetaHTMLAttributes<HTMLMetaElement>, HTMLMetaElement> value);
+  external DetailedHTMLFactory<MeterHTMLAttributes<HTMLElement>, HTMLElement> get meter;
+  external set meter(DetailedHTMLFactory<MeterHTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get nav;
+  external set nav(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get noscript;
+  external set noscript(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<ObjectHTMLAttributes<HTMLObjectElement>, HTMLObjectElement> get object;
+  external set object(DetailedHTMLFactory<ObjectHTMLAttributes<HTMLObjectElement>, HTMLObjectElement> value);
+  external DetailedHTMLFactory<OlHTMLAttributes<HTMLOListElement>, HTMLOListElement> get ol;
+  external set ol(DetailedHTMLFactory<OlHTMLAttributes<HTMLOListElement>, HTMLOListElement> value);
+  external DetailedHTMLFactory<OptgroupHTMLAttributes<HTMLOptGroupElement>, HTMLOptGroupElement> get optgroup;
+  external set optgroup(DetailedHTMLFactory<OptgroupHTMLAttributes<HTMLOptGroupElement>, HTMLOptGroupElement> value);
+  external DetailedHTMLFactory<OptionHTMLAttributes<HTMLOptionElement>, HTMLOptionElement> get option;
+  external set option(DetailedHTMLFactory<OptionHTMLAttributes<HTMLOptionElement>, HTMLOptionElement> value);
+  external DetailedHTMLFactory<OutputHTMLAttributes<HTMLElement>, HTMLElement> get output;
+  external set output(DetailedHTMLFactory<OutputHTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement> get p;
+  external set p(DetailedHTMLFactory<HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement> value);
+  external DetailedHTMLFactory<ParamHTMLAttributes<HTMLParamElement>, HTMLParamElement> get param;
+  external set param(DetailedHTMLFactory<ParamHTMLAttributes<HTMLParamElement>, HTMLParamElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get picture;
+  external set picture(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLPreElement>, HTMLPreElement> get pre;
+  external set pre(DetailedHTMLFactory<HTMLAttributes<HTMLPreElement>, HTMLPreElement> value);
+  external DetailedHTMLFactory<ProgressHTMLAttributes<HTMLProgressElement>, HTMLProgressElement> get progress;
+  external set progress(DetailedHTMLFactory<ProgressHTMLAttributes<HTMLProgressElement>, HTMLProgressElement> value);
+  external DetailedHTMLFactory<QuoteHTMLAttributes<HTMLQuoteElement>, HTMLQuoteElement> get q;
+  external set q(DetailedHTMLFactory<QuoteHTMLAttributes<HTMLQuoteElement>, HTMLQuoteElement> value);
   external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get rp;
-  external set rp(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external set rp(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
   external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get rt;
-  external set rt(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get ruby;
-  external set ruby(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external set rt(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get ruby;
+  external set ruby(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
   external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get s;
-  external set s(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get samp;
-  external set samp(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<SlotHTMLAttributes<HTMLSlotElement>,
-      HTMLSlotElement> get slot;
-  external set slot(
-      DetailedHTMLFactory<SlotHTMLAttributes<HTMLSlotElement>, HTMLSlotElement>
-          value);
-  external DetailedHTMLFactory<ScriptHTMLAttributes<HTMLScriptElement>,
-      HTMLScriptElement> get script;
-  external set script(
-      DetailedHTMLFactory<ScriptHTMLAttributes<HTMLScriptElement>,
-              HTMLScriptElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get section;
-  external set section(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<SelectHTMLAttributes<HTMLSelectElement>,
-      HTMLSelectElement> get select;
-  external set select(
-      DetailedHTMLFactory<SelectHTMLAttributes<HTMLSelectElement>,
-              HTMLSelectElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get small;
-  external set small(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<SourceHTMLAttributes<HTMLSourceElement>,
-      HTMLSourceElement> get source;
-  external set source(
-      DetailedHTMLFactory<SourceHTMLAttributes<HTMLSourceElement>,
-              HTMLSourceElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>
-      get span;
-  external set span(
-      DetailedHTMLFactory<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get strong;
-  external set strong(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<StyleHTMLAttributes<HTMLStyleElement>,
-      HTMLStyleElement> get style;
-  external set style(
-      DetailedHTMLFactory<StyleHTMLAttributes<HTMLStyleElement>,
-              HTMLStyleElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get sub;
-  external set sub(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get summary;
-  external set summary(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get sup;
-  external set sup(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<TableHTMLAttributes<HTMLTableElement>,
-      HTMLTableElement> get table;
-  external set table(
-      DetailedHTMLFactory<TableHTMLAttributes<HTMLTableElement>,
-              HTMLTableElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLTemplateElement>,
-      HTMLTemplateElement> get template;
-  external set template(
-      DetailedHTMLFactory<HTMLAttributes<HTMLTemplateElement>,
-              HTMLTemplateElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLTableSectionElement>,
-      HTMLTableSectionElement> get tbody;
-  external set tbody(
-      DetailedHTMLFactory<HTMLAttributes<HTMLTableSectionElement>,
-              HTMLTableSectionElement>
-          value);
-  external DetailedHTMLFactory<TdHTMLAttributes<HTMLTableDataCellElement>,
-      HTMLTableDataCellElement> get td;
-  external set td(
-      DetailedHTMLFactory<TdHTMLAttributes<HTMLTableDataCellElement>,
-              HTMLTableDataCellElement>
-          value);
-  external DetailedHTMLFactory<TextareaHTMLAttributes<HTMLTextAreaElement>,
-      HTMLTextAreaElement> get textarea;
-  external set textarea(
-      DetailedHTMLFactory<TextareaHTMLAttributes<HTMLTextAreaElement>,
-              HTMLTextAreaElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLTableSectionElement>,
-      HTMLTableSectionElement> get tfoot;
-  external set tfoot(
-      DetailedHTMLFactory<HTMLAttributes<HTMLTableSectionElement>,
-              HTMLTableSectionElement>
-          value);
-  external DetailedHTMLFactory<ThHTMLAttributes<HTMLTableHeaderCellElement>,
-      HTMLTableHeaderCellElement> get th;
-  external set th(
-      DetailedHTMLFactory<ThHTMLAttributes<HTMLTableHeaderCellElement>,
-              HTMLTableHeaderCellElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLTableSectionElement>,
-      HTMLTableSectionElement> get thead;
-  external set thead(
-      DetailedHTMLFactory<HTMLAttributes<HTMLTableSectionElement>,
-              HTMLTableSectionElement>
-          value);
-  external DetailedHTMLFactory<TimeHTMLAttributes<HTMLElement>, HTMLElement>
-      get time;
-  external set time(
-      DetailedHTMLFactory<TimeHTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLTitleElement>,
-      HTMLTitleElement> get title;
-  external set title(
-      DetailedHTMLFactory<HTMLAttributes<HTMLTitleElement>, HTMLTitleElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLTableRowElement>,
-      HTMLTableRowElement> get tr;
-  external set tr(
-      DetailedHTMLFactory<HTMLAttributes<HTMLTableRowElement>,
-              HTMLTableRowElement>
-          value);
-  external DetailedHTMLFactory<TrackHTMLAttributes<HTMLTrackElement>,
-      HTMLTrackElement> get track;
-  external set track(
-      DetailedHTMLFactory<TrackHTMLAttributes<HTMLTrackElement>,
-              HTMLTrackElement>
-          value);
+  external set s(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get samp;
+  external set samp(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<SlotHTMLAttributes<HTMLSlotElement>, HTMLSlotElement> get slot;
+  external set slot(DetailedHTMLFactory<SlotHTMLAttributes<HTMLSlotElement>, HTMLSlotElement> value);
+  external DetailedHTMLFactory<ScriptHTMLAttributes<HTMLScriptElement>, HTMLScriptElement> get script;
+  external set script(DetailedHTMLFactory<ScriptHTMLAttributes<HTMLScriptElement>, HTMLScriptElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get section;
+  external set section(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement> get select;
+  external set select(DetailedHTMLFactory<SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get small;
+  external set small(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<SourceHTMLAttributes<HTMLSourceElement>, HTMLSourceElement> get source;
+  external set source(DetailedHTMLFactory<SourceHTMLAttributes<HTMLSourceElement>, HTMLSourceElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement> get span;
+  external set span(DetailedHTMLFactory<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get strong;
+  external set strong(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<StyleHTMLAttributes<HTMLStyleElement>, HTMLStyleElement> get style;
+  external set style(DetailedHTMLFactory<StyleHTMLAttributes<HTMLStyleElement>, HTMLStyleElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get sub;
+  external set sub(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get summary;
+  external set summary(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get sup;
+  external set sup(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<TableHTMLAttributes<HTMLTableElement>, HTMLTableElement> get table;
+  external set table(DetailedHTMLFactory<TableHTMLAttributes<HTMLTableElement>, HTMLTableElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLTemplateElement>, HTMLTemplateElement> get template;
+  external set template(DetailedHTMLFactory<HTMLAttributes<HTMLTemplateElement>, HTMLTemplateElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement> get tbody;
+  external set tbody(DetailedHTMLFactory<HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement> value);
+  external DetailedHTMLFactory<TdHTMLAttributes<HTMLTableDataCellElement>, HTMLTableDataCellElement> get td;
+  external set td(DetailedHTMLFactory<TdHTMLAttributes<HTMLTableDataCellElement>, HTMLTableDataCellElement> value);
+  external DetailedHTMLFactory<TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement> get textarea;
+  external set textarea(DetailedHTMLFactory<TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement> get tfoot;
+  external set tfoot(DetailedHTMLFactory<HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement> value);
+  external DetailedHTMLFactory<ThHTMLAttributes<HTMLTableHeaderCellElement>, HTMLTableHeaderCellElement> get th;
+  external set th(DetailedHTMLFactory<ThHTMLAttributes<HTMLTableHeaderCellElement>, HTMLTableHeaderCellElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement> get thead;
+  external set thead(DetailedHTMLFactory<HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement> value);
+  external DetailedHTMLFactory<TimeHTMLAttributes<HTMLElement>, HTMLElement> get time;
+  external set time(DetailedHTMLFactory<TimeHTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLTitleElement>, HTMLTitleElement> get title;
+  external set title(DetailedHTMLFactory<HTMLAttributes<HTMLTitleElement>, HTMLTitleElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLTableRowElement>, HTMLTableRowElement> get tr;
+  external set tr(DetailedHTMLFactory<HTMLAttributes<HTMLTableRowElement>, HTMLTableRowElement> value);
+  external DetailedHTMLFactory<TrackHTMLAttributes<HTMLTrackElement>, HTMLTrackElement> get track;
+  external set track(DetailedHTMLFactory<TrackHTMLAttributes<HTMLTrackElement>, HTMLTrackElement> value);
   external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get u;
-  external set u(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLUListElement>,
-      HTMLUListElement> get ul;
-  external set ul(
-      DetailedHTMLFactory<HTMLAttributes<HTMLUListElement>, HTMLUListElement>
-          value);
-  external DetailedHTMLFactory<VideoHTMLAttributes<HTMLVideoElement>,
-      HTMLVideoElement> get video;
-  external set video(
-      DetailedHTMLFactory<VideoHTMLAttributes<HTMLVideoElement>,
-              HTMLVideoElement>
-          value);
-  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>
-      get wbr;
-  external set wbr(
-      DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLFactory<WebViewHTMLAttributes<HTMLWebViewElement>,
-      HTMLWebViewElement> get webview;
-  external set webview(
-      DetailedHTMLFactory<WebViewHTMLAttributes<HTMLWebViewElement>,
-              HTMLWebViewElement>
-          value);
+  external set u(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLUListElement>, HTMLUListElement> get ul;
+  external set ul(DetailedHTMLFactory<HTMLAttributes<HTMLUListElement>, HTMLUListElement> value);
+  external DetailedHTMLFactory<VideoHTMLAttributes<HTMLVideoElement>, HTMLVideoElement> get video;
+  external set video(DetailedHTMLFactory<VideoHTMLAttributes<HTMLVideoElement>, HTMLVideoElement> value);
+  external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get wbr;
+  external set wbr(DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLFactory<WebViewHTMLAttributes<HTMLWebViewElement>, HTMLWebViewElement> get webview;
+  external set webview(DetailedHTMLFactory<WebViewHTMLAttributes<HTMLWebViewElement>, HTMLWebViewElement> value);
   external factory ReactHTML({
-    DetailedHTMLFactory<AnchorHTMLAttributes<HTMLAnchorElement>,
-            HTMLAnchorElement>
-        a,
+    DetailedHTMLFactory<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement> a,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> abbr,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> address,
-    DetailedHTMLFactory<AreaHTMLAttributes<HTMLAreaElement>, HTMLAreaElement>
-        area,
+    DetailedHTMLFactory<AreaHTMLAttributes<HTMLAreaElement>, HTMLAreaElement> area,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> article,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> aside,
-    DetailedHTMLFactory<AudioHTMLAttributes<HTMLAudioElement>, HTMLAudioElement>
-        audio,
+    DetailedHTMLFactory<AudioHTMLAttributes<HTMLAudioElement>, HTMLAudioElement> audio,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> b,
-    DetailedHTMLFactory<BaseHTMLAttributes<HTMLBaseElement>, HTMLBaseElement>
-        base,
+    DetailedHTMLFactory<BaseHTMLAttributes<HTMLBaseElement>, HTMLBaseElement> base,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> bdi,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> bdo,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> big,
-    DetailedHTMLFactory<BlockquoteHTMLAttributes<HTMLElement>, HTMLElement>
-        blockquote,
+    DetailedHTMLFactory<BlockquoteHTMLAttributes<HTMLElement>, HTMLElement> blockquote,
     DetailedHTMLFactory<HTMLAttributes<HTMLBodyElement>, HTMLBodyElement> body,
     DetailedHTMLFactory<HTMLAttributes<HTMLBRElement>, HTMLBRElement> br,
-    DetailedHTMLFactory<ButtonHTMLAttributes<HTMLButtonElement>,
-            HTMLButtonElement>
-        button,
-    DetailedHTMLFactory<CanvasHTMLAttributes<HTMLCanvasElement>,
-            HTMLCanvasElement>
-        canvas,
+    DetailedHTMLFactory<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> button,
+    DetailedHTMLFactory<CanvasHTMLAttributes<HTMLCanvasElement>, HTMLCanvasElement> canvas,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> caption,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> cite,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> code,
-    DetailedHTMLFactory<ColHTMLAttributes<HTMLTableColElement>,
-            HTMLTableColElement>
-        col,
-    DetailedHTMLFactory<ColgroupHTMLAttributes<HTMLTableColElement>,
-            HTMLTableColElement>
-        colgroup,
-    DetailedHTMLFactory<DataHTMLAttributes<HTMLDataElement>, HTMLDataElement>
-        data,
-    DetailedHTMLFactory<HTMLAttributes<HTMLDataListElement>,
-            HTMLDataListElement>
-        datalist,
+    DetailedHTMLFactory<ColHTMLAttributes<HTMLTableColElement>, HTMLTableColElement> col,
+    DetailedHTMLFactory<ColgroupHTMLAttributes<HTMLTableColElement>, HTMLTableColElement> colgroup,
+    DetailedHTMLFactory<DataHTMLAttributes<HTMLDataElement>, HTMLDataElement> data,
+    DetailedHTMLFactory<HTMLAttributes<HTMLDataListElement>, HTMLDataListElement> datalist,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> dd,
     DetailedHTMLFactory<DelHTMLAttributes<HTMLElement>, HTMLElement> del,
-    DetailedHTMLFactory<DetailsHTMLAttributes<HTMLElement>, HTMLElement>
-        details,
+    DetailedHTMLFactory<DetailsHTMLAttributes<HTMLElement>, HTMLElement> details,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> dfn,
-    DetailedHTMLFactory<DialogHTMLAttributes<HTMLDialogElement>,
-            HTMLDialogElement>
-        dialog,
+    DetailedHTMLFactory<DialogHTMLAttributes<HTMLDialogElement>, HTMLDialogElement> dialog,
     DetailedHTMLFactory<HTMLAttributes<HTMLDivElement>, HTMLDivElement> div,
     DetailedHTMLFactory<HTMLAttributes<HTMLDListElement>, HTMLDListElement> dl,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> dt,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> em,
-    DetailedHTMLFactory<EmbedHTMLAttributes<HTMLEmbedElement>, HTMLEmbedElement>
-        embed,
-    DetailedHTMLFactory<FieldsetHTMLAttributes<HTMLFieldSetElement>,
-            HTMLFieldSetElement>
-        fieldset,
+    DetailedHTMLFactory<EmbedHTMLAttributes<HTMLEmbedElement>, HTMLEmbedElement> embed,
+    DetailedHTMLFactory<FieldsetHTMLAttributes<HTMLFieldSetElement>, HTMLFieldSetElement> fieldset,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> figcaption,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> figure,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> footer,
-    DetailedHTMLFactory<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>
-        form,
-    DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
-        h1,
-    DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
-        h2,
-    DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
-        h3,
-    DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
-        h4,
-    DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
-        h5,
-    DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
-        h6,
+    DetailedHTMLFactory<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> form,
+    DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> h1,
+    DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> h2,
+    DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> h3,
+    DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> h4,
+    DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> h5,
+    DetailedHTMLFactory<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> h6,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLHeadElement> head,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> header,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> hgroup,
     DetailedHTMLFactory<HTMLAttributes<HTMLHRElement>, HTMLHRElement> hr,
-    DetailedHTMLFactory<HtmlHTMLAttributes<HTMLHtmlElement>, HTMLHtmlElement>
-        html,
+    DetailedHTMLFactory<HtmlHTMLAttributes<HTMLHtmlElement>, HTMLHtmlElement> html,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> i,
-    DetailedHTMLFactory<IframeHTMLAttributes<HTMLIFrameElement>,
-            HTMLIFrameElement>
-        iframe,
-    DetailedHTMLFactory<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>
-        img,
-    DetailedHTMLFactory<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
-        input,
+    DetailedHTMLFactory<IframeHTMLAttributes<HTMLIFrameElement>, HTMLIFrameElement> iframe,
+    DetailedHTMLFactory<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement> img,
+    DetailedHTMLFactory<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> input,
     DetailedHTMLFactory<InsHTMLAttributes<HTMLModElement>, HTMLModElement> ins,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> kbd,
     DetailedHTMLFactory<KeygenHTMLAttributes<HTMLElement>, HTMLElement> keygen,
-    DetailedHTMLFactory<LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement>
-        label,
-    DetailedHTMLFactory<HTMLAttributes<HTMLLegendElement>, HTMLLegendElement>
-        legend,
+    DetailedHTMLFactory<LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement> label,
+    DetailedHTMLFactory<HTMLAttributes<HTMLLegendElement>, HTMLLegendElement> legend,
     DetailedHTMLFactory<LiHTMLAttributes<HTMLLIElement>, HTMLLIElement> li,
-    DetailedHTMLFactory<LinkHTMLAttributes<HTMLLinkElement>, HTMLLinkElement>
-        link,
+    DetailedHTMLFactory<LinkHTMLAttributes<HTMLLinkElement>, HTMLLinkElement> link,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> main,
     DetailedHTMLFactory<MapHTMLAttributes<HTMLMapElement>, HTMLMapElement> map,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> mark,
     DetailedHTMLFactory<MenuHTMLAttributes<HTMLElement>, HTMLElement> menu,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> menuitem,
-    DetailedHTMLFactory<MetaHTMLAttributes<HTMLMetaElement>, HTMLMetaElement>
-        meta,
+    DetailedHTMLFactory<MetaHTMLAttributes<HTMLMetaElement>, HTMLMetaElement> meta,
     DetailedHTMLFactory<MeterHTMLAttributes<HTMLElement>, HTMLElement> meter,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> nav,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> noscript,
-    DetailedHTMLFactory<ObjectHTMLAttributes<HTMLObjectElement>,
-            HTMLObjectElement>
-        object,
-    DetailedHTMLFactory<OlHTMLAttributes<HTMLOListElement>, HTMLOListElement>
-        ol,
-    DetailedHTMLFactory<OptgroupHTMLAttributes<HTMLOptGroupElement>,
-            HTMLOptGroupElement>
-        optgroup,
-    DetailedHTMLFactory<OptionHTMLAttributes<HTMLOptionElement>,
-            HTMLOptionElement>
-        option,
+    DetailedHTMLFactory<ObjectHTMLAttributes<HTMLObjectElement>, HTMLObjectElement> object,
+    DetailedHTMLFactory<OlHTMLAttributes<HTMLOListElement>, HTMLOListElement> ol,
+    DetailedHTMLFactory<OptgroupHTMLAttributes<HTMLOptGroupElement>, HTMLOptGroupElement> optgroup,
+    DetailedHTMLFactory<OptionHTMLAttributes<HTMLOptionElement>, HTMLOptionElement> option,
     DetailedHTMLFactory<OutputHTMLAttributes<HTMLElement>, HTMLElement> output,
-    DetailedHTMLFactory<HTMLAttributes<HTMLParagraphElement>,
-            HTMLParagraphElement>
-        p,
-    DetailedHTMLFactory<ParamHTMLAttributes<HTMLParamElement>, HTMLParamElement>
-        param,
+    DetailedHTMLFactory<HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement> p,
+    DetailedHTMLFactory<ParamHTMLAttributes<HTMLParamElement>, HTMLParamElement> param,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> picture,
     DetailedHTMLFactory<HTMLAttributes<HTMLPreElement>, HTMLPreElement> pre,
-    DetailedHTMLFactory<ProgressHTMLAttributes<HTMLProgressElement>,
-            HTMLProgressElement>
-        progress,
-    DetailedHTMLFactory<QuoteHTMLAttributes<HTMLQuoteElement>, HTMLQuoteElement>
-        q,
+    DetailedHTMLFactory<ProgressHTMLAttributes<HTMLProgressElement>, HTMLProgressElement> progress,
+    DetailedHTMLFactory<QuoteHTMLAttributes<HTMLQuoteElement>, HTMLQuoteElement> q,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> rp,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> rt,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> ruby,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> s,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> samp,
-    DetailedHTMLFactory<SlotHTMLAttributes<HTMLSlotElement>, HTMLSlotElement>
-        slot,
-    DetailedHTMLFactory<ScriptHTMLAttributes<HTMLScriptElement>,
-            HTMLScriptElement>
-        script,
+    DetailedHTMLFactory<SlotHTMLAttributes<HTMLSlotElement>, HTMLSlotElement> slot,
+    DetailedHTMLFactory<ScriptHTMLAttributes<HTMLScriptElement>, HTMLScriptElement> script,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> section,
-    DetailedHTMLFactory<SelectHTMLAttributes<HTMLSelectElement>,
-            HTMLSelectElement>
-        select,
+    DetailedHTMLFactory<SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement> select,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> small,
-    DetailedHTMLFactory<SourceHTMLAttributes<HTMLSourceElement>,
-            HTMLSourceElement>
-        source,
+    DetailedHTMLFactory<SourceHTMLAttributes<HTMLSourceElement>, HTMLSourceElement> source,
     DetailedHTMLFactory<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement> span,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> strong,
-    DetailedHTMLFactory<StyleHTMLAttributes<HTMLStyleElement>, HTMLStyleElement>
-        style,
+    DetailedHTMLFactory<StyleHTMLAttributes<HTMLStyleElement>, HTMLStyleElement> style,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> sub,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> summary,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> sup,
-    DetailedHTMLFactory<TableHTMLAttributes<HTMLTableElement>, HTMLTableElement>
-        table,
-    DetailedHTMLFactory<HTMLAttributes<HTMLTemplateElement>,
-            HTMLTemplateElement>
-        template,
-    DetailedHTMLFactory<HTMLAttributes<HTMLTableSectionElement>,
-            HTMLTableSectionElement>
-        tbody,
-    DetailedHTMLFactory<TdHTMLAttributes<HTMLTableDataCellElement>,
-            HTMLTableDataCellElement>
-        td,
-    DetailedHTMLFactory<TextareaHTMLAttributes<HTMLTextAreaElement>,
-            HTMLTextAreaElement>
-        textarea,
-    DetailedHTMLFactory<HTMLAttributes<HTMLTableSectionElement>,
-            HTMLTableSectionElement>
-        tfoot,
-    DetailedHTMLFactory<ThHTMLAttributes<HTMLTableHeaderCellElement>,
-            HTMLTableHeaderCellElement>
-        th,
-    DetailedHTMLFactory<HTMLAttributes<HTMLTableSectionElement>,
-            HTMLTableSectionElement>
-        thead,
+    DetailedHTMLFactory<TableHTMLAttributes<HTMLTableElement>, HTMLTableElement> table,
+    DetailedHTMLFactory<HTMLAttributes<HTMLTemplateElement>, HTMLTemplateElement> template,
+    DetailedHTMLFactory<HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement> tbody,
+    DetailedHTMLFactory<TdHTMLAttributes<HTMLTableDataCellElement>, HTMLTableDataCellElement> td,
+    DetailedHTMLFactory<TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement> textarea,
+    DetailedHTMLFactory<HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement> tfoot,
+    DetailedHTMLFactory<ThHTMLAttributes<HTMLTableHeaderCellElement>, HTMLTableHeaderCellElement> th,
+    DetailedHTMLFactory<HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement> thead,
     DetailedHTMLFactory<TimeHTMLAttributes<HTMLElement>, HTMLElement> time,
-    DetailedHTMLFactory<HTMLAttributes<HTMLTitleElement>, HTMLTitleElement>
-        title,
-    DetailedHTMLFactory<HTMLAttributes<HTMLTableRowElement>,
-            HTMLTableRowElement>
-        tr,
-    DetailedHTMLFactory<TrackHTMLAttributes<HTMLTrackElement>, HTMLTrackElement>
-        track,
+    DetailedHTMLFactory<HTMLAttributes<HTMLTitleElement>, HTMLTitleElement> title,
+    DetailedHTMLFactory<HTMLAttributes<HTMLTableRowElement>, HTMLTableRowElement> tr,
+    DetailedHTMLFactory<TrackHTMLAttributes<HTMLTrackElement>, HTMLTrackElement> track,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> u,
     DetailedHTMLFactory<HTMLAttributes<HTMLUListElement>, HTMLUListElement> ul,
-    DetailedHTMLFactory<VideoHTMLAttributes<HTMLVideoElement>, HTMLVideoElement>
-        video,
+    DetailedHTMLFactory<VideoHTMLAttributes<HTMLVideoElement>, HTMLVideoElement> video,
     DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> wbr,
-    DetailedHTMLFactory<WebViewHTMLAttributes<HTMLWebViewElement>,
-            HTMLWebViewElement>
-        webview,
+    DetailedHTMLFactory<WebViewHTMLAttributes<HTMLWebViewElement>, HTMLWebViewElement> webview,
   });
 }
 
 @JS()
 @anonymous
-class ReactSVG {
+/*interface*/ class ReactSVG {
   external SVGFactory get animate;
   external set animate(SVGFactory value);
   external SVGFactory get circle;
@@ -5206,9 +4709,7 @@ class ReactSVG {
 
 @JS()
 @anonymous
-class ReactDOM {
-  external factory ReactDOM();
-}
+/*interface*/ class ReactDOM {}
 
 typedef Validator<T> = Validator<T>;
 typedef Requireable<T> = Requireable<T>;
@@ -5217,7 +4718,7 @@ typedef WeakValidationMap<T> = dynamic;
 
 @JS()
 @anonymous
-class ReactPropTypes {
+/*interface*/ class ReactPropTypes {
   external dynamic get any;
   external set any(dynamic value);
   external dynamic get array;
@@ -5272,19 +4773,17 @@ class ReactPropTypes {
 
 @JS()
 @anonymous
-class ReactChildren {
+/*interface*/ class ReactChildren {
   external dynamic map(dynamic children, T Function(C child, num index) fn);
-  external dynamic forEach(
-      dynamic children, dynamic Function(C child, num index) fn);
+  external dynamic forEach(dynamic children, dynamic Function(C child, num index) fn);
   external num count(dynamic children);
   external dynamic only(C children);
   external Array<Exclude<ReactNode, bool?>> toArray(dynamic children);
-  external factory ReactChildren();
 }
 
 @JS()
 @anonymous
-class AbstractView {
+/*interface*/ class AbstractView {
   external StyleMedia get styleMedia;
   external set styleMedia(StyleMedia value);
   external Document get document;
@@ -5297,7 +4796,7 @@ class AbstractView {
 
 @JS()
 @anonymous
-class Touch {
+/*interface*/ class Touch {
   external num get identifier;
   external set identifier(num value);
   external EventTarget get target;
@@ -5328,7 +4827,7 @@ class Touch {
 
 @JS()
 @anonymous
-class TouchList {
+/*interface*/ class TouchList {
   external num get length;
   external set length(num value);
   external Touch item(num index);
@@ -5340,7 +4839,7 @@ class TouchList {
 
 @JS()
 @anonymous
-class ErrorInfo {
+/*interface*/ class ErrorInfo {
   external String get componentStack;
   external set componentStack(String value);
   external factory ErrorInfo({
@@ -5350,28 +4849,24 @@ class ErrorInfo {
 
 typedef IsExactlyAny<T> = dynamic;
 typedef ExactlyAnyPropertyKeys<T> = dynamic;
-typedef NotExactlyAnyPropertyKeys<T>
-    = Exclude<dynamic, ExactlyAnyPropertyKeys<T>>;
+typedef NotExactlyAnyPropertyKeys<T> = Exclude<dynamic, ExactlyAnyPropertyKeys<T>>;
 typedef MergePropTypes<P, T> = dynamic;
 typedef Defaultize<P, D> = dynamic;
 typedef ReactManagedAttributes<C, P> = dynamic;
 
 @JS()
 @anonymous
-class Element {
-  external factory Element();
-}
+/*interface*/ class Element {}
 
 @JS()
 @anonymous
-class ElementClass {
+/*interface*/ class ElementClass {
   external ReactNode render();
-  external factory ElementClass();
 }
 
 @JS()
 @anonymous
-class ElementAttributesProperty {
+/*interface*/ class ElementAttributesProperty {
   external dynamic get props;
   external set props(dynamic value);
   external factory ElementAttributesProperty({
@@ -5381,7 +4876,7 @@ class ElementAttributesProperty {
 
 @JS()
 @anonymous
-class ElementChildrenAttribute {
+/*interface*/ class ElementChildrenAttribute {
   external dynamic get children;
   external set children(dynamic value);
   external factory ElementChildrenAttribute({
@@ -5393,546 +4888,247 @@ typedef LibraryManagedAttributes<C, P> = dynamic;
 
 @JS()
 @anonymous
-class IntrinsicAttributes {
-  external factory IntrinsicAttributes();
-}
+/*interface*/ class IntrinsicAttributes {}
 
 @JS()
 @anonymous
-class IntrinsicClassAttributes<T> {
-  external factory IntrinsicClassAttributes();
-}
+/*interface*/ class IntrinsicClassAttributes<T> {}
 
 @JS()
 @anonymous
-class IntrinsicElements {
-  external DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>,
-      HTMLAnchorElement> get a;
-  external set a(
-      DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>,
-              HTMLAnchorElement>
-          value);
+/*interface*/ class IntrinsicElements {
+  external DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement> get a;
+  external set a(DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement> value);
   external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get abbr;
-  external set abbr(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
-      get address;
-  external set address(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<AreaHTMLAttributes<HTMLAreaElement>,
-      HTMLAreaElement> get area;
-  external set area(
-      DetailedHTMLProps<AreaHTMLAttributes<HTMLAreaElement>, HTMLAreaElement>
-          value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
-      get article;
-  external set article(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
-      get aside;
-  external set aside(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<AudioHTMLAttributes<HTMLAudioElement>,
-      HTMLAudioElement> get audio;
-  external set audio(
-      DetailedHTMLProps<AudioHTMLAttributes<HTMLAudioElement>, HTMLAudioElement>
-          value);
+  external set abbr(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get address;
+  external set address(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<AreaHTMLAttributes<HTMLAreaElement>, HTMLAreaElement> get area;
+  external set area(DetailedHTMLProps<AreaHTMLAttributes<HTMLAreaElement>, HTMLAreaElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get article;
+  external set article(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get aside;
+  external set aside(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<AudioHTMLAttributes<HTMLAudioElement>, HTMLAudioElement> get audio;
+  external set audio(DetailedHTMLProps<AudioHTMLAttributes<HTMLAudioElement>, HTMLAudioElement> value);
   external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get b;
-  external set b(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<BaseHTMLAttributes<HTMLBaseElement>,
-      HTMLBaseElement> get base;
-  external set base(
-      DetailedHTMLProps<BaseHTMLAttributes<HTMLBaseElement>, HTMLBaseElement>
-          value);
+  external set b(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<BaseHTMLAttributes<HTMLBaseElement>, HTMLBaseElement> get base;
+  external set base(DetailedHTMLProps<BaseHTMLAttributes<HTMLBaseElement>, HTMLBaseElement> value);
   external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get bdi;
-  external set bdi(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external set bdi(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
   external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get bdo;
-  external set bdo(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external set bdo(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
   external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get big;
-  external set big(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<BlockquoteHTMLAttributes<HTMLElement>, HTMLElement>
-      get blockquote;
-  external set blockquote(
-      DetailedHTMLProps<BlockquoteHTMLAttributes<HTMLElement>, HTMLElement>
-          value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLBodyElement>, HTMLBodyElement>
-      get body;
-  external set body(
-      DetailedHTMLProps<HTMLAttributes<HTMLBodyElement>, HTMLBodyElement>
-          value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLBRElement>, HTMLBRElement>
-      get br;
-  external set br(
-      DetailedHTMLProps<HTMLAttributes<HTMLBRElement>, HTMLBRElement> value);
-  external DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>,
-      HTMLButtonElement> get button;
-  external set button(
-      DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>,
-              HTMLButtonElement>
-          value);
-  external DetailedHTMLProps<CanvasHTMLAttributes<HTMLCanvasElement>,
-      HTMLCanvasElement> get canvas;
-  external set canvas(
-      DetailedHTMLProps<CanvasHTMLAttributes<HTMLCanvasElement>,
-              HTMLCanvasElement>
-          value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
-      get caption;
-  external set caption(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external set big(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<BlockquoteHTMLAttributes<HTMLElement>, HTMLElement> get blockquote;
+  external set blockquote(DetailedHTMLProps<BlockquoteHTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLBodyElement>, HTMLBodyElement> get body;
+  external set body(DetailedHTMLProps<HTMLAttributes<HTMLBodyElement>, HTMLBodyElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLBRElement>, HTMLBRElement> get br;
+  external set br(DetailedHTMLProps<HTMLAttributes<HTMLBRElement>, HTMLBRElement> value);
+  external DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> get button;
+  external set button(DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> value);
+  external DetailedHTMLProps<CanvasHTMLAttributes<HTMLCanvasElement>, HTMLCanvasElement> get canvas;
+  external set canvas(DetailedHTMLProps<CanvasHTMLAttributes<HTMLCanvasElement>, HTMLCanvasElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get caption;
+  external set caption(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
   external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get cite;
-  external set cite(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external set cite(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
   external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get code;
-  external set code(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<ColHTMLAttributes<HTMLTableColElement>,
-      HTMLTableColElement> get col;
-  external set col(
-      DetailedHTMLProps<ColHTMLAttributes<HTMLTableColElement>,
-              HTMLTableColElement>
-          value);
-  external DetailedHTMLProps<ColgroupHTMLAttributes<HTMLTableColElement>,
-      HTMLTableColElement> get colgroup;
-  external set colgroup(
-      DetailedHTMLProps<ColgroupHTMLAttributes<HTMLTableColElement>,
-              HTMLTableColElement>
-          value);
-  external DetailedHTMLProps<DataHTMLAttributes<HTMLDataElement>,
-      HTMLDataElement> get data;
-  external set data(
-      DetailedHTMLProps<DataHTMLAttributes<HTMLDataElement>, HTMLDataElement>
-          value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLDataListElement>,
-      HTMLDataListElement> get datalist;
-  external set datalist(
-      DetailedHTMLProps<HTMLAttributes<HTMLDataListElement>,
-              HTMLDataListElement>
-          value);
+  external set code(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<ColHTMLAttributes<HTMLTableColElement>, HTMLTableColElement> get col;
+  external set col(DetailedHTMLProps<ColHTMLAttributes<HTMLTableColElement>, HTMLTableColElement> value);
+  external DetailedHTMLProps<ColgroupHTMLAttributes<HTMLTableColElement>, HTMLTableColElement> get colgroup;
+  external set colgroup(DetailedHTMLProps<ColgroupHTMLAttributes<HTMLTableColElement>, HTMLTableColElement> value);
+  external DetailedHTMLProps<DataHTMLAttributes<HTMLDataElement>, HTMLDataElement> get data;
+  external set data(DetailedHTMLProps<DataHTMLAttributes<HTMLDataElement>, HTMLDataElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLDataListElement>, HTMLDataListElement> get datalist;
+  external set datalist(DetailedHTMLProps<HTMLAttributes<HTMLDataListElement>, HTMLDataListElement> value);
   external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get dd;
-  external set dd(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<DelHTMLAttributes<HTMLElement>, HTMLElement>
-      get del;
-  external set del(
-      DetailedHTMLProps<DelHTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<DetailsHTMLAttributes<HTMLElement>, HTMLElement>
-      get details;
-  external set details(
-      DetailedHTMLProps<DetailsHTMLAttributes<HTMLElement>, HTMLElement> value);
+  external set dd(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<DelHTMLAttributes<HTMLElement>, HTMLElement> get del;
+  external set del(DetailedHTMLProps<DelHTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<DetailsHTMLAttributes<HTMLElement>, HTMLElement> get details;
+  external set details(DetailedHTMLProps<DetailsHTMLAttributes<HTMLElement>, HTMLElement> value);
   external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get dfn;
-  external set dfn(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<DialogHTMLAttributes<HTMLDialogElement>,
-      HTMLDialogElement> get dialog;
-  external set dialog(
-      DetailedHTMLProps<DialogHTMLAttributes<HTMLDialogElement>,
-              HTMLDialogElement>
-          value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
-      get div;
-  external set div(
-      DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLDListElement>, HTMLDListElement>
-      get dl;
-  external set dl(
-      DetailedHTMLProps<HTMLAttributes<HTMLDListElement>, HTMLDListElement>
-          value);
+  external set dfn(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<DialogHTMLAttributes<HTMLDialogElement>, HTMLDialogElement> get dialog;
+  external set dialog(DetailedHTMLProps<DialogHTMLAttributes<HTMLDialogElement>, HTMLDialogElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> get div;
+  external set div(DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLDListElement>, HTMLDListElement> get dl;
+  external set dl(DetailedHTMLProps<HTMLAttributes<HTMLDListElement>, HTMLDListElement> value);
   external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get dt;
-  external set dt(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external set dt(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
   external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get em;
-  external set em(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<EmbedHTMLAttributes<HTMLEmbedElement>,
-      HTMLEmbedElement> get embed;
-  external set embed(
-      DetailedHTMLProps<EmbedHTMLAttributes<HTMLEmbedElement>, HTMLEmbedElement>
-          value);
-  external DetailedHTMLProps<FieldsetHTMLAttributes<HTMLFieldSetElement>,
-      HTMLFieldSetElement> get fieldset;
-  external set fieldset(
-      DetailedHTMLProps<FieldsetHTMLAttributes<HTMLFieldSetElement>,
-              HTMLFieldSetElement>
-          value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
-      get figcaption;
-  external set figcaption(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
-      get figure;
-  external set figure(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
-      get footer;
-  external set footer(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>,
-      HTMLFormElement> get form;
-  external set form(
-      DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>
-          value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>,
-      HTMLHeadingElement> get h1;
-  external set h1(
-      DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
-          value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>,
-      HTMLHeadingElement> get h2;
-  external set h2(
-      DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
-          value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>,
-      HTMLHeadingElement> get h3;
-  external set h3(
-      DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
-          value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>,
-      HTMLHeadingElement> get h4;
-  external set h4(
-      DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
-          value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>,
-      HTMLHeadingElement> get h5;
-  external set h5(
-      DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
-          value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>,
-      HTMLHeadingElement> get h6;
-  external set h6(
-      DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
-          value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLHeadElement>, HTMLHeadElement>
-      get head;
-  external set head(
-      DetailedHTMLProps<HTMLAttributes<HTMLHeadElement>, HTMLHeadElement>
-          value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
-      get header;
-  external set header(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
-      get hgroup;
-  external set hgroup(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLHRElement>, HTMLHRElement>
-      get hr;
-  external set hr(
-      DetailedHTMLProps<HTMLAttributes<HTMLHRElement>, HTMLHRElement> value);
-  external DetailedHTMLProps<HtmlHTMLAttributes<HTMLHtmlElement>,
-      HTMLHtmlElement> get html;
-  external set html(
-      DetailedHTMLProps<HtmlHTMLAttributes<HTMLHtmlElement>, HTMLHtmlElement>
-          value);
+  external set em(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<EmbedHTMLAttributes<HTMLEmbedElement>, HTMLEmbedElement> get embed;
+  external set embed(DetailedHTMLProps<EmbedHTMLAttributes<HTMLEmbedElement>, HTMLEmbedElement> value);
+  external DetailedHTMLProps<FieldsetHTMLAttributes<HTMLFieldSetElement>, HTMLFieldSetElement> get fieldset;
+  external set fieldset(DetailedHTMLProps<FieldsetHTMLAttributes<HTMLFieldSetElement>, HTMLFieldSetElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get figcaption;
+  external set figcaption(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get figure;
+  external set figure(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get footer;
+  external set footer(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> get form;
+  external set form(DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> get h1;
+  external set h1(DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> get h2;
+  external set h2(DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> get h3;
+  external set h3(DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> get h4;
+  external set h4(DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> get h5;
+  external set h5(DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> get h6;
+  external set h6(DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLHeadElement>, HTMLHeadElement> get head;
+  external set head(DetailedHTMLProps<HTMLAttributes<HTMLHeadElement>, HTMLHeadElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get header;
+  external set header(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get hgroup;
+  external set hgroup(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLHRElement>, HTMLHRElement> get hr;
+  external set hr(DetailedHTMLProps<HTMLAttributes<HTMLHRElement>, HTMLHRElement> value);
+  external DetailedHTMLProps<HtmlHTMLAttributes<HTMLHtmlElement>, HTMLHtmlElement> get html;
+  external set html(DetailedHTMLProps<HtmlHTMLAttributes<HTMLHtmlElement>, HTMLHtmlElement> value);
   external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get i;
-  external set i(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<IframeHTMLAttributes<HTMLIFrameElement>,
-      HTMLIFrameElement> get iframe;
-  external set iframe(
-      DetailedHTMLProps<IframeHTMLAttributes<HTMLIFrameElement>,
-              HTMLIFrameElement>
-          value);
-  external DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>,
-      HTMLImageElement> get img;
-  external set img(
-      DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>
-          value);
-  external DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>,
-      HTMLInputElement> get input;
-  external set input(
-      DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
-          value);
-  external DetailedHTMLProps<InsHTMLAttributes<HTMLModElement>, HTMLModElement>
-      get ins;
-  external set ins(
-      DetailedHTMLProps<InsHTMLAttributes<HTMLModElement>, HTMLModElement>
-          value);
+  external set i(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<IframeHTMLAttributes<HTMLIFrameElement>, HTMLIFrameElement> get iframe;
+  external set iframe(DetailedHTMLProps<IframeHTMLAttributes<HTMLIFrameElement>, HTMLIFrameElement> value);
+  external DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement> get img;
+  external set img(DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement> value);
+  external DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> get input;
+  external set input(DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> value);
+  external DetailedHTMLProps<InsHTMLAttributes<HTMLModElement>, HTMLModElement> get ins;
+  external set ins(DetailedHTMLProps<InsHTMLAttributes<HTMLModElement>, HTMLModElement> value);
   external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get kbd;
-  external set kbd(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<KeygenHTMLAttributes<HTMLElement>, HTMLElement>
-      get keygen;
-  external set keygen(
-      DetailedHTMLProps<KeygenHTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<LabelHTMLAttributes<HTMLLabelElement>,
-      HTMLLabelElement> get label;
-  external set label(
-      DetailedHTMLProps<LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement>
-          value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLLegendElement>,
-      HTMLLegendElement> get legend;
-  external set legend(
-      DetailedHTMLProps<HTMLAttributes<HTMLLegendElement>, HTMLLegendElement>
-          value);
-  external DetailedHTMLProps<LiHTMLAttributes<HTMLLIElement>, HTMLLIElement>
-      get li;
-  external set li(
-      DetailedHTMLProps<LiHTMLAttributes<HTMLLIElement>, HTMLLIElement> value);
-  external DetailedHTMLProps<LinkHTMLAttributes<HTMLLinkElement>,
-      HTMLLinkElement> get link;
-  external set link(
-      DetailedHTMLProps<LinkHTMLAttributes<HTMLLinkElement>, HTMLLinkElement>
-          value);
+  external set kbd(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<KeygenHTMLAttributes<HTMLElement>, HTMLElement> get keygen;
+  external set keygen(DetailedHTMLProps<KeygenHTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement> get label;
+  external set label(DetailedHTMLProps<LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLLegendElement>, HTMLLegendElement> get legend;
+  external set legend(DetailedHTMLProps<HTMLAttributes<HTMLLegendElement>, HTMLLegendElement> value);
+  external DetailedHTMLProps<LiHTMLAttributes<HTMLLIElement>, HTMLLIElement> get li;
+  external set li(DetailedHTMLProps<LiHTMLAttributes<HTMLLIElement>, HTMLLIElement> value);
+  external DetailedHTMLProps<LinkHTMLAttributes<HTMLLinkElement>, HTMLLinkElement> get link;
+  external set link(DetailedHTMLProps<LinkHTMLAttributes<HTMLLinkElement>, HTMLLinkElement> value);
   external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get main;
-  external set main(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<MapHTMLAttributes<HTMLMapElement>, HTMLMapElement>
-      get map;
-  external set map(
-      DetailedHTMLProps<MapHTMLAttributes<HTMLMapElement>, HTMLMapElement>
-          value);
+  external set main(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<MapHTMLAttributes<HTMLMapElement>, HTMLMapElement> get map;
+  external set map(DetailedHTMLProps<MapHTMLAttributes<HTMLMapElement>, HTMLMapElement> value);
   external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get mark;
-  external set mark(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<MenuHTMLAttributes<HTMLElement>, HTMLElement>
-      get menu;
-  external set menu(
-      DetailedHTMLProps<MenuHTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
-      get menuitem;
-  external set menuitem(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<MetaHTMLAttributes<HTMLMetaElement>,
-      HTMLMetaElement> get meta;
-  external set meta(
-      DetailedHTMLProps<MetaHTMLAttributes<HTMLMetaElement>, HTMLMetaElement>
-          value);
-  external DetailedHTMLProps<MeterHTMLAttributes<HTMLElement>, HTMLElement>
-      get meter;
-  external set meter(
-      DetailedHTMLProps<MeterHTMLAttributes<HTMLElement>, HTMLElement> value);
+  external set mark(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<MenuHTMLAttributes<HTMLElement>, HTMLElement> get menu;
+  external set menu(DetailedHTMLProps<MenuHTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get menuitem;
+  external set menuitem(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<MetaHTMLAttributes<HTMLMetaElement>, HTMLMetaElement> get meta;
+  external set meta(DetailedHTMLProps<MetaHTMLAttributes<HTMLMetaElement>, HTMLMetaElement> value);
+  external DetailedHTMLProps<MeterHTMLAttributes<HTMLElement>, HTMLElement> get meter;
+  external set meter(DetailedHTMLProps<MeterHTMLAttributes<HTMLElement>, HTMLElement> value);
   external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get nav;
-  external set nav(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
-      get noindex;
-  external set noindex(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
-      get noscript;
-  external set noscript(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<ObjectHTMLAttributes<HTMLObjectElement>,
-      HTMLObjectElement> get object;
-  external set object(
-      DetailedHTMLProps<ObjectHTMLAttributes<HTMLObjectElement>,
-              HTMLObjectElement>
-          value);
-  external DetailedHTMLProps<OlHTMLAttributes<HTMLOListElement>,
-      HTMLOListElement> get ol;
-  external set ol(
-      DetailedHTMLProps<OlHTMLAttributes<HTMLOListElement>, HTMLOListElement>
-          value);
-  external DetailedHTMLProps<OptgroupHTMLAttributes<HTMLOptGroupElement>,
-      HTMLOptGroupElement> get optgroup;
-  external set optgroup(
-      DetailedHTMLProps<OptgroupHTMLAttributes<HTMLOptGroupElement>,
-              HTMLOptGroupElement>
-          value);
-  external DetailedHTMLProps<OptionHTMLAttributes<HTMLOptionElement>,
-      HTMLOptionElement> get option;
-  external set option(
-      DetailedHTMLProps<OptionHTMLAttributes<HTMLOptionElement>,
-              HTMLOptionElement>
-          value);
-  external DetailedHTMLProps<OutputHTMLAttributes<HTMLElement>, HTMLElement>
-      get output;
-  external set output(
-      DetailedHTMLProps<OutputHTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLParagraphElement>,
-      HTMLParagraphElement> get p;
-  external set p(
-      DetailedHTMLProps<HTMLAttributes<HTMLParagraphElement>,
-              HTMLParagraphElement>
-          value);
-  external DetailedHTMLProps<ParamHTMLAttributes<HTMLParamElement>,
-      HTMLParamElement> get param;
-  external set param(
-      DetailedHTMLProps<ParamHTMLAttributes<HTMLParamElement>, HTMLParamElement>
-          value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
-      get picture;
-  external set picture(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLPreElement>, HTMLPreElement>
-      get pre;
-  external set pre(
-      DetailedHTMLProps<HTMLAttributes<HTMLPreElement>, HTMLPreElement> value);
-  external DetailedHTMLProps<ProgressHTMLAttributes<HTMLProgressElement>,
-      HTMLProgressElement> get progress;
-  external set progress(
-      DetailedHTMLProps<ProgressHTMLAttributes<HTMLProgressElement>,
-              HTMLProgressElement>
-          value);
-  external DetailedHTMLProps<QuoteHTMLAttributes<HTMLQuoteElement>,
-      HTMLQuoteElement> get q;
-  external set q(
-      DetailedHTMLProps<QuoteHTMLAttributes<HTMLQuoteElement>, HTMLQuoteElement>
-          value);
+  external set nav(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get noindex;
+  external set noindex(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get noscript;
+  external set noscript(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<ObjectHTMLAttributes<HTMLObjectElement>, HTMLObjectElement> get object;
+  external set object(DetailedHTMLProps<ObjectHTMLAttributes<HTMLObjectElement>, HTMLObjectElement> value);
+  external DetailedHTMLProps<OlHTMLAttributes<HTMLOListElement>, HTMLOListElement> get ol;
+  external set ol(DetailedHTMLProps<OlHTMLAttributes<HTMLOListElement>, HTMLOListElement> value);
+  external DetailedHTMLProps<OptgroupHTMLAttributes<HTMLOptGroupElement>, HTMLOptGroupElement> get optgroup;
+  external set optgroup(DetailedHTMLProps<OptgroupHTMLAttributes<HTMLOptGroupElement>, HTMLOptGroupElement> value);
+  external DetailedHTMLProps<OptionHTMLAttributes<HTMLOptionElement>, HTMLOptionElement> get option;
+  external set option(DetailedHTMLProps<OptionHTMLAttributes<HTMLOptionElement>, HTMLOptionElement> value);
+  external DetailedHTMLProps<OutputHTMLAttributes<HTMLElement>, HTMLElement> get output;
+  external set output(DetailedHTMLProps<OutputHTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement> get p;
+  external set p(DetailedHTMLProps<HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement> value);
+  external DetailedHTMLProps<ParamHTMLAttributes<HTMLParamElement>, HTMLParamElement> get param;
+  external set param(DetailedHTMLProps<ParamHTMLAttributes<HTMLParamElement>, HTMLParamElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get picture;
+  external set picture(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLPreElement>, HTMLPreElement> get pre;
+  external set pre(DetailedHTMLProps<HTMLAttributes<HTMLPreElement>, HTMLPreElement> value);
+  external DetailedHTMLProps<ProgressHTMLAttributes<HTMLProgressElement>, HTMLProgressElement> get progress;
+  external set progress(DetailedHTMLProps<ProgressHTMLAttributes<HTMLProgressElement>, HTMLProgressElement> value);
+  external DetailedHTMLProps<QuoteHTMLAttributes<HTMLQuoteElement>, HTMLQuoteElement> get q;
+  external set q(DetailedHTMLProps<QuoteHTMLAttributes<HTMLQuoteElement>, HTMLQuoteElement> value);
   external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get rp;
-  external set rp(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external set rp(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
   external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get rt;
-  external set rt(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external set rt(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
   external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get ruby;
-  external set ruby(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external set ruby(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
   external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get s;
-  external set s(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external set s(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
   external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get samp;
-  external set samp(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<SlotHTMLAttributes<HTMLSlotElement>,
-      HTMLSlotElement> get slot;
-  external set slot(
-      DetailedHTMLProps<SlotHTMLAttributes<HTMLSlotElement>, HTMLSlotElement>
-          value);
-  external DetailedHTMLProps<ScriptHTMLAttributes<HTMLScriptElement>,
-      HTMLScriptElement> get script;
-  external set script(
-      DetailedHTMLProps<ScriptHTMLAttributes<HTMLScriptElement>,
-              HTMLScriptElement>
-          value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
-      get section;
-  external set section(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<SelectHTMLAttributes<HTMLSelectElement>,
-      HTMLSelectElement> get select;
-  external set select(
-      DetailedHTMLProps<SelectHTMLAttributes<HTMLSelectElement>,
-              HTMLSelectElement>
-          value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
-      get small;
-  external set small(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<SourceHTMLAttributes<HTMLSourceElement>,
-      HTMLSourceElement> get source;
-  external set source(
-      DetailedHTMLProps<SourceHTMLAttributes<HTMLSourceElement>,
-              HTMLSourceElement>
-          value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>
-      get span;
-  external set span(
-      DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>
-          value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
-      get strong;
-  external set strong(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<StyleHTMLAttributes<HTMLStyleElement>,
-      HTMLStyleElement> get style;
-  external set style(
-      DetailedHTMLProps<StyleHTMLAttributes<HTMLStyleElement>, HTMLStyleElement>
-          value);
+  external set samp(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<SlotHTMLAttributes<HTMLSlotElement>, HTMLSlotElement> get slot;
+  external set slot(DetailedHTMLProps<SlotHTMLAttributes<HTMLSlotElement>, HTMLSlotElement> value);
+  external DetailedHTMLProps<ScriptHTMLAttributes<HTMLScriptElement>, HTMLScriptElement> get script;
+  external set script(DetailedHTMLProps<ScriptHTMLAttributes<HTMLScriptElement>, HTMLScriptElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get section;
+  external set section(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement> get select;
+  external set select(DetailedHTMLProps<SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get small;
+  external set small(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<SourceHTMLAttributes<HTMLSourceElement>, HTMLSourceElement> get source;
+  external set source(DetailedHTMLProps<SourceHTMLAttributes<HTMLSourceElement>, HTMLSourceElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement> get span;
+  external set span(DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get strong;
+  external set strong(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<StyleHTMLAttributes<HTMLStyleElement>, HTMLStyleElement> get style;
+  external set style(DetailedHTMLProps<StyleHTMLAttributes<HTMLStyleElement>, HTMLStyleElement> value);
   external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get sub;
-  external set sub(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
-      get summary;
-  external set summary(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external set sub(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get summary;
+  external set summary(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
   external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get sup;
-  external set sup(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<TableHTMLAttributes<HTMLTableElement>,
-      HTMLTableElement> get table;
-  external set table(
-      DetailedHTMLProps<TableHTMLAttributes<HTMLTableElement>, HTMLTableElement>
-          value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLTemplateElement>,
-      HTMLTemplateElement> get template;
-  external set template(
-      DetailedHTMLProps<HTMLAttributes<HTMLTemplateElement>,
-              HTMLTemplateElement>
-          value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLTableSectionElement>,
-      HTMLTableSectionElement> get tbody;
-  external set tbody(
-      DetailedHTMLProps<HTMLAttributes<HTMLTableSectionElement>,
-              HTMLTableSectionElement>
-          value);
-  external DetailedHTMLProps<TdHTMLAttributes<HTMLTableDataCellElement>,
-      HTMLTableDataCellElement> get td;
-  external set td(
-      DetailedHTMLProps<TdHTMLAttributes<HTMLTableDataCellElement>,
-              HTMLTableDataCellElement>
-          value);
-  external DetailedHTMLProps<TextareaHTMLAttributes<HTMLTextAreaElement>,
-      HTMLTextAreaElement> get textarea;
-  external set textarea(
-      DetailedHTMLProps<TextareaHTMLAttributes<HTMLTextAreaElement>,
-              HTMLTextAreaElement>
-          value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLTableSectionElement>,
-      HTMLTableSectionElement> get tfoot;
-  external set tfoot(
-      DetailedHTMLProps<HTMLAttributes<HTMLTableSectionElement>,
-              HTMLTableSectionElement>
-          value);
-  external DetailedHTMLProps<ThHTMLAttributes<HTMLTableHeaderCellElement>,
-      HTMLTableHeaderCellElement> get th;
-  external set th(
-      DetailedHTMLProps<ThHTMLAttributes<HTMLTableHeaderCellElement>,
-              HTMLTableHeaderCellElement>
-          value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLTableSectionElement>,
-      HTMLTableSectionElement> get thead;
-  external set thead(
-      DetailedHTMLProps<HTMLAttributes<HTMLTableSectionElement>,
-              HTMLTableSectionElement>
-          value);
-  external DetailedHTMLProps<TimeHTMLAttributes<HTMLElement>, HTMLElement>
-      get time;
-  external set time(
-      DetailedHTMLProps<TimeHTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLTitleElement>, HTMLTitleElement>
-      get title;
-  external set title(
-      DetailedHTMLProps<HTMLAttributes<HTMLTitleElement>, HTMLTitleElement>
-          value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLTableRowElement>,
-      HTMLTableRowElement> get tr;
-  external set tr(
-      DetailedHTMLProps<HTMLAttributes<HTMLTableRowElement>,
-              HTMLTableRowElement>
-          value);
-  external DetailedHTMLProps<TrackHTMLAttributes<HTMLTrackElement>,
-      HTMLTrackElement> get track;
-  external set track(
-      DetailedHTMLProps<TrackHTMLAttributes<HTMLTrackElement>, HTMLTrackElement>
-          value);
+  external set sup(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<TableHTMLAttributes<HTMLTableElement>, HTMLTableElement> get table;
+  external set table(DetailedHTMLProps<TableHTMLAttributes<HTMLTableElement>, HTMLTableElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLTemplateElement>, HTMLTemplateElement> get template;
+  external set template(DetailedHTMLProps<HTMLAttributes<HTMLTemplateElement>, HTMLTemplateElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement> get tbody;
+  external set tbody(DetailedHTMLProps<HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement> value);
+  external DetailedHTMLProps<TdHTMLAttributes<HTMLTableDataCellElement>, HTMLTableDataCellElement> get td;
+  external set td(DetailedHTMLProps<TdHTMLAttributes<HTMLTableDataCellElement>, HTMLTableDataCellElement> value);
+  external DetailedHTMLProps<TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement> get textarea;
+  external set textarea(DetailedHTMLProps<TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement> get tfoot;
+  external set tfoot(DetailedHTMLProps<HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement> value);
+  external DetailedHTMLProps<ThHTMLAttributes<HTMLTableHeaderCellElement>, HTMLTableHeaderCellElement> get th;
+  external set th(DetailedHTMLProps<ThHTMLAttributes<HTMLTableHeaderCellElement>, HTMLTableHeaderCellElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement> get thead;
+  external set thead(DetailedHTMLProps<HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement> value);
+  external DetailedHTMLProps<TimeHTMLAttributes<HTMLElement>, HTMLElement> get time;
+  external set time(DetailedHTMLProps<TimeHTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLTitleElement>, HTMLTitleElement> get title;
+  external set title(DetailedHTMLProps<HTMLAttributes<HTMLTitleElement>, HTMLTitleElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLTableRowElement>, HTMLTableRowElement> get tr;
+  external set tr(DetailedHTMLProps<HTMLAttributes<HTMLTableRowElement>, HTMLTableRowElement> value);
+  external DetailedHTMLProps<TrackHTMLAttributes<HTMLTrackElement>, HTMLTrackElement> get track;
+  external set track(DetailedHTMLProps<TrackHTMLAttributes<HTMLTrackElement>, HTMLTrackElement> value);
   external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get u;
-  external set u(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<HTMLAttributes<HTMLUListElement>, HTMLUListElement>
-      get ul;
-  external set ul(
-      DetailedHTMLProps<HTMLAttributes<HTMLUListElement>, HTMLUListElement>
-          value);
-  external DetailedHTMLProps<VideoHTMLAttributes<HTMLVideoElement>,
-      HTMLVideoElement> get video;
-  external set video(
-      DetailedHTMLProps<VideoHTMLAttributes<HTMLVideoElement>, HTMLVideoElement>
-          value);
+  external set u(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<HTMLAttributes<HTMLUListElement>, HTMLUListElement> get ul;
+  external set ul(DetailedHTMLProps<HTMLAttributes<HTMLUListElement>, HTMLUListElement> value);
+  external DetailedHTMLProps<VideoHTMLAttributes<HTMLVideoElement>, HTMLVideoElement> get video;
+  external set video(DetailedHTMLProps<VideoHTMLAttributes<HTMLVideoElement>, HTMLVideoElement> value);
   external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get wbr;
-  external set wbr(
-      DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
-  external DetailedHTMLProps<WebViewHTMLAttributes<HTMLWebViewElement>,
-      HTMLWebViewElement> get webview;
-  external set webview(
-      DetailedHTMLProps<WebViewHTMLAttributes<HTMLWebViewElement>,
-              HTMLWebViewElement>
-          value);
+  external set wbr(DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> value);
+  external DetailedHTMLProps<WebViewHTMLAttributes<HTMLWebViewElement>, HTMLWebViewElement> get webview;
+  external set webview(DetailedHTMLProps<WebViewHTMLAttributes<HTMLWebViewElement>, HTMLWebViewElement> value);
   external SVGProps<SVGSVGElement> get svg;
   external set svg(SVGProps<SVGSVGElement> value);
   external SVGProps<SVGElement> get animate;
@@ -5956,8 +5152,7 @@ class IntrinsicElements {
   external SVGProps<SVGFEColorMatrixElement> get feColorMatrix;
   external set feColorMatrix(SVGProps<SVGFEColorMatrixElement> value);
   external SVGProps<SVGFEComponentTransferElement> get feComponentTransfer;
-  external set feComponentTransfer(
-      SVGProps<SVGFEComponentTransferElement> value);
+  external set feComponentTransfer(SVGProps<SVGFEComponentTransferElement> value);
   external SVGProps<SVGFECompositeElement> get feComposite;
   external set feComposite(SVGProps<SVGFECompositeElement> value);
   external SVGProps<SVGFEConvolveMatrixElement> get feConvolveMatrix;
@@ -6049,198 +5244,122 @@ class IntrinsicElements {
   external SVGProps<SVGViewElement> get view;
   external set view(SVGProps<SVGViewElement> value);
   external factory IntrinsicElements({
-    DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>,
-            HTMLAnchorElement>
-        a,
+    DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement> a,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> abbr,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> address,
-    DetailedHTMLProps<AreaHTMLAttributes<HTMLAreaElement>, HTMLAreaElement>
-        area,
+    DetailedHTMLProps<AreaHTMLAttributes<HTMLAreaElement>, HTMLAreaElement> area,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> article,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> aside,
-    DetailedHTMLProps<AudioHTMLAttributes<HTMLAudioElement>, HTMLAudioElement>
-        audio,
+    DetailedHTMLProps<AudioHTMLAttributes<HTMLAudioElement>, HTMLAudioElement> audio,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> b,
-    DetailedHTMLProps<BaseHTMLAttributes<HTMLBaseElement>, HTMLBaseElement>
-        base,
+    DetailedHTMLProps<BaseHTMLAttributes<HTMLBaseElement>, HTMLBaseElement> base,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> bdi,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> bdo,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> big,
-    DetailedHTMLProps<BlockquoteHTMLAttributes<HTMLElement>, HTMLElement>
-        blockquote,
+    DetailedHTMLProps<BlockquoteHTMLAttributes<HTMLElement>, HTMLElement> blockquote,
     DetailedHTMLProps<HTMLAttributes<HTMLBodyElement>, HTMLBodyElement> body,
     DetailedHTMLProps<HTMLAttributes<HTMLBRElement>, HTMLBRElement> br,
-    DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>,
-            HTMLButtonElement>
-        button,
-    DetailedHTMLProps<CanvasHTMLAttributes<HTMLCanvasElement>,
-            HTMLCanvasElement>
-        canvas,
+    DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> button,
+    DetailedHTMLProps<CanvasHTMLAttributes<HTMLCanvasElement>, HTMLCanvasElement> canvas,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> caption,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> cite,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> code,
-    DetailedHTMLProps<ColHTMLAttributes<HTMLTableColElement>,
-            HTMLTableColElement>
-        col,
-    DetailedHTMLProps<ColgroupHTMLAttributes<HTMLTableColElement>,
-            HTMLTableColElement>
-        colgroup,
-    DetailedHTMLProps<DataHTMLAttributes<HTMLDataElement>, HTMLDataElement>
-        data,
-    DetailedHTMLProps<HTMLAttributes<HTMLDataListElement>, HTMLDataListElement>
-        datalist,
+    DetailedHTMLProps<ColHTMLAttributes<HTMLTableColElement>, HTMLTableColElement> col,
+    DetailedHTMLProps<ColgroupHTMLAttributes<HTMLTableColElement>, HTMLTableColElement> colgroup,
+    DetailedHTMLProps<DataHTMLAttributes<HTMLDataElement>, HTMLDataElement> data,
+    DetailedHTMLProps<HTMLAttributes<HTMLDataListElement>, HTMLDataListElement> datalist,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> dd,
     DetailedHTMLProps<DelHTMLAttributes<HTMLElement>, HTMLElement> del,
     DetailedHTMLProps<DetailsHTMLAttributes<HTMLElement>, HTMLElement> details,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> dfn,
-    DetailedHTMLProps<DialogHTMLAttributes<HTMLDialogElement>,
-            HTMLDialogElement>
-        dialog,
+    DetailedHTMLProps<DialogHTMLAttributes<HTMLDialogElement>, HTMLDialogElement> dialog,
     DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> div,
     DetailedHTMLProps<HTMLAttributes<HTMLDListElement>, HTMLDListElement> dl,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> dt,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> em,
-    DetailedHTMLProps<EmbedHTMLAttributes<HTMLEmbedElement>, HTMLEmbedElement>
-        embed,
-    DetailedHTMLProps<FieldsetHTMLAttributes<HTMLFieldSetElement>,
-            HTMLFieldSetElement>
-        fieldset,
+    DetailedHTMLProps<EmbedHTMLAttributes<HTMLEmbedElement>, HTMLEmbedElement> embed,
+    DetailedHTMLProps<FieldsetHTMLAttributes<HTMLFieldSetElement>, HTMLFieldSetElement> fieldset,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> figcaption,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> figure,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> footer,
-    DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>
-        form,
-    DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
-        h1,
-    DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
-        h2,
-    DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
-        h3,
-    DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
-        h4,
-    DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
-        h5,
-    DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
-        h6,
+    DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> form,
+    DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> h1,
+    DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> h2,
+    DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> h3,
+    DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> h4,
+    DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> h5,
+    DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> h6,
     DetailedHTMLProps<HTMLAttributes<HTMLHeadElement>, HTMLHeadElement> head,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> header,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> hgroup,
     DetailedHTMLProps<HTMLAttributes<HTMLHRElement>, HTMLHRElement> hr,
-    DetailedHTMLProps<HtmlHTMLAttributes<HTMLHtmlElement>, HTMLHtmlElement>
-        html,
+    DetailedHTMLProps<HtmlHTMLAttributes<HTMLHtmlElement>, HTMLHtmlElement> html,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> i,
-    DetailedHTMLProps<IframeHTMLAttributes<HTMLIFrameElement>,
-            HTMLIFrameElement>
-        iframe,
-    DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>
-        img,
-    DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
-        input,
+    DetailedHTMLProps<IframeHTMLAttributes<HTMLIFrameElement>, HTMLIFrameElement> iframe,
+    DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement> img,
+    DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> input,
     DetailedHTMLProps<InsHTMLAttributes<HTMLModElement>, HTMLModElement> ins,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> kbd,
     DetailedHTMLProps<KeygenHTMLAttributes<HTMLElement>, HTMLElement> keygen,
-    DetailedHTMLProps<LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement>
-        label,
-    DetailedHTMLProps<HTMLAttributes<HTMLLegendElement>, HTMLLegendElement>
-        legend,
+    DetailedHTMLProps<LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement> label,
+    DetailedHTMLProps<HTMLAttributes<HTMLLegendElement>, HTMLLegendElement> legend,
     DetailedHTMLProps<LiHTMLAttributes<HTMLLIElement>, HTMLLIElement> li,
-    DetailedHTMLProps<LinkHTMLAttributes<HTMLLinkElement>, HTMLLinkElement>
-        link,
+    DetailedHTMLProps<LinkHTMLAttributes<HTMLLinkElement>, HTMLLinkElement> link,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> main,
     DetailedHTMLProps<MapHTMLAttributes<HTMLMapElement>, HTMLMapElement> map,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> mark,
     DetailedHTMLProps<MenuHTMLAttributes<HTMLElement>, HTMLElement> menu,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> menuitem,
-    DetailedHTMLProps<MetaHTMLAttributes<HTMLMetaElement>, HTMLMetaElement>
-        meta,
+    DetailedHTMLProps<MetaHTMLAttributes<HTMLMetaElement>, HTMLMetaElement> meta,
     DetailedHTMLProps<MeterHTMLAttributes<HTMLElement>, HTMLElement> meter,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> nav,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> noindex,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> noscript,
-    DetailedHTMLProps<ObjectHTMLAttributes<HTMLObjectElement>,
-            HTMLObjectElement>
-        object,
+    DetailedHTMLProps<ObjectHTMLAttributes<HTMLObjectElement>, HTMLObjectElement> object,
     DetailedHTMLProps<OlHTMLAttributes<HTMLOListElement>, HTMLOListElement> ol,
-    DetailedHTMLProps<OptgroupHTMLAttributes<HTMLOptGroupElement>,
-            HTMLOptGroupElement>
-        optgroup,
-    DetailedHTMLProps<OptionHTMLAttributes<HTMLOptionElement>,
-            HTMLOptionElement>
-        option,
+    DetailedHTMLProps<OptgroupHTMLAttributes<HTMLOptGroupElement>, HTMLOptGroupElement> optgroup,
+    DetailedHTMLProps<OptionHTMLAttributes<HTMLOptionElement>, HTMLOptionElement> option,
     DetailedHTMLProps<OutputHTMLAttributes<HTMLElement>, HTMLElement> output,
-    DetailedHTMLProps<HTMLAttributes<HTMLParagraphElement>,
-            HTMLParagraphElement>
-        p,
-    DetailedHTMLProps<ParamHTMLAttributes<HTMLParamElement>, HTMLParamElement>
-        param,
+    DetailedHTMLProps<HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement> p,
+    DetailedHTMLProps<ParamHTMLAttributes<HTMLParamElement>, HTMLParamElement> param,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> picture,
     DetailedHTMLProps<HTMLAttributes<HTMLPreElement>, HTMLPreElement> pre,
-    DetailedHTMLProps<ProgressHTMLAttributes<HTMLProgressElement>,
-            HTMLProgressElement>
-        progress,
-    DetailedHTMLProps<QuoteHTMLAttributes<HTMLQuoteElement>, HTMLQuoteElement>
-        q,
+    DetailedHTMLProps<ProgressHTMLAttributes<HTMLProgressElement>, HTMLProgressElement> progress,
+    DetailedHTMLProps<QuoteHTMLAttributes<HTMLQuoteElement>, HTMLQuoteElement> q,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> rp,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> rt,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> ruby,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> s,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> samp,
-    DetailedHTMLProps<SlotHTMLAttributes<HTMLSlotElement>, HTMLSlotElement>
-        slot,
-    DetailedHTMLProps<ScriptHTMLAttributes<HTMLScriptElement>,
-            HTMLScriptElement>
-        script,
+    DetailedHTMLProps<SlotHTMLAttributes<HTMLSlotElement>, HTMLSlotElement> slot,
+    DetailedHTMLProps<ScriptHTMLAttributes<HTMLScriptElement>, HTMLScriptElement> script,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> section,
-    DetailedHTMLProps<SelectHTMLAttributes<HTMLSelectElement>,
-            HTMLSelectElement>
-        select,
+    DetailedHTMLProps<SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement> select,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> small,
-    DetailedHTMLProps<SourceHTMLAttributes<HTMLSourceElement>,
-            HTMLSourceElement>
-        source,
+    DetailedHTMLProps<SourceHTMLAttributes<HTMLSourceElement>, HTMLSourceElement> source,
     DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement> span,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> strong,
-    DetailedHTMLProps<StyleHTMLAttributes<HTMLStyleElement>, HTMLStyleElement>
-        style,
+    DetailedHTMLProps<StyleHTMLAttributes<HTMLStyleElement>, HTMLStyleElement> style,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> sub,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> summary,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> sup,
-    DetailedHTMLProps<TableHTMLAttributes<HTMLTableElement>, HTMLTableElement>
-        table,
-    DetailedHTMLProps<HTMLAttributes<HTMLTemplateElement>, HTMLTemplateElement>
-        template,
-    DetailedHTMLProps<HTMLAttributes<HTMLTableSectionElement>,
-            HTMLTableSectionElement>
-        tbody,
-    DetailedHTMLProps<TdHTMLAttributes<HTMLTableDataCellElement>,
-            HTMLTableDataCellElement>
-        td,
-    DetailedHTMLProps<TextareaHTMLAttributes<HTMLTextAreaElement>,
-            HTMLTextAreaElement>
-        textarea,
-    DetailedHTMLProps<HTMLAttributes<HTMLTableSectionElement>,
-            HTMLTableSectionElement>
-        tfoot,
-    DetailedHTMLProps<ThHTMLAttributes<HTMLTableHeaderCellElement>,
-            HTMLTableHeaderCellElement>
-        th,
-    DetailedHTMLProps<HTMLAttributes<HTMLTableSectionElement>,
-            HTMLTableSectionElement>
-        thead,
+    DetailedHTMLProps<TableHTMLAttributes<HTMLTableElement>, HTMLTableElement> table,
+    DetailedHTMLProps<HTMLAttributes<HTMLTemplateElement>, HTMLTemplateElement> template,
+    DetailedHTMLProps<HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement> tbody,
+    DetailedHTMLProps<TdHTMLAttributes<HTMLTableDataCellElement>, HTMLTableDataCellElement> td,
+    DetailedHTMLProps<TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement> textarea,
+    DetailedHTMLProps<HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement> tfoot,
+    DetailedHTMLProps<ThHTMLAttributes<HTMLTableHeaderCellElement>, HTMLTableHeaderCellElement> th,
+    DetailedHTMLProps<HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement> thead,
     DetailedHTMLProps<TimeHTMLAttributes<HTMLElement>, HTMLElement> time,
     DetailedHTMLProps<HTMLAttributes<HTMLTitleElement>, HTMLTitleElement> title,
-    DetailedHTMLProps<HTMLAttributes<HTMLTableRowElement>, HTMLTableRowElement>
-        tr,
-    DetailedHTMLProps<TrackHTMLAttributes<HTMLTrackElement>, HTMLTrackElement>
-        track,
+    DetailedHTMLProps<HTMLAttributes<HTMLTableRowElement>, HTMLTableRowElement> tr,
+    DetailedHTMLProps<TrackHTMLAttributes<HTMLTrackElement>, HTMLTrackElement> track,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> u,
     DetailedHTMLProps<HTMLAttributes<HTMLUListElement>, HTMLUListElement> ul,
-    DetailedHTMLProps<VideoHTMLAttributes<HTMLVideoElement>, HTMLVideoElement>
-        video,
+    DetailedHTMLProps<VideoHTMLAttributes<HTMLVideoElement>, HTMLVideoElement> video,
     DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> wbr,
-    DetailedHTMLProps<WebViewHTMLAttributes<HTMLWebViewElement>,
-            HTMLWebViewElement>
-        webview,
+    DetailedHTMLProps<WebViewHTMLAttributes<HTMLWebViewElement>, HTMLWebViewElement> webview,
     SVGProps<SVGSVGElement> svg,
     SVGProps<SVGElement> animate,
     SVGProps<SVGElement> animateMotion,
