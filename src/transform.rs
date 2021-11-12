@@ -9,7 +9,9 @@ struct Transformer {
 }
 
 struct Class {
+    /// Ident of class
     id: String,
+    /// `(id, type)`
     fields: Vec<(String, String)>,
     /// Whether this class only exists on the type level, i.e. a pure interface with
     /// no constructors in TypeScript.
@@ -63,6 +65,11 @@ impl Transformer {
     }
 
     #[inline]
+    fn buf(&self) -> &String {
+        self.bufs.last().unwrap()
+    }
+
+    #[inline]
     fn push(&mut self, input: &str) {
         self.bufs.last_mut().unwrap().push_str(input);
     }
@@ -102,26 +109,32 @@ impl Transformer {
         self.push_char(';')
     }
 
+    /// Parses `(..)`
     fn visit_params(&mut self, params: &[Param]) {
         self.push_char('(');
         for item in params {
-            match &item.pat {
-                swc_ecma_ast::Pat::Ident(ident) => {
-                    self.visit_type_ann(&ident.type_ann);
-                    self.push_char(' ');
-                    self.push(&ident.id.sym);
-                }
-                other => {
-                    error!("Unhandled pattern:\n{:?}", other);
-                    todo!();
-                }
-            }
-            self.push_char(',');
+            self.visit_param_single(item);
         }
         if !params.is_empty() {
             self.pop();
         }
         self.push_char(')');
+    }
+
+    fn visit_param_single(&mut self, param: &Param) {
+        match &param.pat {
+            Pat::Ident(ident) => {
+                self.visit_type_ann(&ident.type_ann);
+                self.push_char(' ');
+                self.push(&ident.id.sym);
+            }
+            Pat::Rest(rest) => self.visit_rest_pat(rest),
+            other => {
+                error!("Unhandled pattern:\n{:?}", other);
+                todo!();
+            }
+        }
+        self.push_char(',');
     }
 
     /// `@JS() @anonymous class T<..> { .. external factory T({ .. }) }`
@@ -161,12 +174,10 @@ impl Transformer {
         info!("Function: {}", func.ident.sym);
         self.annotate(&func.ident.sym);
         self.push("external ");
-        if let Some(ann) = &func.function.return_type {
-            self.visit_type(&ann.type_ann);
-        }
-        self.visit_type_params(func.function.type_params.as_ref());
+        self.visit_type_ann(&func.function.return_type);
         self.push_char(' ');
         self.push(&func.ident.sym);
+        self.visit_type_params(func.function.type_params.as_ref());
         self.visit_params(&func.function.params);
         self.semi();
     }
@@ -240,14 +251,20 @@ impl Transformer {
                 TsTypeElement::TsPropertySignature(prop) => {
                     let ty = self.collect(|s| {
                         s.visit_type_params(prop.type_params.as_ref());
-                        if let Some(ann) = &prop.type_ann {
-                            s.visit_type(&ann.type_ann);
-                        }
-                        if prop.optional {
+                        s.visit_type_ann(&prop.type_ann);
+                        if prop.optional && !s.buf().ends_with('?') {
                             s.push_char('?');
                         }
                     });
-                    let id = parse_expression(&prop.key.as_ref()).unwrap();
+                    let id = parse_expression(prop.key.as_ref()).unwrap();
+                    if id.contains('-') {
+                        warn!("Invalid character in property name: {}.", id);
+                        continue;
+                    }
+                    if ["default", "switch", "in", "var", "is"].contains(&id.as_str()) {
+                        warn!("Forbidden property name: {}.", id);
+                        continue;
+                    }
                     self.push("external ");
                     self.push(&ty);
                     self.push(" get ");
@@ -325,10 +342,12 @@ impl Transformer {
             warn!("Forbidden method name: {}.", id);
             return;
         }
-        self.push("external ");
-        if let Some(TsTypeAnn { type_ann, .. }) = &met.type_ann {
-            self.visit_type(type_ann);
+        if id.contains('-') {
+            warn!("Forbidden method name: {}.", id);
+            return;
         }
+        self.push("external ");
+        self.visit_type_ann(&met.type_ann);
         self.push_char(' ');
         self.push(id);
         self.push_char('(');
@@ -392,6 +411,20 @@ impl Transformer {
         }
     }
 
+    fn visit_rest_pat(&mut self, rest: &RestPat) {
+        self.push_char('[');
+        let ty = self.collect(|s| s.visit_type_ann(&rest.type_ann));
+        let nullable = &ty == "dynamic" || ty.ends_with('?');
+        let ty = format!("{}{} ", ty, if nullable { "" } else { "?" });
+        for idx in ['1', '2', '3', '4', '5'] {
+            self.push(&ty);
+            self.push(&parse_pat(&rest.arg).unwrap_or_else(|| "_".to_owned()));
+            self.push_char(idx);
+            self.push_char(',');
+        }
+        self.push_char(']');
+    }
+
     fn visit_function_param_single(&mut self, item: &TsFnParam) {
         match item {
             TsFnParam::Ident(ident) => {
@@ -407,19 +440,7 @@ impl Transformer {
                 self.push_char(' ');
                 self.push(&ident.id.sym);
             }
-            TsFnParam::Rest(rest) => {
-                self.push_char('[');
-                let ty = self.collect(|s| s.visit_type_ann(&rest.type_ann));
-                let nullable = &ty == "dynamic" || ty.ends_with('?');
-                let ty = format!("{}{} ", ty, if nullable { "" } else { "?" });
-                for idx in ['1', '2', '3', '4', '5'] {
-                    self.push(&ty);
-                    self.push(&parse_pat(&rest.arg).unwrap_or_else(|| "_".to_owned()));
-                    self.push_char(idx);
-                    self.push_char(',');
-                }
-                self.push_char(']');
-            }
+            TsFnParam::Rest(rest) => self.visit_rest_pat(rest),
             _ => {
                 error!("Function parameter not handled:\n{:?}", item);
                 todo!()
@@ -444,12 +465,6 @@ impl Transformer {
                 }
                 TsKeywordTypeKind::TsBooleanKeyword => self.push("bool"),
                 TsKeywordTypeKind::TsStringKeyword => self.push("String"),
-                TsKeywordTypeKind::TsVoidKeyword | TsKeywordTypeKind::TsNeverKeyword => {
-                    self.push("void")
-                }
-                TsKeywordTypeKind::TsUndefinedKeyword | TsKeywordTypeKind::TsNullKeyword => {
-                    self.push("null")
-                }
                 _ => self.push("dynamic"),
             },
             TsType::TsFnOrConstructorType(func) => match func {
@@ -524,6 +539,7 @@ impl Transformer {
             Decl::TsInterface(intr) => self.visit_interface(intr),
             Decl::TsModule(module) => self.visit_module(module),
             Decl::TsTypeAlias(alias) => self.visit_type_alias(alias),
+            Decl::Class(class) => self.visit_class(class),
             _ => {
                 error!("Unhandled declaration:\n{:?}", decl);
                 todo!();
@@ -531,10 +547,100 @@ impl Transformer {
         }
     }
 
+    fn visit_class(&mut self, class: &ClassDecl) {
+        let id = class.ident.sym.as_ref();
+        info!("Class: {}", id);
+        self.class = Some(Class {
+            fields: vec![],
+            id: id.to_owned(),
+            anonymous: false,
+        });
+        self.push("@JS() class ");
+        self.push(id);
+        self.visit_type_params(class.class.type_params.as_ref());
+        if let Some(extends) = &class.class.super_class {
+            self.push(" extends ");
+            self.push(&parse_expression(extends).unwrap());
+        }
+        if !class.class.implements.is_empty() {
+            for imp in &class.class.implements {
+                dbg!(imp);
+            }
+        }
+        self.push_char('{');
+        {
+            for item in &class.class.body {
+                self.visit_class_member(item);
+            }
+        }
+        self.push_char('}')
+    }
+
+    fn visit_class_member(&mut self, member: &ClassMember) {
+        match member {
+            ClassMember::Method(ClassMethod {
+                key,
+                is_static,
+                function,
+                ..
+            }) => {
+                self.push("external ");
+                if *is_static {
+                    self.push("static ");
+                }
+                self.visit_type_ann(&function.return_type);
+                self.push_char(' ');
+                let id = match &key {
+                    PropName::Str(Str { value, .. }) => value.as_ref(),
+                    PropName::Ident(id) => id.as_ref(),
+                    _ => todo!(),
+                };
+                self.push(id);
+                self.visit_type_params(function.type_params.as_ref());
+                self.visit_params(&function.params);
+                self.semi();
+            }
+            ClassMember::Constructor(Constructor { params, .. }) => {
+                self.push("external factory ");
+                self.push(&self.class.as_ref().map(|x| x.id.clone()).unwrap());
+                self.push_char('(');
+                for param in params {
+                    match param {
+                        ParamOrTsParamProp::Param(param) => self.visit_param_single(param),
+                        _ => {
+                            error!("Unhandled parameter:\n{:?}", param);
+                            todo!()
+                        }
+                    }
+                }
+                self.push(");");
+            }
+            ClassMember::ClassProp(ClassProp {
+                type_ann,
+                key,
+                is_static,
+                ..
+            }) => {
+                self.push("external ");
+                if *is_static {
+                    self.push("static ");
+                }
+                self.visit_type_ann(type_ann);
+                self.push_char(' ');
+                self.push(&parse_expression(key).unwrap());
+                self.semi();
+            }
+            _ => {}
+        }
+    }
+
     fn visit_module_decl(&mut self, decl: &ModuleDecl) {
         match decl {
             ModuleDecl::ExportDecl(exp) => self.visit_decl(&exp.decl),
-            ModuleDecl::ExportDefaultDecl(_) => {}
+            ModuleDecl::ExportDefaultDecl(_)
+            | ModuleDecl::Import(_)
+            | ModuleDecl::TsExportAssignment(_)
+            | ModuleDecl::TsNamespaceExport(_) => {}
             _ => {
                 error!("Unhandled module declaration:\n{:?}", decl);
                 todo!();
