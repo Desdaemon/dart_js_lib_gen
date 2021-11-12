@@ -1,9 +1,10 @@
+use crate::transform::visit_program;
 use anyhow::Result;
+use flexi_logger::Logger;
 use std::collections::HashMap;
 use std::path::Path;
 use std::rc::Rc;
 
-use crate::transform::Transformer;
 use swc_common::{
     errors::{ColorConfig, Handler},
     SourceMap,
@@ -22,14 +23,15 @@ pub struct Entry {
 }
 
 pub fn parse_library(config: Config) -> Result<Vec<Entry>> {
-    let modules = parse_impl(config);
+    Logger::try_with_str("info")?.start()?;
+    let modules = parse_modules(config);
     Ok(modules
         .into_iter()
         .map(|(key, val)| {
             let library_name = path_to_lib_name(Path::new(&key));
             Entry {
                 key,
-                value: Transformer::visit_program(&val, &library_name, None),
+                value: visit_program(&val, &library_name, None),
             }
         })
         .collect())
@@ -45,7 +47,7 @@ fn path_to_lib_name(buf: &Path) -> String {
         .join(".")
 }
 
-fn parse_impl(config: Config) -> HashMap<String, Module> {
+fn parse_modules(config: Config) -> HashMap<String, Module> {
     let cm: Rc<SourceMap> = Default::default();
     let handler = Handler::with_tty_emitter(ColorConfig::Auto, true, false, Some(cm.clone()));
     let mut modules = HashMap::new();

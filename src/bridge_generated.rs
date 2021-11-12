@@ -31,15 +31,15 @@ pub extern "C" fn wire_parse_library(port: i64, config: *mut wire_Config) {
 
 #[repr(C)]
 #[derive(Clone)]
-pub struct wire_Config {
-    inputs: *mut wire_list_String,
+pub struct wire_StringList {
+    ptr: *mut *mut wire_uint_8_list,
+    len: i32,
 }
 
 #[repr(C)]
 #[derive(Clone)]
-pub struct wire_list_String {
-    ptr: *mut *mut wire_uint_8_list,
-    len: i32,
+pub struct wire_Config {
+    inputs: *mut wire_StringList,
 }
 
 #[repr(C)]
@@ -52,17 +52,17 @@ pub struct wire_uint_8_list {
 // Section: allocate functions
 
 #[no_mangle]
-pub extern "C" fn new_box_autoadd_config() -> *mut wire_Config {
-    support::new_leak_box_ptr(wire_Config::new_with_null_ptr())
-}
-
-#[no_mangle]
-pub extern "C" fn new_list_String(len: i32) -> *mut wire_list_String {
-    let wrap = wire_list_String {
+pub extern "C" fn new_StringList(len: i32) -> *mut wire_StringList {
+    let wrap = wire_StringList {
         ptr: support::new_leak_vec_ptr(<*mut wire_uint_8_list>::new_with_null_ptr(), len),
         len,
     };
     support::new_leak_box_ptr(wrap)
+}
+
+#[no_mangle]
+pub extern "C" fn new_box_autoadd_config() -> *mut wire_Config {
+    support::new_leak_box_ptr(wire_Config::new_with_null_ptr())
 }
 
 #[no_mangle]
@@ -100,6 +100,16 @@ impl Wire2Api<String> for *mut wire_uint_8_list {
     }
 }
 
+impl Wire2Api<Vec<String>> for *mut wire_StringList {
+    fn wire2api(self) -> Vec<String> {
+        let vec = unsafe {
+            let wrap = support::box_from_leak_ptr(self);
+            support::vec_from_leak_ptr(wrap.ptr, wrap.len)
+        };
+        vec.into_iter().map(Wire2Api::wire2api).collect()
+    }
+}
+
 impl Wire2Api<Config> for *mut wire_Config {
     fn wire2api(self) -> Config {
         let wrap = unsafe { support::box_from_leak_ptr(self) };
@@ -112,16 +122,6 @@ impl Wire2Api<Config> for wire_Config {
         Config {
             inputs: self.inputs.wire2api(),
         }
-    }
-}
-
-impl Wire2Api<Vec<String>> for *mut wire_list_String {
-    fn wire2api(self) -> Vec<String> {
-        let vec = unsafe {
-            let wrap = support::box_from_leak_ptr(self);
-            support::vec_from_leak_ptr(wrap.ptr, wrap.len)
-        };
-        vec.into_iter().map(Wire2Api::wire2api).collect()
     }
 }
 
