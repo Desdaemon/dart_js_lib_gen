@@ -171,7 +171,6 @@ impl Transformer {
 
     /// `@JS(..) external Output func<..>(...);`
     fn visit_function(&mut self, func: &FnDecl) {
-        info!("Function: {}", func.ident.sym);
         self.annotate(&func.ident.sym);
         self.push("external ");
         self.visit_type_ann(&func.function.return_type);
@@ -549,7 +548,6 @@ impl Transformer {
 
     fn visit_class(&mut self, class: &ClassDecl) {
         let id = class.ident.sym.as_ref();
-        info!("Class: {}", id);
         self.class = Some(Class {
             fields: vec![],
             id: id.to_owned(),
