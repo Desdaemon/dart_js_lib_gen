@@ -281,8 +281,11 @@ impl Transformer {
     }
 
     fn visit_type_alias(&mut self, alias: &TsTypeAliasDecl) {
+        let id: &str = &alias.id.sym;
+        self.undecls.remove(id);
+        self.resolved.insert(id.to_owned());
         self.push("typedef ");
-        self.push(&alias.id.sym);
+        self.push(id);
         self.visit_type_params(&alias.type_params);
         self.push_char('=');
         self.visit_type(alias.type_ann.as_ref());
@@ -439,7 +442,10 @@ impl Transformer {
         if let Some(TsTypeParamDecl { params, .. }) = params {
             self.push_char('<');
             for item in params {
-                self.push(&item.name.sym);
+                let id: &str = &item.name.sym;
+                self.undecls.remove(id);
+                self.resolved.insert(id.to_owned());
+                self.push(id);
                 if let Some(typ) = &item.constraint {
                     self.push(" extends ");
                     self.visit_type(typ);
@@ -475,7 +481,11 @@ impl Transformer {
     fn visit_rest_pat(&mut self, rest: &RestPat) {
         self.push_char('[');
         let ty = self.collect(|s| s.visit_type_ann(&rest.type_ann));
-        let ty = &ty[5..(ty.len() - 1)];
+        let ty = if ty.starts_with("List<") {
+            &ty[5..(ty.len() - 1)]
+        } else {
+            &ty
+        };
         let nullable = ty == "dynamic" || ty.ends_with('?');
         let ty = format!("{}{} ", ty, if nullable { "" } else { "?" });
         for idx in ['1', '2', '3', '4', '5', '6', '7', '8', '9'] {
