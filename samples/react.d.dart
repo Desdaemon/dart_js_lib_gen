@@ -167,38 +167,54 @@ class ReactPortal {
 
 typedef Factory<P> = ReactElement<P> Function(
   dynamic props, [
-  List<ReactNode>? children1,
-  List<ReactNode>? children2,
-  List<ReactNode>? children3,
-  List<ReactNode>? children4,
-  List<ReactNode>? children5,
+  ReactNode? children1,
+  ReactNode? children2,
+  ReactNode? children3,
+  ReactNode? children4,
+  ReactNode? children5,
+  ReactNode? children6,
+  ReactNode? children7,
+  ReactNode? children8,
+  ReactNode? children9,
 ]);
 typedef SFCFactory<P> = FunctionComponentFactory<P>;
 typedef FunctionComponentFactory<P> = FunctionComponentElement<P> Function(
   dynamic props, [
-  List<ReactNode>? children1,
-  List<ReactNode>? children2,
-  List<ReactNode>? children3,
-  List<ReactNode>? children4,
-  List<ReactNode>? children5,
+  ReactNode? children1,
+  ReactNode? children2,
+  ReactNode? children3,
+  ReactNode? children4,
+  ReactNode? children5,
+  ReactNode? children6,
+  ReactNode? children7,
+  ReactNode? children8,
+  ReactNode? children9,
 ]);
 typedef ComponentFactory<P, T extends Component<P, ComponentState>> = CElement<P, T> Function(
   dynamic props, [
-  List<ReactNode>? children1,
-  List<ReactNode>? children2,
-  List<ReactNode>? children3,
-  List<ReactNode>? children4,
-  List<ReactNode>? children5,
+  ReactNode? children1,
+  ReactNode? children2,
+  ReactNode? children3,
+  ReactNode? children4,
+  ReactNode? children5,
+  ReactNode? children6,
+  ReactNode? children7,
+  ReactNode? children8,
+  ReactNode? children9,
 ]);
 typedef CFactory<P, T extends Component<P, ComponentState>> = ComponentFactory<P, T>;
 typedef ClassicFactory<P> = CFactory<P, ClassicComponent<P, ComponentState>>;
 typedef DOMFactory<P extends DOMAttributes<T>, T extends Element> = DOMElement<P, T> Function(
   dynamic? props, [
-  List<ReactNode>? children1,
-  List<ReactNode>? children2,
-  List<ReactNode>? children3,
-  List<ReactNode>? children4,
-  List<ReactNode>? children5,
+  ReactNode? children1,
+  ReactNode? children2,
+  ReactNode? children3,
+  ReactNode? children4,
+  ReactNode? children5,
+  ReactNode? children6,
+  ReactNode? children7,
+  ReactNode? children8,
+  ReactNode? children9,
 ]);
 
 @JS()
@@ -224,170 +240,33 @@ typedef ReactFragment = dynamic;
 typedef ReactNode = dynamic;
 @JS('React.createFactory')
 external HTMLFactory<T> createFactory<T extends HTMLElement>(dynamic type);
-@JS('React.createFactory')
-external SVGFactory createFactory(dynamic type);
-@JS('React.createFactory')
-external DOMFactory<P, T> createFactory<P extends DOMAttributes<T>, T extends Element>(String type);
-@JS('React.createFactory')
-external FunctionComponentFactory<P> createFactory<P>(FunctionComponent<P> type);
-@JS('React.createFactory')
-external CFactory<P, ClassicComponent<P, ComponentState>> createFactory<P>(
-    ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> type);
-@JS('React.createFactory')
-external CFactory<P, T> createFactory<P, T extends Component<P, ComponentState>, C extends ComponentClass<P>>(
-    ClassType<P, T, C> type);
-@JS('React.createFactory')
-external Factory<P> createFactory<P>(ComponentClass<P> type);
 @JS('React.createElement')
 external DetailedReactHTMLElement<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> createElement(
   String type,
   dynamic? props, [
-  List<ReactNode>? children1,
-  List<ReactNode>? children2,
-  List<ReactNode>? children3,
-  List<ReactNode>? children4,
-  List<ReactNode>? children5,
-]);
-@JS('React.createElement')
-external DetailedReactHTMLElement<P, T> createElement<P extends HTMLAttributes<T>, T extends HTMLElement>(
-  dynamic type,
-  dynamic? props, [
-  List<ReactNode>? children1,
-  List<ReactNode>? children2,
-  List<ReactNode>? children3,
-  List<ReactNode>? children4,
-  List<ReactNode>? children5,
-]);
-@JS('React.createElement')
-external ReactSVGElement createElement<P extends SVGAttributes<T>, T extends SVGElement>(
-  dynamic type,
-  dynamic? props, [
-  List<ReactNode>? children1,
-  List<ReactNode>? children2,
-  List<ReactNode>? children3,
-  List<ReactNode>? children4,
-  List<ReactNode>? children5,
-]);
-@JS('React.createElement')
-external DOMElement<P, T> createElement<P extends DOMAttributes<T>, T extends Element>(
-  String type,
-  dynamic? props, [
-  List<ReactNode>? children1,
-  List<ReactNode>? children2,
-  List<ReactNode>? children3,
-  List<ReactNode>? children4,
-  List<ReactNode>? children5,
-]);
-@JS('React.createElement')
-external FunctionComponentElement<P> createElement<P extends dynamic>(
-  FunctionComponent<P> type,
-  dynamic? props, [
-  List<ReactNode>? children1,
-  List<ReactNode>? children2,
-  List<ReactNode>? children3,
-  List<ReactNode>? children4,
-  List<ReactNode>? children5,
-]);
-@JS('React.createElement')
-external CElement<P, ClassicComponent<P, ComponentState>> createElement<P extends dynamic>(
-  ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> type,
-  dynamic? props, [
-  List<ReactNode>? children1,
-  List<ReactNode>? children2,
-  List<ReactNode>? children3,
-  List<ReactNode>? children4,
-  List<ReactNode>? children5,
-]);
-@JS('React.createElement')
-external CElement<P, T>
-    createElement<P extends dynamic, T extends Component<P, ComponentState>, C extends ComponentClass<P>>(
-  ClassType<P, T, C> type,
-  dynamic? props, [
-  List<ReactNode>? children1,
-  List<ReactNode>? children2,
-  List<ReactNode>? children3,
-  List<ReactNode>? children4,
-  List<ReactNode>? children5,
-]);
-@JS('React.createElement')
-external ReactElement<P> createElement<P extends dynamic>(
-  dynamic type,
-  dynamic? props, [
-  List<ReactNode>? children1,
-  List<ReactNode>? children2,
-  List<ReactNode>? children3,
-  List<ReactNode>? children4,
-  List<ReactNode>? children5,
+  ReactNode? children1,
+  ReactNode? children2,
+  ReactNode? children3,
+  ReactNode? children4,
+  ReactNode? children5,
+  ReactNode? children6,
+  ReactNode? children7,
+  ReactNode? children8,
+  ReactNode? children9,
 ]);
 @JS('React.cloneElement')
 external DetailedReactHTMLElement<P, T> cloneElement<P extends HTMLAttributes<T>, T extends HTMLElement>(
   DetailedReactHTMLElement<P, T> element,
   P props, [
-  List<ReactNode>? children1,
-  List<ReactNode>? children2,
-  List<ReactNode>? children3,
-  List<ReactNode>? children4,
-  List<ReactNode>? children5,
-]);
-@JS('React.cloneElement')
-external ReactHTMLElement<T> cloneElement<P extends HTMLAttributes<T>, T extends HTMLElement>(
-  ReactHTMLElement<T> element,
-  P props, [
-  List<ReactNode>? children1,
-  List<ReactNode>? children2,
-  List<ReactNode>? children3,
-  List<ReactNode>? children4,
-  List<ReactNode>? children5,
-]);
-@JS('React.cloneElement')
-external ReactSVGElement cloneElement<P extends SVGAttributes<T>, T extends SVGElement>(
-  ReactSVGElement element,
-  P props, [
-  List<ReactNode>? children1,
-  List<ReactNode>? children2,
-  List<ReactNode>? children3,
-  List<ReactNode>? children4,
-  List<ReactNode>? children5,
-]);
-@JS('React.cloneElement')
-external DOMElement<P, T> cloneElement<P extends DOMAttributes<T>, T extends Element>(
-  DOMElement<P, T> element,
-  dynamic props, [
-  List<ReactNode>? children1,
-  List<ReactNode>? children2,
-  List<ReactNode>? children3,
-  List<ReactNode>? children4,
-  List<ReactNode>? children5,
-]);
-@JS('React.cloneElement')
-external FunctionComponentElement<P> cloneElement<P>(
-  FunctionComponentElement<P> element,
-  dynamic props, [
-  List<ReactNode>? children1,
-  List<ReactNode>? children2,
-  List<ReactNode>? children3,
-  List<ReactNode>? children4,
-  List<ReactNode>? children5,
-]);
-@JS('React.cloneElement')
-external CElement<P, T> cloneElement<P, T extends Component<P, ComponentState>>(
-  CElement<P, T> element,
-  dynamic props, [
-  List<ReactNode>? children1,
-  List<ReactNode>? children2,
-  List<ReactNode>? children3,
-  List<ReactNode>? children4,
-  List<ReactNode>? children5,
-]);
-@JS('React.cloneElement')
-external ReactElement<P> cloneElement<P>(
-  ReactElement<P> element,
-  dynamic props, [
-  List<ReactNode>? children1,
-  List<ReactNode>? children2,
-  List<ReactNode>? children3,
-  List<ReactNode>? children4,
-  List<ReactNode>? children5,
+  ReactNode? children1,
+  ReactNode? children2,
+  ReactNode? children3,
+  ReactNode? children4,
+  ReactNode? children5,
+  ReactNode? children6,
+  ReactNode? children7,
+  ReactNode? children8,
+  ReactNode? children9,
 ]);
 
 @JS()
@@ -758,9 +637,6 @@ typedef MemoExoticComponent<T extends ComponentType<dynamic>> = dynamic;
 @JS('React.memo')
 external NamedExoticComponent<P> memo<P extends dynamic>(FunctionComponent<P> Component,
     bool Function(Readonly<PropsWithChildren<P>> prevProps, Readonly<PropsWithChildren<P>> nextProps) propsAreEqual);
-@JS('React.memo')
-external MemoExoticComponent<T> memo<T extends ComponentType<dynamic>>(T Component,
-    bool Function(Readonly<ComponentProps<T>> prevProps, Readonly<ComponentProps<T>> nextProps) propsAreEqual);
 typedef LazyExoticComponent<T extends ComponentType<dynamic>> = dynamic;
 @JS('React.lazy')
 external LazyExoticComponent<T> lazy<T extends ComponentType<dynamic>>(Promise<dynamic> Function() factory);
@@ -789,29 +665,11 @@ class MutableRefObject<T> {
 external T useContext<T>(Context<T> context);
 @JS('React.useState')
 external dynamic useState<S>(dynamic initialState);
-@JS('React.useState')
-external dynamic useState<S>();
 @JS('React.useReducer')
 external dynamic useReducer<R extends ReducerWithoutAction<dynamic>, I>(
     R reducer, I initializerArg, ReducerStateWithoutAction<R> Function(I arg) initializer);
-@JS('React.useReducer')
-external dynamic useReducer<R extends ReducerWithoutAction<dynamic>>(
-    R reducer, ReducerStateWithoutAction<R> initializerArg, dynamic initializer);
-@JS('React.useReducer')
-external dynamic useReducer<R extends Reducer<dynamic, dynamic>, I>(
-    R reducer, dynamic initializerArg, ReducerState<R> Function(dynamic arg) initializer);
-@JS('React.useReducer')
-external dynamic useReducer<R extends Reducer<dynamic, dynamic>, I>(
-    R reducer, I initializerArg, ReducerState<R> Function(I arg) initializer);
-@JS('React.useReducer')
-external dynamic useReducer<R extends Reducer<dynamic, dynamic>>(
-    R reducer, ReducerState<R> initialState, dynamic initializer);
 @JS('React.useRef')
 external MutableRefObject<T> useRef<T>(T initialValue);
-@JS('React.useRef')
-external RefObject<T> useRef<T>(T? initialValue);
-@JS('React.useRef')
-external MutableRefObject<T?> useRef<T>();
 @JS('React.useLayoutEffect')
 external dynamic useLayoutEffect(EffectCallback effect, DependencyList deps);
 @JS('React.useEffect')
@@ -821,11 +679,15 @@ external dynamic useImperativeHandle<T, R extends T>(Ref<T>? ref, R Function() i
 @JS('React.useCallback')
 external T useCallback<
     T extends dynamic Function([
-  List<dynamic>? args1,
-  List<dynamic>? args2,
-  List<dynamic>? args3,
-  List<dynamic>? args4,
-  List<dynamic>? args5,
+  dynamic args1,
+  dynamic args2,
+  dynamic args3,
+  dynamic args4,
+  dynamic args5,
+  dynamic args6,
+  dynamic args7,
+  dynamic args8,
+  dynamic args9,
 ])>(T callback, DependencyList deps);
 @JS('React.useMemo')
 external T useMemo<T>(T Function() factory, DependencyList? deps);

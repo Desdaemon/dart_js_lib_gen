@@ -10,6 +10,7 @@ struct Transformer {
     class: Option<Class>,
     undecls: HashSet<String>,
     resolved: HashSet<String>,
+    resolved_funcs: HashSet<String>,
 }
 
 struct Class {
@@ -52,6 +53,7 @@ pub fn visit_program(module: &Module, library_name: &str, size_hint: Option<usiz
         class: None,
         undecls: HashSet::new(),
         resolved: HashSet::new(),
+        resolved_funcs: HashSet::new(),
     };
 
     t.push("@JS() library ");
@@ -219,7 +221,12 @@ impl Transformer {
 
     /// `@JS(..) external Output func<..>(...);`
     fn visit_function(&mut self, func: &FnDecl) {
-        let id = &func.ident.sym;
+        let id: &str = &func.ident.sym;
+        let conflict = !self.resolved_funcs.insert(id.to_owned());
+        if conflict {
+            warn!("Overload of {} ignored.", id);
+            return;
+        }
         self.annotate(id);
         self.push("external ");
         self.visit_type_ann(&func.function.return_type);
@@ -468,9 +475,10 @@ impl Transformer {
     fn visit_rest_pat(&mut self, rest: &RestPat) {
         self.push_char('[');
         let ty = self.collect(|s| s.visit_type_ann(&rest.type_ann));
-        let nullable = &ty == "dynamic" || ty.ends_with('?');
+        let ty = &ty[5..(ty.len() - 1)];
+        let nullable = ty == "dynamic" || ty.ends_with('?');
         let ty = format!("{}{} ", ty, if nullable { "" } else { "?" });
-        for idx in ['1', '2', '3', '4', '5'] {
+        for idx in ['1', '2', '3', '4', '5', '6', '7', '8', '9'] {
             self.push(&ty);
             self.push(parse_pat(&rest.arg).unwrap_or("_"));
             self.push_char(idx);
