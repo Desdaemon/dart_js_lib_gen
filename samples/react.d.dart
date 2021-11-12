@@ -27,7 +27,7 @@ typedef JSXElementConstructor<P> = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class RefObject<T> {
+class RefObject<T> {
   external T? get current;
   external set current(T? value);
   external factory RefObject({
@@ -44,7 +44,7 @@ typedef Key = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class Attributes {
+class Attributes {
   external Key? get key;
   external set key(Key? value);
   external factory Attributes({
@@ -54,7 +54,7 @@ typedef Key = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class RefAttributes<T> {
+class RefAttributes<T> {
   external Ref<T>? get ref;
   external set ref(Ref<T>? value);
   external factory RefAttributes({
@@ -64,7 +64,7 @@ typedef Key = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class ClassAttributes<T> {
+class ClassAttributes<T> {
   external LegacyRef<T>? get ref;
   external set ref(LegacyRef<T>? value);
   external factory ClassAttributes({
@@ -74,7 +74,7 @@ typedef Key = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class ReactElement<P, T extends dynamic> {
+class ReactElement<P, T extends dynamic> {
   external T get type;
   external set type(T value);
   external P get props;
@@ -90,13 +90,13 @@ typedef Key = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class ReactComponentElement<T extends dynamic, P> {}
+class ReactComponentElement<T extends dynamic, P> {}
 
 typedef SFCElement<P> = FunctionComponentElement<P>;
 
 @JS()
 @anonymous
-/*interface*/ class FunctionComponentElement<P> {
+class FunctionComponentElement<P> {
   external dynamic? get ref;
   external set ref(dynamic? value);
   external factory FunctionComponentElement({
@@ -108,7 +108,7 @@ typedef CElement<P, T extends Component<P, ComponentState>> = ComponentElement<P
 
 @JS()
 @anonymous
-/*interface*/ class ComponentElement<P, T extends Component<P, ComponentState>> {
+class ComponentElement<P, T extends Component<P, ComponentState>> {
   external LegacyRef<T>? get ref;
   external set ref(LegacyRef<T>? value);
   external factory ComponentElement({
@@ -120,7 +120,7 @@ typedef ClassicElement<P> = CElement<P, ClassicComponent<P, ComponentState>>;
 
 @JS()
 @anonymous
-/*interface*/ class DOMElement<P extends dynamic, T extends Element> {
+class DOMElement<P extends dynamic, T extends Element> {
   external LegacyRef<T> get ref;
   external set ref(LegacyRef<T> value);
   external factory DOMElement({
@@ -130,11 +130,11 @@ typedef ClassicElement<P> = CElement<P, ClassicComponent<P, ComponentState>>;
 
 @JS()
 @anonymous
-/*interface*/ class ReactHTMLElement<T extends HTMLElement> {}
+class ReactHTMLElement<T extends HTMLElement> {}
 
 @JS()
 @anonymous
-/*interface*/ class DetailedReactHTMLElement<P extends HTMLAttributes<T>, T extends HTMLElement> {
+class DetailedReactHTMLElement<P extends HTMLAttributes<T>, T extends HTMLElement> {
   external dynamic get type;
   external set type(dynamic value);
   external factory DetailedReactHTMLElement({
@@ -144,7 +144,7 @@ typedef ClassicElement<P> = CElement<P, ClassicComponent<P, ComponentState>>;
 
 @JS()
 @anonymous
-/*interface*/ class ReactSVGElement {
+class ReactSVGElement {
   external dynamic get type;
   external set type(dynamic value);
   external factory ReactSVGElement({
@@ -154,7 +154,7 @@ typedef ClassicElement<P> = CElement<P, ClassicComponent<P, ComponentState>>;
 
 @JS()
 @anonymous
-/*interface*/ class ReactPortal {
+class ReactPortal {
   external Key? get key;
   external set key(Key? value);
   external ReactNode get children;
@@ -203,22 +203,22 @@ typedef DOMFactory<P extends DOMAttributes<T>, T extends Element> = DOMElement<P
 
 @JS()
 @anonymous
-/*interface*/ class HTMLFactory<T extends HTMLElement> {}
+class HTMLFactory<T extends HTMLElement> {}
 
 @JS()
 @anonymous
-/*interface*/ class DetailedHTMLFactory<P extends HTMLAttributes<T>, T extends HTMLElement> {}
+class DetailedHTMLFactory<P extends HTMLAttributes<T>, T extends HTMLElement> {}
 
 @JS()
 @anonymous
-/*interface*/ class SVGFactory {}
+class SVGFactory {}
 
 typedef ReactText = dynamic;
 typedef ReactChild = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class ReactNodeArray {}
+class ReactNodeArray {}
 
 typedef ReactFragment = dynamic;
 typedef ReactNode = dynamic;
@@ -392,7 +392,7 @@ external ReactElement<P> cloneElement<P>(
 
 @JS()
 @anonymous
-/*interface*/ class ProviderProps<T> {
+class ProviderProps<T> {
   external T get value;
   external set value(T value);
   external ReactNode? get children;
@@ -405,7 +405,7 @@ external ReactElement<P> cloneElement<P>(
 
 @JS()
 @anonymous
-/*interface*/ class ConsumerProps<T> {
+class ConsumerProps<T> {
   external ReactNode Function(T value) get children;
   external set children(ReactNode Function(T value) value);
   external factory ConsumerProps({
@@ -415,7 +415,7 @@ external ReactElement<P> cloneElement<P>(
 
 @JS()
 @anonymous
-/*interface*/ class ExoticComponent<P> {
+class ExoticComponent<P> {
   external dynamic get $$typeof;
   external set $$typeof(dynamic value);
   external factory ExoticComponent({
@@ -425,7 +425,7 @@ external ReactElement<P> cloneElement<P>(
 
 @JS()
 @anonymous
-/*interface*/ class NamedExoticComponent<P> {
+class NamedExoticComponent<P> {
   external String? get displayName;
   external set displayName(String? value);
   external factory NamedExoticComponent({
@@ -435,7 +435,7 @@ external ReactElement<P> cloneElement<P>(
 
 @JS()
 @anonymous
-/*interface*/ class ProviderExoticComponent<P> {
+class ProviderExoticComponent<P> {
   external WeakValidationMap<P>? get propTypes;
   external set propTypes(WeakValidationMap<P>? value);
   external factory ProviderExoticComponent({
@@ -449,7 +449,7 @@ typedef Consumer<T> = ExoticComponent<ConsumerProps<T>>;
 
 @JS()
 @anonymous
-/*interface*/ class Context<T> {
+class Context<T> {
   external Provider<T> get Provider;
   external set Provider(Provider<T> value);
   external Consumer<T> get Consumer;
@@ -476,7 +476,7 @@ external ExoticComponent<dynamic> StrictMode;
 
 @JS()
 @anonymous
-/*interface*/ class SuspenseProps {
+class SuspenseProps {
   external ReactNode? get children;
   external set children(ReactNode? value);
   external NonNullable<ReactNode>? get fallback;
@@ -496,7 +496,7 @@ typedef ProfilerOnRenderCallback = dynamic Function(String id, dynamic phase, nu
 
 @JS()
 @anonymous
-/*interface*/ class ProfilerProps {
+class ProfilerProps {
   external ReactNode? get children;
   external set children(ReactNode? value);
   external String get id;
@@ -516,7 +516,7 @@ typedef ReactInstance = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class Component<P, S, SS> {}
+class Component<P, S, SS> {}
 
 @JS()
 class Component<P, S> {
@@ -542,7 +542,7 @@ class PureComponent<P, S, SS> extends Component {}
 
 @JS()
 @anonymous
-/*interface*/ class ClassicComponent<P, S> {
+class ClassicComponent<P, S> {
   external dynamic replaceState(S nextState, dynamic Function() callback);
   external bool isMounted();
   external S getInitialState();
@@ -550,7 +550,7 @@ class PureComponent<P, S, SS> extends Component {}
 
 @JS()
 @anonymous
-/*interface*/ class ChildContextProvider<CC> {
+class ChildContextProvider<CC> {
   external CC getChildContext();
 }
 
@@ -560,7 +560,7 @@ typedef FC<P> = FunctionComponent<P>;
 
 @JS()
 @anonymous
-/*interface*/ class FunctionComponent<P> {
+class FunctionComponent<P> {
   external WeakValidationMap<P>? get propTypes;
   external set propTypes(WeakValidationMap<P>? value);
   external ValidationMap<dynamic>? get contextTypes;
@@ -581,7 +581,7 @@ typedef VFC<P> = VoidFunctionComponent<P>;
 
 @JS()
 @anonymous
-/*interface*/ class VoidFunctionComponent<P> {
+class VoidFunctionComponent<P> {
   external WeakValidationMap<P>? get propTypes;
   external set propTypes(WeakValidationMap<P>? value);
   external ValidationMap<dynamic>? get contextTypes;
@@ -602,7 +602,7 @@ typedef ForwardedRef<T> = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class ForwardRefRenderFunction<T, P> {
+class ForwardRefRenderFunction<T, P> {
   external String? get displayName;
   external set displayName(String? value);
   external dynamic? get defaultProps;
@@ -618,10 +618,10 @@ typedef ForwardedRef<T> = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class RefForwardingComponent<T, P> {}
+class RefForwardingComponent<T, P> {}
 
 @JS()
-/*interface*/ class ComponentClass<P, S> {
+class ComponentClass<P, S> {
   external factory ComponentClass({P props, dynamic context});
   external WeakValidationMap<P>? get propTypes;
   external set propTypes(WeakValidationMap<P>? value);
@@ -646,7 +646,7 @@ typedef ForwardedRef<T> = dynamic;
 }
 
 @JS()
-/*interface*/ class ClassicComponentClass<P> {
+class ClassicComponentClass<P> {
   external factory ClassicComponentClass({P props, dynamic context});
   external P getDefaultProps();
 }
@@ -655,7 +655,7 @@ typedef ClassType<P, T extends Component<P, ComponentState>, C extends Component
 
 @JS()
 @anonymous
-/*interface*/ class ComponentLifecycle<P, S, SS> {
+class ComponentLifecycle<P, S, SS> {
   external dynamic componentDidMount();
   external bool shouldComponentUpdate(Readonly<P> nextProps, Readonly<S> nextState, dynamic nextContext);
   external dynamic componentWillUnmount();
@@ -664,7 +664,7 @@ typedef ClassType<P, T extends Component<P, ComponentState>, C extends Component
 
 @JS()
 @anonymous
-/*interface*/ class StaticLifecycle<P, S> {
+class StaticLifecycle<P, S> {
   external GetDerivedStateFromProps<P, S>? get getDerivedStateFromProps;
   external set getDerivedStateFromProps(GetDerivedStateFromProps<P, S>? value);
   external GetDerivedStateFromError<P, S>? get getDerivedStateFromError;
@@ -680,14 +680,14 @@ typedef GetDerivedStateFromError<P, S> = Partial<S>? Function(dynamic error);
 
 @JS()
 @anonymous
-/*interface*/ class NewLifecycle<P, S, SS> {
+class NewLifecycle<P, S, SS> {
   external SS? getSnapshotBeforeUpdate(Readonly<P> prevProps, Readonly<S> prevState);
   external dynamic componentDidUpdate(Readonly<P> prevProps, Readonly<S> prevState, SS snapshot);
 }
 
 @JS()
 @anonymous
-/*interface*/ class DeprecatedLifecycle<P, S> {
+class DeprecatedLifecycle<P, S> {
   external dynamic componentWillMount();
   external dynamic UNSAFE_componentWillMount();
   external dynamic componentWillReceiveProps(Readonly<P> nextProps, dynamic nextContext);
@@ -698,7 +698,7 @@ typedef GetDerivedStateFromError<P, S> = Partial<S>? Function(dynamic error);
 
 @JS()
 @anonymous
-/*interface*/ class Mixin<P, S> {
+class Mixin<P, S> {
   external Array<Mixin<P, S>>? get mixins;
   external set mixins(Array<Mixin<P, S>>? value);
   external dynamic? get statics;
@@ -725,7 +725,7 @@ typedef GetDerivedStateFromError<P, S> = Partial<S>? Function(dynamic error);
 
 @JS()
 @anonymous
-/*interface*/ class ComponentSpec<P, S> {
+class ComponentSpec<P, S> {
   external ReactNode render();
 }
 
@@ -734,7 +734,7 @@ external RefObject<T> createRef<T>();
 
 @JS()
 @anonymous
-/*interface*/ class ForwardRefExoticComponent<P> {
+class ForwardRefExoticComponent<P> {
   external Partial<P>? get defaultProps;
   external set defaultProps(Partial<P>? value);
   external WeakValidationMap<P>? get propTypes;
@@ -777,7 +777,7 @@ typedef EffectCallback = dynamic Function();
 
 @JS()
 @anonymous
-/*interface*/ class MutableRefObject<T> {
+class MutableRefObject<T> {
   external T get current;
   external set current(T value);
   external factory MutableRefObject({
@@ -834,7 +834,7 @@ external dynamic useDebugValue<T>(T value, dynamic Function(T value) format);
 
 @JS()
 @anonymous
-/*interface*/ class BaseSyntheticEvent<E, C, T> {
+class BaseSyntheticEvent<E, C, T> {
   external E get nativeEvent;
   external set nativeEvent(E value);
   external C get currentTarget;
@@ -876,11 +876,11 @@ external dynamic useDebugValue<T>(T value, dynamic Function(T value) format);
 
 @JS()
 @anonymous
-/*interface*/ class SyntheticEvent<T, E> {}
+class SyntheticEvent<T, E> {}
 
 @JS()
 @anonymous
-/*interface*/ class ClipboardEvent<T> {
+class ClipboardEvent<T> {
   external DataTransfer get clipboardData;
   external set clipboardData(DataTransfer value);
   external factory ClipboardEvent({
@@ -890,7 +890,7 @@ external dynamic useDebugValue<T>(T value, dynamic Function(T value) format);
 
 @JS()
 @anonymous
-/*interface*/ class CompositionEvent<T> {
+class CompositionEvent<T> {
   external String get data;
   external set data(String value);
   external factory CompositionEvent({
@@ -900,7 +900,7 @@ external dynamic useDebugValue<T>(T value, dynamic Function(T value) format);
 
 @JS()
 @anonymous
-/*interface*/ class DragEvent<T> {
+class DragEvent<T> {
   external DataTransfer get dataTransfer;
   external set dataTransfer(DataTransfer value);
   external factory DragEvent({
@@ -910,7 +910,7 @@ external dynamic useDebugValue<T>(T value, dynamic Function(T value) format);
 
 @JS()
 @anonymous
-/*interface*/ class PointerEvent<T> {
+class PointerEvent<T> {
   external num get pointerId;
   external set pointerId(num value);
   external num get pressure;
@@ -947,7 +947,7 @@ external dynamic useDebugValue<T>(T value, dynamic Function(T value) format);
 
 @JS()
 @anonymous
-/*interface*/ class FocusEvent<Target, RelatedTarget> {
+class FocusEvent<Target, RelatedTarget> {
   external dynamic? get relatedTarget;
   external set relatedTarget(dynamic? value);
   external dynamic get target;
@@ -960,11 +960,11 @@ external dynamic useDebugValue<T>(T value, dynamic Function(T value) format);
 
 @JS()
 @anonymous
-/*interface*/ class FormEvent<T> {}
+class FormEvent<T> {}
 
 @JS()
 @anonymous
-/*interface*/ class InvalidEvent<T> {
+class InvalidEvent<T> {
   external dynamic get target;
   external set target(dynamic value);
   external factory InvalidEvent({
@@ -974,7 +974,7 @@ external dynamic useDebugValue<T>(T value, dynamic Function(T value) format);
 
 @JS()
 @anonymous
-/*interface*/ class ChangeEvent<T> {
+class ChangeEvent<T> {
   external dynamic get target;
   external set target(dynamic value);
   external factory ChangeEvent({
@@ -984,7 +984,7 @@ external dynamic useDebugValue<T>(T value, dynamic Function(T value) format);
 
 @JS()
 @anonymous
-/*interface*/ class KeyboardEvent<T> {
+class KeyboardEvent<T> {
   external bool get altKey;
   external set altKey(bool value);
   external num get charCode;
@@ -1028,7 +1028,7 @@ external dynamic useDebugValue<T>(T value, dynamic Function(T value) format);
 
 @JS()
 @anonymous
-/*interface*/ class MouseEvent<T, E> {
+class MouseEvent<T, E> {
   external bool get altKey;
   external set altKey(bool value);
   external num get button;
@@ -1081,7 +1081,7 @@ external dynamic useDebugValue<T>(T value, dynamic Function(T value) format);
 
 @JS()
 @anonymous
-/*interface*/ class TouchEvent<T> {
+class TouchEvent<T> {
   external bool get altKey;
   external set altKey(bool value);
   external TouchList get changedTouches;
@@ -1110,7 +1110,7 @@ external dynamic useDebugValue<T>(T value, dynamic Function(T value) format);
 
 @JS()
 @anonymous
-/*interface*/ class UIEvent<T, E> {
+class UIEvent<T, E> {
   external num get detail;
   external set detail(num value);
   external AbstractView get view;
@@ -1123,7 +1123,7 @@ external dynamic useDebugValue<T>(T value, dynamic Function(T value) format);
 
 @JS()
 @anonymous
-/*interface*/ class WheelEvent<T> {
+class WheelEvent<T> {
   external num get deltaMode;
   external set deltaMode(num value);
   external num get deltaX;
@@ -1142,7 +1142,7 @@ external dynamic useDebugValue<T>(T value, dynamic Function(T value) format);
 
 @JS()
 @anonymous
-/*interface*/ class AnimationEvent<T> {
+class AnimationEvent<T> {
   external String get animationName;
   external set animationName(String value);
   external num get elapsedTime;
@@ -1158,7 +1158,7 @@ external dynamic useDebugValue<T>(T value, dynamic Function(T value) format);
 
 @JS()
 @anonymous
-/*interface*/ class TransitionEvent<T> {
+class TransitionEvent<T> {
   external num get elapsedTime;
   external set elapsedTime(num value);
   external String get propertyName;
@@ -1191,7 +1191,7 @@ typedef TransitionEventHandler<T> = EventHandler<TransitionEvent<T>>;
 
 @JS()
 @anonymous
-/*interface*/ class Props<T> {
+class Props<T> {
   external ReactNode? get children;
   external set children(ReactNode? value);
   external Key? get key;
@@ -1207,17 +1207,17 @@ typedef TransitionEventHandler<T> = EventHandler<TransitionEvent<T>>;
 
 @JS()
 @anonymous
-/*interface*/ class HTMLProps<T> {}
+class HTMLProps<T> {}
 
 typedef DetailedHTMLProps<E extends HTMLAttributes<T>, T> = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class SVGProps<T> {}
+class SVGProps<T> {}
 
 @JS()
 @anonymous
-/*interface*/ class DOMAttributes<T> {
+class DOMAttributes<T> {
   external ReactNode? get children;
   external set children(ReactNode? value);
   external dynamic? get dangerouslySetInnerHTML;
@@ -1710,17 +1710,17 @@ typedef DetailedHTMLProps<E extends HTMLAttributes<T>, T> = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class CSSProperties {}
+class CSSProperties {}
 
 @JS()
 @anonymous
-/*interface*/ class AriaAttributes {}
+class AriaAttributes {}
 
 typedef AriaRole = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class HTMLAttributes<T> {
+class HTMLAttributes<T> {
   external bool? get defaultChecked;
   external set defaultChecked(bool? value);
   external dynamic? get defaultValue;
@@ -1856,7 +1856,7 @@ typedef AriaRole = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class AllHTMLAttributes<T> {
+class AllHTMLAttributes<T> {
   external String? get accept;
   external set accept(String? value);
   external String? get acceptCharset;
@@ -2181,7 +2181,7 @@ typedef HTMLAttributeAnchorTarget = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class AnchorHTMLAttributes<T> {
+class AnchorHTMLAttributes<T> {
   external dynamic? get download;
   external set download(dynamic? value);
   external String? get href;
@@ -2215,11 +2215,11 @@ typedef HTMLAttributeAnchorTarget = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class AudioHTMLAttributes<T> {}
+class AudioHTMLAttributes<T> {}
 
 @JS()
 @anonymous
-/*interface*/ class AreaHTMLAttributes<T> {
+class AreaHTMLAttributes<T> {
   external String? get alt;
   external set alt(String? value);
   external String? get coords;
@@ -2256,7 +2256,7 @@ typedef HTMLAttributeAnchorTarget = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class BaseHTMLAttributes<T> {
+class BaseHTMLAttributes<T> {
   external String? get href;
   external set href(String? value);
   external String? get target;
@@ -2269,7 +2269,7 @@ typedef HTMLAttributeAnchorTarget = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class BlockquoteHTMLAttributes<T> {
+class BlockquoteHTMLAttributes<T> {
   external String? get cite;
   external set cite(String? value);
   external factory BlockquoteHTMLAttributes({
@@ -2279,7 +2279,7 @@ typedef HTMLAttributeAnchorTarget = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class ButtonHTMLAttributes<T> {
+class ButtonHTMLAttributes<T> {
   external bool? get autoFocus;
   external set autoFocus(bool? value);
   external bool? get disabled;
@@ -2319,7 +2319,7 @@ typedef HTMLAttributeAnchorTarget = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class CanvasHTMLAttributes<T> {
+class CanvasHTMLAttributes<T> {
   external dynamic? get height;
   external set height(dynamic? value);
   external dynamic? get width;
@@ -2332,7 +2332,7 @@ typedef HTMLAttributeAnchorTarget = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class ColHTMLAttributes<T> {
+class ColHTMLAttributes<T> {
   external num? get span;
   external set span(num? value);
   external dynamic? get width;
@@ -2345,7 +2345,7 @@ typedef HTMLAttributeAnchorTarget = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class ColgroupHTMLAttributes<T> {
+class ColgroupHTMLAttributes<T> {
   external num? get span;
   external set span(num? value);
   external factory ColgroupHTMLAttributes({
@@ -2355,7 +2355,7 @@ typedef HTMLAttributeAnchorTarget = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class DataHTMLAttributes<T> {
+class DataHTMLAttributes<T> {
   external dynamic? get value;
   external set value(dynamic? value);
   external factory DataHTMLAttributes({
@@ -2365,7 +2365,7 @@ typedef HTMLAttributeAnchorTarget = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class DetailsHTMLAttributes<T> {
+class DetailsHTMLAttributes<T> {
   external bool? get open;
   external set open(bool? value);
   external ReactEventHandler<T>? get onToggle;
@@ -2378,7 +2378,7 @@ typedef HTMLAttributeAnchorTarget = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class DelHTMLAttributes<T> {
+class DelHTMLAttributes<T> {
   external String? get cite;
   external set cite(String? value);
   external String? get dateTime;
@@ -2391,7 +2391,7 @@ typedef HTMLAttributeAnchorTarget = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class DialogHTMLAttributes<T> {
+class DialogHTMLAttributes<T> {
   external bool? get open;
   external set open(bool? value);
   external factory DialogHTMLAttributes({
@@ -2401,7 +2401,7 @@ typedef HTMLAttributeAnchorTarget = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class EmbedHTMLAttributes<T> {
+class EmbedHTMLAttributes<T> {
   external dynamic? get height;
   external set height(dynamic? value);
   external String? get src;
@@ -2420,7 +2420,7 @@ typedef HTMLAttributeAnchorTarget = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class FieldsetHTMLAttributes<T> {
+class FieldsetHTMLAttributes<T> {
   external bool? get disabled;
   external set disabled(bool? value);
   external String? get form;
@@ -2436,7 +2436,7 @@ typedef HTMLAttributeAnchorTarget = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class FormHTMLAttributes<T> {
+class FormHTMLAttributes<T> {
   external String? get acceptCharset;
   external set acceptCharset(String? value);
   external String? get action;
@@ -2467,7 +2467,7 @@ typedef HTMLAttributeAnchorTarget = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class HtmlHTMLAttributes<T> {
+class HtmlHTMLAttributes<T> {
   external String? get manifest;
   external set manifest(String? value);
   external factory HtmlHTMLAttributes({
@@ -2477,7 +2477,7 @@ typedef HTMLAttributeAnchorTarget = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class IframeHTMLAttributes<T> {
+class IframeHTMLAttributes<T> {
   external String? get allow;
   external set allow(String? value);
   external bool? get allowFullScreen;
@@ -2532,7 +2532,7 @@ typedef HTMLAttributeAnchorTarget = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class ImgHTMLAttributes<T> {
+class ImgHTMLAttributes<T> {
   external String? get alt;
   external set alt(String? value);
   external dynamic? get crossOrigin;
@@ -2572,7 +2572,7 @@ typedef HTMLAttributeAnchorTarget = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class InsHTMLAttributes<T> {
+class InsHTMLAttributes<T> {
   external String? get cite;
   external set cite(String? value);
   external String? get dateTime;
@@ -2587,7 +2587,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class InputHTMLAttributes<T> {
+class InputHTMLAttributes<T> {
   external String? get accept;
   external set accept(String? value);
   external String? get alt;
@@ -2696,7 +2696,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class KeygenHTMLAttributes<T> {
+class KeygenHTMLAttributes<T> {
   external bool? get autoFocus;
   external set autoFocus(bool? value);
   external String? get challenge;
@@ -2724,7 +2724,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class LabelHTMLAttributes<T> {
+class LabelHTMLAttributes<T> {
   external String? get form;
   external set form(String? value);
   external String? get htmlFor;
@@ -2737,7 +2737,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class LiHTMLAttributes<T> {
+class LiHTMLAttributes<T> {
   external dynamic? get value;
   external set value(dynamic? value);
   external factory LiHTMLAttributes({
@@ -2747,7 +2747,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class LinkHTMLAttributes<T> {
+class LinkHTMLAttributes<T> {
   external String? get as;
   external set as(String? value);
   external String? get crossOrigin;
@@ -2790,7 +2790,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class MapHTMLAttributes<T> {
+class MapHTMLAttributes<T> {
   external String? get name;
   external set name(String? value);
   external factory MapHTMLAttributes({
@@ -2800,7 +2800,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class MenuHTMLAttributes<T> {
+class MenuHTMLAttributes<T> {
   external String? get type;
   external set type(String? value);
   external factory MenuHTMLAttributes({
@@ -2810,7 +2810,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class MediaHTMLAttributes<T> {
+class MediaHTMLAttributes<T> {
   external bool? get autoPlay;
   external set autoPlay(bool? value);
   external bool? get controls;
@@ -2847,7 +2847,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class MetaHTMLAttributes<T> {
+class MetaHTMLAttributes<T> {
   external String? get charSet;
   external set charSet(String? value);
   external String? get content;
@@ -2869,7 +2869,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class MeterHTMLAttributes<T> {
+class MeterHTMLAttributes<T> {
   external String? get form;
   external set form(String? value);
   external num? get high;
@@ -2897,7 +2897,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class QuoteHTMLAttributes<T> {
+class QuoteHTMLAttributes<T> {
   external String? get cite;
   external set cite(String? value);
   external factory QuoteHTMLAttributes({
@@ -2907,7 +2907,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class ObjectHTMLAttributes<T> {
+class ObjectHTMLAttributes<T> {
   external String? get classID;
   external set classID(String? value);
   external String? get data;
@@ -2941,7 +2941,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class OlHTMLAttributes<T> {
+class OlHTMLAttributes<T> {
   external bool? get reversed;
   external set reversed(bool? value);
   external num? get start;
@@ -2957,7 +2957,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class OptgroupHTMLAttributes<T> {
+class OptgroupHTMLAttributes<T> {
   external bool? get disabled;
   external set disabled(bool? value);
   external String? get label;
@@ -2970,7 +2970,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class OptionHTMLAttributes<T> {
+class OptionHTMLAttributes<T> {
   external bool? get disabled;
   external set disabled(bool? value);
   external String? get label;
@@ -2989,7 +2989,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class OutputHTMLAttributes<T> {
+class OutputHTMLAttributes<T> {
   external String? get form;
   external set form(String? value);
   external String? get htmlFor;
@@ -3005,7 +3005,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class ParamHTMLAttributes<T> {
+class ParamHTMLAttributes<T> {
   external String? get name;
   external set name(String? value);
   external dynamic? get value;
@@ -3018,7 +3018,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class ProgressHTMLAttributes<T> {
+class ProgressHTMLAttributes<T> {
   external dynamic? get max;
   external set max(dynamic? value);
   external dynamic? get value;
@@ -3031,7 +3031,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class SlotHTMLAttributes<T> {
+class SlotHTMLAttributes<T> {
   external String? get name;
   external set name(String? value);
   external factory SlotHTMLAttributes({
@@ -3041,7 +3041,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class ScriptHTMLAttributes<T> {
+class ScriptHTMLAttributes<T> {
   external bool? get async;
   external set async(bool? value);
   external String? get charSet;
@@ -3078,7 +3078,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class SelectHTMLAttributes<T> {
+class SelectHTMLAttributes<T> {
   external String? get autoComplete;
   external set autoComplete(String? value);
   external bool? get autoFocus;
@@ -3115,7 +3115,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class SourceHTMLAttributes<T> {
+class SourceHTMLAttributes<T> {
   external dynamic? get height;
   external set height(dynamic? value);
   external String? get media;
@@ -3143,7 +3143,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class StyleHTMLAttributes<T> {
+class StyleHTMLAttributes<T> {
   external String? get media;
   external set media(String? value);
   external String? get nonce;
@@ -3162,7 +3162,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class TableHTMLAttributes<T> {
+class TableHTMLAttributes<T> {
   external dynamic? get cellPadding;
   external set cellPadding(dynamic? value);
   external dynamic? get cellSpacing;
@@ -3181,7 +3181,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class TextareaHTMLAttributes<T> {
+class TextareaHTMLAttributes<T> {
   external String? get autoComplete;
   external set autoComplete(String? value);
   external bool? get autoFocus;
@@ -3236,7 +3236,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class TdHTMLAttributes<T> {
+class TdHTMLAttributes<T> {
   external dynamic? get align;
   external set align(dynamic? value);
   external num? get colSpan;
@@ -3270,7 +3270,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class ThHTMLAttributes<T> {
+class ThHTMLAttributes<T> {
   external dynamic? get align;
   external set align(dynamic? value);
   external num? get colSpan;
@@ -3295,7 +3295,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class TimeHTMLAttributes<T> {
+class TimeHTMLAttributes<T> {
   external String? get dateTime;
   external set dateTime(String? value);
   external factory TimeHTMLAttributes({
@@ -3305,7 +3305,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class TrackHTMLAttributes<T> {
+class TrackHTMLAttributes<T> {
   external String? get kind;
   external set kind(String? value);
   external String? get label;
@@ -3324,7 +3324,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class VideoHTMLAttributes<T> {
+class VideoHTMLAttributes<T> {
   external dynamic? get height;
   external set height(dynamic? value);
   external bool? get playsInline;
@@ -3349,7 +3349,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class SVGAttributes<T> {
+class SVGAttributes<T> {
   external String? get className;
   external set className(String? value);
   external String? get color;
@@ -4130,7 +4130,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class WebViewHTMLAttributes<T> {
+class WebViewHTMLAttributes<T> {
   external bool? get allowFullScreen;
   external set allowFullScreen(bool? value);
   external bool? get allowpopups;
@@ -4188,7 +4188,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class ReactHTML {
+class ReactHTML {
   external DetailedHTMLFactory<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement> get a;
   external set a(DetailedHTMLFactory<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement> value);
   external DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement> get abbr;
@@ -4540,7 +4540,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class ReactSVG {
+class ReactSVG {
   external SVGFactory get animate;
   external set animate(SVGFactory value);
   external SVGFactory get circle;
@@ -4709,7 +4709,7 @@ typedef HTMLInputTypeAttribute = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class ReactDOM {}
+class ReactDOM {}
 
 typedef Validator<T> = Validator<T>;
 typedef Requireable<T> = Requireable<T>;
@@ -4718,7 +4718,7 @@ typedef WeakValidationMap<T> = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class ReactPropTypes {
+class ReactPropTypes {
   external dynamic get any;
   external set any(dynamic value);
   external dynamic get array;
@@ -4773,7 +4773,7 @@ typedef WeakValidationMap<T> = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class ReactChildren {
+class ReactChildren {
   external dynamic map(dynamic children, T Function(C child, num index) fn);
   external dynamic forEach(dynamic children, dynamic Function(C child, num index) fn);
   external num count(dynamic children);
@@ -4783,7 +4783,7 @@ typedef WeakValidationMap<T> = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class AbstractView {
+class AbstractView {
   external StyleMedia get styleMedia;
   external set styleMedia(StyleMedia value);
   external Document get document;
@@ -4796,7 +4796,7 @@ typedef WeakValidationMap<T> = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class Touch {
+class Touch {
   external num get identifier;
   external set identifier(num value);
   external EventTarget get target;
@@ -4827,7 +4827,7 @@ typedef WeakValidationMap<T> = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class TouchList {
+class TouchList {
   external num get length;
   external set length(num value);
   external Touch item(num index);
@@ -4839,7 +4839,7 @@ typedef WeakValidationMap<T> = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class ErrorInfo {
+class ErrorInfo {
   external String get componentStack;
   external set componentStack(String value);
   external factory ErrorInfo({
@@ -4856,17 +4856,17 @@ typedef ReactManagedAttributes<C, P> = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class Element {}
+class Element {}
 
 @JS()
 @anonymous
-/*interface*/ class ElementClass {
+class ElementClass {
   external ReactNode render();
 }
 
 @JS()
 @anonymous
-/*interface*/ class ElementAttributesProperty {
+class ElementAttributesProperty {
   external dynamic get props;
   external set props(dynamic value);
   external factory ElementAttributesProperty({
@@ -4876,7 +4876,7 @@ typedef ReactManagedAttributes<C, P> = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class ElementChildrenAttribute {
+class ElementChildrenAttribute {
   external dynamic get children;
   external set children(dynamic value);
   external factory ElementChildrenAttribute({
@@ -4888,15 +4888,15 @@ typedef LibraryManagedAttributes<C, P> = dynamic;
 
 @JS()
 @anonymous
-/*interface*/ class IntrinsicAttributes {}
+class IntrinsicAttributes {}
 
 @JS()
 @anonymous
-/*interface*/ class IntrinsicClassAttributes<T> {}
+class IntrinsicClassAttributes<T> {}
 
 @JS()
 @anonymous
-/*interface*/ class IntrinsicElements {
+class IntrinsicElements {
   external DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement> get a;
   external set a(DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement> value);
   external DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> get abbr;

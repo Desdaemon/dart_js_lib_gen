@@ -11,3 +11,5 @@ build/
 /target
 **/*.swp
 **/*.jit
+
+dart_js_lib_gen

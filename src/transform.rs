@@ -9,6 +9,7 @@ struct Transformer {
     /// Should be filled when there are fields, or when the class is not anonymous.
     class: Option<Class>,
     undecls: HashSet<String>,
+    resolved: HashSet<String>,
 }
 
 struct Class {
@@ -50,6 +51,7 @@ pub fn visit_program(module: &Module, library_name: &str, size_hint: Option<usiz
         bufs: vec![buf],
         class: None,
         undecls: HashSet::new(),
+        resolved: HashSet::new(),
     };
 
     t.push("@JS() library ");
@@ -144,6 +146,9 @@ impl Transformer {
     fn visit_default_decl(&mut self, decl: &DefaultDecl) {
         match decl {
             DefaultDecl::TsInterfaceDecl(intr) => self.visit_interface(intr),
+            DefaultDecl::Fn(_) => {
+                info!("Default function declaration ignored.");
+            }
             _ => {
                 error!("Unhandled default declaration:\n{:?}", decl);
                 todo!();
@@ -183,6 +188,7 @@ impl Transformer {
     fn visit_interface(&mut self, intr: &TsInterfaceDecl) {
         let id = intr.id.sym.as_ref();
         self.undecls.remove(id);
+        self.resolved.insert(id.to_owned());
         if ["String", "Function"].contains(&id) {
             warn!("Forbidden interface: {}", id);
             return;
@@ -194,7 +200,7 @@ impl Transformer {
         });
         self.push("@JS() ");
         let class_body = self.collect(|s| {
-            s.push("/*interface*/ class ");
+            s.push("class ");
             s.push(id);
             s.visit_type_params(&intr.type_params);
             s.push_char('{');
@@ -443,7 +449,9 @@ impl Transformer {
             TsEntityName::TsQualifiedName(qn) => &qn.right.sym,
             TsEntityName::Ident(ident) => &ident.sym,
         };
-        self.undecls.insert(id.to_owned());
+        if !self.resolved.contains(id) {
+            self.undecls.insert(id.to_owned());
+        }
         self.push(id);
     }
 
