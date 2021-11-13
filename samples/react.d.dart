@@ -368,7 +368,7 @@ class SuspenseProps {
 external ExoticComponent<SuspenseProps> Suspense;
 @JS('React.version')
 external String version;
-typedef ProfilerOnRenderCallback = void Function(String id, dynamic phase, num actualDuration, num baseDuration,
+typedef ProfilerOnRenderCallback = void Function(String id, String phase, num actualDuration, num baseDuration,
     num startTime, num commitTime, Set<SchedulerInteraction> interactions);
 
 @JS()
@@ -787,8 +787,8 @@ class PointerEvent<T> {
   external set width(num value);
   external num get height;
   external set height(num value);
-  external dynamic get pointerType;
-  external set pointerType(dynamic value);
+  external String get pointerType;
+  external set pointerType(String value);
   external bool get isPrimary;
   external set isPrimary(bool value);
   external factory PointerEvent({
@@ -800,7 +800,7 @@ class PointerEvent<T> {
     num twist,
     num width,
     num height,
-    dynamic pointerType,
+    String pointerType,
     bool isPrimary,
   });
 }
@@ -1619,8 +1619,8 @@ class HTMLAttributes<T> {
   external set tabIndex(num? value);
   external String? get title;
   external set title(String? value);
-  external dynamic? get translate;
-  external set translate(dynamic? value);
+  external String? get translate;
+  external set translate(String? value);
   external String? get radioGroup;
   external set radioGroup(String? value);
   external AriaRole? get role;
@@ -1663,10 +1663,10 @@ class HTMLAttributes<T> {
   external set results(num? value);
   external String? get security;
   external set security(String? value);
-  external dynamic? get unselectable;
-  external set unselectable(dynamic? value);
-  external dynamic? get inputMode;
-  external set inputMode(dynamic? value);
+  external String? get unselectable;
+  external set unselectable(String? value);
+  external String? get inputMode;
+  external set inputMode(String? value);
   external factory HTMLAttributes({
     bool? defaultChecked,
     dynamic? defaultValue,
@@ -1687,7 +1687,7 @@ class HTMLAttributes<T> {
     CSSProperties? style,
     num? tabIndex,
     String? title,
-    dynamic? translate,
+    String? translate,
     String? radioGroup,
     AriaRole? role,
     String? about,
@@ -1709,8 +1709,8 @@ class HTMLAttributes<T> {
     String? itemRef,
     num? results,
     String? security,
-    dynamic? unselectable,
-    dynamic? inputMode,
+    String? unselectable,
+    String? inputMode,
   });
 }
 
@@ -2036,7 +2036,7 @@ class AllHTMLAttributes<T> {
   });
 }
 
-typedef HTMLAttributeReferrerPolicy = dynamic;
+typedef HTMLAttributeReferrerPolicy = String;
 typedef HTMLAttributeAnchorTarget = dynamic;
 
 @JS()
@@ -2158,8 +2158,8 @@ class ButtonHTMLAttributes<T> {
   external set formTarget(String? value);
   external String? get name;
   external set name(String? value);
-  external dynamic? get type;
-  external set type(dynamic? value);
+  external String? get type;
+  external set type(String? value);
   external dynamic? get value;
   external set value(dynamic? value);
   external factory ButtonHTMLAttributes({
@@ -2172,7 +2172,7 @@ class ButtonHTMLAttributes<T> {
     bool? formNoValidate,
     String? formTarget,
     String? name,
-    dynamic? type,
+    String? type,
     dynamic? value,
   });
 }
@@ -2348,8 +2348,8 @@ class IframeHTMLAttributes<T> {
   external set frameBorder(dynamic? value);
   external dynamic? get height;
   external set height(dynamic? value);
-  external dynamic? get loading;
-  external set loading(dynamic? value);
+  external String? get loading;
+  external set loading(String? value);
   external num? get marginHeight;
   external set marginHeight(num? value);
   external num? get marginWidth;
@@ -2376,7 +2376,7 @@ class IframeHTMLAttributes<T> {
     bool? allowTransparency,
     dynamic? frameBorder,
     dynamic? height,
-    dynamic? loading,
+    String? loading,
     num? marginHeight,
     num? marginWidth,
     String? name,
@@ -2395,14 +2395,14 @@ class IframeHTMLAttributes<T> {
 class ImgHTMLAttributes<T> {
   external String? get alt;
   external set alt(String? value);
-  external dynamic? get crossOrigin;
-  external set crossOrigin(dynamic? value);
-  external dynamic? get decoding;
-  external set decoding(dynamic? value);
+  external String? get crossOrigin;
+  external set crossOrigin(String? value);
+  external String? get decoding;
+  external set decoding(String? value);
   external dynamic? get height;
   external set height(dynamic? value);
-  external dynamic? get loading;
-  external set loading(dynamic? value);
+  external String? get loading;
+  external set loading(String? value);
   external HTMLAttributeReferrerPolicy? get referrerPolicy;
   external set referrerPolicy(HTMLAttributeReferrerPolicy? value);
   external String? get sizes;
@@ -2417,10 +2417,10 @@ class ImgHTMLAttributes<T> {
   external set width(dynamic? value);
   external factory ImgHTMLAttributes({
     String? alt,
-    dynamic? crossOrigin,
-    dynamic? decoding,
+    String? crossOrigin,
+    String? decoding,
     dynamic? height,
-    dynamic? loading,
+    String? loading,
     HTMLAttributeReferrerPolicy? referrerPolicy,
     String? sizes,
     String? src,
@@ -2464,8 +2464,8 @@ class InputHTMLAttributes<T> {
   external set crossOrigin(String? value);
   external bool? get disabled;
   external set disabled(bool? value);
-  external dynamic? get enterKeyHint;
-  external set enterKeyHint(dynamic? value);
+  external String? get enterKeyHint;
+  external set enterKeyHint(String? value);
   external String? get form;
   external set form(String? value);
   external String? get formAction;
@@ -2525,7 +2525,7 @@ class InputHTMLAttributes<T> {
     bool? checked,
     String? crossOrigin,
     bool? disabled,
-    dynamic? enterKeyHint,
+    String? enterKeyHint,
     String? form,
     String? formAction,
     String? formEncType,
@@ -2806,12 +2806,12 @@ class OlHTMLAttributes<T> {
   external set reversed(bool? value);
   external num? get start;
   external set start(num? value);
-  external dynamic? get type;
-  external set type(dynamic? value);
+  external String? get type;
+  external set type(String? value);
   external factory OlHTMLAttributes({
     bool? reversed,
     num? start,
-    dynamic? type,
+    String? type,
   });
 }
 
@@ -3097,8 +3097,8 @@ class TextareaHTMLAttributes<T> {
 @JS()
 @anonymous
 class TdHTMLAttributes<T> {
-  external dynamic? get align;
-  external set align(dynamic? value);
+  external String? get align;
+  external set align(String? value);
   external num? get colSpan;
   external set colSpan(num? value);
   external String? get headers;
@@ -3113,10 +3113,10 @@ class TdHTMLAttributes<T> {
   external set height(dynamic? value);
   external dynamic? get width;
   external set width(dynamic? value);
-  external dynamic? get valign;
-  external set valign(dynamic? value);
+  external String? get valign;
+  external set valign(String? value);
   external factory TdHTMLAttributes({
-    dynamic? align,
+    String? align,
     num? colSpan,
     String? headers,
     num? rowSpan,
@@ -3124,15 +3124,15 @@ class TdHTMLAttributes<T> {
     String? abbr,
     dynamic? height,
     dynamic? width,
-    dynamic? valign,
+    String? valign,
   });
 }
 
 @JS()
 @anonymous
 class ThHTMLAttributes<T> {
-  external dynamic? get align;
-  external set align(dynamic? value);
+  external String? get align;
+  external set align(String? value);
   external num? get colSpan;
   external set colSpan(num? value);
   external String? get headers;
@@ -3144,7 +3144,7 @@ class ThHTMLAttributes<T> {
   external String? get abbr;
   external set abbr(String? value);
   external factory ThHTMLAttributes({
-    dynamic? align,
+    String? align,
     num? colSpan,
     String? headers,
     num? rowSpan,
@@ -3242,24 +3242,24 @@ class SVGAttributes<T> {
   external set role(AriaRole? value);
   external num? get tabIndex;
   external set tabIndex(num? value);
-  external dynamic? get crossOrigin;
-  external set crossOrigin(dynamic? value);
+  external String? get crossOrigin;
+  external set crossOrigin(String? value);
   external dynamic? get accentHeight;
   external set accentHeight(dynamic? value);
-  external dynamic? get accumulate;
-  external set accumulate(dynamic? value);
-  external dynamic? get additive;
-  external set additive(dynamic? value);
-  external dynamic? get alignmentBaseline;
-  external set alignmentBaseline(dynamic? value);
-  external dynamic? get allowReorder;
-  external set allowReorder(dynamic? value);
+  external String? get accumulate;
+  external set accumulate(String? value);
+  external String? get additive;
+  external set additive(String? value);
+  external String? get alignmentBaseline;
+  external set alignmentBaseline(String? value);
+  external String? get allowReorder;
+  external set allowReorder(String? value);
   external dynamic? get alphabetic;
   external set alphabetic(dynamic? value);
   external dynamic? get amplitude;
   external set amplitude(dynamic? value);
-  external dynamic? get arabicForm;
-  external set arabicForm(dynamic? value);
+  external String? get arabicForm;
+  external set arabicForm(String? value);
   external dynamic? get ascent;
   external set ascent(dynamic? value);
   external String? get attributeName;
@@ -3298,8 +3298,8 @@ class SVGAttributes<T> {
   external set clipRule(dynamic? value);
   external dynamic? get colorInterpolation;
   external set colorInterpolation(dynamic? value);
-  external dynamic? get colorInterpolationFilters;
-  external set colorInterpolationFilters(dynamic? value);
+  external String? get colorInterpolationFilters;
+  external set colorInterpolationFilters(String? value);
   external dynamic? get colorProfile;
   external set colorProfile(dynamic? value);
   external dynamic? get colorRendering;
@@ -3352,8 +3352,8 @@ class SVGAttributes<T> {
   external set fill(String? value);
   external dynamic? get fillOpacity;
   external set fillOpacity(dynamic? value);
-  external dynamic? get fillRule;
-  external set fillRule(dynamic? value);
+  external String? get fillRule;
+  external set fillRule(String? value);
   external String? get filter;
   external set filter(String? value);
   external dynamic? get filterRes;
@@ -3600,10 +3600,10 @@ class SVGAttributes<T> {
   external set strokeDasharray(dynamic? value);
   external dynamic? get strokeDashoffset;
   external set strokeDashoffset(dynamic? value);
-  external dynamic? get strokeLinecap;
-  external set strokeLinecap(dynamic? value);
-  external dynamic? get strokeLinejoin;
-  external set strokeLinejoin(dynamic? value);
+  external String? get strokeLinecap;
+  external set strokeLinecap(String? value);
+  external String? get strokeLinejoin;
+  external set strokeLinejoin(String? value);
   external dynamic? get strokeMiterlimit;
   external set strokeMiterlimit(dynamic? value);
   external dynamic? get strokeOpacity;
@@ -3743,15 +3743,15 @@ class SVGAttributes<T> {
     dynamic? width,
     AriaRole? role,
     num? tabIndex,
-    dynamic? crossOrigin,
+    String? crossOrigin,
     dynamic? accentHeight,
-    dynamic? accumulate,
-    dynamic? additive,
-    dynamic? alignmentBaseline,
-    dynamic? allowReorder,
+    String? accumulate,
+    String? additive,
+    String? alignmentBaseline,
+    String? allowReorder,
     dynamic? alphabetic,
     dynamic? amplitude,
-    dynamic? arabicForm,
+    String? arabicForm,
     dynamic? ascent,
     String? attributeName,
     String? attributeType,
@@ -3771,7 +3771,7 @@ class SVGAttributes<T> {
     dynamic? clipPathUnits,
     dynamic? clipRule,
     dynamic? colorInterpolation,
-    dynamic? colorInterpolationFilters,
+    String? colorInterpolationFilters,
     dynamic? colorProfile,
     dynamic? colorRendering,
     dynamic? contentScriptType,
@@ -3798,7 +3798,7 @@ class SVGAttributes<T> {
     Booleanish? externalResourcesRequired,
     String? fill,
     dynamic? fillOpacity,
-    dynamic? fillRule,
+    String? fillRule,
     String? filter,
     dynamic? filterRes,
     dynamic? filterUnits,
@@ -3922,8 +3922,8 @@ class SVGAttributes<T> {
     String? stroke,
     dynamic? strokeDasharray,
     dynamic? strokeDashoffset,
-    dynamic? strokeLinecap,
-    dynamic? strokeLinejoin,
+    String? strokeLinecap,
+    String? strokeLinejoin,
     dynamic? strokeMiterlimit,
     dynamic? strokeOpacity,
     dynamic? strokeWidth,
@@ -5282,14 +5282,14 @@ class IntrinsicElements {
 
 @JS()
 @anonymous
-class IFragment {
+class IStrictMode {
   external ReactNode? get children;
   external set children(ReactNode? value);
 }
 
 @JS()
 @anonymous
-class IStrictMode {
+class IFragment {
   external ReactNode? get children;
   external set children(ReactNode? value);
 }

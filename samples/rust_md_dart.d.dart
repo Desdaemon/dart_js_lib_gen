@@ -12,13 +12,9 @@ typedef InitInput = dynamic;
 @anonymous
 class InitOutput {
   external Memory get memory;
-  external set memory(Memory value);
   external num Function(num a, num b) get parse;
-  external set parse(num Function(num a, num b) value);
   external num Function(num a) get __wbindgen_malloc;
-  external set __wbindgen_malloc(num Function(num a) value);
   external num Function(num a, num b, num c) get __wbindgen_realloc;
-  external set __wbindgen_realloc(num Function(num a, num b, num c) value);
   external factory InitOutput({
     Memory memory,
     num Function(num a, num b) parse,

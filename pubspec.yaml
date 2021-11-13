@@ -16,5 +16,5 @@ dependencies:
   code_builder: ^4.1.0
   dart_style: ^2.0.3
   ffi: ^1.1.2
-  flutter_rust_bridge: ^1.5.0
+  flutter_rust_bridge: ^1.6.0
   js: ^0.6.3

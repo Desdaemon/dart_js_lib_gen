@@ -119,9 +119,9 @@ class FunctionConstructor {
     String? args8,
     String? args9,
   ]);
-  external Function get prototype;
+  external Function() get prototype;
   external factory FunctionConstructor({
-    Function prototype,
+    Function() prototype,
   });
 }
 
@@ -173,11 +173,11 @@ class NewableFunction {
 class IArguments {
   external num get length;
   external set length(num value);
-  external Function get callee;
-  external set callee(Function value);
+  external Function() get callee;
+  external set callee(Function() value);
   external factory IArguments({
     num length,
-    Function callee,
+    Function() callee,
   });
 }
 
@@ -757,7 +757,7 @@ class TypedPropertyDescriptor<T> {
   });
 }
 
-typedef ClassDecorator = dynamic Function<TFunction extends Function>(TFunction target);
+typedef ClassDecorator = dynamic Function<TFunction extends Function()>(TFunction target);
 typedef PropertyDecorator = void Function(Object target, dynamic propertyKey);
 typedef MethodDecorator = dynamic Function<T>(
     Object target, dynamic propertyKey, TypedPropertyDescriptor<T> descriptor);
@@ -1681,44 +1681,44 @@ external INumberFormat NumberFormat;
 @JS()
 @anonymous
 class DateTimeFormatOptions {
-  external dynamic? get localeMatcher;
-  external set localeMatcher(dynamic? value);
-  external dynamic? get weekday;
-  external set weekday(dynamic? value);
-  external dynamic? get era;
-  external set era(dynamic? value);
-  external dynamic? get year;
-  external set year(dynamic? value);
-  external dynamic? get month;
-  external set month(dynamic? value);
-  external dynamic? get day;
-  external set day(dynamic? value);
-  external dynamic? get hour;
-  external set hour(dynamic? value);
-  external dynamic? get minute;
-  external set minute(dynamic? value);
-  external dynamic? get second;
-  external set second(dynamic? value);
-  external dynamic? get timeZoneName;
-  external set timeZoneName(dynamic? value);
-  external dynamic? get formatMatcher;
-  external set formatMatcher(dynamic? value);
+  external String? get localeMatcher;
+  external set localeMatcher(String? value);
+  external String? get weekday;
+  external set weekday(String? value);
+  external String? get era;
+  external set era(String? value);
+  external String? get year;
+  external set year(String? value);
+  external String? get month;
+  external set month(String? value);
+  external String? get day;
+  external set day(String? value);
+  external String? get hour;
+  external set hour(String? value);
+  external String? get minute;
+  external set minute(String? value);
+  external String? get second;
+  external set second(String? value);
+  external String? get timeZoneName;
+  external set timeZoneName(String? value);
+  external String? get formatMatcher;
+  external set formatMatcher(String? value);
   external bool? get hour12;
   external set hour12(bool? value);
   external String? get timeZone;
   external set timeZone(String? value);
   external factory DateTimeFormatOptions({
-    dynamic? localeMatcher,
-    dynamic? weekday,
-    dynamic? era,
-    dynamic? year,
-    dynamic? month,
-    dynamic? day,
-    dynamic? hour,
-    dynamic? minute,
-    dynamic? second,
-    dynamic? timeZoneName,
-    dynamic? formatMatcher,
+    String? localeMatcher,
+    String? weekday,
+    String? era,
+    String? year,
+    String? month,
+    String? day,
+    String? hour,
+    String? minute,
+    String? second,
+    String? timeZoneName,
+    String? formatMatcher,
     bool? hour12,
     String? timeZone,
   });
@@ -1799,16 +1799,16 @@ class Date {
 
 @JS()
 @anonymous
-class INumberFormat {
-  external factory INumberFormat({dynamic locales, NumberFormatOptions options});
-  external List<String> supportedLocalesOf(dynamic locales, NumberFormatOptions options);
+class IDateTimeFormat {
+  external factory IDateTimeFormat({dynamic locales, DateTimeFormatOptions options});
+  external List<String> supportedLocalesOf(dynamic locales, DateTimeFormatOptions options);
 }
 
 @JS()
 @anonymous
-class IDateTimeFormat {
-  external factory IDateTimeFormat({dynamic locales, DateTimeFormatOptions options});
-  external List<String> supportedLocalesOf(dynamic locales, DateTimeFormatOptions options);
+class INumberFormat {
+  external factory INumberFormat({dynamic locales, NumberFormatOptions options});
+  external List<String> supportedLocalesOf(dynamic locales, NumberFormatOptions options);
 }
 
 @JS()

@@ -34,7 +34,9 @@ Future<void> main(List<String> arguments) async {
   final lineLength = int.parse(args['line-length']);
   final rest = args.rest.where((e) => e.endsWith('ts'));
   if (rest.isEmpty || help) {
-    print(parser.usage);
+    final exe = Platform.executable;
+    stderr.writeln('$exe <*.ts> [options]\nOptions:');
+    stderr.writeln(parser.usage);
     return;
   }
   final config = Config(inputs: rest.toList(growable: false));
@@ -46,7 +48,7 @@ Future<void> main(List<String> arguments) async {
     final formatted = format ? DartFormatter(pageWidth: lineLength).format(relined) : relined;
     if (write) {
       final path = p.setExtension(file.key, '.dart');
-      print('Writing to $path...');
+      stderr.writeln('Writing to $path...');
       File(path).writeAsString(formatted);
     } else {
       print(formatted);

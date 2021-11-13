@@ -124,6 +124,32 @@ impl Transformer {
     }
 }
 
+/// Valid identifiers in JavaScript but not in Dart. Non-exhaustive.
+static FORBIDDEN_IDENTS: &[&str] = &[
+    "default", "switch", "in", "var", "is", "continue", "extends", "catch", "assert",
+];
+
+fn valid_identifier(id: &str) -> Option<String> {
+    if id.contains('-') {
+        Some(format!("Invalid character in identifier: {}", id))
+    } else if FORBIDDEN_IDENTS.contains(&id) {
+        Some(format!("{} is a reserved keyword", id))
+    } else {
+        None
+    }
+}
+
+macro_rules! gen_matcher {
+    ($ty:ident, $($pat:pat),*) => {
+        match $ty {
+            $(
+                $pat => |ty: &Box<TsType>| matches!(ty.as_ref(), $pat),
+             )*
+            _ => { return false; }
+        }
+    };
+}
+
 impl Transformer {
     fn visit_module_item(&mut self, items: &[ModuleItem]) {
         items.iter().for_each(|e| match e {
@@ -338,12 +364,8 @@ impl Transformer {
             error!("Member already defined: {}", id);
             return;
         }
-        if id.contains('-') {
-            warn!("Invalid character in property name: {}.", id);
-            return;
-        }
-        if ["default", "switch", "in", "var", "is"].contains(&id) {
-            warn!("Forbidden property name: {}.", id);
+        if let Some(err) = valid_identifier(id) {
+            warn!("{}", err);
             return;
         }
         let ty = self.collect(|s| {
@@ -444,13 +466,8 @@ impl Transformer {
             error!("Member already defined: {}", id);
             return;
         }
-        if ["catch"].contains(&id) {
-            // Dart keyword, cannot be called.
-            warn!("Forbidden method name: {}.", id);
-            return;
-        }
-        if id.contains('-') {
-            warn!("Forbidden method name: {}.", id);
+        if let Some(err) = valid_identifier(id) {
+            warn!("{}", err);
             return;
         }
         self.push("external ");
@@ -503,15 +520,21 @@ impl Transformer {
         }
     }
 
-    fn visit_entity_name(&mut self, name: &TsEntityName) {
+    fn visit_entity_name(&mut self, name: &TsEntityName) -> bool {
         let id: &str = match name {
             TsEntityName::TsQualifiedName(qn) => &qn.right.sym,
             TsEntityName::Ident(ident) => &ident.sym,
         };
+        if ["Function"].contains(&id) {
+            warn!("{} is not a valid type.", id);
+            self.push("Function()");
+            return false;
+        }
         if !self.resolved.contains(id) {
             self.undecls.insert(id.to_owned());
         }
         self.push(id);
+        true
     }
 
     /// Emits the inner function parametes, not including the surrounding parentheses.
@@ -546,13 +569,14 @@ impl Transformer {
     fn visit_function_param_single(&mut self, item: &TsFnParam) {
         match item {
             TsFnParam::Ident(ident) => {
-                if &ident.id.sym == "this" {
+                let id: &str = &ident.id.sym;
+                if id == "this" {
                     // 'this' is a TypeScript concept, it cannot be applied to Dart.
                     return;
                 }
                 self.visit_type_ann(&ident.type_ann);
                 self.push_char(' ');
-                self.push(&ident.id.sym);
+                self.push(id);
             }
             TsFnParam::Rest(rest) => self.visit_rest_pat(rest),
             _ => {
@@ -572,8 +596,85 @@ impl Transformer {
         }
     }
 
+    fn visit_union(&mut self, uni: &TsUnionType) -> bool {
+        let is_parseable_union = self.visit_mono_union(uni) || self.visit_nullable_union(uni);
+        if !is_parseable_union {
+            self.push("dynamic");
+        }
+        is_parseable_union
+    }
+
+    /// Returns whether this union was a nullable union,
+    /// i.e. `T | null | undefined`
+    fn visit_nullable_union(&mut self, uni: &TsUnionType) -> bool {
+        let simple_union: Vec<_> = uni
+            .types
+            .iter()
+            .cloned()
+            .filter(|e| {
+                !matches!(
+                    e.as_ref(),
+                    TsType::TsKeywordType(TsKeywordType {
+                        kind: TsKeywordTypeKind::TsUndefinedKeyword
+                            | TsKeywordTypeKind::TsNullKeyword,
+                        ..
+                    })
+                )
+            })
+            .collect();
+        if simple_union.len() == 1 {
+            self.visit_type(simple_union.first().unwrap().as_ref());
+            self.push_char('?');
+            return true;
+        }
+        if self.visit_mono_union(&TsUnionType {
+            span: uni.span,
+            types: simple_union,
+        }) {
+            self.push_char('?');
+            return true;
+        }
+
+        false
+    }
+
+    /// Returns whether this union was a union of literals of the same kind,
+    /// i.e. `'one' | 'two' | 'three'` or `1 | 2 | 3`
+    fn visit_mono_union(&mut self, uni: &TsUnionType) -> bool {
+        let ty: &TsType = uni.types.first().as_ref().unwrap();
+        let matcher = gen_matcher!(
+            ty,
+            TsType::TsLitType(TsLitType {
+                lit: TsLit::Str(_),
+                ..
+            }),
+            TsType::TsLitType(TsLitType {
+                lit: TsLit::Number(_),
+                ..
+            }),
+            TsType::TsLitType(TsLitType {
+                lit: TsLit::Bool(_),
+                ..
+            })
+        );
+        let is_mono_union = uni.types.iter().all(matcher);
+        if is_mono_union {
+            self.visit_type(ty);
+        }
+        is_mono_union
+    }
+
     fn visit_type(&mut self, typ: &TsType) {
         match typ {
+            TsType::TsTypeLit(type_lit) => self.visit_ts_type_lit(type_lit),
+            TsType::TsTypePredicate(_) => self.push("bool"), // A is B
+            TsType::TsTupleType(_) => self.push("List<dynamic>"),
+            TsType::TsParenthesizedType(TsParenthesizedType { type_ann, .. }) => {
+                self.visit_type(type_ann)
+            }
+            TsType::TsUnionOrIntersectionType(TsUnionOrIntersectionType::TsUnionType(uni)) => {
+                self.visit_union(uni);
+            }
             TsType::TsKeywordType(key) => match key.kind {
                 TsKeywordTypeKind::TsNumberKeyword | TsKeywordTypeKind::TsBigIntKeyword => {
                     self.push("num")
@@ -599,7 +700,9 @@ impl Transformer {
                 }
             },
             TsType::TsTypeRef(re) => {
-                self.visit_entity_name(&re.type_name);
+                if !self.visit_entity_name(&re.type_name) {
+                    return;
+                }
                 if let Some(para) = &re.type_params {
                     self.push_char('<');
                     for item in &para.params {
@@ -624,26 +727,6 @@ impl Transformer {
                 TsLit::Str(_) | TsLit::Tpl(_) => self.push("String"),
                 TsLit::Bool(_) => self.push("bool"),
             },
-            TsType::TsUnionOrIntersectionType(TsUnionOrIntersectionType::TsUnionType(uni)) => {
-                let simple_union: Vec<_> = uni
-                    .types
-                    .iter()
-                    .filter(|e| match e.as_ref() {
-                        TsType::TsKeywordType(TsKeywordType { kind, .. }) => !matches!(
-                            kind,
-                            TsKeywordTypeKind::TsUndefinedKeyword
-                                | TsKeywordTypeKind::TsNullKeyword
-                        ),
-                        _ => true,
-                    })
-                    .collect();
-                if simple_union.len() == 1 {
-                    self.visit_type(simple_union.first().unwrap().as_ref());
-                    self.push_char('?');
-                } else {
-                    self.push("dynamic");
-                }
-            }
             TsType::TsTypeOperator(op) => match op.op.as_str() {
                 "readonly" => self.visit_type(&op.type_ann),
                 "keyof" => self.push("String"),
@@ -662,12 +745,6 @@ impl Transformer {
                     .unwrap_or_else(|| "dynamic".to_owned());
                 self.push(&ty);
             }
-            TsType::TsTypePredicate(_) => self.push("bool"), // A is B
-            TsType::TsParenthesizedType(TsParenthesizedType { type_ann, .. }) => {
-                self.visit_type(type_ann)
-            }
-            TsType::TsTypeLit(type_lit) => self.visit_ts_type_lit(type_lit),
-            TsType::TsTupleType(_) => self.push("List<dynamic>"),
             TsType::TsUnionOrIntersectionType(TsUnionOrIntersectionType::TsIntersectionType(_))
             | TsType::TsConditionalType(_) // T extends .. ? .. : ..
             | TsType::TsMappedType(_)
