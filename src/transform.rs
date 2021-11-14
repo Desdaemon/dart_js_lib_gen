@@ -11,7 +11,7 @@ use swc_common::SourceFile;
 use swc_common::Span;
 use swc_ecma_ast::*;
 
-#[cfg(debug_assertions)]
+#[cfg(feature = "alloc_counter")]
 #[global_allocator]
 static A: alloc_counter::AllocCounterSystem = alloc_counter::AllocCounterSystem;
 
@@ -127,10 +127,10 @@ impl Transformer {
     }
 
     fn push(&mut self, input: &str) {
-        #[cfg(not(debug_assertions))]
+        #[cfg(not(feature = "alloc_counter"))]
         self.bufs.last_mut().unwrap().push_str(input);
 
-        #[cfg(debug_assertions)]
+        #[cfg(feature = "alloc_counter")]
         {
             let buf = self.bufs.last_mut().unwrap();
             let ((_, reallocs, _), _) = alloc_counter::count_alloc(|| buf.push_str(input));
@@ -139,10 +139,10 @@ impl Transformer {
     }
 
     fn push_char(&mut self, c: char) {
-        #[cfg(not(debug_assertions))]
+        #[cfg(not(feature = "alloc_counter"))]
         self.bufs.last_mut().unwrap().push(c);
 
-        #[cfg(debug_assertions)]
+        #[cfg(feature = "alloc_counter")]
         {
             let buf = self.bufs.last_mut().unwrap();
             let ((_, reallocs, _), _) = alloc_counter::count_alloc(|| buf.push(c));
@@ -204,8 +204,16 @@ impl Transformer {
                     .with_message("Dart reserved identifier")
                     .with_label(
                         Label::new((path.clone(), span))
-                            .with_message("This identifier is reserved by Dart.".fg(Color::Yellow))
+                            .with_message(format!("{} is reserved by Dart.", id).fg(Color::Yellow))
                             .with_color(Color::Yellow),
+                    )
+                    .with_label(
+                        Label::new((path.clone(), self.span.clone()))
+                            .with_message(
+                                "This interface/class contains the invalid identifier."
+                                    .fg(Color::Blue),
+                            )
+                            .with_color(Color::Blue),
                     )
                     .finish()
                     .eprint(&mut self.source)
@@ -409,7 +417,7 @@ impl Transformer {
         let id = decl.id.sym.as_ref();
         self.undecls.remove(id);
         self.resolved.insert(id.to_owned());
-        if ["String", "Function"].contains(&id) {
+        if ["String"].contains(&id) {
             self.errors += 1;
             if log_enabled!(Level::Error) {
                 let (path, _) = &self.source;
@@ -417,7 +425,8 @@ impl Transformer {
                     .with_message("Forbidden interface name")
                     .with_label(
                         Label::new((path.clone(), self.range_of(decl.id.span)))
-                            .with_message("Consider renaming this interface"),
+                            .with_message("Rename this interface".fg(Color::Red))
+                            .with_color(Color::Red),
                     )
                     .finish()
                     .eprint(&mut self.source)
@@ -439,7 +448,9 @@ impl Transformer {
             s.push_char('{');
             {
                 s.visit_type_elements(&decl.body.body);
-                s.emit_factory_constr();
+                if s.class.as_ref().unwrap().anonymous {
+                    s.emit_factory_constr();
+                }
             }
             s.push_char('}');
         });
@@ -509,15 +520,11 @@ impl Transformer {
         for item in &var.decls {
             if let swc_ecma_ast::Pat::Ident(ident) = &item.name {
                 let id = ident.id.sym.as_ref();
-                if ["String"].contains(&id) {
-                    // warn!("Forbidden variable name: {}.", id);
-                    continue;
-                }
                 self.current_ident = Some(id.to_owned());
                 self.annotate(id);
                 self.push("external ");
                 self.visit_type_ann(&ident.type_ann);
-                self.push_char(' ');
+                self.push(" J");
                 self.push(id);
                 self.semi();
                 self.current_ident.take().unwrap();
@@ -676,6 +683,9 @@ impl Transformer {
             .register_member(id)
             .and_then(|e| self.valid_identifier(e, self.range_of(met.span)))
         {
+            if id == "toString" {
+                self.push("@override ");
+            }
             self.push("external ");
             self.visit_type_ann(&met.type_ann);
             self.push_char(' ');
@@ -732,20 +742,15 @@ impl Transformer {
         }
     }
 
-    fn visit_entity_name(&mut self, name: &TsEntityName) -> bool {
+    fn visit_entity_name(&mut self, name: &TsEntityName) {
         let id: &str = match name {
             TsEntityName::TsQualifiedName(qn) => &qn.right.sym,
             TsEntityName::Ident(ident) => &ident.sym,
         };
-        if id == "Function" {
-            self.push("Function()");
-            return false;
-        }
         if !self.resolved.contains(id) {
             self.undecls.insert(id.to_owned());
         }
         self.push(id);
-        true
     }
 
     /// Emits the inner function parametes, not including the surrounding parentheses.
@@ -880,9 +885,7 @@ impl Transformer {
             TsType::TsTypeLit(type_lit) => self.visit_ts_type_lit(type_lit),
             TsType::TsTypePredicate(_) => self.push("bool"), // A is B
             TsType::TsTupleType(_) => self.push("List<dynamic>"),
-            TsType::TsParenthesizedType(TsParenthesizedType { type_ann, .. }) => {
-                self.visit_type(type_ann)
-            }
+            TsType::TsParenthesizedType(ty) => self.visit_type(&ty.type_ann),
             TsType::TsUnionOrIntersectionType(TsUnionOrIntersectionType::TsUnionType(uni)) => {
                 self.visit_union(uni);
             }
@@ -904,6 +907,7 @@ impl Transformer {
                     self.visit_function_params(&func.params);
                     self.push_char(')');
                 }
+                // new(..): ..
                 TsFnOrConstructorType::TsConstructorType(ctor) => {
                     // warn!("Constructor type not handled.");
                     debug!("{:?}", ctor);
@@ -911,9 +915,7 @@ impl Transformer {
                 }
             },
             TsType::TsTypeRef(re) => {
-                if !self.visit_entity_name(&re.type_name) {
-                    return;
-                }
+                self.visit_entity_name(&re.type_name);
                 if let Some(para) = &re.type_params {
                     self.push_char('<');
                     for item in &para.params {
@@ -931,7 +933,9 @@ impl Transformer {
             }
             TsType::TsOptionalType(typ) => {
                 self.visit_type(&typ.type_ann);
-                self.push_char('?');
+                if !self.buf().ends_with('?') {
+                    self.push_char('?');
+                }
             }
             TsType::TsLitType(TsLitType { lit, .. }) => match lit {
                 TsLit::Number(_) | TsLit::BigInt(_) => self.push("num"),
@@ -956,16 +960,7 @@ impl Transformer {
                     .unwrap_or_else(|| "dynamic".to_owned());
                 self.push(&ty);
             }
-            TsType::TsUnionOrIntersectionType(TsUnionOrIntersectionType::TsIntersectionType(_))
-            | TsType::TsConditionalType(_) // T extends .. ? .. : ..
-            | TsType::TsMappedType(_)
-            | TsType::TsIndexedAccessType(_) // { [..]: .. }
-            | TsType::TsTypeQuery(_) // typeof ..
-            => self.push("dynamic"),
-            _ => {
-                error!("Unhandled type: {:?}", typ);
-                todo!()
-            }
+            _ => self.push("dynamic"),
         };
     }
 
@@ -1003,6 +998,7 @@ impl Transformer {
     fn visit_class(&mut self, ClassDecl { class, ident, .. }: &ClassDecl) {
         let id: &str = &ident.sym;
         self.undecls.remove(id);
+        self.resolved.insert(id.to_owned());
         self.class = Some(Class {
             fields: vec![],
             id: id.to_owned(),
@@ -1017,8 +1013,22 @@ impl Transformer {
             self.push(self.parse_expression(extends).unwrap().0);
         }
         if !class.implements.is_empty() {
+            self.push(" implements ");
             for imp in &class.implements {
-                dbg!(imp);
+                self.visit_entity_name(&imp.expr);
+                if let Some(args) = &imp.type_args {
+                    self.push_char('<');
+                    for ty in &args.params {
+                        self.visit_type(&ty);
+                        self.push_char(',')
+                    }
+                    self.pop();
+                    self.push_char('>');
+                }
+                self.push_char(',');
+            }
+            if class.implements.len() != 1 {
+                self.pop();
             }
         }
         self.push_char('{');
@@ -1075,6 +1085,7 @@ impl Transformer {
                 self.push(self.parse_expression(key).unwrap().0);
                 self.semi();
             }
+            ClassMember::PrivateProp(_) => {}
             _ => {
                 error!("Unhandled class member:\n{:?}", member);
                 todo!()

@@ -5,9 +5,9 @@ library samples.lib.es5.d.ts;
 import 'package:js/js.dart';
 
 @JS('NaN')
-external num NaN;
+external num JNaN;
 @JS('Infinity')
-external num Infinity;
+external num JInfinity;
 @JS('eval')
 external dynamic eval(String x);
 @JS('parseInt')
@@ -34,6 +34,7 @@ external String unescape(String string);
 @JS()
 @anonymous
 class Symbol {
+  @override
   external String toString();
   external dynamic valueOf();
 }
@@ -68,8 +69,9 @@ class PropertyDescriptorMap {}
 @JS()
 @anonymous
 class Object {
-  external Function() get constructor;
-  external set constructor(Function() value);
+  external Function get constructor;
+  external set constructor(Function value);
+  @override
   external String toString();
   external String toLocaleString();
   external Object valueOf();
@@ -77,7 +79,7 @@ class Object {
   external bool isPrototypeOf(Object v);
   external bool propertyIsEnumerable(PropertyKey v);
   external factory Object({
-    Function() constructor,
+    Function constructor,
   });
 }
 
@@ -98,13 +100,55 @@ class ObjectConstructor {
   external bool isFrozen(dynamic o);
   external bool isExtensible(dynamic o);
   external List<String> keys(dynamic o);
-  external factory ObjectConstructor({
-    Object prototype,
-  });
 }
 
 @JS('Object')
-external ObjectConstructor Object;
+external ObjectConstructor JObject;
+
+@JS()
+@anonymous
+class Function {
+  external dynamic apply(dynamic thisArg, dynamic argArray);
+  external dynamic call(
+    dynamic thisArg, [
+    dynamic argArray1,
+    dynamic argArray2,
+    dynamic argArray3,
+    dynamic argArray4,
+    dynamic argArray5,
+    dynamic argArray6,
+    dynamic argArray7,
+    dynamic argArray8,
+    dynamic argArray9,
+  ]);
+  external dynamic bind(
+    dynamic thisArg, [
+    dynamic argArray1,
+    dynamic argArray2,
+    dynamic argArray3,
+    dynamic argArray4,
+    dynamic argArray5,
+    dynamic argArray6,
+    dynamic argArray7,
+    dynamic argArray8,
+    dynamic argArray9,
+  ]);
+  @override
+  external String toString();
+  external dynamic get prototype;
+  external set prototype(dynamic value);
+  external num get length;
+  external dynamic get arguments;
+  external set arguments(dynamic value);
+  external Function get caller;
+  external set caller(Function value);
+  external factory Function({
+    dynamic prototype,
+    num length,
+    dynamic arguments,
+    Function caller,
+  });
+}
 
 @JS()
 class FunctionConstructor {
@@ -119,14 +163,11 @@ class FunctionConstructor {
     String? args8,
     String? args9,
   ]);
-  external Function() get prototype;
-  external factory FunctionConstructor({
-    Function() prototype,
-  });
+  external Function get prototype;
 }
 
 @JS('Function')
-external FunctionConstructor Function;
+external FunctionConstructor JFunction;
 typedef ThisParameterType<T> = dynamic;
 typedef OmitThisParameter<T> = dynamic;
 
@@ -173,11 +214,11 @@ class NewableFunction {
 class IArguments {
   external num get length;
   external set length(num value);
-  external Function() get callee;
-  external set callee(Function() value);
+  external Function get callee;
+  external set callee(Function value);
   external factory IArguments({
     num length,
-    Function() callee,
+    Function callee,
   });
 }
 
@@ -196,10 +237,10 @@ class StringConstructor {
     num? codes8,
     num? codes9,
   ]);
-  external factory StringConstructor({
-    String prototype,
-  });
 }
+
+@JS('String')
+external StringConstructor JString;
 
 @JS()
 @anonymous
@@ -211,17 +252,15 @@ class Boolean {
 class BooleanConstructor {
   external factory BooleanConstructor({dynamic value});
   external Boolean get prototype;
-  external factory BooleanConstructor({
-    Boolean prototype,
-  });
 }
 
 @JS('Boolean')
-external BooleanConstructor Boolean;
+external BooleanConstructor JBoolean;
 
 @JS()
 @anonymous
 class Number {
+  @override
   external String toString(num radix);
   external String toFixed(num fractionDigits);
   external String toExponential(num fractionDigits);
@@ -238,18 +277,10 @@ class NumberConstructor {
   external num get NaN;
   external num get NEGATIVE_INFINITY;
   external num get POSITIVE_INFINITY;
-  external factory NumberConstructor({
-    Number prototype,
-    num MAX_VALUE,
-    num MIN_VALUE,
-    num NaN,
-    num NEGATIVE_INFINITY,
-    num POSITIVE_INFINITY,
-  });
 }
 
 @JS('Number')
-external NumberConstructor Number;
+external NumberConstructor JNumber;
 
 @JS()
 @anonymous
@@ -326,11 +357,12 @@ class Math {
 }
 
 @JS('Math')
-external Math Math;
+external Math JMath;
 
 @JS()
 @anonymous
 class Date {
+  @override
   external String toString();
   external String toDateString();
   external String toTimeString();
@@ -383,13 +415,10 @@ class DateConstructor {
   external num parse(String s);
   external num UTC(num year, num month, num date, num hours, num minutes, num seconds, num ms);
   external num now();
-  external factory DateConstructor({
-    Date prototype,
-  });
 }
 
 @JS('Date')
-external DateConstructor Date;
+external DateConstructor JDate;
 
 @JS()
 @anonymous
@@ -462,23 +491,10 @@ class RegExpConstructor {
   external set $9(String value);
   external String get lastMatch;
   external set lastMatch(String value);
-  external factory RegExpConstructor({
-    RegExp prototype,
-    String $1,
-    String $2,
-    String $3,
-    String $4,
-    String $5,
-    String $6,
-    String $7,
-    String $8,
-    String $9,
-    String lastMatch,
-  });
 }
 
 @JS('RegExp')
-external RegExpConstructor RegExp;
+external RegExpConstructor JRegExp;
 
 @JS()
 @anonymous
@@ -500,13 +516,10 @@ class Error {
 class ErrorConstructor {
   external factory ErrorConstructor({String message});
   external Error get prototype;
-  external factory ErrorConstructor({
-    Error prototype,
-  });
 }
 
 @JS('Error')
-external ErrorConstructor Error;
+external ErrorConstructor JError;
 
 @JS()
 @anonymous
@@ -516,13 +529,10 @@ class EvalError {}
 class EvalErrorConstructor {
   external factory EvalErrorConstructor({String message});
   external EvalError get prototype;
-  external factory EvalErrorConstructor({
-    EvalError prototype,
-  });
 }
 
 @JS('EvalError')
-external EvalErrorConstructor EvalError;
+external EvalErrorConstructor JEvalError;
 
 @JS()
 @anonymous
@@ -532,13 +542,10 @@ class RangeError {}
 class RangeErrorConstructor {
   external factory RangeErrorConstructor({String message});
   external RangeError get prototype;
-  external factory RangeErrorConstructor({
-    RangeError prototype,
-  });
 }
 
 @JS('RangeError')
-external RangeErrorConstructor RangeError;
+external RangeErrorConstructor JRangeError;
 
 @JS()
 @anonymous
@@ -548,13 +555,10 @@ class ReferenceError {}
 class ReferenceErrorConstructor {
   external factory ReferenceErrorConstructor({String message});
   external ReferenceError get prototype;
-  external factory ReferenceErrorConstructor({
-    ReferenceError prototype,
-  });
 }
 
 @JS('ReferenceError')
-external ReferenceErrorConstructor ReferenceError;
+external ReferenceErrorConstructor JReferenceError;
 
 @JS()
 @anonymous
@@ -564,13 +568,10 @@ class SyntaxError {}
 class SyntaxErrorConstructor {
   external factory SyntaxErrorConstructor({String message});
   external SyntaxError get prototype;
-  external factory SyntaxErrorConstructor({
-    SyntaxError prototype,
-  });
 }
 
 @JS('SyntaxError')
-external SyntaxErrorConstructor SyntaxError;
+external SyntaxErrorConstructor JSyntaxError;
 
 @JS()
 @anonymous
@@ -580,13 +581,10 @@ class TypeError {}
 class TypeErrorConstructor {
   external factory TypeErrorConstructor({String message});
   external TypeError get prototype;
-  external factory TypeErrorConstructor({
-    TypeError prototype,
-  });
 }
 
 @JS('TypeError')
-external TypeErrorConstructor TypeError;
+external TypeErrorConstructor JTypeError;
 
 @JS()
 @anonymous
@@ -596,13 +594,10 @@ class URIError {}
 class URIErrorConstructor {
   external factory URIErrorConstructor({String message});
   external URIError get prototype;
-  external factory URIErrorConstructor({
-    URIError prototype,
-  });
 }
 
 @JS('URIError')
-external URIErrorConstructor URIError;
+external URIErrorConstructor JURIError;
 
 @JS()
 @anonymous
@@ -612,12 +607,13 @@ class JSON {
 }
 
 @JS('JSON')
-external JSON JSON;
+external JSON JJSON;
 
 @JS()
 @anonymous
 class ReadonlyArray<T> {
   external num get length;
+  @override
   external String toString();
   external String toLocaleString();
   external List<T> concat([
@@ -663,6 +659,7 @@ class ConcatArray<T> {
 class Array<T> {
   external num get length;
   external set length(num value);
+  @override
   external String toString();
   external String toLocaleString();
   external T? pop();
@@ -724,13 +721,10 @@ class ArrayConstructor {
   external factory ArrayConstructor({num arrayLength});
   external bool isArray(dynamic arg);
   external List<dynamic> get prototype;
-  external factory ArrayConstructor({
-    List<dynamic> prototype,
-  });
 }
 
 @JS('Array')
-external ArrayConstructor Array;
+external ArrayConstructor JArray;
 
 @JS()
 @anonymous
@@ -757,7 +751,7 @@ class TypedPropertyDescriptor<T> {
   });
 }
 
-typedef ClassDecorator = dynamic Function<TFunction extends Function()>(TFunction target);
+typedef ClassDecorator = dynamic Function<TFunction extends Function>(TFunction target);
 typedef PropertyDecorator = void Function(Object target, dynamic propertyKey);
 typedef MethodDecorator = dynamic Function<T>(
     Object target, dynamic propertyKey, TypedPropertyDescriptor<T> descriptor);
@@ -860,13 +854,10 @@ class ArrayBufferConstructor {
   external ArrayBuffer get prototype;
   external factory ArrayBufferConstructor({num byteLength});
   external bool isView(dynamic arg);
-  external factory ArrayBufferConstructor({
-    ArrayBuffer prototype,
-  });
 }
 
 @JS('ArrayBuffer')
-external ArrayBufferConstructor ArrayBuffer;
+external ArrayBufferConstructor JArrayBuffer;
 
 @JS()
 @anonymous
@@ -917,13 +908,10 @@ class DataView {
 class DataViewConstructor {
   external DataView get prototype;
   external factory DataViewConstructor({ArrayBufferLike buffer, num byteOffset, num byteLength});
-  external factory DataViewConstructor({
-    DataView prototype,
-  });
 }
 
 @JS('DataView')
-external DataViewConstructor DataView;
+external DataViewConstructor JDataView;
 
 @JS()
 @anonymous
@@ -954,6 +942,7 @@ class Int8Array {
   external Int8Array sort(num Function(num a, num b) compareFn);
   external Int8Array subarray(num begin, num end);
   external String toLocaleString();
+  @override
   external String toString();
   external Int8Array valueOf();
   external factory Int8Array({
@@ -982,14 +971,10 @@ class Int8ArrayConstructor {
     num? items9,
   ]);
   external Int8Array from(ArrayLike<num> arrayLike);
-  external factory Int8ArrayConstructor({
-    Int8Array prototype,
-    num BYTES_PER_ELEMENT,
-  });
 }
 
 @JS('Int8Array')
-external Int8ArrayConstructor Int8Array;
+external Int8ArrayConstructor JInt8Array;
 
 @JS()
 @anonymous
@@ -1020,6 +1005,7 @@ class Uint8Array {
   external Uint8Array sort(num Function(num a, num b) compareFn);
   external Uint8Array subarray(num begin, num end);
   external String toLocaleString();
+  @override
   external String toString();
   external Uint8Array valueOf();
   external factory Uint8Array({
@@ -1048,14 +1034,10 @@ class Uint8ArrayConstructor {
     num? items9,
   ]);
   external Uint8Array from(ArrayLike<num> arrayLike);
-  external factory Uint8ArrayConstructor({
-    Uint8Array prototype,
-    num BYTES_PER_ELEMENT,
-  });
 }
 
 @JS('Uint8Array')
-external Uint8ArrayConstructor Uint8Array;
+external Uint8ArrayConstructor JUint8Array;
 
 @JS()
 @anonymous
@@ -1089,6 +1071,7 @@ class Uint8ClampedArray {
   external Uint8ClampedArray sort(num Function(num a, num b) compareFn);
   external Uint8ClampedArray subarray(num begin, num end);
   external String toLocaleString();
+  @override
   external String toString();
   external Uint8ClampedArray valueOf();
   external factory Uint8ClampedArray({
@@ -1117,14 +1100,10 @@ class Uint8ClampedArrayConstructor {
     num? items9,
   ]);
   external Uint8ClampedArray from(ArrayLike<num> arrayLike);
-  external factory Uint8ClampedArrayConstructor({
-    Uint8ClampedArray prototype,
-    num BYTES_PER_ELEMENT,
-  });
 }
 
 @JS('Uint8ClampedArray')
-external Uint8ClampedArrayConstructor Uint8ClampedArray;
+external Uint8ClampedArrayConstructor JUint8ClampedArray;
 
 @JS()
 @anonymous
@@ -1155,6 +1134,7 @@ class Int16Array {
   external Int16Array sort(num Function(num a, num b) compareFn);
   external Int16Array subarray(num begin, num end);
   external String toLocaleString();
+  @override
   external String toString();
   external Int16Array valueOf();
   external factory Int16Array({
@@ -1183,14 +1163,10 @@ class Int16ArrayConstructor {
     num? items9,
   ]);
   external Int16Array from(ArrayLike<num> arrayLike);
-  external factory Int16ArrayConstructor({
-    Int16Array prototype,
-    num BYTES_PER_ELEMENT,
-  });
 }
 
 @JS('Int16Array')
-external Int16ArrayConstructor Int16Array;
+external Int16ArrayConstructor JInt16Array;
 
 @JS()
 @anonymous
@@ -1222,6 +1198,7 @@ class Uint16Array {
   external Uint16Array sort(num Function(num a, num b) compareFn);
   external Uint16Array subarray(num begin, num end);
   external String toLocaleString();
+  @override
   external String toString();
   external Uint16Array valueOf();
   external factory Uint16Array({
@@ -1250,14 +1227,10 @@ class Uint16ArrayConstructor {
     num? items9,
   ]);
   external Uint16Array from(ArrayLike<num> arrayLike);
-  external factory Uint16ArrayConstructor({
-    Uint16Array prototype,
-    num BYTES_PER_ELEMENT,
-  });
 }
 
 @JS('Uint16Array')
-external Uint16ArrayConstructor Uint16Array;
+external Uint16ArrayConstructor JUint16Array;
 
 @JS()
 @anonymous
@@ -1288,6 +1261,7 @@ class Int32Array {
   external Int32Array sort(num Function(num a, num b) compareFn);
   external Int32Array subarray(num begin, num end);
   external String toLocaleString();
+  @override
   external String toString();
   external Int32Array valueOf();
   external factory Int32Array({
@@ -1316,14 +1290,10 @@ class Int32ArrayConstructor {
     num? items9,
   ]);
   external Int32Array from(ArrayLike<num> arrayLike);
-  external factory Int32ArrayConstructor({
-    Int32Array prototype,
-    num BYTES_PER_ELEMENT,
-  });
 }
 
 @JS('Int32Array')
-external Int32ArrayConstructor Int32Array;
+external Int32ArrayConstructor JInt32Array;
 
 @JS()
 @anonymous
@@ -1355,6 +1325,7 @@ class Uint32Array {
   external Uint32Array sort(num Function(num a, num b) compareFn);
   external Uint32Array subarray(num begin, num end);
   external String toLocaleString();
+  @override
   external String toString();
   external Uint32Array valueOf();
   external factory Uint32Array({
@@ -1383,14 +1354,10 @@ class Uint32ArrayConstructor {
     num? items9,
   ]);
   external Uint32Array from(ArrayLike<num> arrayLike);
-  external factory Uint32ArrayConstructor({
-    Uint32Array prototype,
-    num BYTES_PER_ELEMENT,
-  });
 }
 
 @JS('Uint32Array')
-external Uint32ArrayConstructor Uint32Array;
+external Uint32ArrayConstructor JUint32Array;
 
 @JS()
 @anonymous
@@ -1422,6 +1389,7 @@ class Float32Array {
   external Float32Array sort(num Function(num a, num b) compareFn);
   external Float32Array subarray(num begin, num end);
   external String toLocaleString();
+  @override
   external String toString();
   external Float32Array valueOf();
   external factory Float32Array({
@@ -1450,14 +1418,10 @@ class Float32ArrayConstructor {
     num? items9,
   ]);
   external Float32Array from(ArrayLike<num> arrayLike);
-  external factory Float32ArrayConstructor({
-    Float32Array prototype,
-    num BYTES_PER_ELEMENT,
-  });
 }
 
 @JS('Float32Array')
-external Float32ArrayConstructor Float32Array;
+external Float32ArrayConstructor JFloat32Array;
 
 @JS()
 @anonymous
@@ -1488,6 +1452,7 @@ class Float64Array {
   external bool some(dynamic Function(num value, num index, Float64Array array) predicate, dynamic thisArg);
   external Float64Array sort(num Function(num a, num b) compareFn);
   external Float64Array subarray(num begin, num end);
+  @override
   external String toString();
   external Float64Array valueOf();
   external factory Float64Array({
@@ -1516,14 +1481,10 @@ class Float64ArrayConstructor {
     num? items9,
   ]);
   external Float64Array from(ArrayLike<num> arrayLike);
-  external factory Float64ArrayConstructor({
-    Float64Array prototype,
-    num BYTES_PER_ELEMENT,
-  });
 }
 
 @JS('Float64Array')
-external Float64ArrayConstructor Float64Array;
+external Float64ArrayConstructor JFloat64Array;
 
 @JS()
 @anonymous
@@ -1586,7 +1547,7 @@ class Collator {
 }
 
 @JS('Intl.Collator')
-external ICollator Collator;
+external ICollator JCollator;
 
 @JS()
 @anonymous
@@ -1676,7 +1637,7 @@ class NumberFormat {
 }
 
 @JS('Intl.NumberFormat')
-external INumberFormat NumberFormat;
+external INumberFormat JNumberFormat;
 
 @JS()
 @anonymous
@@ -1781,7 +1742,7 @@ class DateTimeFormat {
 }
 
 @JS('Intl.DateTimeFormat')
-external IDateTimeFormat DateTimeFormat;
+external IDateTimeFormat JDateTimeFormat;
 
 @JS()
 @anonymous

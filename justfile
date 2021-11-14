@@ -15,6 +15,5 @@ compile:
 run +args: build
 	./dart_js_lib_gen {{args}}
 
-build-samples $MODE="release":
-	just build --release
+build-samples: build
 	./dart_js_lib_gen -sw samples/*.ts

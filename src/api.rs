@@ -30,13 +30,14 @@ pub struct Entry {
 }
 
 pub fn parse_library(config: Config) -> Result<Vec<Entry>> {
-    Logger::try_with_str(
+    let _handle = Logger::try_with_env_or_str(
         config
             .log_spec
             .as_ref()
             .map(String::as_str)
             .unwrap_or("info"),
     )?
+    .write_mode(flexi_logger::WriteMode::Async)
     .start()?;
     let modules = parse_modules(config);
     Ok(modules
