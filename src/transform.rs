@@ -6,10 +6,8 @@ use std::rc::Rc;
 use ariadne::{Color, Fmt, Label, ReportKind, Source};
 use log::log_enabled;
 use log::{debug, error, info, warn, Level};
-use swc_common::BytePos;
-use swc_common::SourceFile;
-use swc_common::Span;
-use swc_ecma_ast::*;
+use swc_common::{BytePos, SourceFile, Span};
+use swc_ecma_visit::{swc_ecma_ast::*, VisitMut};
 
 #[cfg(feature = "alloc_counter")]
 #[global_allocator]
@@ -60,6 +58,10 @@ fn parse_pat(pat: &Pat) -> Option<&str> {
 
 fn generate_type_param(count: usize) -> impl Iterator<Item = char> {
     ('T'..'Z').chain('A'..'O').take(count)
+}
+
+impl VisitMut for Transformer {
+    fn visit_mut_params(&mut self, params: &mut Vec<Param>) {}
 }
 
 pub fn visit_program(
@@ -249,6 +251,7 @@ impl Transformer {
         }
     }
 
+    /// Calculates the extra bytes the due multibyte characters appearing before [pos] and after [start_at].
     fn extra_bytes(&self, pos: BytePos, start_at: Option<u32>) -> u32 {
         let start = self.file.start_pos.0;
         let start = start_at.unwrap_or(0) + start;
@@ -261,6 +264,7 @@ impl Transformer {
             .sum()
     }
 
+    /// Converts a byte-index span to a character-index range.
     fn range_of(&self, span: Span) -> Range<usize> {
         let lo_extras = self.extra_bytes(span.lo, None);
         let hi_extras = self.extra_bytes(span.hi, Some(span.lo.0)) + lo_extras;
@@ -270,6 +274,7 @@ impl Transformer {
         lo..hi
     }
 
+    /// Converts a byte offset to a character offset.
     fn char_offset(&self, pos: BytePos) -> usize {
         let extra_bytes = self.extra_bytes(pos, None);
         let start = self.file.start_pos.0;
@@ -776,8 +781,10 @@ impl Transformer {
         old: usize,
         range: Range<usize>,
         old_range: Range<usize>,
+        first_decl_message: Option<&str>,
     ) {
         let (path, _) = &self.source;
+        let first_decl_message = first_decl_message.unwrap_or("The type was first declared here.");
         let message = format!("This type was declared with {} parameter(s), but a previous declaration has {} parameter(s).", count, old);
         Report::build(ReportKind::Error, path, range.start)
             .with_message("Type parameter length mismatch")
@@ -788,10 +795,10 @@ impl Transformer {
             )
             .with_label(
                 Label::new((path.clone(), old_range.clone()))
-                    .with_message("The type was first declared here".fg(Color::Blue))
+                    .with_message(first_decl_message.fg(Color::Blue))
                     .with_color(Color::Blue),
             )
-            .with_note("Dart does not support default type parameters, so all declarations must have the same number of parameters.")
+            .with_note("Dart does not support default type parameters, so all declarations of the same type must have the same number of arguments.")
             .finish()
             .eprint(&mut self.source)
             .ok();
@@ -812,7 +819,7 @@ impl Transformer {
             Some((old, old_range)) if old != count => {
                 self.errors += 1;
                 if log_enabled!(Level::Error) {
-                    self.report_type_param_mismatch(count, old, range, old_range);
+                    self.report_type_param_mismatch(count, old, range, old_range, None);
                 }
             }
             None => {
@@ -1077,7 +1084,7 @@ impl Transformer {
             Some((old, old_range)) if old != size => {
                 self.errors += 1;
                 if log_enabled!(Level::Error) {
-                    self.report_type_param_mismatch(size, old, id_span.clone(), old_range);
+                    self.report_type_param_mismatch(size, old, id_span.clone(), old_range, None);
                 }
             }
             _ => {}
@@ -1086,7 +1093,13 @@ impl Transformer {
             Some((old, old_range)) if old != size => {
                 self.errors += 1;
                 if log_enabled!(Level::Error) {
-                    self.report_type_param_mismatch(size, old, id_span, old_range);
+                    self.report_type_param_mismatch(
+                        size,
+                        old,
+                        id_span,
+                        old_range,
+                        Some("This type's effective declaration was resolved here."),
+                    );
                 }
             }
             None => {
