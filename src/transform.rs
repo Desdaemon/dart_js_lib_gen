@@ -3,14 +3,17 @@ use std::collections::HashSet;
 use std::ops::Range;
 use std::rc::Rc;
 
-use ariadne::Color;
-use ariadne::{Fmt, Label, ReportKind, Source};
+use ariadne::{Color, Fmt, Label, ReportKind, Source};
 use log::log_enabled;
 use log::{debug, error, info, warn, Level};
 use swc_common::BytePos;
 use swc_common::SourceFile;
 use swc_common::Span;
 use swc_ecma_ast::*;
+
+#[cfg(debug_assertions)]
+#[global_allocator]
+static A: alloc_counter::AllocCounterSystem = alloc_counter::AllocCounterSystem;
 
 type Report = ariadne::Report<(String, Range<usize>)>;
 
@@ -30,6 +33,7 @@ struct Transformer {
     warnings: u32,
     errors: u32,
     file: Rc<SourceFile>,
+    allocs: usize,
 }
 
 struct Class {
@@ -76,6 +80,7 @@ pub fn visit_program(
         warnings: 0,
         errors: 0,
         file,
+        allocs: 0,
     };
 
     t.push("@JS() library ");
@@ -108,23 +113,41 @@ pub fn visit_program(
             }
         );
     }
+    debug!(
+        "Allocs/reallocs: {} | Ratio: {}",
+        t.allocs,
+        (buf.len() as f64) / (buf.capacity() as f64),
+    );
     buf
 }
 
 impl Transformer {
-    #[inline]
     fn buf(&self) -> &String {
         self.bufs.last().unwrap()
     }
 
-    #[inline]
     fn push(&mut self, input: &str) {
+        #[cfg(not(debug_assertions))]
         self.bufs.last_mut().unwrap().push_str(input);
+
+        #[cfg(debug_assertions)]
+        {
+            let buf = self.bufs.last_mut().unwrap();
+            let ((_, reallocs, _), _) = alloc_counter::count_alloc(|| buf.push_str(input));
+            self.allocs += reallocs;
+        }
     }
 
-    #[inline]
     fn push_char(&mut self, c: char) {
+        #[cfg(not(debug_assertions))]
         self.bufs.last_mut().unwrap().push(c);
+
+        #[cfg(debug_assertions)]
+        {
+            let buf = self.bufs.last_mut().unwrap();
+            let ((_, reallocs, _), _) = alloc_counter::count_alloc(|| buf.push(c));
+            self.allocs += reallocs;
+        }
     }
 
     /// Remove a single character from the buffer.
@@ -153,7 +176,7 @@ impl Transformer {
 
     #[inline]
     fn semi(&mut self) {
-        self.push_char(';')
+        self.push_char(';');
     }
 
     fn valid_identifier<'a>(&mut self, id: &'a str, span: Range<usize>) -> Option<&'a str> {
@@ -217,7 +240,8 @@ impl Transformer {
 
     fn char_offset(&self, pos: BytePos) -> usize {
         let extra_bytes = self.extra_bytes(pos, None);
-        (pos.0 - extra_bytes) as usize
+        let start = self.file.start_pos.0;
+        (pos.0 - extra_bytes - start) as usize
     }
 
     fn parse_expression<'a>(&self, expr: &'a Expr) -> Option<(&'a str, Range<usize>)> {

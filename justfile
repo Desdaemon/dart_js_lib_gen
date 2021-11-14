@@ -5,8 +5,8 @@ gen:
 	dart format --fix -l 120 lib/bridge_generated.dart
 
 alias b := build
-build:
-	cargo build
+build *args:
+	cargo build {{args}}
 
 alias c := compile
 compile:
@@ -14,3 +14,7 @@ compile:
 
 run +args: build
 	./dart_js_lib_gen {{args}}
+
+build-samples $MODE="release":
+	just build --release
+	./dart_js_lib_gen -sw samples/*.ts

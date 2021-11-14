@@ -43,12 +43,19 @@ pub fn parse_library(config: Config) -> Result<Vec<Entry>> {
         .into_iter()
         .map(|(key, (file, val))| {
             let library_name = path_to_lib_name(Path::new(&key));
-            let hint = (file.byte_length() / 2) as usize;
-            debug!("Parsing {} with size hint of {}", key, hint);
-            Entry {
+            let hint = (file.byte_length() / 3) as usize;
+            let value = visit_program(&val, file, &library_name, Some(hint));
+            debug!(
+                "{}
+Hint\tLength\tCap.\tRatio
+{}\t{}\t{}\t{}",
                 key,
-                value: visit_program(&val, file, &library_name, Some(hint)),
-            }
+                hint,
+                value.len(),
+                value.capacity(),
+                (value.len() as f64) / (value.capacity() as f64)
+            );
+            Entry { key, value }
         })
         .collect())
 }

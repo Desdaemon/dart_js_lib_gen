@@ -6,9 +6,9 @@ import 'package:dart_style/dart_style.dart';
 import 'package:path/path.dart' as p;
 import 'package:args/args.dart';
 
-const mode = String.fromEnvironment('ENV', defaultValue: 'debug');
-const libPath = String.fromEnvironment('LIBRARY',
-    defaultValue: 'target/$mode/libdart_js_lib_gen.so');
+final mode = Platform.environment['MODE'] ?? 'debug';
+final libPath =
+    Platform.environment['LIBRARY'] ?? 'target/$mode/libdart_js_lib_gen.so';
 final lib = DynamicLibrary.open(libPath);
 final api = DartJsLibGen(lib);
 
