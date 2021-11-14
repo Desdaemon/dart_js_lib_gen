@@ -1,10 +1,17 @@
 /* tslint:disable */
 /* eslint-disable */
-/**
-* @param {string} markdown
-* @returns {any}
-*/
-export function parse(markdown: string): any;
+interface Element {
+    tag: string
+    attributes?: Attribute[]
+    children?: Element[]
+}
+interface Attribute {
+    key: string
+    value: string
+}
+
+export function parse(markdown: string): Element[] | null
+
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 

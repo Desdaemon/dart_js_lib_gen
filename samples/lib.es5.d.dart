@@ -48,8 +48,8 @@ class PropertyDescriptor {
   external set configurable(bool? value);
   external bool? get enumerable;
   external set enumerable(bool? value);
-  external dynamic? get value;
-  external set value(dynamic? value);
+  external dynamic get value;
+  external set value(dynamic value);
   external bool? get writable;
   external set writable(bool? value);
   external dynamic get();
@@ -57,7 +57,7 @@ class PropertyDescriptor {
   external factory PropertyDescriptor({
     bool? configurable,
     bool? enumerable,
-    dynamic? value,
+    dynamic value,
     bool? writable,
   });
 }
@@ -90,7 +90,7 @@ class ObjectConstructor {
   external dynamic getPrototypeOf(dynamic o);
   external PropertyDescriptor? getOwnPropertyDescriptor(dynamic o, PropertyKey p);
   external List<String> getOwnPropertyNames(dynamic o);
-  external dynamic create(dynamic? o);
+  external dynamic create(dynamic o);
   external T defineProperty<T>(T o, PropertyKey p, dynamic attributes);
   external T defineProperties<T>(T o, dynamic properties);
   external T seal<T>(T o);

@@ -17,7 +17,7 @@ abstract class DartJsLibGen extends FlutterRustBridgeBase<DartJsLibGenWire> {
 }
 
 class Config {
-  /// A list of paths to files to process.
+  /// A list of paths to TypeScript definition files to process.
   final List<String> inputs;
 
   /// Specifies the logging behavior. Can be simply one of:
@@ -27,9 +27,14 @@ class Config {
   /// Also see the [full specification](https://docs.rs/flexi_logger/0.20.0/flexi_logger/struct.LogSpecification.html#).
   final String? logSpec;
 
+  /// Generate `typedef T = dynamic` definitions for types that were referenced but not defined
+  /// within the file.
+  final bool? dynamicUndefs;
+
   Config({
     required this.inputs,
     this.logSpec,
+    this.dynamicUndefs,
   });
 }
 
@@ -71,6 +76,14 @@ class DartJsLibGenImpl extends DartJsLibGen {
     return ans;
   }
 
+  bool _api2wire_bool(bool raw) {
+    return raw;
+  }
+
+  ffi.Pointer<ffi.Uint8> _api2wire_box_autoadd_bool(bool raw) {
+    return inner.new_box_autoadd_bool(raw);
+  }
+
   ffi.Pointer<wire_Config> _api2wire_box_autoadd_config(Config raw) {
     final ptr = inner.new_box_autoadd_config();
     _api_fill_to_wire_config(raw, ptr.ref);
@@ -79,6 +92,10 @@ class DartJsLibGenImpl extends DartJsLibGen {
 
   ffi.Pointer<wire_uint_8_list> _api2wire_opt_String(String? raw) {
     return raw == null ? ffi.nullptr : _api2wire_String(raw);
+  }
+
+  ffi.Pointer<ffi.Uint8> _api2wire_opt_box_autoadd_bool(bool? raw) {
+    return raw == null ? ffi.nullptr : _api2wire_box_autoadd_bool(raw);
   }
 
   int _api2wire_u8(int raw) {
@@ -100,6 +117,7 @@ class DartJsLibGenImpl extends DartJsLibGen {
   void _api_fill_to_wire_config(Config apiObj, wire_Config wireObj) {
     wireObj.inputs = _api2wire_StringList(apiObj.inputs);
     wireObj.log_spec = _api2wire_opt_String(apiObj.logSpec);
+    wireObj.dynamic_undefs = _api2wire_opt_box_autoadd_bool(apiObj.dynamicUndefs);
   }
 }
 
@@ -173,6 +191,18 @@ class DartJsLibGenWire implements FlutterRustBridgeWireBase {
       _lookup<ffi.NativeFunction<ffi.Pointer<wire_StringList> Function(ffi.Int32)>>('new_StringList');
   late final _new_StringList = _new_StringListPtr.asFunction<ffi.Pointer<wire_StringList> Function(int)>();
 
+  ffi.Pointer<ffi.Uint8> new_box_autoadd_bool(
+    bool value,
+  ) {
+    return _new_box_autoadd_bool(
+      value ? 1 : 0,
+    );
+  }
+
+  late final _new_box_autoadd_boolPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Uint8> Function(ffi.Uint8)>>('new_box_autoadd_bool');
+  late final _new_box_autoadd_bool = _new_box_autoadd_boolPtr.asFunction<ffi.Pointer<ffi.Uint8> Function(int)>();
+
   ffi.Pointer<wire_Config> new_box_autoadd_config() {
     return _new_box_autoadd_config();
   }
@@ -237,6 +267,8 @@ class wire_Config extends ffi.Struct {
   external ffi.Pointer<wire_StringList> inputs;
 
   external ffi.Pointer<wire_uint_8_list> log_spec;
+
+  external ffi.Pointer<ffi.Uint8> dynamic_undefs;
 }
 
 typedef DartPostCObjectFnType = ffi.Pointer<ffi.NativeFunction<ffi.Uint8 Function(DartPort, ffi.Pointer<ffi.Void>)>>;

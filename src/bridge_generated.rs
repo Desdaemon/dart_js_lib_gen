@@ -41,6 +41,7 @@ pub struct wire_StringList {
 pub struct wire_Config {
     inputs: *mut wire_StringList,
     log_spec: *mut wire_uint_8_list,
+    dynamic_undefs: *mut bool,
 }
 
 #[repr(C)]
@@ -59,6 +60,11 @@ pub extern "C" fn new_StringList(len: i32) -> *mut wire_StringList {
         len,
     };
     support::new_leak_box_ptr(wrap)
+}
+
+#[no_mangle]
+pub extern "C" fn new_box_autoadd_bool(value: bool) -> *mut bool {
+    support::new_leak_box_ptr(value)
 }
 
 #[no_mangle]
@@ -111,6 +117,19 @@ impl Wire2Api<Vec<String>> for *mut wire_StringList {
     }
 }
 
+impl Wire2Api<bool> for bool {
+    fn wire2api(self) -> bool {
+        self
+    }
+}
+
+impl Wire2Api<bool> for *mut bool {
+    fn wire2api(self) -> bool {
+        let wrap = unsafe { support::box_from_leak_ptr(self) };
+        (*wrap).wire2api().into()
+    }
+}
+
 impl Wire2Api<Config> for *mut wire_Config {
     fn wire2api(self) -> Config {
         let wrap = unsafe { support::box_from_leak_ptr(self) };
@@ -123,6 +142,7 @@ impl Wire2Api<Config> for wire_Config {
         Config {
             inputs: self.inputs.wire2api(),
             log_spec: self.log_spec.wire2api(),
+            dynamic_undefs: self.dynamic_undefs.wire2api(),
         }
     }
 }
@@ -159,6 +179,7 @@ impl NewWithNullPtr for wire_Config {
         Self {
             inputs: std::ptr::null_mut(),
             log_spec: std::ptr::null_mut(),
+            dynamic_undefs: std::ptr::null_mut(),
         }
     }
 }

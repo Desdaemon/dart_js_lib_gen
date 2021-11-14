@@ -16,14 +16,17 @@ use swc_ecma_ast::*;
 static A: alloc_counter::AllocCounterSystem = alloc_counter::AllocCounterSystem;
 
 type Report = ariadne::Report<(String, Range<usize>)>;
+/// Ident -> (# of parameters, span of original declaration)
+type TypeResolutionMap = HashMap<String, (usize, Range<usize>)>;
 
 struct Transformer {
     path: Vec<String>,
     bufs: Vec<String>,
     /// Should be filled when there are fields, or when the class is not anonymous.
     class: Option<Class>,
-    undecls: HashSet<String>,
-    resolved: HashSet<String>,
+    /// Undeclared type usages, with some number of type parameters and span information.
+    undecls: TypeResolutionMap,
+    resolved: TypeResolutionMap,
     resolved_funcs: HashMap<String, Range<usize>>,
     /// Keeps track of the ident of the variable declaration being evaluated.
     current_ident: Option<String>,
@@ -55,11 +58,16 @@ fn parse_pat(pat: &Pat) -> Option<&str> {
     }
 }
 
+fn generate_type_param(count: usize) -> impl Iterator<Item = char> {
+    ('T'..'Z').chain('A'..'O').take(count)
+}
+
 pub fn visit_program(
     module: &Module,
     file: Rc<SourceFile>,
     library_name: &str,
     size_hint: Option<usize>,
+    gen_undecl_typedef: bool,
 ) -> String {
     let buf = match size_hint {
         Some(size) => String::with_capacity(size),
@@ -70,8 +78,8 @@ pub fn visit_program(
         path: vec![],
         bufs: vec![buf],
         class: None,
-        undecls: HashSet::new(),
-        resolved: HashSet::new(),
+        undecls: HashMap::new(),
+        resolved: HashMap::new(),
         resolved_funcs: HashMap::new(),
         current_ident: None,
         type_lits: HashMap::new(),
@@ -87,7 +95,7 @@ pub fn visit_program(
     t.push(library_name);
     t.push(";\n// ignore_for_file: non_constant_identifier_names, private_optional_parameter, unused_element\n");
     t.push("import 'package:js/js.dart';");
-    t.visit_module_item(&module.body);
+    t.visit_module_items(&module.body);
     let mut buf = t.bufs.pop().unwrap();
     let mut entries = t.type_lits.into_iter().collect::<Vec<_>>();
     entries.sort_by(Ord::cmp);
@@ -95,9 +103,25 @@ pub fn visit_program(
     for (_, lit) in entries {
         buf.push_str(&lit);
     }
-    if !t.undecls.is_empty() {
-        let cls = t.undecls.into_iter().collect::<Vec<_>>().join(", ");
+    if !t.undecls.is_empty() && log_enabled!(Level::Warn) {
+        let cls = t.undecls.keys().cloned().collect::<Vec<_>>().join(", ");
         warn!("The following types were used but not declared:\n{}", cls);
+    }
+    if gen_undecl_typedef {
+        for (ty, (params, _)) in &t.undecls {
+            buf.push_str("typedef ");
+            buf.push_str(ty);
+            if *params > 0 {
+                buf.push('<');
+                for letter in generate_type_param(*params as usize) {
+                    buf.push(letter);
+                    buf.push(',')
+                }
+                buf.pop();
+                buf.push('>');
+            }
+            buf.push_str("=dynamic;");
+        }
     }
     if t.errors != 0 || t.warnings != 0 {
         info!(
@@ -262,6 +286,13 @@ impl Transformer {
             }
         }
     }
+
+    fn optional(&mut self) {
+        let buf = self.buf();
+        if !(buf.ends_with("dynamic") || buf.ends_with('?')) {
+            self.push_char('?');
+        }
+    }
 }
 
 /// Valid identifiers in JavaScript but not in Dart. Non-exhaustive.
@@ -281,7 +312,7 @@ macro_rules! gen_matcher {
 }
 
 impl Transformer {
-    fn visit_module_item(&mut self, items: &[ModuleItem]) {
+    fn visit_module_items(&mut self, items: &[ModuleItem]) {
         items.iter().for_each(|e| match e {
             ModuleItem::ModuleDecl(decl) => self.visit_module_decl(decl),
             ModuleItem::Stmt(stmt) => self.visit_statement(stmt),
@@ -414,9 +445,8 @@ impl Transformer {
     /// `@JS() @anonymous class T<..> { .. external factory T({ .. }) }`
     fn visit_interface_decl(&mut self, decl: &TsInterfaceDecl) {
         self.span = self.range_of(decl.span);
-        let id = decl.id.sym.as_ref();
-        self.undecls.remove(id);
-        self.resolved.insert(id.to_owned());
+        let id: &str = &decl.id.sym;
+        self.register_type(id, self.range_of(decl.id.span), &decl.type_params);
         if ["String"].contains(&id) {
             self.errors += 1;
             if log_enabled!(Level::Error) {
@@ -443,7 +473,7 @@ impl Transformer {
         self.push("@JS() ");
         let class_body = self.collect(|s| {
             s.push("class ");
-            s.push(id);
+            s.push(&id);
             s.visit_type_params(&decl.type_params);
             s.push_char('{');
             {
@@ -546,7 +576,7 @@ impl Transformer {
             }
             match ns {
                 swc_ecma_ast::TsNamespaceBody::TsModuleBlock(blk) => {
-                    self.visit_module_item(&blk.body)
+                    self.visit_module_items(&blk.body)
                 }
                 swc_ecma_ast::TsNamespaceBody::TsNamespaceDecl(_) => todo!(),
             }
@@ -560,10 +590,9 @@ impl Transformer {
     fn visit_type_alias(&mut self, alias: &TsTypeAliasDecl) {
         let id: &str = &alias.id.sym;
         self.current_ident = Some(id.to_owned());
-        self.undecls.remove(id);
-        self.resolved.insert(id.to_owned());
+        self.register_type(id, self.range_of(alias.span), &alias.type_params);
         self.push("typedef ");
-        self.push(id);
+        self.push(&id);
         self.visit_type_params(&alias.type_params);
         self.push_char('=');
         self.visit_type(alias.type_ann.as_ref());
@@ -611,8 +640,8 @@ impl Transformer {
             let ty = self.collect(|s| {
                 s.visit_type_params(&prop.type_params);
                 s.visit_type_ann(&prop.type_ann);
-                if prop.optional && !s.buf().ends_with('?') {
-                    s.push_char('?');
+                if prop.optional {
+                    s.optional();
                 }
             });
             self.emit_getter(&ty, &id);
@@ -728,8 +757,7 @@ impl Transformer {
             self.push_char('<');
             for item in params {
                 let id: &str = &item.name.sym;
-                self.undecls.remove(id);
-                self.resolved.insert(id.to_owned());
+                self.register_type(id, self.range_of(item.span), &None);
                 self.push(id);
                 if let Some(typ) = &item.constraint {
                     self.push(" extends ");
@@ -742,13 +770,55 @@ impl Transformer {
         }
     }
 
-    fn visit_entity_name(&mut self, name: &TsEntityName) {
-        let id: &str = match name {
-            TsEntityName::TsQualifiedName(qn) => &qn.right.sym,
-            TsEntityName::Ident(ident) => &ident.sym,
+    fn report_type_param_mismatch(
+        &mut self,
+        count: usize,
+        old: usize,
+        range: Range<usize>,
+        old_range: Range<usize>,
+    ) {
+        let (path, _) = &self.source;
+        let message = format!("This type was declared with {} parameter(s), but a previous declaration has {} parameter(s).", count, old);
+        Report::build(ReportKind::Error, path, range.start)
+            .with_message("Type parameter length mismatch")
+            .with_label(
+                Label::new((path.clone(), range))
+                    .with_message(message.fg(Color::Red))
+                    .with_color(Color::Red),
+            )
+            .with_label(
+                Label::new((path.clone(), old_range.clone()))
+                    .with_message("The type was first declared here".fg(Color::Blue))
+                    .with_color(Color::Blue),
+            )
+            .with_note("Dart does not support default type parameters, so all declarations must have the same number of parameters.")
+            .finish()
+            .eprint(&mut self.source)
+            .ok();
+    }
+
+    fn visit_entity_name(&mut self, name: &TsEntityName, param_count: Option<usize>) {
+        let (id, span): (&str, _) = match name {
+            TsEntityName::TsQualifiedName(qn) => (&qn.right.sym, qn.right.span),
+            TsEntityName::Ident(ident) => (&ident.sym, ident.span),
         };
-        if !self.resolved.contains(id) {
-            self.undecls.insert(id.to_owned());
+        let count = param_count.unwrap_or(0);
+        let range = self.range_of(span);
+        if self.resolved.contains_key(id) {
+            self.push(id);
+            return;
+        }
+        match self.undecls.get(id).cloned() {
+            Some((old, old_range)) if old != count => {
+                self.errors += 1;
+                if log_enabled!(Level::Error) {
+                    self.report_type_param_mismatch(count, old, range, old_range);
+                }
+            }
+            None => {
+                self.undecls.insert(id.to_owned(), (count, range));
+            }
+            _ => {}
         }
         self.push(id);
     }
@@ -840,14 +910,14 @@ impl Transformer {
             .collect();
         if simple_union.len() == 1 {
             self.visit_type(simple_union.first().unwrap().as_ref());
-            self.push_char('?');
+            self.optional();
             return true;
         }
         if self.visit_mono_union(&TsUnionType {
             span: uni.span,
             types: simple_union,
         }) {
-            self.push_char('?');
+            self.optional();
             return true;
         }
 
@@ -915,7 +985,10 @@ impl Transformer {
                 }
             },
             TsType::TsTypeRef(re) => {
-                self.visit_entity_name(&re.type_name);
+                self.visit_entity_name(
+                    &re.type_name,
+                    re.type_params.as_ref().map(|x| x.params.len()),
+                );
                 if let Some(para) = &re.type_params {
                     self.push_char('<');
                     for item in &para.params {
@@ -933,9 +1006,7 @@ impl Transformer {
             }
             TsType::TsOptionalType(typ) => {
                 self.visit_type(&typ.type_ann);
-                if !self.buf().ends_with('?') {
-                    self.push_char('?');
-                }
+                self.optional();
             }
             TsType::TsLitType(TsLitType { lit, .. }) => match lit {
                 TsLit::Number(_) | TsLit::BigInt(_) => self.push("num"),
@@ -995,10 +1066,39 @@ impl Transformer {
         self.push("dynamic");
     }
 
+    fn register_type(
+        &mut self,
+        id: &str,
+        id_span: Range<usize>,
+        type_params: &Option<TsTypeParamDecl>,
+    ) {
+        let size = type_params.as_ref().map(|x| x.params.len()).unwrap_or(0);
+        match self.undecls.remove(id) {
+            Some((old, old_range)) if old != size => {
+                self.errors += 1;
+                if log_enabled!(Level::Error) {
+                    self.report_type_param_mismatch(size, old, id_span.clone(), old_range);
+                }
+            }
+            _ => {}
+        }
+        match self.resolved.get(id).cloned() {
+            Some((old, old_range)) if old != size => {
+                self.errors += 1;
+                if log_enabled!(Level::Error) {
+                    self.report_type_param_mismatch(size, old, id_span, old_range);
+                }
+            }
+            None => {
+                self.resolved.insert(id.to_owned(), (size, id_span));
+            }
+            _ => {}
+        }
+    }
+
     fn visit_class(&mut self, ClassDecl { class, ident, .. }: &ClassDecl) {
         let id: &str = &ident.sym;
-        self.undecls.remove(id);
-        self.resolved.insert(id.to_owned());
+        self.register_type(id, self.range_of(ident.span), &class.type_params);
         self.class = Some(Class {
             fields: vec![],
             id: id.to_owned(),
@@ -1015,7 +1115,8 @@ impl Transformer {
         if !class.implements.is_empty() {
             self.push(" implements ");
             for imp in &class.implements {
-                self.visit_entity_name(&imp.expr);
+                let params = imp.type_args.as_ref().map(|x| x.params.len());
+                self.visit_entity_name(&imp.expr, params);
                 if let Some(args) = &imp.type_args {
                     self.push_char('<');
                     for ty in &args.params {

@@ -4,8 +4,37 @@ library samples.rust_md_dart.d.ts;
 // ignore_for_file: non_constant_identifier_names, private_optional_parameter, unused_element
 import 'package:js/js.dart';
 
+@JS()
+@anonymous
+class Element {
+  external String get tag;
+  external set tag(String value);
+  external List<Attribute>? get attributes;
+  external set attributes(List<Attribute>? value);
+  external List<Element>? get children;
+  external set children(List<Element>? value);
+  external factory Element({
+    String tag,
+    List<Attribute>? attributes,
+    List<Element>? children,
+  });
+}
+
+@JS()
+@anonymous
+class Attribute {
+  external String get key;
+  external set key(String value);
+  external String get value;
+  external set value(String value);
+  external factory Attribute({
+    String key,
+    String value,
+  });
+}
+
 @JS('parse')
-external dynamic parse(String markdown);
+external List<Element>? parse(String markdown);
 typedef InitInput = dynamic;
 
 @JS()

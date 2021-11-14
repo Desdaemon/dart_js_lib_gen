@@ -1,8 +1,8 @@
 alias g := gen
 gen:
 	flutter_rust_bridge_codegen \
-		-r src/api.rs -d lib/bridge_generated.dart
-	dart format --fix -l 120 lib/bridge_generated.dart
+		-r src/api.rs -d lib/src/bridge_generated.dart
+	dart format --fix -l 120 lib/src/bridge_generated.dart
 
 alias b := build
 build *args:

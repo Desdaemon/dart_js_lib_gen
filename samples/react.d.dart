@@ -96,10 +96,10 @@ typedef SFCElement<P> = FunctionComponentElement<P>;
 @JS()
 @anonymous
 class FunctionComponentElement<P> {
-  external dynamic? get ref;
-  external set ref(dynamic? value);
+  external dynamic get ref;
+  external set ref(dynamic value);
   external factory FunctionComponentElement({
-    dynamic? ref,
+    dynamic ref,
   });
 }
 
@@ -204,7 +204,7 @@ typedef ComponentFactory<P, T extends Component<P, ComponentState>> = CElement<P
 typedef CFactory<P, T extends Component<P, ComponentState>> = ComponentFactory<P, T>;
 typedef ClassicFactory<P> = CFactory<P, ClassicComponent<P, ComponentState>>;
 typedef DOMFactory<P extends DOMAttributes<T>, T extends Element> = DOMElement<P, T> Function(
-  dynamic? props, [
+  dynamic props, [
   ReactNode? children1,
   ReactNode? children2,
   ReactNode? children3,
@@ -256,7 +256,7 @@ external Factory<P> createFactory<P>(ComponentClass<P> type);
 @JS('React.createElement')
 external DetailedReactHTMLElement<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> createElement(
   String type,
-  dynamic? props, [
+  dynamic props, [
   ReactNode? children1,
   ReactNode? children2,
   ReactNode? children3,
@@ -270,7 +270,7 @@ external DetailedReactHTMLElement<InputHTMLAttributes<HTMLInputElement>, HTMLInp
 @JS('React.createElement')
 external DetailedReactHTMLElement<P, T> createElement<P extends HTMLAttributes<T>, T extends HTMLElement>(
   String type,
-  dynamic? props, [
+  dynamic props, [
   ReactNode? children1,
   ReactNode? children2,
   ReactNode? children3,
@@ -284,7 +284,7 @@ external DetailedReactHTMLElement<P, T> createElement<P extends HTMLAttributes<T
 @JS('React.createElement')
 external ReactSVGElement createElement<P extends SVGAttributes<T>, T extends SVGElement>(
   String type,
-  dynamic? props, [
+  dynamic props, [
   ReactNode? children1,
   ReactNode? children2,
   ReactNode? children3,
@@ -298,7 +298,7 @@ external ReactSVGElement createElement<P extends SVGAttributes<T>, T extends SVG
 @JS('React.createElement')
 external DOMElement<P, T> createElement<P extends DOMAttributes<T>, T extends Element>(
   String type,
-  dynamic? props, [
+  dynamic props, [
   ReactNode? children1,
   ReactNode? children2,
   ReactNode? children3,
@@ -312,7 +312,7 @@ external DOMElement<P, T> createElement<P extends DOMAttributes<T>, T extends El
 @JS('React.createElement')
 external FunctionComponentElement<P> createElement<P extends dynamic>(
   FunctionComponent<P> type,
-  dynamic? props, [
+  dynamic props, [
   ReactNode? children1,
   ReactNode? children2,
   ReactNode? children3,
@@ -326,7 +326,7 @@ external FunctionComponentElement<P> createElement<P extends dynamic>(
 @JS('React.createElement')
 external CElement<P, ClassicComponent<P, ComponentState>> createElement<P extends dynamic>(
   ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> type,
-  dynamic? props, [
+  dynamic props, [
   ReactNode? children1,
   ReactNode? children2,
   ReactNode? children3,
@@ -341,7 +341,7 @@ external CElement<P, ClassicComponent<P, ComponentState>> createElement<P extend
 external CElement<P, T>
     createElement<P extends dynamic, T extends Component<P, ComponentState>, C extends ComponentClass<P>>(
   ClassType<P, T, C> type,
-  dynamic? props, [
+  dynamic props, [
   ReactNode? children1,
   ReactNode? children2,
   ReactNode? children3,
@@ -355,7 +355,7 @@ external CElement<P, T>
 @JS('React.createElement')
 external ReactElement<P> createElement<P extends dynamic>(
   dynamic type,
-  dynamic? props, [
+  dynamic props, [
   ReactNode? children1,
   ReactNode? children2,
   ReactNode? children3,
@@ -540,7 +540,7 @@ class Context<T> {
 @JS('React.createContext')
 external Context<T> createContext<T>(T defaultValue);
 @JS('React.isValidElement')
-external bool isValidElement<P>(dynamic? object);
+external bool isValidElement<P>(dynamic object);
 @JS('React.Children')
 external ReactChildren JChildren;
 @JS('React.Fragment')
@@ -679,14 +679,14 @@ typedef ForwardedRef<T> = dynamic;
 class ForwardRefRenderFunction<T, P> {
   external String? get displayName;
   external set displayName(String? value);
-  external dynamic? get defaultProps;
-  external set defaultProps(dynamic? value);
-  external dynamic? get propTypes;
-  external set propTypes(dynamic? value);
+  external dynamic get defaultProps;
+  external set defaultProps(dynamic value);
+  external dynamic get propTypes;
+  external set propTypes(dynamic value);
   external factory ForwardRefRenderFunction({
     String? displayName,
-    dynamic? defaultProps,
-    dynamic? propTypes,
+    dynamic defaultProps,
+    dynamic propTypes,
   });
 }
 
@@ -767,8 +767,8 @@ class DeprecatedLifecycle<P, S> {
 class Mixin<P, S> {
   external Array<Mixin<P, S>>? get mixins;
   external set mixins(Array<Mixin<P, S>>? value);
-  external dynamic? get statics;
-  external set statics(dynamic? value);
+  external dynamic get statics;
+  external set statics(dynamic value);
   external String? get displayName;
   external set displayName(String? value);
   external ValidationMap<dynamic>? get propTypes;
@@ -781,7 +781,7 @@ class Mixin<P, S> {
   external S getInitialState();
   external factory Mixin({
     Array<Mixin<P, S>>? mixins,
-    dynamic? statics,
+    dynamic statics,
     String? displayName,
     ValidationMap<dynamic>? propTypes,
     ValidationMap<dynamic>? contextTypes,
@@ -1018,12 +1018,12 @@ class PointerEvent<T> {
 @JS()
 @anonymous
 class FocusEvent<Target, RelatedTarget> {
-  external dynamic? get relatedTarget;
-  external set relatedTarget(dynamic? value);
+  external dynamic get relatedTarget;
+  external set relatedTarget(dynamic value);
   external dynamic get target;
   external set target(dynamic value);
   external factory FocusEvent({
-    dynamic? relatedTarget,
+    dynamic relatedTarget,
     dynamic target,
   });
 }
@@ -1290,8 +1290,8 @@ class SVGProps<T> {}
 class DOMAttributes<T> {
   external ReactNode? get children;
   external set children(ReactNode? value);
-  external dynamic? get dangerouslySetInnerHTML;
-  external set dangerouslySetInnerHTML(dynamic? value);
+  external dynamic get dangerouslySetInnerHTML;
+  external set dangerouslySetInnerHTML(dynamic value);
   external ClipboardEventHandler<T>? get onCopy;
   external set onCopy(ClipboardEventHandler<T>? value);
   external ClipboardEventHandler<T>? get onCopyCapture;
@@ -1614,7 +1614,7 @@ class DOMAttributes<T> {
   external set onTransitionEndCapture(TransitionEventHandler<T>? value);
   external factory DOMAttributes({
     ReactNode? children,
-    dynamic? dangerouslySetInnerHTML,
+    dynamic dangerouslySetInnerHTML,
     ClipboardEventHandler<T>? onCopy,
     ClipboardEventHandler<T>? onCopyCapture,
     ClipboardEventHandler<T>? onCut,
@@ -1793,8 +1793,8 @@ typedef AriaRole = dynamic;
 class HTMLAttributes<T> {
   external bool? get defaultChecked;
   external set defaultChecked(bool? value);
-  external dynamic? get defaultValue;
-  external set defaultValue(dynamic? value);
+  external dynamic get defaultValue;
+  external set defaultValue(dynamic value);
   external bool? get suppressContentEditableWarning;
   external set suppressContentEditableWarning(bool? value);
   external bool? get suppressHydrationWarning;
@@ -1803,8 +1803,8 @@ class HTMLAttributes<T> {
   external set accessKey(String? value);
   external String? get className;
   external set className(String? value);
-  external dynamic? get contentEditable;
-  external set contentEditable(dynamic? value);
+  external dynamic get contentEditable;
+  external set contentEditable(dynamic value);
   external String? get contextMenu;
   external set contextMenu(String? value);
   external String? get dir;
@@ -1839,8 +1839,8 @@ class HTMLAttributes<T> {
   external set about(String? value);
   external String? get datatype;
   external set datatype(String? value);
-  external dynamic? get inlist;
-  external set inlist(dynamic? value);
+  external dynamic get inlist;
+  external set inlist(dynamic value);
   external String? get prefix;
   external set prefix(String? value);
   external String? get property;
@@ -1879,12 +1879,12 @@ class HTMLAttributes<T> {
   external set inputMode(String? value);
   external factory HTMLAttributes({
     bool? defaultChecked,
-    dynamic? defaultValue,
+    dynamic defaultValue,
     bool? suppressContentEditableWarning,
     bool? suppressHydrationWarning,
     String? accessKey,
     String? className,
-    dynamic? contentEditable,
+    dynamic contentEditable,
     String? contextMenu,
     String? dir,
     Booleanish? draggable,
@@ -1902,7 +1902,7 @@ class HTMLAttributes<T> {
     AriaRole? role,
     String? about,
     String? datatype,
-    dynamic? inlist,
+    dynamic inlist,
     String? prefix,
     String? property,
     String? resource,
@@ -1949,12 +1949,12 @@ class AllHTMLAttributes<T> {
   external set autoFocus(bool? value);
   external bool? get autoPlay;
   external set autoPlay(bool? value);
-  external dynamic? get capture;
-  external set capture(dynamic? value);
-  external dynamic? get cellPadding;
-  external set cellPadding(dynamic? value);
-  external dynamic? get cellSpacing;
-  external set cellSpacing(dynamic? value);
+  external dynamic get capture;
+  external set capture(dynamic value);
+  external dynamic get cellPadding;
+  external set cellPadding(dynamic value);
+  external dynamic get cellSpacing;
+  external set cellSpacing(dynamic value);
   external String? get charSet;
   external set charSet(String? value);
   external String? get challenge;
@@ -1985,8 +1985,8 @@ class AllHTMLAttributes<T> {
   external set defer(bool? value);
   external bool? get disabled;
   external set disabled(bool? value);
-  external dynamic? get download;
-  external set download(dynamic? value);
+  external dynamic get download;
+  external set download(dynamic value);
   external String? get encType;
   external set encType(String? value);
   external String? get form;
@@ -2001,12 +2001,12 @@ class AllHTMLAttributes<T> {
   external set formNoValidate(bool? value);
   external String? get formTarget;
   external set formTarget(String? value);
-  external dynamic? get frameBorder;
-  external set frameBorder(dynamic? value);
+  external dynamic get frameBorder;
+  external set frameBorder(dynamic value);
   external String? get headers;
   external set headers(String? value);
-  external dynamic? get height;
-  external set height(dynamic? value);
+  external dynamic get height;
+  external set height(dynamic value);
   external num? get high;
   external set high(num? value);
   external String? get href;
@@ -2039,8 +2039,8 @@ class AllHTMLAttributes<T> {
   external set marginHeight(num? value);
   external num? get marginWidth;
   external set marginWidth(num? value);
-  external dynamic? get max;
-  external set max(dynamic? value);
+  external dynamic get max;
+  external set max(dynamic value);
   external num? get maxLength;
   external set maxLength(num? value);
   external String? get media;
@@ -2049,8 +2049,8 @@ class AllHTMLAttributes<T> {
   external set mediaGroup(String? value);
   external String? get method;
   external set method(String? value);
-  external dynamic? get min;
-  external set min(dynamic? value);
+  external dynamic get min;
+  external set min(dynamic value);
   external num? get minLength;
   external set minLength(num? value);
   external bool? get multiple;
@@ -2119,8 +2119,8 @@ class AllHTMLAttributes<T> {
   external set srcSet(String? value);
   external num? get start;
   external set start(num? value);
-  external dynamic? get step;
-  external set step(dynamic? value);
+  external dynamic get step;
+  external set step(dynamic value);
   external String? get summary;
   external set summary(String? value);
   external String? get target;
@@ -2129,10 +2129,10 @@ class AllHTMLAttributes<T> {
   external set type(String? value);
   external String? get useMap;
   external set useMap(String? value);
-  external dynamic? get value;
-  external set value(dynamic? value);
-  external dynamic? get width;
-  external set width(dynamic? value);
+  external dynamic get value;
+  external set value(dynamic value);
+  external dynamic get width;
+  external set width(dynamic value);
   external String? get wmode;
   external set wmode(String? value);
   external String? get wrap;
@@ -2149,9 +2149,9 @@ class AllHTMLAttributes<T> {
     String? autoComplete,
     bool? autoFocus,
     bool? autoPlay,
-    dynamic? capture,
-    dynamic? cellPadding,
-    dynamic? cellSpacing,
+    dynamic capture,
+    dynamic cellPadding,
+    dynamic cellSpacing,
     String? charSet,
     String? challenge,
     bool? checked,
@@ -2167,7 +2167,7 @@ class AllHTMLAttributes<T> {
     String? dateTime,
     bool? defer,
     bool? disabled,
-    dynamic? download,
+    dynamic download,
     String? encType,
     String? form,
     String? formAction,
@@ -2175,9 +2175,9 @@ class AllHTMLAttributes<T> {
     String? formMethod,
     bool? formNoValidate,
     String? formTarget,
-    dynamic? frameBorder,
+    dynamic frameBorder,
     String? headers,
-    dynamic? height,
+    dynamic height,
     num? high,
     String? href,
     String? hrefLang,
@@ -2194,12 +2194,12 @@ class AllHTMLAttributes<T> {
     String? manifest,
     num? marginHeight,
     num? marginWidth,
-    dynamic? max,
+    dynamic max,
     num? maxLength,
     String? media,
     String? mediaGroup,
     String? method,
-    dynamic? min,
+    dynamic min,
     num? minLength,
     bool? multiple,
     bool? muted,
@@ -2234,13 +2234,13 @@ class AllHTMLAttributes<T> {
     String? srcLang,
     String? srcSet,
     num? start,
-    dynamic? step,
+    dynamic step,
     String? summary,
     String? target,
     String? type,
     String? useMap,
-    dynamic? value,
-    dynamic? width,
+    dynamic value,
+    dynamic width,
     String? wmode,
     String? wrap,
   });
@@ -2252,8 +2252,8 @@ typedef HTMLAttributeAnchorTarget = dynamic;
 @JS()
 @anonymous
 class AnchorHTMLAttributes<T> {
-  external dynamic? get download;
-  external set download(dynamic? value);
+  external dynamic get download;
+  external set download(dynamic value);
   external String? get href;
   external set href(String? value);
   external String? get hrefLang;
@@ -2271,7 +2271,7 @@ class AnchorHTMLAttributes<T> {
   external HTMLAttributeReferrerPolicy? get referrerPolicy;
   external set referrerPolicy(HTMLAttributeReferrerPolicy? value);
   external factory AnchorHTMLAttributes({
-    dynamic? download,
+    dynamic download,
     String? href,
     String? hrefLang,
     String? media,
@@ -2294,8 +2294,8 @@ class AreaHTMLAttributes<T> {
   external set alt(String? value);
   external String? get coords;
   external set coords(String? value);
-  external dynamic? get download;
-  external set download(dynamic? value);
+  external dynamic get download;
+  external set download(dynamic value);
   external String? get href;
   external set href(String? value);
   external String? get hrefLang;
@@ -2313,7 +2313,7 @@ class AreaHTMLAttributes<T> {
   external factory AreaHTMLAttributes({
     String? alt,
     String? coords,
-    dynamic? download,
+    dynamic download,
     String? href,
     String? hrefLang,
     String? media,
@@ -2370,8 +2370,8 @@ class ButtonHTMLAttributes<T> {
   external set name(String? value);
   external String? get type;
   external set type(String? value);
-  external dynamic? get value;
-  external set value(dynamic? value);
+  external dynamic get value;
+  external set value(dynamic value);
   external factory ButtonHTMLAttributes({
     bool? autoFocus,
     bool? disabled,
@@ -2383,20 +2383,20 @@ class ButtonHTMLAttributes<T> {
     String? formTarget,
     String? name,
     String? type,
-    dynamic? value,
+    dynamic value,
   });
 }
 
 @JS()
 @anonymous
 class CanvasHTMLAttributes<T> {
-  external dynamic? get height;
-  external set height(dynamic? value);
-  external dynamic? get width;
-  external set width(dynamic? value);
+  external dynamic get height;
+  external set height(dynamic value);
+  external dynamic get width;
+  external set width(dynamic value);
   external factory CanvasHTMLAttributes({
-    dynamic? height,
-    dynamic? width,
+    dynamic height,
+    dynamic width,
   });
 }
 
@@ -2405,11 +2405,11 @@ class CanvasHTMLAttributes<T> {
 class ColHTMLAttributes<T> {
   external num? get span;
   external set span(num? value);
-  external dynamic? get width;
-  external set width(dynamic? value);
+  external dynamic get width;
+  external set width(dynamic value);
   external factory ColHTMLAttributes({
     num? span,
-    dynamic? width,
+    dynamic width,
   });
 }
 
@@ -2426,10 +2426,10 @@ class ColgroupHTMLAttributes<T> {
 @JS()
 @anonymous
 class DataHTMLAttributes<T> {
-  external dynamic? get value;
-  external set value(dynamic? value);
+  external dynamic get value;
+  external set value(dynamic value);
   external factory DataHTMLAttributes({
-    dynamic? value,
+    dynamic value,
   });
 }
 
@@ -2472,19 +2472,19 @@ class DialogHTMLAttributes<T> {
 @JS()
 @anonymous
 class EmbedHTMLAttributes<T> {
-  external dynamic? get height;
-  external set height(dynamic? value);
+  external dynamic get height;
+  external set height(dynamic value);
   external String? get src;
   external set src(String? value);
   external String? get type;
   external set type(String? value);
-  external dynamic? get width;
-  external set width(dynamic? value);
+  external dynamic get width;
+  external set width(dynamic value);
   external factory EmbedHTMLAttributes({
-    dynamic? height,
+    dynamic height,
     String? src,
     String? type,
-    dynamic? width,
+    dynamic width,
   });
 }
 
@@ -2554,10 +2554,10 @@ class IframeHTMLAttributes<T> {
   external set allowFullScreen(bool? value);
   external bool? get allowTransparency;
   external set allowTransparency(bool? value);
-  external dynamic? get frameBorder;
-  external set frameBorder(dynamic? value);
-  external dynamic? get height;
-  external set height(dynamic? value);
+  external dynamic get frameBorder;
+  external set frameBorder(dynamic value);
+  external dynamic get height;
+  external set height(dynamic value);
   external String? get loading;
   external set loading(String? value);
   external num? get marginHeight;
@@ -2578,14 +2578,14 @@ class IframeHTMLAttributes<T> {
   external set src(String? value);
   external String? get srcDoc;
   external set srcDoc(String? value);
-  external dynamic? get width;
-  external set width(dynamic? value);
+  external dynamic get width;
+  external set width(dynamic value);
   external factory IframeHTMLAttributes({
     String? allow,
     bool? allowFullScreen,
     bool? allowTransparency,
-    dynamic? frameBorder,
-    dynamic? height,
+    dynamic frameBorder,
+    dynamic height,
     String? loading,
     num? marginHeight,
     num? marginWidth,
@@ -2596,7 +2596,7 @@ class IframeHTMLAttributes<T> {
     bool? seamless,
     String? src,
     String? srcDoc,
-    dynamic? width,
+    dynamic width,
   });
 }
 
@@ -2609,8 +2609,8 @@ class ImgHTMLAttributes<T> {
   external set crossOrigin(String? value);
   external String? get decoding;
   external set decoding(String? value);
-  external dynamic? get height;
-  external set height(dynamic? value);
+  external dynamic get height;
+  external set height(dynamic value);
   external String? get loading;
   external set loading(String? value);
   external HTMLAttributeReferrerPolicy? get referrerPolicy;
@@ -2623,20 +2623,20 @@ class ImgHTMLAttributes<T> {
   external set srcSet(String? value);
   external String? get useMap;
   external set useMap(String? value);
-  external dynamic? get width;
-  external set width(dynamic? value);
+  external dynamic get width;
+  external set width(dynamic value);
   external factory ImgHTMLAttributes({
     String? alt,
     String? crossOrigin,
     String? decoding,
-    dynamic? height,
+    dynamic height,
     String? loading,
     HTMLAttributeReferrerPolicy? referrerPolicy,
     String? sizes,
     String? src,
     String? srcSet,
     String? useMap,
-    dynamic? width,
+    dynamic width,
   });
 }
 
@@ -2666,8 +2666,8 @@ class InputHTMLAttributes<T> {
   external set autoComplete(String? value);
   external bool? get autoFocus;
   external set autoFocus(bool? value);
-  external dynamic? get capture;
-  external set capture(dynamic? value);
+  external dynamic get capture;
+  external set capture(dynamic value);
   external bool? get checked;
   external set checked(bool? value);
   external String? get crossOrigin;
@@ -2688,16 +2688,16 @@ class InputHTMLAttributes<T> {
   external set formNoValidate(bool? value);
   external String? get formTarget;
   external set formTarget(String? value);
-  external dynamic? get height;
-  external set height(dynamic? value);
+  external dynamic get height;
+  external set height(dynamic value);
   external String? get list;
   external set list(String? value);
-  external dynamic? get max;
-  external set max(dynamic? value);
+  external dynamic get max;
+  external set max(dynamic value);
   external num? get maxLength;
   external set maxLength(num? value);
-  external dynamic? get min;
-  external set min(dynamic? value);
+  external dynamic get min;
+  external set min(dynamic value);
   external num? get minLength;
   external set minLength(num? value);
   external bool? get multiple;
@@ -2716,14 +2716,14 @@ class InputHTMLAttributes<T> {
   external set size(num? value);
   external String? get src;
   external set src(String? value);
-  external dynamic? get step;
-  external set step(dynamic? value);
+  external dynamic get step;
+  external set step(dynamic value);
   external HTMLInputTypeAttribute? get type;
   external set type(HTMLInputTypeAttribute? value);
-  external dynamic? get value;
-  external set value(dynamic? value);
-  external dynamic? get width;
-  external set width(dynamic? value);
+  external dynamic get value;
+  external set value(dynamic value);
+  external dynamic get width;
+  external set width(dynamic value);
   external ChangeEventHandler<T>? get onChange;
   external set onChange(ChangeEventHandler<T>? value);
   external factory InputHTMLAttributes({
@@ -2731,7 +2731,7 @@ class InputHTMLAttributes<T> {
     String? alt,
     String? autoComplete,
     bool? autoFocus,
-    dynamic? capture,
+    dynamic capture,
     bool? checked,
     String? crossOrigin,
     bool? disabled,
@@ -2742,11 +2742,11 @@ class InputHTMLAttributes<T> {
     String? formMethod,
     bool? formNoValidate,
     String? formTarget,
-    dynamic? height,
+    dynamic height,
     String? list,
-    dynamic? max,
+    dynamic max,
     num? maxLength,
-    dynamic? min,
+    dynamic min,
     num? minLength,
     bool? multiple,
     String? name,
@@ -2756,10 +2756,10 @@ class InputHTMLAttributes<T> {
     bool? required,
     num? size,
     String? src,
-    dynamic? step,
+    dynamic step,
     HTMLInputTypeAttribute? type,
-    dynamic? value,
-    dynamic? width,
+    dynamic value,
+    dynamic width,
     ChangeEventHandler<T>? onChange,
   });
 }
@@ -2808,10 +2808,10 @@ class LabelHTMLAttributes<T> {
 @JS()
 @anonymous
 class LiHTMLAttributes<T> {
-  external dynamic? get value;
-  external set value(dynamic? value);
+  external dynamic get value;
+  external set value(dynamic value);
   external factory LiHTMLAttributes({
-    dynamic? value,
+    dynamic value,
   });
 }
 
@@ -2946,22 +2946,22 @@ class MeterHTMLAttributes<T> {
   external set high(num? value);
   external num? get low;
   external set low(num? value);
-  external dynamic? get max;
-  external set max(dynamic? value);
-  external dynamic? get min;
-  external set min(dynamic? value);
+  external dynamic get max;
+  external set max(dynamic value);
+  external dynamic get min;
+  external set min(dynamic value);
   external num? get optimum;
   external set optimum(num? value);
-  external dynamic? get value;
-  external set value(dynamic? value);
+  external dynamic get value;
+  external set value(dynamic value);
   external factory MeterHTMLAttributes({
     String? form,
     num? high,
     num? low,
-    dynamic? max,
-    dynamic? min,
+    dynamic max,
+    dynamic min,
     num? optimum,
-    dynamic? value,
+    dynamic value,
   });
 }
 
@@ -2984,27 +2984,27 @@ class ObjectHTMLAttributes<T> {
   external set data(String? value);
   external String? get form;
   external set form(String? value);
-  external dynamic? get height;
-  external set height(dynamic? value);
+  external dynamic get height;
+  external set height(dynamic value);
   external String? get name;
   external set name(String? value);
   external String? get type;
   external set type(String? value);
   external String? get useMap;
   external set useMap(String? value);
-  external dynamic? get width;
-  external set width(dynamic? value);
+  external dynamic get width;
+  external set width(dynamic value);
   external String? get wmode;
   external set wmode(String? value);
   external factory ObjectHTMLAttributes({
     String? classID,
     String? data,
     String? form,
-    dynamic? height,
+    dynamic height,
     String? name,
     String? type,
     String? useMap,
-    dynamic? width,
+    dynamic width,
     String? wmode,
   });
 }
@@ -3047,13 +3047,13 @@ class OptionHTMLAttributes<T> {
   external set label(String? value);
   external bool? get selected;
   external set selected(bool? value);
-  external dynamic? get value;
-  external set value(dynamic? value);
+  external dynamic get value;
+  external set value(dynamic value);
   external factory OptionHTMLAttributes({
     bool? disabled,
     String? label,
     bool? selected,
-    dynamic? value,
+    dynamic value,
   });
 }
 
@@ -3078,24 +3078,24 @@ class OutputHTMLAttributes<T> {
 class ParamHTMLAttributes<T> {
   external String? get name;
   external set name(String? value);
-  external dynamic? get value;
-  external set value(dynamic? value);
+  external dynamic get value;
+  external set value(dynamic value);
   external factory ParamHTMLAttributes({
     String? name,
-    dynamic? value,
+    dynamic value,
   });
 }
 
 @JS()
 @anonymous
 class ProgressHTMLAttributes<T> {
-  external dynamic? get max;
-  external set max(dynamic? value);
-  external dynamic? get value;
-  external set value(dynamic? value);
+  external dynamic get max;
+  external set max(dynamic value);
+  external dynamic get value;
+  external set value(dynamic value);
   external factory ProgressHTMLAttributes({
-    dynamic? max,
-    dynamic? value,
+    dynamic max,
+    dynamic value,
   });
 }
 
@@ -3165,8 +3165,8 @@ class SelectHTMLAttributes<T> {
   external set required(bool? value);
   external num? get size;
   external set size(num? value);
-  external dynamic? get value;
-  external set value(dynamic? value);
+  external dynamic get value;
+  external set value(dynamic value);
   external ChangeEventHandler<T>? get onChange;
   external set onChange(ChangeEventHandler<T>? value);
   external factory SelectHTMLAttributes({
@@ -3178,7 +3178,7 @@ class SelectHTMLAttributes<T> {
     String? name,
     bool? required,
     num? size,
-    dynamic? value,
+    dynamic value,
     ChangeEventHandler<T>? onChange,
   });
 }
@@ -3186,8 +3186,8 @@ class SelectHTMLAttributes<T> {
 @JS()
 @anonymous
 class SourceHTMLAttributes<T> {
-  external dynamic? get height;
-  external set height(dynamic? value);
+  external dynamic get height;
+  external set height(dynamic value);
   external String? get media;
   external set media(String? value);
   external String? get sizes;
@@ -3198,16 +3198,16 @@ class SourceHTMLAttributes<T> {
   external set srcSet(String? value);
   external String? get type;
   external set type(String? value);
-  external dynamic? get width;
-  external set width(dynamic? value);
+  external dynamic get width;
+  external set width(dynamic value);
   external factory SourceHTMLAttributes({
-    dynamic? height,
+    dynamic height,
     String? media,
     String? sizes,
     String? src,
     String? srcSet,
     String? type,
-    dynamic? width,
+    dynamic width,
   });
 }
 
@@ -3233,19 +3233,19 @@ class StyleHTMLAttributes<T> {
 @JS()
 @anonymous
 class TableHTMLAttributes<T> {
-  external dynamic? get cellPadding;
-  external set cellPadding(dynamic? value);
-  external dynamic? get cellSpacing;
-  external set cellSpacing(dynamic? value);
+  external dynamic get cellPadding;
+  external set cellPadding(dynamic value);
+  external dynamic get cellSpacing;
+  external set cellSpacing(dynamic value);
   external String? get summary;
   external set summary(String? value);
-  external dynamic? get width;
-  external set width(dynamic? value);
+  external dynamic get width;
+  external set width(dynamic value);
   external factory TableHTMLAttributes({
-    dynamic? cellPadding,
-    dynamic? cellSpacing,
+    dynamic cellPadding,
+    dynamic cellSpacing,
     String? summary,
-    dynamic? width,
+    dynamic width,
   });
 }
 
@@ -3278,8 +3278,8 @@ class TextareaHTMLAttributes<T> {
   external set required(bool? value);
   external num? get rows;
   external set rows(num? value);
-  external dynamic? get value;
-  external set value(dynamic? value);
+  external dynamic get value;
+  external set value(dynamic value);
   external String? get wrap;
   external set wrap(String? value);
   external ChangeEventHandler<T>? get onChange;
@@ -3298,7 +3298,7 @@ class TextareaHTMLAttributes<T> {
     bool? readOnly,
     bool? required,
     num? rows,
-    dynamic? value,
+    dynamic value,
     String? wrap,
     ChangeEventHandler<T>? onChange,
   });
@@ -3319,10 +3319,10 @@ class TdHTMLAttributes<T> {
   external set scope(String? value);
   external String? get abbr;
   external set abbr(String? value);
-  external dynamic? get height;
-  external set height(dynamic? value);
-  external dynamic? get width;
-  external set width(dynamic? value);
+  external dynamic get height;
+  external set height(dynamic value);
+  external dynamic get width;
+  external set width(dynamic value);
   external String? get valign;
   external set valign(String? value);
   external factory TdHTMLAttributes({
@@ -3332,8 +3332,8 @@ class TdHTMLAttributes<T> {
     num? rowSpan,
     String? scope,
     String? abbr,
-    dynamic? height,
-    dynamic? width,
+    dynamic height,
+    dynamic width,
     String? valign,
   });
 }
@@ -3395,23 +3395,23 @@ class TrackHTMLAttributes<T> {
 @JS()
 @anonymous
 class VideoHTMLAttributes<T> {
-  external dynamic? get height;
-  external set height(dynamic? value);
+  external dynamic get height;
+  external set height(dynamic value);
   external bool? get playsInline;
   external set playsInline(bool? value);
   external String? get poster;
   external set poster(String? value);
-  external dynamic? get width;
-  external set width(dynamic? value);
+  external dynamic get width;
+  external set width(dynamic value);
   external bool? get disablePictureInPicture;
   external set disablePictureInPicture(bool? value);
   external bool? get disableRemotePlayback;
   external set disableRemotePlayback(bool? value);
   external factory VideoHTMLAttributes({
-    dynamic? height,
+    dynamic height,
     bool? playsInline,
     String? poster,
-    dynamic? width,
+    dynamic width,
     bool? disablePictureInPicture,
     bool? disableRemotePlayback,
   });
@@ -3424,20 +3424,20 @@ class SVGAttributes<T> {
   external set className(String? value);
   external String? get color;
   external set color(String? value);
-  external dynamic? get height;
-  external set height(dynamic? value);
+  external dynamic get height;
+  external set height(dynamic value);
   external String? get id;
   external set id(String? value);
   external String? get lang;
   external set lang(String? value);
-  external dynamic? get max;
-  external set max(dynamic? value);
+  external dynamic get max;
+  external set max(dynamic value);
   external String? get media;
   external set media(String? value);
   external String? get method;
   external set method(String? value);
-  external dynamic? get min;
-  external set min(dynamic? value);
+  external dynamic get min;
+  external set min(dynamic value);
   external String? get name;
   external set name(String? value);
   external CSSProperties? get style;
@@ -3446,16 +3446,16 @@ class SVGAttributes<T> {
   external set target(String? value);
   external String? get type;
   external set type(String? value);
-  external dynamic? get width;
-  external set width(dynamic? value);
+  external dynamic get width;
+  external set width(dynamic value);
   external AriaRole? get role;
   external set role(AriaRole? value);
   external num? get tabIndex;
   external set tabIndex(num? value);
   external String? get crossOrigin;
   external set crossOrigin(String? value);
-  external dynamic? get accentHeight;
-  external set accentHeight(dynamic? value);
+  external dynamic get accentHeight;
+  external set accentHeight(dynamic value);
   external String? get accumulate;
   external set accumulate(String? value);
   external String? get additive;
@@ -3464,442 +3464,442 @@ class SVGAttributes<T> {
   external set alignmentBaseline(String? value);
   external String? get allowReorder;
   external set allowReorder(String? value);
-  external dynamic? get alphabetic;
-  external set alphabetic(dynamic? value);
-  external dynamic? get amplitude;
-  external set amplitude(dynamic? value);
+  external dynamic get alphabetic;
+  external set alphabetic(dynamic value);
+  external dynamic get amplitude;
+  external set amplitude(dynamic value);
   external String? get arabicForm;
   external set arabicForm(String? value);
-  external dynamic? get ascent;
-  external set ascent(dynamic? value);
+  external dynamic get ascent;
+  external set ascent(dynamic value);
   external String? get attributeName;
   external set attributeName(String? value);
   external String? get attributeType;
   external set attributeType(String? value);
   external Booleanish? get autoReverse;
   external set autoReverse(Booleanish? value);
-  external dynamic? get azimuth;
-  external set azimuth(dynamic? value);
-  external dynamic? get baseFrequency;
-  external set baseFrequency(dynamic? value);
-  external dynamic? get baselineShift;
-  external set baselineShift(dynamic? value);
-  external dynamic? get baseProfile;
-  external set baseProfile(dynamic? value);
-  external dynamic? get bbox;
-  external set bbox(dynamic? value);
-  external dynamic? get begin;
-  external set begin(dynamic? value);
-  external dynamic? get bias;
-  external set bias(dynamic? value);
-  external dynamic? get by;
-  external set by(dynamic? value);
-  external dynamic? get calcMode;
-  external set calcMode(dynamic? value);
-  external dynamic? get capHeight;
-  external set capHeight(dynamic? value);
-  external dynamic? get clip;
-  external set clip(dynamic? value);
+  external dynamic get azimuth;
+  external set azimuth(dynamic value);
+  external dynamic get baseFrequency;
+  external set baseFrequency(dynamic value);
+  external dynamic get baselineShift;
+  external set baselineShift(dynamic value);
+  external dynamic get baseProfile;
+  external set baseProfile(dynamic value);
+  external dynamic get bbox;
+  external set bbox(dynamic value);
+  external dynamic get begin;
+  external set begin(dynamic value);
+  external dynamic get bias;
+  external set bias(dynamic value);
+  external dynamic get by;
+  external set by(dynamic value);
+  external dynamic get calcMode;
+  external set calcMode(dynamic value);
+  external dynamic get capHeight;
+  external set capHeight(dynamic value);
+  external dynamic get clip;
+  external set clip(dynamic value);
   external String? get clipPath;
   external set clipPath(String? value);
-  external dynamic? get clipPathUnits;
-  external set clipPathUnits(dynamic? value);
-  external dynamic? get clipRule;
-  external set clipRule(dynamic? value);
-  external dynamic? get colorInterpolation;
-  external set colorInterpolation(dynamic? value);
+  external dynamic get clipPathUnits;
+  external set clipPathUnits(dynamic value);
+  external dynamic get clipRule;
+  external set clipRule(dynamic value);
+  external dynamic get colorInterpolation;
+  external set colorInterpolation(dynamic value);
   external String? get colorInterpolationFilters;
   external set colorInterpolationFilters(String? value);
-  external dynamic? get colorProfile;
-  external set colorProfile(dynamic? value);
-  external dynamic? get colorRendering;
-  external set colorRendering(dynamic? value);
-  external dynamic? get contentScriptType;
-  external set contentScriptType(dynamic? value);
-  external dynamic? get contentStyleType;
-  external set contentStyleType(dynamic? value);
-  external dynamic? get cursor;
-  external set cursor(dynamic? value);
-  external dynamic? get cx;
-  external set cx(dynamic? value);
-  external dynamic? get cy;
-  external set cy(dynamic? value);
+  external dynamic get colorProfile;
+  external set colorProfile(dynamic value);
+  external dynamic get colorRendering;
+  external set colorRendering(dynamic value);
+  external dynamic get contentScriptType;
+  external set contentScriptType(dynamic value);
+  external dynamic get contentStyleType;
+  external set contentStyleType(dynamic value);
+  external dynamic get cursor;
+  external set cursor(dynamic value);
+  external dynamic get cx;
+  external set cx(dynamic value);
+  external dynamic get cy;
+  external set cy(dynamic value);
   external String? get d;
   external set d(String? value);
-  external dynamic? get decelerate;
-  external set decelerate(dynamic? value);
-  external dynamic? get descent;
-  external set descent(dynamic? value);
-  external dynamic? get diffuseConstant;
-  external set diffuseConstant(dynamic? value);
-  external dynamic? get direction;
-  external set direction(dynamic? value);
-  external dynamic? get display;
-  external set display(dynamic? value);
-  external dynamic? get divisor;
-  external set divisor(dynamic? value);
-  external dynamic? get dominantBaseline;
-  external set dominantBaseline(dynamic? value);
-  external dynamic? get dur;
-  external set dur(dynamic? value);
-  external dynamic? get dx;
-  external set dx(dynamic? value);
-  external dynamic? get dy;
-  external set dy(dynamic? value);
-  external dynamic? get edgeMode;
-  external set edgeMode(dynamic? value);
-  external dynamic? get elevation;
-  external set elevation(dynamic? value);
-  external dynamic? get enableBackground;
-  external set enableBackground(dynamic? value);
-  external dynamic? get end;
-  external set end(dynamic? value);
-  external dynamic? get exponent;
-  external set exponent(dynamic? value);
+  external dynamic get decelerate;
+  external set decelerate(dynamic value);
+  external dynamic get descent;
+  external set descent(dynamic value);
+  external dynamic get diffuseConstant;
+  external set diffuseConstant(dynamic value);
+  external dynamic get direction;
+  external set direction(dynamic value);
+  external dynamic get display;
+  external set display(dynamic value);
+  external dynamic get divisor;
+  external set divisor(dynamic value);
+  external dynamic get dominantBaseline;
+  external set dominantBaseline(dynamic value);
+  external dynamic get dur;
+  external set dur(dynamic value);
+  external dynamic get dx;
+  external set dx(dynamic value);
+  external dynamic get dy;
+  external set dy(dynamic value);
+  external dynamic get edgeMode;
+  external set edgeMode(dynamic value);
+  external dynamic get elevation;
+  external set elevation(dynamic value);
+  external dynamic get enableBackground;
+  external set enableBackground(dynamic value);
+  external dynamic get end;
+  external set end(dynamic value);
+  external dynamic get exponent;
+  external set exponent(dynamic value);
   external Booleanish? get externalResourcesRequired;
   external set externalResourcesRequired(Booleanish? value);
   external String? get fill;
   external set fill(String? value);
-  external dynamic? get fillOpacity;
-  external set fillOpacity(dynamic? value);
+  external dynamic get fillOpacity;
+  external set fillOpacity(dynamic value);
   external String? get fillRule;
   external set fillRule(String? value);
   external String? get filter;
   external set filter(String? value);
-  external dynamic? get filterRes;
-  external set filterRes(dynamic? value);
-  external dynamic? get filterUnits;
-  external set filterUnits(dynamic? value);
-  external dynamic? get floodColor;
-  external set floodColor(dynamic? value);
-  external dynamic? get floodOpacity;
-  external set floodOpacity(dynamic? value);
-  external dynamic? get focusable;
-  external set focusable(dynamic? value);
+  external dynamic get filterRes;
+  external set filterRes(dynamic value);
+  external dynamic get filterUnits;
+  external set filterUnits(dynamic value);
+  external dynamic get floodColor;
+  external set floodColor(dynamic value);
+  external dynamic get floodOpacity;
+  external set floodOpacity(dynamic value);
+  external dynamic get focusable;
+  external set focusable(dynamic value);
   external String? get fontFamily;
   external set fontFamily(String? value);
-  external dynamic? get fontSize;
-  external set fontSize(dynamic? value);
-  external dynamic? get fontSizeAdjust;
-  external set fontSizeAdjust(dynamic? value);
-  external dynamic? get fontStretch;
-  external set fontStretch(dynamic? value);
-  external dynamic? get fontStyle;
-  external set fontStyle(dynamic? value);
-  external dynamic? get fontVariant;
-  external set fontVariant(dynamic? value);
-  external dynamic? get fontWeight;
-  external set fontWeight(dynamic? value);
-  external dynamic? get format;
-  external set format(dynamic? value);
-  external dynamic? get fr;
-  external set fr(dynamic? value);
-  external dynamic? get from;
-  external set from(dynamic? value);
-  external dynamic? get fx;
-  external set fx(dynamic? value);
-  external dynamic? get fy;
-  external set fy(dynamic? value);
-  external dynamic? get g1;
-  external set g1(dynamic? value);
-  external dynamic? get g2;
-  external set g2(dynamic? value);
-  external dynamic? get glyphName;
-  external set glyphName(dynamic? value);
-  external dynamic? get glyphOrientationHorizontal;
-  external set glyphOrientationHorizontal(dynamic? value);
-  external dynamic? get glyphOrientationVertical;
-  external set glyphOrientationVertical(dynamic? value);
-  external dynamic? get glyphRef;
-  external set glyphRef(dynamic? value);
+  external dynamic get fontSize;
+  external set fontSize(dynamic value);
+  external dynamic get fontSizeAdjust;
+  external set fontSizeAdjust(dynamic value);
+  external dynamic get fontStretch;
+  external set fontStretch(dynamic value);
+  external dynamic get fontStyle;
+  external set fontStyle(dynamic value);
+  external dynamic get fontVariant;
+  external set fontVariant(dynamic value);
+  external dynamic get fontWeight;
+  external set fontWeight(dynamic value);
+  external dynamic get format;
+  external set format(dynamic value);
+  external dynamic get fr;
+  external set fr(dynamic value);
+  external dynamic get from;
+  external set from(dynamic value);
+  external dynamic get fx;
+  external set fx(dynamic value);
+  external dynamic get fy;
+  external set fy(dynamic value);
+  external dynamic get g1;
+  external set g1(dynamic value);
+  external dynamic get g2;
+  external set g2(dynamic value);
+  external dynamic get glyphName;
+  external set glyphName(dynamic value);
+  external dynamic get glyphOrientationHorizontal;
+  external set glyphOrientationHorizontal(dynamic value);
+  external dynamic get glyphOrientationVertical;
+  external set glyphOrientationVertical(dynamic value);
+  external dynamic get glyphRef;
+  external set glyphRef(dynamic value);
   external String? get gradientTransform;
   external set gradientTransform(String? value);
   external String? get gradientUnits;
   external set gradientUnits(String? value);
-  external dynamic? get hanging;
-  external set hanging(dynamic? value);
-  external dynamic? get horizAdvX;
-  external set horizAdvX(dynamic? value);
-  external dynamic? get horizOriginX;
-  external set horizOriginX(dynamic? value);
+  external dynamic get hanging;
+  external set hanging(dynamic value);
+  external dynamic get horizAdvX;
+  external set horizAdvX(dynamic value);
+  external dynamic get horizOriginX;
+  external set horizOriginX(dynamic value);
   external String? get href;
   external set href(String? value);
-  external dynamic? get ideographic;
-  external set ideographic(dynamic? value);
-  external dynamic? get imageRendering;
-  external set imageRendering(dynamic? value);
-  external dynamic? get in2;
-  external set in2(dynamic? value);
-  external dynamic? get intercept;
-  external set intercept(dynamic? value);
-  external dynamic? get k1;
-  external set k1(dynamic? value);
-  external dynamic? get k2;
-  external set k2(dynamic? value);
-  external dynamic? get k3;
-  external set k3(dynamic? value);
-  external dynamic? get k4;
-  external set k4(dynamic? value);
-  external dynamic? get k;
-  external set k(dynamic? value);
-  external dynamic? get kernelMatrix;
-  external set kernelMatrix(dynamic? value);
-  external dynamic? get kernelUnitLength;
-  external set kernelUnitLength(dynamic? value);
-  external dynamic? get kerning;
-  external set kerning(dynamic? value);
-  external dynamic? get keyPoints;
-  external set keyPoints(dynamic? value);
-  external dynamic? get keySplines;
-  external set keySplines(dynamic? value);
-  external dynamic? get keyTimes;
-  external set keyTimes(dynamic? value);
-  external dynamic? get lengthAdjust;
-  external set lengthAdjust(dynamic? value);
-  external dynamic? get letterSpacing;
-  external set letterSpacing(dynamic? value);
-  external dynamic? get lightingColor;
-  external set lightingColor(dynamic? value);
-  external dynamic? get limitingConeAngle;
-  external set limitingConeAngle(dynamic? value);
-  external dynamic? get local;
-  external set local(dynamic? value);
+  external dynamic get ideographic;
+  external set ideographic(dynamic value);
+  external dynamic get imageRendering;
+  external set imageRendering(dynamic value);
+  external dynamic get in2;
+  external set in2(dynamic value);
+  external dynamic get intercept;
+  external set intercept(dynamic value);
+  external dynamic get k1;
+  external set k1(dynamic value);
+  external dynamic get k2;
+  external set k2(dynamic value);
+  external dynamic get k3;
+  external set k3(dynamic value);
+  external dynamic get k4;
+  external set k4(dynamic value);
+  external dynamic get k;
+  external set k(dynamic value);
+  external dynamic get kernelMatrix;
+  external set kernelMatrix(dynamic value);
+  external dynamic get kernelUnitLength;
+  external set kernelUnitLength(dynamic value);
+  external dynamic get kerning;
+  external set kerning(dynamic value);
+  external dynamic get keyPoints;
+  external set keyPoints(dynamic value);
+  external dynamic get keySplines;
+  external set keySplines(dynamic value);
+  external dynamic get keyTimes;
+  external set keyTimes(dynamic value);
+  external dynamic get lengthAdjust;
+  external set lengthAdjust(dynamic value);
+  external dynamic get letterSpacing;
+  external set letterSpacing(dynamic value);
+  external dynamic get lightingColor;
+  external set lightingColor(dynamic value);
+  external dynamic get limitingConeAngle;
+  external set limitingConeAngle(dynamic value);
+  external dynamic get local;
+  external set local(dynamic value);
   external String? get markerEnd;
   external set markerEnd(String? value);
-  external dynamic? get markerHeight;
-  external set markerHeight(dynamic? value);
+  external dynamic get markerHeight;
+  external set markerHeight(dynamic value);
   external String? get markerMid;
   external set markerMid(String? value);
   external String? get markerStart;
   external set markerStart(String? value);
-  external dynamic? get markerUnits;
-  external set markerUnits(dynamic? value);
-  external dynamic? get markerWidth;
-  external set markerWidth(dynamic? value);
+  external dynamic get markerUnits;
+  external set markerUnits(dynamic value);
+  external dynamic get markerWidth;
+  external set markerWidth(dynamic value);
   external String? get mask;
   external set mask(String? value);
-  external dynamic? get maskContentUnits;
-  external set maskContentUnits(dynamic? value);
-  external dynamic? get maskUnits;
-  external set maskUnits(dynamic? value);
-  external dynamic? get mathematical;
-  external set mathematical(dynamic? value);
-  external dynamic? get mode;
-  external set mode(dynamic? value);
-  external dynamic? get numOctaves;
-  external set numOctaves(dynamic? value);
-  external dynamic? get offset;
-  external set offset(dynamic? value);
-  external dynamic? get opacity;
-  external set opacity(dynamic? value);
-  external dynamic? get operator;
-  external set operator(dynamic? value);
-  external dynamic? get order;
-  external set order(dynamic? value);
-  external dynamic? get orient;
-  external set orient(dynamic? value);
-  external dynamic? get orientation;
-  external set orientation(dynamic? value);
-  external dynamic? get origin;
-  external set origin(dynamic? value);
-  external dynamic? get overflow;
-  external set overflow(dynamic? value);
-  external dynamic? get overlinePosition;
-  external set overlinePosition(dynamic? value);
-  external dynamic? get overlineThickness;
-  external set overlineThickness(dynamic? value);
-  external dynamic? get paintOrder;
-  external set paintOrder(dynamic? value);
-  external dynamic? get panose1;
-  external set panose1(dynamic? value);
+  external dynamic get maskContentUnits;
+  external set maskContentUnits(dynamic value);
+  external dynamic get maskUnits;
+  external set maskUnits(dynamic value);
+  external dynamic get mathematical;
+  external set mathematical(dynamic value);
+  external dynamic get mode;
+  external set mode(dynamic value);
+  external dynamic get numOctaves;
+  external set numOctaves(dynamic value);
+  external dynamic get offset;
+  external set offset(dynamic value);
+  external dynamic get opacity;
+  external set opacity(dynamic value);
+  external dynamic get operator;
+  external set operator(dynamic value);
+  external dynamic get order;
+  external set order(dynamic value);
+  external dynamic get orient;
+  external set orient(dynamic value);
+  external dynamic get orientation;
+  external set orientation(dynamic value);
+  external dynamic get origin;
+  external set origin(dynamic value);
+  external dynamic get overflow;
+  external set overflow(dynamic value);
+  external dynamic get overlinePosition;
+  external set overlinePosition(dynamic value);
+  external dynamic get overlineThickness;
+  external set overlineThickness(dynamic value);
+  external dynamic get paintOrder;
+  external set paintOrder(dynamic value);
+  external dynamic get panose1;
+  external set panose1(dynamic value);
   external String? get path;
   external set path(String? value);
-  external dynamic? get pathLength;
-  external set pathLength(dynamic? value);
+  external dynamic get pathLength;
+  external set pathLength(dynamic value);
   external String? get patternContentUnits;
   external set patternContentUnits(String? value);
-  external dynamic? get patternTransform;
-  external set patternTransform(dynamic? value);
+  external dynamic get patternTransform;
+  external set patternTransform(dynamic value);
   external String? get patternUnits;
   external set patternUnits(String? value);
-  external dynamic? get pointerEvents;
-  external set pointerEvents(dynamic? value);
+  external dynamic get pointerEvents;
+  external set pointerEvents(dynamic value);
   external String? get points;
   external set points(String? value);
-  external dynamic? get pointsAtX;
-  external set pointsAtX(dynamic? value);
-  external dynamic? get pointsAtY;
-  external set pointsAtY(dynamic? value);
-  external dynamic? get pointsAtZ;
-  external set pointsAtZ(dynamic? value);
+  external dynamic get pointsAtX;
+  external set pointsAtX(dynamic value);
+  external dynamic get pointsAtY;
+  external set pointsAtY(dynamic value);
+  external dynamic get pointsAtZ;
+  external set pointsAtZ(dynamic value);
   external Booleanish? get preserveAlpha;
   external set preserveAlpha(Booleanish? value);
   external String? get preserveAspectRatio;
   external set preserveAspectRatio(String? value);
-  external dynamic? get primitiveUnits;
-  external set primitiveUnits(dynamic? value);
-  external dynamic? get r;
-  external set r(dynamic? value);
-  external dynamic? get radius;
-  external set radius(dynamic? value);
-  external dynamic? get refX;
-  external set refX(dynamic? value);
-  external dynamic? get refY;
-  external set refY(dynamic? value);
-  external dynamic? get renderingIntent;
-  external set renderingIntent(dynamic? value);
-  external dynamic? get repeatCount;
-  external set repeatCount(dynamic? value);
-  external dynamic? get repeatDur;
-  external set repeatDur(dynamic? value);
-  external dynamic? get requiredExtensions;
-  external set requiredExtensions(dynamic? value);
-  external dynamic? get requiredFeatures;
-  external set requiredFeatures(dynamic? value);
-  external dynamic? get restart;
-  external set restart(dynamic? value);
+  external dynamic get primitiveUnits;
+  external set primitiveUnits(dynamic value);
+  external dynamic get r;
+  external set r(dynamic value);
+  external dynamic get radius;
+  external set radius(dynamic value);
+  external dynamic get refX;
+  external set refX(dynamic value);
+  external dynamic get refY;
+  external set refY(dynamic value);
+  external dynamic get renderingIntent;
+  external set renderingIntent(dynamic value);
+  external dynamic get repeatCount;
+  external set repeatCount(dynamic value);
+  external dynamic get repeatDur;
+  external set repeatDur(dynamic value);
+  external dynamic get requiredExtensions;
+  external set requiredExtensions(dynamic value);
+  external dynamic get requiredFeatures;
+  external set requiredFeatures(dynamic value);
+  external dynamic get restart;
+  external set restart(dynamic value);
   external String? get result;
   external set result(String? value);
-  external dynamic? get rotate;
-  external set rotate(dynamic? value);
-  external dynamic? get rx;
-  external set rx(dynamic? value);
-  external dynamic? get ry;
-  external set ry(dynamic? value);
-  external dynamic? get scale;
-  external set scale(dynamic? value);
-  external dynamic? get seed;
-  external set seed(dynamic? value);
-  external dynamic? get shapeRendering;
-  external set shapeRendering(dynamic? value);
-  external dynamic? get slope;
-  external set slope(dynamic? value);
-  external dynamic? get spacing;
-  external set spacing(dynamic? value);
-  external dynamic? get specularConstant;
-  external set specularConstant(dynamic? value);
-  external dynamic? get specularExponent;
-  external set specularExponent(dynamic? value);
-  external dynamic? get speed;
-  external set speed(dynamic? value);
+  external dynamic get rotate;
+  external set rotate(dynamic value);
+  external dynamic get rx;
+  external set rx(dynamic value);
+  external dynamic get ry;
+  external set ry(dynamic value);
+  external dynamic get scale;
+  external set scale(dynamic value);
+  external dynamic get seed;
+  external set seed(dynamic value);
+  external dynamic get shapeRendering;
+  external set shapeRendering(dynamic value);
+  external dynamic get slope;
+  external set slope(dynamic value);
+  external dynamic get spacing;
+  external set spacing(dynamic value);
+  external dynamic get specularConstant;
+  external set specularConstant(dynamic value);
+  external dynamic get specularExponent;
+  external set specularExponent(dynamic value);
+  external dynamic get speed;
+  external set speed(dynamic value);
   external String? get spreadMethod;
   external set spreadMethod(String? value);
-  external dynamic? get startOffset;
-  external set startOffset(dynamic? value);
-  external dynamic? get stdDeviation;
-  external set stdDeviation(dynamic? value);
-  external dynamic? get stemh;
-  external set stemh(dynamic? value);
-  external dynamic? get stemv;
-  external set stemv(dynamic? value);
-  external dynamic? get stitchTiles;
-  external set stitchTiles(dynamic? value);
+  external dynamic get startOffset;
+  external set startOffset(dynamic value);
+  external dynamic get stdDeviation;
+  external set stdDeviation(dynamic value);
+  external dynamic get stemh;
+  external set stemh(dynamic value);
+  external dynamic get stemv;
+  external set stemv(dynamic value);
+  external dynamic get stitchTiles;
+  external set stitchTiles(dynamic value);
   external String? get stopColor;
   external set stopColor(String? value);
-  external dynamic? get stopOpacity;
-  external set stopOpacity(dynamic? value);
-  external dynamic? get strikethroughPosition;
-  external set strikethroughPosition(dynamic? value);
-  external dynamic? get strikethroughThickness;
-  external set strikethroughThickness(dynamic? value);
-  external dynamic? get string;
-  external set string(dynamic? value);
+  external dynamic get stopOpacity;
+  external set stopOpacity(dynamic value);
+  external dynamic get strikethroughPosition;
+  external set strikethroughPosition(dynamic value);
+  external dynamic get strikethroughThickness;
+  external set strikethroughThickness(dynamic value);
+  external dynamic get string;
+  external set string(dynamic value);
   external String? get stroke;
   external set stroke(String? value);
-  external dynamic? get strokeDasharray;
-  external set strokeDasharray(dynamic? value);
-  external dynamic? get strokeDashoffset;
-  external set strokeDashoffset(dynamic? value);
+  external dynamic get strokeDasharray;
+  external set strokeDasharray(dynamic value);
+  external dynamic get strokeDashoffset;
+  external set strokeDashoffset(dynamic value);
   external String? get strokeLinecap;
   external set strokeLinecap(String? value);
   external String? get strokeLinejoin;
   external set strokeLinejoin(String? value);
-  external dynamic? get strokeMiterlimit;
-  external set strokeMiterlimit(dynamic? value);
-  external dynamic? get strokeOpacity;
-  external set strokeOpacity(dynamic? value);
-  external dynamic? get strokeWidth;
-  external set strokeWidth(dynamic? value);
-  external dynamic? get surfaceScale;
-  external set surfaceScale(dynamic? value);
-  external dynamic? get systemLanguage;
-  external set systemLanguage(dynamic? value);
-  external dynamic? get tableValues;
-  external set tableValues(dynamic? value);
-  external dynamic? get targetX;
-  external set targetX(dynamic? value);
-  external dynamic? get targetY;
-  external set targetY(dynamic? value);
+  external dynamic get strokeMiterlimit;
+  external set strokeMiterlimit(dynamic value);
+  external dynamic get strokeOpacity;
+  external set strokeOpacity(dynamic value);
+  external dynamic get strokeWidth;
+  external set strokeWidth(dynamic value);
+  external dynamic get surfaceScale;
+  external set surfaceScale(dynamic value);
+  external dynamic get systemLanguage;
+  external set systemLanguage(dynamic value);
+  external dynamic get tableValues;
+  external set tableValues(dynamic value);
+  external dynamic get targetX;
+  external set targetX(dynamic value);
+  external dynamic get targetY;
+  external set targetY(dynamic value);
   external String? get textAnchor;
   external set textAnchor(String? value);
-  external dynamic? get textDecoration;
-  external set textDecoration(dynamic? value);
-  external dynamic? get textLength;
-  external set textLength(dynamic? value);
-  external dynamic? get textRendering;
-  external set textRendering(dynamic? value);
-  external dynamic? get to;
-  external set to(dynamic? value);
+  external dynamic get textDecoration;
+  external set textDecoration(dynamic value);
+  external dynamic get textLength;
+  external set textLength(dynamic value);
+  external dynamic get textRendering;
+  external set textRendering(dynamic value);
+  external dynamic get to;
+  external set to(dynamic value);
   external String? get transform;
   external set transform(String? value);
-  external dynamic? get u1;
-  external set u1(dynamic? value);
-  external dynamic? get u2;
-  external set u2(dynamic? value);
-  external dynamic? get underlinePosition;
-  external set underlinePosition(dynamic? value);
-  external dynamic? get underlineThickness;
-  external set underlineThickness(dynamic? value);
-  external dynamic? get unicode;
-  external set unicode(dynamic? value);
-  external dynamic? get unicodeBidi;
-  external set unicodeBidi(dynamic? value);
-  external dynamic? get unicodeRange;
-  external set unicodeRange(dynamic? value);
-  external dynamic? get unitsPerEm;
-  external set unitsPerEm(dynamic? value);
-  external dynamic? get vAlphabetic;
-  external set vAlphabetic(dynamic? value);
+  external dynamic get u1;
+  external set u1(dynamic value);
+  external dynamic get u2;
+  external set u2(dynamic value);
+  external dynamic get underlinePosition;
+  external set underlinePosition(dynamic value);
+  external dynamic get underlineThickness;
+  external set underlineThickness(dynamic value);
+  external dynamic get unicode;
+  external set unicode(dynamic value);
+  external dynamic get unicodeBidi;
+  external set unicodeBidi(dynamic value);
+  external dynamic get unicodeRange;
+  external set unicodeRange(dynamic value);
+  external dynamic get unitsPerEm;
+  external set unitsPerEm(dynamic value);
+  external dynamic get vAlphabetic;
+  external set vAlphabetic(dynamic value);
   external String? get values;
   external set values(String? value);
-  external dynamic? get vectorEffect;
-  external set vectorEffect(dynamic? value);
+  external dynamic get vectorEffect;
+  external set vectorEffect(dynamic value);
   external String? get version;
   external set version(String? value);
-  external dynamic? get vertAdvY;
-  external set vertAdvY(dynamic? value);
-  external dynamic? get vertOriginX;
-  external set vertOriginX(dynamic? value);
-  external dynamic? get vertOriginY;
-  external set vertOriginY(dynamic? value);
-  external dynamic? get vHanging;
-  external set vHanging(dynamic? value);
-  external dynamic? get vIdeographic;
-  external set vIdeographic(dynamic? value);
+  external dynamic get vertAdvY;
+  external set vertAdvY(dynamic value);
+  external dynamic get vertOriginX;
+  external set vertOriginX(dynamic value);
+  external dynamic get vertOriginY;
+  external set vertOriginY(dynamic value);
+  external dynamic get vHanging;
+  external set vHanging(dynamic value);
+  external dynamic get vIdeographic;
+  external set vIdeographic(dynamic value);
   external String? get viewBox;
   external set viewBox(String? value);
-  external dynamic? get viewTarget;
-  external set viewTarget(dynamic? value);
-  external dynamic? get visibility;
-  external set visibility(dynamic? value);
-  external dynamic? get vMathematical;
-  external set vMathematical(dynamic? value);
-  external dynamic? get widths;
-  external set widths(dynamic? value);
-  external dynamic? get wordSpacing;
-  external set wordSpacing(dynamic? value);
-  external dynamic? get writingMode;
-  external set writingMode(dynamic? value);
-  external dynamic? get x1;
-  external set x1(dynamic? value);
-  external dynamic? get x2;
-  external set x2(dynamic? value);
-  external dynamic? get x;
-  external set x(dynamic? value);
+  external dynamic get viewTarget;
+  external set viewTarget(dynamic value);
+  external dynamic get visibility;
+  external set visibility(dynamic value);
+  external dynamic get vMathematical;
+  external set vMathematical(dynamic value);
+  external dynamic get widths;
+  external set widths(dynamic value);
+  external dynamic get wordSpacing;
+  external set wordSpacing(dynamic value);
+  external dynamic get writingMode;
+  external set writingMode(dynamic value);
+  external dynamic get x1;
+  external set x1(dynamic value);
+  external dynamic get x2;
+  external set x2(dynamic value);
+  external dynamic get x;
+  external set x(dynamic value);
   external String? get xChannelSelector;
   external set xChannelSelector(String? value);
-  external dynamic? get xHeight;
-  external set xHeight(dynamic? value);
+  external dynamic get xHeight;
+  external set xHeight(dynamic value);
   external String? get xlinkActuate;
   external set xlinkActuate(String? value);
   external String? get xlinkArcrole;
@@ -3924,259 +3924,259 @@ class SVGAttributes<T> {
   external set xmlnsXlink(String? value);
   external String? get xmlSpace;
   external set xmlSpace(String? value);
-  external dynamic? get y1;
-  external set y1(dynamic? value);
-  external dynamic? get y2;
-  external set y2(dynamic? value);
-  external dynamic? get y;
-  external set y(dynamic? value);
+  external dynamic get y1;
+  external set y1(dynamic value);
+  external dynamic get y2;
+  external set y2(dynamic value);
+  external dynamic get y;
+  external set y(dynamic value);
   external String? get yChannelSelector;
   external set yChannelSelector(String? value);
-  external dynamic? get z;
-  external set z(dynamic? value);
+  external dynamic get z;
+  external set z(dynamic value);
   external String? get zoomAndPan;
   external set zoomAndPan(String? value);
   external factory SVGAttributes({
     String? className,
     String? color,
-    dynamic? height,
+    dynamic height,
     String? id,
     String? lang,
-    dynamic? max,
+    dynamic max,
     String? media,
     String? method,
-    dynamic? min,
+    dynamic min,
     String? name,
     CSSProperties? style,
     String? target,
     String? type,
-    dynamic? width,
+    dynamic width,
     AriaRole? role,
     num? tabIndex,
     String? crossOrigin,
-    dynamic? accentHeight,
+    dynamic accentHeight,
     String? accumulate,
     String? additive,
     String? alignmentBaseline,
     String? allowReorder,
-    dynamic? alphabetic,
-    dynamic? amplitude,
+    dynamic alphabetic,
+    dynamic amplitude,
     String? arabicForm,
-    dynamic? ascent,
+    dynamic ascent,
     String? attributeName,
     String? attributeType,
     Booleanish? autoReverse,
-    dynamic? azimuth,
-    dynamic? baseFrequency,
-    dynamic? baselineShift,
-    dynamic? baseProfile,
-    dynamic? bbox,
-    dynamic? begin,
-    dynamic? bias,
-    dynamic? by,
-    dynamic? calcMode,
-    dynamic? capHeight,
-    dynamic? clip,
+    dynamic azimuth,
+    dynamic baseFrequency,
+    dynamic baselineShift,
+    dynamic baseProfile,
+    dynamic bbox,
+    dynamic begin,
+    dynamic bias,
+    dynamic by,
+    dynamic calcMode,
+    dynamic capHeight,
+    dynamic clip,
     String? clipPath,
-    dynamic? clipPathUnits,
-    dynamic? clipRule,
-    dynamic? colorInterpolation,
+    dynamic clipPathUnits,
+    dynamic clipRule,
+    dynamic colorInterpolation,
     String? colorInterpolationFilters,
-    dynamic? colorProfile,
-    dynamic? colorRendering,
-    dynamic? contentScriptType,
-    dynamic? contentStyleType,
-    dynamic? cursor,
-    dynamic? cx,
-    dynamic? cy,
+    dynamic colorProfile,
+    dynamic colorRendering,
+    dynamic contentScriptType,
+    dynamic contentStyleType,
+    dynamic cursor,
+    dynamic cx,
+    dynamic cy,
     String? d,
-    dynamic? decelerate,
-    dynamic? descent,
-    dynamic? diffuseConstant,
-    dynamic? direction,
-    dynamic? display,
-    dynamic? divisor,
-    dynamic? dominantBaseline,
-    dynamic? dur,
-    dynamic? dx,
-    dynamic? dy,
-    dynamic? edgeMode,
-    dynamic? elevation,
-    dynamic? enableBackground,
-    dynamic? end,
-    dynamic? exponent,
+    dynamic decelerate,
+    dynamic descent,
+    dynamic diffuseConstant,
+    dynamic direction,
+    dynamic display,
+    dynamic divisor,
+    dynamic dominantBaseline,
+    dynamic dur,
+    dynamic dx,
+    dynamic dy,
+    dynamic edgeMode,
+    dynamic elevation,
+    dynamic enableBackground,
+    dynamic end,
+    dynamic exponent,
     Booleanish? externalResourcesRequired,
     String? fill,
-    dynamic? fillOpacity,
+    dynamic fillOpacity,
     String? fillRule,
     String? filter,
-    dynamic? filterRes,
-    dynamic? filterUnits,
-    dynamic? floodColor,
-    dynamic? floodOpacity,
-    dynamic? focusable,
+    dynamic filterRes,
+    dynamic filterUnits,
+    dynamic floodColor,
+    dynamic floodOpacity,
+    dynamic focusable,
     String? fontFamily,
-    dynamic? fontSize,
-    dynamic? fontSizeAdjust,
-    dynamic? fontStretch,
-    dynamic? fontStyle,
-    dynamic? fontVariant,
-    dynamic? fontWeight,
-    dynamic? format,
-    dynamic? fr,
-    dynamic? from,
-    dynamic? fx,
-    dynamic? fy,
-    dynamic? g1,
-    dynamic? g2,
-    dynamic? glyphName,
-    dynamic? glyphOrientationHorizontal,
-    dynamic? glyphOrientationVertical,
-    dynamic? glyphRef,
+    dynamic fontSize,
+    dynamic fontSizeAdjust,
+    dynamic fontStretch,
+    dynamic fontStyle,
+    dynamic fontVariant,
+    dynamic fontWeight,
+    dynamic format,
+    dynamic fr,
+    dynamic from,
+    dynamic fx,
+    dynamic fy,
+    dynamic g1,
+    dynamic g2,
+    dynamic glyphName,
+    dynamic glyphOrientationHorizontal,
+    dynamic glyphOrientationVertical,
+    dynamic glyphRef,
     String? gradientTransform,
     String? gradientUnits,
-    dynamic? hanging,
-    dynamic? horizAdvX,
-    dynamic? horizOriginX,
+    dynamic hanging,
+    dynamic horizAdvX,
+    dynamic horizOriginX,
     String? href,
-    dynamic? ideographic,
-    dynamic? imageRendering,
-    dynamic? in2,
-    dynamic? intercept,
-    dynamic? k1,
-    dynamic? k2,
-    dynamic? k3,
-    dynamic? k4,
-    dynamic? k,
-    dynamic? kernelMatrix,
-    dynamic? kernelUnitLength,
-    dynamic? kerning,
-    dynamic? keyPoints,
-    dynamic? keySplines,
-    dynamic? keyTimes,
-    dynamic? lengthAdjust,
-    dynamic? letterSpacing,
-    dynamic? lightingColor,
-    dynamic? limitingConeAngle,
-    dynamic? local,
+    dynamic ideographic,
+    dynamic imageRendering,
+    dynamic in2,
+    dynamic intercept,
+    dynamic k1,
+    dynamic k2,
+    dynamic k3,
+    dynamic k4,
+    dynamic k,
+    dynamic kernelMatrix,
+    dynamic kernelUnitLength,
+    dynamic kerning,
+    dynamic keyPoints,
+    dynamic keySplines,
+    dynamic keyTimes,
+    dynamic lengthAdjust,
+    dynamic letterSpacing,
+    dynamic lightingColor,
+    dynamic limitingConeAngle,
+    dynamic local,
     String? markerEnd,
-    dynamic? markerHeight,
+    dynamic markerHeight,
     String? markerMid,
     String? markerStart,
-    dynamic? markerUnits,
-    dynamic? markerWidth,
+    dynamic markerUnits,
+    dynamic markerWidth,
     String? mask,
-    dynamic? maskContentUnits,
-    dynamic? maskUnits,
-    dynamic? mathematical,
-    dynamic? mode,
-    dynamic? numOctaves,
-    dynamic? offset,
-    dynamic? opacity,
-    dynamic? operator,
-    dynamic? order,
-    dynamic? orient,
-    dynamic? orientation,
-    dynamic? origin,
-    dynamic? overflow,
-    dynamic? overlinePosition,
-    dynamic? overlineThickness,
-    dynamic? paintOrder,
-    dynamic? panose1,
+    dynamic maskContentUnits,
+    dynamic maskUnits,
+    dynamic mathematical,
+    dynamic mode,
+    dynamic numOctaves,
+    dynamic offset,
+    dynamic opacity,
+    dynamic operator,
+    dynamic order,
+    dynamic orient,
+    dynamic orientation,
+    dynamic origin,
+    dynamic overflow,
+    dynamic overlinePosition,
+    dynamic overlineThickness,
+    dynamic paintOrder,
+    dynamic panose1,
     String? path,
-    dynamic? pathLength,
+    dynamic pathLength,
     String? patternContentUnits,
-    dynamic? patternTransform,
+    dynamic patternTransform,
     String? patternUnits,
-    dynamic? pointerEvents,
+    dynamic pointerEvents,
     String? points,
-    dynamic? pointsAtX,
-    dynamic? pointsAtY,
-    dynamic? pointsAtZ,
+    dynamic pointsAtX,
+    dynamic pointsAtY,
+    dynamic pointsAtZ,
     Booleanish? preserveAlpha,
     String? preserveAspectRatio,
-    dynamic? primitiveUnits,
-    dynamic? r,
-    dynamic? radius,
-    dynamic? refX,
-    dynamic? refY,
-    dynamic? renderingIntent,
-    dynamic? repeatCount,
-    dynamic? repeatDur,
-    dynamic? requiredExtensions,
-    dynamic? requiredFeatures,
-    dynamic? restart,
+    dynamic primitiveUnits,
+    dynamic r,
+    dynamic radius,
+    dynamic refX,
+    dynamic refY,
+    dynamic renderingIntent,
+    dynamic repeatCount,
+    dynamic repeatDur,
+    dynamic requiredExtensions,
+    dynamic requiredFeatures,
+    dynamic restart,
     String? result,
-    dynamic? rotate,
-    dynamic? rx,
-    dynamic? ry,
-    dynamic? scale,
-    dynamic? seed,
-    dynamic? shapeRendering,
-    dynamic? slope,
-    dynamic? spacing,
-    dynamic? specularConstant,
-    dynamic? specularExponent,
-    dynamic? speed,
+    dynamic rotate,
+    dynamic rx,
+    dynamic ry,
+    dynamic scale,
+    dynamic seed,
+    dynamic shapeRendering,
+    dynamic slope,
+    dynamic spacing,
+    dynamic specularConstant,
+    dynamic specularExponent,
+    dynamic speed,
     String? spreadMethod,
-    dynamic? startOffset,
-    dynamic? stdDeviation,
-    dynamic? stemh,
-    dynamic? stemv,
-    dynamic? stitchTiles,
+    dynamic startOffset,
+    dynamic stdDeviation,
+    dynamic stemh,
+    dynamic stemv,
+    dynamic stitchTiles,
     String? stopColor,
-    dynamic? stopOpacity,
-    dynamic? strikethroughPosition,
-    dynamic? strikethroughThickness,
-    dynamic? string,
+    dynamic stopOpacity,
+    dynamic strikethroughPosition,
+    dynamic strikethroughThickness,
+    dynamic string,
     String? stroke,
-    dynamic? strokeDasharray,
-    dynamic? strokeDashoffset,
+    dynamic strokeDasharray,
+    dynamic strokeDashoffset,
     String? strokeLinecap,
     String? strokeLinejoin,
-    dynamic? strokeMiterlimit,
-    dynamic? strokeOpacity,
-    dynamic? strokeWidth,
-    dynamic? surfaceScale,
-    dynamic? systemLanguage,
-    dynamic? tableValues,
-    dynamic? targetX,
-    dynamic? targetY,
+    dynamic strokeMiterlimit,
+    dynamic strokeOpacity,
+    dynamic strokeWidth,
+    dynamic surfaceScale,
+    dynamic systemLanguage,
+    dynamic tableValues,
+    dynamic targetX,
+    dynamic targetY,
     String? textAnchor,
-    dynamic? textDecoration,
-    dynamic? textLength,
-    dynamic? textRendering,
-    dynamic? to,
+    dynamic textDecoration,
+    dynamic textLength,
+    dynamic textRendering,
+    dynamic to,
     String? transform,
-    dynamic? u1,
-    dynamic? u2,
-    dynamic? underlinePosition,
-    dynamic? underlineThickness,
-    dynamic? unicode,
-    dynamic? unicodeBidi,
-    dynamic? unicodeRange,
-    dynamic? unitsPerEm,
-    dynamic? vAlphabetic,
+    dynamic u1,
+    dynamic u2,
+    dynamic underlinePosition,
+    dynamic underlineThickness,
+    dynamic unicode,
+    dynamic unicodeBidi,
+    dynamic unicodeRange,
+    dynamic unitsPerEm,
+    dynamic vAlphabetic,
     String? values,
-    dynamic? vectorEffect,
+    dynamic vectorEffect,
     String? version,
-    dynamic? vertAdvY,
-    dynamic? vertOriginX,
-    dynamic? vertOriginY,
-    dynamic? vHanging,
-    dynamic? vIdeographic,
+    dynamic vertAdvY,
+    dynamic vertOriginX,
+    dynamic vertOriginY,
+    dynamic vHanging,
+    dynamic vIdeographic,
     String? viewBox,
-    dynamic? viewTarget,
-    dynamic? visibility,
-    dynamic? vMathematical,
-    dynamic? widths,
-    dynamic? wordSpacing,
-    dynamic? writingMode,
-    dynamic? x1,
-    dynamic? x2,
-    dynamic? x,
+    dynamic viewTarget,
+    dynamic visibility,
+    dynamic vMathematical,
+    dynamic widths,
+    dynamic wordSpacing,
+    dynamic writingMode,
+    dynamic x1,
+    dynamic x2,
+    dynamic x,
     String? xChannelSelector,
-    dynamic? xHeight,
+    dynamic xHeight,
     String? xlinkActuate,
     String? xlinkArcrole,
     String? xlinkHref,
@@ -4189,11 +4189,11 @@ class SVGAttributes<T> {
     String? xmlns,
     String? xmlnsXlink,
     String? xmlSpace,
-    dynamic? y1,
-    dynamic? y2,
-    dynamic? y,
+    dynamic y1,
+    dynamic y2,
+    dynamic y,
     String? yChannelSelector,
-    dynamic? z,
+    dynamic z,
     String? zoomAndPan,
   });
 }

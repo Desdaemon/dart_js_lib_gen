@@ -223,12 +223,12 @@ class AudioConfiguration {
 @JS()
 @anonymous
 class AudioContextOptions {
-  external dynamic? get latencyHint;
-  external set latencyHint(dynamic? value);
+  external dynamic get latencyHint;
+  external set latencyHint(dynamic value);
   external num? get sampleRate;
   external set sampleRate(num? value);
   external factory AudioContextOptions({
-    dynamic? latencyHint,
+    dynamic latencyHint,
     num? sampleRate,
   });
 }
@@ -289,14 +289,14 @@ class AudioWorkletNodeOptions {
   external set outputChannelCount(List<num>? value);
   external Record<String, num>? get parameterData;
   external set parameterData(Record<String, num>? value);
-  external dynamic? get processorOptions;
-  external set processorOptions(dynamic? value);
+  external dynamic get processorOptions;
+  external set processorOptions(dynamic value);
   external factory AudioWorkletNodeOptions({
     num? numberOfInputs,
     num? numberOfOutputs,
     List<num>? outputChannelCount,
     Record<String, num>? parameterData,
-    dynamic? processorOptions,
+    dynamic processorOptions,
   });
 }
 
@@ -583,13 +583,13 @@ class ConstrainBooleanParameters {
 @JS()
 @anonymous
 class ConstrainDOMStringParameters {
-  external dynamic? get exact;
-  external set exact(dynamic? value);
-  external dynamic? get ideal;
-  external set ideal(dynamic? value);
+  external dynamic get exact;
+  external set exact(dynamic value);
+  external dynamic get ideal;
+  external set ideal(dynamic value);
   external factory ConstrainDOMStringParameters({
-    dynamic? exact,
-    dynamic? ideal,
+    dynamic exact,
+    dynamic ideal,
   });
 }
 
@@ -920,13 +920,13 @@ class DeviceOrientationEventInit {
 @JS()
 @anonymous
 class DisplayMediaStreamConstraints {
-  external dynamic? get audio;
-  external set audio(dynamic? value);
-  external dynamic? get video;
-  external set video(dynamic? value);
+  external dynamic get audio;
+  external set audio(dynamic value);
+  external dynamic get video;
+  external set video(dynamic value);
   external factory DisplayMediaStreamConstraints({
-    dynamic? audio,
-    dynamic? video,
+    dynamic audio,
+    dynamic video,
   });
 }
 
@@ -1042,8 +1042,8 @@ class EffectTiming {
   external set delay(num? value);
   external PlaybackDirection? get direction;
   external set direction(PlaybackDirection? value);
-  external dynamic? get duration;
-  external set duration(dynamic? value);
+  external dynamic get duration;
+  external set duration(dynamic value);
   external String? get easing;
   external set easing(String? value);
   external num? get endDelay;
@@ -1059,7 +1059,7 @@ class EffectTiming {
   external factory EffectTiming({
     num? delay,
     PlaybackDirection? direction,
-    dynamic? duration,
+    dynamic duration,
     String? easing,
     num? endDelay,
     FillMode? fill,
@@ -1082,8 +1082,8 @@ class ElementDefinitionOptions {}
 class ErrorEventInit {
   external num? get colno;
   external set colno(num? value);
-  external dynamic? get error;
-  external set error(dynamic? value);
+  external dynamic get error;
+  external set error(dynamic value);
   external String? get filename;
   external set filename(String? value);
   external num? get lineno;
@@ -1092,7 +1092,7 @@ class ErrorEventInit {
   external set message(String? value);
   external factory ErrorEventInit({
     num? colno,
-    dynamic? error,
+    dynamic error,
     String? filename,
     num? lineno,
     String? message,
@@ -1434,11 +1434,11 @@ class IDBIndexParameters {
 class IDBObjectStoreParameters {
   external bool? get autoIncrement;
   external set autoIncrement(bool? value);
-  external dynamic? get keyPath;
-  external set keyPath(dynamic? value);
+  external dynamic get keyPath;
+  external set keyPath(dynamic value);
   external factory IDBObjectStoreParameters({
     bool? autoIncrement,
-    dynamic? keyPath,
+    dynamic keyPath,
   });
 }
 
@@ -1586,16 +1586,16 @@ class IntersectionObserverEntryInit {
 @JS()
 @anonymous
 class IntersectionObserverInit {
-  external dynamic? get root;
-  external set root(dynamic? value);
+  external dynamic get root;
+  external set root(dynamic value);
   external String? get rootMargin;
   external set rootMargin(String? value);
-  external dynamic? get threshold;
-  external set threshold(dynamic? value);
+  external dynamic get threshold;
+  external set threshold(dynamic value);
   external factory IntersectionObserverInit({
-    dynamic? root,
+    dynamic root,
     String? rootMargin,
-    dynamic? threshold,
+    dynamic threshold,
   });
 }
 
@@ -2014,16 +2014,16 @@ class MediaStreamAudioSourceOptions {
 @JS()
 @anonymous
 class MediaStreamConstraints {
-  external dynamic? get audio;
-  external set audio(dynamic? value);
+  external dynamic get audio;
+  external set audio(dynamic value);
   external String? get peerIdentity;
   external set peerIdentity(String? value);
-  external dynamic? get video;
-  external set video(dynamic? value);
+  external dynamic get video;
+  external set video(dynamic value);
   external factory MediaStreamConstraints({
-    dynamic? audio,
+    dynamic audio,
     String? peerIdentity,
-    dynamic? video,
+    dynamic video,
   });
 }
 
@@ -2353,8 +2353,8 @@ class NotificationOptions {
   external set badge(String? value);
   external String? get body;
   external set body(String? value);
-  external dynamic? get data;
-  external set data(dynamic? value);
+  external dynamic get data;
+  external set data(dynamic value);
   external NotificationDirection? get dir;
   external set dir(NotificationDirection? value);
   external String? get icon;
@@ -2379,7 +2379,7 @@ class NotificationOptions {
     List<NotificationAction>? actions,
     String? badge,
     String? body,
-    dynamic? data,
+    dynamic data,
     NotificationDirection? dir,
     String? icon,
     String? image,
@@ -2426,8 +2426,8 @@ class OptionalEffectTiming {
   external set delay(num? value);
   external PlaybackDirection? get direction;
   external set direction(PlaybackDirection? value);
-  external dynamic? get duration;
-  external set duration(dynamic? value);
+  external dynamic get duration;
+  external set duration(dynamic value);
   external String? get easing;
   external set easing(String? value);
   external num? get endDelay;
@@ -2443,7 +2443,7 @@ class OptionalEffectTiming {
   external factory OptionalEffectTiming({
     num? delay,
     PlaybackDirection? direction,
-    dynamic? duration,
+    dynamic duration,
     String? easing,
     num? endDelay,
     FillMode? fill,
@@ -2575,15 +2575,15 @@ class PaymentDetailsInit {
 class PaymentDetailsModifier {
   external List<PaymentItem>? get additionalDisplayItems;
   external set additionalDisplayItems(List<PaymentItem>? value);
-  external dynamic? get data;
-  external set data(dynamic? value);
+  external dynamic get data;
+  external set data(dynamic value);
   external String get supportedMethods;
   external set supportedMethods(String value);
   external PaymentItem? get total;
   external set total(PaymentItem? value);
   external factory PaymentDetailsModifier({
     List<PaymentItem>? additionalDisplayItems,
-    dynamic? data,
+    dynamic data,
     String supportedMethods,
     PaymentItem? total,
   });
@@ -2592,12 +2592,12 @@ class PaymentDetailsModifier {
 @JS()
 @anonymous
 class PaymentDetailsUpdate {
-  external dynamic? get paymentMethodErrors;
-  external set paymentMethodErrors(dynamic? value);
+  external dynamic get paymentMethodErrors;
+  external set paymentMethodErrors(dynamic value);
   external PaymentItem? get total;
   external set total(PaymentItem? value);
   external factory PaymentDetailsUpdate({
-    dynamic? paymentMethodErrors,
+    dynamic paymentMethodErrors,
     PaymentItem? total,
   });
 }
@@ -2621,12 +2621,12 @@ class PaymentItem {
 @JS()
 @anonymous
 class PaymentMethodChangeEventInit {
-  external dynamic? get methodDetails;
-  external set methodDetails(dynamic? value);
+  external dynamic get methodDetails;
+  external set methodDetails(dynamic value);
   external String? get methodName;
   external set methodName(String? value);
   external factory PaymentMethodChangeEventInit({
-    dynamic? methodDetails,
+    dynamic methodDetails,
     String? methodName,
   });
 }
@@ -2634,12 +2634,12 @@ class PaymentMethodChangeEventInit {
 @JS()
 @anonymous
 class PaymentMethodData {
-  external dynamic? get data;
-  external set data(dynamic? value);
+  external dynamic get data;
+  external set data(dynamic value);
   external String get supportedMethods;
   external set supportedMethods(String value);
   external factory PaymentMethodData({
-    dynamic? data,
+    dynamic data,
     String supportedMethods,
   });
 }
@@ -2653,11 +2653,11 @@ class PaymentRequestUpdateEventInit {}
 class PaymentValidationErrors {
   external String? get error;
   external set error(String? value);
-  external dynamic? get paymentMethod;
-  external set paymentMethod(dynamic? value);
+  external dynamic get paymentMethod;
+  external set paymentMethod(dynamic value);
   external factory PaymentValidationErrors({
     String? error,
-    dynamic? paymentMethod,
+    dynamic paymentMethod,
   });
 }
 
@@ -2680,12 +2680,12 @@ class Pbkdf2Params {
 @JS()
 @anonymous
 class PerformanceMarkOptions {
-  external dynamic? get detail;
-  external set detail(dynamic? value);
+  external dynamic get detail;
+  external set detail(dynamic value);
   external DOMHighResTimeStamp? get startTime;
   external set startTime(DOMHighResTimeStamp? value);
   external factory PerformanceMarkOptions({
-    dynamic? detail,
+    dynamic detail,
     DOMHighResTimeStamp? startTime,
   });
 }
@@ -2693,19 +2693,19 @@ class PerformanceMarkOptions {
 @JS()
 @anonymous
 class PerformanceMeasureOptions {
-  external dynamic? get detail;
-  external set detail(dynamic? value);
+  external dynamic get detail;
+  external set detail(dynamic value);
   external DOMHighResTimeStamp? get duration;
   external set duration(DOMHighResTimeStamp? value);
-  external dynamic? get end;
-  external set end(dynamic? value);
-  external dynamic? get start;
-  external set start(dynamic? value);
+  external dynamic get end;
+  external set end(dynamic value);
+  external dynamic get start;
+  external set start(dynamic value);
   external factory PerformanceMeasureOptions({
-    dynamic? detail,
+    dynamic detail,
     DOMHighResTimeStamp? duration,
-    dynamic? end,
-    dynamic? start,
+    dynamic end,
+    dynamic start,
   });
 }
 
@@ -2738,13 +2738,13 @@ class PeriodicWaveConstraints {
 @JS()
 @anonymous
 class PeriodicWaveOptions {
-  external dynamic? get imag;
-  external set imag(dynamic? value);
-  external dynamic? get real;
-  external set real(dynamic? value);
+  external dynamic get imag;
+  external set imag(dynamic value);
+  external dynamic get real;
+  external set real(dynamic value);
   external factory PeriodicWaveOptions({
-    dynamic? imag,
-    dynamic? real,
+    dynamic imag,
+    dynamic real,
   });
 }
 
@@ -2804,10 +2804,10 @@ class PointerEventInit {
 @JS()
 @anonymous
 class PopStateEventInit {
-  external dynamic? get state;
-  external set state(dynamic? value);
+  external dynamic get state;
+  external set state(dynamic value);
   external factory PopStateEventInit({
-    dynamic? state,
+    dynamic state,
   });
 }
 
@@ -2858,27 +2858,27 @@ class ProgressEventInit {
 class PromiseRejectionEventInit {
   external Promise<dynamic> get promise;
   external set promise(Promise<dynamic> value);
-  external dynamic? get reason;
-  external set reason(dynamic? value);
+  external dynamic get reason;
+  external set reason(dynamic value);
   external factory PromiseRejectionEventInit({
     Promise<dynamic> promise,
-    dynamic? reason,
+    dynamic reason,
   });
 }
 
 @JS()
 @anonymous
 class PropertyIndexedKeyframes {
-  external dynamic? get composite;
-  external set composite(dynamic? value);
-  external dynamic? get easing;
-  external set easing(dynamic? value);
-  external dynamic? get offset;
-  external set offset(dynamic? value);
+  external dynamic get composite;
+  external set composite(dynamic value);
+  external dynamic get easing;
+  external set easing(dynamic value);
+  external dynamic get offset;
+  external set offset(dynamic value);
   external factory PropertyIndexedKeyframes({
-    dynamic? composite,
-    dynamic? easing,
-    dynamic? offset,
+    dynamic composite,
+    dynamic easing,
+    dynamic offset,
   });
 }
 
@@ -3022,12 +3022,12 @@ class PushSubscriptionJSON {
 @JS()
 @anonymous
 class PushSubscriptionOptionsInit {
-  external dynamic? get applicationServerKey;
-  external set applicationServerKey(dynamic? value);
+  external dynamic get applicationServerKey;
+  external set applicationServerKey(dynamic value);
   external bool? get userVisibleOnly;
   external set userVisibleOnly(bool? value);
   external factory PushSubscriptionOptionsInit({
-    dynamic? applicationServerKey,
+    dynamic applicationServerKey,
     bool? userVisibleOnly,
   });
 }
@@ -3698,11 +3698,11 @@ class RTCTransportStats {
 class ReadableStreamDefaultReadDoneResult {
   external bool get done;
   external set done(bool value);
-  external dynamic? get value;
-  external set value(dynamic? value);
+  external dynamic get value;
+  external set value(dynamic value);
   external factory ReadableStreamDefaultReadDoneResult({
     bool done,
-    dynamic? value,
+    dynamic value,
   });
 }
 
@@ -3775,8 +3775,8 @@ class RequestInit {
   external set referrerPolicy(ReferrerPolicy? value);
   external AbortSignal? get signal;
   external set signal(AbortSignal? value);
-  external dynamic? get window;
-  external set window(dynamic? value);
+  external dynamic get window;
+  external set window(dynamic value);
   external factory RequestInit({
     BodyInit? body,
     RequestCache? cache,
@@ -3790,7 +3790,7 @@ class RequestInit {
     String? referrer,
     ReferrerPolicy? referrerPolicy,
     AbortSignal? signal,
-    dynamic? window,
+    dynamic window,
   });
 }
 
@@ -4311,20 +4311,20 @@ class TrackEventInit {
 class Transformer<I, O> {
   external TransformerFlushCallback<O>? get flush;
   external set flush(TransformerFlushCallback<O>? value);
-  external dynamic? get readableType;
-  external set readableType(dynamic? value);
+  external dynamic get readableType;
+  external set readableType(dynamic value);
   external TransformerStartCallback<O>? get start;
   external set start(TransformerStartCallback<O>? value);
   external TransformerTransformCallback<I, O>? get transform;
   external set transform(TransformerTransformCallback<I, O>? value);
-  external dynamic? get writableType;
-  external set writableType(dynamic? value);
+  external dynamic get writableType;
+  external set writableType(dynamic value);
   external factory Transformer({
     TransformerFlushCallback<O>? flush,
-    dynamic? readableType,
+    dynamic readableType,
     TransformerStartCallback<O>? start,
     TransformerTransformCallback<I, O>? transform,
-    dynamic? writableType,
+    dynamic writableType,
   });
 }
 
@@ -4382,15 +4382,15 @@ class UnderlyingSink<W> {
   external set close(UnderlyingSinkCloseCallback? value);
   external UnderlyingSinkStartCallback? get start;
   external set start(UnderlyingSinkStartCallback? value);
-  external dynamic? get type;
-  external set type(dynamic? value);
+  external dynamic get type;
+  external set type(dynamic value);
   external UnderlyingSinkWriteCallback<W>? get write;
   external set write(UnderlyingSinkWriteCallback<W>? value);
   external factory UnderlyingSink({
     UnderlyingSinkAbortCallback? abort,
     UnderlyingSinkCloseCallback? close,
     UnderlyingSinkStartCallback? start,
-    dynamic? type,
+    dynamic type,
     UnderlyingSinkWriteCallback<W>? write,
   });
 }
@@ -4404,13 +4404,13 @@ class UnderlyingSource<R> {
   external set pull(UnderlyingSourcePullCallback<R>? value);
   external UnderlyingSourceStartCallback<R>? get start;
   external set start(UnderlyingSourceStartCallback<R>? value);
-  external dynamic? get type;
-  external set type(dynamic? value);
+  external dynamic get type;
+  external set type(dynamic value);
   external factory UnderlyingSource({
     UnderlyingSourceCancelCallback? cancel,
     UnderlyingSourcePullCallback<R>? pull,
     UnderlyingSourceStartCallback<R>? start,
-    dynamic? type,
+    dynamic type,
   });
 }
 
@@ -4451,12 +4451,12 @@ class VideoConfiguration {
 @JS()
 @anonymous
 class WaveShaperOptions {
-  external dynamic? get curve;
-  external set curve(dynamic? value);
+  external dynamic get curve;
+  external set curve(dynamic value);
   external OverSampleType? get oversample;
   external set oversample(OverSampleType? value);
   external factory WaveShaperOptions({
-    dynamic? curve,
+    dynamic curve,
     OverSampleType? oversample,
   });
 }
@@ -8220,7 +8220,7 @@ class Document {
   external String get cookie;
   external set cookie(String value);
   external HTMLOrSVGScriptElement? get currentScript;
-  external dynamic? get defaultView;
+  external dynamic get defaultView;
   external String get designMode;
   external set designMode(String value);
   external String get dir;
@@ -8349,7 +8349,7 @@ class Document {
     String contentType,
     String cookie,
     HTMLOrSVGScriptElement? currentScript,
-    dynamic? defaultView,
+    dynamic defaultView,
     String designMode,
     String dir,
     DocumentType? doctype,
@@ -8641,7 +8641,7 @@ class Element {
   external set slot(String value);
   external String get tagName;
   external ShadowRoot attachShadow(ShadowRootInit init);
-  external dynamic? closest<K extends String>(K selector);
+  external dynamic closest<K extends String>(K selector);
   external String? getAttribute(String qualifiedName);
   external String? getAttributeNS(String? namespace, String localName);
   external List<String> getAttributeNames();
@@ -14026,18 +14026,18 @@ external INetworkInformation JNetworkInformation;
 class Node {
   external String get baseURI;
   external NodeListOf<dynamic> get childNodes;
-  external dynamic? get firstChild;
+  external dynamic get firstChild;
   external bool get isConnected;
-  external dynamic? get lastChild;
-  external dynamic? get nextSibling;
+  external dynamic get lastChild;
+  external dynamic get nextSibling;
   external String get nodeName;
   external num get nodeType;
   external String? get nodeValue;
   external set nodeValue(String? value);
   external Document? get ownerDocument;
   external HTMLElement? get parentElement;
-  external dynamic? get parentNode;
-  external dynamic? get previousSibling;
+  external dynamic get parentNode;
+  external dynamic get previousSibling;
   external String? get textContent;
   external set textContent(String? value);
   external T appendChild<T extends Node>(T node);
@@ -14076,17 +14076,17 @@ class Node {
   external factory Node({
     String baseURI,
     NodeListOf<dynamic> childNodes,
-    dynamic? firstChild,
+    dynamic firstChild,
     bool isConnected,
-    dynamic? lastChild,
-    dynamic? nextSibling,
+    dynamic lastChild,
+    dynamic nextSibling,
     String nodeName,
     num nodeType,
     String? nodeValue,
     Document? ownerDocument,
     HTMLElement? parentElement,
-    dynamic? parentNode,
-    dynamic? previousSibling,
+    dynamic parentNode,
+    dynamic previousSibling,
     String? textContent,
     num ATTRIBUTE_NODE,
     num CDATA_SECTION_NODE,
@@ -14466,7 +14466,7 @@ class ParentNode {
     dynamic nodes8,
     dynamic nodes9,
   ]);
-  external dynamic? querySelector<K extends String>(K selectors);
+  external dynamic querySelector<K extends String>(K selectors);
   external NodeListOf<dynamic> querySelectorAll<K extends String>(K selectors);
   external void replaceChildren([
     dynamic nodes1,

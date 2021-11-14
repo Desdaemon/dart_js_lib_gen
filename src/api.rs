@@ -14,7 +14,7 @@ use swc_ecma_ast::Module;
 use swc_ecma_parser::{lexer::Lexer, Parser, StringInput, Syntax};
 
 pub struct Config {
-    /// A list of paths to files to process.
+    /// A list of paths to TypeScript definition files to process.
     pub inputs: Vec<String>,
     /// Specifies the logging behavior. Can be simply one of:
     /// - off, info, warn, error, debug; or
@@ -22,6 +22,9 @@ pub struct Config {
     ///
     /// Also see the [full specification](https://docs.rs/flexi_logger/0.20.0/flexi_logger/struct.LogSpecification.html#).
     pub log_spec: Option<String>,
+    /// Generate `typedef T = dynamic` definitions for types that were referenced but not defined
+    /// within the file.
+    pub dynamic_undefs: Option<bool>,
 }
 
 pub struct Entry {
@@ -39,13 +42,14 @@ pub fn parse_library(config: Config) -> Result<Vec<Entry>> {
     )?
     .write_mode(flexi_logger::WriteMode::Async)
     .start()?;
+    let gen_undecl_typedef = config.dynamic_undefs.unwrap_or(false);
     let modules = parse_modules(config);
     Ok(modules
         .into_iter()
         .map(|(key, (file, val))| {
             let library_name = path_to_lib_name(Path::new(&key));
             let hint = (file.byte_length() / 3) as usize;
-            let value = visit_program(&val, file, &library_name, Some(hint));
+            let value = visit_program(&val, file, &library_name, Some(hint), gen_undecl_typedef);
             debug!(
                 "{}
 Hint\tLength\tCap.\tRatio

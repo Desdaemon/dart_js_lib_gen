@@ -53,14 +53,14 @@ class AesDerivedKeyParams {
 @JS()
 @anonymous
 class AesGcmParams {
-  external dynamic? get additionalData;
-  external set additionalData(dynamic? value);
+  external dynamic get additionalData;
+  external set additionalData(dynamic value);
   external dynamic get iv;
   external set iv(dynamic value);
   external num? get tagLength;
   external set tagLength(num? value);
   external factory AesGcmParams({
-    dynamic? additionalData,
+    dynamic additionalData,
     dynamic iv,
     num? tagLength,
   });
@@ -388,8 +388,8 @@ class EcdsaParams {
 class ErrorEventInit {
   external num? get colno;
   external set colno(num? value);
-  external dynamic? get error;
-  external set error(dynamic? value);
+  external dynamic get error;
+  external set error(dynamic value);
   external String? get filename;
   external set filename(String? value);
   external num? get lineno;
@@ -398,7 +398,7 @@ class ErrorEventInit {
   external set message(String? value);
   external factory ErrorEventInit({
     num? colno,
-    dynamic? error,
+    dynamic error,
     String? filename,
     num? lineno,
     String? message,
@@ -448,22 +448,22 @@ class ExtendableEventInit {}
 @JS()
 @anonymous
 class ExtendableMessageEventInit {
-  external dynamic? get data;
-  external set data(dynamic? value);
+  external dynamic get data;
+  external set data(dynamic value);
   external String? get lastEventId;
   external set lastEventId(String? value);
   external String? get origin;
   external set origin(String? value);
   external List<MessagePort>? get ports;
   external set ports(List<MessagePort>? value);
-  external dynamic? get source;
-  external set source(dynamic? value);
+  external dynamic get source;
+  external set source(dynamic value);
   external factory ExtendableMessageEventInit({
-    dynamic? data,
+    dynamic data,
     String? lastEventId,
     String? origin,
     List<MessagePort>? ports,
-    dynamic? source,
+    dynamic source,
   });
 }
 
@@ -569,11 +569,11 @@ class IDBIndexParameters {
 class IDBObjectStoreParameters {
   external bool? get autoIncrement;
   external set autoIncrement(bool? value);
-  external dynamic? get keyPath;
-  external set keyPath(dynamic? value);
+  external dynamic get keyPath;
+  external set keyPath(dynamic value);
   external factory IDBObjectStoreParameters({
     bool? autoIncrement,
-    dynamic? keyPath,
+    dynamic keyPath,
   });
 }
 
@@ -815,8 +815,8 @@ class NotificationOptions {
   external set badge(String? value);
   external String? get body;
   external set body(String? value);
-  external dynamic? get data;
-  external set data(dynamic? value);
+  external dynamic get data;
+  external set data(dynamic value);
   external NotificationDirection? get dir;
   external set dir(NotificationDirection? value);
   external String? get icon;
@@ -841,7 +841,7 @@ class NotificationOptions {
     List<NotificationAction>? actions,
     String? badge,
     String? body,
-    dynamic? data,
+    dynamic data,
     NotificationDirection? dir,
     String? icon,
     String? image,
@@ -928,11 +928,11 @@ class ProgressEventInit {
 class PromiseRejectionEventInit {
   external Promise<dynamic> get promise;
   external set promise(Promise<dynamic> value);
-  external dynamic? get reason;
-  external set reason(dynamic? value);
+  external dynamic get reason;
+  external set reason(dynamic value);
   external factory PromiseRejectionEventInit({
     Promise<dynamic> promise,
-    dynamic? reason,
+    dynamic reason,
   });
 }
 
@@ -978,12 +978,12 @@ class PushSubscriptionJSON {
 @JS()
 @anonymous
 class PushSubscriptionOptionsInit {
-  external dynamic? get applicationServerKey;
-  external set applicationServerKey(dynamic? value);
+  external dynamic get applicationServerKey;
+  external set applicationServerKey(dynamic value);
   external bool? get userVisibleOnly;
   external set userVisibleOnly(bool? value);
   external factory PushSubscriptionOptionsInit({
-    dynamic? applicationServerKey,
+    dynamic applicationServerKey,
     bool? userVisibleOnly,
   });
 }
@@ -1016,11 +1016,11 @@ class QueuingStrategyInit {
 class ReadableStreamDefaultReadDoneResult {
   external bool get done;
   external set done(bool value);
-  external dynamic? get value;
-  external set value(dynamic? value);
+  external dynamic get value;
+  external set value(dynamic value);
   external factory ReadableStreamDefaultReadDoneResult({
     bool done,
-    dynamic? value,
+    dynamic value,
   });
 }
 
@@ -1093,8 +1093,8 @@ class RequestInit {
   external set referrerPolicy(ReferrerPolicy? value);
   external AbortSignal? get signal;
   external set signal(AbortSignal? value);
-  external dynamic? get window;
-  external set window(dynamic? value);
+  external dynamic get window;
+  external set window(dynamic value);
   external factory RequestInit({
     BodyInit? body,
     RequestCache? cache,
@@ -1108,7 +1108,7 @@ class RequestInit {
     String? referrer,
     ReferrerPolicy? referrerPolicy,
     AbortSignal? signal,
-    dynamic? window,
+    dynamic window,
   });
 }
 
@@ -1164,10 +1164,10 @@ class RsaKeyGenParams {
 @JS()
 @anonymous
 class RsaOaepParams {
-  external dynamic? get label;
-  external set label(dynamic? value);
+  external dynamic get label;
+  external set label(dynamic value);
   external factory RsaOaepParams({
-    dynamic? label,
+    dynamic label,
   });
 }
 
@@ -1283,20 +1283,20 @@ class TextEncoderEncodeIntoResult {
 class Transformer<I, O> {
   external TransformerFlushCallback<O>? get flush;
   external set flush(TransformerFlushCallback<O>? value);
-  external dynamic? get readableType;
-  external set readableType(dynamic? value);
+  external dynamic get readableType;
+  external set readableType(dynamic value);
   external TransformerStartCallback<O>? get start;
   external set start(TransformerStartCallback<O>? value);
   external TransformerTransformCallback<I, O>? get transform;
   external set transform(TransformerTransformCallback<I, O>? value);
-  external dynamic? get writableType;
-  external set writableType(dynamic? value);
+  external dynamic get writableType;
+  external set writableType(dynamic value);
   external factory Transformer({
     TransformerFlushCallback<O>? flush,
-    dynamic? readableType,
+    dynamic readableType,
     TransformerStartCallback<O>? start,
     TransformerTransformCallback<I, O>? transform,
-    dynamic? writableType,
+    dynamic writableType,
   });
 }
 
@@ -1309,15 +1309,15 @@ class UnderlyingSink<W> {
   external set close(UnderlyingSinkCloseCallback? value);
   external UnderlyingSinkStartCallback? get start;
   external set start(UnderlyingSinkStartCallback? value);
-  external dynamic? get type;
-  external set type(dynamic? value);
+  external dynamic get type;
+  external set type(dynamic value);
   external UnderlyingSinkWriteCallback<W>? get write;
   external set write(UnderlyingSinkWriteCallback<W>? value);
   external factory UnderlyingSink({
     UnderlyingSinkAbortCallback? abort,
     UnderlyingSinkCloseCallback? close,
     UnderlyingSinkStartCallback? start,
-    dynamic? type,
+    dynamic type,
     UnderlyingSinkWriteCallback<W>? write,
   });
 }
@@ -1331,13 +1331,13 @@ class UnderlyingSource<R> {
   external set pull(UnderlyingSourcePullCallback<R>? value);
   external UnderlyingSourceStartCallback<R>? get start;
   external set start(UnderlyingSourceStartCallback<R>? value);
-  external dynamic? get type;
-  external set type(dynamic? value);
+  external dynamic get type;
+  external set type(dynamic value);
   external factory UnderlyingSource({
     UnderlyingSourceCancelCallback? cancel,
     UnderlyingSourcePullCallback<R>? pull,
     UnderlyingSourceStartCallback<R>? start,
-    dynamic? type,
+    dynamic type,
   });
 }
 
@@ -1876,8 +1876,8 @@ external ICloseEvent JCloseEvent;
 class ConcatParams {
   external Uint8Array get algorithmId;
   external set algorithmId(Uint8Array value);
-  external dynamic? get hash;
-  external set hash(dynamic? value);
+  external dynamic get hash;
+  external set hash(dynamic value);
   external Uint8Array get partyUInfo;
   external set partyUInfo(Uint8Array value);
   external Uint8Array get partyVInfo;
@@ -1888,7 +1888,7 @@ class ConcatParams {
   external set publicInfo(Uint8Array? value);
   external factory ConcatParams({
     Uint8Array algorithmId,
-    dynamic? hash,
+    dynamic hash,
     Uint8Array partyUInfo,
     Uint8Array partyVInfo,
     Uint8Array? privateInfo,
@@ -2886,7 +2886,7 @@ class IDBIndex {
   external IDBObjectStore get objectStore;
   external bool get unique;
   external IDBRequest<num> count(dynamic key);
-  external IDBRequest<dynamic?> get(dynamic key);
+  external IDBRequest<dynamic> get(dynamic key);
   external IDBRequest<List<dynamic>> getAll(dynamic query, num count);
   external IDBRequest<List<IDBValidKey>> getAllKeys(dynamic query, num count);
   external IDBRequest<IDBValidKey?> getKey(dynamic key);
@@ -2938,7 +2938,7 @@ class IDBObjectStore {
   external IDBIndex createIndex(String name, dynamic keyPath, IDBIndexParameters options);
   external IDBRequest<dynamic> delete(dynamic key);
   external void deleteIndex(String name);
-  external IDBRequest<dynamic?> get(dynamic query);
+  external IDBRequest<dynamic> get(dynamic query);
   external IDBRequest<List<dynamic>> getAll(dynamic query, num count);
   external IDBRequest<List<IDBValidKey>> getAllKeys(dynamic query, num count);
   external IDBRequest<IDBValidKey?> getKey(dynamic query);
