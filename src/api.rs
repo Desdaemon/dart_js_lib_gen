@@ -1,13 +1,14 @@
 use crate::transform::visit_program;
 use anyhow::Result;
 use flexi_logger::Logger;
+use log::debug;
 use std::collections::HashMap;
 use std::path::Path;
 use std::rc::Rc;
 
 use swc_common::{
     errors::{ColorConfig, Handler},
-    SourceMap,
+    SourceFile, SourceMap,
 };
 use swc_ecma_ast::Module;
 use swc_ecma_parser::{lexer::Lexer, Parser, StringInput, Syntax};
@@ -15,6 +16,12 @@ use swc_ecma_parser::{lexer::Lexer, Parser, StringInput, Syntax};
 pub struct Config {
     /// A list of paths to files to process.
     pub inputs: Vec<String>,
+    /// Specifies the logging behavior. Can be simply one of:
+    /// - off, info, warn, error, debug; or
+    /// - comma-separated key-value pairs of 'crate\[::module]\[=level]'
+    ///
+    /// Also see the [full specification](https://docs.rs/flexi_logger/0.20.0/flexi_logger/struct.LogSpecification.html#).
+    pub log_spec: Option<String>,
 }
 
 pub struct Entry {
@@ -23,15 +30,24 @@ pub struct Entry {
 }
 
 pub fn parse_library(config: Config) -> Result<Vec<Entry>> {
-    Logger::try_with_str("info")?.start()?;
+    Logger::try_with_str(
+        config
+            .log_spec
+            .as_ref()
+            .map(String::as_str)
+            .unwrap_or("info"),
+    )?
+    .start()?;
     let modules = parse_modules(config);
     Ok(modules
         .into_iter()
-        .map(|(key, val)| {
+        .map(|(key, (file, val))| {
             let library_name = path_to_lib_name(Path::new(&key));
+            let hint = (file.byte_length() / 2) as usize;
+            debug!("Parsing {} with size hint of {}", key, hint);
             Entry {
                 key,
-                value: visit_program(&val, &library_name, None),
+                value: visit_program(&val, file, &library_name, Some(hint)),
             }
         })
         .collect())
@@ -47,7 +63,7 @@ fn path_to_lib_name(buf: &Path) -> String {
         .join(".")
 }
 
-fn parse_modules(config: Config) -> HashMap<String, Module> {
+fn parse_modules(config: Config) -> HashMap<String, (Rc<SourceFile>, Module)> {
     let cm: Rc<SourceMap> = Default::default();
     let handler = Handler::with_tty_emitter(ColorConfig::Auto, true, false, Some(cm.clone()));
     let mut modules = HashMap::new();
@@ -73,7 +89,7 @@ fn parse_modules(config: Config) -> HashMap<String, Module> {
             .parse_module()
             .map_err(|e| e.into_diagnostic(&handler).emit())
             .unwrap_or_else(|_| panic!("failed to parse module {}", input));
-        modules.entry(input).or_insert(module);
+        modules.entry(input).or_insert((fm, module));
     }
     modules
 }

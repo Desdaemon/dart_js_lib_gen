@@ -20,8 +20,16 @@ class Config {
   /// A list of paths to files to process.
   final List<String> inputs;
 
+  /// Specifies the logging behavior. Can be simply one of:
+  /// - off, info, warn, error, debug; or
+  /// - comma-separated key-value pairs of 'crate\[::module]\[=level]'
+  ///
+  /// Also see the [full specification](https://docs.rs/flexi_logger/0.20.0/flexi_logger/struct.LogSpecification.html#).
+  final String? logSpec;
+
   Config({
     required this.inputs,
+    this.logSpec,
   });
 }
 
@@ -69,6 +77,10 @@ class DartJsLibGenImpl extends DartJsLibGen {
     return ptr;
   }
 
+  ffi.Pointer<wire_uint_8_list> _api2wire_opt_String(String? raw) {
+    return raw == null ? ffi.nullptr : _api2wire_String(raw);
+  }
+
   int _api2wire_u8(int raw) {
     return raw;
   }
@@ -87,6 +99,7 @@ class DartJsLibGenImpl extends DartJsLibGen {
 
   void _api_fill_to_wire_config(Config apiObj, wire_Config wireObj) {
     wireObj.inputs = _api2wire_StringList(apiObj.inputs);
+    wireObj.log_spec = _api2wire_opt_String(apiObj.logSpec);
   }
 }
 
@@ -222,6 +235,8 @@ class wire_StringList extends ffi.Struct {
 
 class wire_Config extends ffi.Struct {
   external ffi.Pointer<wire_StringList> inputs;
+
+  external ffi.Pointer<wire_uint_8_list> log_spec;
 }
 
 typedef DartPostCObjectFnType = ffi.Pointer<ffi.NativeFunction<ffi.Uint8 Function(DartPort, ffi.Pointer<ffi.Void>)>>;

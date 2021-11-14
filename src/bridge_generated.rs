@@ -40,6 +40,7 @@ pub struct wire_StringList {
 #[derive(Clone)]
 pub struct wire_Config {
     inputs: *mut wire_StringList,
+    log_spec: *mut wire_uint_8_list,
 }
 
 #[repr(C)]
@@ -121,6 +122,7 @@ impl Wire2Api<Config> for wire_Config {
     fn wire2api(self) -> Config {
         Config {
             inputs: self.inputs.wire2api(),
+            log_spec: self.log_spec.wire2api(),
         }
     }
 }
@@ -156,6 +158,7 @@ impl NewWithNullPtr for wire_Config {
     fn new_with_null_ptr() -> Self {
         Self {
             inputs: std::ptr::null_mut(),
+            log_spec: std::ptr::null_mut(),
         }
     }
 }

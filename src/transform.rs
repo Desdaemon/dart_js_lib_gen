@@ -1,8 +1,18 @@
 use std::collections::HashMap;
 use std::collections::HashSet;
+use std::ops::Range;
+use std::rc::Rc;
 
-use log::{debug, error, info, warn};
+use ariadne::Color;
+use ariadne::{Fmt, Label, ReportKind, Source};
+use log::log_enabled;
+use log::{debug, error, info, warn, Level};
+use swc_common::BytePos;
+use swc_common::SourceFile;
+use swc_common::Span;
 use swc_ecma_ast::*;
+
+type Report = ariadne::Report<(String, Range<usize>)>;
 
 struct Transformer {
     path: Vec<String>,
@@ -11,10 +21,15 @@ struct Transformer {
     class: Option<Class>,
     undecls: HashSet<String>,
     resolved: HashSet<String>,
-    resolved_funcs: HashSet<String>,
+    resolved_funcs: HashMap<String, Range<usize>>,
     /// Keeps track of the ident of the variable declaration being evaluated.
     current_ident: Option<String>,
     type_lits: HashMap<String, String>,
+    span: Range<usize>,
+    source: (String, Source),
+    warnings: u32,
+    errors: u32,
+    file: Rc<SourceFile>,
 }
 
 struct Class {
@@ -36,31 +51,31 @@ fn parse_pat(pat: &Pat) -> Option<&str> {
     }
 }
 
-fn parse_expression(expr: &Expr) -> Option<&str> {
-    match expr {
-        Expr::Ident(ident) => Some(ident.sym.as_ref()),
-        Expr::Lit(Lit::Str(string)) => Some(string.value.as_ref()),
-        other => {
-            error!("Unhandled expression:\n{:?}", other);
-            None
-        }
-    }
-}
-
-pub fn visit_program(module: &Module, library_name: &str, size_hint: Option<usize>) -> String {
+pub fn visit_program(
+    module: &Module,
+    file: Rc<SourceFile>,
+    library_name: &str,
+    size_hint: Option<usize>,
+) -> String {
     let buf = match size_hint {
         Some(size) => String::with_capacity(size),
         None => String::new(),
     };
+    let file_path = file.unmapped_path.as_ref().unwrap().clone();
     let mut t = Transformer {
         path: vec![],
         bufs: vec![buf],
         class: None,
         undecls: HashSet::new(),
         resolved: HashSet::new(),
-        resolved_funcs: HashSet::new(),
+        resolved_funcs: HashMap::new(),
         current_ident: None,
         type_lits: HashMap::new(),
+        span: 0..0,
+        source: (file_path.to_string(), Source::from(&*file.src)),
+        warnings: 0,
+        errors: 0,
+        file,
     };
 
     t.push("@JS() library ");
@@ -68,14 +83,32 @@ pub fn visit_program(module: &Module, library_name: &str, size_hint: Option<usiz
     t.push(";\n// ignore_for_file: non_constant_identifier_names, private_optional_parameter, unused_element\n");
     t.push("import 'package:js/js.dart';");
     t.visit_module_item(&module.body);
-    for (_, lit) in t.type_lits {
-        t.bufs.last_mut().unwrap().push_str(&lit);
+    let mut buf = t.bufs.pop().unwrap();
+    let mut entries = t.type_lits.into_iter().collect::<Vec<_>>();
+    entries.sort_by(Ord::cmp);
+
+    for (_, lit) in entries {
+        buf.push_str(&lit);
     }
     if !t.undecls.is_empty() {
         let cls = t.undecls.into_iter().collect::<Vec<_>>().join(", ");
         warn!("The following types were used but not declared:\n{}", cls);
     }
-    t.bufs.first().unwrap().clone()
+    if t.errors != 0 || t.warnings != 0 {
+        info!(
+            "Parsed {} with {} {} and {} {}.",
+            &file_path,
+            t.errors,
+            if t.errors == 1 { "error" } else { "errors" },
+            t.warnings,
+            if t.warnings == 1 {
+                "warning"
+            } else {
+                "warnings"
+            }
+        );
+    }
+    buf
 }
 
 impl Transformer {
@@ -122,22 +155,87 @@ impl Transformer {
     fn semi(&mut self) {
         self.push_char(';')
     }
+
+    fn valid_identifier<'a>(&mut self, id: &'a str, span: Range<usize>) -> Option<&'a str> {
+        if id.contains('-') {
+            self.warnings += 1;
+            if log_enabled!(Level::Warn) {
+                let (path, _) = &self.source;
+                Report::build(ReportKind::Warning, path, span.start)
+                    .with_message("Invalid character in identifier")
+                    .with_label(
+                        Label::new((path.clone(), span))
+                            .with_message("Rename this identifier".fg(Color::Yellow))
+                            .with_color(Color::Yellow),
+                    )
+                    .finish()
+                    .eprint(&mut self.source)
+                    .ok();
+            }
+            None
+        } else if FORBIDDEN_IDENTS.contains(&id) {
+            self.warnings += 1;
+            if log_enabled!(Level::Warn) {
+                let (path, _) = &self.source;
+                Report::build(ReportKind::Warning, path, span.start)
+                    .with_message("Dart reserved identifier")
+                    .with_label(
+                        Label::new((path.clone(), span))
+                            .with_message("This identifier is reserved by Dart.".fg(Color::Yellow))
+                            .with_color(Color::Yellow),
+                    )
+                    .finish()
+                    .eprint(&mut self.source)
+                    .ok();
+            }
+            None
+        } else {
+            Some(id.into())
+        }
+    }
+
+    fn extra_bytes(&self, pos: BytePos, start_at: Option<u32>) -> u32 {
+        let start = self.file.start_pos.0;
+        let start = start_at.unwrap_or(0) + start;
+        self.file
+            .multibyte_chars
+            .iter()
+            .skip_while(|x| start >= x.pos.0)
+            .take_while(|x| x.pos < pos)
+            .map(|x| (x.bytes - 1) as u32)
+            .sum()
+    }
+
+    fn range_of(&self, span: Span) -> Range<usize> {
+        let lo_extras = self.extra_bytes(span.lo, None);
+        let hi_extras = self.extra_bytes(span.hi, Some(span.lo.0)) + lo_extras;
+        let start = self.file.start_pos.0;
+        let lo = (span.lo.0 - lo_extras - start) as usize;
+        let hi = (span.hi.0 - hi_extras - start) as usize;
+        lo..hi
+    }
+
+    fn char_offset(&self, pos: BytePos) -> usize {
+        let extra_bytes = self.extra_bytes(pos, None);
+        (pos.0 - extra_bytes) as usize
+    }
+
+    fn parse_expression<'a>(&self, expr: &'a Expr) -> Option<(&'a str, Range<usize>)> {
+        match expr {
+            Expr::Ident(ident) => Some((&ident.sym, self.range_of(ident.span))),
+            Expr::Lit(Lit::Str(string)) => Some((&string.value, self.range_of(string.span))),
+            other => {
+                error!("Unhandled expression:\n{:?}", other);
+                None
+            }
+        }
+    }
 }
 
 /// Valid identifiers in JavaScript but not in Dart. Non-exhaustive.
 static FORBIDDEN_IDENTS: &[&str] = &[
     "default", "switch", "in", "var", "is", "continue", "extends", "catch", "assert",
 ];
-
-fn valid_identifier(id: &str) -> Option<String> {
-    if id.contains('-') {
-        Some(format!("Invalid character in identifier: {}", id))
-    } else if FORBIDDEN_IDENTS.contains(&id) {
-        Some(format!("{} is a reserved keyword", id))
-    } else {
-        None
-    }
-}
 
 macro_rules! gen_matcher {
     ($ty:ident, $($pat:pat),*) => {
@@ -172,24 +270,82 @@ impl Transformer {
         }
     }
 
-    fn visit_statement(&mut self, stmt: &Stmt) {
-        match stmt {
-            Stmt::Decl(decl) => self.visit_decl(decl),
-            _ => {
-                error!("Unparsed statement:\n{:?}", stmt);
-                todo!();
-            }
-        }
-    }
-
     fn visit_default_decl(&mut self, decl: &DefaultDecl) {
         match decl {
-            DefaultDecl::TsInterfaceDecl(intr) => self.visit_interface(intr),
+            DefaultDecl::TsInterfaceDecl(intr) => self.visit_interface_decl(intr),
             DefaultDecl::Fn(_) => {
                 info!("Default function declaration ignored.");
             }
             _ => {
                 error!("Unhandled default declaration:\n{:?}", decl);
+                todo!();
+            }
+        }
+    }
+
+    fn visit_decl(&mut self, decl: &Decl) {
+        match decl {
+            Decl::Fn(func) => self.visit_function_decl(func),
+            Decl::Var(var) => self.visit_variable(var),
+            Decl::TsInterface(intr) => self.visit_interface_decl(intr),
+            Decl::TsModule(module) => self.visit_module(module),
+            Decl::TsTypeAlias(alias) => self.visit_type_alias(alias),
+            Decl::Class(class) => self.visit_class(class),
+            _ => {
+                error!("Unhandled declaration:\n{:?}", decl);
+                todo!();
+            }
+        }
+    }
+
+    fn visit_type_elements(&mut self, body: &[TsTypeElement]) {
+        let mut first = true;
+        for item in body {
+            match item {
+                TsTypeElement::TsPropertySignature(prop) => self.visit_ts_prop_sig(prop),
+                TsTypeElement::TsMethodSignature(met) => self.visit_ts_method_sig(met),
+                TsTypeElement::TsConstructSignatureDecl(sig) => self.visit_ts_ctor_sig(sig),
+                TsTypeElement::TsGetterSignature(sig) => self.visit_ts_getter_sig(sig),
+                TsTypeElement::TsSetterSignature(sig) => self.visit_ts_setter_sig(sig),
+                TsTypeElement::TsIndexSignature(_) => {}
+                TsTypeElement::TsCallSignatureDecl(call) if !first => {
+                    info!("Call signature ignored.");
+                    debug!("{:?}", call)
+                }
+                TsTypeElement::TsCallSignatureDecl(call) => {
+                    let (path, _) = &self.source;
+                    self.warnings += 1;
+                    if log_enabled!(Level::Warn) {
+                        Report::build(ReportKind::Warning, path, self.char_offset(call.span.lo))
+                            .with_message("Unhandled call signature")
+                            .with_label(
+                                Label::new((path.clone(), self.range_of(call.span)))
+                                    .with_message("This call signature is not handled".fg(Color::Yellow))
+                                    .with_color(Color::Yellow),
+                            )
+                            .with_label(
+                                Label::new((path.clone(), self.span.clone()))
+                                    .with_message(
+                                        "This interface declares a call signature which is unhandled"
+                                            .fg(Color::Blue),
+                                    )
+                                    .with_color(Color::Blue),
+                            )
+                            .finish()
+                            .eprint(&mut self.source)
+                            .ok();
+                    }
+                }
+            }
+            first = false;
+        }
+    }
+
+    fn visit_statement(&mut self, stmt: &Stmt) {
+        match stmt {
+            Stmt::Decl(decl) => self.visit_decl(decl),
+            _ => {
+                error!("Unparsed statement:\n{:?}", stmt);
                 todo!();
             }
         }
@@ -224,28 +380,41 @@ impl Transformer {
     }
 
     /// `@JS() @anonymous class T<..> { .. external factory T({ .. }) }`
-    fn visit_interface(&mut self, intr: &TsInterfaceDecl) {
-        let id = intr.id.sym.as_ref();
+    fn visit_interface_decl(&mut self, decl: &TsInterfaceDecl) {
+        self.span = self.range_of(decl.span);
+        let id = decl.id.sym.as_ref();
         self.undecls.remove(id);
         self.resolved.insert(id.to_owned());
         if ["String", "Function"].contains(&id) {
-            warn!("Forbidden interface: {}", id);
+            self.errors += 1;
+            if log_enabled!(Level::Error) {
+                let (path, _) = &self.source;
+                Report::build(ReportKind::Error, path, self.char_offset(decl.id.span.lo))
+                    .with_message("Forbidden interface name")
+                    .with_label(
+                        Label::new((path.clone(), self.range_of(decl.id.span)))
+                            .with_message("Consider renaming this interface"),
+                    )
+                    .finish()
+                    .eprint(&mut self.source)
+                    .ok();
+            }
             return;
         }
         self.class = Some(Class {
             anonymous: true,
             fields: vec![],
-            id: String::from(intr.id.sym.as_ref()),
+            id: String::from(decl.id.sym.as_ref()),
             members: HashSet::new(),
         });
         self.push("@JS() ");
         let class_body = self.collect(|s| {
             s.push("class ");
             s.push(id);
-            s.visit_type_params(&intr.type_params);
+            s.visit_type_params(&decl.type_params);
             s.push_char('{');
             {
-                s.visit_type_elements(&intr.body.body);
+                s.visit_type_elements(&decl.body.body);
                 s.emit_factory_constr();
             }
             s.push_char('}');
@@ -257,21 +426,57 @@ impl Transformer {
         self.push(&class_body);
     }
 
-    /// `@JS(..) external Output func<..>(...);`
-    fn visit_function(&mut self, func: &FnDecl) {
-        let id: &str = &func.ident.sym;
-        let conflict = !self.resolved_funcs.insert(id.to_owned());
-        if conflict {
-            warn!("Overload of {} ignored.", id);
+    /// `@JS(..) external R id<..>(..);`
+    fn visit_function_decl(&mut self, decl: &FnDecl) {
+        let id: &str = &decl.ident.sym;
+        let conflict = self.resolved_funcs.contains_key(id);
+        if conflict && log_enabled!(Level::Warn) {
+            let (path, _) = &self.source;
+            let first_span = self.resolved_funcs.get(id).unwrap();
+            let span = decl.function.span;
+            Report::build(ReportKind::Warning, path, self.char_offset(span.lo))
+                .with_message("Function overload ignored")
+                .with_label(
+                    Label::new((path.clone(), self.range_of(span)))
+                        .with_message("Remove this definition".fg(Color::Yellow))
+                        .with_color(Color::Yellow),
+                )
+                .with_label(
+                    Label::new((path.clone(), first_span.clone()))
+                        .with_message("Function first defined here".fg(Color::Blue))
+                        .with_color(Color::Blue),
+                )
+                .with_note("Dart does not support function overloads.")
+                .finish()
+                .eprint(&mut self.source)
+                .ok();
             return;
         }
-        self.annotate(id);
+        self.resolved_funcs
+            .insert(id.to_owned(), self.range_of(decl.function.span));
+        self.visit_function(id, &decl.function, false, true);
+    }
+
+    /// `[@JS(id)] external [static] R id<..>(..);`
+    fn visit_function(
+        &mut self,
+        id: &str,
+        function: &Function,
+        is_static: bool,
+        should_annotate: bool,
+    ) {
+        if should_annotate {
+            self.annotate(id);
+        }
         self.push("external ");
-        self.visit_type_ann(&func.function.return_type);
+        if is_static {
+            self.push("static ");
+        }
+        self.visit_type_ann(&function.return_type);
         self.push_char(' ');
         self.push(id);
-        self.visit_type_params(&func.function.type_params);
-        self.visit_params(&func.function.params);
+        self.visit_type_params(&function.type_params);
+        self.visit_params(&function.params);
         self.semi();
     }
 
@@ -281,7 +486,7 @@ impl Transformer {
             if let swc_ecma_ast::Pat::Ident(ident) = &item.name {
                 let id = ident.id.sym.as_ref();
                 if ["String"].contains(&id) {
-                    warn!("Forbidden variable name: {}.", id);
+                    // warn!("Forbidden variable name: {}.", id);
                     continue;
                 }
                 self.current_ident = Some(id.to_owned());
@@ -320,6 +525,7 @@ impl Transformer {
         }
     }
 
+    /// `typedef T<..> = ..;`
     fn visit_type_alias(&mut self, alias: &TsTypeAliasDecl) {
         let id: &str = &alias.id.sym;
         self.current_ident = Some(id.to_owned());
@@ -334,6 +540,7 @@ impl Transformer {
         self.current_ident.take().unwrap();
     }
 
+    /// `external T get id;`
     fn emit_getter(&mut self, typ: &str, id: &str) {
         self.push("external ");
         self.push(typ);
@@ -342,6 +549,7 @@ impl Transformer {
         self.semi();
     }
 
+    /// `external set id(T value);`
     fn emit_setter(&mut self, typ: &str, id: &str, param_name: Option<&str>) {
         let param_name = param_name.unwrap_or("value");
         self.push("external set ");
@@ -353,132 +561,107 @@ impl Transformer {
         self.push(");");
     }
 
-    /// Returns false is [id] is already a member of the current class.
-    fn register_member(&mut self, id: String) -> bool {
-        self.class.as_mut().unwrap().members.insert(id)
+    /// Returns None is [id] is already a member of the current class.
+    fn register_member<'a>(&mut self, id: &'a str) -> Option<&'a str> {
+        let res = self.class.as_mut().unwrap().members.insert(id.to_owned());
+        if !res {
+            let class = &self.class.as_ref().unwrap().id;
+            debug!("{}#{} is already defined.", class, id);
+        }
+        res.then(|| id)
     }
 
     fn visit_ts_prop_sig(&mut self, prop: &TsPropertySignature) {
-        let id = parse_expression(prop.key.as_ref()).unwrap();
-        if !self.register_member(id.to_owned()) {
-            error!("Member already defined: {}", id);
-            return;
-        }
-        if let Some(err) = valid_identifier(id) {
-            warn!("{}", err);
-            return;
-        }
-        let ty = self.collect(|s| {
-            s.visit_type_params(&prop.type_params);
-            s.visit_type_ann(&prop.type_ann);
-            if prop.optional && !s.buf().ends_with('?') {
-                s.push_char('?');
+        if let Some(id) = self
+            .parse_expression(&prop.key)
+            .and_then(|e| self.register_member(e.0).map(|_| e))
+            .and_then(|e| self.valid_identifier(e.0, e.1))
+        {
+            let ty = self.collect(|s| {
+                s.visit_type_params(&prop.type_params);
+                s.visit_type_ann(&prop.type_ann);
+                if prop.optional && !s.buf().ends_with('?') {
+                    s.push_char('?');
+                }
+            });
+            self.emit_getter(&ty, &id);
+            if !prop.readonly {
+                self.emit_setter(&ty, &id, None);
             }
-        });
-        self.emit_getter(&ty, id);
-        if !prop.readonly {
-            self.emit_setter(&ty, id, None);
+            self.class
+                .as_mut()
+                .unwrap()
+                .fields
+                .push((id.to_string(), ty));
         }
-        self.class
-            .as_mut()
-            .unwrap()
-            .fields
-            .push((id.to_owned(), ty));
     }
 
-    fn visit_type_elements(&mut self, body: &[TsTypeElement]) {
-        let mut first = true;
-        for item in body {
-            match item {
-                TsTypeElement::TsPropertySignature(prop) => self.visit_ts_prop_sig(prop),
-                TsTypeElement::TsMethodSignature(met) => self.visit_method(met),
-                // Dart cannot make use of index signatures. Closest we get is dynamic.
-                TsTypeElement::TsIndexSignature(_) => {}
-                TsTypeElement::TsConstructSignatureDecl(TsConstructSignatureDecl {
-                    params,
-                    ..
-                }) => {
-                    let id = self.class.as_ref().unwrap().id.clone();
-                    if !self.register_member(id.to_owned()) {
-                        error!("Member already defined: {}", id);
-                        continue;
-                    }
-                    self.class.as_mut().unwrap().anonymous = false;
-                    let params = self.collect(|s| s.visit_function_params(params));
-                    self.push("external factory ");
-                    self.push(&id);
-                    self.push_char('(');
-                    if !params.is_empty() {
-                        if params.starts_with('[') {
-                            self.push(&params);
-                        } else {
-                            self.push_char('{');
-                            self.push(&params);
-                            self.push_char('}');
-                        }
-                    }
-                    self.push(");");
-                }
-                TsTypeElement::TsCallSignatureDecl(call) if !first => {
-                    info!("Call signature ignored.");
-                    debug!("{:?}", call)
-                }
-                TsTypeElement::TsCallSignatureDecl(call) => {
-                    warn!("Call signature not handled.");
-                    debug!("{:?}", call);
-                }
-                TsTypeElement::TsGetterSignature(TsGetterSignature { type_ann, key, .. }) => {
-                    let id = parse_expression(key).unwrap();
-                    if !self.register_member(id.to_owned()) {
-                        error!("Member already defined: {}", id);
-                        continue;
-                    }
-                    self.push("external ");
-                    self.visit_type_ann(type_ann);
-                    self.push(" get ");
-                    self.push(id);
-                    self.semi();
-                }
-                TsTypeElement::TsSetterSignature(TsSetterSignature { key, param, .. }) => {
-                    let id = parse_expression(key).unwrap();
-                    if !self.register_member(id.to_owned()) {
-                        error!("Member already defined: {}", id);
-                        continue;
-                    }
-                    self.push("external set ");
-                    self.push(id);
-                    self.push_char('(');
-                    self.visit_function_param_single(param);
-                    self.push(");");
+    fn visit_ts_ctor_sig(
+        &mut self,
+        TsConstructSignatureDecl { params, .. }: &TsConstructSignatureDecl,
+    ) {
+        if let Some(id) = self.register_member(&self.class.as_ref().unwrap().id.clone()) {
+            self.class.as_mut().unwrap().anonymous = false;
+            let params = self.collect(|s| s.visit_function_params(params));
+            self.push("external factory ");
+            self.push(&id);
+            self.push_char('(');
+            if !params.is_empty() {
+                if params.starts_with('[') {
+                    self.push(&params);
+                } else {
+                    self.push_char('{');
+                    self.push(&params);
+                    self.push_char('}');
                 }
             }
-            first = false;
+            self.push(");");
+        }
+    }
+
+    fn visit_ts_getter_sig(&mut self, TsGetterSignature { type_ann, key, .. }: &TsGetterSignature) {
+        if let Some(id) = self
+            .parse_expression(key)
+            .and_then(|e| self.register_member(e.0))
+        {
+            self.push("external ");
+            self.visit_type_ann(type_ann);
+            self.push(" get ");
+            self.push(id);
+            self.semi();
+        }
+    }
+
+    fn visit_ts_setter_sig(&mut self, TsSetterSignature { key, param, .. }: &TsSetterSignature) {
+        if let Some(id) = self
+            .parse_expression(key)
+            .and_then(|e| self.register_member(e.0))
+        {
+            self.push("external set ");
+            self.push(id);
+            self.push_char('(');
+            self.visit_function_param_single(param);
+            self.push(");");
         }
     }
 
     /// `external T id(..);`
-    fn visit_method(&mut self, met: &TsMethodSignature) {
-        let id = match &met.key.as_ref() {
-            Expr::Ident(id) => id.sym.as_ref(),
-            _ => unreachable!(),
-        };
-        if !self.register_member(id.to_owned()) {
-            error!("Member already defined: {}", id);
-            return;
+    fn visit_ts_method_sig(&mut self, met: &TsMethodSignature) {
+        let id: &str = &met.key.as_ref().clone().expect_ident().sym;
+        if let Some(id) = self
+            .register_member(id)
+            .and_then(|e| self.valid_identifier(e, self.range_of(met.span)))
+        {
+            self.push("external ");
+            self.visit_type_ann(&met.type_ann);
+            self.push_char(' ');
+            self.push(&id);
+            self.visit_type_params(&met.type_params);
+            self.push_char('(');
+            self.visit_function_params(&met.params);
+            self.push_char(')');
+            self.semi();
         }
-        if let Some(err) = valid_identifier(id) {
-            warn!("{}", err);
-            return;
-        }
-        self.push("external ");
-        self.visit_type_ann(&met.type_ann);
-        self.push_char(' ');
-        self.push(id);
-        self.visit_type_params(&met.type_params);
-        self.push_char('(');
-        self.visit_function_params(&met.params);
-        self.push_char(')');
-        self.semi();
     }
 
     /// `external factory C({ .. });`
@@ -487,17 +670,22 @@ impl Transformer {
             return;
         }
         let class = self.class.take().unwrap();
+        self.emit_factory(&class.id, &class.fields);
+        self.class = Some(class);
+    }
+
+    /// `external factory id({ .. })`
+    fn emit_factory(&mut self, id: &str, fields: &[(String, String)]) {
         self.push("external factory ");
-        self.push(&class.id);
+        self.push(&id);
         self.push("({");
-        for (id, ty) in &class.fields {
+        for (id, ty) in fields {
             self.push(ty);
             self.push_char(' ');
             self.push(id);
             self.push_char(',');
         }
         self.push("});");
-        self.class = Some(class);
     }
 
     /// `<A, B extends .., ..>`
@@ -525,8 +713,7 @@ impl Transformer {
             TsEntityName::TsQualifiedName(qn) => &qn.right.sym,
             TsEntityName::Ident(ident) => &ident.sym,
         };
-        if ["Function"].contains(&id) {
-            warn!("{} is not a valid type.", id);
+        if id == "Function" {
             self.push("Function()");
             return false;
         }
@@ -580,7 +767,7 @@ impl Transformer {
             }
             TsFnParam::Rest(rest) => self.visit_rest_pat(rest),
             _ => {
-                error!("Function parameter not handled:\n{:?}", item);
+                error!("Unhandled function parameter:\n{:?}", item);
                 todo!()
             }
         }
@@ -694,7 +881,7 @@ impl Transformer {
                     self.push_char(')');
                 }
                 TsFnOrConstructorType::TsConstructorType(ctor) => {
-                    warn!("Constructor type not handled.");
+                    // warn!("Constructor type not handled.");
                     debug!("{:?}", ctor);
                     self.push("dynamic Function()");
                 }
@@ -731,8 +918,8 @@ impl Transformer {
                 "readonly" => self.visit_type(&op.type_ann),
                 "keyof" => self.push("String"),
                 "unique" => self.push("dynamic"), // unique symbol
-                other => {
-                    warn!("Type operator not handled: {}", other);
+                _ => {
+                    // warn!("Unhandled type operator: {}", other);
                     self.visit_type(&op.type_ann);
                 }
             },
@@ -759,8 +946,7 @@ impl Transformer {
     }
 
     fn visit_ts_type_lit(&mut self, lit: &TsTypeLit) {
-        if let Some(id) = self.current_ident.as_ref().cloned() {
-            let id = format!("I{}", id);
+        if let Some(id) = self.current_ident.as_ref().map(|x| format!("I{}", x)) {
             if self.type_lits.contains_key(&id) {
                 self.push(&id);
                 return;
@@ -786,27 +972,12 @@ impl Transformer {
             self.type_lits.insert(id, body);
             return;
         }
-        warn!("No current ident for type literal:\n{:?}", lit);
+        // warn!("Unhandled anonymous type literal:\n{:?}", lit);
         self.push("dynamic");
     }
 
-    fn visit_decl(&mut self, decl: &Decl) {
-        match decl {
-            Decl::Fn(func) => self.visit_function(func),
-            Decl::Var(var) => self.visit_variable(var),
-            Decl::TsInterface(intr) => self.visit_interface(intr),
-            Decl::TsModule(module) => self.visit_module(module),
-            Decl::TsTypeAlias(alias) => self.visit_type_alias(alias),
-            Decl::Class(class) => self.visit_class(class),
-            _ => {
-                error!("Unhandled declaration:\n{:?}", decl);
-                todo!();
-            }
-        }
-    }
-
-    fn visit_class(&mut self, class: &ClassDecl) {
-        let id: &str = &class.ident.sym;
+    fn visit_class(&mut self, ClassDecl { class, ident, .. }: &ClassDecl) {
+        let id: &str = &ident.sym;
         self.undecls.remove(id);
         self.class = Some(Class {
             fields: vec![],
@@ -816,19 +987,19 @@ impl Transformer {
         });
         self.push("@JS() class ");
         self.push(id);
-        self.visit_type_params(&class.class.type_params);
-        if let Some(extends) = &class.class.super_class {
+        self.visit_type_params(&class.type_params);
+        if let Some(extends) = &class.super_class {
             self.push(" extends ");
-            self.push(parse_expression(extends).unwrap());
+            self.push(self.parse_expression(extends).unwrap().0);
         }
-        if !class.class.implements.is_empty() {
-            for imp in &class.class.implements {
+        if !class.implements.is_empty() {
+            for imp in &class.implements {
                 dbg!(imp);
             }
         }
         self.push_char('{');
         {
-            for item in &class.class.body {
+            for item in &class.body {
                 self.visit_class_member(item);
             }
         }
@@ -843,21 +1014,12 @@ impl Transformer {
                 function,
                 ..
             }) => {
-                self.push("external ");
-                if *is_static {
-                    self.push("static ");
-                }
-                self.visit_type_ann(&function.return_type);
-                self.push_char(' ');
                 let id = match &key {
                     PropName::Str(Str { value, .. }) => value.as_ref(),
                     PropName::Ident(id) => id.as_ref(),
                     _ => todo!(),
                 };
-                self.push(id);
-                self.visit_type_params(&function.type_params);
-                self.visit_params(&function.params);
-                self.semi();
+                self.visit_function(id, &function, *is_static, false)
             }
             ClassMember::Constructor(Constructor { params, .. }) => {
                 self.push("external factory ");
@@ -886,10 +1048,13 @@ impl Transformer {
                 }
                 self.visit_type_ann(type_ann);
                 self.push_char(' ');
-                self.push(parse_expression(key).unwrap());
+                self.push(self.parse_expression(key).unwrap().0);
                 self.semi();
             }
-            _ => {}
+            _ => {
+                error!("Unhandled class member:\n{:?}", member);
+                todo!()
+            }
         }
     }
 }

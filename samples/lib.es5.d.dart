@@ -1799,6 +1799,13 @@ class Date {
 
 @JS()
 @anonymous
+class ICollator {
+  external factory ICollator({dynamic locales, CollatorOptions options});
+  external List<String> supportedLocalesOf(dynamic locales, CollatorOptions options);
+}
+
+@JS()
+@anonymous
 class IDateTimeFormat {
   external factory IDateTimeFormat({dynamic locales, DateTimeFormatOptions options});
   external List<String> supportedLocalesOf(dynamic locales, DateTimeFormatOptions options);
@@ -1809,11 +1816,4 @@ class IDateTimeFormat {
 class INumberFormat {
   external factory INumberFormat({dynamic locales, NumberFormatOptions options});
   external List<String> supportedLocalesOf(dynamic locales, NumberFormatOptions options);
-}
-
-@JS()
-@anonymous
-class ICollator {
-  external factory ICollator({dynamic locales, CollatorOptions options});
-  external List<String> supportedLocalesOf(dynamic locales, CollatorOptions options);
 }

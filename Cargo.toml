@@ -10,6 +10,7 @@ crate-type = ["cdylib", "rlib"]
 
 [dependencies]
 anyhow = "1.0.45"
+ariadne = "0.1.3"
 flexi_logger = "0.19.6"
 flutter_rust_bridge = "1.6.0"
 log = "0.4.14"

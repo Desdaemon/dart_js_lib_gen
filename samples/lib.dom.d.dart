@@ -22030,6 +22030,8 @@ external Console console;
 external String escape(String ident);
 @JS('CSS.supports')
 external bool supports(String property, String value);
+@JS('CSS.supports')
+external bool supports(String conditionText);
 
 @JS()
 @anonymous
@@ -22214,6 +22216,8 @@ external Promise<Module> compile(BufferSource bytes);
 external Promise<Module> compileStreaming(dynamic source);
 @JS('WebAssembly.instantiate')
 external Promise<WebAssemblyInstantiatedSource> instantiate(BufferSource bytes, Imports importObject);
+@JS('WebAssembly.instantiate')
+external Promise<Instance> instantiate(Module moduleObject, Imports importObject);
 @JS('WebAssembly.instantiateStreaming')
 external Promise<WebAssemblyInstantiatedSource> instantiateStreaming(dynamic source, Imports importObject);
 @JS('WebAssembly.validate')
@@ -23060,6 +23064,8 @@ external void moveTo(num x, num y);
 external WindowProxy? open(dynamic url, String target, String features);
 @JS('postMessage')
 external void postMessage(dynamic message, String targetOrigin, List<Transferable> transfer);
+@JS('postMessage')
+external void postMessage(dynamic message, WindowPostMessageOptions options);
 @JS('print')
 external void print();
 @JS('prompt')
@@ -23074,10 +23080,16 @@ external void resizeBy(num x, num y);
 external void resizeTo(num width, num height);
 @JS('scroll')
 external void scroll(ScrollToOptions options);
+@JS('scroll')
+external void scroll(num x, num y);
 @JS('scrollBy')
 external void scrollBy(ScrollToOptions options);
+@JS('scrollBy')
+external void scrollBy(num x, num y);
 @JS('scrollTo')
 external void scrollTo(ScrollToOptions options);
+@JS('scrollTo')
+external void scrollTo(num x, num y);
 @JS('stop')
 external void stop();
 @JS('toString')
@@ -23324,6 +23336,9 @@ external void clearInterval(num handle);
 external void clearTimeout(num handle);
 @JS('createImageBitmap')
 external Promise<ImageBitmap> createImageBitmap(ImageBitmapSource image, ImageBitmapOptions options);
+@JS('createImageBitmap')
+external Promise<ImageBitmap> createImageBitmap(
+    ImageBitmapSource image, num sx, num sy, num sw, num sh, ImageBitmapOptions options);
 @JS('fetch')
 external Promise<Response> fetch(RequestInfo input, RequestInit init);
 @JS('queueMicrotask')
@@ -23360,8 +23375,12 @@ external num setTimeout(
 external Storage sessionStorage;
 @JS('addEventListener')
 external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
+@JS('addEventListener')
+external void addEventListener(String type, EventListenerOrEventListenerObject listener, dynamic options);
 @JS('removeEventListener')
 external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
+@JS('removeEventListener')
+external void removeEventListener(String type, EventListenerOrEventListenerObject listener, dynamic options);
 typedef AlgorithmIdentifier = dynamic;
 typedef BigInteger = Uint8Array;
 typedef BinaryData = dynamic;
@@ -23570,299 +23589,50 @@ typedef XMLHttpRequestResponseType = String;
 
 @JS()
 @anonymous
-class IServiceWorkerContainer {
-  external ServiceWorkerContainer get prototype;
-  external set prototype(ServiceWorkerContainer value);
-  external factory IServiceWorkerContainer();
+class IAbortController {
+  external AbortController get prototype;
+  external set prototype(AbortController value);
+  external factory IAbortController();
 }
 
 @JS()
 @anonymous
-class IMediaMetadata {
-  external MediaMetadata get prototype;
-  external set prototype(MediaMetadata value);
-  external factory IMediaMetadata({MediaMetadataInit init});
+class IAbortSignal {
+  external AbortSignal get prototype;
+  external set prototype(AbortSignal value);
+  external factory IAbortSignal();
 }
 
 @JS()
 @anonymous
-class IIDBObjectStore {
-  external IDBObjectStore get prototype;
-  external set prototype(IDBObjectStore value);
-  external factory IIDBObjectStore();
+class IAbstractRange {
+  external AbstractRange get prototype;
+  external set prototype(AbstractRange value);
+  external factory IAbstractRange();
 }
 
 @JS()
 @anonymous
-class IFileSystemDirectoryEntry {
-  external FileSystemDirectoryEntry get prototype;
-  external set prototype(FileSystemDirectoryEntry value);
-  external factory IFileSystemDirectoryEntry();
+class IAnalyserNode {
+  external AnalyserNode get prototype;
+  external set prototype(AnalyserNode value);
+  external factory IAnalyserNode({BaseAudioContext context, AnalyserOptions options});
 }
 
 @JS()
 @anonymous
-class IOfflineAudioContext {
-  external OfflineAudioContext get prototype;
-  external set prototype(OfflineAudioContext value);
-  external factory IOfflineAudioContext({OfflineAudioContextOptions contextOptions});
+class IAnimation {
+  external Animation get prototype;
+  external set prototype(Animation value);
+  external factory IAnimation({AnimationEffect? effect, AnimationTimeline? timeline});
 }
 
 @JS()
 @anonymous
-class ICSSAnimation {
-  external CSSAnimation get prototype;
-  external set prototype(CSSAnimation value);
-  external factory ICSSAnimation();
-}
-
-@JS()
-@anonymous
-class IGlobal {
-  external Global get prototype;
-  external set prototype(Global value);
-  external factory IGlobal({GlobalDescriptor descriptor, dynamic v});
-}
-
-@JS()
-@anonymous
-class IClipboardEvent {
-  external ClipboardEvent get prototype;
-  external set prototype(ClipboardEvent value);
-  external factory IClipboardEvent({String type, ClipboardEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class IHTMLUListElement {
-  external HTMLUListElement get prototype;
-  external set prototype(HTMLUListElement value);
-  external factory IHTMLUListElement();
-}
-
-@JS()
-@anonymous
-class IURLSearchParams {
-  external URLSearchParams get prototype;
-  external set prototype(URLSearchParams value);
-  external factory IURLSearchParams({dynamic init});
-  external String toString();
-}
-
-@JS()
-@anonymous
-class IGeolocationPositionError {
-  external GeolocationPositionError get prototype;
-  external set prototype(GeolocationPositionError value);
-  external factory IGeolocationPositionError();
-  external num get PERMISSION_DENIED;
-  external num get POSITION_UNAVAILABLE;
-  external num get TIMEOUT;
-}
-
-@JS()
-@anonymous
-class IHTMLSelectElement {
-  external HTMLSelectElement get prototype;
-  external set prototype(HTMLSelectElement value);
-  external factory IHTMLSelectElement();
-}
-
-@JS()
-@anonymous
-class IIDBIndex {
-  external IDBIndex get prototype;
-  external set prototype(IDBIndex value);
-  external factory IIDBIndex();
-}
-
-@JS()
-@anonymous
-class IComment {
-  external Comment get prototype;
-  external set prototype(Comment value);
-  external factory IComment({String data});
-}
-
-@JS()
-@anonymous
-class ICanvasRenderingContext2D {
-  external CanvasRenderingContext2D get prototype;
-  external set prototype(CanvasRenderingContext2D value);
-  external factory ICanvasRenderingContext2D();
-}
-
-@JS()
-@anonymous
-class IXPathResult {
-  external XPathResult get prototype;
-  external set prototype(XPathResult value);
-  external factory IXPathResult();
-  external num get ANY_TYPE;
-  external num get ANY_UNORDERED_NODE_TYPE;
-  external num get BOOLEAN_TYPE;
-  external num get FIRST_ORDERED_NODE_TYPE;
-  external num get NUMBER_TYPE;
-  external num get ORDERED_NODE_ITERATOR_TYPE;
-  external num get ORDERED_NODE_SNAPSHOT_TYPE;
-  external num get STRING_TYPE;
-  external num get UNORDERED_NODE_ITERATOR_TYPE;
-  external num get UNORDERED_NODE_SNAPSHOT_TYPE;
-}
-
-@JS()
-@anonymous
-class IIDBKeyRange {
-  external IDBKeyRange get prototype;
-  external set prototype(IDBKeyRange value);
-  external factory IIDBKeyRange();
-  external IDBKeyRange bound(dynamic lower, dynamic upper, bool lowerOpen, bool upperOpen);
-  external IDBKeyRange lowerBound(dynamic lower, bool open);
-  external IDBKeyRange only(dynamic value);
-  external IDBKeyRange upperBound(dynamic upper, bool open);
-}
-
-@JS()
-@anonymous
-class IAuthenticatorResponse {
-  external AuthenticatorResponse get prototype;
-  external set prototype(AuthenticatorResponse value);
-  external factory IAuthenticatorResponse();
-}
-
-@JS()
-@anonymous
-class IClipboardItem {
-  external ClipboardItem get prototype;
-  external set prototype(ClipboardItem value);
-  external factory IClipboardItem({Record<String, ClipboardItemData> items, ClipboardItemOptions options});
-}
-
-@JS()
-@anonymous
-class IDynamicsCompressorNode {
-  external DynamicsCompressorNode get prototype;
-  external set prototype(DynamicsCompressorNode value);
-  external factory IDynamicsCompressorNode({BaseAudioContext context, DynamicsCompressorOptions options});
-}
-
-@JS()
-@anonymous
-class IPaymentResponse {
-  external PaymentResponse get prototype;
-  external set prototype(PaymentResponse value);
-  external factory IPaymentResponse();
-}
-
-@JS()
-@anonymous
-class ISVGElement {
-  external SVGElement get prototype;
-  external set prototype(SVGElement value);
-  external factory ISVGElement();
-}
-
-@JS()
-@anonymous
-class IDOMTokenList {
-  external DOMTokenList get prototype;
-  external set prototype(DOMTokenList value);
-  external factory IDOMTokenList();
-}
-
-@JS()
-@anonymous
-class IGainNode {
-  external GainNode get prototype;
-  external set prototype(GainNode value);
-  external factory IGainNode({BaseAudioContext context, GainOptions options});
-}
-
-@JS()
-@anonymous
-class IChannelMergerNode {
-  external ChannelMergerNode get prototype;
-  external set prototype(ChannelMergerNode value);
-  external factory IChannelMergerNode({BaseAudioContext context, ChannelMergerOptions options});
-}
-
-@JS()
-@anonymous
-class IHTMLBRElement {
-  external HTMLBRElement get prototype;
-  external set prototype(HTMLBRElement value);
-  external factory IHTMLBRElement();
-}
-
-@JS()
-@anonymous
-class IHTMLInputElement {
-  external HTMLInputElement get prototype;
-  external set prototype(HTMLInputElement value);
-  external factory IHTMLInputElement();
-}
-
-@JS()
-@anonymous
-class IPerformancePaintTiming {
-  external PerformancePaintTiming get prototype;
-  external set prototype(PerformancePaintTiming value);
-  external factory IPerformancePaintTiming();
-}
-
-@JS()
-@anonymous
-class IRTCStatsReport {
-  external RTCStatsReport get prototype;
-  external set prototype(RTCStatsReport value);
-  external factory IRTCStatsReport();
-}
-
-@JS()
-@anonymous
-class ISVGPreserveAspectRatio {
-  external SVGPreserveAspectRatio get prototype;
-  external set prototype(SVGPreserveAspectRatio value);
-  external factory ISVGPreserveAspectRatio();
-  external num get SVG_MEETORSLICE_MEET;
-  external num get SVG_MEETORSLICE_SLICE;
-  external num get SVG_MEETORSLICE_UNKNOWN;
-  external num get SVG_PRESERVEASPECTRATIO_NONE;
-  external num get SVG_PRESERVEASPECTRATIO_UNKNOWN;
-  external num get SVG_PRESERVEASPECTRATIO_XMAXYMAX;
-  external num get SVG_PRESERVEASPECTRATIO_XMAXYMID;
-  external num get SVG_PRESERVEASPECTRATIO_XMAXYMIN;
-  external num get SVG_PRESERVEASPECTRATIO_XMIDYMAX;
-  external num get SVG_PRESERVEASPECTRATIO_XMIDYMID;
-  external num get SVG_PRESERVEASPECTRATIO_XMIDYMIN;
-  external num get SVG_PRESERVEASPECTRATIO_XMINYMAX;
-  external num get SVG_PRESERVEASPECTRATIO_XMINYMID;
-  external num get SVG_PRESERVEASPECTRATIO_XMINYMIN;
-}
-
-@JS()
-@anonymous
-class IWebGLSampler {
-  external WebGLSampler get prototype;
-  external set prototype(WebGLSampler value);
-  external factory IWebGLSampler();
-}
-
-@JS()
-@anonymous
-class IHTMLVideoElement {
-  external HTMLVideoElement get prototype;
-  external set prototype(HTMLVideoElement value);
-  external factory IHTMLVideoElement();
-}
-
-@JS()
-@anonymous
-class IPerformanceObserver {
-  external PerformanceObserver get prototype;
-  external set prototype(PerformanceObserver value);
-  external factory IPerformanceObserver({PerformanceObserverCallback callback});
-  external ReadonlyArray<String> get supportedEntryTypes;
+class IAnimationEffect {
+  external AnimationEffect get prototype;
+  external set prototype(AnimationEffect value);
+  external factory IAnimationEffect();
 }
 
 @JS()
@@ -23875,663 +23645,128 @@ class IAnimationEvent {
 
 @JS()
 @anonymous
-class IStyleMedia {
-  external StyleMedia get prototype;
-  external set prototype(StyleMedia value);
-  external factory IStyleMedia();
+class IAnimationPlaybackEvent {
+  external AnimationPlaybackEvent get prototype;
+  external set prototype(AnimationPlaybackEvent value);
+  external factory IAnimationPlaybackEvent({String type, AnimationPlaybackEventInit eventInitDict});
 }
 
 @JS()
 @anonymous
-class ICSSTransition {
-  external CSSTransition get prototype;
-  external set prototype(CSSTransition value);
-  external factory ICSSTransition();
+class IAnimationTimeline {
+  external AnimationTimeline get prototype;
+  external set prototype(AnimationTimeline value);
+  external factory IAnimationTimeline();
 }
 
 @JS()
 @anonymous
-class ISVGAnimatedTransformList {
-  external SVGAnimatedTransformList get prototype;
-  external set prototype(SVGAnimatedTransformList value);
-  external factory ISVGAnimatedTransformList();
+class IAttr {
+  external Attr get prototype;
+  external set prototype(Attr value);
+  external factory IAttr();
 }
 
 @JS()
 @anonymous
-class IHTMLTimeElement {
-  external HTMLTimeElement get prototype;
-  external set prototype(HTMLTimeElement value);
-  external factory IHTMLTimeElement();
+class IAudio {
+  external factory IAudio({String src});
 }
 
 @JS()
 @anonymous
-class IHTMLAnchorElement {
-  external HTMLAnchorElement get prototype;
-  external set prototype(HTMLAnchorElement value);
-  external factory IHTMLAnchorElement();
+class IAudioBuffer {
+  external AudioBuffer get prototype;
+  external set prototype(AudioBuffer value);
+  external factory IAudioBuffer({AudioBufferOptions options});
 }
 
 @JS()
 @anonymous
-class IPromiseRejectionEvent {
-  external PromiseRejectionEvent get prototype;
-  external set prototype(PromiseRejectionEvent value);
-  external factory IPromiseRejectionEvent({String type, PromiseRejectionEventInit eventInitDict});
+class IAudioBufferSourceNode {
+  external AudioBufferSourceNode get prototype;
+  external set prototype(AudioBufferSourceNode value);
+  external factory IAudioBufferSourceNode({BaseAudioContext context, AudioBufferSourceOptions options});
 }
 
 @JS()
 @anonymous
-class ISVGAnimatedLength {
-  external SVGAnimatedLength get prototype;
-  external set prototype(SVGAnimatedLength value);
-  external factory ISVGAnimatedLength();
+class IAudioContext {
+  external AudioContext get prototype;
+  external set prototype(AudioContext value);
+  external factory IAudioContext({AudioContextOptions contextOptions});
 }
 
 @JS()
 @anonymous
-class IBeforeUnloadEvent {
-  external BeforeUnloadEvent get prototype;
-  external set prototype(BeforeUnloadEvent value);
-  external factory IBeforeUnloadEvent();
+class IAudioDestinationNode {
+  external AudioDestinationNode get prototype;
+  external set prototype(AudioDestinationNode value);
+  external factory IAudioDestinationNode();
 }
 
 @JS()
 @anonymous
-class IHTMLMarqueeElement {
-  external HTMLMarqueeElement get prototype;
-  external set prototype(HTMLMarqueeElement value);
-  external factory IHTMLMarqueeElement();
+class IAudioListener {
+  external AudioListener get prototype;
+  external set prototype(AudioListener value);
+  external factory IAudioListener();
 }
 
 @JS()
 @anonymous
-class ISVGStyleElement {
-  external SVGStyleElement get prototype;
-  external set prototype(SVGStyleElement value);
-  external factory ISVGStyleElement();
+class IAudioNode {
+  external AudioNode get prototype;
+  external set prototype(AudioNode value);
+  external factory IAudioNode();
 }
 
 @JS()
 @anonymous
-class IDOMQuad {
-  external DOMQuad get prototype;
-  external set prototype(DOMQuad value);
-  external factory IDOMQuad({DOMPointInit p1, DOMPointInit p2, DOMPointInit p3, DOMPointInit p4});
-  external DOMQuad fromQuad(DOMQuadInit other);
-  external DOMQuad fromRect(DOMRectInit other);
+class IAudioParam {
+  external AudioParam get prototype;
+  external set prototype(AudioParam value);
+  external factory IAudioParam();
 }
 
 @JS()
 @anonymous
-class IHTMLMetaElement {
-  external HTMLMetaElement get prototype;
-  external set prototype(HTMLMetaElement value);
-  external factory IHTMLMetaElement();
+class IAudioParamMap {
+  external AudioParamMap get prototype;
+  external set prototype(AudioParamMap value);
+  external factory IAudioParamMap();
 }
 
 @JS()
 @anonymous
-class IHTMLSlotElement {
-  external HTMLSlotElement get prototype;
-  external set prototype(HTMLSlotElement value);
-  external factory IHTMLSlotElement();
+class IAudioProcessingEvent {
+  external AudioProcessingEvent get prototype;
+  external set prototype(AudioProcessingEvent value);
+  external factory IAudioProcessingEvent({String type, AudioProcessingEventInit eventInitDict});
 }
 
 @JS()
 @anonymous
-class IPointerEvent {
-  external PointerEvent get prototype;
-  external set prototype(PointerEvent value);
-  external factory IPointerEvent({String type, PointerEventInit eventInitDict});
+class IAudioScheduledSourceNode {
+  external AudioScheduledSourceNode get prototype;
+  external set prototype(AudioScheduledSourceNode value);
+  external factory IAudioScheduledSourceNode();
 }
 
 @JS()
 @anonymous
-class IRTCPeerConnection {
-  external RTCPeerConnection get prototype;
-  external set prototype(RTCPeerConnection value);
-  external factory IRTCPeerConnection({RTCConfiguration configuration});
-  external Promise<RTCCertificate> generateCertificate(AlgorithmIdentifier keygenAlgorithm);
+class IAudioWorklet {
+  external AudioWorklet get prototype;
+  external set prototype(AudioWorklet value);
+  external factory IAudioWorklet();
 }
 
 @JS()
 @anonymous
-class IPerformanceObserverEntryList {
-  external PerformanceObserverEntryList get prototype;
-  external set prototype(PerformanceObserverEntryList value);
-  external factory IPerformanceObserverEntryList();
-}
-
-@JS()
-@anonymous
-class ISVGAnimatedRect {
-  external SVGAnimatedRect get prototype;
-  external set prototype(SVGAnimatedRect value);
-  external factory ISVGAnimatedRect();
-}
-
-@JS()
-@anonymous
-class IMediaStreamTrack {
-  external MediaStreamTrack get prototype;
-  external set prototype(MediaStreamTrack value);
-  external factory IMediaStreamTrack();
-}
-
-@JS()
-@anonymous
-class IGeolocationCoordinates {
-  external GeolocationCoordinates get prototype;
-  external set prototype(GeolocationCoordinates value);
-  external factory IGeolocationCoordinates();
-}
-
-@JS()
-@anonymous
-class ISVGMPathElement {
-  external SVGMPathElement get prototype;
-  external set prototype(SVGMPathElement value);
-  external factory ISVGMPathElement();
-}
-
-@JS()
-@anonymous
-class ICSSConditionRule {
-  external CSSConditionRule get prototype;
-  external set prototype(CSSConditionRule value);
-  external factory ICSSConditionRule();
-}
-
-@JS()
-@anonymous
-class ISVGUnitTypes {
-  external SVGUnitTypes get prototype;
-  external set prototype(SVGUnitTypes value);
-  external factory ISVGUnitTypes();
-  external num get SVG_UNIT_TYPE_OBJECTBOUNDINGBOX;
-  external num get SVG_UNIT_TYPE_UNKNOWN;
-  external num get SVG_UNIT_TYPE_USERSPACEONUSE;
-}
-
-@JS()
-@anonymous
-class IScreen {
-  external Screen get prototype;
-  external set prototype(Screen value);
-  external factory IScreen();
-}
-
-@JS()
-@anonymous
-class IStorageEvent {
-  external StorageEvent get prototype;
-  external set prototype(StorageEvent value);
-  external factory IStorageEvent({String type, StorageEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class ISVGPolygonElement {
-  external SVGPolygonElement get prototype;
-  external set prototype(SVGPolygonElement value);
-  external factory ISVGPolygonElement();
-}
-
-@JS()
-@anonymous
-class IHTMLModElement {
-  external HTMLModElement get prototype;
-  external set prototype(HTMLModElement value);
-  external factory IHTMLModElement();
-}
-
-@JS()
-@anonymous
-class IHTMLUnknownElement {
-  external HTMLUnknownElement get prototype;
-  external set prototype(HTMLUnknownElement value);
-  external factory IHTMLUnknownElement();
-}
-
-@JS()
-@anonymous
-class IPermissionStatus {
-  external PermissionStatus get prototype;
-  external set prototype(PermissionStatus value);
-  external factory IPermissionStatus();
-}
-
-@JS()
-@anonymous
-class ISpeechSynthesisVoice {
-  external SpeechSynthesisVoice get prototype;
-  external set prototype(SpeechSynthesisVoice value);
-  external factory ISpeechSynthesisVoice();
-}
-
-@JS()
-@anonymous
-class ISVGFilterElement {
-  external SVGFilterElement get prototype;
-  external set prototype(SVGFilterElement value);
-  external factory ISVGFilterElement();
-}
-
-@JS()
-@anonymous
-class ISVGTextElement {
-  external SVGTextElement get prototype;
-  external set prototype(SVGTextElement value);
-  external factory ISVGTextElement();
-}
-
-@JS()
-@anonymous
-class IHTMLMediaElement {
-  external HTMLMediaElement get prototype;
-  external set prototype(HTMLMediaElement value);
-  external factory IHTMLMediaElement();
-  external num get HAVE_CURRENT_DATA;
-  external num get HAVE_ENOUGH_DATA;
-  external num get HAVE_FUTURE_DATA;
-  external num get HAVE_METADATA;
-  external num get HAVE_NOTHING;
-  external num get NETWORK_EMPTY;
-  external num get NETWORK_IDLE;
-  external num get NETWORK_LOADING;
-  external num get NETWORK_NO_SOURCE;
-}
-
-@JS()
-@anonymous
-class IXMLDocument {
-  external XMLDocument get prototype;
-  external set prototype(XMLDocument value);
-  external factory IXMLDocument();
-}
-
-@JS()
-@anonymous
-class IDataTransferItem {
-  external DataTransferItem get prototype;
-  external set prototype(DataTransferItem value);
-  external factory IDataTransferItem();
-}
-
-@JS()
-@anonymous
-class IIntersectionObserver {
-  external IntersectionObserver get prototype;
-  external set prototype(IntersectionObserver value);
-  external factory IIntersectionObserver({IntersectionObserverCallback callback, IntersectionObserverInit options});
-}
-
-@JS()
-@anonymous
-class ISVGRadialGradientElement {
-  external SVGRadialGradientElement get prototype;
-  external set prototype(SVGRadialGradientElement value);
-  external factory ISVGRadialGradientElement();
-}
-
-@JS()
-@anonymous
-class IWebGLUniformLocation {
-  external WebGLUniformLocation get prototype;
-  external set prototype(WebGLUniformLocation value);
-  external factory IWebGLUniformLocation();
-}
-
-@JS()
-@anonymous
-class IHTMLBaseElement {
-  external HTMLBaseElement get prototype;
-  external set prototype(HTMLBaseElement value);
-  external factory IHTMLBaseElement();
-}
-
-@JS()
-@anonymous
-class IHTMLTrackElement {
-  external HTMLTrackElement get prototype;
-  external set prototype(HTMLTrackElement value);
-  external factory IHTMLTrackElement();
-  external num get ERROR;
-  external num get LOADED;
-  external num get LOADING;
-  external num get NONE;
-}
-
-@JS()
-@anonymous
-class IMediaElementAudioSourceNode {
-  external MediaElementAudioSourceNode get prototype;
-  external set prototype(MediaElementAudioSourceNode value);
-  external factory IMediaElementAudioSourceNode({AudioContext context, MediaElementAudioSourceOptions options});
-}
-
-@JS()
-@anonymous
-class IMouseEvent {
-  external MouseEvent get prototype;
-  external set prototype(MouseEvent value);
-  external factory IMouseEvent({String type, MouseEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class IRTCSessionDescription {
-  external RTCSessionDescription get prototype;
-  external set prototype(RTCSessionDescription value);
-  external factory IRTCSessionDescription({RTCSessionDescriptionInit descriptionInitDict});
-}
-
-@JS()
-@anonymous
-class IHTMLMenuElement {
-  external HTMLMenuElement get prototype;
-  external set prototype(HTMLMenuElement value);
-  external factory IHTMLMenuElement();
-}
-
-@JS()
-@anonymous
-class IRange {
-  external Range get prototype;
-  external set prototype(Range value);
-  external factory IRange();
-  external num get END_TO_END;
-  external num get END_TO_START;
-  external num get START_TO_END;
-  external num get START_TO_START;
-  external String toString();
-}
-
-@JS()
-@anonymous
-class IHTMLFrameSetElement {
-  external HTMLFrameSetElement get prototype;
-  external set prototype(HTMLFrameSetElement value);
-  external factory IHTMLFrameSetElement();
-}
-
-@JS()
-@anonymous
-class IPushSubscription {
-  external PushSubscription get prototype;
-  external set prototype(PushSubscription value);
-  external factory IPushSubscription();
-}
-
-@JS()
-@anonymous
-class ITextDecoderStream {
-  external TextDecoderStream get prototype;
-  external set prototype(TextDecoderStream value);
-  external factory ITextDecoderStream({String label, TextDecoderOptions options});
-}
-
-@JS()
-@anonymous
-class INodeFilter {
-  external num get FILTER_ACCEPT;
-  external num get FILTER_REJECT;
-  external num get FILTER_SKIP;
-  external num get SHOW_ALL;
-  external num get SHOW_ATTRIBUTE;
-  external num get SHOW_CDATA_SECTION;
-  external num get SHOW_COMMENT;
-  external num get SHOW_DOCUMENT;
-  external num get SHOW_DOCUMENT_FRAGMENT;
-  external num get SHOW_DOCUMENT_TYPE;
-  external num get SHOW_ELEMENT;
-  external num get SHOW_ENTITY;
-  external num get SHOW_ENTITY_REFERENCE;
-  external num get SHOW_NOTATION;
-  external num get SHOW_PROCESSING_INSTRUCTION;
-  external num get SHOW_TEXT;
-}
-
-@JS()
-@anonymous
-class IHTMLStyleElement {
-  external HTMLStyleElement get prototype;
-  external set prototype(HTMLStyleElement value);
-  external factory IHTMLStyleElement();
-}
-
-@JS()
-@anonymous
-class IPushManager {
-  external PushManager get prototype;
-  external set prototype(PushManager value);
-  external factory IPushManager();
-  external ReadonlyArray<String> get supportedContentEncodings;
-}
-
-@JS()
-@anonymous
-class ISVGGeometryElement {
-  external SVGGeometryElement get prototype;
-  external set prototype(SVGGeometryElement value);
-  external factory ISVGGeometryElement();
-}
-
-@JS()
-@anonymous
-class ISVGTextPositioningElement {
-  external SVGTextPositioningElement get prototype;
-  external set prototype(SVGTextPositioningElement value);
-  external factory ISVGTextPositioningElement();
-}
-
-@JS()
-@anonymous
-class IOscillatorNode {
-  external OscillatorNode get prototype;
-  external set prototype(OscillatorNode value);
-  external factory IOscillatorNode({BaseAudioContext context, OscillatorOptions options});
-}
-
-@JS()
-@anonymous
-class IRTCDtlsTransport {
-  external RTCDtlsTransport get prototype;
-  external set prototype(RTCDtlsTransport value);
-  external factory IRTCDtlsTransport();
-}
-
-@JS()
-@anonymous
-class IPopStateEvent {
-  external PopStateEvent get prototype;
-  external set prototype(PopStateEvent value);
-  external factory IPopStateEvent({String type, PopStateEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class ISourceBufferList {
-  external SourceBufferList get prototype;
-  external set prototype(SourceBufferList value);
-  external factory ISourceBufferList();
-}
-
-@JS()
-@anonymous
-class IGamepad {
-  external Gamepad get prototype;
-  external set prototype(Gamepad value);
-  external factory IGamepad();
-}
-
-@JS()
-@anonymous
-class IPlugin {
-  external Plugin get prototype;
-  external set prototype(Plugin value);
-  external factory IPlugin();
-}
-
-@JS()
-@anonymous
-class IWebSocket {
-  external WebSocket get prototype;
-  external set prototype(WebSocket value);
-  external factory IWebSocket({dynamic url, dynamic protocols});
-  external num get CLOSED;
-  external num get CLOSING;
-  external num get CONNECTING;
-  external num get OPEN;
-}
-
-@JS()
-@anonymous
-class IMutationRecord {
-  external MutationRecord get prototype;
-  external set prototype(MutationRecord value);
-  external factory IMutationRecord();
-}
-
-@JS()
-@anonymous
-class ISVGForeignObjectElement {
-  external SVGForeignObjectElement get prototype;
-  external set prototype(SVGForeignObjectElement value);
-  external factory ISVGForeignObjectElement();
-}
-
-@JS()
-@anonymous
-class IWebGLTransformFeedback {
-  external WebGLTransformFeedback get prototype;
-  external set prototype(WebGLTransformFeedback value);
-  external factory IWebGLTransformFeedback();
-}
-
-@JS()
-@anonymous
-class IHashChangeEvent {
-  external HashChangeEvent get prototype;
-  external set prototype(HashChangeEvent value);
-  external factory IHashChangeEvent({String type, HashChangeEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class IHTMLFormControlsCollection {
-  external HTMLFormControlsCollection get prototype;
-  external set prototype(HTMLFormControlsCollection value);
-  external factory IHTMLFormControlsCollection();
-}
-
-@JS()
-@anonymous
-class ISVGFEDistantLightElement {
-  external SVGFEDistantLightElement get prototype;
-  external set prototype(SVGFEDistantLightElement value);
-  external factory ISVGFEDistantLightElement();
-}
-
-@JS()
-@anonymous
-class IOption {
-  external factory IOption({String text, String value, bool defaultSelected, bool selected});
-}
-
-@JS()
-@anonymous
-class ISVGCircleElement {
-  external SVGCircleElement get prototype;
-  external set prototype(SVGCircleElement value);
-  external factory ISVGCircleElement();
-}
-
-@JS()
-@anonymous
-class IMediaQueryListEvent {
-  external MediaQueryListEvent get prototype;
-  external set prototype(MediaQueryListEvent value);
-  external factory IMediaQueryListEvent({String type, MediaQueryListEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class ICSSSupportsRule {
-  external CSSSupportsRule get prototype;
-  external set prototype(CSSSupportsRule value);
-  external factory ICSSSupportsRule();
-}
-
-@JS()
-@anonymous
-class IFileSystemEntry {
-  external FileSystemEntry get prototype;
-  external set prototype(FileSystemEntry value);
-  external factory IFileSystemEntry();
-}
-
-@JS()
-@anonymous
-class IHTMLCanvasElement {
-  external HTMLCanvasElement get prototype;
-  external set prototype(HTMLCanvasElement value);
-  external factory IHTMLCanvasElement();
-}
-
-@JS()
-@anonymous
-class IOverconstrainedError {
-  external OverconstrainedError get prototype;
-  external set prototype(OverconstrainedError value);
-  external factory IOverconstrainedError({String constraint, String message});
-}
-
-@JS()
-@anonymous
-class IRTCPeerConnectionIceErrorEvent {
-  external RTCPeerConnectionIceErrorEvent get prototype;
-  external set prototype(RTCPeerConnectionIceErrorEvent value);
-  external factory IRTCPeerConnectionIceErrorEvent({String type, RTCPeerConnectionIceErrorEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class IXMLHttpRequest {
-  external XMLHttpRequest get prototype;
-  external set prototype(XMLHttpRequest value);
-  external factory IXMLHttpRequest();
-  external num get DONE;
-  external num get HEADERS_RECEIVED;
-  external num get LOADING;
-  external num get OPENED;
-  external num get UNSENT;
-}
-
-@JS()
-@anonymous
-class ITextTrackCueList {
-  external TextTrackCueList get prototype;
-  external set prototype(TextTrackCueList value);
-  external factory ITextTrackCueList();
-}
-
-@JS()
-@anonymous
-class IWritableStreamDefaultWriter {
-  external WritableStreamDefaultWriter get prototype;
-  external set prototype(WritableStreamDefaultWriter value);
-  external factory IWritableStreamDefaultWriter({WritableStream<W> stream});
-}
-
-@JS()
-@anonymous
-class IPath2D {
-  external Path2D get prototype;
-  external set prototype(Path2D value);
-  external factory IPath2D({dynamic path});
+class IAudioWorkletNode {
+  external AudioWorkletNode get prototype;
+  external set prototype(AudioWorkletNode value);
+  external factory IAudioWorkletNode({BaseAudioContext context, String name, AudioWorkletNodeOptions options});
 }
 
 @JS()
@@ -24544,238 +23779,138 @@ class IAuthenticatorAssertionResponse {
 
 @JS()
 @anonymous
-class ISelection {
-  external Selection get prototype;
-  external set prototype(Selection value);
-  external factory ISelection();
-  external String toString();
+class IAuthenticatorAttestationResponse {
+  external AuthenticatorAttestationResponse get prototype;
+  external set prototype(AuthenticatorAttestationResponse value);
+  external factory IAuthenticatorAttestationResponse();
 }
 
 @JS()
 @anonymous
-class ISVGFEComponentTransferElement {
-  external SVGFEComponentTransferElement get prototype;
-  external set prototype(SVGFEComponentTransferElement value);
-  external factory ISVGFEComponentTransferElement();
+class IAuthenticatorResponse {
+  external AuthenticatorResponse get prototype;
+  external set prototype(AuthenticatorResponse value);
+  external factory IAuthenticatorResponse();
 }
 
 @JS()
 @anonymous
-class IIDBFactory {
-  external IDBFactory get prototype;
-  external set prototype(IDBFactory value);
-  external factory IIDBFactory();
+class IBarProp {
+  external BarProp get prototype;
+  external set prototype(BarProp value);
+  external factory IBarProp();
 }
 
 @JS()
 @anonymous
-class ITextTrackCue {
-  external TextTrackCue get prototype;
-  external set prototype(TextTrackCue value);
-  external factory ITextTrackCue();
+class IBaseAudioContext {
+  external BaseAudioContext get prototype;
+  external set prototype(BaseAudioContext value);
+  external factory IBaseAudioContext();
 }
 
 @JS()
 @anonymous
-class ITextTrackList {
-  external TextTrackList get prototype;
-  external set prototype(TextTrackList value);
-  external factory ITextTrackList();
+class IBeforeUnloadEvent {
+  external BeforeUnloadEvent get prototype;
+  external set prototype(BeforeUnloadEvent value);
+  external factory IBeforeUnloadEvent();
 }
 
 @JS()
 @anonymous
-class ISVGTextContentElement {
-  external SVGTextContentElement get prototype;
-  external set prototype(SVGTextContentElement value);
-  external factory ISVGTextContentElement();
-  external num get LENGTHADJUST_SPACING;
-  external num get LENGTHADJUST_SPACINGANDGLYPHS;
-  external num get LENGTHADJUST_UNKNOWN;
+class IBiquadFilterNode {
+  external BiquadFilterNode get prototype;
+  external set prototype(BiquadFilterNode value);
+  external factory IBiquadFilterNode({BaseAudioContext context, BiquadFilterOptions options});
 }
 
 @JS()
 @anonymous
-class IHTMLOptionElement {
-  external HTMLOptionElement get prototype;
-  external set prototype(HTMLOptionElement value);
-  external factory IHTMLOptionElement();
+class IBlob {
+  external Blob get prototype;
+  external set prototype(Blob value);
+  external factory IBlob({List<BlobPart> blobParts, BlobPropertyBag options});
 }
 
 @JS()
 @anonymous
-class IPerformanceEventTiming {
-  external PerformanceEventTiming get prototype;
-  external set prototype(PerformanceEventTiming value);
-  external factory IPerformanceEventTiming();
+class IBlobEvent {
+  external BlobEvent get prototype;
+  external set prototype(BlobEvent value);
+  external factory IBlobEvent({String type, BlobEventInit eventInitDict});
 }
 
 @JS()
 @anonymous
-class IMediaKeys {
-  external MediaKeys get prototype;
-  external set prototype(MediaKeys value);
-  external factory IMediaKeys();
+class IBroadcastChannel {
+  external BroadcastChannel get prototype;
+  external set prototype(BroadcastChannel value);
+  external factory IBroadcastChannel({String name});
 }
 
 @JS()
 @anonymous
-class IWebGLShader {
-  external WebGLShader get prototype;
-  external set prototype(WebGLShader value);
-  external factory IWebGLShader();
+class IByteLengthQueuingStrategy {
+  external ByteLengthQueuingStrategy get prototype;
+  external set prototype(ByteLengthQueuingStrategy value);
+  external factory IByteLengthQueuingStrategy({QueuingStrategyInit init});
 }
 
 @JS()
 @anonymous
-class ISVGTransformList {
-  external SVGTransformList get prototype;
-  external set prototype(SVGTransformList value);
-  external factory ISVGTransformList();
+class ICDATASection {
+  external CDATASection get prototype;
+  external set prototype(CDATASection value);
+  external factory ICDATASection();
 }
 
 @JS()
 @anonymous
-class IHTMLPreElement {
-  external HTMLPreElement get prototype;
-  external set prototype(HTMLPreElement value);
-  external factory IHTMLPreElement();
+class ICSSAnimation {
+  external CSSAnimation get prototype;
+  external set prototype(CSSAnimation value);
+  external factory ICSSAnimation();
 }
 
 @JS()
 @anonymous
-class ITransformStreamDefaultController {
-  external TransformStreamDefaultController get prototype;
-  external set prototype(TransformStreamDefaultController value);
-  external factory ITransformStreamDefaultController();
+class ICSSConditionRule {
+  external CSSConditionRule get prototype;
+  external set prototype(CSSConditionRule value);
+  external factory ICSSConditionRule();
 }
 
 @JS()
 @anonymous
-class ISVGLengthList {
-  external SVGLengthList get prototype;
-  external set prototype(SVGLengthList value);
-  external factory ISVGLengthList();
+class ICSSCounterStyleRule {
+  external CSSCounterStyleRule get prototype;
+  external set prototype(CSSCounterStyleRule value);
+  external factory ICSSCounterStyleRule();
 }
 
 @JS()
 @anonymous
-class ISVGSymbolElement {
-  external SVGSymbolElement get prototype;
-  external set prototype(SVGSymbolElement value);
-  external factory ISVGSymbolElement();
+class ICSSFontFaceRule {
+  external CSSFontFaceRule get prototype;
+  external set prototype(CSSFontFaceRule value);
+  external factory ICSSFontFaceRule();
 }
 
 @JS()
 @anonymous
-class IHTMLHRElement {
-  external HTMLHRElement get prototype;
-  external set prototype(HTMLHRElement value);
-  external factory IHTMLHRElement();
+class ICSSGroupingRule {
+  external CSSGroupingRule get prototype;
+  external set prototype(CSSGroupingRule value);
+  external factory ICSSGroupingRule();
 }
 
 @JS()
 @anonymous
-class IElement {
-  external Element get prototype;
-  external set prototype(Element value);
-  external factory IElement();
-}
-
-@JS()
-@anonymous
-class IIIRFilterNode {
-  external IIRFilterNode get prototype;
-  external set prototype(IIRFilterNode value);
-  external factory IIIRFilterNode({BaseAudioContext context, IIRFilterOptions options});
-}
-
-@JS()
-@anonymous
-class ISpeechRecognitionErrorEvent {
-  external SpeechRecognitionErrorEvent get prototype;
-  external set prototype(SpeechRecognitionErrorEvent value);
-  external factory ISpeechRecognitionErrorEvent({String type, SpeechRecognitionErrorEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class IHTMLCollection {
-  external HTMLCollection get prototype;
-  external set prototype(HTMLCollection value);
-  external factory IHTMLCollection();
-}
-
-@JS()
-@anonymous
-class IRTCDataChannelEvent {
-  external RTCDataChannelEvent get prototype;
-  external set prototype(RTCDataChannelEvent value);
-  external factory IRTCDataChannelEvent({String type, RTCDataChannelEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class ISpeechRecognitionResultList {
-  external SpeechRecognitionResultList get prototype;
-  external set prototype(SpeechRecognitionResultList value);
-  external factory ISpeechRecognitionResultList();
-}
-
-@JS()
-@anonymous
-class ITouchList {
-  external TouchList get prototype;
-  external set prototype(TouchList value);
-  external factory ITouchList();
-}
-
-@JS()
-@anonymous
-class IWritableStreamDefaultController {
-  external WritableStreamDefaultController get prototype;
-  external set prototype(WritableStreamDefaultController value);
-  external factory IWritableStreamDefaultController();
-}
-
-@JS()
-@anonymous
-class IPerformanceMeasure {
-  external PerformanceMeasure get prototype;
-  external set prototype(PerformanceMeasure value);
-  external factory IPerformanceMeasure();
-}
-
-@JS()
-@anonymous
-class ITextMetrics {
-  external TextMetrics get prototype;
-  external set prototype(TextMetrics value);
-  external factory ITextMetrics();
-}
-
-@JS()
-@anonymous
-class ICredential {
-  external Credential get prototype;
-  external set prototype(Credential value);
-  external factory ICredential();
-}
-
-@JS()
-@anonymous
-class ICache {
-  external Cache get prototype;
-  external set prototype(Cache value);
-  external factory ICache();
-}
-
-@JS()
-@anonymous
-class IErrorEvent {
-  external ErrorEvent get prototype;
-  external set prototype(ErrorEvent value);
-  external factory IErrorEvent({String type, ErrorEventInit eventInitDict});
+class ICSSImportRule {
+  external CSSImportRule get prototype;
+  external set prototype(CSSImportRule value);
+  external factory ICSSImportRule();
 }
 
 @JS()
@@ -24788,43 +23923,300 @@ class ICSSKeyframeRule {
 
 @JS()
 @anonymous
-class IIDBCursor {
-  external IDBCursor get prototype;
-  external set prototype(IDBCursor value);
-  external factory IIDBCursor();
+class ICSSKeyframesRule {
+  external CSSKeyframesRule get prototype;
+  external set prototype(CSSKeyframesRule value);
+  external factory ICSSKeyframesRule();
 }
 
 @JS()
 @anonymous
-class IHTMLQuoteElement {
-  external HTMLQuoteElement get prototype;
-  external set prototype(HTMLQuoteElement value);
-  external factory IHTMLQuoteElement();
+class ICSSMediaRule {
+  external CSSMediaRule get prototype;
+  external set prototype(CSSMediaRule value);
+  external factory ICSSMediaRule();
 }
 
 @JS()
 @anonymous
-class ISVGFEMergeNodeElement {
-  external SVGFEMergeNodeElement get prototype;
-  external set prototype(SVGFEMergeNodeElement value);
-  external factory ISVGFEMergeNodeElement();
+class ICSSNamespaceRule {
+  external CSSNamespaceRule get prototype;
+  external set prototype(CSSNamespaceRule value);
+  external factory ICSSNamespaceRule();
 }
 
 @JS()
 @anonymous
-class IMediaRecorder {
-  external MediaRecorder get prototype;
-  external set prototype(MediaRecorder value);
-  external factory IMediaRecorder({MediaStream stream, MediaRecorderOptions options});
-  external bool isTypeSupported(String type);
+class ICSSPageRule {
+  external CSSPageRule get prototype;
+  external set prototype(CSSPageRule value);
+  external factory ICSSPageRule();
 }
 
 @JS()
 @anonymous
-class ITrackEvent {
-  external TrackEvent get prototype;
-  external set prototype(TrackEvent value);
-  external factory ITrackEvent({String type, TrackEventInit eventInitDict});
+class ICSSRule {
+  external CSSRule get prototype;
+  external set prototype(CSSRule value);
+  external factory ICSSRule();
+  external num get CHARSET_RULE;
+  external num get FONT_FACE_RULE;
+  external num get IMPORT_RULE;
+  external num get KEYFRAMES_RULE;
+  external num get KEYFRAME_RULE;
+  external num get MEDIA_RULE;
+  external num get NAMESPACE_RULE;
+  external num get PAGE_RULE;
+  external num get STYLE_RULE;
+  external num get SUPPORTS_RULE;
+}
+
+@JS()
+@anonymous
+class ICSSRuleList {
+  external CSSRuleList get prototype;
+  external set prototype(CSSRuleList value);
+  external factory ICSSRuleList();
+}
+
+@JS()
+@anonymous
+class ICSSStyleDeclaration {
+  external CSSStyleDeclaration get prototype;
+  external set prototype(CSSStyleDeclaration value);
+  external factory ICSSStyleDeclaration();
+}
+
+@JS()
+@anonymous
+class ICSSStyleRule {
+  external CSSStyleRule get prototype;
+  external set prototype(CSSStyleRule value);
+  external factory ICSSStyleRule();
+}
+
+@JS()
+@anonymous
+class ICSSStyleSheet {
+  external CSSStyleSheet get prototype;
+  external set prototype(CSSStyleSheet value);
+  external factory ICSSStyleSheet();
+}
+
+@JS()
+@anonymous
+class ICSSSupportsRule {
+  external CSSSupportsRule get prototype;
+  external set prototype(CSSSupportsRule value);
+  external factory ICSSSupportsRule();
+}
+
+@JS()
+@anonymous
+class ICSSTransition {
+  external CSSTransition get prototype;
+  external set prototype(CSSTransition value);
+  external factory ICSSTransition();
+}
+
+@JS()
+@anonymous
+class ICache {
+  external Cache get prototype;
+  external set prototype(Cache value);
+  external factory ICache();
+}
+
+@JS()
+@anonymous
+class ICacheStorage {
+  external CacheStorage get prototype;
+  external set prototype(CacheStorage value);
+  external factory ICacheStorage();
+}
+
+@JS()
+@anonymous
+class ICanvasGradient {
+  external CanvasGradient get prototype;
+  external set prototype(CanvasGradient value);
+  external factory ICanvasGradient();
+}
+
+@JS()
+@anonymous
+class ICanvasPattern {
+  external CanvasPattern get prototype;
+  external set prototype(CanvasPattern value);
+  external factory ICanvasPattern();
+}
+
+@JS()
+@anonymous
+class ICanvasRenderingContext2D {
+  external CanvasRenderingContext2D get prototype;
+  external set prototype(CanvasRenderingContext2D value);
+  external factory ICanvasRenderingContext2D();
+}
+
+@JS()
+@anonymous
+class IChannelMergerNode {
+  external ChannelMergerNode get prototype;
+  external set prototype(ChannelMergerNode value);
+  external factory IChannelMergerNode({BaseAudioContext context, ChannelMergerOptions options});
+}
+
+@JS()
+@anonymous
+class IChannelSplitterNode {
+  external ChannelSplitterNode get prototype;
+  external set prototype(ChannelSplitterNode value);
+  external factory IChannelSplitterNode({BaseAudioContext context, ChannelSplitterOptions options});
+}
+
+@JS()
+@anonymous
+class ICharacterData {
+  external CharacterData get prototype;
+  external set prototype(CharacterData value);
+  external factory ICharacterData();
+}
+
+@JS()
+@anonymous
+class IClientRect {
+  external ClientRect get prototype;
+  external set prototype(ClientRect value);
+  external factory IClientRect();
+}
+
+@JS()
+@anonymous
+class IClipboard {
+  external Clipboard get prototype;
+  external set prototype(Clipboard value);
+  external factory IClipboard();
+}
+
+@JS()
+@anonymous
+class IClipboardEvent {
+  external ClipboardEvent get prototype;
+  external set prototype(ClipboardEvent value);
+  external factory IClipboardEvent({String type, ClipboardEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IClipboardItem {
+  external ClipboardItem get prototype;
+  external set prototype(ClipboardItem value);
+  external factory IClipboardItem({Record<String, ClipboardItemData> items, ClipboardItemOptions options});
+}
+
+@JS()
+@anonymous
+class ICloseEvent {
+  external CloseEvent get prototype;
+  external set prototype(CloseEvent value);
+  external factory ICloseEvent({String type, CloseEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IComment {
+  external Comment get prototype;
+  external set prototype(Comment value);
+  external factory IComment({String data});
+}
+
+@JS()
+@anonymous
+class ICompileError {
+  external CompileError get prototype;
+  external set prototype(CompileError value);
+  external factory ICompileError();
+}
+
+@JS()
+@anonymous
+class ICompositionEvent {
+  external CompositionEvent get prototype;
+  external set prototype(CompositionEvent value);
+  external factory ICompositionEvent({String type, CompositionEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IConstantSourceNode {
+  external ConstantSourceNode get prototype;
+  external set prototype(ConstantSourceNode value);
+  external factory IConstantSourceNode({BaseAudioContext context, ConstantSourceOptions options});
+}
+
+@JS()
+@anonymous
+class IConvolverNode {
+  external ConvolverNode get prototype;
+  external set prototype(ConvolverNode value);
+  external factory IConvolverNode({BaseAudioContext context, ConvolverOptions options});
+}
+
+@JS()
+@anonymous
+class ICountQueuingStrategy {
+  external CountQueuingStrategy get prototype;
+  external set prototype(CountQueuingStrategy value);
+  external factory ICountQueuingStrategy({QueuingStrategyInit init});
+}
+
+@JS()
+@anonymous
+class ICredential {
+  external Credential get prototype;
+  external set prototype(Credential value);
+  external factory ICredential();
+}
+
+@JS()
+@anonymous
+class ICredentialsContainer {
+  external CredentialsContainer get prototype;
+  external set prototype(CredentialsContainer value);
+  external factory ICredentialsContainer();
+}
+
+@JS()
+@anonymous
+class ICrypto {
+  external Crypto get prototype;
+  external set prototype(Crypto value);
+  external factory ICrypto();
+}
+
+@JS()
+@anonymous
+class ICryptoKey {
+  external CryptoKey get prototype;
+  external set prototype(CryptoKey value);
+  external factory ICryptoKey();
+}
+
+@JS()
+@anonymous
+class ICustomElementRegistry {
+  external CustomElementRegistry get prototype;
+  external set prototype(CustomElementRegistry value);
+  external factory ICustomElementRegistry();
+}
+
+@JS()
+@anonymous
+class ICustomEvent {
+  external CustomEvent get prototype;
+  external set prototype(CustomEvent value);
+  external factory ICustomEvent({String type, CustomEventInit<T> eventInitDict});
 }
 
 @JS()
@@ -24862,10 +24254,2249 @@ class IDOMException {
 
 @JS()
 @anonymous
-class ITreeWalker {
-  external TreeWalker get prototype;
-  external set prototype(TreeWalker value);
-  external factory ITreeWalker();
+class IDOMImplementation {
+  external DOMImplementation get prototype;
+  external set prototype(DOMImplementation value);
+  external factory IDOMImplementation();
+}
+
+@JS()
+@anonymous
+class IDOMMatrix {
+  external DOMMatrix get prototype;
+  external set prototype(DOMMatrix value);
+  external factory IDOMMatrix({dynamic init});
+  external DOMMatrix fromFloat32Array(Float32Array array32);
+  external DOMMatrix fromFloat64Array(Float64Array array64);
+  external DOMMatrix fromMatrix(DOMMatrixInit other);
+}
+
+@JS()
+@anonymous
+class IDOMMatrixReadOnly {
+  external DOMMatrixReadOnly get prototype;
+  external set prototype(DOMMatrixReadOnly value);
+  external factory IDOMMatrixReadOnly({dynamic init});
+  external DOMMatrixReadOnly fromFloat32Array(Float32Array array32);
+  external DOMMatrixReadOnly fromFloat64Array(Float64Array array64);
+  external DOMMatrixReadOnly fromMatrix(DOMMatrixInit other);
+  external String toString();
+}
+
+@JS()
+@anonymous
+class IDOMParser {
+  external DOMParser get prototype;
+  external set prototype(DOMParser value);
+  external factory IDOMParser();
+}
+
+@JS()
+@anonymous
+class IDOMPoint {
+  external DOMPoint get prototype;
+  external set prototype(DOMPoint value);
+  external factory IDOMPoint({num x, num y, num z, num w});
+  external DOMPoint fromPoint(DOMPointInit other);
+}
+
+@JS()
+@anonymous
+class IDOMPointReadOnly {
+  external DOMPointReadOnly get prototype;
+  external set prototype(DOMPointReadOnly value);
+  external factory IDOMPointReadOnly({num x, num y, num z, num w});
+  external DOMPointReadOnly fromPoint(DOMPointInit other);
+}
+
+@JS()
+@anonymous
+class IDOMQuad {
+  external DOMQuad get prototype;
+  external set prototype(DOMQuad value);
+  external factory IDOMQuad({DOMPointInit p1, DOMPointInit p2, DOMPointInit p3, DOMPointInit p4});
+  external DOMQuad fromQuad(DOMQuadInit other);
+  external DOMQuad fromRect(DOMRectInit other);
+}
+
+@JS()
+@anonymous
+class IDOMRect {
+  external DOMRect get prototype;
+  external set prototype(DOMRect value);
+  external factory IDOMRect({num x, num y, num width, num height});
+  external DOMRect fromRect(DOMRectInit other);
+}
+
+@JS()
+@anonymous
+class IDOMRectList {
+  external DOMRectList get prototype;
+  external set prototype(DOMRectList value);
+  external factory IDOMRectList();
+}
+
+@JS()
+@anonymous
+class IDOMRectReadOnly {
+  external DOMRectReadOnly get prototype;
+  external set prototype(DOMRectReadOnly value);
+  external factory IDOMRectReadOnly({num x, num y, num width, num height});
+  external DOMRectReadOnly fromRect(DOMRectInit other);
+}
+
+@JS()
+@anonymous
+class IDOMStringList {
+  external DOMStringList get prototype;
+  external set prototype(DOMStringList value);
+  external factory IDOMStringList();
+}
+
+@JS()
+@anonymous
+class IDOMStringMap {
+  external DOMStringMap get prototype;
+  external set prototype(DOMStringMap value);
+  external factory IDOMStringMap();
+}
+
+@JS()
+@anonymous
+class IDOMTokenList {
+  external DOMTokenList get prototype;
+  external set prototype(DOMTokenList value);
+  external factory IDOMTokenList();
+}
+
+@JS()
+@anonymous
+class IDataTransfer {
+  external DataTransfer get prototype;
+  external set prototype(DataTransfer value);
+  external factory IDataTransfer();
+}
+
+@JS()
+@anonymous
+class IDataTransferItem {
+  external DataTransferItem get prototype;
+  external set prototype(DataTransferItem value);
+  external factory IDataTransferItem();
+}
+
+@JS()
+@anonymous
+class IDataTransferItemList {
+  external DataTransferItemList get prototype;
+  external set prototype(DataTransferItemList value);
+  external factory IDataTransferItemList();
+}
+
+@JS()
+@anonymous
+class IDelayNode {
+  external DelayNode get prototype;
+  external set prototype(DelayNode value);
+  external factory IDelayNode({BaseAudioContext context, DelayOptions options});
+}
+
+@JS()
+@anonymous
+class IDeviceMotionEvent {
+  external DeviceMotionEvent get prototype;
+  external set prototype(DeviceMotionEvent value);
+  external factory IDeviceMotionEvent({String type, DeviceMotionEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IDeviceOrientationEvent {
+  external DeviceOrientationEvent get prototype;
+  external set prototype(DeviceOrientationEvent value);
+  external factory IDeviceOrientationEvent({String type, DeviceOrientationEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IDocument {
+  external Document get prototype;
+  external set prototype(Document value);
+  external factory IDocument();
+}
+
+@JS()
+@anonymous
+class IDocumentFragment {
+  external DocumentFragment get prototype;
+  external set prototype(DocumentFragment value);
+  external factory IDocumentFragment();
+}
+
+@JS()
+@anonymous
+class IDocumentTimeline {
+  external DocumentTimeline get prototype;
+  external set prototype(DocumentTimeline value);
+  external factory IDocumentTimeline({DocumentTimelineOptions options});
+}
+
+@JS()
+@anonymous
+class IDocumentType {
+  external DocumentType get prototype;
+  external set prototype(DocumentType value);
+  external factory IDocumentType();
+}
+
+@JS()
+@anonymous
+class IDragEvent {
+  external DragEvent get prototype;
+  external set prototype(DragEvent value);
+  external factory IDragEvent({String type, DragEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IDynamicsCompressorNode {
+  external DynamicsCompressorNode get prototype;
+  external set prototype(DynamicsCompressorNode value);
+  external factory IDynamicsCompressorNode({BaseAudioContext context, DynamicsCompressorOptions options});
+}
+
+@JS()
+@anonymous
+class IElement {
+  external Element get prototype;
+  external set prototype(Element value);
+  external factory IElement();
+}
+
+@JS()
+@anonymous
+class IErrorEvent {
+  external ErrorEvent get prototype;
+  external set prototype(ErrorEvent value);
+  external factory IErrorEvent({String type, ErrorEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IEvent {
+  external Event get prototype;
+  external set prototype(Event value);
+  external factory IEvent({String type, EventInit eventInitDict});
+  external num get AT_TARGET;
+  external num get BUBBLING_PHASE;
+  external num get CAPTURING_PHASE;
+  external num get NONE;
+}
+
+@JS()
+@anonymous
+class IEventSource {
+  external EventSource get prototype;
+  external set prototype(EventSource value);
+  external factory IEventSource({dynamic url, EventSourceInit eventSourceInitDict});
+  external num get CLOSED;
+  external num get CONNECTING;
+  external num get OPEN;
+}
+
+@JS()
+@anonymous
+class IEventTarget {
+  external EventTarget get prototype;
+  external set prototype(EventTarget value);
+  external factory IEventTarget();
+}
+
+@JS()
+@anonymous
+class IExternal {
+  external External get prototype;
+  external set prototype(External value);
+  external factory IExternal();
+}
+
+@JS()
+@anonymous
+class IFile {
+  external File get prototype;
+  external set prototype(File value);
+  external factory IFile({List<BlobPart> fileBits, String fileName, FilePropertyBag options});
+}
+
+@JS()
+@anonymous
+class IFileList {
+  external FileList get prototype;
+  external set prototype(FileList value);
+  external factory IFileList();
+}
+
+@JS()
+@anonymous
+class IFileReader {
+  external FileReader get prototype;
+  external set prototype(FileReader value);
+  external factory IFileReader();
+  external num get DONE;
+  external num get EMPTY;
+  external num get LOADING;
+}
+
+@JS()
+@anonymous
+class IFileSystem {
+  external FileSystem get prototype;
+  external set prototype(FileSystem value);
+  external factory IFileSystem();
+}
+
+@JS()
+@anonymous
+class IFileSystemDirectoryEntry {
+  external FileSystemDirectoryEntry get prototype;
+  external set prototype(FileSystemDirectoryEntry value);
+  external factory IFileSystemDirectoryEntry();
+}
+
+@JS()
+@anonymous
+class IFileSystemDirectoryReader {
+  external FileSystemDirectoryReader get prototype;
+  external set prototype(FileSystemDirectoryReader value);
+  external factory IFileSystemDirectoryReader();
+}
+
+@JS()
+@anonymous
+class IFileSystemEntry {
+  external FileSystemEntry get prototype;
+  external set prototype(FileSystemEntry value);
+  external factory IFileSystemEntry();
+}
+
+@JS()
+@anonymous
+class IFileSystemFileEntry {
+  external FileSystemFileEntry get prototype;
+  external set prototype(FileSystemFileEntry value);
+  external factory IFileSystemFileEntry();
+}
+
+@JS()
+@anonymous
+class IFocusEvent {
+  external FocusEvent get prototype;
+  external set prototype(FocusEvent value);
+  external factory IFocusEvent({String type, FocusEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IFontFace {
+  external FontFace get prototype;
+  external set prototype(FontFace value);
+  external factory IFontFace({String family, dynamic source, FontFaceDescriptors descriptors});
+}
+
+@JS()
+@anonymous
+class IFontFaceSet {
+  external FontFaceSet get prototype;
+  external set prototype(FontFaceSet value);
+  external factory IFontFaceSet({List<FontFace> initialFaces});
+}
+
+@JS()
+@anonymous
+class IFontFaceSetLoadEvent {
+  external FontFaceSetLoadEvent get prototype;
+  external set prototype(FontFaceSetLoadEvent value);
+  external factory IFontFaceSetLoadEvent({String type, FontFaceSetLoadEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IFormData {
+  external FormData get prototype;
+  external set prototype(FormData value);
+  external factory IFormData({HTMLFormElement form});
+}
+
+@JS()
+@anonymous
+class IFormDataEvent {
+  external FormDataEvent get prototype;
+  external set prototype(FormDataEvent value);
+  external factory IFormDataEvent({String type, FormDataEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IGainNode {
+  external GainNode get prototype;
+  external set prototype(GainNode value);
+  external factory IGainNode({BaseAudioContext context, GainOptions options});
+}
+
+@JS()
+@anonymous
+class IGamepad {
+  external Gamepad get prototype;
+  external set prototype(Gamepad value);
+  external factory IGamepad();
+}
+
+@JS()
+@anonymous
+class IGamepadButton {
+  external GamepadButton get prototype;
+  external set prototype(GamepadButton value);
+  external factory IGamepadButton();
+}
+
+@JS()
+@anonymous
+class IGamepadEvent {
+  external GamepadEvent get prototype;
+  external set prototype(GamepadEvent value);
+  external factory IGamepadEvent({String type, GamepadEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IGamepadHapticActuator {
+  external GamepadHapticActuator get prototype;
+  external set prototype(GamepadHapticActuator value);
+  external factory IGamepadHapticActuator();
+}
+
+@JS()
+@anonymous
+class IGeolocation {
+  external Geolocation get prototype;
+  external set prototype(Geolocation value);
+  external factory IGeolocation();
+}
+
+@JS()
+@anonymous
+class IGeolocationCoordinates {
+  external GeolocationCoordinates get prototype;
+  external set prototype(GeolocationCoordinates value);
+  external factory IGeolocationCoordinates();
+}
+
+@JS()
+@anonymous
+class IGeolocationPosition {
+  external GeolocationPosition get prototype;
+  external set prototype(GeolocationPosition value);
+  external factory IGeolocationPosition();
+}
+
+@JS()
+@anonymous
+class IGeolocationPositionError {
+  external GeolocationPositionError get prototype;
+  external set prototype(GeolocationPositionError value);
+  external factory IGeolocationPositionError();
+  external num get PERMISSION_DENIED;
+  external num get POSITION_UNAVAILABLE;
+  external num get TIMEOUT;
+}
+
+@JS()
+@anonymous
+class IGlobal {
+  external Global get prototype;
+  external set prototype(Global value);
+  external factory IGlobal({GlobalDescriptor descriptor, dynamic v});
+}
+
+@JS()
+@anonymous
+class IHTMLAllCollection {
+  external HTMLAllCollection get prototype;
+  external set prototype(HTMLAllCollection value);
+  external factory IHTMLAllCollection();
+}
+
+@JS()
+@anonymous
+class IHTMLAnchorElement {
+  external HTMLAnchorElement get prototype;
+  external set prototype(HTMLAnchorElement value);
+  external factory IHTMLAnchorElement();
+}
+
+@JS()
+@anonymous
+class IHTMLAreaElement {
+  external HTMLAreaElement get prototype;
+  external set prototype(HTMLAreaElement value);
+  external factory IHTMLAreaElement();
+}
+
+@JS()
+@anonymous
+class IHTMLAudioElement {
+  external HTMLAudioElement get prototype;
+  external set prototype(HTMLAudioElement value);
+  external factory IHTMLAudioElement();
+}
+
+@JS()
+@anonymous
+class IHTMLBRElement {
+  external HTMLBRElement get prototype;
+  external set prototype(HTMLBRElement value);
+  external factory IHTMLBRElement();
+}
+
+@JS()
+@anonymous
+class IHTMLBaseElement {
+  external HTMLBaseElement get prototype;
+  external set prototype(HTMLBaseElement value);
+  external factory IHTMLBaseElement();
+}
+
+@JS()
+@anonymous
+class IHTMLBodyElement {
+  external HTMLBodyElement get prototype;
+  external set prototype(HTMLBodyElement value);
+  external factory IHTMLBodyElement();
+}
+
+@JS()
+@anonymous
+class IHTMLButtonElement {
+  external HTMLButtonElement get prototype;
+  external set prototype(HTMLButtonElement value);
+  external factory IHTMLButtonElement();
+}
+
+@JS()
+@anonymous
+class IHTMLCanvasElement {
+  external HTMLCanvasElement get prototype;
+  external set prototype(HTMLCanvasElement value);
+  external factory IHTMLCanvasElement();
+}
+
+@JS()
+@anonymous
+class IHTMLCollection {
+  external HTMLCollection get prototype;
+  external set prototype(HTMLCollection value);
+  external factory IHTMLCollection();
+}
+
+@JS()
+@anonymous
+class IHTMLDListElement {
+  external HTMLDListElement get prototype;
+  external set prototype(HTMLDListElement value);
+  external factory IHTMLDListElement();
+}
+
+@JS()
+@anonymous
+class IHTMLDataElement {
+  external HTMLDataElement get prototype;
+  external set prototype(HTMLDataElement value);
+  external factory IHTMLDataElement();
+}
+
+@JS()
+@anonymous
+class IHTMLDataListElement {
+  external HTMLDataListElement get prototype;
+  external set prototype(HTMLDataListElement value);
+  external factory IHTMLDataListElement();
+}
+
+@JS()
+@anonymous
+class IHTMLDetailsElement {
+  external HTMLDetailsElement get prototype;
+  external set prototype(HTMLDetailsElement value);
+  external factory IHTMLDetailsElement();
+}
+
+@JS()
+@anonymous
+class IHTMLDirectoryElement {
+  external HTMLDirectoryElement get prototype;
+  external set prototype(HTMLDirectoryElement value);
+  external factory IHTMLDirectoryElement();
+}
+
+@JS()
+@anonymous
+class IHTMLDivElement {
+  external HTMLDivElement get prototype;
+  external set prototype(HTMLDivElement value);
+  external factory IHTMLDivElement();
+}
+
+@JS()
+@anonymous
+class IHTMLElement {
+  external HTMLElement get prototype;
+  external set prototype(HTMLElement value);
+  external factory IHTMLElement();
+}
+
+@JS()
+@anonymous
+class IHTMLEmbedElement {
+  external HTMLEmbedElement get prototype;
+  external set prototype(HTMLEmbedElement value);
+  external factory IHTMLEmbedElement();
+}
+
+@JS()
+@anonymous
+class IHTMLFieldSetElement {
+  external HTMLFieldSetElement get prototype;
+  external set prototype(HTMLFieldSetElement value);
+  external factory IHTMLFieldSetElement();
+}
+
+@JS()
+@anonymous
+class IHTMLFontElement {
+  external HTMLFontElement get prototype;
+  external set prototype(HTMLFontElement value);
+  external factory IHTMLFontElement();
+}
+
+@JS()
+@anonymous
+class IHTMLFormControlsCollection {
+  external HTMLFormControlsCollection get prototype;
+  external set prototype(HTMLFormControlsCollection value);
+  external factory IHTMLFormControlsCollection();
+}
+
+@JS()
+@anonymous
+class IHTMLFormElement {
+  external HTMLFormElement get prototype;
+  external set prototype(HTMLFormElement value);
+  external factory IHTMLFormElement();
+}
+
+@JS()
+@anonymous
+class IHTMLFrameElement {
+  external HTMLFrameElement get prototype;
+  external set prototype(HTMLFrameElement value);
+  external factory IHTMLFrameElement();
+}
+
+@JS()
+@anonymous
+class IHTMLFrameSetElement {
+  external HTMLFrameSetElement get prototype;
+  external set prototype(HTMLFrameSetElement value);
+  external factory IHTMLFrameSetElement();
+}
+
+@JS()
+@anonymous
+class IHTMLHRElement {
+  external HTMLHRElement get prototype;
+  external set prototype(HTMLHRElement value);
+  external factory IHTMLHRElement();
+}
+
+@JS()
+@anonymous
+class IHTMLHeadElement {
+  external HTMLHeadElement get prototype;
+  external set prototype(HTMLHeadElement value);
+  external factory IHTMLHeadElement();
+}
+
+@JS()
+@anonymous
+class IHTMLHeadingElement {
+  external HTMLHeadingElement get prototype;
+  external set prototype(HTMLHeadingElement value);
+  external factory IHTMLHeadingElement();
+}
+
+@JS()
+@anonymous
+class IHTMLHtmlElement {
+  external HTMLHtmlElement get prototype;
+  external set prototype(HTMLHtmlElement value);
+  external factory IHTMLHtmlElement();
+}
+
+@JS()
+@anonymous
+class IHTMLIFrameElement {
+  external HTMLIFrameElement get prototype;
+  external set prototype(HTMLIFrameElement value);
+  external factory IHTMLIFrameElement();
+}
+
+@JS()
+@anonymous
+class IHTMLImageElement {
+  external HTMLImageElement get prototype;
+  external set prototype(HTMLImageElement value);
+  external factory IHTMLImageElement();
+}
+
+@JS()
+@anonymous
+class IHTMLInputElement {
+  external HTMLInputElement get prototype;
+  external set prototype(HTMLInputElement value);
+  external factory IHTMLInputElement();
+}
+
+@JS()
+@anonymous
+class IHTMLLIElement {
+  external HTMLLIElement get prototype;
+  external set prototype(HTMLLIElement value);
+  external factory IHTMLLIElement();
+}
+
+@JS()
+@anonymous
+class IHTMLLabelElement {
+  external HTMLLabelElement get prototype;
+  external set prototype(HTMLLabelElement value);
+  external factory IHTMLLabelElement();
+}
+
+@JS()
+@anonymous
+class IHTMLLegendElement {
+  external HTMLLegendElement get prototype;
+  external set prototype(HTMLLegendElement value);
+  external factory IHTMLLegendElement();
+}
+
+@JS()
+@anonymous
+class IHTMLLinkElement {
+  external HTMLLinkElement get prototype;
+  external set prototype(HTMLLinkElement value);
+  external factory IHTMLLinkElement();
+}
+
+@JS()
+@anonymous
+class IHTMLMapElement {
+  external HTMLMapElement get prototype;
+  external set prototype(HTMLMapElement value);
+  external factory IHTMLMapElement();
+}
+
+@JS()
+@anonymous
+class IHTMLMarqueeElement {
+  external HTMLMarqueeElement get prototype;
+  external set prototype(HTMLMarqueeElement value);
+  external factory IHTMLMarqueeElement();
+}
+
+@JS()
+@anonymous
+class IHTMLMediaElement {
+  external HTMLMediaElement get prototype;
+  external set prototype(HTMLMediaElement value);
+  external factory IHTMLMediaElement();
+  external num get HAVE_CURRENT_DATA;
+  external num get HAVE_ENOUGH_DATA;
+  external num get HAVE_FUTURE_DATA;
+  external num get HAVE_METADATA;
+  external num get HAVE_NOTHING;
+  external num get NETWORK_EMPTY;
+  external num get NETWORK_IDLE;
+  external num get NETWORK_LOADING;
+  external num get NETWORK_NO_SOURCE;
+}
+
+@JS()
+@anonymous
+class IHTMLMenuElement {
+  external HTMLMenuElement get prototype;
+  external set prototype(HTMLMenuElement value);
+  external factory IHTMLMenuElement();
+}
+
+@JS()
+@anonymous
+class IHTMLMetaElement {
+  external HTMLMetaElement get prototype;
+  external set prototype(HTMLMetaElement value);
+  external factory IHTMLMetaElement();
+}
+
+@JS()
+@anonymous
+class IHTMLMeterElement {
+  external HTMLMeterElement get prototype;
+  external set prototype(HTMLMeterElement value);
+  external factory IHTMLMeterElement();
+}
+
+@JS()
+@anonymous
+class IHTMLModElement {
+  external HTMLModElement get prototype;
+  external set prototype(HTMLModElement value);
+  external factory IHTMLModElement();
+}
+
+@JS()
+@anonymous
+class IHTMLOListElement {
+  external HTMLOListElement get prototype;
+  external set prototype(HTMLOListElement value);
+  external factory IHTMLOListElement();
+}
+
+@JS()
+@anonymous
+class IHTMLObjectElement {
+  external HTMLObjectElement get prototype;
+  external set prototype(HTMLObjectElement value);
+  external factory IHTMLObjectElement();
+}
+
+@JS()
+@anonymous
+class IHTMLOptGroupElement {
+  external HTMLOptGroupElement get prototype;
+  external set prototype(HTMLOptGroupElement value);
+  external factory IHTMLOptGroupElement();
+}
+
+@JS()
+@anonymous
+class IHTMLOptionElement {
+  external HTMLOptionElement get prototype;
+  external set prototype(HTMLOptionElement value);
+  external factory IHTMLOptionElement();
+}
+
+@JS()
+@anonymous
+class IHTMLOptionsCollection {
+  external HTMLOptionsCollection get prototype;
+  external set prototype(HTMLOptionsCollection value);
+  external factory IHTMLOptionsCollection();
+}
+
+@JS()
+@anonymous
+class IHTMLOutputElement {
+  external HTMLOutputElement get prototype;
+  external set prototype(HTMLOutputElement value);
+  external factory IHTMLOutputElement();
+}
+
+@JS()
+@anonymous
+class IHTMLParagraphElement {
+  external HTMLParagraphElement get prototype;
+  external set prototype(HTMLParagraphElement value);
+  external factory IHTMLParagraphElement();
+}
+
+@JS()
+@anonymous
+class IHTMLParamElement {
+  external HTMLParamElement get prototype;
+  external set prototype(HTMLParamElement value);
+  external factory IHTMLParamElement();
+}
+
+@JS()
+@anonymous
+class IHTMLPictureElement {
+  external HTMLPictureElement get prototype;
+  external set prototype(HTMLPictureElement value);
+  external factory IHTMLPictureElement();
+}
+
+@JS()
+@anonymous
+class IHTMLPreElement {
+  external HTMLPreElement get prototype;
+  external set prototype(HTMLPreElement value);
+  external factory IHTMLPreElement();
+}
+
+@JS()
+@anonymous
+class IHTMLProgressElement {
+  external HTMLProgressElement get prototype;
+  external set prototype(HTMLProgressElement value);
+  external factory IHTMLProgressElement();
+}
+
+@JS()
+@anonymous
+class IHTMLQuoteElement {
+  external HTMLQuoteElement get prototype;
+  external set prototype(HTMLQuoteElement value);
+  external factory IHTMLQuoteElement();
+}
+
+@JS()
+@anonymous
+class IHTMLScriptElement {
+  external HTMLScriptElement get prototype;
+  external set prototype(HTMLScriptElement value);
+  external factory IHTMLScriptElement();
+}
+
+@JS()
+@anonymous
+class IHTMLSelectElement {
+  external HTMLSelectElement get prototype;
+  external set prototype(HTMLSelectElement value);
+  external factory IHTMLSelectElement();
+}
+
+@JS()
+@anonymous
+class IHTMLSlotElement {
+  external HTMLSlotElement get prototype;
+  external set prototype(HTMLSlotElement value);
+  external factory IHTMLSlotElement();
+}
+
+@JS()
+@anonymous
+class IHTMLSourceElement {
+  external HTMLSourceElement get prototype;
+  external set prototype(HTMLSourceElement value);
+  external factory IHTMLSourceElement();
+}
+
+@JS()
+@anonymous
+class IHTMLSpanElement {
+  external HTMLSpanElement get prototype;
+  external set prototype(HTMLSpanElement value);
+  external factory IHTMLSpanElement();
+}
+
+@JS()
+@anonymous
+class IHTMLStyleElement {
+  external HTMLStyleElement get prototype;
+  external set prototype(HTMLStyleElement value);
+  external factory IHTMLStyleElement();
+}
+
+@JS()
+@anonymous
+class IHTMLTableCaptionElement {
+  external HTMLTableCaptionElement get prototype;
+  external set prototype(HTMLTableCaptionElement value);
+  external factory IHTMLTableCaptionElement();
+}
+
+@JS()
+@anonymous
+class IHTMLTableCellElement {
+  external HTMLTableCellElement get prototype;
+  external set prototype(HTMLTableCellElement value);
+  external factory IHTMLTableCellElement();
+}
+
+@JS()
+@anonymous
+class IHTMLTableColElement {
+  external HTMLTableColElement get prototype;
+  external set prototype(HTMLTableColElement value);
+  external factory IHTMLTableColElement();
+}
+
+@JS()
+@anonymous
+class IHTMLTableElement {
+  external HTMLTableElement get prototype;
+  external set prototype(HTMLTableElement value);
+  external factory IHTMLTableElement();
+}
+
+@JS()
+@anonymous
+class IHTMLTableRowElement {
+  external HTMLTableRowElement get prototype;
+  external set prototype(HTMLTableRowElement value);
+  external factory IHTMLTableRowElement();
+}
+
+@JS()
+@anonymous
+class IHTMLTableSectionElement {
+  external HTMLTableSectionElement get prototype;
+  external set prototype(HTMLTableSectionElement value);
+  external factory IHTMLTableSectionElement();
+}
+
+@JS()
+@anonymous
+class IHTMLTemplateElement {
+  external HTMLTemplateElement get prototype;
+  external set prototype(HTMLTemplateElement value);
+  external factory IHTMLTemplateElement();
+}
+
+@JS()
+@anonymous
+class IHTMLTextAreaElement {
+  external HTMLTextAreaElement get prototype;
+  external set prototype(HTMLTextAreaElement value);
+  external factory IHTMLTextAreaElement();
+}
+
+@JS()
+@anonymous
+class IHTMLTimeElement {
+  external HTMLTimeElement get prototype;
+  external set prototype(HTMLTimeElement value);
+  external factory IHTMLTimeElement();
+}
+
+@JS()
+@anonymous
+class IHTMLTitleElement {
+  external HTMLTitleElement get prototype;
+  external set prototype(HTMLTitleElement value);
+  external factory IHTMLTitleElement();
+}
+
+@JS()
+@anonymous
+class IHTMLTrackElement {
+  external HTMLTrackElement get prototype;
+  external set prototype(HTMLTrackElement value);
+  external factory IHTMLTrackElement();
+  external num get ERROR;
+  external num get LOADED;
+  external num get LOADING;
+  external num get NONE;
+}
+
+@JS()
+@anonymous
+class IHTMLUListElement {
+  external HTMLUListElement get prototype;
+  external set prototype(HTMLUListElement value);
+  external factory IHTMLUListElement();
+}
+
+@JS()
+@anonymous
+class IHTMLUnknownElement {
+  external HTMLUnknownElement get prototype;
+  external set prototype(HTMLUnknownElement value);
+  external factory IHTMLUnknownElement();
+}
+
+@JS()
+@anonymous
+class IHTMLVideoElement {
+  external HTMLVideoElement get prototype;
+  external set prototype(HTMLVideoElement value);
+  external factory IHTMLVideoElement();
+}
+
+@JS()
+@anonymous
+class IHashChangeEvent {
+  external HashChangeEvent get prototype;
+  external set prototype(HashChangeEvent value);
+  external factory IHashChangeEvent({String type, HashChangeEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IHeaders {
+  external Headers get prototype;
+  external set prototype(Headers value);
+  external factory IHeaders({HeadersInit init});
+}
+
+@JS()
+@anonymous
+class IHistory {
+  external History get prototype;
+  external set prototype(History value);
+  external factory IHistory();
+}
+
+@JS()
+@anonymous
+class IIDBCursor {
+  external IDBCursor get prototype;
+  external set prototype(IDBCursor value);
+  external factory IIDBCursor();
+}
+
+@JS()
+@anonymous
+class IIDBCursorWithValue {
+  external IDBCursorWithValue get prototype;
+  external set prototype(IDBCursorWithValue value);
+  external factory IIDBCursorWithValue();
+}
+
+@JS()
+@anonymous
+class IIDBDatabase {
+  external IDBDatabase get prototype;
+  external set prototype(IDBDatabase value);
+  external factory IIDBDatabase();
+}
+
+@JS()
+@anonymous
+class IIDBFactory {
+  external IDBFactory get prototype;
+  external set prototype(IDBFactory value);
+  external factory IIDBFactory();
+}
+
+@JS()
+@anonymous
+class IIDBIndex {
+  external IDBIndex get prototype;
+  external set prototype(IDBIndex value);
+  external factory IIDBIndex();
+}
+
+@JS()
+@anonymous
+class IIDBKeyRange {
+  external IDBKeyRange get prototype;
+  external set prototype(IDBKeyRange value);
+  external factory IIDBKeyRange();
+  external IDBKeyRange bound(dynamic lower, dynamic upper, bool lowerOpen, bool upperOpen);
+  external IDBKeyRange lowerBound(dynamic lower, bool open);
+  external IDBKeyRange only(dynamic value);
+  external IDBKeyRange upperBound(dynamic upper, bool open);
+}
+
+@JS()
+@anonymous
+class IIDBObjectStore {
+  external IDBObjectStore get prototype;
+  external set prototype(IDBObjectStore value);
+  external factory IIDBObjectStore();
+}
+
+@JS()
+@anonymous
+class IIDBOpenDBRequest {
+  external IDBOpenDBRequest get prototype;
+  external set prototype(IDBOpenDBRequest value);
+  external factory IIDBOpenDBRequest();
+}
+
+@JS()
+@anonymous
+class IIDBRequest {
+  external IDBRequest get prototype;
+  external set prototype(IDBRequest value);
+  external factory IIDBRequest();
+}
+
+@JS()
+@anonymous
+class IIDBTransaction {
+  external IDBTransaction get prototype;
+  external set prototype(IDBTransaction value);
+  external factory IIDBTransaction();
+}
+
+@JS()
+@anonymous
+class IIDBVersionChangeEvent {
+  external IDBVersionChangeEvent get prototype;
+  external set prototype(IDBVersionChangeEvent value);
+  external factory IIDBVersionChangeEvent({String type, IDBVersionChangeEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IIIRFilterNode {
+  external IIRFilterNode get prototype;
+  external set prototype(IIRFilterNode value);
+  external factory IIIRFilterNode({BaseAudioContext context, IIRFilterOptions options});
+}
+
+@JS()
+@anonymous
+class IIdleDeadline {
+  external IdleDeadline get prototype;
+  external set prototype(IdleDeadline value);
+  external factory IIdleDeadline();
+}
+
+@JS()
+@anonymous
+class IImage {
+  external factory IImage({num width, num height});
+}
+
+@JS()
+@anonymous
+class IImageBitmap {
+  external ImageBitmap get prototype;
+  external set prototype(ImageBitmap value);
+  external factory IImageBitmap();
+}
+
+@JS()
+@anonymous
+class IImageBitmapRenderingContext {
+  external ImageBitmapRenderingContext get prototype;
+  external set prototype(ImageBitmapRenderingContext value);
+  external factory IImageBitmapRenderingContext();
+}
+
+@JS()
+@anonymous
+class IImageData {
+  external ImageData get prototype;
+  external set prototype(ImageData value);
+  external factory IImageData({num sw, num sh, ImageDataSettings settings});
+}
+
+@JS()
+@anonymous
+class IInputEvent {
+  external InputEvent get prototype;
+  external set prototype(InputEvent value);
+  external factory IInputEvent({String type, InputEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IInstance {
+  external Instance get prototype;
+  external set prototype(Instance value);
+  external factory IInstance({Module module, Imports importObject});
+}
+
+@JS()
+@anonymous
+class IIntersectionObserver {
+  external IntersectionObserver get prototype;
+  external set prototype(IntersectionObserver value);
+  external factory IIntersectionObserver({IntersectionObserverCallback callback, IntersectionObserverInit options});
+}
+
+@JS()
+@anonymous
+class IIntersectionObserverEntry {
+  external IntersectionObserverEntry get prototype;
+  external set prototype(IntersectionObserverEntry value);
+  external factory IIntersectionObserverEntry({IntersectionObserverEntryInit intersectionObserverEntryInit});
+}
+
+@JS()
+@anonymous
+class IKeyboardEvent {
+  external KeyboardEvent get prototype;
+  external set prototype(KeyboardEvent value);
+  external factory IKeyboardEvent({String type, KeyboardEventInit eventInitDict});
+  external num get DOM_KEY_LOCATION_LEFT;
+  external num get DOM_KEY_LOCATION_NUMPAD;
+  external num get DOM_KEY_LOCATION_RIGHT;
+  external num get DOM_KEY_LOCATION_STANDARD;
+}
+
+@JS()
+@anonymous
+class IKeyframeEffect {
+  external KeyframeEffect get prototype;
+  external set prototype(KeyframeEffect value);
+  external factory IKeyframeEffect({Element? target, dynamic keyframes, dynamic options});
+}
+
+@JS()
+@anonymous
+class ILinkError {
+  external LinkError get prototype;
+  external set prototype(LinkError value);
+  external factory ILinkError();
+}
+
+@JS()
+@anonymous
+class ILocation {
+  external Location get prototype;
+  external set prototype(Location value);
+  external factory ILocation();
+}
+
+@JS()
+@anonymous
+class IMathMLElement {
+  external MathMLElement get prototype;
+  external set prototype(MathMLElement value);
+  external factory IMathMLElement();
+}
+
+@JS()
+@anonymous
+class IMediaCapabilities {
+  external MediaCapabilities get prototype;
+  external set prototype(MediaCapabilities value);
+  external factory IMediaCapabilities();
+}
+
+@JS()
+@anonymous
+class IMediaDeviceInfo {
+  external MediaDeviceInfo get prototype;
+  external set prototype(MediaDeviceInfo value);
+  external factory IMediaDeviceInfo();
+}
+
+@JS()
+@anonymous
+class IMediaDevices {
+  external MediaDevices get prototype;
+  external set prototype(MediaDevices value);
+  external factory IMediaDevices();
+}
+
+@JS()
+@anonymous
+class IMediaElementAudioSourceNode {
+  external MediaElementAudioSourceNode get prototype;
+  external set prototype(MediaElementAudioSourceNode value);
+  external factory IMediaElementAudioSourceNode({AudioContext context, MediaElementAudioSourceOptions options});
+}
+
+@JS()
+@anonymous
+class IMediaEncryptedEvent {
+  external MediaEncryptedEvent get prototype;
+  external set prototype(MediaEncryptedEvent value);
+  external factory IMediaEncryptedEvent({String type, MediaEncryptedEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IMediaError {
+  external MediaError get prototype;
+  external set prototype(MediaError value);
+  external factory IMediaError();
+  external num get MEDIA_ERR_ABORTED;
+  external num get MEDIA_ERR_DECODE;
+  external num get MEDIA_ERR_NETWORK;
+  external num get MEDIA_ERR_SRC_NOT_SUPPORTED;
+}
+
+@JS()
+@anonymous
+class IMediaKeyMessageEvent {
+  external MediaKeyMessageEvent get prototype;
+  external set prototype(MediaKeyMessageEvent value);
+  external factory IMediaKeyMessageEvent({String type, MediaKeyMessageEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IMediaKeySession {
+  external MediaKeySession get prototype;
+  external set prototype(MediaKeySession value);
+  external factory IMediaKeySession();
+}
+
+@JS()
+@anonymous
+class IMediaKeyStatusMap {
+  external MediaKeyStatusMap get prototype;
+  external set prototype(MediaKeyStatusMap value);
+  external factory IMediaKeyStatusMap();
+}
+
+@JS()
+@anonymous
+class IMediaKeySystemAccess {
+  external MediaKeySystemAccess get prototype;
+  external set prototype(MediaKeySystemAccess value);
+  external factory IMediaKeySystemAccess();
+}
+
+@JS()
+@anonymous
+class IMediaKeys {
+  external MediaKeys get prototype;
+  external set prototype(MediaKeys value);
+  external factory IMediaKeys();
+}
+
+@JS()
+@anonymous
+class IMediaList {
+  external MediaList get prototype;
+  external set prototype(MediaList value);
+  external factory IMediaList();
+}
+
+@JS()
+@anonymous
+class IMediaMetadata {
+  external MediaMetadata get prototype;
+  external set prototype(MediaMetadata value);
+  external factory IMediaMetadata({MediaMetadataInit init});
+}
+
+@JS()
+@anonymous
+class IMediaQueryList {
+  external MediaQueryList get prototype;
+  external set prototype(MediaQueryList value);
+  external factory IMediaQueryList();
+}
+
+@JS()
+@anonymous
+class IMediaQueryListEvent {
+  external MediaQueryListEvent get prototype;
+  external set prototype(MediaQueryListEvent value);
+  external factory IMediaQueryListEvent({String type, MediaQueryListEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IMediaRecorder {
+  external MediaRecorder get prototype;
+  external set prototype(MediaRecorder value);
+  external factory IMediaRecorder({MediaStream stream, MediaRecorderOptions options});
+  external bool isTypeSupported(String type);
+}
+
+@JS()
+@anonymous
+class IMediaRecorderErrorEvent {
+  external MediaRecorderErrorEvent get prototype;
+  external set prototype(MediaRecorderErrorEvent value);
+  external factory IMediaRecorderErrorEvent({String type, MediaRecorderErrorEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IMediaSession {
+  external MediaSession get prototype;
+  external set prototype(MediaSession value);
+  external factory IMediaSession();
+}
+
+@JS()
+@anonymous
+class IMediaSource {
+  external MediaSource get prototype;
+  external set prototype(MediaSource value);
+  external factory IMediaSource();
+  external bool isTypeSupported(String type);
+}
+
+@JS()
+@anonymous
+class IMediaStream {
+  external MediaStream get prototype;
+  external set prototype(MediaStream value);
+  external factory IMediaStream();
+}
+
+@JS()
+@anonymous
+class IMediaStreamAudioDestinationNode {
+  external MediaStreamAudioDestinationNode get prototype;
+  external set prototype(MediaStreamAudioDestinationNode value);
+  external factory IMediaStreamAudioDestinationNode({AudioContext context, AudioNodeOptions options});
+}
+
+@JS()
+@anonymous
+class IMediaStreamAudioSourceNode {
+  external MediaStreamAudioSourceNode get prototype;
+  external set prototype(MediaStreamAudioSourceNode value);
+  external factory IMediaStreamAudioSourceNode({AudioContext context, MediaStreamAudioSourceOptions options});
+}
+
+@JS()
+@anonymous
+class IMediaStreamTrack {
+  external MediaStreamTrack get prototype;
+  external set prototype(MediaStreamTrack value);
+  external factory IMediaStreamTrack();
+}
+
+@JS()
+@anonymous
+class IMediaStreamTrackEvent {
+  external MediaStreamTrackEvent get prototype;
+  external set prototype(MediaStreamTrackEvent value);
+  external factory IMediaStreamTrackEvent({String type, MediaStreamTrackEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IMemory {
+  external Memory get prototype;
+  external set prototype(Memory value);
+  external factory IMemory({MemoryDescriptor descriptor});
+}
+
+@JS()
+@anonymous
+class IMessageChannel {
+  external MessageChannel get prototype;
+  external set prototype(MessageChannel value);
+  external factory IMessageChannel();
+}
+
+@JS()
+@anonymous
+class IMessageEvent {
+  external MessageEvent get prototype;
+  external set prototype(MessageEvent value);
+  external factory IMessageEvent({String type, MessageEventInit<T> eventInitDict});
+}
+
+@JS()
+@anonymous
+class IMessagePort {
+  external MessagePort get prototype;
+  external set prototype(MessagePort value);
+  external factory IMessagePort();
+}
+
+@JS()
+@anonymous
+class IMimeType {
+  external MimeType get prototype;
+  external set prototype(MimeType value);
+  external factory IMimeType();
+}
+
+@JS()
+@anonymous
+class IMimeTypeArray {
+  external MimeTypeArray get prototype;
+  external set prototype(MimeTypeArray value);
+  external factory IMimeTypeArray();
+}
+
+@JS()
+@anonymous
+class IModule {
+  external Module get prototype;
+  external set prototype(Module value);
+  external factory IModule({BufferSource bytes});
+  external List<ArrayBuffer> customSections(Module moduleObject, String sectionName);
+  external List<ModuleExportDescriptor> exports(Module moduleObject);
+  external List<ModuleImportDescriptor> imports(Module moduleObject);
+}
+
+@JS()
+@anonymous
+class IMouseEvent {
+  external MouseEvent get prototype;
+  external set prototype(MouseEvent value);
+  external factory IMouseEvent({String type, MouseEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IMutationEvent {
+  external MutationEvent get prototype;
+  external set prototype(MutationEvent value);
+  external factory IMutationEvent();
+  external num get ADDITION;
+  external num get MODIFICATION;
+  external num get REMOVAL;
+}
+
+@JS()
+@anonymous
+class IMutationObserver {
+  external MutationObserver get prototype;
+  external set prototype(MutationObserver value);
+  external factory IMutationObserver({MutationCallback callback});
+}
+
+@JS()
+@anonymous
+class IMutationRecord {
+  external MutationRecord get prototype;
+  external set prototype(MutationRecord value);
+  external factory IMutationRecord();
+}
+
+@JS()
+@anonymous
+class INamedNodeMap {
+  external NamedNodeMap get prototype;
+  external set prototype(NamedNodeMap value);
+  external factory INamedNodeMap();
+}
+
+@JS()
+@anonymous
+class INavigator {
+  external Navigator get prototype;
+  external set prototype(Navigator value);
+  external factory INavigator();
+}
+
+@JS()
+@anonymous
+class INetworkInformation {
+  external NetworkInformation get prototype;
+  external set prototype(NetworkInformation value);
+  external factory INetworkInformation();
+}
+
+@JS()
+@anonymous
+class INode {
+  external Node get prototype;
+  external set prototype(Node value);
+  external factory INode();
+  external num get ATTRIBUTE_NODE;
+  external num get CDATA_SECTION_NODE;
+  external num get COMMENT_NODE;
+  external num get DOCUMENT_FRAGMENT_NODE;
+  external num get DOCUMENT_NODE;
+  external num get DOCUMENT_POSITION_CONTAINED_BY;
+  external num get DOCUMENT_POSITION_CONTAINS;
+  external num get DOCUMENT_POSITION_DISCONNECTED;
+  external num get DOCUMENT_POSITION_FOLLOWING;
+  external num get DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC;
+  external num get DOCUMENT_POSITION_PRECEDING;
+  external num get DOCUMENT_TYPE_NODE;
+  external num get ELEMENT_NODE;
+  external num get ENTITY_NODE;
+  external num get ENTITY_REFERENCE_NODE;
+  external num get NOTATION_NODE;
+  external num get PROCESSING_INSTRUCTION_NODE;
+  external num get TEXT_NODE;
+}
+
+@JS()
+@anonymous
+class INodeFilter {
+  external num get FILTER_ACCEPT;
+  external num get FILTER_REJECT;
+  external num get FILTER_SKIP;
+  external num get SHOW_ALL;
+  external num get SHOW_ATTRIBUTE;
+  external num get SHOW_CDATA_SECTION;
+  external num get SHOW_COMMENT;
+  external num get SHOW_DOCUMENT;
+  external num get SHOW_DOCUMENT_FRAGMENT;
+  external num get SHOW_DOCUMENT_TYPE;
+  external num get SHOW_ELEMENT;
+  external num get SHOW_ENTITY;
+  external num get SHOW_ENTITY_REFERENCE;
+  external num get SHOW_NOTATION;
+  external num get SHOW_PROCESSING_INSTRUCTION;
+  external num get SHOW_TEXT;
+}
+
+@JS()
+@anonymous
+class INodeIterator {
+  external NodeIterator get prototype;
+  external set prototype(NodeIterator value);
+  external factory INodeIterator();
+}
+
+@JS()
+@anonymous
+class INodeList {
+  external NodeList get prototype;
+  external set prototype(NodeList value);
+  external factory INodeList();
+}
+
+@JS()
+@anonymous
+class INotification {
+  external Notification get prototype;
+  external set prototype(Notification value);
+  external factory INotification({String title, NotificationOptions options});
+  external NotificationPermission get permission;
+  external Promise<NotificationPermission> requestPermission(NotificationPermissionCallback deprecatedCallback);
+}
+
+@JS()
+@anonymous
+class IOfflineAudioCompletionEvent {
+  external OfflineAudioCompletionEvent get prototype;
+  external set prototype(OfflineAudioCompletionEvent value);
+  external factory IOfflineAudioCompletionEvent({String type, OfflineAudioCompletionEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IOfflineAudioContext {
+  external OfflineAudioContext get prototype;
+  external set prototype(OfflineAudioContext value);
+  external factory IOfflineAudioContext({OfflineAudioContextOptions contextOptions});
+}
+
+@JS()
+@anonymous
+class IOption {
+  external factory IOption({String text, String value, bool defaultSelected, bool selected});
+}
+
+@JS()
+@anonymous
+class IOscillatorNode {
+  external OscillatorNode get prototype;
+  external set prototype(OscillatorNode value);
+  external factory IOscillatorNode({BaseAudioContext context, OscillatorOptions options});
+}
+
+@JS()
+@anonymous
+class IOverconstrainedError {
+  external OverconstrainedError get prototype;
+  external set prototype(OverconstrainedError value);
+  external factory IOverconstrainedError({String constraint, String message});
+}
+
+@JS()
+@anonymous
+class IPageTransitionEvent {
+  external PageTransitionEvent get prototype;
+  external set prototype(PageTransitionEvent value);
+  external factory IPageTransitionEvent({String type, PageTransitionEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IPannerNode {
+  external PannerNode get prototype;
+  external set prototype(PannerNode value);
+  external factory IPannerNode({BaseAudioContext context, PannerOptions options});
+}
+
+@JS()
+@anonymous
+class IPath2D {
+  external Path2D get prototype;
+  external set prototype(Path2D value);
+  external factory IPath2D({dynamic path});
+}
+
+@JS()
+@anonymous
+class IPaymentAddress {
+  external PaymentAddress get prototype;
+  external set prototype(PaymentAddress value);
+  external factory IPaymentAddress();
+}
+
+@JS()
+@anonymous
+class IPaymentMethodChangeEvent {
+  external PaymentMethodChangeEvent get prototype;
+  external set prototype(PaymentMethodChangeEvent value);
+  external factory IPaymentMethodChangeEvent({String type, PaymentMethodChangeEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IPaymentRequest {
+  external PaymentRequest get prototype;
+  external set prototype(PaymentRequest value);
+  external factory IPaymentRequest({List<PaymentMethodData> methodData, PaymentDetailsInit details});
+}
+
+@JS()
+@anonymous
+class IPaymentRequestUpdateEvent {
+  external PaymentRequestUpdateEvent get prototype;
+  external set prototype(PaymentRequestUpdateEvent value);
+  external factory IPaymentRequestUpdateEvent({String type, PaymentRequestUpdateEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IPaymentResponse {
+  external PaymentResponse get prototype;
+  external set prototype(PaymentResponse value);
+  external factory IPaymentResponse();
+}
+
+@JS()
+@anonymous
+class IPerformance {
+  external Performance get prototype;
+  external set prototype(Performance value);
+  external factory IPerformance();
+}
+
+@JS()
+@anonymous
+class IPerformanceEntry {
+  external PerformanceEntry get prototype;
+  external set prototype(PerformanceEntry value);
+  external factory IPerformanceEntry();
+}
+
+@JS()
+@anonymous
+class IPerformanceEventTiming {
+  external PerformanceEventTiming get prototype;
+  external set prototype(PerformanceEventTiming value);
+  external factory IPerformanceEventTiming();
+}
+
+@JS()
+@anonymous
+class IPerformanceMark {
+  external PerformanceMark get prototype;
+  external set prototype(PerformanceMark value);
+  external factory IPerformanceMark({String markName, PerformanceMarkOptions markOptions});
+}
+
+@JS()
+@anonymous
+class IPerformanceMeasure {
+  external PerformanceMeasure get prototype;
+  external set prototype(PerformanceMeasure value);
+  external factory IPerformanceMeasure();
+}
+
+@JS()
+@anonymous
+class IPerformanceNavigation {
+  external PerformanceNavigation get prototype;
+  external set prototype(PerformanceNavigation value);
+  external factory IPerformanceNavigation();
+  external num get TYPE_BACK_FORWARD;
+  external num get TYPE_NAVIGATE;
+  external num get TYPE_RELOAD;
+  external num get TYPE_RESERVED;
+}
+
+@JS()
+@anonymous
+class IPerformanceNavigationTiming {
+  external PerformanceNavigationTiming get prototype;
+  external set prototype(PerformanceNavigationTiming value);
+  external factory IPerformanceNavigationTiming();
+}
+
+@JS()
+@anonymous
+class IPerformanceObserver {
+  external PerformanceObserver get prototype;
+  external set prototype(PerformanceObserver value);
+  external factory IPerformanceObserver({PerformanceObserverCallback callback});
+  external ReadonlyArray<String> get supportedEntryTypes;
+}
+
+@JS()
+@anonymous
+class IPerformanceObserverEntryList {
+  external PerformanceObserverEntryList get prototype;
+  external set prototype(PerformanceObserverEntryList value);
+  external factory IPerformanceObserverEntryList();
+}
+
+@JS()
+@anonymous
+class IPerformancePaintTiming {
+  external PerformancePaintTiming get prototype;
+  external set prototype(PerformancePaintTiming value);
+  external factory IPerformancePaintTiming();
+}
+
+@JS()
+@anonymous
+class IPerformanceResourceTiming {
+  external PerformanceResourceTiming get prototype;
+  external set prototype(PerformanceResourceTiming value);
+  external factory IPerformanceResourceTiming();
+}
+
+@JS()
+@anonymous
+class IPerformanceServerTiming {
+  external PerformanceServerTiming get prototype;
+  external set prototype(PerformanceServerTiming value);
+  external factory IPerformanceServerTiming();
+}
+
+@JS()
+@anonymous
+class IPerformanceTiming {
+  external PerformanceTiming get prototype;
+  external set prototype(PerformanceTiming value);
+  external factory IPerformanceTiming();
+}
+
+@JS()
+@anonymous
+class IPeriodicWave {
+  external PeriodicWave get prototype;
+  external set prototype(PeriodicWave value);
+  external factory IPeriodicWave({BaseAudioContext context, PeriodicWaveOptions options});
+}
+
+@JS()
+@anonymous
+class IPermissionStatus {
+  external PermissionStatus get prototype;
+  external set prototype(PermissionStatus value);
+  external factory IPermissionStatus();
+}
+
+@JS()
+@anonymous
+class IPermissions {
+  external Permissions get prototype;
+  external set prototype(Permissions value);
+  external factory IPermissions();
+}
+
+@JS()
+@anonymous
+class IPictureInPictureWindow {
+  external PictureInPictureWindow get prototype;
+  external set prototype(PictureInPictureWindow value);
+  external factory IPictureInPictureWindow();
+}
+
+@JS()
+@anonymous
+class IPlugin {
+  external Plugin get prototype;
+  external set prototype(Plugin value);
+  external factory IPlugin();
+}
+
+@JS()
+@anonymous
+class IPluginArray {
+  external PluginArray get prototype;
+  external set prototype(PluginArray value);
+  external factory IPluginArray();
+}
+
+@JS()
+@anonymous
+class IPointerEvent {
+  external PointerEvent get prototype;
+  external set prototype(PointerEvent value);
+  external factory IPointerEvent({String type, PointerEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IPopStateEvent {
+  external PopStateEvent get prototype;
+  external set prototype(PopStateEvent value);
+  external factory IPopStateEvent({String type, PopStateEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IProcessingInstruction {
+  external ProcessingInstruction get prototype;
+  external set prototype(ProcessingInstruction value);
+  external factory IProcessingInstruction();
+}
+
+@JS()
+@anonymous
+class IProgressEvent {
+  external ProgressEvent get prototype;
+  external set prototype(ProgressEvent value);
+  external factory IProgressEvent({String type, ProgressEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IPromiseRejectionEvent {
+  external PromiseRejectionEvent get prototype;
+  external set prototype(PromiseRejectionEvent value);
+  external factory IPromiseRejectionEvent({String type, PromiseRejectionEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IPublicKeyCredential {
+  external PublicKeyCredential get prototype;
+  external set prototype(PublicKeyCredential value);
+  external factory IPublicKeyCredential();
+  external Promise<bool> isUserVerifyingPlatformAuthenticatorAvailable();
+}
+
+@JS()
+@anonymous
+class IPushManager {
+  external PushManager get prototype;
+  external set prototype(PushManager value);
+  external factory IPushManager();
+  external ReadonlyArray<String> get supportedContentEncodings;
+}
+
+@JS()
+@anonymous
+class IPushSubscription {
+  external PushSubscription get prototype;
+  external set prototype(PushSubscription value);
+  external factory IPushSubscription();
+}
+
+@JS()
+@anonymous
+class IPushSubscriptionOptions {
+  external PushSubscriptionOptions get prototype;
+  external set prototype(PushSubscriptionOptions value);
+  external factory IPushSubscriptionOptions();
+}
+
+@JS()
+@anonymous
+class IRTCCertificate {
+  external RTCCertificate get prototype;
+  external set prototype(RTCCertificate value);
+  external factory IRTCCertificate();
+}
+
+@JS()
+@anonymous
+class IRTCDTMFSender {
+  external RTCDTMFSender get prototype;
+  external set prototype(RTCDTMFSender value);
+  external factory IRTCDTMFSender();
+}
+
+@JS()
+@anonymous
+class IRTCDTMFToneChangeEvent {
+  external RTCDTMFToneChangeEvent get prototype;
+  external set prototype(RTCDTMFToneChangeEvent value);
+  external factory IRTCDTMFToneChangeEvent({String type, RTCDTMFToneChangeEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IRTCDataChannel {
+  external RTCDataChannel get prototype;
+  external set prototype(RTCDataChannel value);
+  external factory IRTCDataChannel();
+}
+
+@JS()
+@anonymous
+class IRTCDataChannelEvent {
+  external RTCDataChannelEvent get prototype;
+  external set prototype(RTCDataChannelEvent value);
+  external factory IRTCDataChannelEvent({String type, RTCDataChannelEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IRTCDtlsTransport {
+  external RTCDtlsTransport get prototype;
+  external set prototype(RTCDtlsTransport value);
+  external factory IRTCDtlsTransport();
+}
+
+@JS()
+@anonymous
+class IRTCIceCandidate {
+  external RTCIceCandidate get prototype;
+  external set prototype(RTCIceCandidate value);
+  external factory IRTCIceCandidate({RTCIceCandidateInit candidateInitDict});
+}
+
+@JS()
+@anonymous
+class IRTCIceTransport {
+  external RTCIceTransport get prototype;
+  external set prototype(RTCIceTransport value);
+  external factory IRTCIceTransport();
+}
+
+@JS()
+@anonymous
+class IRTCPeerConnection {
+  external RTCPeerConnection get prototype;
+  external set prototype(RTCPeerConnection value);
+  external factory IRTCPeerConnection({RTCConfiguration configuration});
+  external Promise<RTCCertificate> generateCertificate(AlgorithmIdentifier keygenAlgorithm);
+}
+
+@JS()
+@anonymous
+class IRTCPeerConnectionIceErrorEvent {
+  external RTCPeerConnectionIceErrorEvent get prototype;
+  external set prototype(RTCPeerConnectionIceErrorEvent value);
+  external factory IRTCPeerConnectionIceErrorEvent({String type, RTCPeerConnectionIceErrorEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IRTCPeerConnectionIceEvent {
+  external RTCPeerConnectionIceEvent get prototype;
+  external set prototype(RTCPeerConnectionIceEvent value);
+  external factory IRTCPeerConnectionIceEvent({String type, RTCPeerConnectionIceEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IRTCRtpReceiver {
+  external RTCRtpReceiver get prototype;
+  external set prototype(RTCRtpReceiver value);
+  external factory IRTCRtpReceiver();
+  external RTCRtpCapabilities? getCapabilities(String kind);
+}
+
+@JS()
+@anonymous
+class IRTCRtpSender {
+  external RTCRtpSender get prototype;
+  external set prototype(RTCRtpSender value);
+  external factory IRTCRtpSender();
+  external RTCRtpCapabilities? getCapabilities(String kind);
+}
+
+@JS()
+@anonymous
+class IRTCRtpTransceiver {
+  external RTCRtpTransceiver get prototype;
+  external set prototype(RTCRtpTransceiver value);
+  external factory IRTCRtpTransceiver();
+}
+
+@JS()
+@anonymous
+class IRTCSessionDescription {
+  external RTCSessionDescription get prototype;
+  external set prototype(RTCSessionDescription value);
+  external factory IRTCSessionDescription({RTCSessionDescriptionInit descriptionInitDict});
+}
+
+@JS()
+@anonymous
+class IRTCStatsReport {
+  external RTCStatsReport get prototype;
+  external set prototype(RTCStatsReport value);
+  external factory IRTCStatsReport();
+}
+
+@JS()
+@anonymous
+class IRTCTrackEvent {
+  external RTCTrackEvent get prototype;
+  external set prototype(RTCTrackEvent value);
+  external factory IRTCTrackEvent({String type, RTCTrackEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IRadioNodeList {
+  external RadioNodeList get prototype;
+  external set prototype(RadioNodeList value);
+  external factory IRadioNodeList();
+}
+
+@JS()
+@anonymous
+class IRange {
+  external Range get prototype;
+  external set prototype(Range value);
+  external factory IRange();
+  external num get END_TO_END;
+  external num get END_TO_START;
+  external num get START_TO_END;
+  external num get START_TO_START;
+  external String toString();
+}
+
+@JS()
+@anonymous
+class IReadableStream {
+  external ReadableStream get prototype;
+  external set prototype(ReadableStream value);
+  external factory IReadableStream({UnderlyingSource<R> underlyingSource, QueuingStrategy<R> strategy});
+}
+
+@JS()
+@anonymous
+class IReadableStreamDefaultController {
+  external ReadableStreamDefaultController get prototype;
+  external set prototype(ReadableStreamDefaultController value);
+  external factory IReadableStreamDefaultController();
+}
+
+@JS()
+@anonymous
+class IReadableStreamDefaultReader {
+  external ReadableStreamDefaultReader get prototype;
+  external set prototype(ReadableStreamDefaultReader value);
+  external factory IReadableStreamDefaultReader({ReadableStream<R> stream});
+}
+
+@JS()
+@anonymous
+class IRemotePlayback {
+  external RemotePlayback get prototype;
+  external set prototype(RemotePlayback value);
+  external factory IRemotePlayback();
+}
+
+@JS()
+@anonymous
+class IRequest {
+  external Request get prototype;
+  external set prototype(Request value);
+  external factory IRequest({RequestInfo input, RequestInit init});
+}
+
+@JS()
+@anonymous
+class IResizeObserver {
+  external ResizeObserver get prototype;
+  external set prototype(ResizeObserver value);
+  external factory IResizeObserver({ResizeObserverCallback callback});
+}
+
+@JS()
+@anonymous
+class IResizeObserverEntry {
+  external ResizeObserverEntry get prototype;
+  external set prototype(ResizeObserverEntry value);
+  external factory IResizeObserverEntry();
 }
 
 @JS()
@@ -24874,6 +26505,289 @@ class IResizeObserverSize {
   external ResizeObserverSize get prototype;
   external set prototype(ResizeObserverSize value);
   external factory IResizeObserverSize();
+}
+
+@JS()
+@anonymous
+class IResponse {
+  external Response get prototype;
+  external set prototype(Response value);
+  external factory IResponse({BodyInit? body, ResponseInit init});
+  external Response error();
+  external Response redirect(dynamic url, num status);
+}
+
+@JS()
+@anonymous
+class IRuntimeError {
+  external RuntimeError get prototype;
+  external set prototype(RuntimeError value);
+  external factory IRuntimeError();
+}
+
+@JS()
+@anonymous
+class ISVGAElement {
+  external SVGAElement get prototype;
+  external set prototype(SVGAElement value);
+  external factory ISVGAElement();
+}
+
+@JS()
+@anonymous
+class ISVGAngle {
+  external SVGAngle get prototype;
+  external set prototype(SVGAngle value);
+  external factory ISVGAngle();
+  external num get SVG_ANGLETYPE_DEG;
+  external num get SVG_ANGLETYPE_GRAD;
+  external num get SVG_ANGLETYPE_RAD;
+  external num get SVG_ANGLETYPE_UNKNOWN;
+  external num get SVG_ANGLETYPE_UNSPECIFIED;
+}
+
+@JS()
+@anonymous
+class ISVGAnimateElement {
+  external SVGAnimateElement get prototype;
+  external set prototype(SVGAnimateElement value);
+  external factory ISVGAnimateElement();
+}
+
+@JS()
+@anonymous
+class ISVGAnimateMotionElement {
+  external SVGAnimateMotionElement get prototype;
+  external set prototype(SVGAnimateMotionElement value);
+  external factory ISVGAnimateMotionElement();
+}
+
+@JS()
+@anonymous
+class ISVGAnimateTransformElement {
+  external SVGAnimateTransformElement get prototype;
+  external set prototype(SVGAnimateTransformElement value);
+  external factory ISVGAnimateTransformElement();
+}
+
+@JS()
+@anonymous
+class ISVGAnimatedAngle {
+  external SVGAnimatedAngle get prototype;
+  external set prototype(SVGAnimatedAngle value);
+  external factory ISVGAnimatedAngle();
+}
+
+@JS()
+@anonymous
+class ISVGAnimatedBoolean {
+  external SVGAnimatedBoolean get prototype;
+  external set prototype(SVGAnimatedBoolean value);
+  external factory ISVGAnimatedBoolean();
+}
+
+@JS()
+@anonymous
+class ISVGAnimatedEnumeration {
+  external SVGAnimatedEnumeration get prototype;
+  external set prototype(SVGAnimatedEnumeration value);
+  external factory ISVGAnimatedEnumeration();
+}
+
+@JS()
+@anonymous
+class ISVGAnimatedInteger {
+  external SVGAnimatedInteger get prototype;
+  external set prototype(SVGAnimatedInteger value);
+  external factory ISVGAnimatedInteger();
+}
+
+@JS()
+@anonymous
+class ISVGAnimatedLength {
+  external SVGAnimatedLength get prototype;
+  external set prototype(SVGAnimatedLength value);
+  external factory ISVGAnimatedLength();
+}
+
+@JS()
+@anonymous
+class ISVGAnimatedLengthList {
+  external SVGAnimatedLengthList get prototype;
+  external set prototype(SVGAnimatedLengthList value);
+  external factory ISVGAnimatedLengthList();
+}
+
+@JS()
+@anonymous
+class ISVGAnimatedNumber {
+  external SVGAnimatedNumber get prototype;
+  external set prototype(SVGAnimatedNumber value);
+  external factory ISVGAnimatedNumber();
+}
+
+@JS()
+@anonymous
+class ISVGAnimatedNumberList {
+  external SVGAnimatedNumberList get prototype;
+  external set prototype(SVGAnimatedNumberList value);
+  external factory ISVGAnimatedNumberList();
+}
+
+@JS()
+@anonymous
+class ISVGAnimatedPreserveAspectRatio {
+  external SVGAnimatedPreserveAspectRatio get prototype;
+  external set prototype(SVGAnimatedPreserveAspectRatio value);
+  external factory ISVGAnimatedPreserveAspectRatio();
+}
+
+@JS()
+@anonymous
+class ISVGAnimatedRect {
+  external SVGAnimatedRect get prototype;
+  external set prototype(SVGAnimatedRect value);
+  external factory ISVGAnimatedRect();
+}
+
+@JS()
+@anonymous
+class ISVGAnimatedString {
+  external SVGAnimatedString get prototype;
+  external set prototype(SVGAnimatedString value);
+  external factory ISVGAnimatedString();
+}
+
+@JS()
+@anonymous
+class ISVGAnimatedTransformList {
+  external SVGAnimatedTransformList get prototype;
+  external set prototype(SVGAnimatedTransformList value);
+  external factory ISVGAnimatedTransformList();
+}
+
+@JS()
+@anonymous
+class ISVGAnimationElement {
+  external SVGAnimationElement get prototype;
+  external set prototype(SVGAnimationElement value);
+  external factory ISVGAnimationElement();
+}
+
+@JS()
+@anonymous
+class ISVGCircleElement {
+  external SVGCircleElement get prototype;
+  external set prototype(SVGCircleElement value);
+  external factory ISVGCircleElement();
+}
+
+@JS()
+@anonymous
+class ISVGClipPathElement {
+  external SVGClipPathElement get prototype;
+  external set prototype(SVGClipPathElement value);
+  external factory ISVGClipPathElement();
+}
+
+@JS()
+@anonymous
+class ISVGComponentTransferFunctionElement {
+  external SVGComponentTransferFunctionElement get prototype;
+  external set prototype(SVGComponentTransferFunctionElement value);
+  external factory ISVGComponentTransferFunctionElement();
+  external num get SVG_FECOMPONENTTRANSFER_TYPE_DISCRETE;
+  external num get SVG_FECOMPONENTTRANSFER_TYPE_GAMMA;
+  external num get SVG_FECOMPONENTTRANSFER_TYPE_IDENTITY;
+  external num get SVG_FECOMPONENTTRANSFER_TYPE_LINEAR;
+  external num get SVG_FECOMPONENTTRANSFER_TYPE_TABLE;
+  external num get SVG_FECOMPONENTTRANSFER_TYPE_UNKNOWN;
+}
+
+@JS()
+@anonymous
+class ISVGCursorElement {
+  external SVGCursorElement get prototype;
+  external set prototype(SVGCursorElement value);
+  external factory ISVGCursorElement();
+}
+
+@JS()
+@anonymous
+class ISVGDefsElement {
+  external SVGDefsElement get prototype;
+  external set prototype(SVGDefsElement value);
+  external factory ISVGDefsElement();
+}
+
+@JS()
+@anonymous
+class ISVGDescElement {
+  external SVGDescElement get prototype;
+  external set prototype(SVGDescElement value);
+  external factory ISVGDescElement();
+}
+
+@JS()
+@anonymous
+class ISVGElement {
+  external SVGElement get prototype;
+  external set prototype(SVGElement value);
+  external factory ISVGElement();
+}
+
+@JS()
+@anonymous
+class ISVGEllipseElement {
+  external SVGEllipseElement get prototype;
+  external set prototype(SVGEllipseElement value);
+  external factory ISVGEllipseElement();
+}
+
+@JS()
+@anonymous
+class ISVGFEBlendElement {
+  external SVGFEBlendElement get prototype;
+  external set prototype(SVGFEBlendElement value);
+  external factory ISVGFEBlendElement();
+  external num get SVG_FEBLEND_MODE_COLOR;
+  external num get SVG_FEBLEND_MODE_COLOR_BURN;
+  external num get SVG_FEBLEND_MODE_COLOR_DODGE;
+  external num get SVG_FEBLEND_MODE_DARKEN;
+  external num get SVG_FEBLEND_MODE_DIFFERENCE;
+  external num get SVG_FEBLEND_MODE_EXCLUSION;
+  external num get SVG_FEBLEND_MODE_HARD_LIGHT;
+  external num get SVG_FEBLEND_MODE_HUE;
+  external num get SVG_FEBLEND_MODE_LIGHTEN;
+  external num get SVG_FEBLEND_MODE_LUMINOSITY;
+  external num get SVG_FEBLEND_MODE_MULTIPLY;
+  external num get SVG_FEBLEND_MODE_NORMAL;
+  external num get SVG_FEBLEND_MODE_OVERLAY;
+  external num get SVG_FEBLEND_MODE_SATURATION;
+  external num get SVG_FEBLEND_MODE_SCREEN;
+  external num get SVG_FEBLEND_MODE_SOFT_LIGHT;
+  external num get SVG_FEBLEND_MODE_UNKNOWN;
+}
+
+@JS()
+@anonymous
+class ISVGFEColorMatrixElement {
+  external SVGFEColorMatrixElement get prototype;
+  external set prototype(SVGFEColorMatrixElement value);
+  external factory ISVGFEColorMatrixElement();
+  external num get SVG_FECOLORMATRIX_TYPE_HUEROTATE;
+  external num get SVG_FECOLORMATRIX_TYPE_LUMINANCETOALPHA;
+  external num get SVG_FECOLORMATRIX_TYPE_MATRIX;
+  external num get SVG_FECOLORMATRIX_TYPE_SATURATE;
+  external num get SVG_FECOLORMATRIX_TYPE_UNKNOWN;
+}
+
+@JS()
+@anonymous
+class ISVGFEComponentTransferElement {
+  external SVGFEComponentTransferElement get prototype;
+  external set prototype(SVGFEComponentTransferElement value);
+  external factory ISVGFEComponentTransferElement();
 }
 
 @JS()
@@ -24893,212 +26807,75 @@ class ISVGFECompositeElement {
 
 @JS()
 @anonymous
-class IIDBCursorWithValue {
-  external IDBCursorWithValue get prototype;
-  external set prototype(IDBCursorWithValue value);
-  external factory IIDBCursorWithValue();
+class ISVGFEConvolveMatrixElement {
+  external SVGFEConvolveMatrixElement get prototype;
+  external set prototype(SVGFEConvolveMatrixElement value);
+  external factory ISVGFEConvolveMatrixElement();
+  external num get SVG_EDGEMODE_DUPLICATE;
+  external num get SVG_EDGEMODE_NONE;
+  external num get SVG_EDGEMODE_UNKNOWN;
+  external num get SVG_EDGEMODE_WRAP;
 }
 
 @JS()
 @anonymous
-class IValidityState {
-  external ValidityState get prototype;
-  external set prototype(ValidityState value);
-  external factory IValidityState();
+class ISVGFEDiffuseLightingElement {
+  external SVGFEDiffuseLightingElement get prototype;
+  external set prototype(SVGFEDiffuseLightingElement value);
+  external factory ISVGFEDiffuseLightingElement();
 }
 
 @JS()
 @anonymous
-class ISVGStopElement {
-  external SVGStopElement get prototype;
-  external set prototype(SVGStopElement value);
-  external factory ISVGStopElement();
+class ISVGFEDisplacementMapElement {
+  external SVGFEDisplacementMapElement get prototype;
+  external set prototype(SVGFEDisplacementMapElement value);
+  external factory ISVGFEDisplacementMapElement();
+  external num get SVG_CHANNEL_A;
+  external num get SVG_CHANNEL_B;
+  external num get SVG_CHANNEL_G;
+  external num get SVG_CHANNEL_R;
+  external num get SVG_CHANNEL_UNKNOWN;
 }
 
 @JS()
 @anonymous
-class IHTMLParamElement {
-  external HTMLParamElement get prototype;
-  external set prototype(HTMLParamElement value);
-  external factory IHTMLParamElement();
+class ISVGFEDistantLightElement {
+  external SVGFEDistantLightElement get prototype;
+  external set prototype(SVGFEDistantLightElement value);
+  external factory ISVGFEDistantLightElement();
 }
 
 @JS()
 @anonymous
-class IAbortController {
-  external AbortController get prototype;
-  external set prototype(AbortController value);
-  external factory IAbortController();
+class ISVGFEDropShadowElement {
+  external SVGFEDropShadowElement get prototype;
+  external set prototype(SVGFEDropShadowElement value);
+  external factory ISVGFEDropShadowElement();
 }
 
 @JS()
 @anonymous
-class IXMLSerializer {
-  external XMLSerializer get prototype;
-  external set prototype(XMLSerializer value);
-  external factory IXMLSerializer();
+class ISVGFEFloodElement {
+  external SVGFEFloodElement get prototype;
+  external set prototype(SVGFEFloodElement value);
+  external factory ISVGFEFloodElement();
 }
 
 @JS()
 @anonymous
-class IMediaError {
-  external MediaError get prototype;
-  external set prototype(MediaError value);
-  external factory IMediaError();
-  external num get MEDIA_ERR_ABORTED;
-  external num get MEDIA_ERR_DECODE;
-  external num get MEDIA_ERR_NETWORK;
-  external num get MEDIA_ERR_SRC_NOT_SUPPORTED;
+class ISVGFEFuncAElement {
+  external SVGFEFuncAElement get prototype;
+  external set prototype(SVGFEFuncAElement value);
+  external factory ISVGFEFuncAElement();
 }
 
 @JS()
 @anonymous
-class ISVGAnimatedNumberList {
-  external SVGAnimatedNumberList get prototype;
-  external set prototype(SVGAnimatedNumberList value);
-  external factory ISVGAnimatedNumberList();
-}
-
-@JS()
-@anonymous
-class IHTMLImageElement {
-  external HTMLImageElement get prototype;
-  external set prototype(HTMLImageElement value);
-  external factory IHTMLImageElement();
-}
-
-@JS()
-@anonymous
-class IAudioNode {
-  external AudioNode get prototype;
-  external set prototype(AudioNode value);
-  external factory IAudioNode();
-}
-
-@JS()
-@anonymous
-class IHTMLPictureElement {
-  external HTMLPictureElement get prototype;
-  external set prototype(HTMLPictureElement value);
-  external factory IHTMLPictureElement();
-}
-
-@JS()
-@anonymous
-class ISVGMarkerElement {
-  external SVGMarkerElement get prototype;
-  external set prototype(SVGMarkerElement value);
-  external factory ISVGMarkerElement();
-  external num get SVG_MARKERUNITS_STROKEWIDTH;
-  external num get SVG_MARKERUNITS_UNKNOWN;
-  external num get SVG_MARKERUNITS_USERSPACEONUSE;
-  external num get SVG_MARKER_ORIENT_ANGLE;
-  external num get SVG_MARKER_ORIENT_AUTO;
-  external num get SVG_MARKER_ORIENT_UNKNOWN;
-}
-
-@JS()
-@anonymous
-class IProgressEvent {
-  external ProgressEvent get prototype;
-  external set prototype(ProgressEvent value);
-  external factory IProgressEvent({String type, ProgressEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class ISourceBuffer {
-  external SourceBuffer get prototype;
-  external set prototype(SourceBuffer value);
-  external factory ISourceBuffer();
-}
-
-@JS()
-@anonymous
-class ISVGEllipseElement {
-  external SVGEllipseElement get prototype;
-  external set prototype(SVGEllipseElement value);
-  external factory ISVGEllipseElement();
-}
-
-@JS()
-@anonymous
-class IIDBVersionChangeEvent {
-  external IDBVersionChangeEvent get prototype;
-  external set prototype(IDBVersionChangeEvent value);
-  external factory IIDBVersionChangeEvent({String type, IDBVersionChangeEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class INodeIterator {
-  external NodeIterator get prototype;
-  external set prototype(NodeIterator value);
-  external factory INodeIterator();
-}
-
-@JS()
-@anonymous
-class IConvolverNode {
-  external ConvolverNode get prototype;
-  external set prototype(ConvolverNode value);
-  external factory IConvolverNode({BaseAudioContext context, ConvolverOptions options});
-}
-
-@JS()
-@anonymous
-class IDocument {
-  external Document get prototype;
-  external set prototype(Document value);
-  external factory IDocument();
-}
-
-@JS()
-@anonymous
-class IReadableStreamDefaultController {
-  external ReadableStreamDefaultController get prototype;
-  external set prototype(ReadableStreamDefaultController value);
-  external factory IReadableStreamDefaultController();
-}
-
-@JS()
-@anonymous
-class ISecurityPolicyViolationEvent {
-  external SecurityPolicyViolationEvent get prototype;
-  external set prototype(SecurityPolicyViolationEvent value);
-  external factory ISecurityPolicyViolationEvent({String type, SecurityPolicyViolationEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class IInstance {
-  external Instance get prototype;
-  external set prototype(Instance value);
-  external factory IInstance({Module module, Imports importObject});
-}
-
-@JS()
-@anonymous
-class ICrypto {
-  external Crypto get prototype;
-  external set prototype(Crypto value);
-  external factory ICrypto();
-}
-
-@JS()
-@anonymous
-class IMediaKeySystemAccess {
-  external MediaKeySystemAccess get prototype;
-  external set prototype(MediaKeySystemAccess value);
-  external factory IMediaKeySystemAccess();
-}
-
-@JS()
-@anonymous
-class IGamepadEvent {
-  external GamepadEvent get prototype;
-  external set prototype(GamepadEvent value);
-  external factory IGamepadEvent({String type, GamepadEventInit eventInitDict});
+class ISVGFEFuncBElement {
+  external SVGFEFuncBElement get prototype;
+  external set prototype(SVGFEFuncBElement value);
+  external factory ISVGFEFuncBElement();
 }
 
 @JS()
@@ -25111,20 +26888,93 @@ class ISVGFEFuncGElement {
 
 @JS()
 @anonymous
-class ICSSRule {
-  external CSSRule get prototype;
-  external set prototype(CSSRule value);
-  external factory ICSSRule();
-  external num get CHARSET_RULE;
-  external num get FONT_FACE_RULE;
-  external num get IMPORT_RULE;
-  external num get KEYFRAMES_RULE;
-  external num get KEYFRAME_RULE;
-  external num get MEDIA_RULE;
-  external num get NAMESPACE_RULE;
-  external num get PAGE_RULE;
-  external num get STYLE_RULE;
-  external num get SUPPORTS_RULE;
+class ISVGFEFuncRElement {
+  external SVGFEFuncRElement get prototype;
+  external set prototype(SVGFEFuncRElement value);
+  external factory ISVGFEFuncRElement();
+}
+
+@JS()
+@anonymous
+class ISVGFEGaussianBlurElement {
+  external SVGFEGaussianBlurElement get prototype;
+  external set prototype(SVGFEGaussianBlurElement value);
+  external factory ISVGFEGaussianBlurElement();
+}
+
+@JS()
+@anonymous
+class ISVGFEImageElement {
+  external SVGFEImageElement get prototype;
+  external set prototype(SVGFEImageElement value);
+  external factory ISVGFEImageElement();
+}
+
+@JS()
+@anonymous
+class ISVGFEMergeElement {
+  external SVGFEMergeElement get prototype;
+  external set prototype(SVGFEMergeElement value);
+  external factory ISVGFEMergeElement();
+}
+
+@JS()
+@anonymous
+class ISVGFEMergeNodeElement {
+  external SVGFEMergeNodeElement get prototype;
+  external set prototype(SVGFEMergeNodeElement value);
+  external factory ISVGFEMergeNodeElement();
+}
+
+@JS()
+@anonymous
+class ISVGFEMorphologyElement {
+  external SVGFEMorphologyElement get prototype;
+  external set prototype(SVGFEMorphologyElement value);
+  external factory ISVGFEMorphologyElement();
+  external num get SVG_MORPHOLOGY_OPERATOR_DILATE;
+  external num get SVG_MORPHOLOGY_OPERATOR_ERODE;
+  external num get SVG_MORPHOLOGY_OPERATOR_UNKNOWN;
+}
+
+@JS()
+@anonymous
+class ISVGFEOffsetElement {
+  external SVGFEOffsetElement get prototype;
+  external set prototype(SVGFEOffsetElement value);
+  external factory ISVGFEOffsetElement();
+}
+
+@JS()
+@anonymous
+class ISVGFEPointLightElement {
+  external SVGFEPointLightElement get prototype;
+  external set prototype(SVGFEPointLightElement value);
+  external factory ISVGFEPointLightElement();
+}
+
+@JS()
+@anonymous
+class ISVGFESpecularLightingElement {
+  external SVGFESpecularLightingElement get prototype;
+  external set prototype(SVGFESpecularLightingElement value);
+  external factory ISVGFESpecularLightingElement();
+}
+
+@JS()
+@anonymous
+class ISVGFESpotLightElement {
+  external SVGFESpotLightElement get prototype;
+  external set prototype(SVGFESpotLightElement value);
+  external factory ISVGFESpotLightElement();
+}
+
+@JS()
+@anonymous
+class ISVGFETileElement {
+  external SVGFETileElement get prototype;
+  external set prototype(SVGFETileElement value);
+  external factory ISVGFETileElement();
 }
 
 @JS()
@@ -25143,50 +26993,34 @@ class ISVGFETurbulenceElement {
 
 @JS()
 @anonymous
-class IHTMLButtonElement {
-  external HTMLButtonElement get prototype;
-  external set prototype(HTMLButtonElement value);
-  external factory IHTMLButtonElement();
+class ISVGFilterElement {
+  external SVGFilterElement get prototype;
+  external set prototype(SVGFilterElement value);
+  external factory ISVGFilterElement();
 }
 
 @JS()
 @anonymous
-class ISVGPathElement {
-  external SVGPathElement get prototype;
-  external set prototype(SVGPathElement value);
-  external factory ISVGPathElement();
+class ISVGForeignObjectElement {
+  external SVGForeignObjectElement get prototype;
+  external set prototype(SVGForeignObjectElement value);
+  external factory ISVGForeignObjectElement();
 }
 
 @JS()
 @anonymous
-class IHTMLDivElement {
-  external HTMLDivElement get prototype;
-  external set prototype(HTMLDivElement value);
-  external factory IHTMLDivElement();
+class ISVGGElement {
+  external SVGGElement get prototype;
+  external set prototype(SVGGElement value);
+  external factory ISVGGElement();
 }
 
 @JS()
 @anonymous
-class IHTMLTableRowElement {
-  external HTMLTableRowElement get prototype;
-  external set prototype(HTMLTableRowElement value);
-  external factory IHTMLTableRowElement();
-}
-
-@JS()
-@anonymous
-class IHTMLFormElement {
-  external HTMLFormElement get prototype;
-  external set prototype(HTMLFormElement value);
-  external factory IHTMLFormElement();
-}
-
-@JS()
-@anonymous
-class ICompileError {
-  external CompileError get prototype;
-  external set prototype(CompileError value);
-  external factory ICompileError();
+class ISVGGeometryElement {
+  external SVGGeometryElement get prototype;
+  external set prototype(SVGGeometryElement value);
+  external factory ISVGGeometryElement();
 }
 
 @JS()
@@ -25203,177 +27037,6 @@ class ISVGGradientElement {
 
 @JS()
 @anonymous
-class IAnimationEffect {
-  external AnimationEffect get prototype;
-  external set prototype(AnimationEffect value);
-  external factory IAnimationEffect();
-}
-
-@JS()
-@anonymous
-class ISVGUseElement {
-  external SVGUseElement get prototype;
-  external set prototype(SVGUseElement value);
-  external factory ISVGUseElement();
-}
-
-@JS()
-@anonymous
-class IAudioContext {
-  external AudioContext get prototype;
-  external set prototype(AudioContext value);
-  external factory IAudioContext({AudioContextOptions contextOptions});
-}
-
-@JS()
-@anonymous
-class IPerformanceEntry {
-  external PerformanceEntry get prototype;
-  external set prototype(PerformanceEntry value);
-  external factory IPerformanceEntry();
-}
-
-@JS()
-@anonymous
-class IHTMLBodyElement {
-  external HTMLBodyElement get prototype;
-  external set prototype(HTMLBodyElement value);
-  external factory IHTMLBodyElement();
-}
-
-@JS()
-@anonymous
-class ICSSPageRule {
-  external CSSPageRule get prototype;
-  external set prototype(CSSPageRule value);
-  external factory ICSSPageRule();
-}
-
-@JS()
-@anonymous
-class IHTMLTableCaptionElement {
-  external HTMLTableCaptionElement get prototype;
-  external set prototype(HTMLTableCaptionElement value);
-  external factory IHTMLTableCaptionElement();
-}
-
-@JS()
-@anonymous
-class IDocumentTimeline {
-  external DocumentTimeline get prototype;
-  external set prototype(DocumentTimeline value);
-  external factory IDocumentTimeline({DocumentTimelineOptions options});
-}
-
-@JS()
-@anonymous
-class INavigator {
-  external Navigator get prototype;
-  external set prototype(Navigator value);
-  external factory INavigator();
-}
-
-@JS()
-@anonymous
-class IHTMLElement {
-  external HTMLElement get prototype;
-  external set prototype(HTMLElement value);
-  external factory IHTMLElement();
-}
-
-@JS()
-@anonymous
-class ICSSRuleList {
-  external CSSRuleList get prototype;
-  external set prototype(CSSRuleList value);
-  external factory ICSSRuleList();
-}
-
-@JS()
-@anonymous
-class IProcessingInstruction {
-  external ProcessingInstruction get prototype;
-  external set prototype(ProcessingInstruction value);
-  external factory IProcessingInstruction();
-}
-
-@JS()
-@anonymous
-class IMutationEvent {
-  external MutationEvent get prototype;
-  external set prototype(MutationEvent value);
-  external factory IMutationEvent();
-  external num get ADDITION;
-  external num get MODIFICATION;
-  external num get REMOVAL;
-}
-
-@JS()
-@anonymous
-class ICanvasPattern {
-  external CanvasPattern get prototype;
-  external set prototype(CanvasPattern value);
-  external factory ICanvasPattern();
-}
-
-@JS()
-@anonymous
-class INodeList {
-  external NodeList get prototype;
-  external set prototype(NodeList value);
-  external factory INodeList();
-}
-
-@JS()
-@anonymous
-class ISVGRectElement {
-  external SVGRectElement get prototype;
-  external set prototype(SVGRectElement value);
-  external factory ISVGRectElement();
-}
-
-@JS()
-@anonymous
-class IGeolocation {
-  external Geolocation get prototype;
-  external set prototype(Geolocation value);
-  external factory IGeolocation();
-}
-
-@JS()
-@anonymous
-class ICanvasGradient {
-  external CanvasGradient get prototype;
-  external set prototype(CanvasGradient value);
-  external factory ICanvasGradient();
-}
-
-@JS()
-@anonymous
-class IHTMLIFrameElement {
-  external HTMLIFrameElement get prototype;
-  external set prototype(HTMLIFrameElement value);
-  external factory IHTMLIFrameElement();
-}
-
-@JS()
-@anonymous
-class IHTMLTableColElement {
-  external HTMLTableColElement get prototype;
-  external set prototype(HTMLTableColElement value);
-  external factory IHTMLTableColElement();
-}
-
-@JS()
-@anonymous
-class IClipboard {
-  external Clipboard get prototype;
-  external set prototype(Clipboard value);
-  external factory IClipboard();
-}
-
-@JS()
-@anonymous
 class ISVGGraphicsElement {
   external SVGGraphicsElement get prototype;
   external set prototype(SVGGraphicsElement value);
@@ -25382,132 +27045,75 @@ class ISVGGraphicsElement {
 
 @JS()
 @anonymous
-class ISVGPointList {
-  external SVGPointList get prototype;
-  external set prototype(SVGPointList value);
-  external factory ISVGPointList();
+class ISVGImageElement {
+  external SVGImageElement get prototype;
+  external set prototype(SVGImageElement value);
+  external factory ISVGImageElement();
 }
 
 @JS()
 @anonymous
-class IWebGLQuery {
-  external WebGLQuery get prototype;
-  external set prototype(WebGLQuery value);
-  external factory IWebGLQuery();
+class ISVGLength {
+  external SVGLength get prototype;
+  external set prototype(SVGLength value);
+  external factory ISVGLength();
+  external num get SVG_LENGTHTYPE_CM;
+  external num get SVG_LENGTHTYPE_EMS;
+  external num get SVG_LENGTHTYPE_EXS;
+  external num get SVG_LENGTHTYPE_IN;
+  external num get SVG_LENGTHTYPE_MM;
+  external num get SVG_LENGTHTYPE_NUMBER;
+  external num get SVG_LENGTHTYPE_PC;
+  external num get SVG_LENGTHTYPE_PERCENTAGE;
+  external num get SVG_LENGTHTYPE_PT;
+  external num get SVG_LENGTHTYPE_PX;
+  external num get SVG_LENGTHTYPE_UNKNOWN;
 }
 
 @JS()
 @anonymous
-class IURL {
-  external URL get prototype;
-  external set prototype(URL value);
-  external factory IURL({dynamic url, dynamic base});
-  external String createObjectURL(dynamic object);
-  external void revokeObjectURL(String url);
+class ISVGLengthList {
+  external SVGLengthList get prototype;
+  external set prototype(SVGLengthList value);
+  external factory ISVGLengthList();
 }
 
 @JS()
 @anonymous
-class IAnalyserNode {
-  external AnalyserNode get prototype;
-  external set prototype(AnalyserNode value);
-  external factory IAnalyserNode({BaseAudioContext context, AnalyserOptions options});
+class ISVGLineElement {
+  external SVGLineElement get prototype;
+  external set prototype(SVGLineElement value);
+  external factory ISVGLineElement();
 }
 
 @JS()
 @anonymous
-class IXPathExpression {
-  external XPathExpression get prototype;
-  external set prototype(XPathExpression value);
-  external factory IXPathExpression();
+class ISVGLinearGradientElement {
+  external SVGLinearGradientElement get prototype;
+  external set prototype(SVGLinearGradientElement value);
+  external factory ISVGLinearGradientElement();
 }
 
 @JS()
 @anonymous
-class IText {
-  external Text get prototype;
-  external set prototype(Text value);
-  external factory IText({String data});
+class ISVGMPathElement {
+  external SVGMPathElement get prototype;
+  external set prototype(SVGMPathElement value);
+  external factory ISVGMPathElement();
 }
 
 @JS()
 @anonymous
-class IAnimation {
-  external Animation get prototype;
-  external set prototype(Animation value);
-  external factory IAnimation({AnimationEffect? effect, AnimationTimeline? timeline});
-}
-
-@JS()
-@anonymous
-class IHTMLTemplateElement {
-  external HTMLTemplateElement get prototype;
-  external set prototype(HTMLTemplateElement value);
-  external factory IHTMLTemplateElement();
-}
-
-@JS()
-@anonymous
-class IVTTCue {
-  external VTTCue get prototype;
-  external set prototype(VTTCue value);
-  external factory IVTTCue({num startTime, num endTime, String text});
-}
-
-@JS()
-@anonymous
-class IMathMLElement {
-  external MathMLElement get prototype;
-  external set prototype(MathMLElement value);
-  external factory IMathMLElement();
-}
-
-@JS()
-@anonymous
-class IDeviceMotionEvent {
-  external DeviceMotionEvent get prototype;
-  external set prototype(DeviceMotionEvent value);
-  external factory IDeviceMotionEvent({String type, DeviceMotionEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class IFocusEvent {
-  external FocusEvent get prototype;
-  external set prototype(FocusEvent value);
-  external factory IFocusEvent({String type, FocusEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class ISVGAnimateElement {
-  external SVGAnimateElement get prototype;
-  external set prototype(SVGAnimateElement value);
-  external factory ISVGAnimateElement();
-}
-
-@JS()
-@anonymous
-class IReadableStreamDefaultReader {
-  external ReadableStreamDefaultReader get prototype;
-  external set prototype(ReadableStreamDefaultReader value);
-  external factory IReadableStreamDefaultReader({ReadableStream<R> stream});
-}
-
-@JS()
-@anonymous
-class IInputEvent {
-  external InputEvent get prototype;
-  external set prototype(InputEvent value);
-  external factory IInputEvent({String type, InputEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class ISubtleCrypto {
-  external SubtleCrypto get prototype;
-  external set prototype(SubtleCrypto value);
-  external factory ISubtleCrypto();
+class ISVGMarkerElement {
+  external SVGMarkerElement get prototype;
+  external set prototype(SVGMarkerElement value);
+  external factory ISVGMarkerElement();
+  external num get SVG_MARKERUNITS_STROKEWIDTH;
+  external num get SVG_MARKERUNITS_UNKNOWN;
+  external num get SVG_MARKERUNITS_USERSPACEONUSE;
+  external num get SVG_MARKER_ORIENT_ANGLE;
+  external num get SVG_MARKER_ORIENT_AUTO;
+  external num get SVG_MARKER_ORIENT_UNKNOWN;
 }
 
 @JS()
@@ -25520,75 +27126,217 @@ class ISVGMaskElement {
 
 @JS()
 @anonymous
-class ISVGFEFuncRElement {
-  external SVGFEFuncRElement get prototype;
-  external set prototype(SVGFEFuncRElement value);
-  external factory ISVGFEFuncRElement();
+class ISVGMetadataElement {
+  external SVGMetadataElement get prototype;
+  external set prototype(SVGMetadataElement value);
+  external factory ISVGMetadataElement();
 }
 
 @JS()
 @anonymous
-class IWebGLProgram {
-  external WebGLProgram get prototype;
-  external set prototype(WebGLProgram value);
-  external factory IWebGLProgram();
+class ISVGNumber {
+  external SVGNumber get prototype;
+  external set prototype(SVGNumber value);
+  external factory ISVGNumber();
 }
 
 @JS()
 @anonymous
-class IClientRect {
-  external ClientRect get prototype;
-  external set prototype(ClientRect value);
-  external factory IClientRect();
+class ISVGNumberList {
+  external SVGNumberList get prototype;
+  external set prototype(SVGNumberList value);
+  external factory ISVGNumberList();
 }
 
 @JS()
 @anonymous
-class IPublicKeyCredential {
-  external PublicKeyCredential get prototype;
-  external set prototype(PublicKeyCredential value);
-  external factory IPublicKeyCredential();
-  external Promise<bool> isUserVerifyingPlatformAuthenticatorAvailable();
+class ISVGPathElement {
+  external SVGPathElement get prototype;
+  external set prototype(SVGPathElement value);
+  external factory ISVGPathElement();
 }
 
 @JS()
 @anonymous
-class IHTMLHtmlElement {
-  external HTMLHtmlElement get prototype;
-  external set prototype(HTMLHtmlElement value);
-  external factory IHTMLHtmlElement();
+class ISVGPatternElement {
+  external SVGPatternElement get prototype;
+  external set prototype(SVGPatternElement value);
+  external factory ISVGPatternElement();
 }
 
 @JS()
 @anonymous
-class IIDBRequest {
-  external IDBRequest get prototype;
-  external set prototype(IDBRequest value);
-  external factory IIDBRequest();
+class ISVGPointList {
+  external SVGPointList get prototype;
+  external set prototype(SVGPointList value);
+  external factory ISVGPointList();
 }
 
 @JS()
 @anonymous
-class ICountQueuingStrategy {
-  external CountQueuingStrategy get prototype;
-  external set prototype(CountQueuingStrategy value);
-  external factory ICountQueuingStrategy({QueuingStrategyInit init});
+class ISVGPolygonElement {
+  external SVGPolygonElement get prototype;
+  external set prototype(SVGPolygonElement value);
+  external factory ISVGPolygonElement();
 }
 
 @JS()
 @anonymous
-class IHistory {
-  external History get prototype;
-  external set prototype(History value);
-  external factory IHistory();
+class ISVGPolylineElement {
+  external SVGPolylineElement get prototype;
+  external set prototype(SVGPolylineElement value);
+  external factory ISVGPolylineElement();
 }
 
 @JS()
 @anonymous
-class IMediaCapabilities {
-  external MediaCapabilities get prototype;
-  external set prototype(MediaCapabilities value);
-  external factory IMediaCapabilities();
+class ISVGPreserveAspectRatio {
+  external SVGPreserveAspectRatio get prototype;
+  external set prototype(SVGPreserveAspectRatio value);
+  external factory ISVGPreserveAspectRatio();
+  external num get SVG_MEETORSLICE_MEET;
+  external num get SVG_MEETORSLICE_SLICE;
+  external num get SVG_MEETORSLICE_UNKNOWN;
+  external num get SVG_PRESERVEASPECTRATIO_NONE;
+  external num get SVG_PRESERVEASPECTRATIO_UNKNOWN;
+  external num get SVG_PRESERVEASPECTRATIO_XMAXYMAX;
+  external num get SVG_PRESERVEASPECTRATIO_XMAXYMID;
+  external num get SVG_PRESERVEASPECTRATIO_XMAXYMIN;
+  external num get SVG_PRESERVEASPECTRATIO_XMIDYMAX;
+  external num get SVG_PRESERVEASPECTRATIO_XMIDYMID;
+  external num get SVG_PRESERVEASPECTRATIO_XMIDYMIN;
+  external num get SVG_PRESERVEASPECTRATIO_XMINYMAX;
+  external num get SVG_PRESERVEASPECTRATIO_XMINYMID;
+  external num get SVG_PRESERVEASPECTRATIO_XMINYMIN;
+}
+
+@JS()
+@anonymous
+class ISVGRadialGradientElement {
+  external SVGRadialGradientElement get prototype;
+  external set prototype(SVGRadialGradientElement value);
+  external factory ISVGRadialGradientElement();
+}
+
+@JS()
+@anonymous
+class ISVGRectElement {
+  external SVGRectElement get prototype;
+  external set prototype(SVGRectElement value);
+  external factory ISVGRectElement();
+}
+
+@JS()
+@anonymous
+class ISVGSVGElement {
+  external SVGSVGElement get prototype;
+  external set prototype(SVGSVGElement value);
+  external factory ISVGSVGElement();
+}
+
+@JS()
+@anonymous
+class ISVGScriptElement {
+  external SVGScriptElement get prototype;
+  external set prototype(SVGScriptElement value);
+  external factory ISVGScriptElement();
+}
+
+@JS()
+@anonymous
+class ISVGSetElement {
+  external SVGSetElement get prototype;
+  external set prototype(SVGSetElement value);
+  external factory ISVGSetElement();
+}
+
+@JS()
+@anonymous
+class ISVGStopElement {
+  external SVGStopElement get prototype;
+  external set prototype(SVGStopElement value);
+  external factory ISVGStopElement();
+}
+
+@JS()
+@anonymous
+class ISVGStringList {
+  external SVGStringList get prototype;
+  external set prototype(SVGStringList value);
+  external factory ISVGStringList();
+}
+
+@JS()
+@anonymous
+class ISVGStyleElement {
+  external SVGStyleElement get prototype;
+  external set prototype(SVGStyleElement value);
+  external factory ISVGStyleElement();
+}
+
+@JS()
+@anonymous
+class ISVGSwitchElement {
+  external SVGSwitchElement get prototype;
+  external set prototype(SVGSwitchElement value);
+  external factory ISVGSwitchElement();
+}
+
+@JS()
+@anonymous
+class ISVGSymbolElement {
+  external SVGSymbolElement get prototype;
+  external set prototype(SVGSymbolElement value);
+  external factory ISVGSymbolElement();
+}
+
+@JS()
+@anonymous
+class ISVGTSpanElement {
+  external SVGTSpanElement get prototype;
+  external set prototype(SVGTSpanElement value);
+  external factory ISVGTSpanElement();
+}
+
+@JS()
+@anonymous
+class ISVGTextContentElement {
+  external SVGTextContentElement get prototype;
+  external set prototype(SVGTextContentElement value);
+  external factory ISVGTextContentElement();
+  external num get LENGTHADJUST_SPACING;
+  external num get LENGTHADJUST_SPACINGANDGLYPHS;
+  external num get LENGTHADJUST_UNKNOWN;
+}
+
+@JS()
+@anonymous
+class ISVGTextElement {
+  external SVGTextElement get prototype;
+  external set prototype(SVGTextElement value);
+  external factory ISVGTextElement();
+}
+
+@JS()
+@anonymous
+class ISVGTextPathElement {
+  external SVGTextPathElement get prototype;
+  external set prototype(SVGTextPathElement value);
+  external factory ISVGTextPathElement();
+  external num get TEXTPATH_METHODTYPE_ALIGN;
+  external num get TEXTPATH_METHODTYPE_STRETCH;
+  external num get TEXTPATH_METHODTYPE_UNKNOWN;
+  external num get TEXTPATH_SPACINGTYPE_AUTO;
+  external num get TEXTPATH_SPACINGTYPE_EXACT;
+  external num get TEXTPATH_SPACINGTYPE_UNKNOWN;
+}
+
+@JS()
+@anonymous
+class ISVGTextPositioningElement {
+  external SVGTextPositioningElement get prototype;
+  external set prototype(SVGTextPositioningElement value);
+  external factory ISVGTextPositioningElement();
 }
 
 @JS()
@@ -25597,121 +27345,6 @@ class ISVGTitleElement {
   external SVGTitleElement get prototype;
   external set prototype(SVGTitleElement value);
   external factory ISVGTitleElement();
-}
-
-@JS()
-@anonymous
-class IStyleSheetList {
-  external StyleSheetList get prototype;
-  external set prototype(StyleSheetList value);
-  external factory IStyleSheetList();
-}
-
-@JS()
-@anonymous
-class ICryptoKey {
-  external CryptoKey get prototype;
-  external set prototype(CryptoKey value);
-  external factory ICryptoKey();
-}
-
-@JS()
-@anonymous
-class IPushSubscriptionOptions {
-  external PushSubscriptionOptions get prototype;
-  external set prototype(PushSubscriptionOptions value);
-  external factory IPushSubscriptionOptions();
-}
-
-@JS()
-@anonymous
-class IWebGLTexture {
-  external WebGLTexture get prototype;
-  external set prototype(WebGLTexture value);
-  external factory IWebGLTexture();
-}
-
-@JS()
-@anonymous
-class IHTMLFrameElement {
-  external HTMLFrameElement get prototype;
-  external set prototype(HTMLFrameElement value);
-  external factory IHTMLFrameElement();
-}
-
-@JS()
-@anonymous
-class IAbstractRange {
-  external AbstractRange get prototype;
-  external set prototype(AbstractRange value);
-  external factory IAbstractRange();
-}
-
-@JS()
-@anonymous
-class IDOMMatrix {
-  external DOMMatrix get prototype;
-  external set prototype(DOMMatrix value);
-  external factory IDOMMatrix({dynamic init});
-  external DOMMatrix fromFloat32Array(Float32Array array32);
-  external DOMMatrix fromFloat64Array(Float64Array array64);
-  external DOMMatrix fromMatrix(DOMMatrixInit other);
-}
-
-@JS()
-@anonymous
-class IDOMStringList {
-  external DOMStringList get prototype;
-  external set prototype(DOMStringList value);
-  external factory IDOMStringList();
-}
-
-@JS()
-@anonymous
-class ICompositionEvent {
-  external CompositionEvent get prototype;
-  external set prototype(CompositionEvent value);
-  external factory ICompositionEvent({String type, CompositionEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class IHTMLFieldSetElement {
-  external HTMLFieldSetElement get prototype;
-  external set prototype(HTMLFieldSetElement value);
-  external factory IHTMLFieldSetElement();
-}
-
-@JS()
-@anonymous
-class IMessageChannel {
-  external MessageChannel get prototype;
-  external set prototype(MessageChannel value);
-  external factory IMessageChannel();
-}
-
-@JS()
-@anonymous
-class IHeaders {
-  external Headers get prototype;
-  external set prototype(Headers value);
-  external factory IHeaders({HeadersInit init});
-}
-
-@JS()
-@anonymous
-class ISVGFEMergeElement {
-  external SVGFEMergeElement get prototype;
-  external set prototype(SVGFEMergeElement value);
-  external factory ISVGFEMergeElement();
-}
-
-@JS()
-@anonymous
-class IVisualViewport {
-  external VisualViewport get prototype;
-  external set prototype(VisualViewport value);
-  external factory IVisualViewport();
 }
 
 @JS()
@@ -25731,383 +27364,78 @@ class ISVGTransform {
 
 @JS()
 @anonymous
-class IMimeType {
-  external MimeType get prototype;
-  external set prototype(MimeType value);
-  external factory IMimeType();
+class ISVGTransformList {
+  external SVGTransformList get prototype;
+  external set prototype(SVGTransformList value);
+  external factory ISVGTransformList();
 }
 
 @JS()
 @anonymous
-class IWebGLContextEvent {
-  external WebGLContextEvent get prototype;
-  external set prototype(WebGLContextEvent value);
-  external factory IWebGLContextEvent({String type, WebGLContextEventInit eventInit});
+class ISVGUnitTypes {
+  external SVGUnitTypes get prototype;
+  external set prototype(SVGUnitTypes value);
+  external factory ISVGUnitTypes();
+  external num get SVG_UNIT_TYPE_OBJECTBOUNDINGBOX;
+  external num get SVG_UNIT_TYPE_UNKNOWN;
+  external num get SVG_UNIT_TYPE_USERSPACEONUSE;
 }
 
 @JS()
 @anonymous
-class ISVGDescElement {
-  external SVGDescElement get prototype;
-  external set prototype(SVGDescElement value);
-  external factory ISVGDescElement();
+class ISVGUseElement {
+  external SVGUseElement get prototype;
+  external set prototype(SVGUseElement value);
+  external factory ISVGUseElement();
 }
 
 @JS()
 @anonymous
-class IXMLHttpRequestEventTarget {
-  external XMLHttpRequestEventTarget get prototype;
-  external set prototype(XMLHttpRequestEventTarget value);
-  external factory IXMLHttpRequestEventTarget();
+class ISVGViewElement {
+  external SVGViewElement get prototype;
+  external set prototype(SVGViewElement value);
+  external factory ISVGViewElement();
 }
 
 @JS()
 @anonymous
-class IEvent {
-  external Event get prototype;
-  external set prototype(Event value);
-  external factory IEvent({String type, EventInit eventInitDict});
-  external num get AT_TARGET;
-  external num get BUBBLING_PHASE;
-  external num get CAPTURING_PHASE;
-  external num get NONE;
+class IScreen {
+  external Screen get prototype;
+  external set prototype(Screen value);
+  external factory IScreen();
 }
 
 @JS()
 @anonymous
-class ISpeechRecognitionAlternative {
-  external SpeechRecognitionAlternative get prototype;
-  external set prototype(SpeechRecognitionAlternative value);
-  external factory ISpeechRecognitionAlternative();
+class IScreenOrientation {
+  external ScreenOrientation get prototype;
+  external set prototype(ScreenOrientation value);
+  external factory IScreenOrientation();
 }
 
 @JS()
 @anonymous
-class IBarProp {
-  external BarProp get prototype;
-  external set prototype(BarProp value);
-  external factory IBarProp();
+class IScriptProcessorNode {
+  external ScriptProcessorNode get prototype;
+  external set prototype(ScriptProcessorNode value);
+  external factory IScriptProcessorNode();
 }
 
 @JS()
 @anonymous
-class IPaymentAddress {
-  external PaymentAddress get prototype;
-  external set prototype(PaymentAddress value);
-  external factory IPaymentAddress();
+class ISecurityPolicyViolationEvent {
+  external SecurityPolicyViolationEvent get prototype;
+  external set prototype(SecurityPolicyViolationEvent value);
+  external factory ISecurityPolicyViolationEvent({String type, SecurityPolicyViolationEventInit eventInitDict});
 }
 
 @JS()
 @anonymous
-class IHTMLOptGroupElement {
-  external HTMLOptGroupElement get prototype;
-  external set prototype(HTMLOptGroupElement value);
-  external factory IHTMLOptGroupElement();
-}
-
-@JS()
-@anonymous
-class IHTMLLegendElement {
-  external HTMLLegendElement get prototype;
-  external set prototype(HTMLLegendElement value);
-  external factory IHTMLLegendElement();
-}
-
-@JS()
-@anonymous
-class IMimeTypeArray {
-  external MimeTypeArray get prototype;
-  external set prototype(MimeTypeArray value);
-  external factory IMimeTypeArray();
-}
-
-@JS()
-@anonymous
-class ISVGScriptElement {
-  external SVGScriptElement get prototype;
-  external set prototype(SVGScriptElement value);
-  external factory ISVGScriptElement();
-}
-
-@JS()
-@anonymous
-class IAnimationTimeline {
-  external AnimationTimeline get prototype;
-  external set prototype(AnimationTimeline value);
-  external factory IAnimationTimeline();
-}
-
-@JS()
-@anonymous
-class IHTMLProgressElement {
-  external HTMLProgressElement get prototype;
-  external set prototype(HTMLProgressElement value);
-  external factory IHTMLProgressElement();
-}
-
-@JS()
-@anonymous
-class IHTMLSourceElement {
-  external HTMLSourceElement get prototype;
-  external set prototype(HTMLSourceElement value);
-  external factory IHTMLSourceElement();
-}
-
-@JS()
-@anonymous
-class IWebGLFramebuffer {
-  external WebGLFramebuffer get prototype;
-  external set prototype(WebGLFramebuffer value);
-  external factory IWebGLFramebuffer();
-}
-
-@JS()
-@anonymous
-class IPageTransitionEvent {
-  external PageTransitionEvent get prototype;
-  external set prototype(PageTransitionEvent value);
-  external factory IPageTransitionEvent({String type, PageTransitionEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class IPermissions {
-  external Permissions get prototype;
-  external set prototype(Permissions value);
-  external factory IPermissions();
-}
-
-@JS()
-@anonymous
-class IDOMRect {
-  external DOMRect get prototype;
-  external set prototype(DOMRect value);
-  external factory IDOMRect({num x, num y, num width, num height});
-  external DOMRect fromRect(DOMRectInit other);
-}
-
-@JS()
-@anonymous
-class IDocumentType {
-  external DocumentType get prototype;
-  external set prototype(DocumentType value);
-  external factory IDocumentType();
-}
-
-@JS()
-@anonymous
-class ISVGCursorElement {
-  external SVGCursorElement get prototype;
-  external set prototype(SVGCursorElement value);
-  external factory ISVGCursorElement();
-}
-
-@JS()
-@anonymous
-class IHTMLTextAreaElement {
-  external HTMLTextAreaElement get prototype;
-  external set prototype(HTMLTextAreaElement value);
-  external factory IHTMLTextAreaElement();
-}
-
-@JS()
-@anonymous
-class IFormData {
-  external FormData get prototype;
-  external set prototype(FormData value);
-  external factory IFormData({HTMLFormElement form});
-}
-
-@JS()
-@anonymous
-class ISubmitEvent {
-  external SubmitEvent get prototype;
-  external set prototype(SubmitEvent value);
-  external factory ISubmitEvent({String type, SubmitEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class ICSSStyleRule {
-  external CSSStyleRule get prototype;
-  external set prototype(CSSStyleRule value);
-  external factory ICSSStyleRule();
-}
-
-@JS()
-@anonymous
-class ISVGAnimatedPreserveAspectRatio {
-  external SVGAnimatedPreserveAspectRatio get prototype;
-  external set prototype(SVGAnimatedPreserveAspectRatio value);
-  external factory ISVGAnimatedPreserveAspectRatio();
-}
-
-@JS()
-@anonymous
-class ICSSStyleSheet {
-  external CSSStyleSheet get prototype;
-  external set prototype(CSSStyleSheet value);
-  external factory ICSSStyleSheet();
-}
-
-@JS()
-@anonymous
-class ICSSFontFaceRule {
-  external CSSFontFaceRule get prototype;
-  external set prototype(CSSFontFaceRule value);
-  external factory ICSSFontFaceRule();
-}
-
-@JS()
-@anonymous
-class IDOMStringMap {
-  external DOMStringMap get prototype;
-  external set prototype(DOMStringMap value);
-  external factory IDOMStringMap();
-}
-
-@JS()
-@anonymous
-class IPerformanceServerTiming {
-  external PerformanceServerTiming get prototype;
-  external set prototype(PerformanceServerTiming value);
-  external factory IPerformanceServerTiming();
-}
-
-@JS()
-@anonymous
-class ICharacterData {
-  external CharacterData get prototype;
-  external set prototype(CharacterData value);
-  external factory ICharacterData();
-}
-
-@JS()
-@anonymous
-class IMediaQueryList {
-  external MediaQueryList get prototype;
-  external set prototype(MediaQueryList value);
-  external factory IMediaQueryList();
-}
-
-@JS()
-@anonymous
-class IMediaEncryptedEvent {
-  external MediaEncryptedEvent get prototype;
-  external set prototype(MediaEncryptedEvent value);
-  external factory IMediaEncryptedEvent({String type, MediaEncryptedEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class IVTTRegion {
-  external VTTRegion get prototype;
-  external set prototype(VTTRegion value);
-  external factory IVTTRegion();
-}
-
-@JS()
-@anonymous
-class ITextEncoderStream {
-  external TextEncoderStream get prototype;
-  external set prototype(TextEncoderStream value);
-  external factory ITextEncoderStream();
-}
-
-@JS()
-@anonymous
-class IAudioWorkletNode {
-  external AudioWorkletNode get prototype;
-  external set prototype(AudioWorkletNode value);
-  external factory IAudioWorkletNode({BaseAudioContext context, String name, AudioWorkletNodeOptions options});
-}
-
-@JS()
-@anonymous
-class IAnimationPlaybackEvent {
-  external AnimationPlaybackEvent get prototype;
-  external set prototype(AnimationPlaybackEvent value);
-  external factory IAnimationPlaybackEvent({String type, AnimationPlaybackEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class IHTMLDetailsElement {
-  external HTMLDetailsElement get prototype;
-  external set prototype(HTMLDetailsElement value);
-  external factory IHTMLDetailsElement();
-}
-
-@JS()
-@anonymous
-class ISVGSwitchElement {
-  external SVGSwitchElement get prototype;
-  external set prototype(SVGSwitchElement value);
-  external factory ISVGSwitchElement();
-}
-
-@JS()
-@anonymous
-class ITouch {
-  external Touch get prototype;
-  external set prototype(Touch value);
-  external factory ITouch({TouchInit touchInitDict});
-}
-
-@JS()
-@anonymous
-class IHTMLTableElement {
-  external HTMLTableElement get prototype;
-  external set prototype(HTMLTableElement value);
-  external factory IHTMLTableElement();
-}
-
-@JS()
-@anonymous
-class IWaveShaperNode {
-  external WaveShaperNode get prototype;
-  external set prototype(WaveShaperNode value);
-  external factory IWaveShaperNode({BaseAudioContext context, WaveShaperOptions options});
-}
-
-@JS()
-@anonymous
-class IRTCDTMFToneChangeEvent {
-  external RTCDTMFToneChangeEvent get prototype;
-  external set prototype(RTCDTMFToneChangeEvent value);
-  external factory IRTCDTMFToneChangeEvent({String type, RTCDTMFToneChangeEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class IHTMLHeadingElement {
-  external HTMLHeadingElement get prototype;
-  external set prototype(HTMLHeadingElement value);
-  external factory IHTMLHeadingElement();
-}
-
-@JS()
-@anonymous
-class IPictureInPictureWindow {
-  external PictureInPictureWindow get prototype;
-  external set prototype(PictureInPictureWindow value);
-  external factory IPictureInPictureWindow();
-}
-
-@JS()
-@anonymous
-class ISVGAnimatedAngle {
-  external SVGAnimatedAngle get prototype;
-  external set prototype(SVGAnimatedAngle value);
-  external factory ISVGAnimatedAngle();
-}
-
-@JS()
-@anonymous
-class ISVGAnimatedString {
-  external SVGAnimatedString get prototype;
-  external set prototype(SVGAnimatedString value);
-  external factory ISVGAnimatedString();
+class ISelection {
+  external Selection get prototype;
+  external set prototype(Selection value);
+  external factory ISelection();
+  external String toString();
 }
 
 @JS()
@@ -26120,137 +27448,90 @@ class IServiceWorker {
 
 @JS()
 @anonymous
-class ITextDecoder {
-  external TextDecoder get prototype;
-  external set prototype(TextDecoder value);
-  external factory ITextDecoder({String label, TextDecoderOptions options});
+class IServiceWorkerContainer {
+  external ServiceWorkerContainer get prototype;
+  external set prototype(ServiceWorkerContainer value);
+  external factory IServiceWorkerContainer();
 }
 
 @JS()
 @anonymous
-class IModule {
-  external Module get prototype;
-  external set prototype(Module value);
-  external factory IModule({BufferSource bytes});
-  external List<ArrayBuffer> customSections(Module moduleObject, String sectionName);
-  external List<ModuleExportDescriptor> exports(Module moduleObject);
-  external List<ModuleImportDescriptor> imports(Module moduleObject);
+class IServiceWorkerRegistration {
+  external ServiceWorkerRegistration get prototype;
+  external set prototype(ServiceWorkerRegistration value);
+  external factory IServiceWorkerRegistration();
 }
 
 @JS()
 @anonymous
-class IHTMLOListElement {
-  external HTMLOListElement get prototype;
-  external set prototype(HTMLOListElement value);
-  external factory IHTMLOListElement();
+class IShadowRoot {
+  external ShadowRoot get prototype;
+  external set prototype(ShadowRoot value);
+  external factory IShadowRoot();
 }
 
 @JS()
 @anonymous
-class IIDBOpenDBRequest {
-  external IDBOpenDBRequest get prototype;
-  external set prototype(IDBOpenDBRequest value);
-  external factory IIDBOpenDBRequest();
+class ISharedWorker {
+  external SharedWorker get prototype;
+  external set prototype(SharedWorker value);
+  external factory ISharedWorker({dynamic scriptURL, dynamic options});
 }
 
 @JS()
 @anonymous
-class IFileReader {
-  external FileReader get prototype;
-  external set prototype(FileReader value);
-  external factory IFileReader();
-  external num get DONE;
-  external num get EMPTY;
-  external num get LOADING;
+class ISourceBuffer {
+  external SourceBuffer get prototype;
+  external set prototype(SourceBuffer value);
+  external factory ISourceBuffer();
 }
 
 @JS()
 @anonymous
-class IFontFace {
-  external FontFace get prototype;
-  external set prototype(FontFace value);
-  external factory IFontFace({String family, dynamic source, FontFaceDescriptors descriptors});
+class ISourceBufferList {
+  external SourceBufferList get prototype;
+  external set prototype(SourceBufferList value);
+  external factory ISourceBufferList();
 }
 
 @JS()
 @anonymous
-class IFontFaceSetLoadEvent {
-  external FontFaceSetLoadEvent get prototype;
-  external set prototype(FontFaceSetLoadEvent value);
-  external factory IFontFaceSetLoadEvent({String type, FontFaceSetLoadEventInit eventInitDict});
+class ISpeechRecognitionAlternative {
+  external SpeechRecognitionAlternative get prototype;
+  external set prototype(SpeechRecognitionAlternative value);
+  external factory ISpeechRecognitionAlternative();
 }
 
 @JS()
 @anonymous
-class ISVGAnimatedEnumeration {
-  external SVGAnimatedEnumeration get prototype;
-  external set prototype(SVGAnimatedEnumeration value);
-  external factory ISVGAnimatedEnumeration();
+class ISpeechRecognitionErrorEvent {
+  external SpeechRecognitionErrorEvent get prototype;
+  external set prototype(SpeechRecognitionErrorEvent value);
+  external factory ISpeechRecognitionErrorEvent({String type, SpeechRecognitionErrorEventInit eventInitDict});
 }
 
 @JS()
 @anonymous
-class IRTCCertificate {
-  external RTCCertificate get prototype;
-  external set prototype(RTCCertificate value);
-  external factory IRTCCertificate();
+class ISpeechRecognitionResult {
+  external SpeechRecognitionResult get prototype;
+  external set prototype(SpeechRecognitionResult value);
+  external factory ISpeechRecognitionResult();
 }
 
 @JS()
 @anonymous
-class IAbortSignal {
-  external AbortSignal get prototype;
-  external set prototype(AbortSignal value);
-  external factory IAbortSignal();
+class ISpeechRecognitionResultList {
+  external SpeechRecognitionResultList get prototype;
+  external set prototype(SpeechRecognitionResultList value);
+  external factory ISpeechRecognitionResultList();
 }
 
 @JS()
 @anonymous
-class IDelayNode {
-  external DelayNode get prototype;
-  external set prototype(DelayNode value);
-  external factory IDelayNode({BaseAudioContext context, DelayOptions options});
-}
-
-@JS()
-@anonymous
-class IMessageEvent {
-  external MessageEvent get prototype;
-  external set prototype(MessageEvent value);
-  external factory IMessageEvent({String type, MessageEventInit<T> eventInitDict});
-}
-
-@JS()
-@anonymous
-class IReadableStream {
-  external ReadableStream get prototype;
-  external set prototype(ReadableStream value);
-  external factory IReadableStream({UnderlyingSource<R> underlyingSource, QueuingStrategy<R> strategy});
-}
-
-@JS()
-@anonymous
-class ISVGFEDiffuseLightingElement {
-  external SVGFEDiffuseLightingElement get prototype;
-  external set prototype(SVGFEDiffuseLightingElement value);
-  external factory ISVGFEDiffuseLightingElement();
-}
-
-@JS()
-@anonymous
-class IDOMPointReadOnly {
-  external DOMPointReadOnly get prototype;
-  external set prototype(DOMPointReadOnly value);
-  external factory IDOMPointReadOnly({num x, num y, num z, num w});
-  external DOMPointReadOnly fromPoint(DOMPointInit other);
-}
-
-@JS()
-@anonymous
-class IWorker {
-  external Worker get prototype;
-  external set prototype(Worker value);
-  external factory IWorker({dynamic scriptURL, WorkerOptions options});
+class ISpeechSynthesis {
+  external SpeechSynthesis get prototype;
+  external set prototype(SpeechSynthesis value);
+  external factory ISpeechSynthesis();
 }
 
 @JS()
@@ -26263,48 +27544,342 @@ class ISpeechSynthesisErrorEvent {
 
 @JS()
 @anonymous
-class ISVGFEDropShadowElement {
-  external SVGFEDropShadowElement get prototype;
-  external set prototype(SVGFEDropShadowElement value);
-  external factory ISVGFEDropShadowElement();
+class ISpeechSynthesisEvent {
+  external SpeechSynthesisEvent get prototype;
+  external set prototype(SpeechSynthesisEvent value);
+  external factory ISpeechSynthesisEvent({String type, SpeechSynthesisEventInit eventInitDict});
 }
 
 @JS()
 @anonymous
-class IAudioBufferSourceNode {
-  external AudioBufferSourceNode get prototype;
-  external set prototype(AudioBufferSourceNode value);
-  external factory IAudioBufferSourceNode({BaseAudioContext context, AudioBufferSourceOptions options});
+class ISpeechSynthesisUtterance {
+  external SpeechSynthesisUtterance get prototype;
+  external set prototype(SpeechSynthesisUtterance value);
+  external factory ISpeechSynthesisUtterance({String text});
 }
 
 @JS()
 @anonymous
-class IHTMLAllCollection {
-  external HTMLAllCollection get prototype;
-  external set prototype(HTMLAllCollection value);
-  external factory IHTMLAllCollection();
+class ISpeechSynthesisVoice {
+  external SpeechSynthesisVoice get prototype;
+  external set prototype(SpeechSynthesisVoice value);
+  external factory ISpeechSynthesisVoice();
 }
 
 @JS()
 @anonymous
-class IResizeObserver {
-  external ResizeObserver get prototype;
-  external set prototype(ResizeObserver value);
-  external factory IResizeObserver({ResizeObserverCallback callback});
+class IStaticRange {
+  external StaticRange get prototype;
+  external set prototype(StaticRange value);
+  external factory IStaticRange({StaticRangeInit init});
 }
 
 @JS()
 @anonymous
-class ISVGComponentTransferFunctionElement {
-  external SVGComponentTransferFunctionElement get prototype;
-  external set prototype(SVGComponentTransferFunctionElement value);
-  external factory ISVGComponentTransferFunctionElement();
-  external num get SVG_FECOMPONENTTRANSFER_TYPE_DISCRETE;
-  external num get SVG_FECOMPONENTTRANSFER_TYPE_GAMMA;
-  external num get SVG_FECOMPONENTTRANSFER_TYPE_IDENTITY;
-  external num get SVG_FECOMPONENTTRANSFER_TYPE_LINEAR;
-  external num get SVG_FECOMPONENTTRANSFER_TYPE_TABLE;
-  external num get SVG_FECOMPONENTTRANSFER_TYPE_UNKNOWN;
+class IStereoPannerNode {
+  external StereoPannerNode get prototype;
+  external set prototype(StereoPannerNode value);
+  external factory IStereoPannerNode({BaseAudioContext context, StereoPannerOptions options});
+}
+
+@JS()
+@anonymous
+class IStorage {
+  external Storage get prototype;
+  external set prototype(Storage value);
+  external factory IStorage();
+}
+
+@JS()
+@anonymous
+class IStorageEvent {
+  external StorageEvent get prototype;
+  external set prototype(StorageEvent value);
+  external factory IStorageEvent({String type, StorageEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IStorageManager {
+  external StorageManager get prototype;
+  external set prototype(StorageManager value);
+  external factory IStorageManager();
+}
+
+@JS()
+@anonymous
+class IStyleMedia {
+  external StyleMedia get prototype;
+  external set prototype(StyleMedia value);
+  external factory IStyleMedia();
+}
+
+@JS()
+@anonymous
+class IStyleSheet {
+  external StyleSheet get prototype;
+  external set prototype(StyleSheet value);
+  external factory IStyleSheet();
+}
+
+@JS()
+@anonymous
+class IStyleSheetList {
+  external StyleSheetList get prototype;
+  external set prototype(StyleSheetList value);
+  external factory IStyleSheetList();
+}
+
+@JS()
+@anonymous
+class ISubmitEvent {
+  external SubmitEvent get prototype;
+  external set prototype(SubmitEvent value);
+  external factory ISubmitEvent({String type, SubmitEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class ISubtleCrypto {
+  external SubtleCrypto get prototype;
+  external set prototype(SubtleCrypto value);
+  external factory ISubtleCrypto();
+}
+
+@JS()
+@anonymous
+class ITable {
+  external Table get prototype;
+  external set prototype(Table value);
+  external factory ITable({TableDescriptor descriptor, dynamic value});
+}
+
+@JS()
+@anonymous
+class IText {
+  external Text get prototype;
+  external set prototype(Text value);
+  external factory IText({String data});
+}
+
+@JS()
+@anonymous
+class ITextDecoder {
+  external TextDecoder get prototype;
+  external set prototype(TextDecoder value);
+  external factory ITextDecoder({String label, TextDecoderOptions options});
+}
+
+@JS()
+@anonymous
+class ITextDecoderStream {
+  external TextDecoderStream get prototype;
+  external set prototype(TextDecoderStream value);
+  external factory ITextDecoderStream({String label, TextDecoderOptions options});
+}
+
+@JS()
+@anonymous
+class ITextEncoder {
+  external TextEncoder get prototype;
+  external set prototype(TextEncoder value);
+  external factory ITextEncoder();
+}
+
+@JS()
+@anonymous
+class ITextEncoderStream {
+  external TextEncoderStream get prototype;
+  external set prototype(TextEncoderStream value);
+  external factory ITextEncoderStream();
+}
+
+@JS()
+@anonymous
+class ITextMetrics {
+  external TextMetrics get prototype;
+  external set prototype(TextMetrics value);
+  external factory ITextMetrics();
+}
+
+@JS()
+@anonymous
+class ITextTrack {
+  external TextTrack get prototype;
+  external set prototype(TextTrack value);
+  external factory ITextTrack();
+}
+
+@JS()
+@anonymous
+class ITextTrackCue {
+  external TextTrackCue get prototype;
+  external set prototype(TextTrackCue value);
+  external factory ITextTrackCue();
+}
+
+@JS()
+@anonymous
+class ITextTrackCueList {
+  external TextTrackCueList get prototype;
+  external set prototype(TextTrackCueList value);
+  external factory ITextTrackCueList();
+}
+
+@JS()
+@anonymous
+class ITextTrackList {
+  external TextTrackList get prototype;
+  external set prototype(TextTrackList value);
+  external factory ITextTrackList();
+}
+
+@JS()
+@anonymous
+class ITimeRanges {
+  external TimeRanges get prototype;
+  external set prototype(TimeRanges value);
+  external factory ITimeRanges();
+}
+
+@JS()
+@anonymous
+class ITouch {
+  external Touch get prototype;
+  external set prototype(Touch value);
+  external factory ITouch({TouchInit touchInitDict});
+}
+
+@JS()
+@anonymous
+class ITouchEvent {
+  external TouchEvent get prototype;
+  external set prototype(TouchEvent value);
+  external factory ITouchEvent({String type, TouchEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class ITouchList {
+  external TouchList get prototype;
+  external set prototype(TouchList value);
+  external factory ITouchList();
+}
+
+@JS()
+@anonymous
+class ITrackEvent {
+  external TrackEvent get prototype;
+  external set prototype(TrackEvent value);
+  external factory ITrackEvent({String type, TrackEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class ITransformStream {
+  external TransformStream get prototype;
+  external set prototype(TransformStream value);
+  external factory ITransformStream(
+      {Transformer<I, O> transformer, QueuingStrategy<I> writableStrategy, QueuingStrategy<O> readableStrategy});
+}
+
+@JS()
+@anonymous
+class ITransformStreamDefaultController {
+  external TransformStreamDefaultController get prototype;
+  external set prototype(TransformStreamDefaultController value);
+  external factory ITransformStreamDefaultController();
+}
+
+@JS()
+@anonymous
+class ITransitionEvent {
+  external TransitionEvent get prototype;
+  external set prototype(TransitionEvent value);
+  external factory ITransitionEvent({String type, TransitionEventInit transitionEventInitDict});
+}
+
+@JS()
+@anonymous
+class ITreeWalker {
+  external TreeWalker get prototype;
+  external set prototype(TreeWalker value);
+  external factory ITreeWalker();
+}
+
+@JS()
+@anonymous
+class IUIEvent {
+  external UIEvent get prototype;
+  external set prototype(UIEvent value);
+  external factory IUIEvent({String type, UIEventInit eventInitDict});
+}
+
+@JS()
+@anonymous
+class IURL {
+  external URL get prototype;
+  external set prototype(URL value);
+  external factory IURL({dynamic url, dynamic base});
+  external String createObjectURL(dynamic object);
+  external void revokeObjectURL(String url);
+}
+
+@JS()
+@anonymous
+class IURLSearchParams {
+  external URLSearchParams get prototype;
+  external set prototype(URLSearchParams value);
+  external factory IURLSearchParams({dynamic init});
+  external String toString();
+}
+
+@JS()
+@anonymous
+class IVTTCue {
+  external VTTCue get prototype;
+  external set prototype(VTTCue value);
+  external factory IVTTCue({num startTime, num endTime, String text});
+}
+
+@JS()
+@anonymous
+class IVTTRegion {
+  external VTTRegion get prototype;
+  external set prototype(VTTRegion value);
+  external factory IVTTRegion();
+}
+
+@JS()
+@anonymous
+class IValidityState {
+  external ValidityState get prototype;
+  external set prototype(ValidityState value);
+  external factory IValidityState();
+}
+
+@JS()
+@anonymous
+class IVideoPlaybackQuality {
+  external VideoPlaybackQuality get prototype;
+  external set prototype(VideoPlaybackQuality value);
+  external factory IVideoPlaybackQuality();
+}
+
+@JS()
+@anonymous
+class IVisualViewport {
+  external VisualViewport get prototype;
+  external set prototype(VisualViewport value);
+  external factory IVisualViewport();
+}
+
+@JS()
+@anonymous
+class IWaveShaperNode {
+  external WaveShaperNode get prototype;
+  external set prototype(WaveShaperNode value);
+  external factory IWaveShaperNode({BaseAudioContext context, WaveShaperOptions options});
 }
 
 @JS()
@@ -26876,111 +28451,58 @@ class IWebGL2RenderingContext {
 
 @JS()
 @anonymous
-class IDOMImplementation {
-  external DOMImplementation get prototype;
-  external set prototype(DOMImplementation value);
-  external factory IDOMImplementation();
+class IWebGLActiveInfo {
+  external WebGLActiveInfo get prototype;
+  external set prototype(WebGLActiveInfo value);
+  external factory IWebGLActiveInfo();
 }
 
 @JS()
 @anonymous
-class INamedNodeMap {
-  external NamedNodeMap get prototype;
-  external set prototype(NamedNodeMap value);
-  external factory INamedNodeMap();
+class IWebGLBuffer {
+  external WebGLBuffer get prototype;
+  external set prototype(WebGLBuffer value);
+  external factory IWebGLBuffer();
 }
 
 @JS()
 @anonymous
-class IImageBitmapRenderingContext {
-  external ImageBitmapRenderingContext get prototype;
-  external set prototype(ImageBitmapRenderingContext value);
-  external factory IImageBitmapRenderingContext();
+class IWebGLContextEvent {
+  external WebGLContextEvent get prototype;
+  external set prototype(WebGLContextEvent value);
+  external factory IWebGLContextEvent({String type, WebGLContextEventInit eventInit});
 }
 
 @JS()
 @anonymous
-class IMediaSource {
-  external MediaSource get prototype;
-  external set prototype(MediaSource value);
-  external factory IMediaSource();
-  external bool isTypeSupported(String type);
+class IWebGLFramebuffer {
+  external WebGLFramebuffer get prototype;
+  external set prototype(WebGLFramebuffer value);
+  external factory IWebGLFramebuffer();
 }
 
 @JS()
 @anonymous
-class IFormDataEvent {
-  external FormDataEvent get prototype;
-  external set prototype(FormDataEvent value);
-  external factory IFormDataEvent({String type, FormDataEventInit eventInitDict});
+class IWebGLProgram {
+  external WebGLProgram get prototype;
+  external set prototype(WebGLProgram value);
+  external factory IWebGLProgram();
 }
 
 @JS()
 @anonymous
-class ISVGAnimatedBoolean {
-  external SVGAnimatedBoolean get prototype;
-  external set prototype(SVGAnimatedBoolean value);
-  external factory ISVGAnimatedBoolean();
+class IWebGLQuery {
+  external WebGLQuery get prototype;
+  external set prototype(WebGLQuery value);
+  external factory IWebGLQuery();
 }
 
 @JS()
 @anonymous
-class ISVGAnimatedLengthList {
-  external SVGAnimatedLengthList get prototype;
-  external set prototype(SVGAnimatedLengthList value);
-  external factory ISVGAnimatedLengthList();
-}
-
-@JS()
-@anonymous
-class IBroadcastChannel {
-  external BroadcastChannel get prototype;
-  external set prototype(BroadcastChannel value);
-  external factory IBroadcastChannel({String name});
-}
-
-@JS()
-@anonymous
-class ICSSCounterStyleRule {
-  external CSSCounterStyleRule get prototype;
-  external set prototype(CSSCounterStyleRule value);
-  external factory ICSSCounterStyleRule();
-}
-
-@JS()
-@anonymous
-class IPerformanceNavigation {
-  external PerformanceNavigation get prototype;
-  external set prototype(PerformanceNavigation value);
-  external factory IPerformanceNavigation();
-  external num get TYPE_BACK_FORWARD;
-  external num get TYPE_NAVIGATE;
-  external num get TYPE_RELOAD;
-  external num get TYPE_RESERVED;
-}
-
-@JS()
-@anonymous
-class IMediaStream {
-  external MediaStream get prototype;
-  external set prototype(MediaStream value);
-  external factory IMediaStream();
-}
-
-@JS()
-@anonymous
-class IPerformanceMark {
-  external PerformanceMark get prototype;
-  external set prototype(PerformanceMark value);
-  external factory IPerformanceMark({String markName, PerformanceMarkOptions markOptions});
-}
-
-@JS()
-@anonymous
-class IPerformanceTiming {
-  external PerformanceTiming get prototype;
-  external set prototype(PerformanceTiming value);
-  external factory IPerformanceTiming();
+class IWebGLRenderbuffer {
+  external WebGLRenderbuffer get prototype;
+  external set prototype(WebGLRenderbuffer value);
+  external factory IWebGLRenderbuffer();
 }
 
 @JS()
@@ -27289,1167 +28811,18 @@ class IWebGLRenderingContext {
 
 @JS()
 @anonymous
-class ISVGNumber {
-  external SVGNumber get prototype;
-  external set prototype(SVGNumber value);
-  external factory ISVGNumber();
+class IWebGLSampler {
+  external WebGLSampler get prototype;
+  external set prototype(WebGLSampler value);
+  external factory IWebGLSampler();
 }
 
 @JS()
 @anonymous
-class IWorklet {
-  external Worklet get prototype;
-  external set prototype(Worklet value);
-  external factory IWorklet();
-}
-
-@JS()
-@anonymous
-class ISVGAnimateMotionElement {
-  external SVGAnimateMotionElement get prototype;
-  external set prototype(SVGAnimateMotionElement value);
-  external factory ISVGAnimateMotionElement();
-}
-
-@JS()
-@anonymous
-class ISVGLength {
-  external SVGLength get prototype;
-  external set prototype(SVGLength value);
-  external factory ISVGLength();
-  external num get SVG_LENGTHTYPE_CM;
-  external num get SVG_LENGTHTYPE_EMS;
-  external num get SVG_LENGTHTYPE_EXS;
-  external num get SVG_LENGTHTYPE_IN;
-  external num get SVG_LENGTHTYPE_MM;
-  external num get SVG_LENGTHTYPE_NUMBER;
-  external num get SVG_LENGTHTYPE_PC;
-  external num get SVG_LENGTHTYPE_PERCENTAGE;
-  external num get SVG_LENGTHTYPE_PT;
-  external num get SVG_LENGTHTYPE_PX;
-  external num get SVG_LENGTHTYPE_UNKNOWN;
-}
-
-@JS()
-@anonymous
-class IFileSystem {
-  external FileSystem get prototype;
-  external set prototype(FileSystem value);
-  external factory IFileSystem();
-}
-
-@JS()
-@anonymous
-class IImageBitmap {
-  external ImageBitmap get prototype;
-  external set prototype(ImageBitmap value);
-  external factory IImageBitmap();
-}
-
-@JS()
-@anonymous
-class IMediaDevices {
-  external MediaDevices get prototype;
-  external set prototype(MediaDevices value);
-  external factory IMediaDevices();
-}
-
-@JS()
-@anonymous
-class IMediaStreamAudioSourceNode {
-  external MediaStreamAudioSourceNode get prototype;
-  external set prototype(MediaStreamAudioSourceNode value);
-  external factory IMediaStreamAudioSourceNode({AudioContext context, MediaStreamAudioSourceOptions options});
-}
-
-@JS()
-@anonymous
-class ICSSImportRule {
-  external CSSImportRule get prototype;
-  external set prototype(CSSImportRule value);
-  external factory ICSSImportRule();
-}
-
-@JS()
-@anonymous
-class IHTMLObjectElement {
-  external HTMLObjectElement get prototype;
-  external set prototype(HTMLObjectElement value);
-  external factory IHTMLObjectElement();
-}
-
-@JS()
-@anonymous
-class IConstantSourceNode {
-  external ConstantSourceNode get prototype;
-  external set prototype(ConstantSourceNode value);
-  external factory IConstantSourceNode({BaseAudioContext context, ConstantSourceOptions options});
-}
-
-@JS()
-@anonymous
-class IMutationObserver {
-  external MutationObserver get prototype;
-  external set prototype(MutationObserver value);
-  external factory IMutationObserver({MutationCallback callback});
-}
-
-@JS()
-@anonymous
-class IHTMLMeterElement {
-  external HTMLMeterElement get prototype;
-  external set prototype(HTMLMeterElement value);
-  external factory IHTMLMeterElement();
-}
-
-@JS()
-@anonymous
-class IPaymentMethodChangeEvent {
-  external PaymentMethodChangeEvent get prototype;
-  external set prototype(PaymentMethodChangeEvent value);
-  external factory IPaymentMethodChangeEvent({String type, PaymentMethodChangeEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class IRadioNodeList {
-  external RadioNodeList get prototype;
-  external set prototype(RadioNodeList value);
-  external factory IRadioNodeList();
-}
-
-@JS()
-@anonymous
-class ISVGFEMorphologyElement {
-  external SVGFEMorphologyElement get prototype;
-  external set prototype(SVGFEMorphologyElement value);
-  external factory ISVGFEMorphologyElement();
-  external num get SVG_MORPHOLOGY_OPERATOR_DILATE;
-  external num get SVG_MORPHOLOGY_OPERATOR_ERODE;
-  external num get SVG_MORPHOLOGY_OPERATOR_UNKNOWN;
-}
-
-@JS()
-@anonymous
-class IScreenOrientation {
-  external ScreenOrientation get prototype;
-  external set prototype(ScreenOrientation value);
-  external factory IScreenOrientation();
-}
-
-@JS()
-@anonymous
-class IWebGLRenderbuffer {
-  external WebGLRenderbuffer get prototype;
-  external set prototype(WebGLRenderbuffer value);
-  external factory IWebGLRenderbuffer();
-}
-
-@JS()
-@anonymous
-class IRuntimeError {
-  external RuntimeError get prototype;
-  external set prototype(RuntimeError value);
-  external factory IRuntimeError();
-}
-
-@JS()
-@anonymous
-class IStyleSheet {
-  external StyleSheet get prototype;
-  external set prototype(StyleSheet value);
-  external factory IStyleSheet();
-}
-
-@JS()
-@anonymous
-class IRTCDTMFSender {
-  external RTCDTMFSender get prototype;
-  external set prototype(RTCDTMFSender value);
-  external factory IRTCDTMFSender();
-}
-
-@JS()
-@anonymous
-class IDocumentFragment {
-  external DocumentFragment get prototype;
-  external set prototype(DocumentFragment value);
-  external factory IDocumentFragment();
-}
-
-@JS()
-@anonymous
-class IGamepadButton {
-  external GamepadButton get prototype;
-  external set prototype(GamepadButton value);
-  external factory IGamepadButton();
-}
-
-@JS()
-@anonymous
-class ISpeechSynthesisEvent {
-  external SpeechSynthesisEvent get prototype;
-  external set prototype(SpeechSynthesisEvent value);
-  external factory ISpeechSynthesisEvent({String type, SpeechSynthesisEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class IAudio {
-  external factory IAudio({String src});
-}
-
-@JS()
-@anonymous
-class ICredentialsContainer {
-  external CredentialsContainer get prototype;
-  external set prototype(CredentialsContainer value);
-  external factory ICredentialsContainer();
-}
-
-@JS()
-@anonymous
-class ISVGAnimatedNumber {
-  external SVGAnimatedNumber get prototype;
-  external set prototype(SVGAnimatedNumber value);
-  external factory ISVGAnimatedNumber();
-}
-
-@JS()
-@anonymous
-class ITimeRanges {
-  external TimeRanges get prototype;
-  external set prototype(TimeRanges value);
-  external factory ITimeRanges();
-}
-
-@JS()
-@anonymous
-class INotification {
-  external Notification get prototype;
-  external set prototype(Notification value);
-  external factory INotification({String title, NotificationOptions options});
-  external NotificationPermission get permission;
-  external Promise<NotificationPermission> requestPermission(NotificationPermissionCallback deprecatedCallback);
-}
-
-@JS()
-@anonymous
-class IHTMLLIElement {
-  external HTMLLIElement get prototype;
-  external set prototype(HTMLLIElement value);
-  external factory IHTMLLIElement();
-}
-
-@JS()
-@anonymous
-class ITransitionEvent {
-  external TransitionEvent get prototype;
-  external set prototype(TransitionEvent value);
-  external factory ITransitionEvent({String type, TransitionEventInit transitionEventInitDict});
-}
-
-@JS()
-@anonymous
-class IDOMRectList {
-  external DOMRectList get prototype;
-  external set prototype(DOMRectList value);
-  external factory IDOMRectList();
-}
-
-@JS()
-@anonymous
-class IFile {
-  external File get prototype;
-  external set prototype(File value);
-  external factory IFile({List<BlobPart> fileBits, String fileName, FilePropertyBag options});
-}
-
-@JS()
-@anonymous
-class IMediaRecorderErrorEvent {
-  external MediaRecorderErrorEvent get prototype;
-  external set prototype(MediaRecorderErrorEvent value);
-  external factory IMediaRecorderErrorEvent({String type, MediaRecorderErrorEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class ISVGFEFloodElement {
-  external SVGFEFloodElement get prototype;
-  external set prototype(SVGFEFloodElement value);
-  external factory ISVGFEFloodElement();
-}
-
-@JS()
-@anonymous
-class ISVGDefsElement {
-  external SVGDefsElement get prototype;
-  external set prototype(SVGDefsElement value);
-  external factory ISVGDefsElement();
-}
-
-@JS()
-@anonymous
-class IVideoPlaybackQuality {
-  external VideoPlaybackQuality get prototype;
-  external set prototype(VideoPlaybackQuality value);
-  external factory IVideoPlaybackQuality();
-}
-
-@JS()
-@anonymous
-class IPaymentRequestUpdateEvent {
-  external PaymentRequestUpdateEvent get prototype;
-  external set prototype(PaymentRequestUpdateEvent value);
-  external factory IPaymentRequestUpdateEvent({String type, PaymentRequestUpdateEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class ISVGAnimationElement {
-  external SVGAnimationElement get prototype;
-  external set prototype(SVGAnimationElement value);
-  external factory ISVGAnimationElement();
-}
-
-@JS()
-@anonymous
-class ISVGSVGElement {
-  external SVGSVGElement get prototype;
-  external set prototype(SVGSVGElement value);
-  external factory ISVGSVGElement();
-}
-
-@JS()
-@anonymous
-class ISVGFEPointLightElement {
-  external SVGFEPointLightElement get prototype;
-  external set prototype(SVGFEPointLightElement value);
-  external factory ISVGFEPointLightElement();
-}
-
-@JS()
-@anonymous
-class IHTMLMapElement {
-  external HTMLMapElement get prototype;
-  external set prototype(HTMLMapElement value);
-  external factory IHTMLMapElement();
-}
-
-@JS()
-@anonymous
-class IWritableStream {
-  external WritableStream get prototype;
-  external set prototype(WritableStream value);
-  external factory IWritableStream({UnderlyingSink<W> underlyingSink, QueuingStrategy<W> strategy});
-}
-
-@JS()
-@anonymous
-class ILinkError {
-  external LinkError get prototype;
-  external set prototype(LinkError value);
-  external factory ILinkError();
-}
-
-@JS()
-@anonymous
-class IScriptProcessorNode {
-  external ScriptProcessorNode get prototype;
-  external set prototype(ScriptProcessorNode value);
-  external factory IScriptProcessorNode();
-}
-
-@JS()
-@anonymous
-class IHTMLAreaElement {
-  external HTMLAreaElement get prototype;
-  external set prototype(HTMLAreaElement value);
-  external factory IHTMLAreaElement();
-}
-
-@JS()
-@anonymous
-class IPerformanceNavigationTiming {
-  external PerformanceNavigationTiming get prototype;
-  external set prototype(PerformanceNavigationTiming value);
-  external factory IPerformanceNavigationTiming();
-}
-
-@JS()
-@anonymous
-class IWebGLActiveInfo {
-  external WebGLActiveInfo get prototype;
-  external set prototype(WebGLActiveInfo value);
-  external factory IWebGLActiveInfo();
-}
-
-@JS()
-@anonymous
-class IBiquadFilterNode {
-  external BiquadFilterNode get prototype;
-  external set prototype(BiquadFilterNode value);
-  external factory IBiquadFilterNode({BaseAudioContext context, BiquadFilterOptions options});
-}
-
-@JS()
-@anonymous
-class IHTMLLinkElement {
-  external HTMLLinkElement get prototype;
-  external set prototype(HTMLLinkElement value);
-  external factory IHTMLLinkElement();
-}
-
-@JS()
-@anonymous
-class ITextTrack {
-  external TextTrack get prototype;
-  external set prototype(TextTrack value);
-  external factory ITextTrack();
-}
-
-@JS()
-@anonymous
-class IImage {
-  external factory IImage({num width, num height});
-}
-
-@JS()
-@anonymous
-class ISVGFEColorMatrixElement {
-  external SVGFEColorMatrixElement get prototype;
-  external set prototype(SVGFEColorMatrixElement value);
-  external factory ISVGFEColorMatrixElement();
-  external num get SVG_FECOLORMATRIX_TYPE_HUEROTATE;
-  external num get SVG_FECOLORMATRIX_TYPE_LUMINANCETOALPHA;
-  external num get SVG_FECOLORMATRIX_TYPE_MATRIX;
-  external num get SVG_FECOLORMATRIX_TYPE_SATURATE;
-  external num get SVG_FECOLORMATRIX_TYPE_UNKNOWN;
-}
-
-@JS()
-@anonymous
-class ICSSKeyframesRule {
-  external CSSKeyframesRule get prototype;
-  external set prototype(CSSKeyframesRule value);
-  external factory ICSSKeyframesRule();
-}
-
-@JS()
-@anonymous
-class ISVGImageElement {
-  external SVGImageElement get prototype;
-  external set prototype(SVGImageElement value);
-  external factory ISVGImageElement();
-}
-
-@JS()
-@anonymous
-class ISpeechSynthesis {
-  external SpeechSynthesis get prototype;
-  external set prototype(SpeechSynthesis value);
-  external factory ISpeechSynthesis();
-}
-
-@JS()
-@anonymous
-class ISVGMetadataElement {
-  external SVGMetadataElement get prototype;
-  external set prototype(SVGMetadataElement value);
-  external factory ISVGMetadataElement();
-}
-
-@JS()
-@anonymous
-class IPannerNode {
-  external PannerNode get prototype;
-  external set prototype(PannerNode value);
-  external factory IPannerNode({BaseAudioContext context, PannerOptions options});
-}
-
-@JS()
-@anonymous
-class IHTMLTableSectionElement {
-  external HTMLTableSectionElement get prototype;
-  external set prototype(HTMLTableSectionElement value);
-  external factory IHTMLTableSectionElement();
-}
-
-@JS()
-@anonymous
-class ICloseEvent {
-  external CloseEvent get prototype;
-  external set prototype(CloseEvent value);
-  external factory ICloseEvent({String type, CloseEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class ISVGAnimatedInteger {
-  external SVGAnimatedInteger get prototype;
-  external set prototype(SVGAnimatedInteger value);
-  external factory ISVGAnimatedInteger();
-}
-
-@JS()
-@anonymous
-class IDragEvent {
-  external DragEvent get prototype;
-  external set prototype(DragEvent value);
-  external factory IDragEvent({String type, DragEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class IKeyframeEffect {
-  external KeyframeEffect get prototype;
-  external set prototype(KeyframeEffect value);
-  external factory IKeyframeEffect({Element? target, dynamic keyframes, dynamic options});
-}
-
-@JS()
-@anonymous
-class IWebGLVertexArrayObject {
-  external WebGLVertexArrayObject get prototype;
-  external set prototype(WebGLVertexArrayObject value);
-  external factory IWebGLVertexArrayObject();
-}
-
-@JS()
-@anonymous
-class IWindow {
-  external Window get prototype;
-  external set prototype(Window value);
-  external factory IWindow();
-}
-
-@JS()
-@anonymous
-class IIDBTransaction {
-  external IDBTransaction get prototype;
-  external set prototype(IDBTransaction value);
-  external factory IIDBTransaction();
-}
-
-@JS()
-@anonymous
-class IDOMParser {
-  external DOMParser get prototype;
-  external set prototype(DOMParser value);
-  external factory IDOMParser();
-}
-
-@JS()
-@anonymous
-class IBlob {
-  external Blob get prototype;
-  external set prototype(Blob value);
-  external factory IBlob({List<BlobPart> blobParts, BlobPropertyBag options});
-}
-
-@JS()
-@anonymous
-class ICustomElementRegistry {
-  external CustomElementRegistry get prototype;
-  external set prototype(CustomElementRegistry value);
-  external factory ICustomElementRegistry();
-}
-
-@JS()
-@anonymous
-class IPerformanceResourceTiming {
-  external PerformanceResourceTiming get prototype;
-  external set prototype(PerformanceResourceTiming value);
-  external factory IPerformanceResourceTiming();
-}
-
-@JS()
-@anonymous
-class IRTCIceTransport {
-  external RTCIceTransport get prototype;
-  external set prototype(RTCIceTransport value);
-  external factory IRTCIceTransport();
-}
-
-@JS()
-@anonymous
-class IMediaDeviceInfo {
-  external MediaDeviceInfo get prototype;
-  external set prototype(MediaDeviceInfo value);
-  external factory IMediaDeviceInfo();
-}
-
-@JS()
-@anonymous
-class IMemory {
-  external Memory get prototype;
-  external set prototype(Memory value);
-  external factory IMemory({MemoryDescriptor descriptor});
-}
-
-@JS()
-@anonymous
-class ISVGFEImageElement {
-  external SVGFEImageElement get prototype;
-  external set prototype(SVGFEImageElement value);
-  external factory ISVGFEImageElement();
-}
-
-@JS()
-@anonymous
-class IHTMLAudioElement {
-  external HTMLAudioElement get prototype;
-  external set prototype(HTMLAudioElement value);
-  external factory IHTMLAudioElement();
-}
-
-@JS()
-@anonymous
-class ISVGAngle {
-  external SVGAngle get prototype;
-  external set prototype(SVGAngle value);
-  external factory ISVGAngle();
-  external num get SVG_ANGLETYPE_DEG;
-  external num get SVG_ANGLETYPE_GRAD;
-  external num get SVG_ANGLETYPE_RAD;
-  external num get SVG_ANGLETYPE_UNKNOWN;
-  external num get SVG_ANGLETYPE_UNSPECIFIED;
-}
-
-@JS()
-@anonymous
-class ITouchEvent {
-  external TouchEvent get prototype;
-  external set prototype(TouchEvent value);
-  external factory ITouchEvent({String type, TouchEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class IGamepadHapticActuator {
-  external GamepadHapticActuator get prototype;
-  external set prototype(GamepadHapticActuator value);
-  external factory IGamepadHapticActuator();
-}
-
-@JS()
-@anonymous
-class IHTMLOutputElement {
-  external HTMLOutputElement get prototype;
-  external set prototype(HTMLOutputElement value);
-  external factory IHTMLOutputElement();
-}
-
-@JS()
-@anonymous
-class ILocation {
-  external Location get prototype;
-  external set prototype(Location value);
-  external factory ILocation();
-}
-
-@JS()
-@anonymous
-class ISVGFEConvolveMatrixElement {
-  external SVGFEConvolveMatrixElement get prototype;
-  external set prototype(SVGFEConvolveMatrixElement value);
-  external factory ISVGFEConvolveMatrixElement();
-  external num get SVG_EDGEMODE_DUPLICATE;
-  external num get SVG_EDGEMODE_NONE;
-  external num get SVG_EDGEMODE_UNKNOWN;
-  external num get SVG_EDGEMODE_WRAP;
-}
-
-@JS()
-@anonymous
-class IWebGLSync {
-  external WebGLSync get prototype;
-  external set prototype(WebGLSync value);
-  external factory IWebGLSync();
-}
-
-@JS()
-@anonymous
-class IXMLHttpRequestUpload {
-  external XMLHttpRequestUpload get prototype;
-  external set prototype(XMLHttpRequestUpload value);
-  external factory IXMLHttpRequestUpload();
-}
-
-@JS()
-@anonymous
-class ITransformStream {
-  external TransformStream get prototype;
-  external set prototype(TransformStream value);
-  external factory ITransformStream(
-      {Transformer<I, O> transformer, QueuingStrategy<I> writableStrategy, QueuingStrategy<O> readableStrategy});
-}
-
-@JS()
-@anonymous
-class IEventSource {
-  external EventSource get prototype;
-  external set prototype(EventSource value);
-  external factory IEventSource({dynamic url, EventSourceInit eventSourceInitDict});
-  external num get CLOSED;
-  external num get CONNECTING;
-  external num get OPEN;
-}
-
-@JS()
-@anonymous
-class IHTMLTitleElement {
-  external HTMLTitleElement get prototype;
-  external set prototype(HTMLTitleElement value);
-  external factory IHTMLTitleElement();
-}
-
-@JS()
-@anonymous
-class ICSSStyleDeclaration {
-  external CSSStyleDeclaration get prototype;
-  external set prototype(CSSStyleDeclaration value);
-  external factory ICSSStyleDeclaration();
-}
-
-@JS()
-@anonymous
-class ISVGStringList {
-  external SVGStringList get prototype;
-  external set prototype(SVGStringList value);
-  external factory ISVGStringList();
-}
-
-@JS()
-@anonymous
-class IMediaKeyStatusMap {
-  external MediaKeyStatusMap get prototype;
-  external set prototype(MediaKeyStatusMap value);
-  external factory IMediaKeyStatusMap();
-}
-
-@JS()
-@anonymous
-class IFileSystemFileEntry {
-  external FileSystemFileEntry get prototype;
-  external set prototype(FileSystemFileEntry value);
-  external factory IFileSystemFileEntry();
-}
-
-@JS()
-@anonymous
-class IHTMLLabelElement {
-  external HTMLLabelElement get prototype;
-  external set prototype(HTMLLabelElement value);
-  external factory IHTMLLabelElement();
-}
-
-@JS()
-@anonymous
-class IMediaKeySession {
-  external MediaKeySession get prototype;
-  external set prototype(MediaKeySession value);
-  external factory IMediaKeySession();
-}
-
-@JS()
-@anonymous
-class IRTCIceCandidate {
-  external RTCIceCandidate get prototype;
-  external set prototype(RTCIceCandidate value);
-  external factory IRTCIceCandidate({RTCIceCandidateInit candidateInitDict});
-}
-
-@JS()
-@anonymous
-class IRTCRtpSender {
-  external RTCRtpSender get prototype;
-  external set prototype(RTCRtpSender value);
-  external factory IRTCRtpSender();
-  external RTCRtpCapabilities? getCapabilities(String kind);
-}
-
-@JS()
-@anonymous
-class ISVGTextPathElement {
-  external SVGTextPathElement get prototype;
-  external set prototype(SVGTextPathElement value);
-  external factory ISVGTextPathElement();
-  external num get TEXTPATH_METHODTYPE_ALIGN;
-  external num get TEXTPATH_METHODTYPE_STRETCH;
-  external num get TEXTPATH_METHODTYPE_UNKNOWN;
-  external num get TEXTPATH_SPACINGTYPE_AUTO;
-  external num get TEXTPATH_SPACINGTYPE_EXACT;
-  external num get TEXTPATH_SPACINGTYPE_UNKNOWN;
-}
-
-@JS()
-@anonymous
-class ISpeechSynthesisUtterance {
-  external SpeechSynthesisUtterance get prototype;
-  external set prototype(SpeechSynthesisUtterance value);
-  external factory ISpeechSynthesisUtterance({String text});
-}
-
-@JS()
-@anonymous
-class ITable {
-  external Table get prototype;
-  external set prototype(Table value);
-  external factory ITable({TableDescriptor descriptor, dynamic value});
-}
-
-@JS()
-@anonymous
-class ICSSGroupingRule {
-  external CSSGroupingRule get prototype;
-  external set prototype(CSSGroupingRule value);
-  external factory ICSSGroupingRule();
-}
-
-@JS()
-@anonymous
-class IAudioDestinationNode {
-  external AudioDestinationNode get prototype;
-  external set prototype(AudioDestinationNode value);
-  external factory IAudioDestinationNode();
-}
-
-@JS()
-@anonymous
-class IMediaList {
-  external MediaList get prototype;
-  external set prototype(MediaList value);
-  external factory IMediaList();
-}
-
-@JS()
-@anonymous
-class IXSLTProcessor {
-  external XSLTProcessor get prototype;
-  external set prototype(XSLTProcessor value);
-  external factory IXSLTProcessor();
-}
-
-@JS()
-@anonymous
-class IBlobEvent {
-  external BlobEvent get prototype;
-  external set prototype(BlobEvent value);
-  external factory IBlobEvent({String type, BlobEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class IAttr {
-  external Attr get prototype;
-  external set prototype(Attr value);
-  external factory IAttr();
-}
-
-@JS()
-@anonymous
-class IAudioBuffer {
-  external AudioBuffer get prototype;
-  external set prototype(AudioBuffer value);
-  external factory IAudioBuffer({AudioBufferOptions options});
-}
-
-@JS()
-@anonymous
-class INetworkInformation {
-  external NetworkInformation get prototype;
-  external set prototype(NetworkInformation value);
-  external factory INetworkInformation();
-}
-
-@JS()
-@anonymous
-class IPeriodicWave {
-  external PeriodicWave get prototype;
-  external set prototype(PeriodicWave value);
-  external factory IPeriodicWave({BaseAudioContext context, PeriodicWaveOptions options});
-}
-
-@JS()
-@anonymous
-class IAudioParamMap {
-  external AudioParamMap get prototype;
-  external set prototype(AudioParamMap value);
-  external factory IAudioParamMap();
-}
-
-@JS()
-@anonymous
-class IResponse {
-  external Response get prototype;
-  external set prototype(Response value);
-  external factory IResponse({BodyInit? body, ResponseInit init});
-  external Response error();
-  external Response redirect(dynamic url, num status);
-}
-
-@JS()
-@anonymous
-class IRTCDataChannel {
-  external RTCDataChannel get prototype;
-  external set prototype(RTCDataChannel value);
-  external factory IRTCDataChannel();
-}
-
-@JS()
-@anonymous
-class ISVGNumberList {
-  external SVGNumberList get prototype;
-  external set prototype(SVGNumberList value);
-  external factory ISVGNumberList();
-}
-
-@JS()
-@anonymous
-class IRTCRtpTransceiver {
-  external RTCRtpTransceiver get prototype;
-  external set prototype(RTCRtpTransceiver value);
-  external factory IRTCRtpTransceiver();
-}
-
-@JS()
-@anonymous
-class ISVGFEFuncBElement {
-  external SVGFEFuncBElement get prototype;
-  external set prototype(SVGFEFuncBElement value);
-  external factory ISVGFEFuncBElement();
-}
-
-@JS()
-@anonymous
-class IHTMLEmbedElement {
-  external HTMLEmbedElement get prototype;
-  external set prototype(HTMLEmbedElement value);
-  external factory IHTMLEmbedElement();
-}
-
-@JS()
-@anonymous
-class IHTMLDataListElement {
-  external HTMLDataListElement get prototype;
-  external set prototype(HTMLDataListElement value);
-  external factory IHTMLDataListElement();
-}
-
-@JS()
-@anonymous
-class ISVGFESpotLightElement {
-  external SVGFESpotLightElement get prototype;
-  external set prototype(SVGFESpotLightElement value);
-  external factory ISVGFESpotLightElement();
-}
-
-@JS()
-@anonymous
-class ISVGFETileElement {
-  external SVGFETileElement get prototype;
-  external set prototype(SVGFETileElement value);
-  external factory ISVGFETileElement();
-}
-
-@JS()
-@anonymous
-class ISVGTSpanElement {
-  external SVGTSpanElement get prototype;
-  external set prototype(SVGTSpanElement value);
-  external factory ISVGTSpanElement();
-}
-
-@JS()
-@anonymous
-class IDOMMatrixReadOnly {
-  external DOMMatrixReadOnly get prototype;
-  external set prototype(DOMMatrixReadOnly value);
-  external factory IDOMMatrixReadOnly({dynamic init});
-  external DOMMatrixReadOnly fromFloat32Array(Float32Array array32);
-  external DOMMatrixReadOnly fromFloat64Array(Float64Array array64);
-  external DOMMatrixReadOnly fromMatrix(DOMMatrixInit other);
-  external String toString();
-}
-
-@JS()
-@anonymous
-class ISharedWorker {
-  external SharedWorker get prototype;
-  external set prototype(SharedWorker value);
-  external factory ISharedWorker({dynamic scriptURL, dynamic options});
-}
-
-@JS()
-@anonymous
-class ITextEncoder {
-  external TextEncoder get prototype;
-  external set prototype(TextEncoder value);
-  external factory ITextEncoder();
-}
-
-@JS()
-@anonymous
-class ICSSMediaRule {
-  external CSSMediaRule get prototype;
-  external set prototype(CSSMediaRule value);
-  external factory ICSSMediaRule();
-}
-
-@JS()
-@anonymous
-class ISVGAElement {
-  external SVGAElement get prototype;
-  external set prototype(SVGAElement value);
-  external factory ISVGAElement();
-}
-
-@JS()
-@anonymous
-class INode {
-  external Node get prototype;
-  external set prototype(Node value);
-  external factory INode();
-  external num get ATTRIBUTE_NODE;
-  external num get CDATA_SECTION_NODE;
-  external num get COMMENT_NODE;
-  external num get DOCUMENT_FRAGMENT_NODE;
-  external num get DOCUMENT_NODE;
-  external num get DOCUMENT_POSITION_CONTAINED_BY;
-  external num get DOCUMENT_POSITION_CONTAINS;
-  external num get DOCUMENT_POSITION_DISCONNECTED;
-  external num get DOCUMENT_POSITION_FOLLOWING;
-  external num get DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC;
-  external num get DOCUMENT_POSITION_PRECEDING;
-  external num get DOCUMENT_TYPE_NODE;
-  external num get ELEMENT_NODE;
-  external num get ENTITY_NODE;
-  external num get ENTITY_REFERENCE_NODE;
-  external num get NOTATION_NODE;
-  external num get PROCESSING_INSTRUCTION_NODE;
-  external num get TEXT_NODE;
-}
-
-@JS()
-@anonymous
-class IRequest {
-  external Request get prototype;
-  external set prototype(Request value);
-  external factory IRequest({RequestInfo input, RequestInit init});
-}
-
-@JS()
-@anonymous
-class IResizeObserverEntry {
-  external ResizeObserverEntry get prototype;
-  external set prototype(ResizeObserverEntry value);
-  external factory IResizeObserverEntry();
-}
-
-@JS()
-@anonymous
-class IHTMLDataElement {
-  external HTMLDataElement get prototype;
-  external set prototype(HTMLDataElement value);
-  external factory IHTMLDataElement();
-}
-
-@JS()
-@anonymous
-class IMediaStreamAudioDestinationNode {
-  external MediaStreamAudioDestinationNode get prototype;
-  external set prototype(MediaStreamAudioDestinationNode value);
-  external factory IMediaStreamAudioDestinationNode({AudioContext context, AudioNodeOptions options});
-}
-
-@JS()
-@anonymous
-class IStereoPannerNode {
-  external StereoPannerNode get prototype;
-  external set prototype(StereoPannerNode value);
-  external factory IStereoPannerNode({BaseAudioContext context, StereoPannerOptions options});
-}
-
-@JS()
-@anonymous
-class IShadowRoot {
-  external ShadowRoot get prototype;
-  external set prototype(ShadowRoot value);
-  external factory IShadowRoot();
-}
-
-@JS()
-@anonymous
-class IIDBDatabase {
-  external IDBDatabase get prototype;
-  external set prototype(IDBDatabase value);
-  external factory IIDBDatabase();
-}
-
-@JS()
-@anonymous
-class ISVGFESpecularLightingElement {
-  external SVGFESpecularLightingElement get prototype;
-  external set prototype(SVGFESpecularLightingElement value);
-  external factory ISVGFESpecularLightingElement();
-}
-
-@JS()
-@anonymous
-class IByteLengthQueuingStrategy {
-  external ByteLengthQueuingStrategy get prototype;
-  external set prototype(ByteLengthQueuingStrategy value);
-  external factory IByteLengthQueuingStrategy({QueuingStrategyInit init});
-}
-
-@JS()
-@anonymous
-class ICSSNamespaceRule {
-  external CSSNamespaceRule get prototype;
-  external set prototype(CSSNamespaceRule value);
-  external factory ICSSNamespaceRule();
-}
-
-@JS()
-@anonymous
-class IStorage {
-  external Storage get prototype;
-  external set prototype(Storage value);
-  external factory IStorage();
-}
-
-@JS()
-@anonymous
-class IAuthenticatorAttestationResponse {
-  external AuthenticatorAttestationResponse get prototype;
-  external set prototype(AuthenticatorAttestationResponse value);
-  external factory IAuthenticatorAttestationResponse();
-}
-
-@JS()
-@anonymous
-class ISVGPolylineElement {
-  external SVGPolylineElement get prototype;
-  external set prototype(SVGPolylineElement value);
-  external factory ISVGPolylineElement();
-}
-
-@JS()
-@anonymous
-class ISVGViewElement {
-  external SVGViewElement get prototype;
-  external set prototype(SVGViewElement value);
-  external factory ISVGViewElement();
-}
-
-@JS()
-@anonymous
-class IHTMLScriptElement {
-  external HTMLScriptElement get prototype;
-  external set prototype(HTMLScriptElement value);
-  external factory IHTMLScriptElement();
+class IWebGLShader {
+  external WebGLShader get prototype;
+  external set prototype(WebGLShader value);
+  external factory IWebGLShader();
 }
 
 @JS()
@@ -28462,320 +28835,54 @@ class IWebGLShaderPrecisionFormat {
 
 @JS()
 @anonymous
-class IRTCPeerConnectionIceEvent {
-  external RTCPeerConnectionIceEvent get prototype;
-  external set prototype(RTCPeerConnectionIceEvent value);
-  external factory IRTCPeerConnectionIceEvent({String type, RTCPeerConnectionIceEventInit eventInitDict});
+class IWebGLSync {
+  external WebGLSync get prototype;
+  external set prototype(WebGLSync value);
+  external factory IWebGLSync();
 }
 
 @JS()
 @anonymous
-class IChannelSplitterNode {
-  external ChannelSplitterNode get prototype;
-  external set prototype(ChannelSplitterNode value);
-  external factory IChannelSplitterNode({BaseAudioContext context, ChannelSplitterOptions options});
+class IWebGLTexture {
+  external WebGLTexture get prototype;
+  external set prototype(WebGLTexture value);
+  external factory IWebGLTexture();
 }
 
 @JS()
 @anonymous
-class IHTMLFontElement {
-  external HTMLFontElement get prototype;
-  external set prototype(HTMLFontElement value);
-  external factory IHTMLFontElement();
+class IWebGLTransformFeedback {
+  external WebGLTransformFeedback get prototype;
+  external set prototype(WebGLTransformFeedback value);
+  external factory IWebGLTransformFeedback();
 }
 
 @JS()
 @anonymous
-class IImageData {
-  external ImageData get prototype;
-  external set prototype(ImageData value);
-  external factory IImageData({num sw, num sh, ImageDataSettings settings});
+class IWebGLUniformLocation {
+  external WebGLUniformLocation get prototype;
+  external set prototype(WebGLUniformLocation value);
+  external factory IWebGLUniformLocation();
 }
 
 @JS()
 @anonymous
-class ICacheStorage {
-  external CacheStorage get prototype;
-  external set prototype(CacheStorage value);
-  external factory ICacheStorage();
+class IWebGLVertexArrayObject {
+  external WebGLVertexArrayObject get prototype;
+  external set prototype(WebGLVertexArrayObject value);
+  external factory IWebGLVertexArrayObject();
 }
 
 @JS()
 @anonymous
-class IIntersectionObserverEntry {
-  external IntersectionObserverEntry get prototype;
-  external set prototype(IntersectionObserverEntry value);
-  external factory IIntersectionObserverEntry({IntersectionObserverEntryInit intersectionObserverEntryInit});
-}
-
-@JS()
-@anonymous
-class IAudioScheduledSourceNode {
-  external AudioScheduledSourceNode get prototype;
-  external set prototype(AudioScheduledSourceNode value);
-  external factory IAudioScheduledSourceNode();
-}
-
-@JS()
-@anonymous
-class IHTMLSpanElement {
-  external HTMLSpanElement get prototype;
-  external set prototype(HTMLSpanElement value);
-  external factory IHTMLSpanElement();
-}
-
-@JS()
-@anonymous
-class ISVGFEOffsetElement {
-  external SVGFEOffsetElement get prototype;
-  external set prototype(SVGFEOffsetElement value);
-  external factory ISVGFEOffsetElement();
-}
-
-@JS()
-@anonymous
-class IHTMLHeadElement {
-  external HTMLHeadElement get prototype;
-  external set prototype(HTMLHeadElement value);
-  external factory IHTMLHeadElement();
-}
-
-@JS()
-@anonymous
-class ICDATASection {
-  external CDATASection get prototype;
-  external set prototype(CDATASection value);
-  external factory ICDATASection();
-}
-
-@JS()
-@anonymous
-class IGeolocationPosition {
-  external GeolocationPosition get prototype;
-  external set prototype(GeolocationPosition value);
-  external factory IGeolocationPosition();
-}
-
-@JS()
-@anonymous
-class ISVGAnimateTransformElement {
-  external SVGAnimateTransformElement get prototype;
-  external set prototype(SVGAnimateTransformElement value);
-  external factory ISVGAnimateTransformElement();
-}
-
-@JS()
-@anonymous
-class IStaticRange {
-  external StaticRange get prototype;
-  external set prototype(StaticRange value);
-  external factory IStaticRange({StaticRangeInit init});
-}
-
-@JS()
-@anonymous
-class IXPathEvaluator {
-  external XPathEvaluator get prototype;
-  external set prototype(XPathEvaluator value);
-  external factory IXPathEvaluator();
-}
-
-@JS()
-@anonymous
-class IServiceWorkerRegistration {
-  external ServiceWorkerRegistration get prototype;
-  external set prototype(ServiceWorkerRegistration value);
-  external factory IServiceWorkerRegistration();
-}
-
-@JS()
-@anonymous
-class IDataTransfer {
-  external DataTransfer get prototype;
-  external set prototype(DataTransfer value);
-  external factory IDataTransfer();
-}
-
-@JS()
-@anonymous
-class IStorageManager {
-  external StorageManager get prototype;
-  external set prototype(StorageManager value);
-  external factory IStorageManager();
-}
-
-@JS()
-@anonymous
-class IRTCTrackEvent {
-  external RTCTrackEvent get prototype;
-  external set prototype(RTCTrackEvent value);
-  external factory IRTCTrackEvent({String type, RTCTrackEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class ISVGClipPathElement {
-  external SVGClipPathElement get prototype;
-  external set prototype(SVGClipPathElement value);
-  external factory ISVGClipPathElement();
-}
-
-@JS()
-@anonymous
-class IAudioWorklet {
-  external AudioWorklet get prototype;
-  external set prototype(AudioWorklet value);
-  external factory IAudioWorklet();
-}
-
-@JS()
-@anonymous
-class IMediaKeyMessageEvent {
-  external MediaKeyMessageEvent get prototype;
-  external set prototype(MediaKeyMessageEvent value);
-  external factory IMediaKeyMessageEvent({String type, MediaKeyMessageEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class IDOMRectReadOnly {
-  external DOMRectReadOnly get prototype;
-  external set prototype(DOMRectReadOnly value);
-  external factory IDOMRectReadOnly({num x, num y, num width, num height});
-  external DOMRectReadOnly fromRect(DOMRectInit other);
-}
-
-@JS()
-@anonymous
-class IPerformance {
-  external Performance get prototype;
-  external set prototype(Performance value);
-  external factory IPerformance();
-}
-
-@JS()
-@anonymous
-class IHTMLDirectoryElement {
-  external HTMLDirectoryElement get prototype;
-  external set prototype(HTMLDirectoryElement value);
-  external factory IHTMLDirectoryElement();
-}
-
-@JS()
-@anonymous
-class IFileList {
-  external FileList get prototype;
-  external set prototype(FileList value);
-  external factory IFileList();
-}
-
-@JS()
-@anonymous
-class IDOMPoint {
-  external DOMPoint get prototype;
-  external set prototype(DOMPoint value);
-  external factory IDOMPoint({num x, num y, num z, num w});
-  external DOMPoint fromPoint(DOMPointInit other);
-}
-
-@JS()
-@anonymous
-class ISVGFEFuncAElement {
-  external SVGFEFuncAElement get prototype;
-  external set prototype(SVGFEFuncAElement value);
-  external factory ISVGFEFuncAElement();
-}
-
-@JS()
-@anonymous
-class ISVGGElement {
-  external SVGGElement get prototype;
-  external set prototype(SVGGElement value);
-  external factory ISVGGElement();
-}
-
-@JS()
-@anonymous
-class IAudioProcessingEvent {
-  external AudioProcessingEvent get prototype;
-  external set prototype(AudioProcessingEvent value);
-  external factory IAudioProcessingEvent({String type, AudioProcessingEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class IMediaStreamTrackEvent {
-  external MediaStreamTrackEvent get prototype;
-  external set prototype(MediaStreamTrackEvent value);
-  external factory IMediaStreamTrackEvent({String type, MediaStreamTrackEventInit eventInitDict});
-}
-
-@JS()
-@anonymous
-class IExternal {
-  external External get prototype;
-  external set prototype(External value);
-  external factory IExternal();
-}
-
-@JS()
-@anonymous
-class ISVGFEGaussianBlurElement {
-  external SVGFEGaussianBlurElement get prototype;
-  external set prototype(SVGFEGaussianBlurElement value);
-  external factory ISVGFEGaussianBlurElement();
-}
-
-@JS()
-@anonymous
-class IKeyboardEvent {
-  external KeyboardEvent get prototype;
-  external set prototype(KeyboardEvent value);
-  external factory IKeyboardEvent({String type, KeyboardEventInit eventInitDict});
-  external num get DOM_KEY_LOCATION_LEFT;
-  external num get DOM_KEY_LOCATION_NUMPAD;
-  external num get DOM_KEY_LOCATION_RIGHT;
-  external num get DOM_KEY_LOCATION_STANDARD;
-}
-
-@JS()
-@anonymous
-class IAudioListener {
-  external AudioListener get prototype;
-  external set prototype(AudioListener value);
-  external factory IAudioListener();
-}
-
-@JS()
-@anonymous
-class ISpeechRecognitionResult {
-  external SpeechRecognitionResult get prototype;
-  external set prototype(SpeechRecognitionResult value);
-  external factory ISpeechRecognitionResult();
-}
-
-@JS()
-@anonymous
-class ISVGPatternElement {
-  external SVGPatternElement get prototype;
-  external set prototype(SVGPatternElement value);
-  external factory ISVGPatternElement();
-}
-
-@JS()
-@anonymous
-class IWebGLBuffer {
-  external WebGLBuffer get prototype;
-  external set prototype(WebGLBuffer value);
-  external factory IWebGLBuffer();
-}
-
-@JS()
-@anonymous
-class IIdleDeadline {
-  external IdleDeadline get prototype;
-  external set prototype(IdleDeadline value);
-  external factory IIdleDeadline();
+class IWebSocket {
+  external WebSocket get prototype;
+  external set prototype(WebSocket value);
+  external factory IWebSocket({dynamic url, dynamic protocols});
+  external num get CLOSED;
+  external num get CLOSING;
+  external num get CONNECTING;
+  external num get OPEN;
 }
 
 @JS()
@@ -28791,223 +28898,135 @@ class IWheelEvent {
 
 @JS()
 @anonymous
-class IDeviceOrientationEvent {
-  external DeviceOrientationEvent get prototype;
-  external set prototype(DeviceOrientationEvent value);
-  external factory IDeviceOrientationEvent({String type, DeviceOrientationEventInit eventInitDict});
+class IWindow {
+  external Window get prototype;
+  external set prototype(Window value);
+  external factory IWindow();
 }
 
 @JS()
 @anonymous
-class IBaseAudioContext {
-  external BaseAudioContext get prototype;
-  external set prototype(BaseAudioContext value);
-  external factory IBaseAudioContext();
+class IWorker {
+  external Worker get prototype;
+  external set prototype(Worker value);
+  external factory IWorker({dynamic scriptURL, WorkerOptions options});
 }
 
 @JS()
 @anonymous
-class ISVGSetElement {
-  external SVGSetElement get prototype;
-  external set prototype(SVGSetElement value);
-  external factory ISVGSetElement();
+class IWorklet {
+  external Worklet get prototype;
+  external set prototype(Worklet value);
+  external factory IWorklet();
 }
 
 @JS()
 @anonymous
-class IHTMLTableCellElement {
-  external HTMLTableCellElement get prototype;
-  external set prototype(HTMLTableCellElement value);
-  external factory IHTMLTableCellElement();
+class IWritableStream {
+  external WritableStream get prototype;
+  external set prototype(WritableStream value);
+  external factory IWritableStream({UnderlyingSink<W> underlyingSink, QueuingStrategy<W> strategy});
 }
 
 @JS()
 @anonymous
-class IUIEvent {
-  external UIEvent get prototype;
-  external set prototype(UIEvent value);
-  external factory IUIEvent({String type, UIEventInit eventInitDict});
+class IWritableStreamDefaultController {
+  external WritableStreamDefaultController get prototype;
+  external set prototype(WritableStreamDefaultController value);
+  external factory IWritableStreamDefaultController();
 }
 
 @JS()
 @anonymous
-class IMessagePort {
-  external MessagePort get prototype;
-  external set prototype(MessagePort value);
-  external factory IMessagePort();
+class IWritableStreamDefaultWriter {
+  external WritableStreamDefaultWriter get prototype;
+  external set prototype(WritableStreamDefaultWriter value);
+  external factory IWritableStreamDefaultWriter({WritableStream<W> stream});
 }
 
 @JS()
 @anonymous
-class IFileSystemDirectoryReader {
-  external FileSystemDirectoryReader get prototype;
-  external set prototype(FileSystemDirectoryReader value);
-  external factory IFileSystemDirectoryReader();
+class IXMLDocument {
+  external XMLDocument get prototype;
+  external set prototype(XMLDocument value);
+  external factory IXMLDocument();
 }
 
 @JS()
 @anonymous
-class IMediaSession {
-  external MediaSession get prototype;
-  external set prototype(MediaSession value);
-  external factory IMediaSession();
+class IXMLHttpRequest {
+  external XMLHttpRequest get prototype;
+  external set prototype(XMLHttpRequest value);
+  external factory IXMLHttpRequest();
+  external num get DONE;
+  external num get HEADERS_RECEIVED;
+  external num get LOADING;
+  external num get OPENED;
+  external num get UNSENT;
 }
 
 @JS()
 @anonymous
-class IHTMLOptionsCollection {
-  external HTMLOptionsCollection get prototype;
-  external set prototype(HTMLOptionsCollection value);
-  external factory IHTMLOptionsCollection();
+class IXMLHttpRequestEventTarget {
+  external XMLHttpRequestEventTarget get prototype;
+  external set prototype(XMLHttpRequestEventTarget value);
+  external factory IXMLHttpRequestEventTarget();
 }
 
 @JS()
 @anonymous
-class IOfflineAudioCompletionEvent {
-  external OfflineAudioCompletionEvent get prototype;
-  external set prototype(OfflineAudioCompletionEvent value);
-  external factory IOfflineAudioCompletionEvent({String type, OfflineAudioCompletionEventInit eventInitDict});
+class IXMLHttpRequestUpload {
+  external XMLHttpRequestUpload get prototype;
+  external set prototype(XMLHttpRequestUpload value);
+  external factory IXMLHttpRequestUpload();
 }
 
 @JS()
 @anonymous
-class IAudioParam {
-  external AudioParam get prototype;
-  external set prototype(AudioParam value);
-  external factory IAudioParam();
+class IXMLSerializer {
+  external XMLSerializer get prototype;
+  external set prototype(XMLSerializer value);
+  external factory IXMLSerializer();
 }
 
 @JS()
 @anonymous
-class IHTMLDListElement {
-  external HTMLDListElement get prototype;
-  external set prototype(HTMLDListElement value);
-  external factory IHTMLDListElement();
+class IXPathEvaluator {
+  external XPathEvaluator get prototype;
+  external set prototype(XPathEvaluator value);
+  external factory IXPathEvaluator();
 }
 
 @JS()
 @anonymous
-class ISVGLinearGradientElement {
-  external SVGLinearGradientElement get prototype;
-  external set prototype(SVGLinearGradientElement value);
-  external factory ISVGLinearGradientElement();
+class IXPathExpression {
+  external XPathExpression get prototype;
+  external set prototype(XPathExpression value);
+  external factory IXPathExpression();
 }
 
 @JS()
 @anonymous
-class ISVGFEBlendElement {
-  external SVGFEBlendElement get prototype;
-  external set prototype(SVGFEBlendElement value);
-  external factory ISVGFEBlendElement();
-  external num get SVG_FEBLEND_MODE_COLOR;
-  external num get SVG_FEBLEND_MODE_COLOR_BURN;
-  external num get SVG_FEBLEND_MODE_COLOR_DODGE;
-  external num get SVG_FEBLEND_MODE_DARKEN;
-  external num get SVG_FEBLEND_MODE_DIFFERENCE;
-  external num get SVG_FEBLEND_MODE_EXCLUSION;
-  external num get SVG_FEBLEND_MODE_HARD_LIGHT;
-  external num get SVG_FEBLEND_MODE_HUE;
-  external num get SVG_FEBLEND_MODE_LIGHTEN;
-  external num get SVG_FEBLEND_MODE_LUMINOSITY;
-  external num get SVG_FEBLEND_MODE_MULTIPLY;
-  external num get SVG_FEBLEND_MODE_NORMAL;
-  external num get SVG_FEBLEND_MODE_OVERLAY;
-  external num get SVG_FEBLEND_MODE_SATURATION;
-  external num get SVG_FEBLEND_MODE_SCREEN;
-  external num get SVG_FEBLEND_MODE_SOFT_LIGHT;
-  external num get SVG_FEBLEND_MODE_UNKNOWN;
+class IXPathResult {
+  external XPathResult get prototype;
+  external set prototype(XPathResult value);
+  external factory IXPathResult();
+  external num get ANY_TYPE;
+  external num get ANY_UNORDERED_NODE_TYPE;
+  external num get BOOLEAN_TYPE;
+  external num get FIRST_ORDERED_NODE_TYPE;
+  external num get NUMBER_TYPE;
+  external num get ORDERED_NODE_ITERATOR_TYPE;
+  external num get ORDERED_NODE_SNAPSHOT_TYPE;
+  external num get STRING_TYPE;
+  external num get UNORDERED_NODE_ITERATOR_TYPE;
+  external num get UNORDERED_NODE_SNAPSHOT_TYPE;
 }
 
 @JS()
 @anonymous
-class IHTMLParagraphElement {
-  external HTMLParagraphElement get prototype;
-  external set prototype(HTMLParagraphElement value);
-  external factory IHTMLParagraphElement();
-}
-
-@JS()
-@anonymous
-class IFontFaceSet {
-  external FontFaceSet get prototype;
-  external set prototype(FontFaceSet value);
-  external factory IFontFaceSet({List<FontFace> initialFaces});
-}
-
-@JS()
-@anonymous
-class ISVGLineElement {
-  external SVGLineElement get prototype;
-  external set prototype(SVGLineElement value);
-  external factory ISVGLineElement();
-}
-
-@JS()
-@anonymous
-class IPaymentRequest {
-  external PaymentRequest get prototype;
-  external set prototype(PaymentRequest value);
-  external factory IPaymentRequest({List<PaymentMethodData> methodData, PaymentDetailsInit details});
-}
-
-@JS()
-@anonymous
-class IRemotePlayback {
-  external RemotePlayback get prototype;
-  external set prototype(RemotePlayback value);
-  external factory IRemotePlayback();
-}
-
-@JS()
-@anonymous
-class IDataTransferItemList {
-  external DataTransferItemList get prototype;
-  external set prototype(DataTransferItemList value);
-  external factory IDataTransferItemList();
-}
-
-@JS()
-@anonymous
-class IRTCRtpReceiver {
-  external RTCRtpReceiver get prototype;
-  external set prototype(RTCRtpReceiver value);
-  external factory IRTCRtpReceiver();
-  external RTCRtpCapabilities? getCapabilities(String kind);
-}
-
-@JS()
-@anonymous
-class IPluginArray {
-  external PluginArray get prototype;
-  external set prototype(PluginArray value);
-  external factory IPluginArray();
-}
-
-@JS()
-@anonymous
-class ICustomEvent {
-  external CustomEvent get prototype;
-  external set prototype(CustomEvent value);
-  external factory ICustomEvent({String type, CustomEventInit<T> eventInitDict});
-}
-
-@JS()
-@anonymous
-class ISVGFEDisplacementMapElement {
-  external SVGFEDisplacementMapElement get prototype;
-  external set prototype(SVGFEDisplacementMapElement value);
-  external factory ISVGFEDisplacementMapElement();
-  external num get SVG_CHANNEL_A;
-  external num get SVG_CHANNEL_B;
-  external num get SVG_CHANNEL_G;
-  external num get SVG_CHANNEL_R;
-  external num get SVG_CHANNEL_UNKNOWN;
-}
-
-@JS()
-@anonymous
-class IEventTarget {
-  external EventTarget get prototype;
-  external set prototype(EventTarget value);
-  external factory IEventTarget();
+class IXSLTProcessor {
+  external XSLTProcessor get prototype;
+  external set prototype(XSLTProcessor value);
+  external factory IXSLTProcessor();
 }
