@@ -34,15 +34,9 @@ pub struct Entry {
 }
 
 pub fn parse_library(config: Config) -> Result<Vec<Entry>> {
-    let _handle = Logger::try_with_env_or_str(
-        config
-            .log_spec
-            .as_ref()
-            .map(String::as_str)
-            .unwrap_or("info"),
-    )?
-    .write_mode(flexi_logger::WriteMode::Async)
-    .start()?;
+    let _handle = Logger::try_with_env_or_str(config.log_spec.as_deref().unwrap_or("info"))?
+        .write_mode(flexi_logger::WriteMode::Async)
+        .start()?;
     let gen_undecl_typedef = config.dynamic_undefs.unwrap_or(false);
     let rename_overloads = config.rename_overloads.unwrap_or(false);
     let modules = parse_modules(config);
@@ -77,11 +71,17 @@ Hint\tLength\tCap.\tRatio
 fn path_to_lib_name(buf: &Path) -> String {
     buf.components()
         .filter_map(|e| match e {
-            std::path::Component::Normal(item) => Some(item.to_string_lossy()),
+            std::path::Component::Normal(item) => {
+                Some(to_dart_compat_ident(&item.to_string_lossy()))
+            }
             _ => None,
         })
         .collect::<Vec<_>>()
         .join(".")
+}
+
+fn to_dart_compat_ident(input: &str) -> String {
+    input.replace("-", "_")
 }
 
 fn parse_modules(config: Config) -> HashMap<String, (Rc<SourceFile>, Module)> {

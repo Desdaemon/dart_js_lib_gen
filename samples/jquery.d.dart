@@ -3,6 +3,7 @@ library samples.jquery.d.ts;
 
 // ignore_for_file: non_constant_identifier_names, private_optional_parameter, unused_element
 import 'package:js/js.dart';
+import "dart:html";
 
 @JS()
 @anonymous
@@ -105,7 +106,7 @@ class JQueryAjaxSettings {
 
 @JS()
 @anonymous
-class JQueryXHR extends XMLHttpRequest {
+class JQueryXHR extends HttpRequest {
   external dynamic overrideMimeType(String mimeType);
   external void abort(String statusText);
   external JQueryPromise<R> then<R>(dynamic Function(dynamic data, String textStatus, JQueryXHR jqXHR) doneCallback,
@@ -207,51 +208,51 @@ class JQueryPromise<T> extends JQueryGenericPromise<T> {
   external String state();
   external JQueryPromise<T> always(
     dynamic alwaysCallback1, [
-    Array<dynamic>? alwaysCallbackN1,
-    Array<dynamic>? alwaysCallbackN2,
-    Array<dynamic>? alwaysCallbackN3,
-    Array<dynamic>? alwaysCallbackN4,
-    Array<dynamic>? alwaysCallbackN5,
-    Array<dynamic>? alwaysCallbackN6,
-    Array<dynamic>? alwaysCallbackN7,
-    Array<dynamic>? alwaysCallbackN8,
-    Array<dynamic>? alwaysCallbackN9,
+    dynamic alwaysCallbackN1,
+    dynamic alwaysCallbackN2,
+    dynamic alwaysCallbackN3,
+    dynamic alwaysCallbackN4,
+    dynamic alwaysCallbackN5,
+    dynamic alwaysCallbackN6,
+    dynamic alwaysCallbackN7,
+    dynamic alwaysCallbackN8,
+    dynamic alwaysCallbackN9,
   ]);
   external JQueryPromise<T> done(
     dynamic doneCallback1, [
-    Array<dynamic>? doneCallbackN1,
-    Array<dynamic>? doneCallbackN2,
-    Array<dynamic>? doneCallbackN3,
-    Array<dynamic>? doneCallbackN4,
-    Array<dynamic>? doneCallbackN5,
-    Array<dynamic>? doneCallbackN6,
-    Array<dynamic>? doneCallbackN7,
-    Array<dynamic>? doneCallbackN8,
-    Array<dynamic>? doneCallbackN9,
+    dynamic doneCallbackN1,
+    dynamic doneCallbackN2,
+    dynamic doneCallbackN3,
+    dynamic doneCallbackN4,
+    dynamic doneCallbackN5,
+    dynamic doneCallbackN6,
+    dynamic doneCallbackN7,
+    dynamic doneCallbackN8,
+    dynamic doneCallbackN9,
   ]);
   external JQueryPromise<T> fail(
     dynamic failCallback1, [
-    Array<dynamic>? failCallbackN1,
-    Array<dynamic>? failCallbackN2,
-    Array<dynamic>? failCallbackN3,
-    Array<dynamic>? failCallbackN4,
-    Array<dynamic>? failCallbackN5,
-    Array<dynamic>? failCallbackN6,
-    Array<dynamic>? failCallbackN7,
-    Array<dynamic>? failCallbackN8,
-    Array<dynamic>? failCallbackN9,
+    dynamic failCallbackN1,
+    dynamic failCallbackN2,
+    dynamic failCallbackN3,
+    dynamic failCallbackN4,
+    dynamic failCallbackN5,
+    dynamic failCallbackN6,
+    dynamic failCallbackN7,
+    dynamic failCallbackN8,
+    dynamic failCallbackN9,
   ]);
   external JQueryPromise<T> progress(
     dynamic progressCallback1, [
-    Array<dynamic>? progressCallbackN1,
-    Array<dynamic>? progressCallbackN2,
-    Array<dynamic>? progressCallbackN3,
-    Array<dynamic>? progressCallbackN4,
-    Array<dynamic>? progressCallbackN5,
-    Array<dynamic>? progressCallbackN6,
-    Array<dynamic>? progressCallbackN7,
-    Array<dynamic>? progressCallbackN8,
-    Array<dynamic>? progressCallbackN9,
+    dynamic progressCallbackN1,
+    dynamic progressCallbackN2,
+    dynamic progressCallbackN3,
+    dynamic progressCallbackN4,
+    dynamic progressCallbackN5,
+    dynamic progressCallbackN6,
+    dynamic progressCallbackN7,
+    dynamic progressCallbackN8,
+    dynamic progressCallbackN9,
   ]);
   external JQueryPromise<dynamic> pipe(dynamic Function(dynamic x) doneFilter, dynamic Function(dynamic x) failFilter,
       dynamic Function(dynamic x) progressFilter);
@@ -265,51 +266,51 @@ class JQueryDeferred<T> extends JQueryGenericPromise<T> {
   external String state();
   external JQueryDeferred<T> always(
     dynamic alwaysCallback1, [
-    Array<dynamic>? alwaysCallbackN1,
-    Array<dynamic>? alwaysCallbackN2,
-    Array<dynamic>? alwaysCallbackN3,
-    Array<dynamic>? alwaysCallbackN4,
-    Array<dynamic>? alwaysCallbackN5,
-    Array<dynamic>? alwaysCallbackN6,
-    Array<dynamic>? alwaysCallbackN7,
-    Array<dynamic>? alwaysCallbackN8,
-    Array<dynamic>? alwaysCallbackN9,
+    dynamic alwaysCallbackN1,
+    dynamic alwaysCallbackN2,
+    dynamic alwaysCallbackN3,
+    dynamic alwaysCallbackN4,
+    dynamic alwaysCallbackN5,
+    dynamic alwaysCallbackN6,
+    dynamic alwaysCallbackN7,
+    dynamic alwaysCallbackN8,
+    dynamic alwaysCallbackN9,
   ]);
   external JQueryDeferred<T> done(
     dynamic doneCallback1, [
-    Array<dynamic>? doneCallbackN1,
-    Array<dynamic>? doneCallbackN2,
-    Array<dynamic>? doneCallbackN3,
-    Array<dynamic>? doneCallbackN4,
-    Array<dynamic>? doneCallbackN5,
-    Array<dynamic>? doneCallbackN6,
-    Array<dynamic>? doneCallbackN7,
-    Array<dynamic>? doneCallbackN8,
-    Array<dynamic>? doneCallbackN9,
+    dynamic doneCallbackN1,
+    dynamic doneCallbackN2,
+    dynamic doneCallbackN3,
+    dynamic doneCallbackN4,
+    dynamic doneCallbackN5,
+    dynamic doneCallbackN6,
+    dynamic doneCallbackN7,
+    dynamic doneCallbackN8,
+    dynamic doneCallbackN9,
   ]);
   external JQueryDeferred<T> fail(
     dynamic failCallback1, [
-    Array<dynamic>? failCallbackN1,
-    Array<dynamic>? failCallbackN2,
-    Array<dynamic>? failCallbackN3,
-    Array<dynamic>? failCallbackN4,
-    Array<dynamic>? failCallbackN5,
-    Array<dynamic>? failCallbackN6,
-    Array<dynamic>? failCallbackN7,
-    Array<dynamic>? failCallbackN8,
-    Array<dynamic>? failCallbackN9,
+    dynamic failCallbackN1,
+    dynamic failCallbackN2,
+    dynamic failCallbackN3,
+    dynamic failCallbackN4,
+    dynamic failCallbackN5,
+    dynamic failCallbackN6,
+    dynamic failCallbackN7,
+    dynamic failCallbackN8,
+    dynamic failCallbackN9,
   ]);
   external JQueryDeferred<T> progress(
     dynamic progressCallback1, [
-    Array<dynamic>? progressCallbackN1,
-    Array<dynamic>? progressCallbackN2,
-    Array<dynamic>? progressCallbackN3,
-    Array<dynamic>? progressCallbackN4,
-    Array<dynamic>? progressCallbackN5,
-    Array<dynamic>? progressCallbackN6,
-    Array<dynamic>? progressCallbackN7,
-    Array<dynamic>? progressCallbackN8,
-    Array<dynamic>? progressCallbackN9,
+    dynamic progressCallbackN1,
+    dynamic progressCallbackN2,
+    dynamic progressCallbackN3,
+    dynamic progressCallbackN4,
+    dynamic progressCallbackN5,
+    dynamic progressCallbackN6,
+    dynamic progressCallbackN7,
+    dynamic progressCallbackN8,
+    dynamic progressCallbackN9,
   ]);
   external JQueryDeferred<T> notify(
     dynamic value, [
@@ -689,15 +690,15 @@ class JQueryStatic {
   external void holdReady(bool hold);
   external JQueryStatic noConflict(bool removeAll);
   external JQueryPromise<T> when<T>([
-    Array<dynamic>? deferreds1,
-    Array<dynamic>? deferreds2,
-    Array<dynamic>? deferreds3,
-    Array<dynamic>? deferreds4,
-    Array<dynamic>? deferreds5,
-    Array<dynamic>? deferreds6,
-    Array<dynamic>? deferreds7,
-    Array<dynamic>? deferreds8,
-    Array<dynamic>? deferreds9,
+    dynamic deferreds1,
+    dynamic deferreds2,
+    dynamic deferreds3,
+    dynamic deferreds4,
+    dynamic deferreds5,
+    dynamic deferreds6,
+    dynamic deferreds7,
+    dynamic deferreds8,
+    dynamic deferreds9,
   ]);
   external dynamic get cssHooks;
   external set cssHooks(dynamic value);
@@ -778,7 +779,7 @@ class JQueryStatic {
   external dynamic noop();
   external num now();
   external dynamic parseJSON(String json);
-  external XMLDocument parseXML(String data);
+  external XmlDocument parseXML(String data);
   external String trim(String str);
   external String type(dynamic obj);
   external List<T> unique<T extends Element>(List<T> array);
@@ -802,7 +803,7 @@ class JQueryStatic {
 @anonymous
 class JQuery {
   external JQuery ajaxComplete(
-      dynamic Function(JQueryEventObject event, XMLHttpRequest XMLHttpRequest, dynamic ajaxOptions) handler);
+      dynamic Function(JQueryEventObject event, HttpRequest XMLHttpRequest, dynamic ajaxOptions) handler);
   external JQuery ajaxError(
       dynamic Function(JQueryEventObject event, JQueryXHR jqXHR, JQueryAjaxSettings ajaxSettings, dynamic thrownError)
           handler);
@@ -811,9 +812,9 @@ class JQuery {
   external JQuery ajaxStart(dynamic Function() handler);
   external JQuery ajaxStop(dynamic Function() handler);
   external JQuery ajaxSuccess(
-      dynamic Function(JQueryEventObject event, XMLHttpRequest XMLHttpRequest, JQueryAjaxSettings ajaxOptions) handler);
+      dynamic Function(JQueryEventObject event, HttpRequest XMLHttpRequest, JQueryAjaxSettings ajaxOptions) handler);
   external JQuery load(String url, dynamic data,
-      dynamic Function(String responseText, String textStatus, XMLHttpRequest XMLHttpRequest) complete);
+      dynamic Function(String responseText, String textStatus, HttpRequest XMLHttpRequest) complete);
   external String serialize();
   external List<JQuerySerializeArrayElement> serializeArray();
   external JQuery addClass(String className);
@@ -1033,11 +1034,4 @@ class JQuery {
 external JQueryStatic jQuery;
 @JS(r'$')
 external JQueryStatic $;
-typedef Array<T> = dynamic;
-typedef Document = dynamic;
-typedef Element = dynamic;
-typedef Event = dynamic;
-typedef Node = dynamic;
 typedef Object = dynamic;
-typedef XMLDocument = dynamic;
-typedef XMLHttpRequest = dynamic;

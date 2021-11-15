@@ -13,3 +13,4 @@ build/
 **/*.jit
 
 dart_js_lib_gen
+*.so

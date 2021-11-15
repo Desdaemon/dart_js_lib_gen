@@ -3,6 +3,7 @@ library samples.rust_md_dart.d.ts;
 
 // ignore_for_file: non_constant_identifier_names, private_optional_parameter, unused_element
 import 'package:js/js.dart';
+import "dart:html";
 
 @JS()
 @anonymous

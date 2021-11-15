@@ -1,3 +1,12 @@
+base := "dart_js_lib_gen"
+dylib := if os() == "windows" {
+	base + ".dll"
+} else if os() == "macos" {
+	"lib" + base + ".dylib"
+} else {
+	"lib" + base + ".so"
+}
+
 alias g := gen
 gen:
 	flutter_rust_bridge_codegen \
@@ -7,13 +16,14 @@ gen:
 alias b := build
 build *args:
 	cargo build {{args}}
+	cp target/debug/{{dylib}} ./
 
-alias c := compile
-compile:
-	dart compile exe bin/dart_js_lib_gen.dart -o dart_js_lib_gen
+build-release:
+	cargo build --release
+	cp target/release/{{dylib}} ./
 
 run +args: build
-	./dart_js_lib_gen {{args}}
+	dart bin/dart_js_lib_gen.dart {{args}}
 
 build-samples: build
-	./dart_js_lib_gen -sw --rename-overloads --dynamic-undefs samples/*.ts
+	dart bin/dart_js_lib_gen.dart -sw --rename-overloads --dynamic-undefs samples/*.ts

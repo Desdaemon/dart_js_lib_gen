@@ -3,6 +3,11 @@ library samples.lib.webworker.d.ts;
 
 // ignore_for_file: non_constant_identifier_names, private_optional_parameter, unused_element
 import 'package:js/js.dart';
+import "dart:typed_data";
+import "dart:web_gl";
+import "lib.es5.d.dart";
+import "dart:html";
+import "dart:indexed_db";
 
 @JS()
 @anonymous
@@ -1516,7 +1521,7 @@ class AnimationFrameProvider {
 class Blob {
   external num get size;
   external String get type;
-  external Promise<ArrayBuffer> arrayBuffer();
+  external Promise<ByteBuffer> arrayBuffer();
   external Blob slice(num start, num end, String contentType);
   external ReadableStream stream();
   external Promise<String> text();
@@ -1532,15 +1537,15 @@ external IBlob JBlob;
 @JS()
 @anonymous
 class Body {
-  external ReadableStream<Uint8Array>? get body;
+  external ReadableStream<Uint8List>? get body;
   external bool get bodyUsed;
-  external Promise<ArrayBuffer> arrayBuffer();
+  external Promise<ByteBuffer> arrayBuffer();
   external Promise<Blob> blob();
   external Promise<FormData> formData();
   external Promise<dynamic> json();
   external Promise<String> text();
   external factory Body({
-    ReadableStream<Uint8Array>? body,
+    ReadableStream<Uint8List>? body,
     bool bodyUsed,
   });
 }
@@ -1582,12 +1587,12 @@ external IBroadcastChannel JBroadcastChannel;
 
 @JS()
 @anonymous
-class ByteLengthQueuingStrategy extends QueuingStrategy<ArrayBufferView> {
+class ByteLengthQueuingStrategy extends QueuingStrategy<TypedData> {
   external num get highWaterMark;
-  external QueuingStrategySize<ArrayBufferView> get size;
+  external QueuingStrategySize<TypedData> get size;
   external factory ByteLengthQueuingStrategy({
     num highWaterMark,
-    QueuingStrategySize<ArrayBufferView> size,
+    QueuingStrategySize<TypedData> size,
   });
 }
 
@@ -1600,9 +1605,9 @@ class Cache {
   external Promise<void> add(RequestInfo request);
   external Promise<void> addAll(List<RequestInfo> requests);
   external Promise<bool> delete(RequestInfo request, CacheQueryOptions options);
-  external Promise<ReadonlyArray<Request>> keys(RequestInfo request, CacheQueryOptions options);
+  external Promise<List<Request>> keys(RequestInfo request, CacheQueryOptions options);
   external Promise<Response?> match(RequestInfo request, CacheQueryOptions options);
-  external Promise<ReadonlyArray<Response>> matchAll(RequestInfo request, CacheQueryOptions options);
+  external Promise<List<Response>> matchAll(RequestInfo request, CacheQueryOptions options);
   external Promise<void> put(RequestInfo request, Response response);
   external factory Cache();
 }
@@ -1831,7 +1836,7 @@ class CanvasTextDrawingStyles {
 @JS()
 @anonymous
 class CanvasTransform {
-  external DOMMatrix getTransform();
+  external DomMatrix getTransform();
   external void resetTransform();
   external void rotate(num angle);
   external void scale(num x, num y);
@@ -1865,7 +1870,7 @@ external IClient JClient;
 class Clients {
   external Promise<void> claim();
   external Promise<Client?> get(String id);
-  external Promise<ReadonlyArray<dynamic>> matchAll<T extends ClientQueryOptions>(T options);
+  external Promise<List<dynamic>> matchAll<T extends ClientQueryOptions>(T options);
   external Promise<WindowClient?> openWindow(String url);
   external factory Clients();
 }
@@ -1892,25 +1897,25 @@ external ICloseEvent JCloseEvent;
 @JS()
 @anonymous
 class ConcatParams extends Algorithm {
-  external Uint8Array get algorithmId;
-  external set algorithmId(Uint8Array value);
+  external Uint8List get algorithmId;
+  external set algorithmId(Uint8List value);
   external dynamic get hash;
   external set hash(dynamic value);
-  external Uint8Array get partyUInfo;
-  external set partyUInfo(Uint8Array value);
-  external Uint8Array get partyVInfo;
-  external set partyVInfo(Uint8Array value);
-  external Uint8Array? get privateInfo;
-  external set privateInfo(Uint8Array? value);
-  external Uint8Array? get publicInfo;
-  external set publicInfo(Uint8Array? value);
+  external Uint8List get partyUInfo;
+  external set partyUInfo(Uint8List value);
+  external Uint8List get partyVInfo;
+  external set partyVInfo(Uint8List value);
+  external Uint8List? get privateInfo;
+  external set privateInfo(Uint8List? value);
+  external Uint8List? get publicInfo;
+  external set publicInfo(Uint8List? value);
   external factory ConcatParams({
-    Uint8Array algorithmId,
+    Uint8List algorithmId,
     dynamic hash,
-    Uint8Array partyUInfo,
-    Uint8Array partyVInfo,
-    Uint8Array? privateInfo,
-    Uint8Array? publicInfo,
+    Uint8List partyUInfo,
+    Uint8List partyVInfo,
+    Uint8List? privateInfo,
+    Uint8List? publicInfo,
   });
 }
 
@@ -2040,7 +2045,7 @@ external IDOMException JDOMException;
 
 @JS()
 @anonymous
-class DOMMatrix extends DOMMatrixReadOnly {
+class DOMMatrix extends DomMatrixReadOnly {
   external num get a;
   external set a(num value);
   external num get b;
@@ -2085,17 +2090,17 @@ class DOMMatrix extends DOMMatrixReadOnly {
   external set m43(num value);
   external num get m44;
   external set m44(num value);
-  external DOMMatrix invertSelf();
-  external DOMMatrix multiplySelf(DOMMatrixInit other);
-  external DOMMatrix preMultiplySelf(DOMMatrixInit other);
-  external DOMMatrix rotateAxisAngleSelf(num x, num y, num z, num angle);
-  external DOMMatrix rotateFromVectorSelf(num x, num y);
-  external DOMMatrix rotateSelf(num rotX, num rotY, num rotZ);
-  external DOMMatrix scale3dSelf(num scale, num originX, num originY, num originZ);
-  external DOMMatrix scaleSelf(num scaleX, num scaleY, num scaleZ, num originX, num originY, num originZ);
-  external DOMMatrix skewXSelf(num sx);
-  external DOMMatrix skewYSelf(num sy);
-  external DOMMatrix translateSelf(num tx, num ty, num tz);
+  external DomMatrix invertSelf();
+  external DomMatrix multiplySelf(DOMMatrixInit other);
+  external DomMatrix preMultiplySelf(DOMMatrixInit other);
+  external DomMatrix rotateAxisAngleSelf(num x, num y, num z, num angle);
+  external DomMatrix rotateFromVectorSelf(num x, num y);
+  external DomMatrix rotateSelf(num rotX, num rotY, num rotZ);
+  external DomMatrix scale3dSelf(num scale, num originX, num originY, num originZ);
+  external DomMatrix scaleSelf(num scaleX, num scaleY, num scaleZ, num originX, num originY, num originZ);
+  external DomMatrix skewXSelf(num sx);
+  external DomMatrix skewYSelf(num sy);
+  external DomMatrix translateSelf(num tx, num ty, num tz);
   external factory DOMMatrix({
     num a,
     num b,
@@ -2152,23 +2157,23 @@ class DOMMatrixReadOnly {
   external num get m42;
   external num get m43;
   external num get m44;
-  external DOMMatrix flipX();
-  external DOMMatrix flipY();
-  external DOMMatrix inverse();
-  external DOMMatrix multiply(DOMMatrixInit other);
-  external DOMMatrix rotate(num rotX, num rotY, num rotZ);
-  external DOMMatrix rotateAxisAngle(num x, num y, num z, num angle);
-  external DOMMatrix rotateFromVector(num x, num y);
-  external DOMMatrix scale(num scaleX, num scaleY, num scaleZ, num originX, num originY, num originZ);
-  external DOMMatrix scale3d(num scale, num originX, num originY, num originZ);
-  external DOMMatrix scaleNonUniform(num scaleX, num scaleY);
-  external DOMMatrix skewX(num sx);
-  external DOMMatrix skewY(num sy);
-  external Float32Array toFloat32Array();
-  external Float64Array toFloat64Array();
+  external DomMatrix flipX();
+  external DomMatrix flipY();
+  external DomMatrix inverse();
+  external DomMatrix multiply(DOMMatrixInit other);
+  external DomMatrix rotate(num rotX, num rotY, num rotZ);
+  external DomMatrix rotateAxisAngle(num x, num y, num z, num angle);
+  external DomMatrix rotateFromVector(num x, num y);
+  external DomMatrix scale(num scaleX, num scaleY, num scaleZ, num originX, num originY, num originZ);
+  external DomMatrix scale3d(num scale, num originX, num originY, num originZ);
+  external DomMatrix scaleNonUniform(num scaleX, num scaleY);
+  external DomMatrix skewX(num sx);
+  external DomMatrix skewY(num sy);
+  external Float32List toFloat32Array();
+  external Float64List toFloat64Array();
   external dynamic toJSON();
-  external DOMPoint transformPoint(DOMPointInit point);
-  external DOMMatrix translate(num tx, num ty, num tz);
+  external DomPoint transformPoint(DOMPointInit point);
+  external DomMatrix translate(num tx, num ty, num tz);
   external factory DOMMatrixReadOnly({
     num a,
     num b,
@@ -2202,7 +2207,7 @@ external IDOMMatrixReadOnly JDOMMatrixReadOnly;
 
 @JS()
 @anonymous
-class DOMPoint extends DOMPointReadOnly {
+class DOMPoint extends DomPointReadOnly {
   external num get w;
   external set w(num value);
   external num get x;
@@ -2229,7 +2234,7 @@ class DOMPointReadOnly {
   external num get x;
   external num get y;
   external num get z;
-  external DOMPoint matrixTransform(DOMMatrixInit matrix);
+  external DomPoint matrixTransform(DOMMatrixInit matrix);
   external dynamic toJSON();
   external factory DOMPointReadOnly({
     num w,
@@ -2245,17 +2250,17 @@ external IDOMPointReadOnly JDOMPointReadOnly;
 @JS()
 @anonymous
 class DOMQuad {
-  external DOMPoint get p1;
-  external DOMPoint get p2;
-  external DOMPoint get p3;
-  external DOMPoint get p4;
+  external DomPoint get p1;
+  external DomPoint get p2;
+  external DomPoint get p3;
+  external DomPoint get p4;
   external DOMRect getBounds();
   external dynamic toJSON();
   external factory DOMQuad({
-    DOMPoint p1,
-    DOMPoint p2,
-    DOMPoint p3,
-    DOMPoint p4,
+    DomPoint p1,
+    DomPoint p2,
+    DomPoint p3,
+    DomPoint p4,
   });
 }
 
@@ -2264,7 +2269,7 @@ external IDOMQuad JDOMQuad;
 
 @JS()
 @anonymous
-class DOMRect extends DOMRectReadOnly {
+class DOMRect extends DomRectReadOnly {
   external num get height;
   external set height(num value);
   external num get width;
@@ -2363,26 +2368,26 @@ external IDedicatedWorkerGlobalScope JDedicatedWorkerGlobalScope;
 @JS()
 @anonymous
 class DhImportKeyParams extends Algorithm {
-  external Uint8Array get generator;
-  external set generator(Uint8Array value);
-  external Uint8Array get prime;
-  external set prime(Uint8Array value);
+  external Uint8List get generator;
+  external set generator(Uint8List value);
+  external Uint8List get prime;
+  external set prime(Uint8List value);
   external factory DhImportKeyParams({
-    Uint8Array generator,
-    Uint8Array prime,
+    Uint8List generator,
+    Uint8List prime,
   });
 }
 
 @JS()
 @anonymous
 class DhKeyAlgorithm extends KeyAlgorithm {
-  external Uint8Array get generator;
-  external set generator(Uint8Array value);
-  external Uint8Array get prime;
-  external set prime(Uint8Array value);
+  external Uint8List get generator;
+  external set generator(Uint8List value);
+  external Uint8List get prime;
+  external set prime(Uint8List value);
   external factory DhKeyAlgorithm({
-    Uint8Array generator,
-    Uint8Array prime,
+    Uint8List generator,
+    Uint8List prime,
   });
 }
 
@@ -2399,13 +2404,13 @@ class DhKeyDeriveParams extends Algorithm {
 @JS()
 @anonymous
 class DhKeyGenParams extends Algorithm {
-  external Uint8Array get generator;
-  external set generator(Uint8Array value);
-  external Uint8Array get prime;
-  external set prime(Uint8Array value);
+  external Uint8List get generator;
+  external set generator(Uint8List value);
+  external Uint8List get prime;
+  external set prime(Uint8List value);
   external factory DhKeyGenParams({
-    Uint8Array generator,
-    Uint8Array prime,
+    Uint8List generator,
+    Uint8List prime,
   });
 }
 
@@ -2614,13 +2619,13 @@ class ExtendableMessageEvent extends ExtendableEvent {
   external dynamic get data;
   external String get lastEventId;
   external String get origin;
-  external ReadonlyArray<MessagePort> get ports;
+  external List<MessagePort> get ports;
   external dynamic get source;
   external factory ExtendableMessageEvent({
     dynamic data,
     String lastEventId,
     String origin,
-    ReadonlyArray<MessagePort> ports,
+    List<MessagePort> ports,
     dynamic source,
   });
 }
@@ -2702,7 +2707,7 @@ class FileReaderEventMap {
 @JS()
 @anonymous
 class FileReader extends EventTarget {
-  external DOMException? get error;
+  external DomException? get error;
   external dynamic Function(ProgressEvent<FileReader> ev)? get onabort;
   external set onabort(dynamic Function(ProgressEvent<FileReader> ev)? value);
   external dynamic Function(ProgressEvent<FileReader> ev)? get onerror;
@@ -2728,7 +2733,7 @@ class FileReader extends EventTarget {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory FileReader({
-    DOMException? error,
+    DomException? error,
     dynamic Function(ProgressEvent<FileReader> ev)? onabort,
     dynamic Function(ProgressEvent<FileReader> ev)? onerror,
     dynamic Function(ProgressEvent<FileReader> ev)? onload,
@@ -2749,7 +2754,7 @@ external IFileReader JFileReader;
 @JS()
 @anonymous
 class FileReaderSync {
-  external ArrayBuffer readAsArrayBuffer(Blob blob);
+  external ByteBuffer readAsArrayBuffer(Blob blob);
   external String readAsBinaryString(Blob blob);
   external String readAsDataURL(Blob blob);
   external String readAsText(Blob blob, String encoding);
@@ -2804,7 +2809,7 @@ external IHeaders JHeaders;
 
 @JS()
 @anonymous
-class IDBArrayKey extends Array<IDBValidKey> {
+class IDBArrayKey extends List<IDBValidKey> {
   external factory IDBArrayKey();
 }
 
@@ -2817,8 +2822,8 @@ class IDBCursor {
   external dynamic get source;
   external void advance(num count);
   external void continuePrimaryKey(IDBValidKey key, IDBValidKey primaryKey);
-  external IDBRequest<dynamic> delete();
-  external IDBRequest<IDBValidKey> update(dynamic value);
+  external Request<dynamic> delete();
+  external Request<IDBValidKey> update(dynamic value);
   external factory IDBCursor({
     IDBCursorDirection direction,
     IDBValidKey key,
@@ -2832,7 +2837,7 @@ external IIDBCursor JIDBCursor;
 
 @JS()
 @anonymous
-class IDBCursorWithValue extends IDBCursor {
+class IDBCursorWithValue extends Cursor {
   external dynamic get value;
   external factory IDBCursorWithValue({
     dynamic value,
@@ -2851,13 +2856,13 @@ class IDBDatabaseEventMap {
   external set close(Event value);
   external Event get error;
   external set error(Event value);
-  external IDBVersionChangeEvent get versionchange;
-  external set versionchange(IDBVersionChangeEvent value);
+  external VersionChangeEvent get versionchange;
+  external set versionchange(VersionChangeEvent value);
   external factory IDBDatabaseEventMap({
     Event abort,
     Event close,
     Event error,
-    IDBVersionChangeEvent versionchange,
+    VersionChangeEvent versionchange,
   });
 }
 
@@ -2865,29 +2870,29 @@ class IDBDatabaseEventMap {
 @anonymous
 class IDBDatabase extends EventTarget {
   external String get name;
-  external DOMStringList get objectStoreNames;
+  external DomStringList get objectStoreNames;
   external dynamic Function(Event ev)? get onabort;
   external set onabort(dynamic Function(Event ev)? value);
   external dynamic Function(Event ev)? get onclose;
   external set onclose(dynamic Function(Event ev)? value);
   external dynamic Function(Event ev)? get onerror;
   external set onerror(dynamic Function(Event ev)? value);
-  external dynamic Function(IDBVersionChangeEvent ev)? get onversionchange;
-  external set onversionchange(dynamic Function(IDBVersionChangeEvent ev)? value);
+  external dynamic Function(VersionChangeEvent ev)? get onversionchange;
+  external set onversionchange(dynamic Function(VersionChangeEvent ev)? value);
   external num get version;
   external void close();
-  external IDBObjectStore createObjectStore(String name, IDBObjectStoreParameters options);
+  external ObjectStore createObjectStore(String name, IDBObjectStoreParameters options);
   external void deleteObjectStore(String name);
-  external IDBTransaction transaction(dynamic storeNames, IDBTransactionMode mode);
+  external Transaction transaction(dynamic storeNames, IDBTransactionMode mode);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory IDBDatabase({
     String name,
-    DOMStringList objectStoreNames,
+    DomStringList objectStoreNames,
     dynamic Function(Event ev)? onabort,
     dynamic Function(Event ev)? onclose,
     dynamic Function(Event ev)? onerror,
-    dynamic Function(IDBVersionChangeEvent ev)? onversionchange,
+    dynamic Function(VersionChangeEvent ev)? onversionchange,
     num version,
   });
 }
@@ -2899,8 +2904,8 @@ external IIDBDatabase JIDBDatabase;
 @anonymous
 class IDBFactory {
   external num cmp(dynamic first, dynamic second);
-  external IDBOpenDBRequest deleteDatabase(String name);
-  external IDBOpenDBRequest open(String name, num version);
+  external OpenDBRequest deleteDatabase(String name);
+  external OpenDBRequest open(String name, num version);
   external factory IDBFactory();
 }
 
@@ -2914,20 +2919,20 @@ class IDBIndex {
   external bool get multiEntry;
   external String get name;
   external set name(String value);
-  external IDBObjectStore get objectStore;
+  external ObjectStore get objectStore;
   external bool get unique;
-  external IDBRequest<num> count(dynamic key);
-  external IDBRequest<dynamic> get(dynamic key);
-  external IDBRequest<List<dynamic>> getAll(dynamic query, num count);
-  external IDBRequest<List<IDBValidKey>> getAllKeys(dynamic query, num count);
-  external IDBRequest<IDBValidKey?> getKey(dynamic key);
-  external IDBRequest<IDBCursorWithValue?> openCursor(dynamic query, IDBCursorDirection direction);
-  external IDBRequest<IDBCursor?> openKeyCursor(dynamic query, IDBCursorDirection direction);
+  external Request<num> count(dynamic key);
+  external Request<dynamic> get(dynamic key);
+  external Request<List<dynamic>> getAll(dynamic query, num count);
+  external Request<List<IDBValidKey>> getAllKeys(dynamic query, num count);
+  external Request<IDBValidKey?> getKey(dynamic key);
+  external Request<CursorWithValue?> openCursor(dynamic query, IDBCursorDirection direction);
+  external Request<Cursor?> openKeyCursor(dynamic query, IDBCursorDirection direction);
   external factory IDBIndex({
     dynamic keyPath,
     bool multiEntry,
     String name,
-    IDBObjectStore objectStore,
+    ObjectStore objectStore,
     bool unique,
   });
 }
@@ -2958,31 +2963,31 @@ external IIDBKeyRange JIDBKeyRange;
 @anonymous
 class IDBObjectStore {
   external bool get autoIncrement;
-  external DOMStringList get indexNames;
+  external DomStringList get indexNames;
   external dynamic get keyPath;
   external String get name;
   external set name(String value);
-  external IDBTransaction get transaction;
-  external IDBRequest<IDBValidKey> add(dynamic value, IDBValidKey key);
-  external IDBRequest<dynamic> clear();
-  external IDBRequest<num> count(dynamic key);
-  external IDBIndex createIndex(String name, dynamic keyPath, IDBIndexParameters options);
-  external IDBRequest<dynamic> delete(dynamic key);
+  external Transaction get transaction;
+  external Request<IDBValidKey> add(dynamic value, IDBValidKey key);
+  external Request<dynamic> clear();
+  external Request<num> count(dynamic key);
+  external Index createIndex(String name, dynamic keyPath, IDBIndexParameters options);
+  external Request<dynamic> delete(dynamic key);
   external void deleteIndex(String name);
-  external IDBRequest<dynamic> get(dynamic query);
-  external IDBRequest<List<dynamic>> getAll(dynamic query, num count);
-  external IDBRequest<List<IDBValidKey>> getAllKeys(dynamic query, num count);
-  external IDBRequest<IDBValidKey?> getKey(dynamic query);
-  external IDBIndex index(String name);
-  external IDBRequest<IDBCursorWithValue?> openCursor(dynamic query, IDBCursorDirection direction);
-  external IDBRequest<IDBCursor?> openKeyCursor(dynamic query, IDBCursorDirection direction);
-  external IDBRequest<IDBValidKey> put(dynamic value, IDBValidKey key);
+  external Request<dynamic> get(dynamic query);
+  external Request<List<dynamic>> getAll(dynamic query, num count);
+  external Request<List<IDBValidKey>> getAllKeys(dynamic query, num count);
+  external Request<IDBValidKey?> getKey(dynamic query);
+  external Index index(String name);
+  external Request<CursorWithValue?> openCursor(dynamic query, IDBCursorDirection direction);
+  external Request<Cursor?> openKeyCursor(dynamic query, IDBCursorDirection direction);
+  external Request<IDBValidKey> put(dynamic value, IDBValidKey key);
   external factory IDBObjectStore({
     bool autoIncrement,
-    DOMStringList indexNames,
+    DomStringList indexNames,
     dynamic keyPath,
     String name,
-    IDBTransaction transaction,
+    Transaction transaction,
   });
 }
 
@@ -2994,26 +2999,26 @@ external IIDBObjectStore JIDBObjectStore;
 class IDBOpenDBRequestEventMap extends IDBRequestEventMap {
   external Event get blocked;
   external set blocked(Event value);
-  external IDBVersionChangeEvent get upgradeneeded;
-  external set upgradeneeded(IDBVersionChangeEvent value);
+  external VersionChangeEvent get upgradeneeded;
+  external set upgradeneeded(VersionChangeEvent value);
   external factory IDBOpenDBRequestEventMap({
     Event blocked,
-    IDBVersionChangeEvent upgradeneeded,
+    VersionChangeEvent upgradeneeded,
   });
 }
 
 @JS()
 @anonymous
-class IDBOpenDBRequest extends IDBRequest<IDBDatabase> {
+class IDBOpenDBRequest extends Request<Database> {
   external dynamic Function(Event ev)? get onblocked;
   external set onblocked(dynamic Function(Event ev)? value);
-  external dynamic Function(IDBVersionChangeEvent ev)? get onupgradeneeded;
-  external set onupgradeneeded(dynamic Function(IDBVersionChangeEvent ev)? value);
+  external dynamic Function(VersionChangeEvent ev)? get onupgradeneeded;
+  external set onupgradeneeded(dynamic Function(VersionChangeEvent ev)? value);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory IDBOpenDBRequest({
     dynamic Function(Event ev)? onblocked,
-    dynamic Function(IDBVersionChangeEvent ev)? onupgradeneeded,
+    dynamic Function(VersionChangeEvent ev)? onupgradeneeded,
   });
 }
 
@@ -3036,7 +3041,7 @@ class IDBRequestEventMap {
 @JS()
 @anonymous
 class IDBRequest<T> extends EventTarget {
-  external DOMException? get error;
+  external DomException? get error;
   external dynamic Function(Event ev)? get onerror;
   external set onerror(dynamic Function(Event ev)? value);
   external dynamic Function(Event ev)? get onsuccess;
@@ -3044,17 +3049,17 @@ class IDBRequest<T> extends EventTarget {
   external IDBRequestReadyState get readyState;
   external T get result;
   external dynamic get source;
-  external IDBTransaction? get transaction;
+  external Transaction? get transaction;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory IDBRequest({
-    DOMException? error,
+    DomException? error,
     dynamic Function(Event ev)? onerror,
     dynamic Function(Event ev)? onsuccess,
     IDBRequestReadyState readyState,
     T result,
     dynamic source,
-    IDBTransaction? transaction,
+    Transaction? transaction,
   });
 }
 
@@ -3080,10 +3085,10 @@ class IDBTransactionEventMap {
 @JS()
 @anonymous
 class IDBTransaction extends EventTarget {
-  external IDBDatabase get db;
-  external DOMException get error;
+  external Database get db;
+  external DomException get error;
   external IDBTransactionMode get mode;
-  external DOMStringList get objectStoreNames;
+  external DomStringList get objectStoreNames;
   external dynamic Function(Event ev)? get onabort;
   external set onabort(dynamic Function(Event ev)? value);
   external dynamic Function(Event ev)? get oncomplete;
@@ -3091,14 +3096,14 @@ class IDBTransaction extends EventTarget {
   external dynamic Function(Event ev)? get onerror;
   external set onerror(dynamic Function(Event ev)? value);
   external void abort();
-  external IDBObjectStore objectStore(String name);
+  external ObjectStore objectStore(String name);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory IDBTransaction({
-    IDBDatabase db,
-    DOMException error,
+    Database db,
+    DomException error,
     IDBTransactionMode mode,
-    DOMStringList objectStoreNames,
+    DomStringList objectStoreNames,
     dynamic Function(Event ev)? onabort,
     dynamic Function(Event ev)? oncomplete,
     dynamic Function(Event ev)? onerror,
@@ -3153,11 +3158,11 @@ external IImageBitmapRenderingContext JImageBitmapRenderingContext;
 @JS()
 @anonymous
 class ImageData {
-  external Uint8ClampedArray get data;
+  external Uint8ClampedList get data;
   external num get height;
   external num get width;
   external factory ImageData({
-    Uint8ClampedArray data,
+    Uint8ClampedList data,
     num height,
     num width,
   });
@@ -3186,13 +3191,13 @@ class MessageEvent<T> extends Event {
   external T get data;
   external String get lastEventId;
   external String get origin;
-  external ReadonlyArray<MessagePort> get ports;
+  external List<MessagePort> get ports;
   external MessageEventSource? get source;
   external factory MessageEvent({
     T data,
     String lastEventId,
     String origin,
-    ReadonlyArray<MessagePort> ports,
+    List<MessagePort> ports,
     MessageEventSource? source,
   });
 }
@@ -3279,10 +3284,10 @@ class NavigatorID {
 @anonymous
 class NavigatorLanguage {
   external String get language;
-  external ReadonlyArray<String> get languages;
+  external List<String> get languages;
   external factory NavigatorLanguage({
     String language,
-    ReadonlyArray<String> languages,
+    List<String> languages,
   });
 }
 
@@ -3326,7 +3331,7 @@ class NotificationEventMap {
 @JS()
 @anonymous
 class Notification extends EventTarget {
-  external ReadonlyArray<NotificationAction> get actions;
+  external List<NotificationAction> get actions;
   external String get badge;
   external String get body;
   external dynamic get data;
@@ -3348,12 +3353,12 @@ class Notification extends EventTarget {
   external String get tag;
   external num get timestamp;
   external String get title;
-  external ReadonlyArray<num> get vibrate;
+  external List<num> get vibrate;
   external void close();
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory Notification({
-    ReadonlyArray<NotificationAction> actions,
+    List<NotificationAction> actions,
     String badge,
     String body,
     dynamic data,
@@ -3371,7 +3376,7 @@ class Notification extends EventTarget {
     String tag,
     num timestamp,
     String title,
-    ReadonlyArray<num> vibrate,
+    List<num> vibrate,
   });
 }
 
@@ -3437,10 +3442,10 @@ class OES_texture_half_float_linear {
 @JS()
 @anonymous
 class OES_vertex_array_object {
-  external void bindVertexArrayOES(WebGLVertexArrayObjectOES? arrayObject);
-  external WebGLVertexArrayObjectOES? createVertexArrayOES();
-  external void deleteVertexArrayOES(WebGLVertexArrayObjectOES? arrayObject);
-  external GLboolean isVertexArrayOES(WebGLVertexArrayObjectOES? arrayObject);
+  external void bindVertexArrayOES(VertexArrayObject? arrayObject);
+  external VertexArrayObject? createVertexArrayOES();
+  external void deleteVertexArrayOES(VertexArrayObject? arrayObject);
+  external GLboolean isVertexArrayOES(VertexArrayObject? arrayObject);
   external GLenum get VERTEX_ARRAY_BINDING_OES;
   external factory OES_vertex_array_object({
     GLenum VERTEX_ARRAY_BINDING_OES,
@@ -3729,7 +3734,7 @@ external IPushManager JPushManager;
 @JS()
 @anonymous
 class PushMessageData {
-  external ArrayBuffer arrayBuffer();
+  external ByteBuffer arrayBuffer();
   external Blob blob();
   external dynamic json();
   external String text();
@@ -3745,7 +3750,7 @@ class PushSubscription {
   external String get endpoint;
   external num? get expirationTime;
   external PushSubscriptionOptions get options;
-  external ArrayBuffer? getKey(PushEncryptionKeyName name);
+  external ByteBuffer? getKey(PushEncryptionKeyName name);
   external PushSubscriptionJSON toJSON();
   external Promise<bool> unsubscribe();
   external factory PushSubscription({
@@ -3761,10 +3766,10 @@ external IPushSubscription JPushSubscription;
 @JS()
 @anonymous
 class PushSubscriptionOptions {
-  external ArrayBuffer? get applicationServerKey;
+  external ByteBuffer? get applicationServerKey;
   external bool get userVisibleOnly;
   external factory PushSubscriptionOptions({
-    ArrayBuffer? applicationServerKey,
+    ByteBuffer? applicationServerKey,
     bool userVisibleOnly,
   });
 }
@@ -3951,7 +3956,7 @@ class ServiceWorkerContainer extends EventTarget {
   external set onmessageerror(dynamic Function(MessageEvent ev)? value);
   external Promise<ServiceWorkerRegistration> get ready;
   external Promise<ServiceWorkerRegistration?> getRegistration(String clientURL);
-  external Promise<ReadonlyArray<ServiceWorkerRegistration>> getRegistrations();
+  external Promise<List<ServiceWorkerRegistration>> getRegistrations();
   external Promise<ServiceWorkerRegistration> register(dynamic scriptURL, RegistrationOptions options);
   external void startMessages();
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
@@ -4149,21 +4154,21 @@ external IStorageManager JStorageManager;
 @JS()
 @anonymous
 class SubtleCrypto {
-  external Promise<ArrayBuffer> decrypt(dynamic algorithm, CryptoKey key, dynamic data);
-  external Promise<ArrayBuffer> deriveBits(dynamic algorithm, CryptoKey baseKey, num length);
+  external Promise<ByteBuffer> decrypt(dynamic algorithm, CryptoKey key, dynamic data);
+  external Promise<ByteBuffer> deriveBits(dynamic algorithm, CryptoKey baseKey, num length);
   external Promise<CryptoKey> deriveKey(
       dynamic algorithm, CryptoKey baseKey, dynamic derivedKeyType, bool extractable, List<KeyUsage> keyUsages);
-  external Promise<ArrayBuffer> digest(AlgorithmIdentifier algorithm, dynamic data);
-  external Promise<ArrayBuffer> encrypt(dynamic algorithm, CryptoKey key, dynamic data);
+  external Promise<ByteBuffer> digest(AlgorithmIdentifier algorithm, dynamic data);
+  external Promise<ByteBuffer> encrypt(dynamic algorithm, CryptoKey key, dynamic data);
   external Promise<JsonWebKey> exportKey(String format, CryptoKey key);
   external Promise<CryptoKeyPair> generateKey(dynamic algorithm, bool extractable, List<KeyUsage> keyUsages);
   external Promise<CryptoKey> importKey(
       String format, JsonWebKey keyData, dynamic algorithm, bool extractable, List<KeyUsage> keyUsages);
-  external Promise<ArrayBuffer> sign(dynamic algorithm, CryptoKey key, dynamic data);
+  external Promise<ByteBuffer> sign(dynamic algorithm, CryptoKey key, dynamic data);
   external Promise<CryptoKey> unwrapKey(dynamic format, dynamic wrappedKey, CryptoKey unwrappingKey,
       dynamic unwrapAlgorithm, dynamic unwrappedKeyAlgorithm, bool extractable, List<KeyUsage> keyUsages);
   external Promise<bool> verify(dynamic algorithm, CryptoKey key, dynamic signature, dynamic data);
-  external Promise<ArrayBuffer> wrapKey(dynamic format, CryptoKey key, CryptoKey wrappingKey, dynamic wrapAlgorithm);
+  external Promise<ByteBuffer> wrapKey(dynamic format, CryptoKey key, CryptoKey wrappingKey, dynamic wrapAlgorithm);
   external factory SubtleCrypto();
 }
 
@@ -4235,8 +4240,8 @@ external ITextDecoderStream JTextDecoderStream;
 @JS()
 @anonymous
 class TextEncoder extends TextEncoderCommon {
-  external Uint8Array encode(String input);
-  external TextEncoderEncodeIntoResult encodeInto(String source, Uint8Array destination);
+  external Uint8List encode(String input);
+  external TextEncoderEncodeIntoResult encodeInto(String source, Uint8List destination);
   external factory TextEncoder();
 }
 
@@ -4255,10 +4260,10 @@ class TextEncoderCommon {
 @JS()
 @anonymous
 class TextEncoderStream extends GenericTransformStream {
-  external ReadableStream<Uint8Array> get readable;
+  external ReadableStream<Uint8List> get readable;
   external WritableStream<String> get writable;
   external factory TextEncoderStream({
-    ReadableStream<Uint8Array> readable,
+    ReadableStream<Uint8List> readable,
     WritableStream<String> writable,
   });
 }
@@ -4502,7 +4507,7 @@ class WEBGL_debug_renderer_info {
 @JS()
 @anonymous
 class WEBGL_debug_shaders {
-  external String getTranslatedShaderSource(WebGLShader shader);
+  external String getTranslatedShaderSource(Shader shader);
   external factory WEBGL_debug_shaders();
 }
 
@@ -4613,8 +4618,8 @@ external IWebGL2RenderingContext JWebGL2RenderingContext;
 class WebGL2RenderingContextBase {
   external void beginQuery(GLenum target, WebGLQuery query);
   external void beginTransformFeedback(GLenum primitiveMode);
-  external void bindBufferBase(GLenum target, GLuint index, WebGLBuffer? buffer);
-  external void bindBufferRange(GLenum target, GLuint index, WebGLBuffer? buffer, GLintptr offset, GLsizeiptr size);
+  external void bindBufferBase(GLenum target, GLuint index, Buffer? buffer);
+  external void bindBufferRange(GLenum target, GLuint index, Buffer? buffer, GLintptr offset, GLsizeiptr size);
   external void bindSampler(GLuint unit, WebGLSampler? sampler);
   external void bindTransformFeedback(GLenum target, WebGLTransformFeedback? tf);
   external void bindVertexArray(WebGLVertexArrayObject? array);
@@ -4649,23 +4654,22 @@ class WebGL2RenderingContextBase {
   external void endQuery(GLenum target);
   external void endTransformFeedback();
   external WebGLSync? fenceSync(GLenum condition, GLbitfield flags);
-  external void framebufferTextureLayer(
-      GLenum target, GLenum attachment, WebGLTexture? texture, GLint level, GLint layer);
-  external String? getActiveUniformBlockName(WebGLProgram program, GLuint uniformBlockIndex);
-  external dynamic getActiveUniformBlockParameter(WebGLProgram program, GLuint uniformBlockIndex, GLenum pname);
-  external dynamic getActiveUniforms(WebGLProgram program, List<GLuint> uniformIndices, GLenum pname);
+  external void framebufferTextureLayer(GLenum target, GLenum attachment, Texture? texture, GLint level, GLint layer);
+  external String? getActiveUniformBlockName(Program program, GLuint uniformBlockIndex);
+  external dynamic getActiveUniformBlockParameter(Program program, GLuint uniformBlockIndex, GLenum pname);
+  external dynamic getActiveUniforms(Program program, List<GLuint> uniformIndices, GLenum pname);
   external void getBufferSubData(
-      GLenum target, GLintptr srcByteOffset, ArrayBufferView dstBuffer, GLuint dstOffset, GLuint length);
-  external GLint getFragDataLocation(WebGLProgram program, String name);
+      GLenum target, GLintptr srcByteOffset, TypedData dstBuffer, GLuint dstOffset, GLuint length);
+  external GLint getFragDataLocation(Program program, String name);
   external dynamic getIndexedParameter(GLenum target, GLuint index);
   external dynamic getInternalformatParameter(GLenum target, GLenum internalformat, GLenum pname);
   external WebGLQuery? getQuery(GLenum target, GLenum pname);
   external dynamic getQueryParameter(WebGLQuery query, GLenum pname);
   external dynamic getSamplerParameter(WebGLSampler sampler, GLenum pname);
   external dynamic getSyncParameter(WebGLSync sync, GLenum pname);
-  external WebGLActiveInfo? getTransformFeedbackVarying(WebGLProgram program, GLuint index);
-  external GLuint getUniformBlockIndex(WebGLProgram program, String uniformBlockName);
-  external List<GLuint>? getUniformIndices(WebGLProgram program, List<String> uniformNames);
+  external ActiveInfo? getTransformFeedbackVarying(Program program, GLuint index);
+  external GLuint getUniformBlockIndex(Program program, String uniformBlockName);
+  external List<GLuint>? getUniformIndices(Program program, List<String> uniformNames);
   external void invalidateFramebuffer(GLenum target, List<GLenum> attachments);
   external void invalidateSubFramebuffer(
       GLenum target, List<GLenum> attachments, GLint x, GLint y, GLsizei width, GLsizei height);
@@ -4688,28 +4692,28 @@ class WebGL2RenderingContextBase {
       GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth);
   external void texSubImage3D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width,
       GLsizei height, GLsizei depth, GLenum format, GLenum type, GLintptr pboOffset);
-  external void transformFeedbackVaryings(WebGLProgram program, List<String> varyings, GLenum bufferMode);
-  external void uniform1ui(WebGLUniformLocation? location, GLuint v0);
-  external void uniform1uiv(WebGLUniformLocation? location, Uint32List data, GLuint srcOffset, GLuint srcLength);
-  external void uniform2ui(WebGLUniformLocation? location, GLuint v0, GLuint v1);
-  external void uniform2uiv(WebGLUniformLocation? location, Uint32List data, GLuint srcOffset, GLuint srcLength);
-  external void uniform3ui(WebGLUniformLocation? location, GLuint v0, GLuint v1, GLuint v2);
-  external void uniform3uiv(WebGLUniformLocation? location, Uint32List data, GLuint srcOffset, GLuint srcLength);
-  external void uniform4ui(WebGLUniformLocation? location, GLuint v0, GLuint v1, GLuint v2, GLuint v3);
-  external void uniform4uiv(WebGLUniformLocation? location, Uint32List data, GLuint srcOffset, GLuint srcLength);
-  external void uniformBlockBinding(WebGLProgram program, GLuint uniformBlockIndex, GLuint uniformBlockBinding);
+  external void transformFeedbackVaryings(Program program, List<String> varyings, GLenum bufferMode);
+  external void uniform1ui(UniformLocation? location, GLuint v0);
+  external void uniform1uiv(UniformLocation? location, Uint32List data, GLuint srcOffset, GLuint srcLength);
+  external void uniform2ui(UniformLocation? location, GLuint v0, GLuint v1);
+  external void uniform2uiv(UniformLocation? location, Uint32List data, GLuint srcOffset, GLuint srcLength);
+  external void uniform3ui(UniformLocation? location, GLuint v0, GLuint v1, GLuint v2);
+  external void uniform3uiv(UniformLocation? location, Uint32List data, GLuint srcOffset, GLuint srcLength);
+  external void uniform4ui(UniformLocation? location, GLuint v0, GLuint v1, GLuint v2, GLuint v3);
+  external void uniform4uiv(UniformLocation? location, Uint32List data, GLuint srcOffset, GLuint srcLength);
+  external void uniformBlockBinding(Program program, GLuint uniformBlockIndex, GLuint uniformBlockBinding);
   external void uniformMatrix2x3fv(
-      WebGLUniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
+      UniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
   external void uniformMatrix2x4fv(
-      WebGLUniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
+      UniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
   external void uniformMatrix3x2fv(
-      WebGLUniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
+      UniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
   external void uniformMatrix3x4fv(
-      WebGLUniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
+      UniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
   external void uniformMatrix4x2fv(
-      WebGLUniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
+      UniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
   external void uniformMatrix4x3fv(
-      WebGLUniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
+      UniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
   external void vertexAttribDivisor(GLuint index, GLuint divisor);
   external void vertexAttribI4i(GLuint index, GLint x, GLint y, GLint z, GLint w);
   external void vertexAttribI4iv(GLuint index, Int32List values);
@@ -5257,25 +5261,25 @@ class WebGL2RenderingContextOverloads {
   external void compressedTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width,
       GLsizei height, GLenum format, GLsizei imageSize, GLintptr offset);
   external void readPixels(
-      GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, ArrayBufferView? dstData);
+      GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, TypedData? dstData);
   external void texImage2D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height,
-      GLint border, GLenum format, GLenum type, ArrayBufferView? pixels);
+      GLint border, GLenum format, GLenum type, TypedData? pixels);
   external void texSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height,
-      GLenum format, GLenum type, ArrayBufferView? pixels);
-  external void uniform1fv(WebGLUniformLocation? location, Float32List data, GLuint srcOffset, GLuint srcLength);
-  external void uniform1iv(WebGLUniformLocation? location, Int32List data, GLuint srcOffset, GLuint srcLength);
-  external void uniform2fv(WebGLUniformLocation? location, Float32List data, GLuint srcOffset, GLuint srcLength);
-  external void uniform2iv(WebGLUniformLocation? location, Int32List data, GLuint srcOffset, GLuint srcLength);
-  external void uniform3fv(WebGLUniformLocation? location, Float32List data, GLuint srcOffset, GLuint srcLength);
-  external void uniform3iv(WebGLUniformLocation? location, Int32List data, GLuint srcOffset, GLuint srcLength);
-  external void uniform4fv(WebGLUniformLocation? location, Float32List data, GLuint srcOffset, GLuint srcLength);
-  external void uniform4iv(WebGLUniformLocation? location, Int32List data, GLuint srcOffset, GLuint srcLength);
+      GLenum format, GLenum type, TypedData? pixels);
+  external void uniform1fv(UniformLocation? location, Float32List data, GLuint srcOffset, GLuint srcLength);
+  external void uniform1iv(UniformLocation? location, Int32List data, GLuint srcOffset, GLuint srcLength);
+  external void uniform2fv(UniformLocation? location, Float32List data, GLuint srcOffset, GLuint srcLength);
+  external void uniform2iv(UniformLocation? location, Int32List data, GLuint srcOffset, GLuint srcLength);
+  external void uniform3fv(UniformLocation? location, Float32List data, GLuint srcOffset, GLuint srcLength);
+  external void uniform3iv(UniformLocation? location, Int32List data, GLuint srcOffset, GLuint srcLength);
+  external void uniform4fv(UniformLocation? location, Float32List data, GLuint srcOffset, GLuint srcLength);
+  external void uniform4iv(UniformLocation? location, Int32List data, GLuint srcOffset, GLuint srcLength);
   external void uniformMatrix2fv(
-      WebGLUniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
+      UniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
   external void uniformMatrix3fv(
-      WebGLUniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
+      UniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
   external void uniformMatrix4fv(
-      WebGLUniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
+      UniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
   external factory WebGL2RenderingContextOverloads();
 }
 
@@ -5368,12 +5372,12 @@ class WebGLRenderingContextBase {
   external GLsizei get drawingBufferHeight;
   external GLsizei get drawingBufferWidth;
   external void activeTexture(GLenum texture);
-  external void attachShader(WebGLProgram program, WebGLShader shader);
-  external void bindAttribLocation(WebGLProgram program, GLuint index, String name);
-  external void bindBuffer(GLenum target, WebGLBuffer? buffer);
-  external void bindFramebuffer(GLenum target, WebGLFramebuffer? framebuffer);
-  external void bindRenderbuffer(GLenum target, WebGLRenderbuffer? renderbuffer);
-  external void bindTexture(GLenum target, WebGLTexture? texture);
+  external void attachShader(Program program, Shader shader);
+  external void bindAttribLocation(Program program, GLuint index, String name);
+  external void bindBuffer(GLenum target, Buffer? buffer);
+  external void bindFramebuffer(GLenum target, Framebuffer? framebuffer);
+  external void bindRenderbuffer(GLenum target, Renderbuffer? renderbuffer);
+  external void bindTexture(GLenum target, Texture? texture);
   external void blendColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
   external void blendEquation(GLenum mode);
   external void blendEquationSeparate(GLenum modeRGB, GLenum modeAlpha);
@@ -5385,28 +5389,28 @@ class WebGLRenderingContextBase {
   external void clearDepth(GLclampf depth);
   external void clearStencil(GLint s);
   external void colorMask(GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha);
-  external void compileShader(WebGLShader shader);
+  external void compileShader(Shader shader);
   external void copyTexImage2D(
       GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border);
   external void copyTexSubImage2D(
       GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height);
-  external WebGLBuffer? createBuffer();
-  external WebGLFramebuffer? createFramebuffer();
-  external WebGLProgram? createProgram();
-  external WebGLRenderbuffer? createRenderbuffer();
-  external WebGLShader? createShader(GLenum type);
-  external WebGLTexture? createTexture();
+  external Buffer? createBuffer();
+  external Framebuffer? createFramebuffer();
+  external Program? createProgram();
+  external Renderbuffer? createRenderbuffer();
+  external Shader? createShader(GLenum type);
+  external Texture? createTexture();
   external void cullFace(GLenum mode);
-  external void deleteBuffer(WebGLBuffer? buffer);
-  external void deleteFramebuffer(WebGLFramebuffer? framebuffer);
-  external void deleteProgram(WebGLProgram? program);
-  external void deleteRenderbuffer(WebGLRenderbuffer? renderbuffer);
-  external void deleteShader(WebGLShader? shader);
-  external void deleteTexture(WebGLTexture? texture);
+  external void deleteBuffer(Buffer? buffer);
+  external void deleteFramebuffer(Framebuffer? framebuffer);
+  external void deleteProgram(Program? program);
+  external void deleteRenderbuffer(Renderbuffer? renderbuffer);
+  external void deleteShader(Shader? shader);
+  external void deleteTexture(Texture? texture);
   external void depthFunc(GLenum func);
   external void depthMask(GLboolean flag);
   external void depthRange(GLclampf zNear, GLclampf zFar);
-  external void detachShader(WebGLProgram program, WebGLShader shader);
+  external void detachShader(Program program, Shader shader);
   external void disable(GLenum cap);
   external void disableVertexAttribArray(GLuint index);
   external void drawArrays(GLenum mode, GLint first, GLsizei count);
@@ -5416,51 +5420,50 @@ class WebGLRenderingContextBase {
   external void finish();
   external void flush();
   external void framebufferRenderbuffer(
-      GLenum target, GLenum attachment, GLenum renderbuffertarget, WebGLRenderbuffer? renderbuffer);
-  external void framebufferTexture2D(
-      GLenum target, GLenum attachment, GLenum textarget, WebGLTexture? texture, GLint level);
+      GLenum target, GLenum attachment, GLenum renderbuffertarget, Renderbuffer? renderbuffer);
+  external void framebufferTexture2D(GLenum target, GLenum attachment, GLenum textarget, Texture? texture, GLint level);
   external void frontFace(GLenum mode);
   external void generateMipmap(GLenum target);
-  external WebGLActiveInfo? getActiveAttrib(WebGLProgram program, GLuint index);
-  external WebGLActiveInfo? getActiveUniform(WebGLProgram program, GLuint index);
-  external List<WebGLShader>? getAttachedShaders(WebGLProgram program);
-  external GLint getAttribLocation(WebGLProgram program, String name);
+  external ActiveInfo? getActiveAttrib(Program program, GLuint index);
+  external ActiveInfo? getActiveUniform(Program program, GLuint index);
+  external List<Shader>? getAttachedShaders(Program program);
+  external GLint getAttribLocation(Program program, String name);
   external dynamic getBufferParameter(GLenum target, GLenum pname);
-  external WebGLContextAttributes? getContextAttributes();
+  external ContextAttributes? getContextAttributes();
   external GLenum getError();
   external EXT_blend_minmax? getExtension(String extensionName);
   external dynamic getFramebufferAttachmentParameter(GLenum target, GLenum attachment, GLenum pname);
   external dynamic getParameter(GLenum pname);
-  external String? getProgramInfoLog(WebGLProgram program);
-  external dynamic getProgramParameter(WebGLProgram program, GLenum pname);
+  external String? getProgramInfoLog(Program program);
+  external dynamic getProgramParameter(Program program, GLenum pname);
   external dynamic getRenderbufferParameter(GLenum target, GLenum pname);
-  external String? getShaderInfoLog(WebGLShader shader);
-  external dynamic getShaderParameter(WebGLShader shader, GLenum pname);
-  external WebGLShaderPrecisionFormat? getShaderPrecisionFormat(GLenum shadertype, GLenum precisiontype);
-  external String? getShaderSource(WebGLShader shader);
+  external String? getShaderInfoLog(Shader shader);
+  external dynamic getShaderParameter(Shader shader, GLenum pname);
+  external ShaderPrecisionFormat? getShaderPrecisionFormat(GLenum shadertype, GLenum precisiontype);
+  external String? getShaderSource(Shader shader);
   external List<String>? getSupportedExtensions();
   external dynamic getTexParameter(GLenum target, GLenum pname);
-  external dynamic getUniform(WebGLProgram program, WebGLUniformLocation location);
-  external WebGLUniformLocation? getUniformLocation(WebGLProgram program, String name);
+  external dynamic getUniform(Program program, UniformLocation location);
+  external UniformLocation? getUniformLocation(Program program, String name);
   external dynamic getVertexAttrib(GLuint index, GLenum pname);
   external GLintptr getVertexAttribOffset(GLuint index, GLenum pname);
   external void hint(GLenum target, GLenum mode);
-  external GLboolean isBuffer(WebGLBuffer? buffer);
+  external GLboolean isBuffer(Buffer? buffer);
   external bool isContextLost();
   external GLboolean isEnabled(GLenum cap);
-  external GLboolean isFramebuffer(WebGLFramebuffer? framebuffer);
-  external GLboolean isProgram(WebGLProgram? program);
-  external GLboolean isRenderbuffer(WebGLRenderbuffer? renderbuffer);
-  external GLboolean isShader(WebGLShader? shader);
-  external GLboolean isTexture(WebGLTexture? texture);
+  external GLboolean isFramebuffer(Framebuffer? framebuffer);
+  external GLboolean isProgram(Program? program);
+  external GLboolean isRenderbuffer(Renderbuffer? renderbuffer);
+  external GLboolean isShader(Shader? shader);
+  external GLboolean isTexture(Texture? texture);
   external void lineWidth(GLfloat width);
-  external void linkProgram(WebGLProgram program);
+  external void linkProgram(Program program);
   external void pixelStorei(GLenum pname, dynamic param);
   external void polygonOffset(GLfloat factor, GLfloat units);
   external void renderbufferStorage(GLenum target, GLenum internalformat, GLsizei width, GLsizei height);
   external void sampleCoverage(GLclampf value, GLboolean invert);
   external void scissor(GLint x, GLint y, GLsizei width, GLsizei height);
-  external void shaderSource(WebGLShader shader, String source);
+  external void shaderSource(Shader shader, String source);
   external void stencilFunc(GLenum func, GLint ref, GLuint mask);
   external void stencilFuncSeparate(GLenum face, GLenum func, GLint ref, GLuint mask);
   external void stencilMask(GLuint mask);
@@ -5469,16 +5472,16 @@ class WebGLRenderingContextBase {
   external void stencilOpSeparate(GLenum face, GLenum fail, GLenum zfail, GLenum zpass);
   external void texParameterf(GLenum target, GLenum pname, GLfloat param);
   external void texParameteri(GLenum target, GLenum pname, GLint param);
-  external void uniform1f(WebGLUniformLocation? location, GLfloat x);
-  external void uniform1i(WebGLUniformLocation? location, GLint x);
-  external void uniform2f(WebGLUniformLocation? location, GLfloat x, GLfloat y);
-  external void uniform2i(WebGLUniformLocation? location, GLint x, GLint y);
-  external void uniform3f(WebGLUniformLocation? location, GLfloat x, GLfloat y, GLfloat z);
-  external void uniform3i(WebGLUniformLocation? location, GLint x, GLint y, GLint z);
-  external void uniform4f(WebGLUniformLocation? location, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
-  external void uniform4i(WebGLUniformLocation? location, GLint x, GLint y, GLint z, GLint w);
-  external void useProgram(WebGLProgram? program);
-  external void validateProgram(WebGLProgram program);
+  external void uniform1f(UniformLocation? location, GLfloat x);
+  external void uniform1i(UniformLocation? location, GLint x);
+  external void uniform2f(UniformLocation? location, GLfloat x, GLfloat y);
+  external void uniform2i(UniformLocation? location, GLint x, GLint y);
+  external void uniform3f(UniformLocation? location, GLfloat x, GLfloat y, GLfloat z);
+  external void uniform3i(UniformLocation? location, GLint x, GLint y, GLint z);
+  external void uniform4f(UniformLocation? location, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+  external void uniform4i(UniformLocation? location, GLint x, GLint y, GLint z, GLint w);
+  external void useProgram(Program? program);
+  external void validateProgram(Program program);
   external void vertexAttrib1f(GLuint index, GLfloat x);
   external void vertexAttrib1fv(GLuint index, Float32List values);
   external void vertexAttrib2f(GLuint index, GLfloat x, GLfloat y);
@@ -6094,27 +6097,27 @@ class WebGLRenderingContextBase {
 class WebGLRenderingContextOverloads {
   external void bufferData(GLenum target, GLsizeiptr size, GLenum usage);
   external void bufferSubData(GLenum target, GLintptr offset, BufferSource data);
-  external void compressedTexImage2D(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height,
-      GLint border, ArrayBufferView data);
+  external void compressedTexImage2D(
+      GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, TypedData data);
   external void compressedTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width,
-      GLsizei height, GLenum format, ArrayBufferView data);
+      GLsizei height, GLenum format, TypedData data);
   external void readPixels(
-      GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, ArrayBufferView? pixels);
+      GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, TypedData? pixels);
   external void texImage2D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height,
-      GLint border, GLenum format, GLenum type, ArrayBufferView? pixels);
+      GLint border, GLenum format, GLenum type, TypedData? pixels);
   external void texSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height,
-      GLenum format, GLenum type, ArrayBufferView? pixels);
-  external void uniform1fv(WebGLUniformLocation? location, Float32List v);
-  external void uniform1iv(WebGLUniformLocation? location, Int32List v);
-  external void uniform2fv(WebGLUniformLocation? location, Float32List v);
-  external void uniform2iv(WebGLUniformLocation? location, Int32List v);
-  external void uniform3fv(WebGLUniformLocation? location, Float32List v);
-  external void uniform3iv(WebGLUniformLocation? location, Int32List v);
-  external void uniform4fv(WebGLUniformLocation? location, Float32List v);
-  external void uniform4iv(WebGLUniformLocation? location, Int32List v);
-  external void uniformMatrix2fv(WebGLUniformLocation? location, GLboolean transpose, Float32List value);
-  external void uniformMatrix3fv(WebGLUniformLocation? location, GLboolean transpose, Float32List value);
-  external void uniformMatrix4fv(WebGLUniformLocation? location, GLboolean transpose, Float32List value);
+      GLenum format, GLenum type, TypedData? pixels);
+  external void uniform1fv(UniformLocation? location, Float32List v);
+  external void uniform1iv(UniformLocation? location, Int32List v);
+  external void uniform2fv(UniformLocation? location, Float32List v);
+  external void uniform2iv(UniformLocation? location, Int32List v);
+  external void uniform3fv(UniformLocation? location, Float32List v);
+  external void uniform3iv(UniformLocation? location, Int32List v);
+  external void uniform4fv(UniformLocation? location, Float32List v);
+  external void uniform4iv(UniformLocation? location, Int32List v);
+  external void uniformMatrix2fv(UniformLocation? location, GLboolean transpose, Float32List value);
+  external void uniformMatrix3fv(UniformLocation? location, GLboolean transpose, Float32List value);
+  external void uniformMatrix4fv(UniformLocation? location, GLboolean transpose, Float32List value);
   external factory WebGLRenderingContextOverloads();
 }
 
@@ -6290,7 +6293,7 @@ external IWindowClient JWindowClient;
 class WindowOrWorkerGlobalScope {
   external CacheStorage get caches;
   external Crypto get crypto;
-  external IDBFactory get indexedDB;
+  external IdbFactory get indexedDB;
   external bool get isSecureContext;
   external String get origin;
   external Performance get performance;
@@ -6330,7 +6333,7 @@ class WindowOrWorkerGlobalScope {
   external factory WindowOrWorkerGlobalScope({
     CacheStorage caches,
     Crypto crypto,
-    IDBFactory indexedDB,
+    IdbFactory indexedDB,
     bool isSecureContext,
     String origin,
     Performance performance,
@@ -6540,7 +6543,7 @@ class XMLHttpRequestEventMap extends XMLHttpRequestEventTargetEventMap {
 
 @JS()
 @anonymous
-class XMLHttpRequest extends XMLHttpRequestEventTarget {
+class XMLHttpRequest extends HttpRequestEventTarget {
   external dynamic Function(Event ev)? get onreadystatechange;
   external set onreadystatechange(dynamic Function(Event ev)? value);
   external num get readyState;
@@ -6553,7 +6556,7 @@ class XMLHttpRequest extends XMLHttpRequestEventTarget {
   external String get statusText;
   external num get timeout;
   external set timeout(num value);
-  external XMLHttpRequestUpload get upload;
+  external HttpRequestUpload get upload;
   external bool get withCredentials;
   external set withCredentials(bool value);
   external void abort();
@@ -6580,7 +6583,7 @@ class XMLHttpRequest extends XMLHttpRequestEventTarget {
     num status,
     String statusText,
     num timeout,
-    XMLHttpRequestUpload upload,
+    HttpRequestUpload upload,
     bool withCredentials,
     num DONE,
     num HEADERS_RECEIVED,
@@ -6596,28 +6599,28 @@ external IXMLHttpRequest JXMLHttpRequest;
 @JS()
 @anonymous
 class XMLHttpRequestEventTargetEventMap {
-  external ProgressEvent<XMLHttpRequestEventTarget> get abort;
-  external set abort(ProgressEvent<XMLHttpRequestEventTarget> value);
-  external ProgressEvent<XMLHttpRequestEventTarget> get error;
-  external set error(ProgressEvent<XMLHttpRequestEventTarget> value);
-  external ProgressEvent<XMLHttpRequestEventTarget> get load;
-  external set load(ProgressEvent<XMLHttpRequestEventTarget> value);
-  external ProgressEvent<XMLHttpRequestEventTarget> get loadend;
-  external set loadend(ProgressEvent<XMLHttpRequestEventTarget> value);
-  external ProgressEvent<XMLHttpRequestEventTarget> get loadstart;
-  external set loadstart(ProgressEvent<XMLHttpRequestEventTarget> value);
-  external ProgressEvent<XMLHttpRequestEventTarget> get progress;
-  external set progress(ProgressEvent<XMLHttpRequestEventTarget> value);
-  external ProgressEvent<XMLHttpRequestEventTarget> get timeout;
-  external set timeout(ProgressEvent<XMLHttpRequestEventTarget> value);
+  external ProgressEvent<HttpRequestEventTarget> get abort;
+  external set abort(ProgressEvent<HttpRequestEventTarget> value);
+  external ProgressEvent<HttpRequestEventTarget> get error;
+  external set error(ProgressEvent<HttpRequestEventTarget> value);
+  external ProgressEvent<HttpRequestEventTarget> get load;
+  external set load(ProgressEvent<HttpRequestEventTarget> value);
+  external ProgressEvent<HttpRequestEventTarget> get loadend;
+  external set loadend(ProgressEvent<HttpRequestEventTarget> value);
+  external ProgressEvent<HttpRequestEventTarget> get loadstart;
+  external set loadstart(ProgressEvent<HttpRequestEventTarget> value);
+  external ProgressEvent<HttpRequestEventTarget> get progress;
+  external set progress(ProgressEvent<HttpRequestEventTarget> value);
+  external ProgressEvent<HttpRequestEventTarget> get timeout;
+  external set timeout(ProgressEvent<HttpRequestEventTarget> value);
   external factory XMLHttpRequestEventTargetEventMap({
-    ProgressEvent<XMLHttpRequestEventTarget> abort,
-    ProgressEvent<XMLHttpRequestEventTarget> error,
-    ProgressEvent<XMLHttpRequestEventTarget> load,
-    ProgressEvent<XMLHttpRequestEventTarget> loadend,
-    ProgressEvent<XMLHttpRequestEventTarget> loadstart,
-    ProgressEvent<XMLHttpRequestEventTarget> progress,
-    ProgressEvent<XMLHttpRequestEventTarget> timeout,
+    ProgressEvent<HttpRequestEventTarget> abort,
+    ProgressEvent<HttpRequestEventTarget> error,
+    ProgressEvent<HttpRequestEventTarget> load,
+    ProgressEvent<HttpRequestEventTarget> loadend,
+    ProgressEvent<HttpRequestEventTarget> loadstart,
+    ProgressEvent<HttpRequestEventTarget> progress,
+    ProgressEvent<HttpRequestEventTarget> timeout,
   });
 }
 
@@ -6656,7 +6659,7 @@ external IXMLHttpRequestEventTarget JXMLHttpRequestEventTarget;
 
 @JS()
 @anonymous
-class XMLHttpRequestUpload extends XMLHttpRequestEventTarget {
+class XMLHttpRequestUpload extends HttpRequestEventTarget {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory XMLHttpRequestUpload();
@@ -6840,10 +6843,10 @@ external IInstance JInstance;
 @JS()
 @anonymous
 class Memory {
-  external ArrayBuffer get buffer;
+  external ByteBuffer get buffer;
   external num grow(num delta);
   external factory Memory({
-    ArrayBuffer buffer,
+    ByteBuffer buffer,
   });
 }
 
@@ -7123,7 +7126,7 @@ external CacheStorage caches;
 @JS(r'crypto')
 external Crypto crypto;
 @JS(r'indexedDB')
-external IDBFactory indexedDB;
+external IdbFactory indexedDB;
 @JS(r'isSecureContext')
 external bool isSecureContext;
 @JS(r'origin')
@@ -7205,7 +7208,7 @@ typedef ReadableStreamController<T> = ReadableStreamDefaultController<T>;
 typedef VibratePattern = dynamic;
 typedef AlgorithmIdentifier = dynamic;
 typedef HashAlgorithmIdentifier = AlgorithmIdentifier;
-typedef BigInteger = Uint8Array;
+typedef BigInteger = Uint8List;
 typedef NamedCurve = String;
 typedef GLenum = num;
 typedef GLboolean = bool;
@@ -7402,8 +7405,8 @@ class ICustomEvent {
 @JS()
 @anonymous
 class IDOMException {
-  external DOMException get prototype;
-  external set prototype(DOMException value);
+  external DomException get prototype;
+  external set prototype(DomException value);
   external factory IDOMException({String message, String name});
   external num get ABORT_ERR;
   external num get DATA_CLONE_ERR;
@@ -7435,41 +7438,41 @@ class IDOMException {
 @JS()
 @anonymous
 class IDOMMatrix {
-  external DOMMatrix get prototype;
-  external set prototype(DOMMatrix value);
+  external DomMatrix get prototype;
+  external set prototype(DomMatrix value);
   external factory IDOMMatrix({dynamic init});
-  external DOMMatrix fromFloat32Array(Float32Array array32);
-  external DOMMatrix fromFloat64Array(Float64Array array64);
-  external DOMMatrix fromMatrix(DOMMatrixInit other);
+  external DomMatrix fromFloat32Array(Float32List array32);
+  external DomMatrix fromFloat64Array(Float64List array64);
+  external DomMatrix fromMatrix(DOMMatrixInit other);
 }
 
 @JS()
 @anonymous
 class IDOMMatrixReadOnly {
-  external DOMMatrixReadOnly get prototype;
-  external set prototype(DOMMatrixReadOnly value);
+  external DomMatrixReadOnly get prototype;
+  external set prototype(DomMatrixReadOnly value);
   external factory IDOMMatrixReadOnly({dynamic init});
-  external DOMMatrixReadOnly fromFloat32Array(Float32Array array32);
-  external DOMMatrixReadOnly fromFloat64Array(Float64Array array64);
-  external DOMMatrixReadOnly fromMatrix(DOMMatrixInit other);
+  external DomMatrixReadOnly fromFloat32Array(Float32List array32);
+  external DomMatrixReadOnly fromFloat64Array(Float64List array64);
+  external DomMatrixReadOnly fromMatrix(DOMMatrixInit other);
 }
 
 @JS()
 @anonymous
 class IDOMPoint {
-  external DOMPoint get prototype;
-  external set prototype(DOMPoint value);
+  external DomPoint get prototype;
+  external set prototype(DomPoint value);
   external factory IDOMPoint({num x, num y, num z, num w});
-  external DOMPoint fromPoint(DOMPointInit other);
+  external DomPoint fromPoint(DOMPointInit other);
 }
 
 @JS()
 @anonymous
 class IDOMPointReadOnly {
-  external DOMPointReadOnly get prototype;
-  external set prototype(DOMPointReadOnly value);
+  external DomPointReadOnly get prototype;
+  external set prototype(DomPointReadOnly value);
   external factory IDOMPointReadOnly({num x, num y, num z, num w});
-  external DOMPointReadOnly fromPoint(DOMPointInit other);
+  external DomPointReadOnly fromPoint(DOMPointInit other);
 }
 
 @JS()
@@ -7494,17 +7497,17 @@ class IDOMRect {
 @JS()
 @anonymous
 class IDOMRectReadOnly {
-  external DOMRectReadOnly get prototype;
-  external set prototype(DOMRectReadOnly value);
+  external DomRectReadOnly get prototype;
+  external set prototype(DomRectReadOnly value);
   external factory IDOMRectReadOnly({num x, num y, num width, num height});
-  external DOMRectReadOnly fromRect(DOMRectInit other);
+  external DomRectReadOnly fromRect(DOMRectInit other);
 }
 
 @JS()
 @anonymous
 class IDOMStringList {
-  external DOMStringList get prototype;
-  external set prototype(DOMStringList value);
+  external DomStringList get prototype;
+  external set prototype(DomStringList value);
   external factory IDOMStringList();
 }
 
@@ -7641,92 +7644,92 @@ class IHeaders {
 @JS()
 @anonymous
 class IIDBCursor {
-  external IDBCursor get prototype;
-  external set prototype(IDBCursor value);
+  external Cursor get prototype;
+  external set prototype(Cursor value);
   external factory IIDBCursor();
 }
 
 @JS()
 @anonymous
 class IIDBCursorWithValue {
-  external IDBCursorWithValue get prototype;
-  external set prototype(IDBCursorWithValue value);
+  external CursorWithValue get prototype;
+  external set prototype(CursorWithValue value);
   external factory IIDBCursorWithValue();
 }
 
 @JS()
 @anonymous
 class IIDBDatabase {
-  external IDBDatabase get prototype;
-  external set prototype(IDBDatabase value);
+  external Database get prototype;
+  external set prototype(Database value);
   external factory IIDBDatabase();
 }
 
 @JS()
 @anonymous
 class IIDBFactory {
-  external IDBFactory get prototype;
-  external set prototype(IDBFactory value);
+  external IdbFactory get prototype;
+  external set prototype(IdbFactory value);
   external factory IIDBFactory();
 }
 
 @JS()
 @anonymous
 class IIDBIndex {
-  external IDBIndex get prototype;
-  external set prototype(IDBIndex value);
+  external Index get prototype;
+  external set prototype(Index value);
   external factory IIDBIndex();
 }
 
 @JS()
 @anonymous
 class IIDBKeyRange {
-  external IDBKeyRange get prototype;
-  external set prototype(IDBKeyRange value);
+  external KeyRange get prototype;
+  external set prototype(KeyRange value);
   external factory IIDBKeyRange();
-  external IDBKeyRange bound(dynamic lower, dynamic upper, bool lowerOpen, bool upperOpen);
-  external IDBKeyRange lowerBound(dynamic lower, bool open);
-  external IDBKeyRange only(dynamic value);
-  external IDBKeyRange upperBound(dynamic upper, bool open);
+  external KeyRange bound(dynamic lower, dynamic upper, bool lowerOpen, bool upperOpen);
+  external KeyRange lowerBound(dynamic lower, bool open);
+  external KeyRange only(dynamic value);
+  external KeyRange upperBound(dynamic upper, bool open);
 }
 
 @JS()
 @anonymous
 class IIDBObjectStore {
-  external IDBObjectStore get prototype;
-  external set prototype(IDBObjectStore value);
+  external ObjectStore get prototype;
+  external set prototype(ObjectStore value);
   external factory IIDBObjectStore();
 }
 
 @JS()
 @anonymous
 class IIDBOpenDBRequest {
-  external IDBOpenDBRequest get prototype;
-  external set prototype(IDBOpenDBRequest value);
+  external OpenDBRequest get prototype;
+  external set prototype(OpenDBRequest value);
   external factory IIDBOpenDBRequest();
 }
 
 @JS()
 @anonymous
 class IIDBRequest {
-  external IDBRequest get prototype;
-  external set prototype(IDBRequest value);
+  external Request get prototype;
+  external set prototype(Request value);
   external factory IIDBRequest();
 }
 
 @JS()
 @anonymous
 class IIDBTransaction {
-  external IDBTransaction get prototype;
-  external set prototype(IDBTransaction value);
+  external Transaction get prototype;
+  external set prototype(Transaction value);
   external factory IIDBTransaction();
 }
 
 @JS()
 @anonymous
 class IIDBVersionChangeEvent {
-  external IDBVersionChangeEvent get prototype;
-  external set prototype(IDBVersionChangeEvent value);
+  external VersionChangeEvent get prototype;
+  external set prototype(VersionChangeEvent value);
   external factory IIDBVersionChangeEvent({String type, IDBVersionChangeEventInit eventInitDict});
 }
 
@@ -7800,7 +7803,7 @@ class IModule {
   external Module get prototype;
   external set prototype(Module value);
   external factory IModule({BufferSource bytes});
-  external List<ArrayBuffer> customSections(Module moduleObject, String sectionName);
+  external List<ByteBuffer> customSections(Module moduleObject, String sectionName);
   external List<ModuleExportDescriptor> exports(Module moduleObject);
   external List<ModuleImportDescriptor> imports(Module moduleObject);
 }
@@ -7893,7 +7896,7 @@ class IPerformanceObserver {
   external PerformanceObserver get prototype;
   external set prototype(PerformanceObserver value);
   external factory IPerformanceObserver({PerformanceObserverCallback callback});
-  external ReadonlyArray<String> get supportedEntryTypes;
+  external List<String> get supportedEntryTypes;
 }
 
 @JS()
@@ -7958,7 +7961,7 @@ class IPushManager {
   external PushManager get prototype;
   external set prototype(PushManager value);
   external factory IPushManager();
-  external ReadonlyArray<String> get supportedContentEncodings;
+  external List<String> get supportedContentEncodings;
 }
 
 @JS()
@@ -8175,8 +8178,8 @@ class ITransformStreamDefaultController {
 @JS()
 @anonymous
 class IURL {
-  external URL get prototype;
-  external set prototype(URL value);
+  external Url get prototype;
+  external set prototype(Url value);
   external factory IURL({String url, dynamic base});
   external String createObjectURL(dynamic object);
   external void revokeObjectURL(String url);
@@ -8762,40 +8765,40 @@ class IWebGL2RenderingContext {
 @JS()
 @anonymous
 class IWebGLActiveInfo {
-  external WebGLActiveInfo get prototype;
-  external set prototype(WebGLActiveInfo value);
+  external ActiveInfo get prototype;
+  external set prototype(ActiveInfo value);
   external factory IWebGLActiveInfo();
 }
 
 @JS()
 @anonymous
 class IWebGLBuffer {
-  external WebGLBuffer get prototype;
-  external set prototype(WebGLBuffer value);
+  external Buffer get prototype;
+  external set prototype(Buffer value);
   external factory IWebGLBuffer();
 }
 
 @JS()
 @anonymous
 class IWebGLContextEvent {
-  external WebGLContextEvent get prototype;
-  external set prototype(WebGLContextEvent value);
+  external ContextEvent get prototype;
+  external set prototype(ContextEvent value);
   external factory IWebGLContextEvent({String type, WebGLContextEventInit eventInit});
 }
 
 @JS()
 @anonymous
 class IWebGLFramebuffer {
-  external WebGLFramebuffer get prototype;
-  external set prototype(WebGLFramebuffer value);
+  external Framebuffer get prototype;
+  external set prototype(Framebuffer value);
   external factory IWebGLFramebuffer();
 }
 
 @JS()
 @anonymous
 class IWebGLProgram {
-  external WebGLProgram get prototype;
-  external set prototype(WebGLProgram value);
+  external Program get prototype;
+  external set prototype(Program value);
   external factory IWebGLProgram();
 }
 
@@ -8810,16 +8813,16 @@ class IWebGLQuery {
 @JS()
 @anonymous
 class IWebGLRenderbuffer {
-  external WebGLRenderbuffer get prototype;
-  external set prototype(WebGLRenderbuffer value);
+  external Renderbuffer get prototype;
+  external set prototype(Renderbuffer value);
   external factory IWebGLRenderbuffer();
 }
 
 @JS()
 @anonymous
 class IWebGLRenderingContext {
-  external WebGLRenderingContext get prototype;
-  external set prototype(WebGLRenderingContext value);
+  external RenderingContext get prototype;
+  external set prototype(RenderingContext value);
   external factory IWebGLRenderingContext();
   external GLenum get ACTIVE_ATTRIBUTES;
   external GLenum get ACTIVE_TEXTURE;
@@ -9130,16 +9133,16 @@ class IWebGLSampler {
 @JS()
 @anonymous
 class IWebGLShader {
-  external WebGLShader get prototype;
-  external set prototype(WebGLShader value);
+  external Shader get prototype;
+  external set prototype(Shader value);
   external factory IWebGLShader();
 }
 
 @JS()
 @anonymous
 class IWebGLShaderPrecisionFormat {
-  external WebGLShaderPrecisionFormat get prototype;
-  external set prototype(WebGLShaderPrecisionFormat value);
+  external ShaderPrecisionFormat get prototype;
+  external set prototype(ShaderPrecisionFormat value);
   external factory IWebGLShaderPrecisionFormat();
 }
 
@@ -9154,8 +9157,8 @@ class IWebGLSync {
 @JS()
 @anonymous
 class IWebGLTexture {
-  external WebGLTexture get prototype;
-  external set prototype(WebGLTexture value);
+  external Texture get prototype;
+  external set prototype(Texture value);
   external factory IWebGLTexture();
 }
 
@@ -9170,8 +9173,8 @@ class IWebGLTransformFeedback {
 @JS()
 @anonymous
 class IWebGLUniformLocation {
-  external WebGLUniformLocation get prototype;
-  external set prototype(WebGLUniformLocation value);
+  external UniformLocation get prototype;
+  external set prototype(UniformLocation value);
   external factory IWebGLUniformLocation();
 }
 
@@ -9262,8 +9265,8 @@ class IWritableStreamDefaultWriter {
 @JS()
 @anonymous
 class IXMLHttpRequest {
-  external XMLHttpRequest get prototype;
-  external set prototype(XMLHttpRequest value);
+  external HttpRequest get prototype;
+  external set prototype(HttpRequest value);
   external factory IXMLHttpRequest();
   external num get DONE;
   external num get HEADERS_RECEIVED;
@@ -9275,26 +9278,17 @@ class IXMLHttpRequest {
 @JS()
 @anonymous
 class IXMLHttpRequestEventTarget {
-  external XMLHttpRequestEventTarget get prototype;
-  external set prototype(XMLHttpRequestEventTarget value);
+  external HttpRequestEventTarget get prototype;
+  external set prototype(HttpRequestEventTarget value);
   external factory IXMLHttpRequestEventTarget();
 }
 
 @JS()
 @anonymous
 class IXMLHttpRequestUpload {
-  external XMLHttpRequestUpload get prototype;
-  external set prototype(XMLHttpRequestUpload value);
+  external HttpRequestUpload get prototype;
+  external set prototype(HttpRequestUpload value);
   external factory IXMLHttpRequestUpload();
 }
 
-typedef Array<T> = dynamic;
-typedef ArrayBuffer = dynamic;
-typedef ArrayBufferView = dynamic;
-typedef Float32Array = dynamic;
-typedef Float64Array = dynamic;
-typedef Promise<T> = dynamic;
-typedef ReadonlyArray<T> = dynamic;
 typedef Record<T, U> = dynamic;
-typedef Uint8Array = dynamic;
-typedef Uint8ClampedArray = dynamic;

@@ -1,13 +1,14 @@
-use std::collections::HashMap;
-use std::collections::HashSet;
 use std::ops::Range;
 use std::rc::Rc;
 
+use ahash::{AHashMap, AHashSet};
 use ariadne::{Color, Fmt, Label, ReportKind, Source};
 use log::log_enabled;
 use log::{debug, error, info, warn, Level};
 use swc_common::{BytePos, SourceFile, Span};
 use swc_ecma_ast::*;
+
+use crate::atoms::replacement_for;
 
 #[cfg(feature = "alloc_counter")]
 #[global_allocator]
@@ -15,7 +16,7 @@ static A: alloc_counter::AllocCounterSystem = alloc_counter::AllocCounterSystem;
 
 type Report = ariadne::Report<(String, Range<usize>)>;
 /// Ident -> (# of parameters, span of original declaration)
-type TypeResolutionMap = HashMap<String, (usize, Range<usize>)>;
+type TypeResolutionMap = AHashMap<String, (usize, Range<usize>)>;
 
 struct Transformer {
     path: Vec<String>,
@@ -25,10 +26,10 @@ struct Transformer {
     /// Undeclared type usages, with some number of type parameters and span information.
     undecls: TypeResolutionMap,
     resolved: TypeResolutionMap,
-    resolved_funcs: HashMap<String, Range<usize>>,
+    resolved_funcs: AHashMap<String, Range<usize>>,
     /// Keeps track of the ident of the variable declaration being evaluated.
     current_ident: Option<String>,
-    type_lits: HashMap<String, String>,
+    type_lits: AHashMap<String, String>,
     span: Range<usize>,
     source: (String, Source),
     warnings: u32,
@@ -36,6 +37,7 @@ struct Transformer {
     file: Rc<SourceFile>,
     allocs: usize,
     rename_overloads: bool,
+    imports: AHashSet<String>,
 }
 
 struct Class {
@@ -46,7 +48,7 @@ struct Class {
     /// Whether this class only exists on the type level, i.e. a pure interface with
     /// no constructors in TypeScript.
     anonymous: bool,
-    members: HashSet<String>,
+    members: AHashSet<String>,
 }
 
 /// Parses a pattern as an ident.
@@ -78,11 +80,7 @@ pub fn visit_program(
         path: vec![],
         bufs: vec![buf],
         class: None,
-        undecls: HashMap::new(),
-        resolved: HashMap::new(),
-        resolved_funcs: HashMap::new(),
         current_ident: None,
-        type_lits: HashMap::new(),
         span: 0..0,
         source: (file_path.to_string(), Source::from(&*file.src)),
         warnings: 0,
@@ -90,36 +88,37 @@ pub fn visit_program(
         file,
         allocs: 0,
         rename_overloads,
+        undecls: AHashMap::new(),
+        resolved: AHashMap::new(),
+        resolved_funcs: AHashMap::new(),
+        imports: AHashSet::new(),
+        type_lits: AHashMap::new(),
     };
-
-    t.push("@JS() library ");
-    t.push(library_name);
-    t.push(";\n// ignore_for_file: non_constant_identifier_names, private_optional_parameter, unused_element\n");
-    t.push("import 'package:js/js.dart';");
     t.visit_module_items(&module.body);
+
     let mut buf = t.bufs.pop().unwrap();
-    let mut entries = t.type_lits.into_iter().collect::<Vec<_>>();
+    let mut entries = t.type_lits.iter().collect::<Vec<_>>();
     entries.sort_by(Ord::cmp);
 
     for (_, lit) in entries {
-        buf.push_str(&lit);
+        buf.push_str(lit);
     }
     if !t.undecls.is_empty() && log_enabled!(Level::Warn) {
         let cls = t.undecls.keys().cloned().collect::<Vec<_>>().join(", ");
         warn!("The following types were used but not declared:\n{}", cls);
     }
     if gen_undecl_typedef {
-        let mut entries = t.undecls.into_iter().collect::<Vec<_>>();
+        let mut entries = t.undecls.iter().collect::<Vec<_>>();
         entries.sort_by_cached_key(|x| x.0.clone());
         for (ty, (params, _)) in entries {
             if ty == "Function" {
                 continue;
             }
             buf.push_str("typedef ");
-            buf.push_str(&ty);
-            if params > 0 {
+            buf.push_str(ty);
+            if *params > 0 {
                 buf.push('<');
-                for letter in generate_type_param(params as usize) {
+                for letter in generate_type_param(*params as usize) {
                     buf.push(letter);
                     buf.push(',')
                 }
@@ -128,6 +127,17 @@ pub fn visit_program(
             }
             buf.push_str("=dynamic;");
         }
+    }
+    let mut header = format!(
+        "@JS() library {};
+// ignore_for_file: non_constant_identifier_names, private_optional_parameter, unused_element
+import 'package:js/js.dart';",
+        library_name
+    );
+    for imp in t.imports {
+        header.push_str("import \"");
+        header.push_str(&imp);
+        header.push_str("\";");
     }
     if t.errors != 0 || t.warnings != 0 {
         info!(
@@ -148,7 +158,8 @@ pub fn visit_program(
         t.allocs,
         (buf.len() as f64) / (buf.capacity() as f64),
     );
-    buf
+    header.push_str(&buf);
+    header
 }
 
 impl Transformer {
@@ -478,7 +489,7 @@ impl Transformer {
             anonymous: true,
             fields: vec![],
             id: String::from(decl.id.sym.as_ref()),
-            members: HashSet::new(),
+            members: AHashSet::new(),
         });
         self.push("@JS() ");
         let class_body = self.collect(|s| {
@@ -861,9 +872,16 @@ impl Transformer {
             TsEntityName::TsQualifiedName(qn) => (&qn.right.sym, qn.right.span),
             TsEntityName::Ident(ident) => (&ident.sym, ident.span),
         };
+        let (replacement, library) = replacement_for(id);
+        if let Some(lib) = library {
+            if !self.imports.contains(lib) {
+                self.imports.insert(lib.to_owned());
+            }
+        }
+        let id = replacement.unwrap_or(id);
         let count = param_count.unwrap_or(0);
         let range = self.range_of(span);
-        if self.resolved.contains_key(id) {
+        if replacement.is_some() || library.is_some() || self.resolved.contains_key(id) {
             self.push(id);
             return;
         }
@@ -1104,7 +1122,7 @@ impl Transformer {
                 let temp = s.class.take();
                 s.class = Some(Class {
                     id: id.to_owned(),
-                    members: HashSet::new(),
+                    members: AHashSet::new(),
                     fields: vec![],
                     anonymous: true,
                 });
@@ -1168,7 +1186,7 @@ impl Transformer {
             fields: vec![],
             id: id.to_owned(),
             anonymous: false,
-            members: HashSet::new(),
+            members: AHashSet::new(),
         });
         self.push("@JS() class ");
         self.push(id);

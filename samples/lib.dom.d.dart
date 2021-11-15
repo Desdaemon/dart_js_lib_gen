@@ -3,6 +3,14 @@ library samples.lib.dom.d.ts;
 
 // ignore_for_file: non_constant_identifier_names, private_optional_parameter, unused_element
 import 'package:js/js.dart';
+import "dart:indexed_db";
+import "dart:web_gl";
+import "dart:svg";
+import "lib.es5.d.dart";
+import "dart:typed_data";
+import "dart:html";
+import "dart:web_audio";
+import "dart:math";
 
 @JS()
 @anonymous
@@ -1806,10 +1814,10 @@ class MediaDecodingConfiguration extends MediaConfiguration {
 @JS()
 @anonymous
 class MediaElementAudioSourceOptions {
-  external HTMLMediaElement get mediaElement;
-  external set mediaElement(HTMLMediaElement value);
+  external MediaElement get mediaElement;
+  external set mediaElement(MediaElement value);
   external factory MediaElementAudioSourceOptions({
-    HTMLMediaElement mediaElement,
+    MediaElement mediaElement,
   });
 }
 
@@ -1826,12 +1834,12 @@ class MediaEncodingConfiguration extends MediaConfiguration {
 @JS()
 @anonymous
 class MediaEncryptedEventInit extends EventInit {
-  external ArrayBuffer? get initData;
-  external set initData(ArrayBuffer? value);
+  external ByteBuffer? get initData;
+  external set initData(ByteBuffer? value);
   external String? get initDataType;
   external set initDataType(String? value);
   external factory MediaEncryptedEventInit({
-    ArrayBuffer? initData,
+    ByteBuffer? initData,
     String? initDataType,
   });
 }
@@ -1855,12 +1863,12 @@ class MediaImage {
 @JS()
 @anonymous
 class MediaKeyMessageEventInit extends EventInit {
-  external ArrayBuffer get message;
-  external set message(ArrayBuffer value);
+  external ByteBuffer get message;
+  external set message(ByteBuffer value);
   external MediaKeyMessageType get messageType;
   external set messageType(MediaKeyMessageType value);
   external factory MediaKeyMessageEventInit({
-    ArrayBuffer message,
+    ByteBuffer message,
     MediaKeyMessageType messageType,
   });
 }
@@ -1960,10 +1968,10 @@ class MediaQueryListEventInit extends EventInit {
 @JS()
 @anonymous
 class MediaRecorderErrorEventInit extends EventInit {
-  external DOMException get error;
-  external set error(DOMException value);
+  external DomException get error;
+  external set error(DomException value);
   external factory MediaRecorderErrorEventInit({
-    DOMException error,
+    DomException error,
   });
 }
 
@@ -3115,10 +3123,10 @@ class RTCDTMFToneChangeEventInit extends EventInit {
 @JS()
 @anonymous
 class RTCDataChannelEventInit extends EventInit {
-  external RTCDataChannel get channel;
-  external set channel(RTCDataChannel value);
+  external RtcDataChannel get channel;
+  external set channel(RtcDataChannel value);
   external factory RTCDataChannelEventInit({
-    RTCDataChannel channel,
+    RtcDataChannel channel,
   });
 }
 
@@ -3360,12 +3368,12 @@ class RTCPeerConnectionIceErrorEventInit extends EventInit {
 @JS()
 @anonymous
 class RTCPeerConnectionIceEventInit extends EventInit {
-  external RTCIceCandidate? get candidate;
-  external set candidate(RTCIceCandidate? value);
+  external RtcIceCandidate? get candidate;
+  external set candidate(RtcIceCandidate? value);
   external String? get url;
   external set url(String? value);
   external factory RTCPeerConnectionIceEventInit({
-    RTCIceCandidate? candidate,
+    RtcIceCandidate? candidate,
     String? url,
   });
 }
@@ -4199,10 +4207,10 @@ class StreamPipeOptions {
 @JS()
 @anonymous
 class SubmitEventInit extends EventInit {
-  external HTMLElement? get submitter;
-  external set submitter(HTMLElement? value);
+  external HtmlElement? get submitter;
+  external set submitter(HtmlElement? value);
   external factory SubmitEventInit({
-    HTMLElement? submitter,
+    HtmlElement? submitter,
   });
 }
 
@@ -4800,10 +4808,10 @@ class AnalyserNode extends AudioNode {
   external set minDecibels(num value);
   external num get smoothingTimeConstant;
   external set smoothingTimeConstant(num value);
-  external void getByteFrequencyData(Uint8Array array);
-  external void getByteTimeDomainData(Uint8Array array);
-  external void getFloatFrequencyData(Float32Array array);
-  external void getFloatTimeDomainData(Float32Array array);
+  external void getByteFrequencyData(Uint8List array);
+  external void getByteTimeDomainData(Uint8List array);
+  external void getFloatFrequencyData(Float32List array);
+  external void getFloatTimeDomainData(Float32List array);
   external factory AnalyserNode({
     num fftSize,
     num frequencyBinCount,
@@ -4993,9 +5001,9 @@ class AudioBuffer {
   external num get length;
   external num get numberOfChannels;
   external num get sampleRate;
-  external void copyFromChannel(Float32Array destination, num channelNumber, num bufferOffset);
-  external void copyToChannel(Float32Array source, num channelNumber, num bufferOffset);
-  external Float32Array getChannelData(num channel);
+  external void copyFromChannel(Float32List destination, num channelNumber, num bufferOffset);
+  external void copyToChannel(Float32List source, num channelNumber, num bufferOffset);
+  external Float32List getChannelData(num channel);
   external factory AudioBuffer({
     num duration,
     num length,
@@ -5041,7 +5049,7 @@ external IAudioBufferSourceNode JAudioBufferSourceNode;
 class AudioContext extends BaseAudioContext {
   external num get baseLatency;
   external Promise<void> close();
-  external MediaElementAudioSourceNode createMediaElementSource(HTMLMediaElement mediaElement);
+  external MediaElementAudioSourceNode createMediaElementSource(MediaElement mediaElement);
   external MediaStreamAudioDestinationNode createMediaStreamDestination();
   external MediaStreamAudioSourceNode createMediaStreamSource(MediaStream mediaStream);
   external AudioTimestamp getOutputTimestamp();
@@ -5249,13 +5257,13 @@ external IAudioWorkletNode JAudioWorkletNode;
 @JS()
 @anonymous
 class AuthenticatorAssertionResponse extends AuthenticatorResponse {
-  external ArrayBuffer get authenticatorData;
-  external ArrayBuffer get signature;
-  external ArrayBuffer? get userHandle;
+  external ByteBuffer get authenticatorData;
+  external ByteBuffer get signature;
+  external ByteBuffer? get userHandle;
   external factory AuthenticatorAssertionResponse({
-    ArrayBuffer authenticatorData,
-    ArrayBuffer signature,
-    ArrayBuffer? userHandle,
+    ByteBuffer authenticatorData,
+    ByteBuffer signature,
+    ByteBuffer? userHandle,
   });
 }
 
@@ -5265,9 +5273,9 @@ external IAuthenticatorAssertionResponse JAuthenticatorAssertionResponse;
 @JS()
 @anonymous
 class AuthenticatorAttestationResponse extends AuthenticatorResponse {
-  external ArrayBuffer get attestationObject;
+  external ByteBuffer get attestationObject;
   external factory AuthenticatorAttestationResponse({
-    ArrayBuffer attestationObject,
+    ByteBuffer attestationObject,
   });
 }
 
@@ -5277,9 +5285,9 @@ external IAuthenticatorAttestationResponse JAuthenticatorAttestationResponse;
 @JS()
 @anonymous
 class AuthenticatorResponse {
-  external ArrayBuffer get clientDataJSON;
+  external ByteBuffer get clientDataJSON;
   external factory AuthenticatorResponse({
-    ArrayBuffer clientDataJSON,
+    ByteBuffer clientDataJSON,
   });
 }
 
@@ -5339,7 +5347,7 @@ class BaseAudioContext extends EventTarget {
   external StereoPannerNode createStereoPanner();
   external WaveShaperNode createWaveShaper();
   external Promise<AudioBuffer> decodeAudioData(
-      ArrayBuffer audioData, DecodeSuccessCallback? successCallback, DecodeErrorCallback? errorCallback);
+      ByteBuffer audioData, DecodeSuccessCallback? successCallback, DecodeErrorCallback? errorCallback);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory BaseAudioContext({
@@ -5378,7 +5386,7 @@ class BiquadFilterNode extends AudioNode {
   external AudioParam get gain;
   external BiquadFilterType get type;
   external set type(BiquadFilterType value);
-  external void getFrequencyResponse(Float32Array frequencyHz, Float32Array magResponse, Float32Array phaseResponse);
+  external void getFrequencyResponse(Float32List frequencyHz, Float32List magResponse, Float32List phaseResponse);
   external factory BiquadFilterNode({
     AudioParam Q,
     AudioParam detune,
@@ -5396,7 +5404,7 @@ external IBiquadFilterNode JBiquadFilterNode;
 class Blob {
   external num get size;
   external String get type;
-  external Promise<ArrayBuffer> arrayBuffer();
+  external Promise<ByteBuffer> arrayBuffer();
   external Blob slice(num start, num end, String contentType);
   external ReadableStream stream();
   external Promise<String> text();
@@ -5426,15 +5434,15 @@ external IBlobEvent JBlobEvent;
 @JS()
 @anonymous
 class Body {
-  external ReadableStream<Uint8Array>? get body;
+  external ReadableStream<Uint8List>? get body;
   external bool get bodyUsed;
-  external Promise<ArrayBuffer> arrayBuffer();
+  external Promise<ByteBuffer> arrayBuffer();
   external Promise<Blob> blob();
   external Promise<FormData> formData();
   external Promise<dynamic> json();
   external Promise<String> text();
   external factory Body({
-    ReadableStream<Uint8Array>? body,
+    ReadableStream<Uint8List>? body,
     bool bodyUsed,
   });
 }
@@ -5476,12 +5484,12 @@ external IBroadcastChannel JBroadcastChannel;
 
 @JS()
 @anonymous
-class ByteLengthQueuingStrategy extends QueuingStrategy<ArrayBufferView> {
+class ByteLengthQueuingStrategy extends QueuingStrategy<TypedData> {
   external num get highWaterMark;
-  external QueuingStrategySize<ArrayBufferView> get size;
+  external QueuingStrategySize<TypedData> get size;
   external factory ByteLengthQueuingStrategy({
     num highWaterMark,
-    QueuingStrategySize<ArrayBufferView> size,
+    QueuingStrategySize<TypedData> size,
   });
 }
 
@@ -5526,7 +5534,7 @@ external ICSSConditionRule JCSSConditionRule;
 
 @JS()
 @anonymous
-class CSSCounterStyleRule extends CSSRule {
+class CSSCounterStyleRule extends CssRule {
   external String get additiveSymbols;
   external set additiveSymbols(String value);
   external String get fallback;
@@ -5569,10 +5577,10 @@ external ICSSCounterStyleRule JCSSCounterStyleRule;
 
 @JS()
 @anonymous
-class CSSFontFaceRule extends CSSRule {
-  external CSSStyleDeclaration get style;
+class CSSFontFaceRule extends CssRule {
+  external CssStyleDeclaration get style;
   external factory CSSFontFaceRule({
-    CSSStyleDeclaration style,
+    CssStyleDeclaration style,
   });
 }
 
@@ -5581,7 +5589,7 @@ external ICSSFontFaceRule JCSSFontFaceRule;
 
 @JS()
 @anonymous
-class CSSGroupingRule extends CSSRule {
+class CSSGroupingRule extends CssRule {
   external CSSRuleList get cssRules;
   external void deleteRule(num index);
   external num insertRule(String rule, num index);
@@ -5595,14 +5603,14 @@ external ICSSGroupingRule JCSSGroupingRule;
 
 @JS()
 @anonymous
-class CSSImportRule extends CSSRule {
+class CSSImportRule extends CssRule {
   external String get href;
   external MediaList get media;
-  external CSSStyleSheet get styleSheet;
+  external CssStyleSheet get styleSheet;
   external factory CSSImportRule({
     String href,
     MediaList media,
-    CSSStyleSheet styleSheet,
+    CssStyleSheet styleSheet,
   });
 }
 
@@ -5611,13 +5619,13 @@ external ICSSImportRule JCSSImportRule;
 
 @JS()
 @anonymous
-class CSSKeyframeRule extends CSSRule {
+class CSSKeyframeRule extends CssRule {
   external String get keyText;
   external set keyText(String value);
-  external CSSStyleDeclaration get style;
+  external CssStyleDeclaration get style;
   external factory CSSKeyframeRule({
     String keyText,
-    CSSStyleDeclaration style,
+    CssStyleDeclaration style,
   });
 }
 
@@ -5626,13 +5634,13 @@ external ICSSKeyframeRule JCSSKeyframeRule;
 
 @JS()
 @anonymous
-class CSSKeyframesRule extends CSSRule {
+class CSSKeyframesRule extends CssRule {
   external CSSRuleList get cssRules;
   external String get name;
   external set name(String value);
   external void appendRule(String rule);
   external void deleteRule(String select);
-  external CSSKeyframeRule? findRule(String select);
+  external CssKeyframeRule? findRule(String select);
   external factory CSSKeyframesRule({
     CSSRuleList cssRules,
     String name,
@@ -5656,7 +5664,7 @@ external ICSSMediaRule JCSSMediaRule;
 
 @JS()
 @anonymous
-class CSSNamespaceRule extends CSSRule {
+class CSSNamespaceRule extends CssRule {
   external String get namespaceURI;
   external String get prefix;
   external factory CSSNamespaceRule({
@@ -5673,10 +5681,10 @@ external ICSSNamespaceRule JCSSNamespaceRule;
 class CSSPageRule extends CSSGroupingRule {
   external String get selectorText;
   external set selectorText(String value);
-  external CSSStyleDeclaration get style;
+  external CssStyleDeclaration get style;
   external factory CSSPageRule({
     String selectorText,
-    CSSStyleDeclaration style,
+    CssStyleDeclaration style,
   });
 }
 
@@ -5688,8 +5696,8 @@ external ICSSPageRule JCSSPageRule;
 class CSSRule {
   external String get cssText;
   external set cssText(String value);
-  external CSSRule? get parentRule;
-  external CSSStyleSheet? get parentStyleSheet;
+  external CssRule? get parentRule;
+  external CssStyleSheet? get parentStyleSheet;
   external num get type;
   external num get CHARSET_RULE;
   external num get FONT_FACE_RULE;
@@ -5703,8 +5711,8 @@ class CSSRule {
   external num get SUPPORTS_RULE;
   external factory CSSRule({
     String cssText,
-    CSSRule? parentRule,
-    CSSStyleSheet? parentStyleSheet,
+    CssRule? parentRule,
+    CssStyleSheet? parentStyleSheet,
     num type,
     num CHARSET_RULE,
     num FONT_FACE_RULE,
@@ -5726,7 +5734,7 @@ external ICSSRule JCSSRule;
 @anonymous
 class CSSRuleList {
   external num get length;
-  external CSSRule? item(num index);
+  external CssRule? item(num index);
   external factory CSSRuleList({
     num length,
   });
@@ -6285,7 +6293,7 @@ class CSSStyleDeclaration {
   external set pageBreakInside(String value);
   external String get paintOrder;
   external set paintOrder(String value);
-  external CSSRule? get parentRule;
+  external CssRule? get parentRule;
   external String get perspective;
   external set perspective(String value);
   external String get perspectiveOrigin;
@@ -6910,7 +6918,7 @@ class CSSStyleDeclaration {
     String pageBreakBefore,
     String pageBreakInside,
     String paintOrder,
-    CSSRule? parentRule,
+    CssRule? parentRule,
     String perspective,
     String perspectiveOrigin,
     String placeContent,
@@ -7091,13 +7099,13 @@ external ICSSStyleDeclaration JCSSStyleDeclaration;
 
 @JS()
 @anonymous
-class CSSStyleRule extends CSSRule {
+class CSSStyleRule extends CssRule {
   external String get selectorText;
   external set selectorText(String value);
-  external CSSStyleDeclaration get style;
+  external CssStyleDeclaration get style;
   external factory CSSStyleRule({
     String selectorText,
-    CSSStyleDeclaration style,
+    CssStyleDeclaration style,
   });
 }
 
@@ -7108,7 +7116,7 @@ external ICSSStyleRule JCSSStyleRule;
 @anonymous
 class CSSStyleSheet extends StyleSheet {
   external CSSRuleList get cssRules;
-  external CSSRule? get ownerRule;
+  external CssRule? get ownerRule;
   external CSSRuleList get rules;
   external num addRule(String selector, String style, num index);
   external void deleteRule(num index);
@@ -7116,7 +7124,7 @@ class CSSStyleSheet extends StyleSheet {
   external void removeRule(num index);
   external factory CSSStyleSheet({
     CSSRuleList cssRules,
-    CSSRule? ownerRule,
+    CssRule? ownerRule,
     CSSRuleList rules,
   });
 }
@@ -7153,9 +7161,9 @@ class Cache {
   external Promise<void> add(RequestInfo request);
   external Promise<void> addAll(List<RequestInfo> requests);
   external Promise<bool> delete(RequestInfo request, CacheQueryOptions options);
-  external Promise<ReadonlyArray<Request>> keys(RequestInfo request, CacheQueryOptions options);
+  external Promise<List<Request>> keys(RequestInfo request, CacheQueryOptions options);
   external Promise<Response?> match(RequestInfo request, CacheQueryOptions options);
-  external Promise<ReadonlyArray<Response>> matchAll(RequestInfo request, CacheQueryOptions options);
+  external Promise<List<Response>> matchAll(RequestInfo request, CacheQueryOptions options);
   external Promise<void> put(RequestInfo request, Response response);
   external factory Cache();
 }
@@ -7329,9 +7337,9 @@ class CanvasRect {
 @JS()
 @anonymous
 class CanvasRenderingContext2D extends CanvasCompositing {
-  external HTMLCanvasElement get canvas;
+  external CanvasElement get canvas;
   external factory CanvasRenderingContext2D({
-    HTMLCanvasElement canvas,
+    CanvasElement canvas,
   });
 }
 
@@ -7396,7 +7404,7 @@ class CanvasTextDrawingStyles {
 @JS()
 @anonymous
 class CanvasTransform {
-  external DOMMatrix getTransform();
+  external DomMatrix getTransform();
   external void resetTransform();
   external void rotate(num angle);
   external void scale(num x, num y);
@@ -7547,10 +7555,10 @@ external IClipboardEvent JClipboardEvent;
 @JS()
 @anonymous
 class ClipboardItem {
-  external ReadonlyArray<String> get types;
+  external List<String> get types;
   external Promise<Blob> getType(String type);
   external factory ClipboardItem({
-    ReadonlyArray<String> types,
+    List<String> types,
   });
 }
 
@@ -7671,7 +7679,7 @@ external ICredentialsContainer JCredentialsContainer;
 @anonymous
 class Crypto {
   external SubtleCrypto get subtle;
-  external T getRandomValues<T extends ArrayBufferView?>(T array);
+  external T getRandomValues<T extends TypedData?>(T array);
   external factory Crypto({
     SubtleCrypto subtle,
   });
@@ -7793,7 +7801,7 @@ external IDOMException JDOMException;
 @JS()
 @anonymous
 class DOMImplementation {
-  external XMLDocument createDocument(String? namespace, String? qualifiedName, DocumentType? doctype);
+  external XmlDocument createDocument(String? namespace, String? qualifiedName, DocumentType? doctype);
   external DocumentType createDocumentType(String qualifiedName, String publicId, String systemId);
   external Document createHTMLDocument(String title);
   external bool hasFeature([
@@ -7815,28 +7823,28 @@ external IDOMImplementation JDOMImplementation;
 
 @JS()
 @anonymous
-class DOMMatrix extends DOMMatrixReadOnly {
-  external DOMMatrix invertSelf();
-  external DOMMatrix multiplySelf(DOMMatrixInit other);
-  external DOMMatrix preMultiplySelf(DOMMatrixInit other);
-  external DOMMatrix rotateAxisAngleSelf(num x, num y, num z, num angle);
-  external DOMMatrix rotateFromVectorSelf(num x, num y);
-  external DOMMatrix rotateSelf(num rotX, num rotY, num rotZ);
-  external DOMMatrix scale3dSelf(num scale, num originX, num originY, num originZ);
-  external DOMMatrix scaleSelf(num scaleX, num scaleY, num scaleZ, num originX, num originY, num originZ);
-  external DOMMatrix setMatrixValue(String transformList);
-  external DOMMatrix skewXSelf(num sx);
-  external DOMMatrix skewYSelf(num sy);
-  external DOMMatrix translateSelf(num tx, num ty, num tz);
+class DOMMatrix extends DomMatrixReadOnly {
+  external DomMatrix invertSelf();
+  external DomMatrix multiplySelf(DOMMatrixInit other);
+  external DomMatrix preMultiplySelf(DOMMatrixInit other);
+  external DomMatrix rotateAxisAngleSelf(num x, num y, num z, num angle);
+  external DomMatrix rotateFromVectorSelf(num x, num y);
+  external DomMatrix rotateSelf(num rotX, num rotY, num rotZ);
+  external DomMatrix scale3dSelf(num scale, num originX, num originY, num originZ);
+  external DomMatrix scaleSelf(num scaleX, num scaleY, num scaleZ, num originX, num originY, num originZ);
+  external DomMatrix setMatrixValue(String transformList);
+  external DomMatrix skewXSelf(num sx);
+  external DomMatrix skewYSelf(num sy);
+  external DomMatrix translateSelf(num tx, num ty, num tz);
   external factory DOMMatrix();
 }
 
 @JS(r'DOMMatrix')
 external IDOMMatrix JDOMMatrix;
-typedef SVGMatrix = DOMMatrix;
+typedef SVGMatrix = DomMatrix;
 @JS(r'SVGMatrix')
 external dynamic JSVGMatrix;
-typedef WebKitCSSMatrix = DOMMatrix;
+typedef WebKitCSSMatrix = DomMatrix;
 @JS(r'WebKitCSSMatrix')
 external dynamic JWebKitCSSMatrix;
 
@@ -7867,23 +7875,23 @@ class DOMMatrixReadOnly {
   external num get m42;
   external num get m43;
   external num get m44;
-  external DOMMatrix flipX();
-  external DOMMatrix flipY();
-  external DOMMatrix inverse();
-  external DOMMatrix multiply(DOMMatrixInit other);
-  external DOMMatrix rotate(num rotX, num rotY, num rotZ);
-  external DOMMatrix rotateAxisAngle(num x, num y, num z, num angle);
-  external DOMMatrix rotateFromVector(num x, num y);
-  external DOMMatrix scale(num scaleX, num scaleY, num scaleZ, num originX, num originY, num originZ);
-  external DOMMatrix scale3d(num scale, num originX, num originY, num originZ);
-  external DOMMatrix scaleNonUniform(num scaleX, num scaleY);
-  external DOMMatrix skewX(num sx);
-  external DOMMatrix skewY(num sy);
-  external Float32Array toFloat32Array();
-  external Float64Array toFloat64Array();
+  external DomMatrix flipX();
+  external DomMatrix flipY();
+  external DomMatrix inverse();
+  external DomMatrix multiply(DOMMatrixInit other);
+  external DomMatrix rotate(num rotX, num rotY, num rotZ);
+  external DomMatrix rotateAxisAngle(num x, num y, num z, num angle);
+  external DomMatrix rotateFromVector(num x, num y);
+  external DomMatrix scale(num scaleX, num scaleY, num scaleZ, num originX, num originY, num originZ);
+  external DomMatrix scale3d(num scale, num originX, num originY, num originZ);
+  external DomMatrix scaleNonUniform(num scaleX, num scaleY);
+  external DomMatrix skewX(num sx);
+  external DomMatrix skewY(num sy);
+  external Float32List toFloat32Array();
+  external Float64List toFloat64Array();
   external dynamic toJSON();
-  external DOMPoint transformPoint(DOMPointInit point);
-  external DOMMatrix translate(num tx, num ty, num tz);
+  external DomPoint transformPoint(DOMPointInit point);
+  external DomMatrix translate(num tx, num ty, num tz);
   @override
   external String toString();
   external factory DOMMatrixReadOnly({
@@ -7929,13 +7937,13 @@ external IDOMParser JDOMParser;
 
 @JS()
 @anonymous
-class DOMPoint extends DOMPointReadOnly {
+class DOMPoint extends DomPointReadOnly {
   external factory DOMPoint();
 }
 
 @JS(r'DOMPoint')
 external IDOMPoint JDOMPoint;
-typedef SVGPoint = DOMPoint;
+typedef SVGPoint = DomPoint;
 @JS(r'SVGPoint')
 external dynamic JSVGPoint;
 
@@ -7946,7 +7954,7 @@ class DOMPointReadOnly {
   external num get x;
   external num get y;
   external num get z;
-  external DOMPoint matrixTransform(DOMMatrixInit matrix);
+  external DomPoint matrixTransform(DOMMatrixInit matrix);
   external dynamic toJSON();
   external factory DOMPointReadOnly({
     num w,
@@ -7962,17 +7970,17 @@ external IDOMPointReadOnly JDOMPointReadOnly;
 @JS()
 @anonymous
 class DOMQuad {
-  external DOMPoint get p1;
-  external DOMPoint get p2;
-  external DOMPoint get p3;
-  external DOMPoint get p4;
+  external DomPoint get p1;
+  external DomPoint get p2;
+  external DomPoint get p3;
+  external DomPoint get p4;
   external DOMRect getBounds();
   external dynamic toJSON();
   external factory DOMQuad({
-    DOMPoint p1,
-    DOMPoint p2,
-    DOMPoint p3,
-    DOMPoint p4,
+    DomPoint p1,
+    DomPoint p2,
+    DomPoint p3,
+    DomPoint p4,
   });
 }
 
@@ -7981,7 +7989,7 @@ external IDOMQuad JDOMQuad;
 
 @JS()
 @anonymous
-class DOMRect extends DOMRectReadOnly {
+class DOMRect extends DomRectReadOnly {
   external factory DOMRect();
 }
 
@@ -8089,7 +8097,7 @@ class DOMTokenList {
   external bool replace(String token, String newToken);
   external bool supports(String token);
   external bool toggle(String token, bool force);
-  external void forEach(void Function(String value, num key, DOMTokenList parent) callbackfn, dynamic thisArg);
+  external void forEach(void Function(String value, num key, DomTokenList parent) callbackfn, dynamic thisArg);
   external factory DOMTokenList({
     num length,
     String value,
@@ -8108,7 +8116,7 @@ class DataTransfer {
   external set effectAllowed(String value);
   external FileList get files;
   external DataTransferItemList get items;
-  external ReadonlyArray<String> get types;
+  external List<String> get types;
   external void clearData(String format);
   external String getData(String format);
   external void setData(String format, String data);
@@ -8118,7 +8126,7 @@ class DataTransfer {
     String effectAllowed,
     FileList files,
     DataTransferItemList items,
-    ReadonlyArray<String> types,
+    List<String> types,
   });
 }
 
@@ -8263,12 +8271,12 @@ class Document extends Node {
   external String get alinkColor;
   external set alinkColor(String value);
   external HTMLAllCollection get all;
-  external HTMLCollectionOf<HTMLAnchorElement> get anchors;
-  external HTMLCollection get applets;
+  external HTMLCollectionOf<AnchorElement> get anchors;
+  external HtmlCollection get applets;
   external String get bgColor;
   external set bgColor(String value);
-  external HTMLElement get body;
-  external set body(HTMLElement value);
+  external HtmlElement get body;
+  external set body(HtmlElement value);
   external String get characterSet;
   external String get charset;
   external String get compatMode;
@@ -8282,20 +8290,20 @@ class Document extends Node {
   external String get dir;
   external set dir(String value);
   external DocumentType? get doctype;
-  external HTMLElement get documentElement;
+  external HtmlElement get documentElement;
   external String get documentURI;
   external String get domain;
   external set domain(String value);
-  external HTMLCollectionOf<HTMLEmbedElement> get embeds;
+  external HTMLCollectionOf<EmbedElement> get embeds;
   external String get fgColor;
   external set fgColor(String value);
-  external HTMLCollectionOf<HTMLFormElement> get forms;
+  external HTMLCollectionOf<FormElement> get forms;
   external bool get fullscreen;
   external bool get fullscreenEnabled;
-  external HTMLHeadElement get head;
+  external HeadElement get head;
   external bool get hidden;
-  external HTMLCollectionOf<HTMLImageElement> get images;
-  external DOMImplementation get implementation;
+  external HTMLCollectionOf<ImageElement> get images;
+  external DomImplementation get implementation;
   external String get inputEncoding;
   external String get lastModified;
   external String get linkColor;
@@ -8316,10 +8324,10 @@ class Document extends Node {
   external set onvisibilitychange(dynamic Function(Event ev)? value);
   external dynamic get ownerDocument;
   external bool get pictureInPictureEnabled;
-  external HTMLCollectionOf<HTMLEmbedElement> get plugins;
+  external HTMLCollectionOf<EmbedElement> get plugins;
   external DocumentReadyState get readyState;
   external String get referrer;
-  external HTMLCollectionOf<HTMLScriptElement> get scripts;
+  external HTMLCollectionOf<ScriptElement> get scripts;
   external Element? get scrollingElement;
   external DocumentTimeline get timeline;
   external String get title;
@@ -8333,11 +8341,11 @@ class Document extends Node {
   external void close();
   external Attr createAttribute(String localName);
   external Attr createAttributeNS(String? namespace, String qualifiedName);
-  external CDATASection createCDATASection(String data);
+  external CDataSection createCDATASection(String data);
   external Comment createComment(String data);
   external DocumentFragment createDocumentFragment();
   external dynamic createElement<K extends String>(K tagName, ElementCreationOptions options);
-  external HTMLElement createElementNS(String namespaceURI, String qualifiedName);
+  external HtmlElement createElementNS(String namespaceURI, String qualifiedName);
   external AnimationEvent createEvent(String eventInterface);
   external NodeIterator createNodeIterator(Node root, num whatToShow, NodeFilter? filter);
   external ProcessingInstruction createProcessingInstruction(String target, String data);
@@ -8350,11 +8358,11 @@ class Document extends Node {
   external Promise<void> exitFullscreen();
   external Promise<void> exitPictureInPicture();
   external void exitPointerLock();
-  external HTMLElement? getElementById(String elementId);
+  external HtmlElement? getElementById(String elementId);
   external HTMLCollectionOf<Element> getElementsByClassName(String classNames);
-  external NodeListOf<HTMLElement> getElementsByName(String elementName);
+  external NodeListOf<HtmlElement> getElementsByName(String elementName);
   external HTMLCollectionOf<dynamic> getElementsByTagName<K extends String>(K qualifiedName);
-  external HTMLCollectionOf<HTMLElement> getElementsByTagNameNS(String namespaceURI, String localName);
+  external HTMLCollectionOf<HtmlElement> getElementsByTagNameNS(String namespaceURI, String localName);
   external Selection? getSelection();
   external bool hasFocus();
   external Promise<bool> hasStorageAccess();
@@ -8395,10 +8403,10 @@ class Document extends Node {
     String URL,
     String alinkColor,
     HTMLAllCollection all,
-    HTMLCollectionOf<HTMLAnchorElement> anchors,
-    HTMLCollection applets,
+    HTMLCollectionOf<AnchorElement> anchors,
+    HtmlCollection applets,
     String bgColor,
-    HTMLElement body,
+    HtmlElement body,
     String characterSet,
     String charset,
     String compatMode,
@@ -8409,18 +8417,18 @@ class Document extends Node {
     String designMode,
     String dir,
     DocumentType? doctype,
-    HTMLElement documentElement,
+    HtmlElement documentElement,
     String documentURI,
     String domain,
-    HTMLCollectionOf<HTMLEmbedElement> embeds,
+    HTMLCollectionOf<EmbedElement> embeds,
     String fgColor,
-    HTMLCollectionOf<HTMLFormElement> forms,
+    HTMLCollectionOf<FormElement> forms,
     bool fullscreen,
     bool fullscreenEnabled,
-    HTMLHeadElement head,
+    HeadElement head,
     bool hidden,
-    HTMLCollectionOf<HTMLImageElement> images,
-    DOMImplementation implementation,
+    HTMLCollectionOf<ImageElement> images,
+    DomImplementation implementation,
     String inputEncoding,
     String lastModified,
     String linkColor,
@@ -8433,10 +8441,10 @@ class Document extends Node {
     dynamic Function(Event ev)? onvisibilitychange,
     dynamic ownerDocument,
     bool pictureInPictureEnabled,
-    HTMLCollectionOf<HTMLEmbedElement> plugins,
+    HTMLCollectionOf<EmbedElement> plugins,
     DocumentReadyState readyState,
     String referrer,
-    HTMLCollectionOf<HTMLScriptElement> scripts,
+    HTMLCollectionOf<ScriptElement> scripts,
     Element? scrollingElement,
     DocumentTimeline timeline,
     String title,
@@ -8678,7 +8686,7 @@ class ElementEventMap {
 @anonymous
 class Element extends Node {
   external NamedNodeMap get attributes;
-  external DOMTokenList get classList;
+  external DomTokenList get classList;
   external String get className;
   external set className(String value);
   external num get clientHeight;
@@ -8696,7 +8704,7 @@ class Element extends Node {
   external String get outerHTML;
   external set outerHTML(String value);
   external Document get ownerDocument;
-  external DOMTokenList get part;
+  external DomTokenList get part;
   external String? get prefix;
   external num get scrollHeight;
   external num get scrollLeft;
@@ -8719,7 +8727,7 @@ class Element extends Node {
   external DOMRectList getClientRects();
   external HTMLCollectionOf<Element> getElementsByClassName(String classNames);
   external HTMLCollectionOf<dynamic> getElementsByTagName<K extends String>(K qualifiedName);
-  external HTMLCollectionOf<HTMLElement> getElementsByTagNameNS(String namespaceURI, String localName);
+  external HTMLCollectionOf<HtmlElement> getElementsByTagNameNS(String namespaceURI, String localName);
   external bool hasAttribute(String qualifiedName);
   external bool hasAttributeNS(String? namespace, String localName);
   external bool hasAttributes();
@@ -8749,7 +8757,7 @@ class Element extends Node {
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory Element({
     NamedNodeMap attributes,
-    DOMTokenList classList,
+    DomTokenList classList,
     String className,
     num clientHeight,
     num clientLeft,
@@ -8762,7 +8770,7 @@ class Element extends Node {
     dynamic Function(Event ev)? onfullscreenerror,
     String outerHTML,
     Document ownerDocument,
-    DOMTokenList part,
+    DomTokenList part,
     String? prefix,
     num scrollHeight,
     num scrollLeft,
@@ -8780,9 +8788,9 @@ external IElement JElement;
 @JS()
 @anonymous
 class ElementCSSInlineStyle {
-  external CSSStyleDeclaration get style;
+  external CssStyleDeclaration get style;
   external factory ElementCSSInlineStyle({
-    CSSStyleDeclaration style,
+    CssStyleDeclaration style,
   });
 }
 
@@ -9018,7 +9026,7 @@ class FileReaderEventMap {
 @JS()
 @anonymous
 class FileReader extends EventTarget {
-  external DOMException? get error;
+  external DomException? get error;
   external dynamic Function(ProgressEvent<FileReader> ev)? get onabort;
   external set onabort(dynamic Function(ProgressEvent<FileReader> ev)? value);
   external dynamic Function(ProgressEvent<FileReader> ev)? get onerror;
@@ -9044,7 +9052,7 @@ class FileReader extends EventTarget {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory FileReader({
-    DOMException? error,
+    DomException? error,
     dynamic Function(ProgressEvent<FileReader> ev)? onabort,
     dynamic Function(ProgressEvent<FileReader> ev)? onerror,
     dynamic Function(ProgressEvent<FileReader> ev)? onload,
@@ -9241,9 +9249,9 @@ external IFontFaceSet JFontFaceSet;
 @JS()
 @anonymous
 class FontFaceSetLoadEvent extends Event {
-  external ReadonlyArray<FontFace> get fontfaces;
+  external List<FontFace> get fontfaces;
   external factory FontFaceSetLoadEvent({
-    ReadonlyArray<FontFace> fontfaces,
+    List<FontFace> fontfaces,
   });
 }
 
@@ -9303,19 +9311,19 @@ external IGainNode JGainNode;
 @JS()
 @anonymous
 class Gamepad {
-  external ReadonlyArray<num> get axes;
-  external ReadonlyArray<GamepadButton> get buttons;
+  external List<num> get axes;
+  external List<GamepadButton> get buttons;
   external bool get connected;
-  external ReadonlyArray<GamepadHapticActuator> get hapticActuators;
+  external List<GamepadHapticActuator> get hapticActuators;
   external String get id;
   external num get index;
   external GamepadMappingType get mapping;
   external DOMHighResTimeStamp get timestamp;
   external factory Gamepad({
-    ReadonlyArray<num> axes,
-    ReadonlyArray<GamepadButton> buttons,
+    List<num> axes,
+    List<GamepadButton> buttons,
     bool connected,
-    ReadonlyArray<GamepadHapticActuator> hapticActuators,
+    List<GamepadHapticActuator> hapticActuators,
     String id,
     num index,
     GamepadMappingType mapping,
@@ -10024,7 +10032,7 @@ external IHTMLAllCollection JHTMLAllCollection;
 
 @JS()
 @anonymous
-class HTMLAnchorElement extends HTMLElement {
+class HTMLAnchorElement extends HtmlElement {
   external String get charset;
   external set charset(String value);
   external String get coords;
@@ -10041,7 +10049,7 @@ class HTMLAnchorElement extends HTMLElement {
   external set referrerPolicy(String value);
   external String get rel;
   external set rel(String value);
-  external DOMTokenList get relList;
+  external DomTokenList get relList;
   external String get rev;
   external set rev(String value);
   external String get shape;
@@ -10063,7 +10071,7 @@ class HTMLAnchorElement extends HTMLElement {
     String ping,
     String referrerPolicy,
     String rel,
-    DOMTokenList relList,
+    DomTokenList relList,
     String rev,
     String shape,
     String target,
@@ -10077,7 +10085,7 @@ external IHTMLAnchorElement JHTMLAnchorElement;
 
 @JS()
 @anonymous
-class HTMLAreaElement extends HTMLElement {
+class HTMLAreaElement extends HtmlElement {
   external String get alt;
   external set alt(String value);
   external String get coords;
@@ -10092,7 +10100,7 @@ class HTMLAreaElement extends HTMLElement {
   external set referrerPolicy(String value);
   external String get rel;
   external set rel(String value);
-  external DOMTokenList get relList;
+  external DomTokenList get relList;
   external String get shape;
   external set shape(String value);
   external String get target;
@@ -10107,7 +10115,7 @@ class HTMLAreaElement extends HTMLElement {
     String ping,
     String referrerPolicy,
     String rel,
-    DOMTokenList relList,
+    DomTokenList relList,
     String shape,
     String target,
   });
@@ -10118,7 +10126,7 @@ external IHTMLAreaElement JHTMLAreaElement;
 
 @JS()
 @anonymous
-class HTMLAudioElement extends HTMLMediaElement {
+class HTMLAudioElement extends MediaElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory HTMLAudioElement();
@@ -10129,7 +10137,7 @@ external IHTMLAudioElement JHTMLAudioElement;
 
 @JS()
 @anonymous
-class HTMLBRElement extends HTMLElement {
+class HTMLBRElement extends HtmlElement {
   external String get clear;
   external set clear(String value);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
@@ -10144,7 +10152,7 @@ external IHTMLBRElement JHTMLBRElement;
 
 @JS()
 @anonymous
-class HTMLBaseElement extends HTMLElement {
+class HTMLBaseElement extends HtmlElement {
   external String get href;
   external set href(String value);
   external String get target;
@@ -10172,7 +10180,7 @@ class HTMLBodyElementEventMap extends HTMLElementEventMap {
 
 @JS()
 @anonymous
-class HTMLBodyElement extends HTMLElement {
+class HTMLBodyElement extends HtmlElement {
   external String get aLink;
   external set aLink(String value);
   external String get background;
@@ -10205,10 +10213,10 @@ external IHTMLBodyElement JHTMLBodyElement;
 
 @JS()
 @anonymous
-class HTMLButtonElement extends HTMLElement {
+class HTMLButtonElement extends HtmlElement {
   external bool get disabled;
   external set disabled(bool value);
-  external HTMLFormElement? get form;
+  external FormElement? get form;
   external String get formAction;
   external set formAction(String value);
   external String get formEnctype;
@@ -10219,7 +10227,7 @@ class HTMLButtonElement extends HTMLElement {
   external set formNoValidate(bool value);
   external String get formTarget;
   external set formTarget(String value);
-  external NodeListOf<HTMLLabelElement> get labels;
+  external NodeListOf<LabelElement> get labels;
   external String get name;
   external set name(String value);
   external String get type;
@@ -10236,13 +10244,13 @@ class HTMLButtonElement extends HTMLElement {
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory HTMLButtonElement({
     bool disabled,
-    HTMLFormElement? form,
+    FormElement? form,
     String formAction,
     String formEnctype,
     String formMethod,
     bool formNoValidate,
     String formTarget,
-    NodeListOf<HTMLLabelElement> labels,
+    NodeListOf<LabelElement> labels,
     String name,
     String type,
     String validationMessage,
@@ -10257,7 +10265,7 @@ external IHTMLButtonElement JHTMLButtonElement;
 
 @JS()
 @anonymous
-class HTMLCanvasElement extends HTMLElement {
+class HTMLCanvasElement extends HtmlElement {
   external num get height;
   external set height(num value);
   external num get width;
@@ -10307,7 +10315,7 @@ class HTMLCollectionOf<T extends Element> extends HTMLCollectionBase {
 
 @JS()
 @anonymous
-class HTMLDListElement extends HTMLElement {
+class HTMLDListElement extends HtmlElement {
   external bool get compact;
   external set compact(bool value);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
@@ -10322,7 +10330,7 @@ external IHTMLDListElement JHTMLDListElement;
 
 @JS()
 @anonymous
-class HTMLDataElement extends HTMLElement {
+class HTMLDataElement extends HtmlElement {
   external String get value;
   external set value(String value);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
@@ -10337,12 +10345,12 @@ external IHTMLDataElement JHTMLDataElement;
 
 @JS()
 @anonymous
-class HTMLDataListElement extends HTMLElement {
-  external HTMLCollectionOf<HTMLOptionElement> get options;
+class HTMLDataListElement extends HtmlElement {
+  external HTMLCollectionOf<OptionElement> get options;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory HTMLDataListElement({
-    HTMLCollectionOf<HTMLOptionElement> options,
+    HTMLCollectionOf<OptionElement> options,
   });
 }
 
@@ -10351,7 +10359,7 @@ external IHTMLDataListElement JHTMLDataListElement;
 
 @JS()
 @anonymous
-class HTMLDetailsElement extends HTMLElement {
+class HTMLDetailsElement extends HtmlElement {
   external bool get open;
   external set open(bool value);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
@@ -10366,7 +10374,7 @@ external IHTMLDetailsElement JHTMLDetailsElement;
 
 @JS()
 @anonymous
-class HTMLDialogElement extends HTMLElement {
+class HTMLDialogElement extends HtmlElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory HTMLDialogElement();
@@ -10374,7 +10382,7 @@ class HTMLDialogElement extends HTMLElement {
 
 @JS()
 @anonymous
-class HTMLDirectoryElement extends HTMLElement {
+class HTMLDirectoryElement extends HtmlElement {
   external bool get compact;
   external set compact(bool value);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
@@ -10389,7 +10397,7 @@ external IHTMLDirectoryElement JHTMLDirectoryElement;
 
 @JS()
 @anonymous
-class HTMLDivElement extends HTMLElement {
+class HTMLDivElement extends HtmlElement {
   external String get align;
   external set align(String value);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
@@ -10476,7 +10484,7 @@ external IHTMLElement JHTMLElement;
 
 @JS()
 @anonymous
-class HTMLEmbedElement extends HTMLElement {
+class HTMLEmbedElement extends HtmlElement {
   external String get align;
   external set align(String value);
   external String get height;
@@ -10507,11 +10515,11 @@ external IHTMLEmbedElement JHTMLEmbedElement;
 
 @JS()
 @anonymous
-class HTMLFieldSetElement extends HTMLElement {
+class HTMLFieldSetElement extends HtmlElement {
   external bool get disabled;
   external set disabled(bool value);
-  external HTMLCollection get elements;
-  external HTMLFormElement? get form;
+  external HtmlCollection get elements;
+  external FormElement? get form;
   external String get name;
   external set name(String value);
   external String get type;
@@ -10525,8 +10533,8 @@ class HTMLFieldSetElement extends HTMLElement {
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory HTMLFieldSetElement({
     bool disabled,
-    HTMLCollection elements,
-    HTMLFormElement? form,
+    HtmlCollection elements,
+    FormElement? form,
     String name,
     String type,
     String validationMessage,
@@ -10540,7 +10548,7 @@ external IHTMLFieldSetElement JHTMLFieldSetElement;
 
 @JS()
 @anonymous
-class HTMLFontElement extends HTMLElement {
+class HTMLFontElement extends HtmlElement {
   external String get color;
   external set color(String value);
   external String get face;
@@ -10571,14 +10579,14 @@ external IHTMLFormControlsCollection JHTMLFormControlsCollection;
 
 @JS()
 @anonymous
-class HTMLFormElement extends HTMLElement {
+class HTMLFormElement extends HtmlElement {
   external String get acceptCharset;
   external set acceptCharset(String value);
   external String get action;
   external set action(String value);
   external String get autocomplete;
   external set autocomplete(String value);
-  external HTMLFormControlsCollection get elements;
+  external HtmlFormControlsCollection get elements;
   external String get encoding;
   external set encoding(String value);
   external String get enctype;
@@ -10594,7 +10602,7 @@ class HTMLFormElement extends HTMLElement {
   external set target(String value);
   external bool checkValidity();
   external bool reportValidity();
-  external void requestSubmit(HTMLElement? submitter);
+  external void requestSubmit(HtmlElement? submitter);
   external void reset();
   external void submit();
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
@@ -10603,7 +10611,7 @@ class HTMLFormElement extends HTMLElement {
     String acceptCharset,
     String action,
     String autocomplete,
-    HTMLFormControlsCollection elements,
+    HtmlFormControlsCollection elements,
     String encoding,
     String enctype,
     num length,
@@ -10619,7 +10627,7 @@ external IHTMLFormElement JHTMLFormElement;
 
 @JS()
 @anonymous
-class HTMLFrameElement extends HTMLElement {
+class HTMLFrameElement extends HtmlElement {
   external Document? get contentDocument;
   external WindowProxy? get contentWindow;
   external String get frameBorder;
@@ -10665,7 +10673,7 @@ class HTMLFrameSetElementEventMap extends HTMLElementEventMap {
 
 @JS()
 @anonymous
-class HTMLFrameSetElement extends HTMLElement {
+class HTMLFrameSetElement extends HtmlElement {
   external String get cols;
   external set cols(String value);
   external String get rows;
@@ -10683,7 +10691,7 @@ external IHTMLFrameSetElement JHTMLFrameSetElement;
 
 @JS()
 @anonymous
-class HTMLHRElement extends HTMLElement {
+class HTMLHRElement extends HtmlElement {
   external String get align;
   external set align(String value);
   external String get color;
@@ -10710,7 +10718,7 @@ external IHTMLHRElement JHTMLHRElement;
 
 @JS()
 @anonymous
-class HTMLHeadElement extends HTMLElement {
+class HTMLHeadElement extends HtmlElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory HTMLHeadElement();
@@ -10721,7 +10729,7 @@ external IHTMLHeadElement JHTMLHeadElement;
 
 @JS()
 @anonymous
-class HTMLHeadingElement extends HTMLElement {
+class HTMLHeadingElement extends HtmlElement {
   external String get align;
   external set align(String value);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
@@ -10736,7 +10744,7 @@ external IHTMLHeadingElement JHTMLHeadingElement;
 
 @JS()
 @anonymous
-class HTMLHtmlElement extends HTMLElement {
+class HTMLHtmlElement extends HtmlElement {
   external String get version;
   external set version(String value);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
@@ -10792,7 +10800,7 @@ class HTMLHyperlinkElementUtils {
 
 @JS()
 @anonymous
-class HTMLIFrameElement extends HTMLElement {
+class HTMLIFrameElement extends HtmlElement {
   external String get align;
   external set align(String value);
   external String get allow;
@@ -10815,7 +10823,7 @@ class HTMLIFrameElement extends HTMLElement {
   external set name(String value);
   external ReferrerPolicy get referrerPolicy;
   external set referrerPolicy(ReferrerPolicy value);
-  external DOMTokenList get sandbox;
+  external DomTokenList get sandbox;
   external String get scrolling;
   external set scrolling(String value);
   external String get src;
@@ -10840,7 +10848,7 @@ class HTMLIFrameElement extends HTMLElement {
     String marginWidth,
     String name,
     ReferrerPolicy referrerPolicy,
-    DOMTokenList sandbox,
+    DomTokenList sandbox,
     String scrolling,
     String src,
     String srcdoc,
@@ -10853,7 +10861,7 @@ external IHTMLIFrameElement JHTMLIFrameElement;
 
 @JS()
 @anonymous
-class HTMLImageElement extends HTMLElement {
+class HTMLImageElement extends HtmlElement {
   external String get align;
   external set align(String value);
   external String get alt;
@@ -10935,7 +10943,7 @@ external IHTMLImageElement JHTMLImageElement;
 
 @JS()
 @anonymous
-class HTMLInputElement extends HTMLElement {
+class HTMLInputElement extends HtmlElement {
   external String get accept;
   external set accept(String value);
   external String get align;
@@ -10958,7 +10966,7 @@ class HTMLInputElement extends HTMLElement {
   external set disabled(bool value);
   external FileList? get files;
   external set files(FileList? value);
-  external HTMLFormElement? get form;
+  external FormElement? get form;
   external String get formAction;
   external set formAction(String value);
   external String get formEnctype;
@@ -10973,8 +10981,8 @@ class HTMLInputElement extends HTMLElement {
   external set height(num value);
   external bool get indeterminate;
   external set indeterminate(bool value);
-  external NodeListOf<HTMLLabelElement>? get labels;
-  external HTMLElement? get list;
+  external NodeListOf<LabelElement>? get labels;
+  external HtmlElement? get list;
   external String get max;
   external set max(String value);
   external num get maxLength;
@@ -11015,11 +11023,11 @@ class HTMLInputElement extends HTMLElement {
   external ValidityState get validity;
   external String get value;
   external set value(String value);
-  external Date? get valueAsDate;
-  external set valueAsDate(Date? value);
+  external DateTime? get valueAsDate;
+  external set valueAsDate(DateTime? value);
   external num get valueAsNumber;
   external set valueAsNumber(num value);
-  external ReadonlyArray<FileSystemEntry> get webkitEntries;
+  external List<FileSystemEntry> get webkitEntries;
   external bool get webkitdirectory;
   external set webkitdirectory(bool value);
   external num get width;
@@ -11047,7 +11055,7 @@ class HTMLInputElement extends HTMLElement {
     String dirName,
     bool disabled,
     FileList? files,
-    HTMLFormElement? form,
+    FormElement? form,
     String formAction,
     String formEnctype,
     String formMethod,
@@ -11055,8 +11063,8 @@ class HTMLInputElement extends HTMLElement {
     String formTarget,
     num height,
     bool indeterminate,
-    NodeListOf<HTMLLabelElement>? labels,
-    HTMLElement? list,
+    NodeListOf<LabelElement>? labels,
+    HtmlElement? list,
     String max,
     num maxLength,
     String min,
@@ -11078,9 +11086,9 @@ class HTMLInputElement extends HTMLElement {
     String validationMessage,
     ValidityState validity,
     String value,
-    Date? valueAsDate,
+    DateTime? valueAsDate,
     num valueAsNumber,
-    ReadonlyArray<FileSystemEntry> webkitEntries,
+    List<FileSystemEntry> webkitEntries,
     bool webkitdirectory,
     num width,
     bool willValidate,
@@ -11092,7 +11100,7 @@ external IHTMLInputElement JHTMLInputElement;
 
 @JS()
 @anonymous
-class HTMLLIElement extends HTMLElement {
+class HTMLLIElement extends HtmlElement {
   external String get type;
   external set type(String value);
   external num get value;
@@ -11110,16 +11118,16 @@ external IHTMLLIElement JHTMLLIElement;
 
 @JS()
 @anonymous
-class HTMLLabelElement extends HTMLElement {
-  external HTMLElement? get control;
-  external HTMLFormElement? get form;
+class HTMLLabelElement extends HtmlElement {
+  external HtmlElement? get control;
+  external FormElement? get form;
   external String get htmlFor;
   external set htmlFor(String value);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory HTMLLabelElement({
-    HTMLElement? control,
-    HTMLFormElement? form,
+    HtmlElement? control,
+    FormElement? form,
     String htmlFor,
   });
 }
@@ -11129,15 +11137,15 @@ external IHTMLLabelElement JHTMLLabelElement;
 
 @JS()
 @anonymous
-class HTMLLegendElement extends HTMLElement {
+class HTMLLegendElement extends HtmlElement {
   external String get align;
   external set align(String value);
-  external HTMLFormElement? get form;
+  external FormElement? get form;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory HTMLLegendElement({
     String align,
-    HTMLFormElement? form,
+    FormElement? form,
   });
 }
 
@@ -11146,7 +11154,7 @@ external IHTMLLegendElement JHTMLLegendElement;
 
 @JS()
 @anonymous
-class HTMLLinkElement extends HTMLElement {
+class HTMLLinkElement extends HtmlElement {
   external String get as;
   external set as(String value);
   external String get charset;
@@ -11171,10 +11179,10 @@ class HTMLLinkElement extends HTMLElement {
   external set referrerPolicy(String value);
   external String get rel;
   external set rel(String value);
-  external DOMTokenList get relList;
+  external DomTokenList get relList;
   external String get rev;
   external set rev(String value);
-  external DOMTokenList get sizes;
+  external DomTokenList get sizes;
   external String get target;
   external set target(String value);
   external String get type;
@@ -11194,9 +11202,9 @@ class HTMLLinkElement extends HTMLElement {
     String media,
     String referrerPolicy,
     String rel,
-    DOMTokenList relList,
+    DomTokenList relList,
     String rev,
-    DOMTokenList sizes,
+    DomTokenList sizes,
     String target,
     String type,
   });
@@ -11207,14 +11215,14 @@ external IHTMLLinkElement JHTMLLinkElement;
 
 @JS()
 @anonymous
-class HTMLMapElement extends HTMLElement {
-  external HTMLCollection get areas;
+class HTMLMapElement extends HtmlElement {
+  external HtmlCollection get areas;
   external String get name;
   external set name(String value);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory HTMLMapElement({
-    HTMLCollection areas,
+    HtmlCollection areas,
     String name,
   });
 }
@@ -11224,7 +11232,7 @@ external IHTMLMapElement JHTMLMapElement;
 
 @JS()
 @anonymous
-class HTMLMarqueeElement extends HTMLElement {
+class HTMLMarqueeElement extends HtmlElement {
   external String get behavior;
   external set behavior(String value);
   external String get bgColor;
@@ -11284,7 +11292,7 @@ class HTMLMediaElementEventMap extends HTMLElementEventMap {
 
 @JS()
 @anonymous
-class HTMLMediaElement extends HTMLElement {
+class HTMLMediaElement extends HtmlElement {
   external bool get autoplay;
   external set autoplay(bool value);
   external TimeRanges get buffered;
@@ -11397,7 +11405,7 @@ external IHTMLMediaElement JHTMLMediaElement;
 
 @JS()
 @anonymous
-class HTMLMenuElement extends HTMLElement {
+class HTMLMenuElement extends HtmlElement {
   external bool get compact;
   external set compact(bool value);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
@@ -11412,7 +11420,7 @@ external IHTMLMenuElement JHTMLMenuElement;
 
 @JS()
 @anonymous
-class HTMLMetaElement extends HTMLElement {
+class HTMLMetaElement extends HtmlElement {
   external String get content;
   external set content(String value);
   external String get httpEquiv;
@@ -11436,10 +11444,10 @@ external IHTMLMetaElement JHTMLMetaElement;
 
 @JS()
 @anonymous
-class HTMLMeterElement extends HTMLElement {
+class HTMLMeterElement extends HtmlElement {
   external num get high;
   external set high(num value);
-  external NodeListOf<HTMLLabelElement> get labels;
+  external NodeListOf<LabelElement> get labels;
   external num get low;
   external set low(num value);
   external num get max;
@@ -11454,7 +11462,7 @@ class HTMLMeterElement extends HTMLElement {
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory HTMLMeterElement({
     num high,
-    NodeListOf<HTMLLabelElement> labels,
+    NodeListOf<LabelElement> labels,
     num low,
     num max,
     num min,
@@ -11468,7 +11476,7 @@ external IHTMLMeterElement JHTMLMeterElement;
 
 @JS()
 @anonymous
-class HTMLModElement extends HTMLElement {
+class HTMLModElement extends HtmlElement {
   external String get cite;
   external set cite(String value);
   external String get dateTime;
@@ -11486,7 +11494,7 @@ external IHTMLModElement JHTMLModElement;
 
 @JS()
 @anonymous
-class HTMLOListElement extends HTMLElement {
+class HTMLOListElement extends HtmlElement {
   external bool get compact;
   external set compact(bool value);
   external bool get reversed;
@@ -11510,7 +11518,7 @@ external IHTMLOListElement JHTMLOListElement;
 
 @JS()
 @anonymous
-class HTMLObjectElement extends HTMLElement {
+class HTMLObjectElement extends HtmlElement {
   external String get align;
   external set align(String value);
   external String get archive;
@@ -11529,7 +11537,7 @@ class HTMLObjectElement extends HTMLElement {
   external set data(String value);
   external bool get declare;
   external set declare(bool value);
-  external HTMLFormElement? get form;
+  external FormElement? get form;
   external String get height;
   external set height(String value);
   external num get hspace;
@@ -11566,7 +11574,7 @@ class HTMLObjectElement extends HTMLElement {
     WindowProxy? contentWindow,
     String data,
     bool declare,
-    HTMLFormElement? form,
+    FormElement? form,
     String height,
     num hspace,
     String name,
@@ -11586,7 +11594,7 @@ external IHTMLObjectElement JHTMLObjectElement;
 
 @JS()
 @anonymous
-class HTMLOptGroupElement extends HTMLElement {
+class HTMLOptGroupElement extends HtmlElement {
   external bool get disabled;
   external set disabled(bool value);
   external String get label;
@@ -11604,12 +11612,12 @@ external IHTMLOptGroupElement JHTMLOptGroupElement;
 
 @JS()
 @anonymous
-class HTMLOptionElement extends HTMLElement {
+class HTMLOptionElement extends HtmlElement {
   external bool get defaultSelected;
   external set defaultSelected(bool value);
   external bool get disabled;
   external set disabled(bool value);
-  external HTMLFormElement? get form;
+  external FormElement? get form;
   external num get index;
   external String get label;
   external set label(String value);
@@ -11624,7 +11632,7 @@ class HTMLOptionElement extends HTMLElement {
   external factory HTMLOptionElement({
     bool defaultSelected,
     bool disabled,
-    HTMLFormElement? form,
+    FormElement? form,
     num index,
     String label,
     bool selected,
@@ -11638,7 +11646,7 @@ external IHTMLOptionElement JHTMLOptionElement;
 
 @JS()
 @anonymous
-class HTMLOptionsCollection extends HTMLCollectionOf<HTMLOptionElement> {
+class HTMLOptionsCollection extends HTMLCollectionOf<OptionElement> {
   external num get length;
   external set length(num value);
   external num get selectedIndex;
@@ -11657,7 +11665,7 @@ external IHTMLOptionsCollection JHTMLOptionsCollection;
 @JS()
 @anonymous
 class HTMLOrSVGElement {
-  external DOMStringMap get dataset;
+  external DomStringMap get dataset;
   external String? get nonce;
   external set nonce(String? value);
   external num get tabIndex;
@@ -11665,7 +11673,7 @@ class HTMLOrSVGElement {
   external void blur();
   external void focus(FocusOptions options);
   external factory HTMLOrSVGElement({
-    DOMStringMap dataset,
+    DomStringMap dataset,
     String? nonce,
     num tabIndex,
   });
@@ -11673,12 +11681,12 @@ class HTMLOrSVGElement {
 
 @JS()
 @anonymous
-class HTMLOutputElement extends HTMLElement {
+class HTMLOutputElement extends HtmlElement {
   external String get defaultValue;
   external set defaultValue(String value);
-  external HTMLFormElement? get form;
-  external DOMTokenList get htmlFor;
-  external NodeListOf<HTMLLabelElement> get labels;
+  external FormElement? get form;
+  external DomTokenList get htmlFor;
+  external NodeListOf<LabelElement> get labels;
   external String get name;
   external set name(String value);
   external String get type;
@@ -11694,9 +11702,9 @@ class HTMLOutputElement extends HTMLElement {
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory HTMLOutputElement({
     String defaultValue,
-    HTMLFormElement? form,
-    DOMTokenList htmlFor,
-    NodeListOf<HTMLLabelElement> labels,
+    FormElement? form,
+    DomTokenList htmlFor,
+    NodeListOf<LabelElement> labels,
     String name,
     String type,
     String validationMessage,
@@ -11711,7 +11719,7 @@ external IHTMLOutputElement JHTMLOutputElement;
 
 @JS()
 @anonymous
-class HTMLParagraphElement extends HTMLElement {
+class HTMLParagraphElement extends HtmlElement {
   external String get align;
   external set align(String value);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
@@ -11726,7 +11734,7 @@ external IHTMLParagraphElement JHTMLParagraphElement;
 
 @JS()
 @anonymous
-class HTMLParamElement extends HTMLElement {
+class HTMLParamElement extends HtmlElement {
   external String get name;
   external set name(String value);
   external String get type;
@@ -11750,7 +11758,7 @@ external IHTMLParamElement JHTMLParamElement;
 
 @JS()
 @anonymous
-class HTMLPictureElement extends HTMLElement {
+class HTMLPictureElement extends HtmlElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory HTMLPictureElement();
@@ -11761,7 +11769,7 @@ external IHTMLPictureElement JHTMLPictureElement;
 
 @JS()
 @anonymous
-class HTMLPreElement extends HTMLElement {
+class HTMLPreElement extends HtmlElement {
   external num get width;
   external set width(num value);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
@@ -11776,8 +11784,8 @@ external IHTMLPreElement JHTMLPreElement;
 
 @JS()
 @anonymous
-class HTMLProgressElement extends HTMLElement {
-  external NodeListOf<HTMLLabelElement> get labels;
+class HTMLProgressElement extends HtmlElement {
+  external NodeListOf<LabelElement> get labels;
   external num get max;
   external set max(num value);
   external num get position;
@@ -11786,7 +11794,7 @@ class HTMLProgressElement extends HTMLElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory HTMLProgressElement({
-    NodeListOf<HTMLLabelElement> labels,
+    NodeListOf<LabelElement> labels,
     num max,
     num position,
     num value,
@@ -11798,7 +11806,7 @@ external IHTMLProgressElement JHTMLProgressElement;
 
 @JS()
 @anonymous
-class HTMLQuoteElement extends HTMLElement {
+class HTMLQuoteElement extends HtmlElement {
   external String get cite;
   external set cite(String value);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
@@ -11813,7 +11821,7 @@ external IHTMLQuoteElement JHTMLQuoteElement;
 
 @JS()
 @anonymous
-class HTMLScriptElement extends HTMLElement {
+class HTMLScriptElement extends HtmlElement {
   external bool get async;
   external set async(bool value);
   external String get charset;
@@ -11861,25 +11869,25 @@ external IHTMLScriptElement JHTMLScriptElement;
 
 @JS()
 @anonymous
-class HTMLSelectElement extends HTMLElement {
+class HTMLSelectElement extends HtmlElement {
   external String get autocomplete;
   external set autocomplete(String value);
   external bool get disabled;
   external set disabled(bool value);
-  external HTMLFormElement? get form;
-  external NodeListOf<HTMLLabelElement> get labels;
+  external FormElement? get form;
+  external NodeListOf<LabelElement> get labels;
   external num get length;
   external set length(num value);
   external bool get multiple;
   external set multiple(bool value);
   external String get name;
   external set name(String value);
-  external HTMLOptionsCollection get options;
+  external HtmlOptionsCollection get options;
   external bool get required;
   external set required(bool value);
   external num get selectedIndex;
   external set selectedIndex(num value);
-  external HTMLCollectionOf<HTMLOptionElement> get selectedOptions;
+  external HTMLCollectionOf<OptionElement> get selectedOptions;
   external num get size;
   external set size(num value);
   external String get type;
@@ -11891,7 +11899,7 @@ class HTMLSelectElement extends HTMLElement {
   external void add(dynamic element, dynamic before);
   external bool checkValidity();
   external Element? item(num index);
-  external HTMLOptionElement? namedItem(String name);
+  external OptionElement? namedItem(String name);
   external void remove();
   external bool reportValidity();
   external void setCustomValidity(String error);
@@ -11900,15 +11908,15 @@ class HTMLSelectElement extends HTMLElement {
   external factory HTMLSelectElement({
     String autocomplete,
     bool disabled,
-    HTMLFormElement? form,
-    NodeListOf<HTMLLabelElement> labels,
+    FormElement? form,
+    NodeListOf<LabelElement> labels,
     num length,
     bool multiple,
     String name,
-    HTMLOptionsCollection options,
+    HtmlOptionsCollection options,
     bool required,
     num selectedIndex,
-    HTMLCollectionOf<HTMLOptionElement> selectedOptions,
+    HTMLCollectionOf<OptionElement> selectedOptions,
     num size,
     String type,
     String validationMessage,
@@ -11923,7 +11931,7 @@ external IHTMLSelectElement JHTMLSelectElement;
 
 @JS()
 @anonymous
-class HTMLSlotElement extends HTMLElement {
+class HTMLSlotElement extends HtmlElement {
   external String get name;
   external set name(String value);
   external List<Element> assignedElements(AssignedNodesOptions options);
@@ -11940,7 +11948,7 @@ external IHTMLSlotElement JHTMLSlotElement;
 
 @JS()
 @anonymous
-class HTMLSourceElement extends HTMLElement {
+class HTMLSourceElement extends HtmlElement {
   external String get media;
   external set media(String value);
   external String get sizes;
@@ -11967,7 +11975,7 @@ external IHTMLSourceElement JHTMLSourceElement;
 
 @JS()
 @anonymous
-class HTMLSpanElement extends HTMLElement {
+class HTMLSpanElement extends HtmlElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory HTMLSpanElement();
@@ -11978,7 +11986,7 @@ external IHTMLSpanElement JHTMLSpanElement;
 
 @JS()
 @anonymous
-class HTMLStyleElement extends HTMLElement {
+class HTMLStyleElement extends HtmlElement {
   external String get media;
   external set media(String value);
   external String get type;
@@ -11996,7 +12004,7 @@ external IHTMLStyleElement JHTMLStyleElement;
 
 @JS()
 @anonymous
-class HTMLTableCaptionElement extends HTMLElement {
+class HTMLTableCaptionElement extends HtmlElement {
   external String get align;
   external set align(String value);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
@@ -12011,7 +12019,7 @@ external IHTMLTableCaptionElement JHTMLTableCaptionElement;
 
 @JS()
 @anonymous
-class HTMLTableCellElement extends HTMLElement {
+class HTMLTableCellElement extends HtmlElement {
   external String get abbr;
   external set abbr(String value);
   external String get align;
@@ -12067,7 +12075,7 @@ external IHTMLTableCellElement JHTMLTableCellElement;
 
 @JS()
 @anonymous
-class HTMLTableColElement extends HTMLElement {
+class HTMLTableColElement extends HtmlElement {
   external String get align;
   external set align(String value);
   external String get ch;
@@ -12097,7 +12105,7 @@ external IHTMLTableColElement JHTMLTableColElement;
 
 @JS()
 @anonymous
-class HTMLTableDataCellElement extends HTMLTableCellElement {
+class HTMLTableDataCellElement extends TableCellElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory HTMLTableDataCellElement();
@@ -12105,58 +12113,58 @@ class HTMLTableDataCellElement extends HTMLTableCellElement {
 
 @JS()
 @anonymous
-class HTMLTableElement extends HTMLElement {
+class HTMLTableElement extends HtmlElement {
   external String get align;
   external set align(String value);
   external String get bgColor;
   external set bgColor(String value);
   external String get border;
   external set border(String value);
-  external HTMLTableCaptionElement? get caption;
-  external set caption(HTMLTableCaptionElement? value);
+  external TableCaptionElement? get caption;
+  external set caption(TableCaptionElement? value);
   external String get cellPadding;
   external set cellPadding(String value);
   external String get cellSpacing;
   external set cellSpacing(String value);
   external String get frame;
   external set frame(String value);
-  external HTMLCollectionOf<HTMLTableRowElement> get rows;
+  external HTMLCollectionOf<TableRowElement> get rows;
   external String get rules;
   external set rules(String value);
   external String get summary;
   external set summary(String value);
-  external HTMLCollectionOf<HTMLTableSectionElement> get tBodies;
-  external HTMLTableSectionElement? get tFoot;
-  external set tFoot(HTMLTableSectionElement? value);
-  external HTMLTableSectionElement? get tHead;
-  external set tHead(HTMLTableSectionElement? value);
+  external HTMLCollectionOf<TableSectionElement> get tBodies;
+  external TableSectionElement? get tFoot;
+  external set tFoot(TableSectionElement? value);
+  external TableSectionElement? get tHead;
+  external set tHead(TableSectionElement? value);
   external String get width;
   external set width(String value);
-  external HTMLTableCaptionElement createCaption();
-  external HTMLTableSectionElement createTBody();
-  external HTMLTableSectionElement createTFoot();
-  external HTMLTableSectionElement createTHead();
+  external TableCaptionElement createCaption();
+  external TableSectionElement createTBody();
+  external TableSectionElement createTFoot();
+  external TableSectionElement createTHead();
   external void deleteCaption();
   external void deleteRow(num index);
   external void deleteTFoot();
   external void deleteTHead();
-  external HTMLTableRowElement insertRow(num index);
+  external TableRowElement insertRow(num index);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory HTMLTableElement({
     String align,
     String bgColor,
     String border,
-    HTMLTableCaptionElement? caption,
+    TableCaptionElement? caption,
     String cellPadding,
     String cellSpacing,
     String frame,
-    HTMLCollectionOf<HTMLTableRowElement> rows,
+    HTMLCollectionOf<TableRowElement> rows,
     String rules,
     String summary,
-    HTMLCollectionOf<HTMLTableSectionElement> tBodies,
-    HTMLTableSectionElement? tFoot,
-    HTMLTableSectionElement? tHead,
+    HTMLCollectionOf<TableSectionElement> tBodies,
+    TableSectionElement? tFoot,
+    TableSectionElement? tHead,
     String width,
   });
 }
@@ -12166,7 +12174,7 @@ external IHTMLTableElement JHTMLTableElement;
 
 @JS()
 @anonymous
-class HTMLTableHeaderCellElement extends HTMLTableCellElement {
+class HTMLTableHeaderCellElement extends TableCellElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory HTMLTableHeaderCellElement();
@@ -12174,12 +12182,12 @@ class HTMLTableHeaderCellElement extends HTMLTableCellElement {
 
 @JS()
 @anonymous
-class HTMLTableRowElement extends HTMLElement {
+class HTMLTableRowElement extends HtmlElement {
   external String get align;
   external set align(String value);
   external String get bgColor;
   external set bgColor(String value);
-  external HTMLCollectionOf<HTMLTableCellElement> get cells;
+  external HTMLCollectionOf<TableCellElement> get cells;
   external String get ch;
   external set ch(String value);
   external String get chOff;
@@ -12189,13 +12197,13 @@ class HTMLTableRowElement extends HTMLElement {
   external String get vAlign;
   external set vAlign(String value);
   external void deleteCell(num index);
-  external HTMLTableCellElement insertCell(num index);
+  external TableCellElement insertCell(num index);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory HTMLTableRowElement({
     String align,
     String bgColor,
-    HTMLCollectionOf<HTMLTableCellElement> cells,
+    HTMLCollectionOf<TableCellElement> cells,
     String ch,
     String chOff,
     num rowIndex,
@@ -12209,25 +12217,25 @@ external IHTMLTableRowElement JHTMLTableRowElement;
 
 @JS()
 @anonymous
-class HTMLTableSectionElement extends HTMLElement {
+class HTMLTableSectionElement extends HtmlElement {
   external String get align;
   external set align(String value);
   external String get ch;
   external set ch(String value);
   external String get chOff;
   external set chOff(String value);
-  external HTMLCollectionOf<HTMLTableRowElement> get rows;
+  external HTMLCollectionOf<TableRowElement> get rows;
   external String get vAlign;
   external set vAlign(String value);
   external void deleteRow(num index);
-  external HTMLTableRowElement insertRow(num index);
+  external TableRowElement insertRow(num index);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory HTMLTableSectionElement({
     String align,
     String ch,
     String chOff,
-    HTMLCollectionOf<HTMLTableRowElement> rows,
+    HTMLCollectionOf<TableRowElement> rows,
     String vAlign,
   });
 }
@@ -12237,7 +12245,7 @@ external IHTMLTableSectionElement JHTMLTableSectionElement;
 
 @JS()
 @anonymous
-class HTMLTemplateElement extends HTMLElement {
+class HTMLTemplateElement extends HtmlElement {
   external DocumentFragment get content;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
@@ -12251,7 +12259,7 @@ external IHTMLTemplateElement JHTMLTemplateElement;
 
 @JS()
 @anonymous
-class HTMLTextAreaElement extends HTMLElement {
+class HTMLTextAreaElement extends HtmlElement {
   external String get autocomplete;
   external set autocomplete(String value);
   external num get cols;
@@ -12262,8 +12270,8 @@ class HTMLTextAreaElement extends HTMLElement {
   external set dirName(String value);
   external bool get disabled;
   external set disabled(bool value);
-  external HTMLFormElement? get form;
-  external NodeListOf<HTMLLabelElement> get labels;
+  external FormElement? get form;
+  external NodeListOf<LabelElement> get labels;
   external num get maxLength;
   external set maxLength(num value);
   external num get minLength;
@@ -12307,8 +12315,8 @@ class HTMLTextAreaElement extends HTMLElement {
     String defaultValue,
     String dirName,
     bool disabled,
-    HTMLFormElement? form,
-    NodeListOf<HTMLLabelElement> labels,
+    FormElement? form,
+    NodeListOf<LabelElement> labels,
     num maxLength,
     num minLength,
     String name,
@@ -12334,7 +12342,7 @@ external IHTMLTextAreaElement JHTMLTextAreaElement;
 
 @JS()
 @anonymous
-class HTMLTimeElement extends HTMLElement {
+class HTMLTimeElement extends HtmlElement {
   external String get dateTime;
   external set dateTime(String value);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
@@ -12349,7 +12357,7 @@ external IHTMLTimeElement JHTMLTimeElement;
 
 @JS()
 @anonymous
-class HTMLTitleElement extends HTMLElement {
+class HTMLTitleElement extends HtmlElement {
   external String get text;
   external set text(String value);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
@@ -12364,7 +12372,7 @@ external IHTMLTitleElement JHTMLTitleElement;
 
 @JS()
 @anonymous
-class HTMLTrackElement extends HTMLElement {
+class HTMLTrackElement extends HtmlElement {
   external String get kind;
   external set kind(String value);
   external String get label;
@@ -12400,7 +12408,7 @@ external IHTMLTrackElement JHTMLTrackElement;
 
 @JS()
 @anonymous
-class HTMLUListElement extends HTMLElement {
+class HTMLUListElement extends HtmlElement {
   external bool get compact;
   external set compact(bool value);
   external String get type;
@@ -12418,7 +12426,7 @@ external IHTMLUListElement JHTMLUListElement;
 
 @JS()
 @anonymous
-class HTMLUnknownElement extends HTMLElement {
+class HTMLUnknownElement extends HtmlElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory HTMLUnknownElement();
@@ -12442,7 +12450,7 @@ class HTMLVideoElementEventMap extends HTMLMediaElementEventMap {
 
 @JS()
 @anonymous
-class HTMLVideoElement extends HTMLMediaElement {
+class HTMLVideoElement extends MediaElement {
   external bool get disablePictureInPicture;
   external set disablePictureInPicture(bool value);
   external num get height;
@@ -12536,17 +12544,17 @@ class IDBCursor {
   external IDBCursorDirection get direction;
   external IDBValidKey get key;
   external IDBValidKey get primaryKey;
-  external IDBRequest get request;
+  external Request get request;
   external dynamic get source;
   external void advance(num count);
   external void continuePrimaryKey(IDBValidKey key, IDBValidKey primaryKey);
-  external IDBRequest<dynamic> delete();
-  external IDBRequest<IDBValidKey> update(dynamic value);
+  external Request<dynamic> delete();
+  external Request<IDBValidKey> update(dynamic value);
   external factory IDBCursor({
     IDBCursorDirection direction,
     IDBValidKey key,
     IDBValidKey primaryKey,
-    IDBRequest request,
+    Request request,
     dynamic source,
   });
 }
@@ -12556,7 +12564,7 @@ external IIDBCursor JIDBCursor;
 
 @JS()
 @anonymous
-class IDBCursorWithValue extends IDBCursor {
+class IDBCursorWithValue extends Cursor {
   external dynamic get value;
   external factory IDBCursorWithValue({
     dynamic value,
@@ -12575,13 +12583,13 @@ class IDBDatabaseEventMap {
   external set close(Event value);
   external Event get error;
   external set error(Event value);
-  external IDBVersionChangeEvent get versionchange;
-  external set versionchange(IDBVersionChangeEvent value);
+  external VersionChangeEvent get versionchange;
+  external set versionchange(VersionChangeEvent value);
   external factory IDBDatabaseEventMap({
     Event abort,
     Event close,
     Event error,
-    IDBVersionChangeEvent versionchange,
+    VersionChangeEvent versionchange,
   });
 }
 
@@ -12589,29 +12597,29 @@ class IDBDatabaseEventMap {
 @anonymous
 class IDBDatabase extends EventTarget {
   external String get name;
-  external DOMStringList get objectStoreNames;
+  external DomStringList get objectStoreNames;
   external dynamic Function(Event ev)? get onabort;
   external set onabort(dynamic Function(Event ev)? value);
   external dynamic Function(Event ev)? get onclose;
   external set onclose(dynamic Function(Event ev)? value);
   external dynamic Function(Event ev)? get onerror;
   external set onerror(dynamic Function(Event ev)? value);
-  external dynamic Function(IDBVersionChangeEvent ev)? get onversionchange;
-  external set onversionchange(dynamic Function(IDBVersionChangeEvent ev)? value);
+  external dynamic Function(VersionChangeEvent ev)? get onversionchange;
+  external set onversionchange(dynamic Function(VersionChangeEvent ev)? value);
   external num get version;
   external void close();
-  external IDBObjectStore createObjectStore(String name, IDBObjectStoreParameters options);
+  external ObjectStore createObjectStore(String name, IDBObjectStoreParameters options);
   external void deleteObjectStore(String name);
-  external IDBTransaction transaction(dynamic storeNames, IDBTransactionMode mode);
+  external Transaction transaction(dynamic storeNames, IDBTransactionMode mode);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory IDBDatabase({
     String name,
-    DOMStringList objectStoreNames,
+    DomStringList objectStoreNames,
     dynamic Function(Event ev)? onabort,
     dynamic Function(Event ev)? onclose,
     dynamic Function(Event ev)? onerror,
-    dynamic Function(IDBVersionChangeEvent ev)? onversionchange,
+    dynamic Function(VersionChangeEvent ev)? onversionchange,
     num version,
   });
 }
@@ -12624,8 +12632,8 @@ external IIDBDatabase JIDBDatabase;
 class IDBFactory {
   external num cmp(dynamic first, dynamic second);
   external Promise<List<IDBDatabaseInfo>> databases();
-  external IDBOpenDBRequest deleteDatabase(String name);
-  external IDBOpenDBRequest open(String name, num version);
+  external OpenDBRequest deleteDatabase(String name);
+  external OpenDBRequest open(String name, num version);
   external factory IDBFactory();
 }
 
@@ -12639,20 +12647,20 @@ class IDBIndex {
   external bool get multiEntry;
   external String get name;
   external set name(String value);
-  external IDBObjectStore get objectStore;
+  external ObjectStore get objectStore;
   external bool get unique;
-  external IDBRequest<num> count(dynamic query);
-  external IDBRequest<dynamic> get(dynamic query);
-  external IDBRequest<List<dynamic>> getAll(dynamic query, num count);
-  external IDBRequest<List<IDBValidKey>> getAllKeys(dynamic query, num count);
-  external IDBRequest<IDBValidKey?> getKey(dynamic query);
-  external IDBRequest<IDBCursorWithValue?> openCursor(dynamic query, IDBCursorDirection direction);
-  external IDBRequest<IDBCursor?> openKeyCursor(dynamic query, IDBCursorDirection direction);
+  external Request<num> count(dynamic query);
+  external Request<dynamic> get(dynamic query);
+  external Request<List<dynamic>> getAll(dynamic query, num count);
+  external Request<List<IDBValidKey>> getAllKeys(dynamic query, num count);
+  external Request<IDBValidKey?> getKey(dynamic query);
+  external Request<CursorWithValue?> openCursor(dynamic query, IDBCursorDirection direction);
+  external Request<Cursor?> openKeyCursor(dynamic query, IDBCursorDirection direction);
   external factory IDBIndex({
     dynamic keyPath,
     bool multiEntry,
     String name,
-    IDBObjectStore objectStore,
+    ObjectStore objectStore,
     bool unique,
   });
 }
@@ -12683,31 +12691,31 @@ external IIDBKeyRange JIDBKeyRange;
 @anonymous
 class IDBObjectStore {
   external bool get autoIncrement;
-  external DOMStringList get indexNames;
+  external DomStringList get indexNames;
   external dynamic get keyPath;
   external String get name;
   external set name(String value);
-  external IDBTransaction get transaction;
-  external IDBRequest<IDBValidKey> add(dynamic value, IDBValidKey key);
-  external IDBRequest<dynamic> clear();
-  external IDBRequest<num> count(dynamic query);
-  external IDBIndex createIndex(String name, dynamic keyPath, IDBIndexParameters options);
-  external IDBRequest<dynamic> delete(dynamic query);
+  external Transaction get transaction;
+  external Request<IDBValidKey> add(dynamic value, IDBValidKey key);
+  external Request<dynamic> clear();
+  external Request<num> count(dynamic query);
+  external Index createIndex(String name, dynamic keyPath, IDBIndexParameters options);
+  external Request<dynamic> delete(dynamic query);
   external void deleteIndex(String name);
-  external IDBRequest<dynamic> get(dynamic query);
-  external IDBRequest<List<dynamic>> getAll(dynamic query, num count);
-  external IDBRequest<List<IDBValidKey>> getAllKeys(dynamic query, num count);
-  external IDBRequest<IDBValidKey?> getKey(dynamic query);
-  external IDBIndex index(String name);
-  external IDBRequest<IDBCursorWithValue?> openCursor(dynamic query, IDBCursorDirection direction);
-  external IDBRequest<IDBCursor?> openKeyCursor(dynamic query, IDBCursorDirection direction);
-  external IDBRequest<IDBValidKey> put(dynamic value, IDBValidKey key);
+  external Request<dynamic> get(dynamic query);
+  external Request<List<dynamic>> getAll(dynamic query, num count);
+  external Request<List<IDBValidKey>> getAllKeys(dynamic query, num count);
+  external Request<IDBValidKey?> getKey(dynamic query);
+  external Index index(String name);
+  external Request<CursorWithValue?> openCursor(dynamic query, IDBCursorDirection direction);
+  external Request<Cursor?> openKeyCursor(dynamic query, IDBCursorDirection direction);
+  external Request<IDBValidKey> put(dynamic value, IDBValidKey key);
   external factory IDBObjectStore({
     bool autoIncrement,
-    DOMStringList indexNames,
+    DomStringList indexNames,
     dynamic keyPath,
     String name,
-    IDBTransaction transaction,
+    Transaction transaction,
   });
 }
 
@@ -12719,26 +12727,26 @@ external IIDBObjectStore JIDBObjectStore;
 class IDBOpenDBRequestEventMap extends IDBRequestEventMap {
   external Event get blocked;
   external set blocked(Event value);
-  external IDBVersionChangeEvent get upgradeneeded;
-  external set upgradeneeded(IDBVersionChangeEvent value);
+  external VersionChangeEvent get upgradeneeded;
+  external set upgradeneeded(VersionChangeEvent value);
   external factory IDBOpenDBRequestEventMap({
     Event blocked,
-    IDBVersionChangeEvent upgradeneeded,
+    VersionChangeEvent upgradeneeded,
   });
 }
 
 @JS()
 @anonymous
-class IDBOpenDBRequest extends IDBRequest<IDBDatabase> {
+class IDBOpenDBRequest extends Request<Database> {
   external dynamic Function(Event ev)? get onblocked;
   external set onblocked(dynamic Function(Event ev)? value);
-  external dynamic Function(IDBVersionChangeEvent ev)? get onupgradeneeded;
-  external set onupgradeneeded(dynamic Function(IDBVersionChangeEvent ev)? value);
+  external dynamic Function(VersionChangeEvent ev)? get onupgradeneeded;
+  external set onupgradeneeded(dynamic Function(VersionChangeEvent ev)? value);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory IDBOpenDBRequest({
     dynamic Function(Event ev)? onblocked,
-    dynamic Function(IDBVersionChangeEvent ev)? onupgradeneeded,
+    dynamic Function(VersionChangeEvent ev)? onupgradeneeded,
   });
 }
 
@@ -12761,7 +12769,7 @@ class IDBRequestEventMap {
 @JS()
 @anonymous
 class IDBRequest<T> extends EventTarget {
-  external DOMException? get error;
+  external DomException? get error;
   external dynamic Function(Event ev)? get onerror;
   external set onerror(dynamic Function(Event ev)? value);
   external dynamic Function(Event ev)? get onsuccess;
@@ -12769,17 +12777,17 @@ class IDBRequest<T> extends EventTarget {
   external IDBRequestReadyState get readyState;
   external T get result;
   external dynamic get source;
-  external IDBTransaction? get transaction;
+  external Transaction? get transaction;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory IDBRequest({
-    DOMException? error,
+    DomException? error,
     dynamic Function(Event ev)? onerror,
     dynamic Function(Event ev)? onsuccess,
     IDBRequestReadyState readyState,
     T result,
     dynamic source,
-    IDBTransaction? transaction,
+    Transaction? transaction,
   });
 }
 
@@ -12805,10 +12813,10 @@ class IDBTransactionEventMap {
 @JS()
 @anonymous
 class IDBTransaction extends EventTarget {
-  external IDBDatabase get db;
-  external DOMException? get error;
+  external Database get db;
+  external DomException? get error;
   external IDBTransactionMode get mode;
-  external DOMStringList get objectStoreNames;
+  external DomStringList get objectStoreNames;
   external dynamic Function(Event ev)? get onabort;
   external set onabort(dynamic Function(Event ev)? value);
   external dynamic Function(Event ev)? get oncomplete;
@@ -12817,14 +12825,14 @@ class IDBTransaction extends EventTarget {
   external set onerror(dynamic Function(Event ev)? value);
   external void abort();
   external void commit();
-  external IDBObjectStore objectStore(String name);
+  external ObjectStore objectStore(String name);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory IDBTransaction({
-    IDBDatabase db,
-    DOMException? error,
+    Database db,
+    DomException? error,
     IDBTransactionMode mode,
-    DOMStringList objectStoreNames,
+    DomStringList objectStoreNames,
     dynamic Function(Event ev)? onabort,
     dynamic Function(Event ev)? oncomplete,
     dynamic Function(Event ev)? onerror,
@@ -12851,7 +12859,7 @@ external IIDBVersionChangeEvent JIDBVersionChangeEvent;
 @JS()
 @anonymous
 class IIRFilterNode extends AudioNode {
-  external void getFrequencyResponse(Float32Array frequencyHz, Float32Array magResponse, Float32Array phaseResponse);
+  external void getFrequencyResponse(Float32List frequencyHz, Float32List magResponse, Float32List phaseResponse);
   external factory IIRFilterNode();
 }
 
@@ -12902,11 +12910,11 @@ external IImageBitmapRenderingContext JImageBitmapRenderingContext;
 @JS()
 @anonymous
 class ImageData {
-  external Uint8ClampedArray get data;
+  external Uint8ClampedList get data;
   external num get height;
   external num get width;
   external factory ImageData({
-    Uint8ClampedArray data,
+    Uint8ClampedList data,
     num height,
     num width,
   });
@@ -12949,7 +12957,7 @@ external IInputEvent JInputEvent;
 class IntersectionObserver {
   external dynamic get root;
   external String get rootMargin;
-  external ReadonlyArray<num> get thresholds;
+  external List<num> get thresholds;
   external void disconnect();
   external void observe(Element target);
   external List<IntersectionObserverEntry> takeRecords();
@@ -12957,7 +12965,7 @@ class IntersectionObserver {
   external factory IntersectionObserver({
     dynamic root,
     String rootMargin,
-    ReadonlyArray<num> thresholds,
+    List<num> thresholds,
   });
 }
 
@@ -12967,19 +12975,19 @@ external IIntersectionObserver JIntersectionObserver;
 @JS()
 @anonymous
 class IntersectionObserverEntry {
-  external DOMRectReadOnly get boundingClientRect;
+  external DomRectReadOnly get boundingClientRect;
   external num get intersectionRatio;
-  external DOMRectReadOnly get intersectionRect;
+  external DomRectReadOnly get intersectionRect;
   external bool get isIntersecting;
-  external DOMRectReadOnly? get rootBounds;
+  external DomRectReadOnly? get rootBounds;
   external Element get target;
   external DOMHighResTimeStamp get time;
   external factory IntersectionObserverEntry({
-    DOMRectReadOnly boundingClientRect,
+    DomRectReadOnly boundingClientRect,
     num intersectionRatio,
-    DOMRectReadOnly intersectionRect,
+    DomRectReadOnly intersectionRect,
     bool isIntersecting,
-    DOMRectReadOnly? rootBounds,
+    DomRectReadOnly? rootBounds,
     Element target,
     DOMHighResTimeStamp time,
   });
@@ -13065,16 +13073,16 @@ external IKeyframeEffect JKeyframeEffect;
 @JS()
 @anonymous
 class LinkStyle {
-  external CSSStyleSheet? get sheet;
+  external CssStyleSheet? get sheet;
   external factory LinkStyle({
-    CSSStyleSheet? sheet,
+    CssStyleSheet? sheet,
   });
 }
 
 @JS()
 @anonymous
 class Location {
-  external DOMStringList get ancestorOrigins;
+  external DomStringList get ancestorOrigins;
   external String get hash;
   external set hash(String value);
   external String get host;
@@ -13098,7 +13106,7 @@ class Location {
   external void reload();
   external void replace(dynamic url);
   external factory Location({
-    DOMStringList ancestorOrigins,
+    DomStringList ancestorOrigins,
     String hash,
     String host,
     String hostname,
@@ -13193,9 +13201,9 @@ external IMediaDevices JMediaDevices;
 @JS()
 @anonymous
 class MediaElementAudioSourceNode extends AudioNode {
-  external HTMLMediaElement get mediaElement;
+  external MediaElement get mediaElement;
   external factory MediaElementAudioSourceNode({
-    HTMLMediaElement mediaElement,
+    MediaElement mediaElement,
   });
 }
 
@@ -13205,10 +13213,10 @@ external IMediaElementAudioSourceNode JMediaElementAudioSourceNode;
 @JS()
 @anonymous
 class MediaEncryptedEvent extends Event {
-  external ArrayBuffer? get initData;
+  external ByteBuffer? get initData;
   external String get initDataType;
   external factory MediaEncryptedEvent({
-    ArrayBuffer? initData,
+    ByteBuffer? initData,
     String initDataType,
   });
 }
@@ -13241,10 +13249,10 @@ external IMediaError JMediaError;
 @JS()
 @anonymous
 class MediaKeyMessageEvent extends Event {
-  external ArrayBuffer get message;
+  external ByteBuffer get message;
   external MediaKeyMessageType get messageType;
   external factory MediaKeyMessageEvent({
-    ArrayBuffer message,
+    ByteBuffer message,
     MediaKeyMessageType messageType,
   });
 }
@@ -13364,14 +13372,14 @@ class MediaMetadata {
   external set album(String value);
   external String get artist;
   external set artist(String value);
-  external ReadonlyArray<MediaImage> get artwork;
-  external set artwork(ReadonlyArray<MediaImage> value);
+  external List<MediaImage> get artwork;
+  external set artwork(List<MediaImage> value);
   external String get title;
   external set title(String value);
   external factory MediaMetadata({
     String album,
     String artist,
-    ReadonlyArray<MediaImage> artwork,
+    List<MediaImage> artwork,
     String title,
   });
 }
@@ -13497,9 +13505,9 @@ external IMediaRecorder JMediaRecorder;
 @JS()
 @anonymous
 class MediaRecorderErrorEvent extends Event {
-  external DOMException get error;
+  external DomException get error;
   external factory MediaRecorderErrorEvent({
-    DOMException error,
+    DomException error,
   });
 }
 
@@ -13732,7 +13740,7 @@ class MessageEvent<T> extends Event {
   external T get data;
   external String get lastEventId;
   external String get origin;
-  external ReadonlyArray<MessagePort> get ports;
+  external List<MessagePort> get ports;
   external MessageEventSource? get source;
   external void initMessageEvent(String type, bool bubbles, bool cancelable, dynamic data, String origin,
       String lastEventId, MessageEventSource? source, List<MessagePort> ports);
@@ -13740,7 +13748,7 @@ class MessageEvent<T> extends Event {
     T data,
     String lastEventId,
     String origin,
-    ReadonlyArray<MessagePort> ports,
+    List<MessagePort> ports,
     MessageEventSource? source,
   });
 }
@@ -14067,10 +14075,10 @@ class NavigatorID {
 @anonymous
 class NavigatorLanguage {
   external String get language;
-  external ReadonlyArray<String> get languages;
+  external List<String> get languages;
   external factory NavigatorLanguage({
     String language,
-    ReadonlyArray<String> languages,
+    List<String> languages,
   });
 }
 
@@ -14139,7 +14147,7 @@ class Node extends EventTarget {
   external String? get nodeValue;
   external set nodeValue(String? value);
   external Document? get ownerDocument;
-  external HTMLElement? get parentElement;
+  external HtmlElement? get parentElement;
   external dynamic get parentNode;
   external dynamic get previousSibling;
   external String? get textContent;
@@ -14188,7 +14196,7 @@ class Node extends EventTarget {
     num nodeType,
     String? nodeValue,
     Document? ownerDocument,
-    HTMLElement? parentElement,
+    HtmlElement? parentElement,
     dynamic parentNode,
     dynamic previousSibling,
     String? textContent,
@@ -14388,10 +14396,10 @@ class OES_texture_half_float_linear {
 @JS()
 @anonymous
 class OES_vertex_array_object {
-  external void bindVertexArrayOES(WebGLVertexArrayObjectOES? arrayObject);
-  external WebGLVertexArrayObjectOES? createVertexArrayOES();
-  external void deleteVertexArrayOES(WebGLVertexArrayObjectOES? arrayObject);
-  external GLboolean isVertexArrayOES(WebGLVertexArrayObjectOES? arrayObject);
+  external void bindVertexArrayOES(VertexArrayObject? arrayObject);
+  external VertexArrayObject? createVertexArrayOES();
+  external void deleteVertexArrayOES(VertexArrayObject? arrayObject);
+  external GLboolean isVertexArrayOES(VertexArrayObject? arrayObject);
   external GLenum get VERTEX_ARRAY_BINDING_OES;
   external factory OES_vertex_array_object({
     GLenum VERTEX_ARRAY_BINDING_OES,
@@ -14402,7 +14410,7 @@ class OES_vertex_array_object {
 @anonymous
 class OVR_multiview2 {
   external void framebufferTextureMultiviewOVR(
-      GLenum target, GLenum attachment, WebGLTexture? texture, GLint level, GLint baseViewIndex, GLsizei numViews);
+      GLenum target, GLenum attachment, Texture? texture, GLint level, GLint baseViewIndex, GLsizei numViews);
   external GLenum get FRAMEBUFFER_ATTACHMENT_TEXTURE_BASE_VIEW_INDEX_OVR;
   external GLenum get FRAMEBUFFER_ATTACHMENT_TEXTURE_NUM_VIEWS_OVR;
   external GLenum get FRAMEBUFFER_INCOMPLETE_VIEW_TARGETS_OVR;
@@ -14559,7 +14567,7 @@ external IPannerNode JPannerNode;
 @anonymous
 class ParentNode {
   external num get childElementCount;
-  external HTMLCollection get children;
+  external HtmlCollection get children;
   external Element? get firstElementChild;
   external Element? get lastElementChild;
   external void append([
@@ -14599,7 +14607,7 @@ class ParentNode {
   ]);
   external factory ParentNode({
     num childElementCount,
-    HTMLCollection children,
+    HtmlCollection children,
     Element? firstElementChild,
     Element? lastElementChild,
   });
@@ -14618,7 +14626,7 @@ external IPath2D JPath2D;
 @JS()
 @anonymous
 class PaymentAddress {
-  external ReadonlyArray<String> get addressLine;
+  external List<String> get addressLine;
   external String get city;
   external String get country;
   external String get dependentLocality;
@@ -14630,7 +14638,7 @@ class PaymentAddress {
   external String get sortingCode;
   external dynamic toJSON();
   external factory PaymentAddress({
-    ReadonlyArray<String> addressLine,
+    List<String> addressLine,
     String city,
     String country,
     String dependentLocality,
@@ -14927,7 +14935,7 @@ class PerformanceResourceTiming extends PerformanceEntry {
   external DOMHighResTimeStamp get responseEnd;
   external DOMHighResTimeStamp get responseStart;
   external DOMHighResTimeStamp get secureConnectionStart;
-  external ReadonlyArray<PerformanceServerTiming> get serverTiming;
+  external List<PerformanceServerTiming> get serverTiming;
   external num get transferSize;
   external DOMHighResTimeStamp get workerStart;
   external dynamic toJSON();
@@ -14947,7 +14955,7 @@ class PerformanceResourceTiming extends PerformanceEntry {
     DOMHighResTimeStamp responseEnd,
     DOMHighResTimeStamp responseStart,
     DOMHighResTimeStamp secureConnectionStart,
-    ReadonlyArray<PerformanceServerTiming> serverTiming,
+    List<PerformanceServerTiming> serverTiming,
     num transferSize,
     DOMHighResTimeStamp workerStart,
   });
@@ -15228,11 +15236,11 @@ external IPromiseRejectionEvent JPromiseRejectionEvent;
 @JS()
 @anonymous
 class PublicKeyCredential extends Credential {
-  external ArrayBuffer get rawId;
+  external ByteBuffer get rawId;
   external AuthenticatorResponse get response;
   external AuthenticationExtensionsClientOutputs getClientExtensionResults();
   external factory PublicKeyCredential({
-    ArrayBuffer rawId,
+    ByteBuffer rawId,
     AuthenticatorResponse response,
   });
 }
@@ -15257,7 +15265,7 @@ external IPushManager JPushManager;
 class PushSubscription {
   external String get endpoint;
   external PushSubscriptionOptions get options;
-  external ArrayBuffer? getKey(PushEncryptionKeyName name);
+  external ByteBuffer? getKey(PushEncryptionKeyName name);
   external PushSubscriptionJSON toJSON();
   external Promise<bool> unsubscribe();
   external factory PushSubscription({
@@ -15272,9 +15280,9 @@ external IPushSubscription JPushSubscription;
 @JS()
 @anonymous
 class PushSubscriptionOptions {
-  external ArrayBuffer? get applicationServerKey;
+  external ByteBuffer? get applicationServerKey;
   external factory PushSubscriptionOptions({
-    ArrayBuffer? applicationServerKey,
+    ByteBuffer? applicationServerKey,
   });
 }
 
@@ -15297,10 +15305,10 @@ external IRTCCertificate JRTCCertificate;
 @JS()
 @anonymous
 class RTCDTMFSenderEventMap {
-  external RTCDTMFToneChangeEvent get tonechange;
-  external set tonechange(RTCDTMFToneChangeEvent value);
+  external RtcDtmfToneChangeEvent get tonechange;
+  external set tonechange(RtcDtmfToneChangeEvent value);
   external factory RTCDTMFSenderEventMap({
-    RTCDTMFToneChangeEvent tonechange,
+    RtcDtmfToneChangeEvent tonechange,
   });
 }
 
@@ -15308,15 +15316,15 @@ class RTCDTMFSenderEventMap {
 @anonymous
 class RTCDTMFSender extends EventTarget {
   external bool get canInsertDTMF;
-  external dynamic Function(RTCDTMFToneChangeEvent ev)? get ontonechange;
-  external set ontonechange(dynamic Function(RTCDTMFToneChangeEvent ev)? value);
+  external dynamic Function(RtcDtmfToneChangeEvent ev)? get ontonechange;
+  external set ontonechange(dynamic Function(RtcDtmfToneChangeEvent ev)? value);
   external String get toneBuffer;
   external void insertDTMF(String tones, num duration, num interToneGap);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory RTCDTMFSender({
     bool canInsertDTMF,
-    dynamic Function(RTCDTMFToneChangeEvent ev)? ontonechange,
+    dynamic Function(RtcDtmfToneChangeEvent ev)? ontonechange,
     String toneBuffer,
   });
 }
@@ -15414,9 +15422,9 @@ external IRTCDataChannel JRTCDataChannel;
 @JS()
 @anonymous
 class RTCDataChannelEvent extends Event {
-  external RTCDataChannel get channel;
+  external RtcDataChannel get channel;
   external factory RTCDataChannelEvent({
-    RTCDataChannel channel,
+    RtcDataChannel channel,
   });
 }
 
@@ -15508,8 +15516,8 @@ external IRTCIceTransport JRTCIceTransport;
 class RTCPeerConnectionEventMap {
   external Event get connectionstatechange;
   external set connectionstatechange(Event value);
-  external RTCDataChannelEvent get datachannel;
-  external set datachannel(RTCDataChannelEvent value);
+  external RtcDataChannelEvent get datachannel;
+  external set datachannel(RtcDataChannelEvent value);
   external RTCPeerConnectionIceEvent get icecandidate;
   external set icecandidate(RTCPeerConnectionIceEvent value);
   external Event get iceconnectionstatechange;
@@ -15524,7 +15532,7 @@ class RTCPeerConnectionEventMap {
   external set track(RTCTrackEvent value);
   external factory RTCPeerConnectionEventMap({
     Event connectionstatechange,
-    RTCDataChannelEvent datachannel,
+    RtcDataChannelEvent datachannel,
     RTCPeerConnectionIceEvent icecandidate,
     Event iceconnectionstatechange,
     Event icegatheringstatechange,
@@ -15539,15 +15547,15 @@ class RTCPeerConnectionEventMap {
 class RTCPeerConnection extends EventTarget {
   external bool? get canTrickleIceCandidates;
   external RTCPeerConnectionState get connectionState;
-  external RTCSessionDescription? get currentLocalDescription;
-  external RTCSessionDescription? get currentRemoteDescription;
+  external RtcSessionDescription? get currentLocalDescription;
+  external RtcSessionDescription? get currentRemoteDescription;
   external RTCIceConnectionState get iceConnectionState;
   external RTCIceGatheringState get iceGatheringState;
-  external RTCSessionDescription? get localDescription;
+  external RtcSessionDescription? get localDescription;
   external dynamic Function(Event ev)? get onconnectionstatechange;
   external set onconnectionstatechange(dynamic Function(Event ev)? value);
-  external dynamic Function(RTCDataChannelEvent ev)? get ondatachannel;
-  external set ondatachannel(dynamic Function(RTCDataChannelEvent ev)? value);
+  external dynamic Function(RtcDataChannelEvent ev)? get ondatachannel;
+  external set ondatachannel(dynamic Function(RtcDataChannelEvent ev)? value);
   external dynamic Function(RTCPeerConnectionIceEvent ev)? get onicecandidate;
   external set onicecandidate(dynamic Function(RTCPeerConnectionIceEvent ev)? value);
   external dynamic Function(Event ev)? get oniceconnectionstatechange;
@@ -15560,9 +15568,9 @@ class RTCPeerConnection extends EventTarget {
   external set onsignalingstatechange(dynamic Function(Event ev)? value);
   external dynamic Function(RTCTrackEvent ev)? get ontrack;
   external set ontrack(dynamic Function(RTCTrackEvent ev)? value);
-  external RTCSessionDescription? get pendingLocalDescription;
-  external RTCSessionDescription? get pendingRemoteDescription;
-  external RTCSessionDescription? get remoteDescription;
+  external RtcSessionDescription? get pendingLocalDescription;
+  external RtcSessionDescription? get pendingRemoteDescription;
+  external RtcSessionDescription? get remoteDescription;
   external RTCSignalingState get signalingState;
   external Promise<void> addIceCandidate(RTCIceCandidateInit candidate);
   external RTCRtpSender addTrack(
@@ -15580,12 +15588,12 @@ class RTCPeerConnection extends EventTarget {
   external RTCRtpTransceiver addTransceiver(dynamic trackOrKind, RTCRtpTransceiverInit init);
   external void close();
   external Promise<RTCSessionDescriptionInit> createAnswer(RTCAnswerOptions options);
-  external RTCDataChannel createDataChannel(String label, RTCDataChannelInit dataChannelDict);
+  external RtcDataChannel createDataChannel(String label, RTCDataChannelInit dataChannelDict);
   external Promise<RTCSessionDescriptionInit> createOffer(RTCOfferOptions options);
   external RTCConfiguration getConfiguration();
   external List<RTCRtpReceiver> getReceivers();
   external List<RTCRtpSender> getSenders();
-  external Promise<RTCStatsReport> getStats(MediaStreamTrack? selector);
+  external Promise<RtcStatsReport> getStats(MediaStreamTrack? selector);
   external List<RTCRtpTransceiver> getTransceivers();
   external void removeTrack(RTCRtpSender sender);
   external void restartIce();
@@ -15597,22 +15605,22 @@ class RTCPeerConnection extends EventTarget {
   external factory RTCPeerConnection({
     bool? canTrickleIceCandidates,
     RTCPeerConnectionState connectionState,
-    RTCSessionDescription? currentLocalDescription,
-    RTCSessionDescription? currentRemoteDescription,
+    RtcSessionDescription? currentLocalDescription,
+    RtcSessionDescription? currentRemoteDescription,
     RTCIceConnectionState iceConnectionState,
     RTCIceGatheringState iceGatheringState,
-    RTCSessionDescription? localDescription,
+    RtcSessionDescription? localDescription,
     dynamic Function(Event ev)? onconnectionstatechange,
-    dynamic Function(RTCDataChannelEvent ev)? ondatachannel,
+    dynamic Function(RtcDataChannelEvent ev)? ondatachannel,
     dynamic Function(RTCPeerConnectionIceEvent ev)? onicecandidate,
     dynamic Function(Event ev)? oniceconnectionstatechange,
     dynamic Function(Event ev)? onicegatheringstatechange,
     dynamic Function(Event ev)? onnegotiationneeded,
     dynamic Function(Event ev)? onsignalingstatechange,
     dynamic Function(RTCTrackEvent ev)? ontrack,
-    RTCSessionDescription? pendingLocalDescription,
-    RTCSessionDescription? pendingRemoteDescription,
-    RTCSessionDescription? remoteDescription,
+    RtcSessionDescription? pendingLocalDescription,
+    RtcSessionDescription? pendingRemoteDescription,
+    RtcSessionDescription? remoteDescription,
     RTCSignalingState signalingState,
   });
 }
@@ -15639,9 +15647,9 @@ external IRTCPeerConnectionIceErrorEvent JRTCPeerConnectionIceErrorEvent;
 @JS()
 @anonymous
 class RTCPeerConnectionIceEvent extends Event {
-  external RTCIceCandidate? get candidate;
+  external RtcIceCandidate? get candidate;
   external factory RTCPeerConnectionIceEvent({
-    RTCIceCandidate? candidate,
+    RtcIceCandidate? candidate,
   });
 }
 
@@ -15655,7 +15663,7 @@ class RTCRtpReceiver {
   external RTCDtlsTransport? get transport;
   external List<RTCRtpContributingSource> getContributingSources();
   external RTCRtpReceiveParameters getParameters();
-  external Promise<RTCStatsReport> getStats();
+  external Promise<RtcStatsReport> getStats();
   external List<RTCRtpSynchronizationSource> getSynchronizationSources();
   external factory RTCRtpReceiver({
     MediaStreamTrack track,
@@ -15669,11 +15677,11 @@ external IRTCRtpReceiver JRTCRtpReceiver;
 @JS()
 @anonymous
 class RTCRtpSender {
-  external RTCDTMFSender? get dtmf;
+  external RtcDtmfSender? get dtmf;
   external MediaStreamTrack? get track;
   external RTCDtlsTransport? get transport;
   external RTCRtpSendParameters getParameters();
-  external Promise<RTCStatsReport> getStats();
+  external Promise<RtcStatsReport> getStats();
   external Promise<void> replaceTrack(MediaStreamTrack? withTrack);
   external Promise<void> setParameters(RTCRtpSendParameters parameters);
   external void setStreams([
@@ -15688,7 +15696,7 @@ class RTCRtpSender {
     MediaStream? streams9,
   ]);
   external factory RTCRtpSender({
-    RTCDTMFSender? dtmf,
+    RtcDtmfSender? dtmf,
     MediaStreamTrack? track,
     RTCDtlsTransport? transport,
   });
@@ -15737,7 +15745,7 @@ external IRTCSessionDescription JRTCSessionDescription;
 @JS()
 @anonymous
 class RTCStatsReport {
-  external void forEach(void Function(dynamic value, String key, RTCStatsReport parent) callbackfn, dynamic thisArg);
+  external void forEach(void Function(dynamic value, String key, RtcStatsReport parent) callbackfn, dynamic thisArg);
   external factory RTCStatsReport();
 }
 
@@ -15748,12 +15756,12 @@ external IRTCStatsReport JRTCStatsReport;
 @anonymous
 class RTCTrackEvent extends Event {
   external RTCRtpReceiver get receiver;
-  external ReadonlyArray<MediaStream> get streams;
+  external List<MediaStream> get streams;
   external MediaStreamTrack get track;
   external RTCRtpTransceiver get transceiver;
   external factory RTCTrackEvent({
     RTCRtpReceiver receiver,
-    ReadonlyArray<MediaStream> streams,
+    List<MediaStream> streams,
     MediaStreamTrack track,
     RTCRtpTransceiver transceiver,
   });
@@ -15968,14 +15976,14 @@ external IResizeObserver JResizeObserver;
 @JS()
 @anonymous
 class ResizeObserverEntry {
-  external ReadonlyArray<ResizeObserverSize> get borderBoxSize;
-  external ReadonlyArray<ResizeObserverSize> get contentBoxSize;
-  external DOMRectReadOnly get contentRect;
+  external List<ResizeObserverSize> get borderBoxSize;
+  external List<ResizeObserverSize> get contentBoxSize;
+  external DomRectReadOnly get contentRect;
   external Element get target;
   external factory ResizeObserverEntry({
-    ReadonlyArray<ResizeObserverSize> borderBoxSize,
-    ReadonlyArray<ResizeObserverSize> contentBoxSize,
-    DOMRectReadOnly contentRect,
+    List<ResizeObserverSize> borderBoxSize,
+    List<ResizeObserverSize> contentBoxSize,
+    DomRectReadOnly contentRect,
     Element target,
   });
 }
@@ -16024,17 +16032,17 @@ external IResponse JResponse;
 
 @JS()
 @anonymous
-class SVGAElement extends SVGGraphicsElement {
+class SVGAElement extends GraphicsElement {
   external String get rel;
   external set rel(String value);
-  external DOMTokenList get relList;
-  external SVGAnimatedString get target;
+  external DomTokenList get relList;
+  external AnimatedString get target;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGAElement({
     String rel,
-    DOMTokenList relList,
-    SVGAnimatedString target,
+    DomTokenList relList,
+    AnimatedString target,
   });
 }
 
@@ -16076,7 +16084,7 @@ external ISVGAngle JSVGAngle;
 
 @JS()
 @anonymous
-class SVGAnimateElement extends SVGAnimationElement {
+class SVGAnimateElement extends AnimationElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGAnimateElement();
@@ -16087,7 +16095,7 @@ external ISVGAnimateElement JSVGAnimateElement;
 
 @JS()
 @anonymous
-class SVGAnimateMotionElement extends SVGAnimationElement {
+class SVGAnimateMotionElement extends AnimationElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGAnimateMotionElement();
@@ -16098,7 +16106,7 @@ external ISVGAnimateMotionElement JSVGAnimateMotionElement;
 
 @JS()
 @anonymous
-class SVGAnimateTransformElement extends SVGAnimationElement {
+class SVGAnimateTransformElement extends AnimationElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGAnimateTransformElement();
@@ -16110,11 +16118,11 @@ external ISVGAnimateTransformElement JSVGAnimateTransformElement;
 @JS()
 @anonymous
 class SVGAnimatedAngle {
-  external SVGAngle get animVal;
-  external SVGAngle get baseVal;
+  external Angle get animVal;
+  external Angle get baseVal;
   external factory SVGAnimatedAngle({
-    SVGAngle animVal,
-    SVGAngle baseVal,
+    Angle animVal,
+    Angle baseVal,
   });
 }
 
@@ -16169,11 +16177,11 @@ external ISVGAnimatedInteger JSVGAnimatedInteger;
 @JS()
 @anonymous
 class SVGAnimatedLength {
-  external SVGLength get animVal;
-  external SVGLength get baseVal;
+  external Length get animVal;
+  external Length get baseVal;
   external factory SVGAnimatedLength({
-    SVGLength animVal,
-    SVGLength baseVal,
+    Length animVal,
+    Length baseVal,
   });
 }
 
@@ -16183,11 +16191,11 @@ external ISVGAnimatedLength JSVGAnimatedLength;
 @JS()
 @anonymous
 class SVGAnimatedLengthList {
-  external SVGLengthList get animVal;
-  external SVGLengthList get baseVal;
+  external LengthList get animVal;
+  external LengthList get baseVal;
   external factory SVGAnimatedLengthList({
-    SVGLengthList animVal,
-    SVGLengthList baseVal,
+    LengthList animVal,
+    LengthList baseVal,
   });
 }
 
@@ -16212,11 +16220,11 @@ external ISVGAnimatedNumber JSVGAnimatedNumber;
 @JS()
 @anonymous
 class SVGAnimatedNumberList {
-  external SVGNumberList get animVal;
-  external SVGNumberList get baseVal;
+  external NumberList get animVal;
+  external NumberList get baseVal;
   external factory SVGAnimatedNumberList({
-    SVGNumberList animVal,
-    SVGNumberList baseVal,
+    NumberList animVal,
+    NumberList baseVal,
   });
 }
 
@@ -16226,22 +16234,22 @@ external ISVGAnimatedNumberList JSVGAnimatedNumberList;
 @JS()
 @anonymous
 class SVGAnimatedPoints {
-  external SVGPointList get animatedPoints;
-  external SVGPointList get points;
+  external PointList get animatedPoints;
+  external PointList get points;
   external factory SVGAnimatedPoints({
-    SVGPointList animatedPoints,
-    SVGPointList points,
+    PointList animatedPoints,
+    PointList points,
   });
 }
 
 @JS()
 @anonymous
 class SVGAnimatedPreserveAspectRatio {
-  external SVGPreserveAspectRatio get animVal;
-  external SVGPreserveAspectRatio get baseVal;
+  external PreserveAspectRatio get animVal;
+  external PreserveAspectRatio get baseVal;
   external factory SVGAnimatedPreserveAspectRatio({
-    SVGPreserveAspectRatio animVal,
-    SVGPreserveAspectRatio baseVal,
+    PreserveAspectRatio animVal,
+    PreserveAspectRatio baseVal,
   });
 }
 
@@ -16251,10 +16259,10 @@ external ISVGAnimatedPreserveAspectRatio JSVGAnimatedPreserveAspectRatio;
 @JS()
 @anonymous
 class SVGAnimatedRect {
-  external DOMRectReadOnly get animVal;
+  external DomRectReadOnly get animVal;
   external DOMRect get baseVal;
   external factory SVGAnimatedRect({
-    DOMRectReadOnly animVal,
+    DomRectReadOnly animVal,
     DOMRect baseVal,
   });
 }
@@ -16280,11 +16288,11 @@ external ISVGAnimatedString JSVGAnimatedString;
 @JS()
 @anonymous
 class SVGAnimatedTransformList {
-  external SVGTransformList get animVal;
-  external SVGTransformList get baseVal;
+  external TransformList get animVal;
+  external TransformList get baseVal;
   external factory SVGAnimatedTransformList({
-    SVGTransformList animVal,
-    SVGTransformList baseVal,
+    TransformList animVal,
+    TransformList baseVal,
   });
 }
 
@@ -16293,8 +16301,8 @@ external ISVGAnimatedTransformList JSVGAnimatedTransformList;
 
 @JS()
 @anonymous
-class SVGAnimationElement extends SVGElement {
-  external SVGElement? get targetElement;
+class SVGAnimationElement extends SvgElement {
+  external SvgElement? get targetElement;
   external void beginElement();
   external void beginElementAt(num offset);
   external void endElement();
@@ -16305,7 +16313,7 @@ class SVGAnimationElement extends SVGElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGAnimationElement({
-    SVGElement? targetElement,
+    SvgElement? targetElement,
   });
 }
 
@@ -16314,16 +16322,16 @@ external ISVGAnimationElement JSVGAnimationElement;
 
 @JS()
 @anonymous
-class SVGCircleElement extends SVGGeometryElement {
-  external SVGAnimatedLength get cx;
-  external SVGAnimatedLength get cy;
-  external SVGAnimatedLength get r;
+class SVGCircleElement extends GeometryElement {
+  external AnimatedLength get cx;
+  external AnimatedLength get cy;
+  external AnimatedLength get r;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGCircleElement({
-    SVGAnimatedLength cx,
-    SVGAnimatedLength cy,
-    SVGAnimatedLength r,
+    AnimatedLength cx,
+    AnimatedLength cy,
+    AnimatedLength r,
   });
 }
 
@@ -16332,14 +16340,14 @@ external ISVGCircleElement JSVGCircleElement;
 
 @JS()
 @anonymous
-class SVGClipPathElement extends SVGElement {
-  external SVGAnimatedEnumeration get clipPathUnits;
-  external SVGAnimatedTransformList get transform;
+class SVGClipPathElement extends SvgElement {
+  external AnimatedEnumeration get clipPathUnits;
+  external AnimatedTransformList get transform;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGClipPathElement({
-    SVGAnimatedEnumeration clipPathUnits,
-    SVGAnimatedTransformList transform,
+    AnimatedEnumeration clipPathUnits,
+    AnimatedTransformList transform,
   });
 }
 
@@ -16348,14 +16356,14 @@ external ISVGClipPathElement JSVGClipPathElement;
 
 @JS()
 @anonymous
-class SVGComponentTransferFunctionElement extends SVGElement {
-  external SVGAnimatedNumber get amplitude;
-  external SVGAnimatedNumber get exponent;
-  external SVGAnimatedNumber get intercept;
-  external SVGAnimatedNumber get offset;
-  external SVGAnimatedNumber get slope;
-  external SVGAnimatedNumberList get tableValues;
-  external SVGAnimatedEnumeration get type;
+class SVGComponentTransferFunctionElement extends SvgElement {
+  external AnimatedNumber get amplitude;
+  external AnimatedNumber get exponent;
+  external AnimatedNumber get intercept;
+  external AnimatedNumber get offset;
+  external AnimatedNumber get slope;
+  external AnimatedNumberList get tableValues;
+  external AnimatedEnumeration get type;
   external num get SVG_FECOMPONENTTRANSFER_TYPE_DISCRETE;
   external num get SVG_FECOMPONENTTRANSFER_TYPE_GAMMA;
   external num get SVG_FECOMPONENTTRANSFER_TYPE_IDENTITY;
@@ -16365,13 +16373,13 @@ class SVGComponentTransferFunctionElement extends SVGElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGComponentTransferFunctionElement({
-    SVGAnimatedNumber amplitude,
-    SVGAnimatedNumber exponent,
-    SVGAnimatedNumber intercept,
-    SVGAnimatedNumber offset,
-    SVGAnimatedNumber slope,
-    SVGAnimatedNumberList tableValues,
-    SVGAnimatedEnumeration type,
+    AnimatedNumber amplitude,
+    AnimatedNumber exponent,
+    AnimatedNumber intercept,
+    AnimatedNumber offset,
+    AnimatedNumber slope,
+    AnimatedNumberList tableValues,
+    AnimatedEnumeration type,
     num SVG_FECOMPONENTTRANSFER_TYPE_DISCRETE,
     num SVG_FECOMPONENTTRANSFER_TYPE_GAMMA,
     num SVG_FECOMPONENTTRANSFER_TYPE_IDENTITY,
@@ -16386,14 +16394,14 @@ external ISVGComponentTransferFunctionElement JSVGComponentTransferFunctionEleme
 
 @JS()
 @anonymous
-class SVGCursorElement extends SVGElement {
-  external SVGAnimatedLength get x;
-  external SVGAnimatedLength get y;
+class SVGCursorElement extends SvgElement {
+  external AnimatedLength get x;
+  external AnimatedLength get y;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGCursorElement({
-    SVGAnimatedLength x,
-    SVGAnimatedLength y,
+    AnimatedLength x,
+    AnimatedLength y,
   });
 }
 
@@ -16402,7 +16410,7 @@ external ISVGCursorElement JSVGCursorElement;
 
 @JS()
 @anonymous
-class SVGDefsElement extends SVGGraphicsElement {
+class SVGDefsElement extends GraphicsElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGDefsElement();
@@ -16413,7 +16421,7 @@ external ISVGDefsElement JSVGDefsElement;
 
 @JS()
 @anonymous
-class SVGDescElement extends SVGElement {
+class SVGDescElement extends SvgElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGDescElement();
@@ -16432,14 +16440,14 @@ class SVGElementEventMap extends ElementEventMap {
 @anonymous
 class SVGElement extends Element {
   external dynamic get className;
-  external SVGSVGElement? get ownerSVGElement;
-  external SVGElement? get viewportElement;
+  external SvgSvgElement? get ownerSVGElement;
+  external SvgElement? get viewportElement;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGElement({
     dynamic className,
-    SVGSVGElement? ownerSVGElement,
-    SVGElement? viewportElement,
+    SvgSvgElement? ownerSVGElement,
+    SvgElement? viewportElement,
   });
 }
 
@@ -16448,18 +16456,18 @@ external ISVGElement JSVGElement;
 
 @JS()
 @anonymous
-class SVGEllipseElement extends SVGGeometryElement {
-  external SVGAnimatedLength get cx;
-  external SVGAnimatedLength get cy;
-  external SVGAnimatedLength get rx;
-  external SVGAnimatedLength get ry;
+class SVGEllipseElement extends GeometryElement {
+  external AnimatedLength get cx;
+  external AnimatedLength get cy;
+  external AnimatedLength get rx;
+  external AnimatedLength get ry;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGEllipseElement({
-    SVGAnimatedLength cx,
-    SVGAnimatedLength cy,
-    SVGAnimatedLength rx,
-    SVGAnimatedLength ry,
+    AnimatedLength cx,
+    AnimatedLength cy,
+    AnimatedLength rx,
+    AnimatedLength ry,
   });
 }
 
@@ -16468,10 +16476,10 @@ external ISVGEllipseElement JSVGEllipseElement;
 
 @JS()
 @anonymous
-class SVGFEBlendElement extends SVGElement {
-  external SVGAnimatedString get in1;
-  external SVGAnimatedString get in2;
-  external SVGAnimatedEnumeration get mode;
+class SVGFEBlendElement extends SvgElement {
+  external AnimatedString get in1;
+  external AnimatedString get in2;
+  external AnimatedEnumeration get mode;
   external num get SVG_FEBLEND_MODE_COLOR;
   external num get SVG_FEBLEND_MODE_COLOR_BURN;
   external num get SVG_FEBLEND_MODE_COLOR_DODGE;
@@ -16492,9 +16500,9 @@ class SVGFEBlendElement extends SVGElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGFEBlendElement({
-    SVGAnimatedString in1,
-    SVGAnimatedString in2,
-    SVGAnimatedEnumeration mode,
+    AnimatedString in1,
+    AnimatedString in2,
+    AnimatedEnumeration mode,
     num SVG_FEBLEND_MODE_COLOR,
     num SVG_FEBLEND_MODE_COLOR_BURN,
     num SVG_FEBLEND_MODE_COLOR_DODGE,
@@ -16520,10 +16528,10 @@ external ISVGFEBlendElement JSVGFEBlendElement;
 
 @JS()
 @anonymous
-class SVGFEColorMatrixElement extends SVGElement {
-  external SVGAnimatedString get in1;
-  external SVGAnimatedEnumeration get type;
-  external SVGAnimatedNumberList get values;
+class SVGFEColorMatrixElement extends SvgElement {
+  external AnimatedString get in1;
+  external AnimatedEnumeration get type;
+  external AnimatedNumberList get values;
   external num get SVG_FECOLORMATRIX_TYPE_HUEROTATE;
   external num get SVG_FECOLORMATRIX_TYPE_LUMINANCETOALPHA;
   external num get SVG_FECOLORMATRIX_TYPE_MATRIX;
@@ -16532,9 +16540,9 @@ class SVGFEColorMatrixElement extends SVGElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGFEColorMatrixElement({
-    SVGAnimatedString in1,
-    SVGAnimatedEnumeration type,
-    SVGAnimatedNumberList values,
+    AnimatedString in1,
+    AnimatedEnumeration type,
+    AnimatedNumberList values,
     num SVG_FECOLORMATRIX_TYPE_HUEROTATE,
     num SVG_FECOLORMATRIX_TYPE_LUMINANCETOALPHA,
     num SVG_FECOLORMATRIX_TYPE_MATRIX,
@@ -16548,12 +16556,12 @@ external ISVGFEColorMatrixElement JSVGFEColorMatrixElement;
 
 @JS()
 @anonymous
-class SVGFEComponentTransferElement extends SVGElement {
-  external SVGAnimatedString get in1;
+class SVGFEComponentTransferElement extends SvgElement {
+  external AnimatedString get in1;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGFEComponentTransferElement({
-    SVGAnimatedString in1,
+    AnimatedString in1,
   });
 }
 
@@ -16562,14 +16570,14 @@ external ISVGFEComponentTransferElement JSVGFEComponentTransferElement;
 
 @JS()
 @anonymous
-class SVGFECompositeElement extends SVGElement {
-  external SVGAnimatedString get in1;
-  external SVGAnimatedString get in2;
-  external SVGAnimatedNumber get k1;
-  external SVGAnimatedNumber get k2;
-  external SVGAnimatedNumber get k3;
-  external SVGAnimatedNumber get k4;
-  external SVGAnimatedEnumeration get operator;
+class SVGFECompositeElement extends SvgElement {
+  external AnimatedString get in1;
+  external AnimatedString get in2;
+  external AnimatedNumber get k1;
+  external AnimatedNumber get k2;
+  external AnimatedNumber get k3;
+  external AnimatedNumber get k4;
+  external AnimatedEnumeration get operator;
   external num get SVG_FECOMPOSITE_OPERATOR_ARITHMETIC;
   external num get SVG_FECOMPOSITE_OPERATOR_ATOP;
   external num get SVG_FECOMPOSITE_OPERATOR_IN;
@@ -16580,13 +16588,13 @@ class SVGFECompositeElement extends SVGElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGFECompositeElement({
-    SVGAnimatedString in1,
-    SVGAnimatedString in2,
-    SVGAnimatedNumber k1,
-    SVGAnimatedNumber k2,
-    SVGAnimatedNumber k3,
-    SVGAnimatedNumber k4,
-    SVGAnimatedEnumeration operator,
+    AnimatedString in1,
+    AnimatedString in2,
+    AnimatedNumber k1,
+    AnimatedNumber k2,
+    AnimatedNumber k3,
+    AnimatedNumber k4,
+    AnimatedEnumeration operator,
     num SVG_FECOMPOSITE_OPERATOR_ARITHMETIC,
     num SVG_FECOMPOSITE_OPERATOR_ATOP,
     num SVG_FECOMPOSITE_OPERATOR_IN,
@@ -16602,19 +16610,19 @@ external ISVGFECompositeElement JSVGFECompositeElement;
 
 @JS()
 @anonymous
-class SVGFEConvolveMatrixElement extends SVGElement {
-  external SVGAnimatedNumber get bias;
-  external SVGAnimatedNumber get divisor;
-  external SVGAnimatedEnumeration get edgeMode;
-  external SVGAnimatedString get in1;
-  external SVGAnimatedNumberList get kernelMatrix;
-  external SVGAnimatedNumber get kernelUnitLengthX;
-  external SVGAnimatedNumber get kernelUnitLengthY;
-  external SVGAnimatedInteger get orderX;
-  external SVGAnimatedInteger get orderY;
-  external SVGAnimatedBoolean get preserveAlpha;
-  external SVGAnimatedInteger get targetX;
-  external SVGAnimatedInteger get targetY;
+class SVGFEConvolveMatrixElement extends SvgElement {
+  external AnimatedNumber get bias;
+  external AnimatedNumber get divisor;
+  external AnimatedEnumeration get edgeMode;
+  external AnimatedString get in1;
+  external AnimatedNumberList get kernelMatrix;
+  external AnimatedNumber get kernelUnitLengthX;
+  external AnimatedNumber get kernelUnitLengthY;
+  external AnimatedInteger get orderX;
+  external AnimatedInteger get orderY;
+  external AnimatedBoolean get preserveAlpha;
+  external AnimatedInteger get targetX;
+  external AnimatedInteger get targetY;
   external num get SVG_EDGEMODE_DUPLICATE;
   external num get SVG_EDGEMODE_NONE;
   external num get SVG_EDGEMODE_UNKNOWN;
@@ -16622,18 +16630,18 @@ class SVGFEConvolveMatrixElement extends SVGElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGFEConvolveMatrixElement({
-    SVGAnimatedNumber bias,
-    SVGAnimatedNumber divisor,
-    SVGAnimatedEnumeration edgeMode,
-    SVGAnimatedString in1,
-    SVGAnimatedNumberList kernelMatrix,
-    SVGAnimatedNumber kernelUnitLengthX,
-    SVGAnimatedNumber kernelUnitLengthY,
-    SVGAnimatedInteger orderX,
-    SVGAnimatedInteger orderY,
-    SVGAnimatedBoolean preserveAlpha,
-    SVGAnimatedInteger targetX,
-    SVGAnimatedInteger targetY,
+    AnimatedNumber bias,
+    AnimatedNumber divisor,
+    AnimatedEnumeration edgeMode,
+    AnimatedString in1,
+    AnimatedNumberList kernelMatrix,
+    AnimatedNumber kernelUnitLengthX,
+    AnimatedNumber kernelUnitLengthY,
+    AnimatedInteger orderX,
+    AnimatedInteger orderY,
+    AnimatedBoolean preserveAlpha,
+    AnimatedInteger targetX,
+    AnimatedInteger targetY,
     num SVG_EDGEMODE_DUPLICATE,
     num SVG_EDGEMODE_NONE,
     num SVG_EDGEMODE_UNKNOWN,
@@ -16646,20 +16654,20 @@ external ISVGFEConvolveMatrixElement JSVGFEConvolveMatrixElement;
 
 @JS()
 @anonymous
-class SVGFEDiffuseLightingElement extends SVGElement {
-  external SVGAnimatedNumber get diffuseConstant;
-  external SVGAnimatedString get in1;
-  external SVGAnimatedNumber get kernelUnitLengthX;
-  external SVGAnimatedNumber get kernelUnitLengthY;
-  external SVGAnimatedNumber get surfaceScale;
+class SVGFEDiffuseLightingElement extends SvgElement {
+  external AnimatedNumber get diffuseConstant;
+  external AnimatedString get in1;
+  external AnimatedNumber get kernelUnitLengthX;
+  external AnimatedNumber get kernelUnitLengthY;
+  external AnimatedNumber get surfaceScale;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGFEDiffuseLightingElement({
-    SVGAnimatedNumber diffuseConstant,
-    SVGAnimatedString in1,
-    SVGAnimatedNumber kernelUnitLengthX,
-    SVGAnimatedNumber kernelUnitLengthY,
-    SVGAnimatedNumber surfaceScale,
+    AnimatedNumber diffuseConstant,
+    AnimatedString in1,
+    AnimatedNumber kernelUnitLengthX,
+    AnimatedNumber kernelUnitLengthY,
+    AnimatedNumber surfaceScale,
   });
 }
 
@@ -16668,12 +16676,12 @@ external ISVGFEDiffuseLightingElement JSVGFEDiffuseLightingElement;
 
 @JS()
 @anonymous
-class SVGFEDisplacementMapElement extends SVGElement {
-  external SVGAnimatedString get in1;
-  external SVGAnimatedString get in2;
-  external SVGAnimatedNumber get scale;
-  external SVGAnimatedEnumeration get xChannelSelector;
-  external SVGAnimatedEnumeration get yChannelSelector;
+class SVGFEDisplacementMapElement extends SvgElement {
+  external AnimatedString get in1;
+  external AnimatedString get in2;
+  external AnimatedNumber get scale;
+  external AnimatedEnumeration get xChannelSelector;
+  external AnimatedEnumeration get yChannelSelector;
   external num get SVG_CHANNEL_A;
   external num get SVG_CHANNEL_B;
   external num get SVG_CHANNEL_G;
@@ -16682,11 +16690,11 @@ class SVGFEDisplacementMapElement extends SVGElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGFEDisplacementMapElement({
-    SVGAnimatedString in1,
-    SVGAnimatedString in2,
-    SVGAnimatedNumber scale,
-    SVGAnimatedEnumeration xChannelSelector,
-    SVGAnimatedEnumeration yChannelSelector,
+    AnimatedString in1,
+    AnimatedString in2,
+    AnimatedNumber scale,
+    AnimatedEnumeration xChannelSelector,
+    AnimatedEnumeration yChannelSelector,
     num SVG_CHANNEL_A,
     num SVG_CHANNEL_B,
     num SVG_CHANNEL_G,
@@ -16700,14 +16708,14 @@ external ISVGFEDisplacementMapElement JSVGFEDisplacementMapElement;
 
 @JS()
 @anonymous
-class SVGFEDistantLightElement extends SVGElement {
-  external SVGAnimatedNumber get azimuth;
-  external SVGAnimatedNumber get elevation;
+class SVGFEDistantLightElement extends SvgElement {
+  external AnimatedNumber get azimuth;
+  external AnimatedNumber get elevation;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGFEDistantLightElement({
-    SVGAnimatedNumber azimuth,
-    SVGAnimatedNumber elevation,
+    AnimatedNumber azimuth,
+    AnimatedNumber elevation,
   });
 }
 
@@ -16716,21 +16724,21 @@ external ISVGFEDistantLightElement JSVGFEDistantLightElement;
 
 @JS()
 @anonymous
-class SVGFEDropShadowElement extends SVGElement {
-  external SVGAnimatedNumber get dx;
-  external SVGAnimatedNumber get dy;
-  external SVGAnimatedString get in1;
-  external SVGAnimatedNumber get stdDeviationX;
-  external SVGAnimatedNumber get stdDeviationY;
+class SVGFEDropShadowElement extends SvgElement {
+  external AnimatedNumber get dx;
+  external AnimatedNumber get dy;
+  external AnimatedString get in1;
+  external AnimatedNumber get stdDeviationX;
+  external AnimatedNumber get stdDeviationY;
   external void setStdDeviation(num stdDeviationX, num stdDeviationY);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGFEDropShadowElement({
-    SVGAnimatedNumber dx,
-    SVGAnimatedNumber dy,
-    SVGAnimatedString in1,
-    SVGAnimatedNumber stdDeviationX,
-    SVGAnimatedNumber stdDeviationY,
+    AnimatedNumber dx,
+    AnimatedNumber dy,
+    AnimatedString in1,
+    AnimatedNumber stdDeviationX,
+    AnimatedNumber stdDeviationY,
   });
 }
 
@@ -16739,7 +16747,7 @@ external ISVGFEDropShadowElement JSVGFEDropShadowElement;
 
 @JS()
 @anonymous
-class SVGFEFloodElement extends SVGElement {
+class SVGFEFloodElement extends SvgElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGFEFloodElement();
@@ -16794,17 +16802,17 @@ external ISVGFEFuncRElement JSVGFEFuncRElement;
 
 @JS()
 @anonymous
-class SVGFEGaussianBlurElement extends SVGElement {
-  external SVGAnimatedString get in1;
-  external SVGAnimatedNumber get stdDeviationX;
-  external SVGAnimatedNumber get stdDeviationY;
+class SVGFEGaussianBlurElement extends SvgElement {
+  external AnimatedString get in1;
+  external AnimatedNumber get stdDeviationX;
+  external AnimatedNumber get stdDeviationY;
   external void setStdDeviation(num stdDeviationX, num stdDeviationY);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGFEGaussianBlurElement({
-    SVGAnimatedString in1,
-    SVGAnimatedNumber stdDeviationX,
-    SVGAnimatedNumber stdDeviationY,
+    AnimatedString in1,
+    AnimatedNumber stdDeviationX,
+    AnimatedNumber stdDeviationY,
   });
 }
 
@@ -16813,12 +16821,12 @@ external ISVGFEGaussianBlurElement JSVGFEGaussianBlurElement;
 
 @JS()
 @anonymous
-class SVGFEImageElement extends SVGElement {
-  external SVGAnimatedPreserveAspectRatio get preserveAspectRatio;
+class SVGFEImageElement extends SvgElement {
+  external AnimatedPreserveAspectRatio get preserveAspectRatio;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGFEImageElement({
-    SVGAnimatedPreserveAspectRatio preserveAspectRatio,
+    AnimatedPreserveAspectRatio preserveAspectRatio,
   });
 }
 
@@ -16827,7 +16835,7 @@ external ISVGFEImageElement JSVGFEImageElement;
 
 @JS()
 @anonymous
-class SVGFEMergeElement extends SVGElement {
+class SVGFEMergeElement extends SvgElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGFEMergeElement();
@@ -16838,12 +16846,12 @@ external ISVGFEMergeElement JSVGFEMergeElement;
 
 @JS()
 @anonymous
-class SVGFEMergeNodeElement extends SVGElement {
-  external SVGAnimatedString get in1;
+class SVGFEMergeNodeElement extends SvgElement {
+  external AnimatedString get in1;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGFEMergeNodeElement({
-    SVGAnimatedString in1,
+    AnimatedString in1,
   });
 }
 
@@ -16852,21 +16860,21 @@ external ISVGFEMergeNodeElement JSVGFEMergeNodeElement;
 
 @JS()
 @anonymous
-class SVGFEMorphologyElement extends SVGElement {
-  external SVGAnimatedString get in1;
-  external SVGAnimatedEnumeration get operator;
-  external SVGAnimatedNumber get radiusX;
-  external SVGAnimatedNumber get radiusY;
+class SVGFEMorphologyElement extends SvgElement {
+  external AnimatedString get in1;
+  external AnimatedEnumeration get operator;
+  external AnimatedNumber get radiusX;
+  external AnimatedNumber get radiusY;
   external num get SVG_MORPHOLOGY_OPERATOR_DILATE;
   external num get SVG_MORPHOLOGY_OPERATOR_ERODE;
   external num get SVG_MORPHOLOGY_OPERATOR_UNKNOWN;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGFEMorphologyElement({
-    SVGAnimatedString in1,
-    SVGAnimatedEnumeration operator,
-    SVGAnimatedNumber radiusX,
-    SVGAnimatedNumber radiusY,
+    AnimatedString in1,
+    AnimatedEnumeration operator,
+    AnimatedNumber radiusX,
+    AnimatedNumber radiusY,
     num SVG_MORPHOLOGY_OPERATOR_DILATE,
     num SVG_MORPHOLOGY_OPERATOR_ERODE,
     num SVG_MORPHOLOGY_OPERATOR_UNKNOWN,
@@ -16878,16 +16886,16 @@ external ISVGFEMorphologyElement JSVGFEMorphologyElement;
 
 @JS()
 @anonymous
-class SVGFEOffsetElement extends SVGElement {
-  external SVGAnimatedNumber get dx;
-  external SVGAnimatedNumber get dy;
-  external SVGAnimatedString get in1;
+class SVGFEOffsetElement extends SvgElement {
+  external AnimatedNumber get dx;
+  external AnimatedNumber get dy;
+  external AnimatedString get in1;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGFEOffsetElement({
-    SVGAnimatedNumber dx,
-    SVGAnimatedNumber dy,
-    SVGAnimatedString in1,
+    AnimatedNumber dx,
+    AnimatedNumber dy,
+    AnimatedString in1,
   });
 }
 
@@ -16896,16 +16904,16 @@ external ISVGFEOffsetElement JSVGFEOffsetElement;
 
 @JS()
 @anonymous
-class SVGFEPointLightElement extends SVGElement {
-  external SVGAnimatedNumber get x;
-  external SVGAnimatedNumber get y;
-  external SVGAnimatedNumber get z;
+class SVGFEPointLightElement extends SvgElement {
+  external AnimatedNumber get x;
+  external AnimatedNumber get y;
+  external AnimatedNumber get z;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGFEPointLightElement({
-    SVGAnimatedNumber x,
-    SVGAnimatedNumber y,
-    SVGAnimatedNumber z,
+    AnimatedNumber x,
+    AnimatedNumber y,
+    AnimatedNumber z,
   });
 }
 
@@ -16914,22 +16922,22 @@ external ISVGFEPointLightElement JSVGFEPointLightElement;
 
 @JS()
 @anonymous
-class SVGFESpecularLightingElement extends SVGElement {
-  external SVGAnimatedString get in1;
-  external SVGAnimatedNumber get kernelUnitLengthX;
-  external SVGAnimatedNumber get kernelUnitLengthY;
-  external SVGAnimatedNumber get specularConstant;
-  external SVGAnimatedNumber get specularExponent;
-  external SVGAnimatedNumber get surfaceScale;
+class SVGFESpecularLightingElement extends SvgElement {
+  external AnimatedString get in1;
+  external AnimatedNumber get kernelUnitLengthX;
+  external AnimatedNumber get kernelUnitLengthY;
+  external AnimatedNumber get specularConstant;
+  external AnimatedNumber get specularExponent;
+  external AnimatedNumber get surfaceScale;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGFESpecularLightingElement({
-    SVGAnimatedString in1,
-    SVGAnimatedNumber kernelUnitLengthX,
-    SVGAnimatedNumber kernelUnitLengthY,
-    SVGAnimatedNumber specularConstant,
-    SVGAnimatedNumber specularExponent,
-    SVGAnimatedNumber surfaceScale,
+    AnimatedString in1,
+    AnimatedNumber kernelUnitLengthX,
+    AnimatedNumber kernelUnitLengthY,
+    AnimatedNumber specularConstant,
+    AnimatedNumber specularExponent,
+    AnimatedNumber surfaceScale,
   });
 }
 
@@ -16938,26 +16946,26 @@ external ISVGFESpecularLightingElement JSVGFESpecularLightingElement;
 
 @JS()
 @anonymous
-class SVGFESpotLightElement extends SVGElement {
-  external SVGAnimatedNumber get limitingConeAngle;
-  external SVGAnimatedNumber get pointsAtX;
-  external SVGAnimatedNumber get pointsAtY;
-  external SVGAnimatedNumber get pointsAtZ;
-  external SVGAnimatedNumber get specularExponent;
-  external SVGAnimatedNumber get x;
-  external SVGAnimatedNumber get y;
-  external SVGAnimatedNumber get z;
+class SVGFESpotLightElement extends SvgElement {
+  external AnimatedNumber get limitingConeAngle;
+  external AnimatedNumber get pointsAtX;
+  external AnimatedNumber get pointsAtY;
+  external AnimatedNumber get pointsAtZ;
+  external AnimatedNumber get specularExponent;
+  external AnimatedNumber get x;
+  external AnimatedNumber get y;
+  external AnimatedNumber get z;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGFESpotLightElement({
-    SVGAnimatedNumber limitingConeAngle,
-    SVGAnimatedNumber pointsAtX,
-    SVGAnimatedNumber pointsAtY,
-    SVGAnimatedNumber pointsAtZ,
-    SVGAnimatedNumber specularExponent,
-    SVGAnimatedNumber x,
-    SVGAnimatedNumber y,
-    SVGAnimatedNumber z,
+    AnimatedNumber limitingConeAngle,
+    AnimatedNumber pointsAtX,
+    AnimatedNumber pointsAtY,
+    AnimatedNumber pointsAtZ,
+    AnimatedNumber specularExponent,
+    AnimatedNumber x,
+    AnimatedNumber y,
+    AnimatedNumber z,
   });
 }
 
@@ -16966,12 +16974,12 @@ external ISVGFESpotLightElement JSVGFESpotLightElement;
 
 @JS()
 @anonymous
-class SVGFETileElement extends SVGElement {
-  external SVGAnimatedString get in1;
+class SVGFETileElement extends SvgElement {
+  external AnimatedString get in1;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGFETileElement({
-    SVGAnimatedString in1,
+    AnimatedString in1,
   });
 }
 
@@ -16980,13 +16988,13 @@ external ISVGFETileElement JSVGFETileElement;
 
 @JS()
 @anonymous
-class SVGFETurbulenceElement extends SVGElement {
-  external SVGAnimatedNumber get baseFrequencyX;
-  external SVGAnimatedNumber get baseFrequencyY;
-  external SVGAnimatedInteger get numOctaves;
-  external SVGAnimatedNumber get seed;
-  external SVGAnimatedEnumeration get stitchTiles;
-  external SVGAnimatedEnumeration get type;
+class SVGFETurbulenceElement extends SvgElement {
+  external AnimatedNumber get baseFrequencyX;
+  external AnimatedNumber get baseFrequencyY;
+  external AnimatedInteger get numOctaves;
+  external AnimatedNumber get seed;
+  external AnimatedEnumeration get stitchTiles;
+  external AnimatedEnumeration get type;
   external num get SVG_STITCHTYPE_NOSTITCH;
   external num get SVG_STITCHTYPE_STITCH;
   external num get SVG_STITCHTYPE_UNKNOWN;
@@ -16996,12 +17004,12 @@ class SVGFETurbulenceElement extends SVGElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGFETurbulenceElement({
-    SVGAnimatedNumber baseFrequencyX,
-    SVGAnimatedNumber baseFrequencyY,
-    SVGAnimatedInteger numOctaves,
-    SVGAnimatedNumber seed,
-    SVGAnimatedEnumeration stitchTiles,
-    SVGAnimatedEnumeration type,
+    AnimatedNumber baseFrequencyX,
+    AnimatedNumber baseFrequencyY,
+    AnimatedInteger numOctaves,
+    AnimatedNumber seed,
+    AnimatedEnumeration stitchTiles,
+    AnimatedEnumeration type,
     num SVG_STITCHTYPE_NOSTITCH,
     num SVG_STITCHTYPE_STITCH,
     num SVG_STITCHTYPE_UNKNOWN,
@@ -17016,22 +17024,22 @@ external ISVGFETurbulenceElement JSVGFETurbulenceElement;
 
 @JS()
 @anonymous
-class SVGFilterElement extends SVGElement {
-  external SVGAnimatedEnumeration get filterUnits;
-  external SVGAnimatedLength get height;
-  external SVGAnimatedEnumeration get primitiveUnits;
-  external SVGAnimatedLength get width;
-  external SVGAnimatedLength get x;
-  external SVGAnimatedLength get y;
+class SVGFilterElement extends SvgElement {
+  external AnimatedEnumeration get filterUnits;
+  external AnimatedLength get height;
+  external AnimatedEnumeration get primitiveUnits;
+  external AnimatedLength get width;
+  external AnimatedLength get x;
+  external AnimatedLength get y;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGFilterElement({
-    SVGAnimatedEnumeration filterUnits,
-    SVGAnimatedLength height,
-    SVGAnimatedEnumeration primitiveUnits,
-    SVGAnimatedLength width,
-    SVGAnimatedLength x,
-    SVGAnimatedLength y,
+    AnimatedEnumeration filterUnits,
+    AnimatedLength height,
+    AnimatedEnumeration primitiveUnits,
+    AnimatedLength width,
+    AnimatedLength x,
+    AnimatedLength y,
   });
 }
 
@@ -17041,45 +17049,45 @@ external ISVGFilterElement JSVGFilterElement;
 @JS()
 @anonymous
 class SVGFilterPrimitiveStandardAttributes {
-  external SVGAnimatedLength get height;
-  external SVGAnimatedString get result;
-  external SVGAnimatedLength get width;
-  external SVGAnimatedLength get x;
-  external SVGAnimatedLength get y;
+  external AnimatedLength get height;
+  external AnimatedString get result;
+  external AnimatedLength get width;
+  external AnimatedLength get x;
+  external AnimatedLength get y;
   external factory SVGFilterPrimitiveStandardAttributes({
-    SVGAnimatedLength height,
-    SVGAnimatedString result,
-    SVGAnimatedLength width,
-    SVGAnimatedLength x,
-    SVGAnimatedLength y,
+    AnimatedLength height,
+    AnimatedString result,
+    AnimatedLength width,
+    AnimatedLength x,
+    AnimatedLength y,
   });
 }
 
 @JS()
 @anonymous
 class SVGFitToViewBox {
-  external SVGAnimatedPreserveAspectRatio get preserveAspectRatio;
-  external SVGAnimatedRect get viewBox;
+  external AnimatedPreserveAspectRatio get preserveAspectRatio;
+  external AnimatedRect get viewBox;
   external factory SVGFitToViewBox({
-    SVGAnimatedPreserveAspectRatio preserveAspectRatio,
-    SVGAnimatedRect viewBox,
+    AnimatedPreserveAspectRatio preserveAspectRatio,
+    AnimatedRect viewBox,
   });
 }
 
 @JS()
 @anonymous
-class SVGForeignObjectElement extends SVGGraphicsElement {
-  external SVGAnimatedLength get height;
-  external SVGAnimatedLength get width;
-  external SVGAnimatedLength get x;
-  external SVGAnimatedLength get y;
+class SVGForeignObjectElement extends GraphicsElement {
+  external AnimatedLength get height;
+  external AnimatedLength get width;
+  external AnimatedLength get x;
+  external AnimatedLength get y;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGForeignObjectElement({
-    SVGAnimatedLength height,
-    SVGAnimatedLength width,
-    SVGAnimatedLength x,
-    SVGAnimatedLength y,
+    AnimatedLength height,
+    AnimatedLength width,
+    AnimatedLength x,
+    AnimatedLength y,
   });
 }
 
@@ -17088,7 +17096,7 @@ external ISVGForeignObjectElement JSVGForeignObjectElement;
 
 @JS()
 @anonymous
-class SVGGElement extends SVGGraphicsElement {
+class SVGGElement extends GraphicsElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGGElement();
@@ -17099,16 +17107,16 @@ external ISVGGElement JSVGGElement;
 
 @JS()
 @anonymous
-class SVGGeometryElement extends SVGGraphicsElement {
-  external SVGAnimatedNumber get pathLength;
-  external DOMPoint getPointAtLength(num distance);
+class SVGGeometryElement extends GraphicsElement {
+  external AnimatedNumber get pathLength;
+  external DomPoint getPointAtLength(num distance);
   external num getTotalLength();
   external bool isPointInFill(DOMPointInit point);
   external bool isPointInStroke(DOMPointInit point);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGGeometryElement({
-    SVGAnimatedNumber pathLength,
+    AnimatedNumber pathLength,
   });
 }
 
@@ -17117,10 +17125,10 @@ external ISVGGeometryElement JSVGGeometryElement;
 
 @JS()
 @anonymous
-class SVGGradientElement extends SVGElement {
-  external SVGAnimatedTransformList get gradientTransform;
-  external SVGAnimatedEnumeration get gradientUnits;
-  external SVGAnimatedEnumeration get spreadMethod;
+class SVGGradientElement extends SvgElement {
+  external AnimatedTransformList get gradientTransform;
+  external AnimatedEnumeration get gradientUnits;
+  external AnimatedEnumeration get spreadMethod;
   external num get SVG_SPREADMETHOD_PAD;
   external num get SVG_SPREADMETHOD_REFLECT;
   external num get SVG_SPREADMETHOD_REPEAT;
@@ -17128,9 +17136,9 @@ class SVGGradientElement extends SVGElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGGradientElement({
-    SVGAnimatedTransformList gradientTransform,
-    SVGAnimatedEnumeration gradientUnits,
-    SVGAnimatedEnumeration spreadMethod,
+    AnimatedTransformList gradientTransform,
+    AnimatedEnumeration gradientUnits,
+    AnimatedEnumeration spreadMethod,
     num SVG_SPREADMETHOD_PAD,
     num SVG_SPREADMETHOD_REFLECT,
     num SVG_SPREADMETHOD_REPEAT,
@@ -17143,15 +17151,15 @@ external ISVGGradientElement JSVGGradientElement;
 
 @JS()
 @anonymous
-class SVGGraphicsElement extends SVGElement {
-  external SVGAnimatedTransformList get transform;
+class SVGGraphicsElement extends SvgElement {
+  external AnimatedTransformList get transform;
   external DOMRect getBBox(SVGBoundingBoxOptions options);
-  external DOMMatrix? getCTM();
-  external DOMMatrix? getScreenCTM();
+  external DomMatrix? getCTM();
+  external DomMatrix? getScreenCTM();
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGGraphicsElement({
-    SVGAnimatedTransformList transform,
+    AnimatedTransformList transform,
   });
 }
 
@@ -17160,20 +17168,20 @@ external ISVGGraphicsElement JSVGGraphicsElement;
 
 @JS()
 @anonymous
-class SVGImageElement extends SVGGraphicsElement {
-  external SVGAnimatedLength get height;
-  external SVGAnimatedPreserveAspectRatio get preserveAspectRatio;
-  external SVGAnimatedLength get width;
-  external SVGAnimatedLength get x;
-  external SVGAnimatedLength get y;
+class SVGImageElement extends GraphicsElement {
+  external AnimatedLength get height;
+  external AnimatedPreserveAspectRatio get preserveAspectRatio;
+  external AnimatedLength get width;
+  external AnimatedLength get x;
+  external AnimatedLength get y;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGImageElement({
-    SVGAnimatedLength height,
-    SVGAnimatedPreserveAspectRatio preserveAspectRatio,
-    SVGAnimatedLength width,
-    SVGAnimatedLength x,
-    SVGAnimatedLength y,
+    AnimatedLength height,
+    AnimatedPreserveAspectRatio preserveAspectRatio,
+    AnimatedLength width,
+    AnimatedLength x,
+    AnimatedLength y,
   });
 }
 
@@ -17230,13 +17238,13 @@ external ISVGLength JSVGLength;
 class SVGLengthList {
   external num get length;
   external num get numberOfItems;
-  external SVGLength appendItem(SVGLength newItem);
+  external Length appendItem(Length newItem);
   external void clear();
-  external SVGLength getItem(num index);
-  external SVGLength initialize(SVGLength newItem);
-  external SVGLength insertItemBefore(SVGLength newItem, num index);
-  external SVGLength removeItem(num index);
-  external SVGLength replaceItem(SVGLength newItem, num index);
+  external Length getItem(num index);
+  external Length initialize(Length newItem);
+  external Length insertItemBefore(Length newItem, num index);
+  external Length removeItem(num index);
+  external Length replaceItem(Length newItem, num index);
   external factory SVGLengthList({
     num length,
     num numberOfItems,
@@ -17248,18 +17256,18 @@ external ISVGLengthList JSVGLengthList;
 
 @JS()
 @anonymous
-class SVGLineElement extends SVGGeometryElement {
-  external SVGAnimatedLength get x1;
-  external SVGAnimatedLength get x2;
-  external SVGAnimatedLength get y1;
-  external SVGAnimatedLength get y2;
+class SVGLineElement extends GeometryElement {
+  external AnimatedLength get x1;
+  external AnimatedLength get x2;
+  external AnimatedLength get y1;
+  external AnimatedLength get y2;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGLineElement({
-    SVGAnimatedLength x1,
-    SVGAnimatedLength x2,
-    SVGAnimatedLength y1,
-    SVGAnimatedLength y2,
+    AnimatedLength x1,
+    AnimatedLength x2,
+    AnimatedLength y1,
+    AnimatedLength y2,
   });
 }
 
@@ -17269,17 +17277,17 @@ external ISVGLineElement JSVGLineElement;
 @JS()
 @anonymous
 class SVGLinearGradientElement extends SVGGradientElement {
-  external SVGAnimatedLength get x1;
-  external SVGAnimatedLength get x2;
-  external SVGAnimatedLength get y1;
-  external SVGAnimatedLength get y2;
+  external AnimatedLength get x1;
+  external AnimatedLength get x2;
+  external AnimatedLength get y1;
+  external AnimatedLength get y2;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGLinearGradientElement({
-    SVGAnimatedLength x1,
-    SVGAnimatedLength x2,
-    SVGAnimatedLength y1,
-    SVGAnimatedLength y2,
+    AnimatedLength x1,
+    AnimatedLength x2,
+    AnimatedLength y1,
+    AnimatedLength y2,
   });
 }
 
@@ -17288,7 +17296,7 @@ external ISVGLinearGradientElement JSVGLinearGradientElement;
 
 @JS()
 @anonymous
-class SVGMPathElement extends SVGElement {
+class SVGMPathElement extends SvgElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGMPathElement();
@@ -17299,15 +17307,15 @@ external ISVGMPathElement JSVGMPathElement;
 
 @JS()
 @anonymous
-class SVGMarkerElement extends SVGElement {
-  external SVGAnimatedLength get markerHeight;
-  external SVGAnimatedEnumeration get markerUnits;
-  external SVGAnimatedLength get markerWidth;
-  external SVGAnimatedAngle get orientAngle;
-  external SVGAnimatedEnumeration get orientType;
-  external SVGAnimatedLength get refX;
-  external SVGAnimatedLength get refY;
-  external void setOrientToAngle(SVGAngle angle);
+class SVGMarkerElement extends SvgElement {
+  external AnimatedLength get markerHeight;
+  external AnimatedEnumeration get markerUnits;
+  external AnimatedLength get markerWidth;
+  external AnimatedAngle get orientAngle;
+  external AnimatedEnumeration get orientType;
+  external AnimatedLength get refX;
+  external AnimatedLength get refY;
+  external void setOrientToAngle(Angle angle);
   external void setOrientToAuto();
   external num get SVG_MARKERUNITS_STROKEWIDTH;
   external num get SVG_MARKERUNITS_UNKNOWN;
@@ -17318,13 +17326,13 @@ class SVGMarkerElement extends SVGElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGMarkerElement({
-    SVGAnimatedLength markerHeight,
-    SVGAnimatedEnumeration markerUnits,
-    SVGAnimatedLength markerWidth,
-    SVGAnimatedAngle orientAngle,
-    SVGAnimatedEnumeration orientType,
-    SVGAnimatedLength refX,
-    SVGAnimatedLength refY,
+    AnimatedLength markerHeight,
+    AnimatedEnumeration markerUnits,
+    AnimatedLength markerWidth,
+    AnimatedAngle orientAngle,
+    AnimatedEnumeration orientType,
+    AnimatedLength refX,
+    AnimatedLength refY,
     num SVG_MARKERUNITS_STROKEWIDTH,
     num SVG_MARKERUNITS_UNKNOWN,
     num SVG_MARKERUNITS_USERSPACEONUSE,
@@ -17339,22 +17347,22 @@ external ISVGMarkerElement JSVGMarkerElement;
 
 @JS()
 @anonymous
-class SVGMaskElement extends SVGElement {
-  external SVGAnimatedLength get height;
-  external SVGAnimatedEnumeration get maskContentUnits;
-  external SVGAnimatedEnumeration get maskUnits;
-  external SVGAnimatedLength get width;
-  external SVGAnimatedLength get x;
-  external SVGAnimatedLength get y;
+class SVGMaskElement extends SvgElement {
+  external AnimatedLength get height;
+  external AnimatedEnumeration get maskContentUnits;
+  external AnimatedEnumeration get maskUnits;
+  external AnimatedLength get width;
+  external AnimatedLength get x;
+  external AnimatedLength get y;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGMaskElement({
-    SVGAnimatedLength height,
-    SVGAnimatedEnumeration maskContentUnits,
-    SVGAnimatedEnumeration maskUnits,
-    SVGAnimatedLength width,
-    SVGAnimatedLength x,
-    SVGAnimatedLength y,
+    AnimatedLength height,
+    AnimatedEnumeration maskContentUnits,
+    AnimatedEnumeration maskUnits,
+    AnimatedLength width,
+    AnimatedLength x,
+    AnimatedLength y,
   });
 }
 
@@ -17363,7 +17371,7 @@ external ISVGMaskElement JSVGMaskElement;
 
 @JS()
 @anonymous
-class SVGMetadataElement extends SVGElement {
+class SVGMetadataElement extends SvgElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGMetadataElement();
@@ -17390,13 +17398,13 @@ external ISVGNumber JSVGNumber;
 class SVGNumberList {
   external num get length;
   external num get numberOfItems;
-  external SVGNumber appendItem(SVGNumber newItem);
+  external Number appendItem(Number newItem);
   external void clear();
-  external SVGNumber getItem(num index);
-  external SVGNumber initialize(SVGNumber newItem);
-  external SVGNumber insertItemBefore(SVGNumber newItem, num index);
-  external SVGNumber removeItem(num index);
-  external SVGNumber replaceItem(SVGNumber newItem, num index);
+  external Number getItem(num index);
+  external Number initialize(Number newItem);
+  external Number insertItemBefore(Number newItem, num index);
+  external Number removeItem(num index);
+  external Number replaceItem(Number newItem, num index);
   external factory SVGNumberList({
     num length,
     num numberOfItems,
@@ -17408,7 +17416,7 @@ external ISVGNumberList JSVGNumberList;
 
 @JS()
 @anonymous
-class SVGPathElement extends SVGGeometryElement {
+class SVGPathElement extends GeometryElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGPathElement();
@@ -17419,24 +17427,24 @@ external ISVGPathElement JSVGPathElement;
 
 @JS()
 @anonymous
-class SVGPatternElement extends SVGElement {
-  external SVGAnimatedLength get height;
-  external SVGAnimatedEnumeration get patternContentUnits;
-  external SVGAnimatedTransformList get patternTransform;
-  external SVGAnimatedEnumeration get patternUnits;
-  external SVGAnimatedLength get width;
-  external SVGAnimatedLength get x;
-  external SVGAnimatedLength get y;
+class SVGPatternElement extends SvgElement {
+  external AnimatedLength get height;
+  external AnimatedEnumeration get patternContentUnits;
+  external AnimatedTransformList get patternTransform;
+  external AnimatedEnumeration get patternUnits;
+  external AnimatedLength get width;
+  external AnimatedLength get x;
+  external AnimatedLength get y;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGPatternElement({
-    SVGAnimatedLength height,
-    SVGAnimatedEnumeration patternContentUnits,
-    SVGAnimatedTransformList patternTransform,
-    SVGAnimatedEnumeration patternUnits,
-    SVGAnimatedLength width,
-    SVGAnimatedLength x,
-    SVGAnimatedLength y,
+    AnimatedLength height,
+    AnimatedEnumeration patternContentUnits,
+    AnimatedTransformList patternTransform,
+    AnimatedEnumeration patternUnits,
+    AnimatedLength width,
+    AnimatedLength x,
+    AnimatedLength y,
   });
 }
 
@@ -17448,13 +17456,13 @@ external ISVGPatternElement JSVGPatternElement;
 class SVGPointList {
   external num get length;
   external num get numberOfItems;
-  external DOMPoint appendItem(DOMPoint newItem);
+  external DomPoint appendItem(DomPoint newItem);
   external void clear();
-  external DOMPoint getItem(num index);
-  external DOMPoint initialize(DOMPoint newItem);
-  external DOMPoint insertItemBefore(DOMPoint newItem, num index);
-  external DOMPoint removeItem(num index);
-  external DOMPoint replaceItem(DOMPoint newItem, num index);
+  external DomPoint getItem(num index);
+  external DomPoint initialize(DomPoint newItem);
+  external DomPoint insertItemBefore(DomPoint newItem, num index);
+  external DomPoint removeItem(num index);
+  external DomPoint replaceItem(DomPoint newItem, num index);
   external factory SVGPointList({
     num length,
     num numberOfItems,
@@ -17466,7 +17474,7 @@ external ISVGPointList JSVGPointList;
 
 @JS()
 @anonymous
-class SVGPolygonElement extends SVGGeometryElement {
+class SVGPolygonElement extends GeometryElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGPolygonElement();
@@ -17477,7 +17485,7 @@ external ISVGPolygonElement JSVGPolygonElement;
 
 @JS()
 @anonymous
-class SVGPolylineElement extends SVGGeometryElement {
+class SVGPolylineElement extends GeometryElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGPolylineElement();
@@ -17533,21 +17541,21 @@ external ISVGPreserveAspectRatio JSVGPreserveAspectRatio;
 @JS()
 @anonymous
 class SVGRadialGradientElement extends SVGGradientElement {
-  external SVGAnimatedLength get cx;
-  external SVGAnimatedLength get cy;
-  external SVGAnimatedLength get fr;
-  external SVGAnimatedLength get fx;
-  external SVGAnimatedLength get fy;
-  external SVGAnimatedLength get r;
+  external AnimatedLength get cx;
+  external AnimatedLength get cy;
+  external AnimatedLength get fr;
+  external AnimatedLength get fx;
+  external AnimatedLength get fy;
+  external AnimatedLength get r;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGRadialGradientElement({
-    SVGAnimatedLength cx,
-    SVGAnimatedLength cy,
-    SVGAnimatedLength fr,
-    SVGAnimatedLength fx,
-    SVGAnimatedLength fy,
-    SVGAnimatedLength r,
+    AnimatedLength cx,
+    AnimatedLength cy,
+    AnimatedLength fr,
+    AnimatedLength fx,
+    AnimatedLength fy,
+    AnimatedLength r,
   });
 }
 
@@ -17556,22 +17564,22 @@ external ISVGRadialGradientElement JSVGRadialGradientElement;
 
 @JS()
 @anonymous
-class SVGRectElement extends SVGGeometryElement {
-  external SVGAnimatedLength get height;
-  external SVGAnimatedLength get rx;
-  external SVGAnimatedLength get ry;
-  external SVGAnimatedLength get width;
-  external SVGAnimatedLength get x;
-  external SVGAnimatedLength get y;
+class SVGRectElement extends GeometryElement {
+  external AnimatedLength get height;
+  external AnimatedLength get rx;
+  external AnimatedLength get ry;
+  external AnimatedLength get width;
+  external AnimatedLength get x;
+  external AnimatedLength get y;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGRectElement({
-    SVGAnimatedLength height,
-    SVGAnimatedLength rx,
-    SVGAnimatedLength ry,
-    SVGAnimatedLength width,
-    SVGAnimatedLength x,
-    SVGAnimatedLength y,
+    AnimatedLength height,
+    AnimatedLength rx,
+    AnimatedLength ry,
+    AnimatedLength width,
+    AnimatedLength x,
+    AnimatedLength y,
   });
 }
 
@@ -17586,31 +17594,31 @@ class SVGSVGElementEventMap extends SVGElementEventMap {
 
 @JS()
 @anonymous
-class SVGSVGElement extends SVGGraphicsElement {
+class SVGSVGElement extends GraphicsElement {
   external num get currentScale;
   external set currentScale(num value);
-  external DOMPointReadOnly get currentTranslate;
-  external SVGAnimatedLength get height;
-  external SVGAnimatedLength get width;
-  external SVGAnimatedLength get x;
-  external SVGAnimatedLength get y;
+  external DomPointReadOnly get currentTranslate;
+  external AnimatedLength get height;
+  external AnimatedLength get width;
+  external AnimatedLength get x;
+  external AnimatedLength get y;
   external bool animationsPaused();
-  external bool checkEnclosure(SVGElement element, DOMRectReadOnly rect);
-  external bool checkIntersection(SVGElement element, DOMRectReadOnly rect);
-  external SVGAngle createSVGAngle();
-  external SVGLength createSVGLength();
-  external DOMMatrix createSVGMatrix();
-  external SVGNumber createSVGNumber();
-  external DOMPoint createSVGPoint();
+  external bool checkEnclosure(SvgElement element, DomRectReadOnly rect);
+  external bool checkIntersection(SvgElement element, DomRectReadOnly rect);
+  external Angle createSVGAngle();
+  external Length createSVGLength();
+  external DomMatrix createSVGMatrix();
+  external Number createSVGNumber();
+  external DomPoint createSVGPoint();
   external DOMRect createSVGRect();
-  external SVGTransform createSVGTransform();
-  external SVGTransform createSVGTransformFromMatrix(DOMMatrix2DInit matrix);
+  external Transform createSVGTransform();
+  external Transform createSVGTransformFromMatrix(DOMMatrix2DInit matrix);
   external void deselectAll();
   external void forceRedraw();
   external num getCurrentTime();
   external Element getElementById(String elementId);
-  external NodeListOf<dynamic> getEnclosureList(DOMRectReadOnly rect, SVGElement? referenceElement);
-  external NodeListOf<dynamic> getIntersectionList(DOMRectReadOnly rect, SVGElement? referenceElement);
+  external NodeListOf<dynamic> getEnclosureList(DomRectReadOnly rect, SvgElement? referenceElement);
+  external NodeListOf<dynamic> getIntersectionList(DomRectReadOnly rect, SvgElement? referenceElement);
   external void pauseAnimations();
   external void setCurrentTime(num seconds);
   external num suspendRedraw(num maxWaitMilliseconds);
@@ -17621,11 +17629,11 @@ class SVGSVGElement extends SVGGraphicsElement {
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGSVGElement({
     num currentScale,
-    DOMPointReadOnly currentTranslate,
-    SVGAnimatedLength height,
-    SVGAnimatedLength width,
-    SVGAnimatedLength x,
-    SVGAnimatedLength y,
+    DomPointReadOnly currentTranslate,
+    AnimatedLength height,
+    AnimatedLength width,
+    AnimatedLength x,
+    AnimatedLength y,
   });
 }
 
@@ -17634,7 +17642,7 @@ external ISVGSVGElement JSVGSVGElement;
 
 @JS()
 @anonymous
-class SVGScriptElement extends SVGElement {
+class SVGScriptElement extends SvgElement {
   external String get type;
   external set type(String value);
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
@@ -17649,7 +17657,7 @@ external ISVGScriptElement JSVGScriptElement;
 
 @JS()
 @anonymous
-class SVGSetElement extends SVGAnimationElement {
+class SVGSetElement extends AnimationElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGSetElement();
@@ -17660,12 +17668,12 @@ external ISVGSetElement JSVGSetElement;
 
 @JS()
 @anonymous
-class SVGStopElement extends SVGElement {
-  external SVGAnimatedNumber get offset;
+class SVGStopElement extends SvgElement {
+  external AnimatedNumber get offset;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGStopElement({
-    SVGAnimatedNumber offset,
+    AnimatedNumber offset,
   });
 }
 
@@ -17695,7 +17703,7 @@ external ISVGStringList JSVGStringList;
 
 @JS()
 @anonymous
-class SVGStyleElement extends SVGElement {
+class SVGStyleElement extends SvgElement {
   external bool get disabled;
   external set disabled(bool value);
   external String get media;
@@ -17719,7 +17727,7 @@ external ISVGStyleElement JSVGStyleElement;
 
 @JS()
 @anonymous
-class SVGSwitchElement extends SVGGraphicsElement {
+class SVGSwitchElement extends GraphicsElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGSwitchElement();
@@ -17730,7 +17738,7 @@ external ISVGSwitchElement JSVGSwitchElement;
 
 @JS()
 @anonymous
-class SVGSymbolElement extends SVGElement {
+class SVGSymbolElement extends SvgElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGSymbolElement();
@@ -17741,7 +17749,7 @@ external ISVGSymbolElement JSVGSymbolElement;
 
 @JS()
 @anonymous
-class SVGTSpanElement extends SVGTextPositioningElement {
+class SVGTSpanElement extends TextPositioningElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGTSpanElement();
@@ -17753,26 +17761,26 @@ external ISVGTSpanElement JSVGTSpanElement;
 @JS()
 @anonymous
 class SVGTests {
-  external SVGStringList get requiredExtensions;
-  external SVGStringList get systemLanguage;
+  external StringList get requiredExtensions;
+  external StringList get systemLanguage;
   external factory SVGTests({
-    SVGStringList requiredExtensions,
-    SVGStringList systemLanguage,
+    StringList requiredExtensions,
+    StringList systemLanguage,
   });
 }
 
 @JS()
 @anonymous
-class SVGTextContentElement extends SVGGraphicsElement {
-  external SVGAnimatedEnumeration get lengthAdjust;
-  external SVGAnimatedLength get textLength;
+class SVGTextContentElement extends GraphicsElement {
+  external AnimatedEnumeration get lengthAdjust;
+  external AnimatedLength get textLength;
   external num getCharNumAtPosition(DOMPointInit point);
   external num getComputedTextLength();
-  external DOMPoint getEndPositionOfChar(num charnum);
+  external DomPoint getEndPositionOfChar(num charnum);
   external DOMRect getExtentOfChar(num charnum);
   external num getNumberOfChars();
   external num getRotationOfChar(num charnum);
-  external DOMPoint getStartPositionOfChar(num charnum);
+  external DomPoint getStartPositionOfChar(num charnum);
   external num getSubStringLength(num charnum, num nchars);
   external void selectSubString(num charnum, num nchars);
   external num get LENGTHADJUST_SPACING;
@@ -17781,8 +17789,8 @@ class SVGTextContentElement extends SVGGraphicsElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGTextContentElement({
-    SVGAnimatedEnumeration lengthAdjust,
-    SVGAnimatedLength textLength,
+    AnimatedEnumeration lengthAdjust,
+    AnimatedLength textLength,
     num LENGTHADJUST_SPACING,
     num LENGTHADJUST_SPACINGANDGLYPHS,
     num LENGTHADJUST_UNKNOWN,
@@ -17794,7 +17802,7 @@ external ISVGTextContentElement JSVGTextContentElement;
 
 @JS()
 @anonymous
-class SVGTextElement extends SVGTextPositioningElement {
+class SVGTextElement extends TextPositioningElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGTextElement();
@@ -17805,10 +17813,10 @@ external ISVGTextElement JSVGTextElement;
 
 @JS()
 @anonymous
-class SVGTextPathElement extends SVGTextContentElement {
-  external SVGAnimatedEnumeration get method;
-  external SVGAnimatedEnumeration get spacing;
-  external SVGAnimatedLength get startOffset;
+class SVGTextPathElement extends TextContentElement {
+  external AnimatedEnumeration get method;
+  external AnimatedEnumeration get spacing;
+  external AnimatedLength get startOffset;
   external num get TEXTPATH_METHODTYPE_ALIGN;
   external num get TEXTPATH_METHODTYPE_STRETCH;
   external num get TEXTPATH_METHODTYPE_UNKNOWN;
@@ -17818,9 +17826,9 @@ class SVGTextPathElement extends SVGTextContentElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGTextPathElement({
-    SVGAnimatedEnumeration method,
-    SVGAnimatedEnumeration spacing,
-    SVGAnimatedLength startOffset,
+    AnimatedEnumeration method,
+    AnimatedEnumeration spacing,
+    AnimatedLength startOffset,
     num TEXTPATH_METHODTYPE_ALIGN,
     num TEXTPATH_METHODTYPE_STRETCH,
     num TEXTPATH_METHODTYPE_UNKNOWN,
@@ -17835,20 +17843,20 @@ external ISVGTextPathElement JSVGTextPathElement;
 
 @JS()
 @anonymous
-class SVGTextPositioningElement extends SVGTextContentElement {
-  external SVGAnimatedLengthList get dx;
-  external SVGAnimatedLengthList get dy;
-  external SVGAnimatedNumberList get rotate;
-  external SVGAnimatedLengthList get x;
-  external SVGAnimatedLengthList get y;
+class SVGTextPositioningElement extends TextContentElement {
+  external AnimatedLengthList get dx;
+  external AnimatedLengthList get dy;
+  external AnimatedNumberList get rotate;
+  external AnimatedLengthList get x;
+  external AnimatedLengthList get y;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGTextPositioningElement({
-    SVGAnimatedLengthList dx,
-    SVGAnimatedLengthList dy,
-    SVGAnimatedNumberList rotate,
-    SVGAnimatedLengthList x,
-    SVGAnimatedLengthList y,
+    AnimatedLengthList dx,
+    AnimatedLengthList dy,
+    AnimatedNumberList rotate,
+    AnimatedLengthList x,
+    AnimatedLengthList y,
   });
 }
 
@@ -17857,7 +17865,7 @@ external ISVGTextPositioningElement JSVGTextPositioningElement;
 
 @JS()
 @anonymous
-class SVGTitleElement extends SVGElement {
+class SVGTitleElement extends SvgElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGTitleElement();
@@ -17870,7 +17878,7 @@ external ISVGTitleElement JSVGTitleElement;
 @anonymous
 class SVGTransform {
   external num get angle;
-  external DOMMatrix get matrix;
+  external DomMatrix get matrix;
   external num get type;
   external void setMatrix(DOMMatrix2DInit matrix);
   external void setRotate(num angle, num cx, num cy);
@@ -17887,7 +17895,7 @@ class SVGTransform {
   external num get SVG_TRANSFORM_UNKNOWN;
   external factory SVGTransform({
     num angle,
-    DOMMatrix matrix,
+    DomMatrix matrix,
     num type,
     num SVG_TRANSFORM_MATRIX,
     num SVG_TRANSFORM_ROTATE,
@@ -17907,15 +17915,15 @@ external ISVGTransform JSVGTransform;
 class SVGTransformList {
   external num get length;
   external num get numberOfItems;
-  external SVGTransform appendItem(SVGTransform newItem);
+  external Transform appendItem(Transform newItem);
   external void clear();
-  external SVGTransform? consolidate();
-  external SVGTransform createSVGTransformFromMatrix(DOMMatrix2DInit matrix);
-  external SVGTransform getItem(num index);
-  external SVGTransform initialize(SVGTransform newItem);
-  external SVGTransform insertItemBefore(SVGTransform newItem, num index);
-  external SVGTransform removeItem(num index);
-  external SVGTransform replaceItem(SVGTransform newItem, num index);
+  external Transform? consolidate();
+  external Transform createSVGTransformFromMatrix(DOMMatrix2DInit matrix);
+  external Transform getItem(num index);
+  external Transform initialize(Transform newItem);
+  external Transform insertItemBefore(Transform newItem, num index);
+  external Transform removeItem(num index);
+  external Transform replaceItem(Transform newItem, num index);
   external factory SVGTransformList({
     num length,
     num numberOfItems,
@@ -17928,9 +17936,9 @@ external ISVGTransformList JSVGTransformList;
 @JS()
 @anonymous
 class SVGURIReference {
-  external SVGAnimatedString get href;
+  external AnimatedString get href;
   external factory SVGURIReference({
-    SVGAnimatedString href,
+    AnimatedString href,
   });
 }
 
@@ -17952,18 +17960,18 @@ external ISVGUnitTypes JSVGUnitTypes;
 
 @JS()
 @anonymous
-class SVGUseElement extends SVGGraphicsElement {
-  external SVGAnimatedLength get height;
-  external SVGAnimatedLength get width;
-  external SVGAnimatedLength get x;
-  external SVGAnimatedLength get y;
+class SVGUseElement extends GraphicsElement {
+  external AnimatedLength get height;
+  external AnimatedLength get width;
+  external AnimatedLength get x;
+  external AnimatedLength get y;
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGUseElement({
-    SVGAnimatedLength height,
-    SVGAnimatedLength width,
-    SVGAnimatedLength x,
-    SVGAnimatedLength y,
+    AnimatedLength height,
+    AnimatedLength width,
+    AnimatedLength x,
+    AnimatedLength y,
   });
 }
 
@@ -17972,7 +17980,7 @@ external ISVGUseElement JSVGUseElement;
 
 @JS()
 @anonymous
-class SVGViewElement extends SVGElement {
+class SVGViewElement extends SvgElement {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory SVGViewElement();
@@ -18195,7 +18203,7 @@ class ServiceWorkerContainer extends EventTarget {
   external set onmessageerror(dynamic Function(MessageEvent ev)? value);
   external Promise<ServiceWorkerRegistration> get ready;
   external Promise<ServiceWorkerRegistration?> getRegistration(dynamic clientURL);
-  external Promise<ReadonlyArray<ServiceWorkerRegistration>> getRegistrations();
+  external Promise<List<ServiceWorkerRegistration>> getRegistrations();
   external Promise<ServiceWorkerRegistration> register(dynamic scriptURL, RegistrationOptions options);
   external void startMessages();
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
@@ -18707,7 +18715,7 @@ class StyleSheet {
   external String? get href;
   external MediaList get media;
   external dynamic get ownerNode;
-  external CSSStyleSheet? get parentStyleSheet;
+  external CssStyleSheet? get parentStyleSheet;
   external String? get title;
   external String get type;
   external factory StyleSheet({
@@ -18715,7 +18723,7 @@ class StyleSheet {
     String? href,
     MediaList media,
     dynamic ownerNode,
-    CSSStyleSheet? parentStyleSheet,
+    CssStyleSheet? parentStyleSheet,
     String? title,
     String type,
   });
@@ -18728,7 +18736,7 @@ external IStyleSheet JStyleSheet;
 @anonymous
 class StyleSheetList {
   external num get length;
-  external CSSStyleSheet? item(num index);
+  external CssStyleSheet? item(num index);
   external factory StyleSheetList({
     num length,
   });
@@ -18740,9 +18748,9 @@ external IStyleSheetList JStyleSheetList;
 @JS()
 @anonymous
 class SubmitEvent extends Event {
-  external HTMLElement? get submitter;
+  external HtmlElement? get submitter;
   external factory SubmitEvent({
-    HTMLElement? submitter,
+    HtmlElement? submitter,
   });
 }
 
@@ -18753,20 +18761,20 @@ external ISubmitEvent JSubmitEvent;
 @anonymous
 class SubtleCrypto {
   external Promise<dynamic> decrypt(dynamic algorithm, CryptoKey key, BufferSource data);
-  external Promise<ArrayBuffer> deriveBits(dynamic algorithm, CryptoKey baseKey, num length);
+  external Promise<ByteBuffer> deriveBits(dynamic algorithm, CryptoKey baseKey, num length);
   external Promise<CryptoKey> deriveKey(
       dynamic algorithm, CryptoKey baseKey, dynamic derivedKeyType, bool extractable, List<KeyUsage> keyUsages);
-  external Promise<ArrayBuffer> digest(AlgorithmIdentifier algorithm, BufferSource data);
+  external Promise<ByteBuffer> digest(AlgorithmIdentifier algorithm, BufferSource data);
   external Promise<dynamic> encrypt(dynamic algorithm, CryptoKey key, BufferSource data);
   external Promise<JsonWebKey> exportKey(String format, CryptoKey key);
   external Promise<CryptoKeyPair> generateKey(dynamic algorithm, bool extractable, List<KeyUsage> keyUsages);
   external Promise<CryptoKey> importKey(
       String format, JsonWebKey keyData, dynamic algorithm, bool extractable, List<KeyUsage> keyUsages);
-  external Promise<ArrayBuffer> sign(dynamic algorithm, CryptoKey key, BufferSource data);
+  external Promise<ByteBuffer> sign(dynamic algorithm, CryptoKey key, BufferSource data);
   external Promise<CryptoKey> unwrapKey(KeyFormat format, BufferSource wrappedKey, CryptoKey unwrappingKey,
       dynamic unwrapAlgorithm, dynamic unwrappedKeyAlgorithm, bool extractable, List<KeyUsage> keyUsages);
   external Promise<bool> verify(dynamic algorithm, CryptoKey key, BufferSource signature, BufferSource data);
-  external Promise<ArrayBuffer> wrapKey(KeyFormat format, CryptoKey key, CryptoKey wrappingKey, dynamic wrapAlgorithm);
+  external Promise<ByteBuffer> wrapKey(KeyFormat format, CryptoKey key, CryptoKey wrappingKey, dynamic wrapAlgorithm);
   external factory SubtleCrypto();
 }
 
@@ -18828,8 +18836,8 @@ external ITextDecoderStream JTextDecoderStream;
 @JS()
 @anonymous
 class TextEncoder extends TextEncoderCommon {
-  external Uint8Array encode(String input);
-  external TextEncoderEncodeIntoResult encodeInto(String source, Uint8Array destination);
+  external Uint8List encode(String input);
+  external TextEncoderEncodeIntoResult encodeInto(String source, Uint8List destination);
   external factory TextEncoder();
 }
 
@@ -18848,10 +18856,10 @@ class TextEncoderCommon {
 @JS()
 @anonymous
 class TextEncoderStream extends GenericTransformStream {
-  external ReadableStream<Uint8Array> get readable;
+  external ReadableStream<Uint8List> get readable;
   external WritableStream<String> get writable;
   external factory TextEncoderStream({
-    ReadableStream<Uint8Array> readable,
+    ReadableStream<Uint8List> readable,
     WritableStream<String> writable,
   });
 }
@@ -19256,7 +19264,7 @@ class URL {
 
 @JS(r'URL')
 external IURL JURL;
-typedef webkitURL = URL;
+typedef webkitURL = Url;
 @JS(r'webkitURL')
 external dynamic webkitURL;
 
@@ -19292,8 +19300,8 @@ class VTTCue extends TextTrackCue {
   external set position(LineAndPositionSetting value);
   external PositionAlignSetting get positionAlign;
   external set positionAlign(PositionAlignSetting value);
-  external VTTRegion? get region;
-  external set region(VTTRegion? value);
+  external VttRegion? get region;
+  external set region(VttRegion? value);
   external num get size;
   external set size(num value);
   external bool get snapToLines;
@@ -19311,7 +19319,7 @@ class VTTCue extends TextTrackCue {
     LineAlignSetting lineAlign,
     LineAndPositionSetting position,
     PositionAlignSetting positionAlign,
-    VTTRegion? region,
+    VttRegion? region,
     num size,
     bool snapToLines,
     String text,
@@ -19623,7 +19631,7 @@ class WEBGL_debug_renderer_info {
 @JS()
 @anonymous
 class WEBGL_debug_shaders {
-  external String getTranslatedShaderSource(WebGLShader shader);
+  external String getTranslatedShaderSource(Shader shader);
   external factory WEBGL_debug_shaders();
 }
 
@@ -19723,12 +19731,12 @@ class WEBGL_lose_context {
 @JS()
 @anonymous
 class WaveShaperNode extends AudioNode {
-  external Float32Array? get curve;
-  external set curve(Float32Array? value);
+  external Float32List? get curve;
+  external set curve(Float32List? value);
   external OverSampleType get oversample;
   external set oversample(OverSampleType value);
   external factory WaveShaperNode({
-    Float32Array? curve,
+    Float32List? curve,
     OverSampleType oversample,
   });
 }
@@ -19750,8 +19758,8 @@ external IWebGL2RenderingContext JWebGL2RenderingContext;
 class WebGL2RenderingContextBase {
   external void beginQuery(GLenum target, WebGLQuery query);
   external void beginTransformFeedback(GLenum primitiveMode);
-  external void bindBufferBase(GLenum target, GLuint index, WebGLBuffer? buffer);
-  external void bindBufferRange(GLenum target, GLuint index, WebGLBuffer? buffer, GLintptr offset, GLsizeiptr size);
+  external void bindBufferBase(GLenum target, GLuint index, Buffer? buffer);
+  external void bindBufferRange(GLenum target, GLuint index, Buffer? buffer, GLintptr offset, GLsizeiptr size);
   external void bindSampler(GLuint unit, WebGLSampler? sampler);
   external void bindTransformFeedback(GLenum target, WebGLTransformFeedback? tf);
   external void bindVertexArray(WebGLVertexArrayObject? array);
@@ -19786,23 +19794,22 @@ class WebGL2RenderingContextBase {
   external void endQuery(GLenum target);
   external void endTransformFeedback();
   external WebGLSync? fenceSync(GLenum condition, GLbitfield flags);
-  external void framebufferTextureLayer(
-      GLenum target, GLenum attachment, WebGLTexture? texture, GLint level, GLint layer);
-  external String? getActiveUniformBlockName(WebGLProgram program, GLuint uniformBlockIndex);
-  external dynamic getActiveUniformBlockParameter(WebGLProgram program, GLuint uniformBlockIndex, GLenum pname);
-  external dynamic getActiveUniforms(WebGLProgram program, List<GLuint> uniformIndices, GLenum pname);
+  external void framebufferTextureLayer(GLenum target, GLenum attachment, Texture? texture, GLint level, GLint layer);
+  external String? getActiveUniformBlockName(Program program, GLuint uniformBlockIndex);
+  external dynamic getActiveUniformBlockParameter(Program program, GLuint uniformBlockIndex, GLenum pname);
+  external dynamic getActiveUniforms(Program program, List<GLuint> uniformIndices, GLenum pname);
   external void getBufferSubData(
-      GLenum target, GLintptr srcByteOffset, ArrayBufferView dstBuffer, GLuint dstOffset, GLuint length);
-  external GLint getFragDataLocation(WebGLProgram program, String name);
+      GLenum target, GLintptr srcByteOffset, TypedData dstBuffer, GLuint dstOffset, GLuint length);
+  external GLint getFragDataLocation(Program program, String name);
   external dynamic getIndexedParameter(GLenum target, GLuint index);
   external dynamic getInternalformatParameter(GLenum target, GLenum internalformat, GLenum pname);
   external WebGLQuery? getQuery(GLenum target, GLenum pname);
   external dynamic getQueryParameter(WebGLQuery query, GLenum pname);
   external dynamic getSamplerParameter(WebGLSampler sampler, GLenum pname);
   external dynamic getSyncParameter(WebGLSync sync, GLenum pname);
-  external WebGLActiveInfo? getTransformFeedbackVarying(WebGLProgram program, GLuint index);
-  external GLuint getUniformBlockIndex(WebGLProgram program, String uniformBlockName);
-  external List<GLuint>? getUniformIndices(WebGLProgram program, List<String> uniformNames);
+  external ActiveInfo? getTransformFeedbackVarying(Program program, GLuint index);
+  external GLuint getUniformBlockIndex(Program program, String uniformBlockName);
+  external List<GLuint>? getUniformIndices(Program program, List<String> uniformNames);
   external void invalidateFramebuffer(GLenum target, List<GLenum> attachments);
   external void invalidateSubFramebuffer(
       GLenum target, List<GLenum> attachments, GLint x, GLint y, GLsizei width, GLsizei height);
@@ -19825,28 +19832,28 @@ class WebGL2RenderingContextBase {
       GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth);
   external void texSubImage3D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width,
       GLsizei height, GLsizei depth, GLenum format, GLenum type, GLintptr pboOffset);
-  external void transformFeedbackVaryings(WebGLProgram program, List<String> varyings, GLenum bufferMode);
-  external void uniform1ui(WebGLUniformLocation? location, GLuint v0);
-  external void uniform1uiv(WebGLUniformLocation? location, Uint32List data, GLuint srcOffset, GLuint srcLength);
-  external void uniform2ui(WebGLUniformLocation? location, GLuint v0, GLuint v1);
-  external void uniform2uiv(WebGLUniformLocation? location, Uint32List data, GLuint srcOffset, GLuint srcLength);
-  external void uniform3ui(WebGLUniformLocation? location, GLuint v0, GLuint v1, GLuint v2);
-  external void uniform3uiv(WebGLUniformLocation? location, Uint32List data, GLuint srcOffset, GLuint srcLength);
-  external void uniform4ui(WebGLUniformLocation? location, GLuint v0, GLuint v1, GLuint v2, GLuint v3);
-  external void uniform4uiv(WebGLUniformLocation? location, Uint32List data, GLuint srcOffset, GLuint srcLength);
-  external void uniformBlockBinding(WebGLProgram program, GLuint uniformBlockIndex, GLuint uniformBlockBinding);
+  external void transformFeedbackVaryings(Program program, List<String> varyings, GLenum bufferMode);
+  external void uniform1ui(UniformLocation? location, GLuint v0);
+  external void uniform1uiv(UniformLocation? location, Uint32List data, GLuint srcOffset, GLuint srcLength);
+  external void uniform2ui(UniformLocation? location, GLuint v0, GLuint v1);
+  external void uniform2uiv(UniformLocation? location, Uint32List data, GLuint srcOffset, GLuint srcLength);
+  external void uniform3ui(UniformLocation? location, GLuint v0, GLuint v1, GLuint v2);
+  external void uniform3uiv(UniformLocation? location, Uint32List data, GLuint srcOffset, GLuint srcLength);
+  external void uniform4ui(UniformLocation? location, GLuint v0, GLuint v1, GLuint v2, GLuint v3);
+  external void uniform4uiv(UniformLocation? location, Uint32List data, GLuint srcOffset, GLuint srcLength);
+  external void uniformBlockBinding(Program program, GLuint uniformBlockIndex, GLuint uniformBlockBinding);
   external void uniformMatrix2x3fv(
-      WebGLUniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
+      UniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
   external void uniformMatrix2x4fv(
-      WebGLUniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
+      UniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
   external void uniformMatrix3x2fv(
-      WebGLUniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
+      UniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
   external void uniformMatrix3x4fv(
-      WebGLUniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
+      UniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
   external void uniformMatrix4x2fv(
-      WebGLUniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
+      UniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
   external void uniformMatrix4x3fv(
-      WebGLUniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
+      UniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
   external void vertexAttribDivisor(GLuint index, GLuint divisor);
   external void vertexAttribI4i(GLuint index, GLint x, GLint y, GLint z, GLint w);
   external void vertexAttribI4iv(GLuint index, Int32List values);
@@ -20394,25 +20401,25 @@ class WebGL2RenderingContextOverloads {
   external void compressedTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width,
       GLsizei height, GLenum format, GLsizei imageSize, GLintptr offset);
   external void readPixels(
-      GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, ArrayBufferView? dstData);
+      GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, TypedData? dstData);
   external void texImage2D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height,
-      GLint border, GLenum format, GLenum type, ArrayBufferView? pixels);
+      GLint border, GLenum format, GLenum type, TypedData? pixels);
   external void texSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height,
-      GLenum format, GLenum type, ArrayBufferView? pixels);
-  external void uniform1fv(WebGLUniformLocation? location, Float32List data, GLuint srcOffset, GLuint srcLength);
-  external void uniform1iv(WebGLUniformLocation? location, Int32List data, GLuint srcOffset, GLuint srcLength);
-  external void uniform2fv(WebGLUniformLocation? location, Float32List data, GLuint srcOffset, GLuint srcLength);
-  external void uniform2iv(WebGLUniformLocation? location, Int32List data, GLuint srcOffset, GLuint srcLength);
-  external void uniform3fv(WebGLUniformLocation? location, Float32List data, GLuint srcOffset, GLuint srcLength);
-  external void uniform3iv(WebGLUniformLocation? location, Int32List data, GLuint srcOffset, GLuint srcLength);
-  external void uniform4fv(WebGLUniformLocation? location, Float32List data, GLuint srcOffset, GLuint srcLength);
-  external void uniform4iv(WebGLUniformLocation? location, Int32List data, GLuint srcOffset, GLuint srcLength);
+      GLenum format, GLenum type, TypedData? pixels);
+  external void uniform1fv(UniformLocation? location, Float32List data, GLuint srcOffset, GLuint srcLength);
+  external void uniform1iv(UniformLocation? location, Int32List data, GLuint srcOffset, GLuint srcLength);
+  external void uniform2fv(UniformLocation? location, Float32List data, GLuint srcOffset, GLuint srcLength);
+  external void uniform2iv(UniformLocation? location, Int32List data, GLuint srcOffset, GLuint srcLength);
+  external void uniform3fv(UniformLocation? location, Float32List data, GLuint srcOffset, GLuint srcLength);
+  external void uniform3iv(UniformLocation? location, Int32List data, GLuint srcOffset, GLuint srcLength);
+  external void uniform4fv(UniformLocation? location, Float32List data, GLuint srcOffset, GLuint srcLength);
+  external void uniform4iv(UniformLocation? location, Int32List data, GLuint srcOffset, GLuint srcLength);
   external void uniformMatrix2fv(
-      WebGLUniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
+      UniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
   external void uniformMatrix3fv(
-      WebGLUniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
+      UniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
   external void uniformMatrix4fv(
-      WebGLUniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
+      UniformLocation? location, GLboolean transpose, Float32List data, GLuint srcOffset, GLuint srcLength);
   external factory WebGL2RenderingContextOverloads();
 }
 
@@ -20504,12 +20511,12 @@ class WebGLRenderingContextBase {
   external GLsizei get drawingBufferHeight;
   external GLsizei get drawingBufferWidth;
   external void activeTexture(GLenum texture);
-  external void attachShader(WebGLProgram program, WebGLShader shader);
-  external void bindAttribLocation(WebGLProgram program, GLuint index, String name);
-  external void bindBuffer(GLenum target, WebGLBuffer? buffer);
-  external void bindFramebuffer(GLenum target, WebGLFramebuffer? framebuffer);
-  external void bindRenderbuffer(GLenum target, WebGLRenderbuffer? renderbuffer);
-  external void bindTexture(GLenum target, WebGLTexture? texture);
+  external void attachShader(Program program, Shader shader);
+  external void bindAttribLocation(Program program, GLuint index, String name);
+  external void bindBuffer(GLenum target, Buffer? buffer);
+  external void bindFramebuffer(GLenum target, Framebuffer? framebuffer);
+  external void bindRenderbuffer(GLenum target, Renderbuffer? renderbuffer);
+  external void bindTexture(GLenum target, Texture? texture);
   external void blendColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
   external void blendEquation(GLenum mode);
   external void blendEquationSeparate(GLenum modeRGB, GLenum modeAlpha);
@@ -20521,28 +20528,28 @@ class WebGLRenderingContextBase {
   external void clearDepth(GLclampf depth);
   external void clearStencil(GLint s);
   external void colorMask(GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha);
-  external void compileShader(WebGLShader shader);
+  external void compileShader(Shader shader);
   external void copyTexImage2D(
       GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border);
   external void copyTexSubImage2D(
       GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height);
-  external WebGLBuffer? createBuffer();
-  external WebGLFramebuffer? createFramebuffer();
-  external WebGLProgram? createProgram();
-  external WebGLRenderbuffer? createRenderbuffer();
-  external WebGLShader? createShader(GLenum type);
-  external WebGLTexture? createTexture();
+  external Buffer? createBuffer();
+  external Framebuffer? createFramebuffer();
+  external Program? createProgram();
+  external Renderbuffer? createRenderbuffer();
+  external Shader? createShader(GLenum type);
+  external Texture? createTexture();
   external void cullFace(GLenum mode);
-  external void deleteBuffer(WebGLBuffer? buffer);
-  external void deleteFramebuffer(WebGLFramebuffer? framebuffer);
-  external void deleteProgram(WebGLProgram? program);
-  external void deleteRenderbuffer(WebGLRenderbuffer? renderbuffer);
-  external void deleteShader(WebGLShader? shader);
-  external void deleteTexture(WebGLTexture? texture);
+  external void deleteBuffer(Buffer? buffer);
+  external void deleteFramebuffer(Framebuffer? framebuffer);
+  external void deleteProgram(Program? program);
+  external void deleteRenderbuffer(Renderbuffer? renderbuffer);
+  external void deleteShader(Shader? shader);
+  external void deleteTexture(Texture? texture);
   external void depthFunc(GLenum func);
   external void depthMask(GLboolean flag);
   external void depthRange(GLclampf zNear, GLclampf zFar);
-  external void detachShader(WebGLProgram program, WebGLShader shader);
+  external void detachShader(Program program, Shader shader);
   external void disable(GLenum cap);
   external void disableVertexAttribArray(GLuint index);
   external void drawArrays(GLenum mode, GLint first, GLsizei count);
@@ -20552,51 +20559,50 @@ class WebGLRenderingContextBase {
   external void finish();
   external void flush();
   external void framebufferRenderbuffer(
-      GLenum target, GLenum attachment, GLenum renderbuffertarget, WebGLRenderbuffer? renderbuffer);
-  external void framebufferTexture2D(
-      GLenum target, GLenum attachment, GLenum textarget, WebGLTexture? texture, GLint level);
+      GLenum target, GLenum attachment, GLenum renderbuffertarget, Renderbuffer? renderbuffer);
+  external void framebufferTexture2D(GLenum target, GLenum attachment, GLenum textarget, Texture? texture, GLint level);
   external void frontFace(GLenum mode);
   external void generateMipmap(GLenum target);
-  external WebGLActiveInfo? getActiveAttrib(WebGLProgram program, GLuint index);
-  external WebGLActiveInfo? getActiveUniform(WebGLProgram program, GLuint index);
-  external List<WebGLShader>? getAttachedShaders(WebGLProgram program);
-  external GLint getAttribLocation(WebGLProgram program, String name);
+  external ActiveInfo? getActiveAttrib(Program program, GLuint index);
+  external ActiveInfo? getActiveUniform(Program program, GLuint index);
+  external List<Shader>? getAttachedShaders(Program program);
+  external GLint getAttribLocation(Program program, String name);
   external dynamic getBufferParameter(GLenum target, GLenum pname);
-  external WebGLContextAttributes? getContextAttributes();
+  external ContextAttributes? getContextAttributes();
   external GLenum getError();
   external EXT_blend_minmax? getExtension(String extensionName);
   external dynamic getFramebufferAttachmentParameter(GLenum target, GLenum attachment, GLenum pname);
   external dynamic getParameter(GLenum pname);
-  external String? getProgramInfoLog(WebGLProgram program);
-  external dynamic getProgramParameter(WebGLProgram program, GLenum pname);
+  external String? getProgramInfoLog(Program program);
+  external dynamic getProgramParameter(Program program, GLenum pname);
   external dynamic getRenderbufferParameter(GLenum target, GLenum pname);
-  external String? getShaderInfoLog(WebGLShader shader);
-  external dynamic getShaderParameter(WebGLShader shader, GLenum pname);
-  external WebGLShaderPrecisionFormat? getShaderPrecisionFormat(GLenum shadertype, GLenum precisiontype);
-  external String? getShaderSource(WebGLShader shader);
+  external String? getShaderInfoLog(Shader shader);
+  external dynamic getShaderParameter(Shader shader, GLenum pname);
+  external ShaderPrecisionFormat? getShaderPrecisionFormat(GLenum shadertype, GLenum precisiontype);
+  external String? getShaderSource(Shader shader);
   external List<String>? getSupportedExtensions();
   external dynamic getTexParameter(GLenum target, GLenum pname);
-  external dynamic getUniform(WebGLProgram program, WebGLUniformLocation location);
-  external WebGLUniformLocation? getUniformLocation(WebGLProgram program, String name);
+  external dynamic getUniform(Program program, UniformLocation location);
+  external UniformLocation? getUniformLocation(Program program, String name);
   external dynamic getVertexAttrib(GLuint index, GLenum pname);
   external GLintptr getVertexAttribOffset(GLuint index, GLenum pname);
   external void hint(GLenum target, GLenum mode);
-  external GLboolean isBuffer(WebGLBuffer? buffer);
+  external GLboolean isBuffer(Buffer? buffer);
   external bool isContextLost();
   external GLboolean isEnabled(GLenum cap);
-  external GLboolean isFramebuffer(WebGLFramebuffer? framebuffer);
-  external GLboolean isProgram(WebGLProgram? program);
-  external GLboolean isRenderbuffer(WebGLRenderbuffer? renderbuffer);
-  external GLboolean isShader(WebGLShader? shader);
-  external GLboolean isTexture(WebGLTexture? texture);
+  external GLboolean isFramebuffer(Framebuffer? framebuffer);
+  external GLboolean isProgram(Program? program);
+  external GLboolean isRenderbuffer(Renderbuffer? renderbuffer);
+  external GLboolean isShader(Shader? shader);
+  external GLboolean isTexture(Texture? texture);
   external void lineWidth(GLfloat width);
-  external void linkProgram(WebGLProgram program);
+  external void linkProgram(Program program);
   external void pixelStorei(GLenum pname, dynamic param);
   external void polygonOffset(GLfloat factor, GLfloat units);
   external void renderbufferStorage(GLenum target, GLenum internalformat, GLsizei width, GLsizei height);
   external void sampleCoverage(GLclampf value, GLboolean invert);
   external void scissor(GLint x, GLint y, GLsizei width, GLsizei height);
-  external void shaderSource(WebGLShader shader, String source);
+  external void shaderSource(Shader shader, String source);
   external void stencilFunc(GLenum func, GLint ref, GLuint mask);
   external void stencilFuncSeparate(GLenum face, GLenum func, GLint ref, GLuint mask);
   external void stencilMask(GLuint mask);
@@ -20605,16 +20611,16 @@ class WebGLRenderingContextBase {
   external void stencilOpSeparate(GLenum face, GLenum fail, GLenum zfail, GLenum zpass);
   external void texParameterf(GLenum target, GLenum pname, GLfloat param);
   external void texParameteri(GLenum target, GLenum pname, GLint param);
-  external void uniform1f(WebGLUniformLocation? location, GLfloat x);
-  external void uniform1i(WebGLUniformLocation? location, GLint x);
-  external void uniform2f(WebGLUniformLocation? location, GLfloat x, GLfloat y);
-  external void uniform2i(WebGLUniformLocation? location, GLint x, GLint y);
-  external void uniform3f(WebGLUniformLocation? location, GLfloat x, GLfloat y, GLfloat z);
-  external void uniform3i(WebGLUniformLocation? location, GLint x, GLint y, GLint z);
-  external void uniform4f(WebGLUniformLocation? location, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
-  external void uniform4i(WebGLUniformLocation? location, GLint x, GLint y, GLint z, GLint w);
-  external void useProgram(WebGLProgram? program);
-  external void validateProgram(WebGLProgram program);
+  external void uniform1f(UniformLocation? location, GLfloat x);
+  external void uniform1i(UniformLocation? location, GLint x);
+  external void uniform2f(UniformLocation? location, GLfloat x, GLfloat y);
+  external void uniform2i(UniformLocation? location, GLint x, GLint y);
+  external void uniform3f(UniformLocation? location, GLfloat x, GLfloat y, GLfloat z);
+  external void uniform3i(UniformLocation? location, GLint x, GLint y, GLint z);
+  external void uniform4f(UniformLocation? location, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+  external void uniform4i(UniformLocation? location, GLint x, GLint y, GLint z, GLint w);
+  external void useProgram(Program? program);
+  external void validateProgram(Program program);
   external void vertexAttrib1f(GLuint index, GLfloat x);
   external void vertexAttrib1fv(GLuint index, Float32List values);
   external void vertexAttrib2f(GLuint index, GLfloat x, GLfloat y);
@@ -21229,27 +21235,27 @@ class WebGLRenderingContextBase {
 class WebGLRenderingContextOverloads {
   external void bufferData(GLenum target, GLsizeiptr size, GLenum usage);
   external void bufferSubData(GLenum target, GLintptr offset, BufferSource data);
-  external void compressedTexImage2D(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height,
-      GLint border, ArrayBufferView data);
+  external void compressedTexImage2D(
+      GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, TypedData data);
   external void compressedTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width,
-      GLsizei height, GLenum format, ArrayBufferView data);
+      GLsizei height, GLenum format, TypedData data);
   external void readPixels(
-      GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, ArrayBufferView? pixels);
+      GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, TypedData? pixels);
   external void texImage2D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height,
-      GLint border, GLenum format, GLenum type, ArrayBufferView? pixels);
+      GLint border, GLenum format, GLenum type, TypedData? pixels);
   external void texSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height,
-      GLenum format, GLenum type, ArrayBufferView? pixels);
-  external void uniform1fv(WebGLUniformLocation? location, Float32List v);
-  external void uniform1iv(WebGLUniformLocation? location, Int32List v);
-  external void uniform2fv(WebGLUniformLocation? location, Float32List v);
-  external void uniform2iv(WebGLUniformLocation? location, Int32List v);
-  external void uniform3fv(WebGLUniformLocation? location, Float32List v);
-  external void uniform3iv(WebGLUniformLocation? location, Int32List v);
-  external void uniform4fv(WebGLUniformLocation? location, Float32List v);
-  external void uniform4iv(WebGLUniformLocation? location, Int32List v);
-  external void uniformMatrix2fv(WebGLUniformLocation? location, GLboolean transpose, Float32List value);
-  external void uniformMatrix3fv(WebGLUniformLocation? location, GLboolean transpose, Float32List value);
-  external void uniformMatrix4fv(WebGLUniformLocation? location, GLboolean transpose, Float32List value);
+      GLenum format, GLenum type, TypedData? pixels);
+  external void uniform1fv(UniformLocation? location, Float32List v);
+  external void uniform1iv(UniformLocation? location, Int32List v);
+  external void uniform2fv(UniformLocation? location, Float32List v);
+  external void uniform2iv(UniformLocation? location, Int32List v);
+  external void uniform3fv(UniformLocation? location, Float32List v);
+  external void uniform3iv(UniformLocation? location, Int32List v);
+  external void uniform4fv(UniformLocation? location, Float32List v);
+  external void uniform4iv(UniformLocation? location, Int32List v);
+  external void uniformMatrix2fv(UniformLocation? location, GLboolean transpose, Float32List value);
+  external void uniformMatrix3fv(UniformLocation? location, GLboolean transpose, Float32List value);
+  external void uniformMatrix4fv(UniformLocation? location, GLboolean transpose, Float32List value);
   external factory WebGLRenderingContextOverloads();
 }
 
@@ -21512,7 +21518,7 @@ class Window extends EventTarget {
   external void close();
   external bool confirm(String message);
   external void focus();
-  external CSSStyleDeclaration getComputedStyle(Element elt, String? pseudoElt);
+  external CssStyleDeclaration getComputedStyle(Element elt, String? pseudoElt);
   external Selection? getSelection();
   external MediaQueryList matchMedia(String query);
   external void moveBy(num x, num y);
@@ -21721,7 +21727,7 @@ class WindowOrWorkerGlobalScope {
   external CacheStorage get caches;
   external bool get crossOriginIsolated;
   external Crypto get crypto;
-  external IDBFactory get indexedDB;
+  external IdbFactory get indexedDB;
   external bool get isSecureContext;
   external String get origin;
   external Performance get performance;
@@ -21762,7 +21768,7 @@ class WindowOrWorkerGlobalScope {
     CacheStorage caches,
     bool crossOriginIsolated,
     Crypto crypto,
-    IDBFactory indexedDB,
+    IdbFactory indexedDB,
     bool isSecureContext,
     String origin,
     Performance performance,
@@ -21889,7 +21895,7 @@ class XMLHttpRequestEventMap extends XMLHttpRequestEventTargetEventMap {
 
 @JS()
 @anonymous
-class XMLHttpRequest extends XMLHttpRequestEventTarget {
+class XMLHttpRequest extends HttpRequestEventTarget {
   external dynamic Function(Event ev)? get onreadystatechange;
   external set onreadystatechange(dynamic Function(Event ev)? value);
   external num get readyState;
@@ -21903,7 +21909,7 @@ class XMLHttpRequest extends XMLHttpRequestEventTarget {
   external String get statusText;
   external num get timeout;
   external set timeout(num value);
-  external XMLHttpRequestUpload get upload;
+  external HttpRequestUpload get upload;
   external bool get withCredentials;
   external set withCredentials(bool value);
   external void abort();
@@ -21931,7 +21937,7 @@ class XMLHttpRequest extends XMLHttpRequestEventTarget {
     num status,
     String statusText,
     num timeout,
-    XMLHttpRequestUpload upload,
+    HttpRequestUpload upload,
     bool withCredentials,
     num DONE,
     num HEADERS_RECEIVED,
@@ -21947,28 +21953,28 @@ external IXMLHttpRequest JXMLHttpRequest;
 @JS()
 @anonymous
 class XMLHttpRequestEventTargetEventMap {
-  external ProgressEvent<XMLHttpRequestEventTarget> get abort;
-  external set abort(ProgressEvent<XMLHttpRequestEventTarget> value);
-  external ProgressEvent<XMLHttpRequestEventTarget> get error;
-  external set error(ProgressEvent<XMLHttpRequestEventTarget> value);
-  external ProgressEvent<XMLHttpRequestEventTarget> get load;
-  external set load(ProgressEvent<XMLHttpRequestEventTarget> value);
-  external ProgressEvent<XMLHttpRequestEventTarget> get loadend;
-  external set loadend(ProgressEvent<XMLHttpRequestEventTarget> value);
-  external ProgressEvent<XMLHttpRequestEventTarget> get loadstart;
-  external set loadstart(ProgressEvent<XMLHttpRequestEventTarget> value);
-  external ProgressEvent<XMLHttpRequestEventTarget> get progress;
-  external set progress(ProgressEvent<XMLHttpRequestEventTarget> value);
-  external ProgressEvent<XMLHttpRequestEventTarget> get timeout;
-  external set timeout(ProgressEvent<XMLHttpRequestEventTarget> value);
+  external ProgressEvent<HttpRequestEventTarget> get abort;
+  external set abort(ProgressEvent<HttpRequestEventTarget> value);
+  external ProgressEvent<HttpRequestEventTarget> get error;
+  external set error(ProgressEvent<HttpRequestEventTarget> value);
+  external ProgressEvent<HttpRequestEventTarget> get load;
+  external set load(ProgressEvent<HttpRequestEventTarget> value);
+  external ProgressEvent<HttpRequestEventTarget> get loadend;
+  external set loadend(ProgressEvent<HttpRequestEventTarget> value);
+  external ProgressEvent<HttpRequestEventTarget> get loadstart;
+  external set loadstart(ProgressEvent<HttpRequestEventTarget> value);
+  external ProgressEvent<HttpRequestEventTarget> get progress;
+  external set progress(ProgressEvent<HttpRequestEventTarget> value);
+  external ProgressEvent<HttpRequestEventTarget> get timeout;
+  external set timeout(ProgressEvent<HttpRequestEventTarget> value);
   external factory XMLHttpRequestEventTargetEventMap({
-    ProgressEvent<XMLHttpRequestEventTarget> abort,
-    ProgressEvent<XMLHttpRequestEventTarget> error,
-    ProgressEvent<XMLHttpRequestEventTarget> load,
-    ProgressEvent<XMLHttpRequestEventTarget> loadend,
-    ProgressEvent<XMLHttpRequestEventTarget> loadstart,
-    ProgressEvent<XMLHttpRequestEventTarget> progress,
-    ProgressEvent<XMLHttpRequestEventTarget> timeout,
+    ProgressEvent<HttpRequestEventTarget> abort,
+    ProgressEvent<HttpRequestEventTarget> error,
+    ProgressEvent<HttpRequestEventTarget> load,
+    ProgressEvent<HttpRequestEventTarget> loadend,
+    ProgressEvent<HttpRequestEventTarget> loadstart,
+    ProgressEvent<HttpRequestEventTarget> progress,
+    ProgressEvent<HttpRequestEventTarget> timeout,
   });
 }
 
@@ -22007,7 +22013,7 @@ external IXMLHttpRequestEventTarget JXMLHttpRequestEventTarget;
 
 @JS()
 @anonymous
-class XMLHttpRequestUpload extends XMLHttpRequestEventTarget {
+class XMLHttpRequestUpload extends HttpRequestEventTarget {
   external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
   external factory XMLHttpRequestUpload();
@@ -22300,10 +22306,10 @@ external ILinkError JLinkError;
 @JS()
 @anonymous
 class Memory {
-  external ArrayBuffer get buffer;
+  external ByteBuffer get buffer;
   external num grow(num delta);
   external factory Memory({
-    ArrayBuffer buffer,
+    ByteBuffer buffer,
   });
 }
 
@@ -22679,561 +22685,561 @@ class VoidFunction {
 @JS()
 @anonymous
 class HTMLElementTagNameMap {
-  external HTMLAnchorElement get a;
-  external set a(HTMLAnchorElement value);
-  external HTMLElement get abbr;
-  external set abbr(HTMLElement value);
-  external HTMLElement get address;
-  external set address(HTMLElement value);
-  external HTMLAreaElement get area;
-  external set area(HTMLAreaElement value);
-  external HTMLElement get article;
-  external set article(HTMLElement value);
-  external HTMLElement get aside;
-  external set aside(HTMLElement value);
-  external HTMLAudioElement get audio;
-  external set audio(HTMLAudioElement value);
-  external HTMLElement get b;
-  external set b(HTMLElement value);
-  external HTMLBaseElement get base;
-  external set base(HTMLBaseElement value);
-  external HTMLElement get bdi;
-  external set bdi(HTMLElement value);
-  external HTMLElement get bdo;
-  external set bdo(HTMLElement value);
-  external HTMLQuoteElement get blockquote;
-  external set blockquote(HTMLQuoteElement value);
-  external HTMLBodyElement get body;
-  external set body(HTMLBodyElement value);
-  external HTMLBRElement get br;
-  external set br(HTMLBRElement value);
-  external HTMLButtonElement get button;
-  external set button(HTMLButtonElement value);
-  external HTMLCanvasElement get canvas;
-  external set canvas(HTMLCanvasElement value);
-  external HTMLTableCaptionElement get caption;
-  external set caption(HTMLTableCaptionElement value);
-  external HTMLElement get cite;
-  external set cite(HTMLElement value);
-  external HTMLElement get code;
-  external set code(HTMLElement value);
-  external HTMLTableColElement get col;
-  external set col(HTMLTableColElement value);
-  external HTMLTableColElement get colgroup;
-  external set colgroup(HTMLTableColElement value);
+  external AnchorElement get a;
+  external set a(AnchorElement value);
+  external HtmlElement get abbr;
+  external set abbr(HtmlElement value);
+  external HtmlElement get address;
+  external set address(HtmlElement value);
+  external AreaElement get area;
+  external set area(AreaElement value);
+  external HtmlElement get article;
+  external set article(HtmlElement value);
+  external HtmlElement get aside;
+  external set aside(HtmlElement value);
+  external AudioElement get audio;
+  external set audio(AudioElement value);
+  external HtmlElement get b;
+  external set b(HtmlElement value);
+  external BaseElement get base;
+  external set base(BaseElement value);
+  external HtmlElement get bdi;
+  external set bdi(HtmlElement value);
+  external HtmlElement get bdo;
+  external set bdo(HtmlElement value);
+  external QuoteElement get blockquote;
+  external set blockquote(QuoteElement value);
+  external BodyElement get body;
+  external set body(BodyElement value);
+  external BRElement get br;
+  external set br(BRElement value);
+  external ButtonElement get button;
+  external set button(ButtonElement value);
+  external CanvasElement get canvas;
+  external set canvas(CanvasElement value);
+  external TableCaptionElement get caption;
+  external set caption(TableCaptionElement value);
+  external HtmlElement get cite;
+  external set cite(HtmlElement value);
+  external HtmlElement get code;
+  external set code(HtmlElement value);
+  external TableColElement get col;
+  external set col(TableColElement value);
+  external TableColElement get colgroup;
+  external set colgroup(TableColElement value);
   external HTMLDataElement get data;
   external set data(HTMLDataElement value);
-  external HTMLDataListElement get datalist;
-  external set datalist(HTMLDataListElement value);
-  external HTMLElement get dd;
-  external set dd(HTMLElement value);
-  external HTMLModElement get del;
-  external set del(HTMLModElement value);
-  external HTMLDetailsElement get details;
-  external set details(HTMLDetailsElement value);
-  external HTMLElement get dfn;
-  external set dfn(HTMLElement value);
-  external HTMLDialogElement get dialog;
-  external set dialog(HTMLDialogElement value);
+  external DataListElement get datalist;
+  external set datalist(DataListElement value);
+  external HtmlElement get dd;
+  external set dd(HtmlElement value);
+  external ModElement get del;
+  external set del(ModElement value);
+  external DetailsElement get details;
+  external set details(DetailsElement value);
+  external HtmlElement get dfn;
+  external set dfn(HtmlElement value);
+  external DialogElement get dialog;
+  external set dialog(DialogElement value);
   external HTMLDirectoryElement get dir;
   external set dir(HTMLDirectoryElement value);
-  external HTMLDivElement get div;
-  external set div(HTMLDivElement value);
-  external HTMLDListElement get dl;
-  external set dl(HTMLDListElement value);
-  external HTMLElement get dt;
-  external set dt(HTMLElement value);
-  external HTMLElement get em;
-  external set em(HTMLElement value);
-  external HTMLEmbedElement get embed;
-  external set embed(HTMLEmbedElement value);
-  external HTMLFieldSetElement get fieldset;
-  external set fieldset(HTMLFieldSetElement value);
-  external HTMLElement get figcaption;
-  external set figcaption(HTMLElement value);
-  external HTMLElement get figure;
-  external set figure(HTMLElement value);
+  external DivElement get div;
+  external set div(DivElement value);
+  external DListElement get dl;
+  external set dl(DListElement value);
+  external HtmlElement get dt;
+  external set dt(HtmlElement value);
+  external HtmlElement get em;
+  external set em(HtmlElement value);
+  external EmbedElement get embed;
+  external set embed(EmbedElement value);
+  external FieldSetElement get fieldset;
+  external set fieldset(FieldSetElement value);
+  external HtmlElement get figcaption;
+  external set figcaption(HtmlElement value);
+  external HtmlElement get figure;
+  external set figure(HtmlElement value);
   external HTMLFontElement get font;
   external set font(HTMLFontElement value);
-  external HTMLElement get footer;
-  external set footer(HTMLElement value);
-  external HTMLFormElement get form;
-  external set form(HTMLFormElement value);
+  external HtmlElement get footer;
+  external set footer(HtmlElement value);
+  external FormElement get form;
+  external set form(FormElement value);
   external HTMLFrameElement get frame;
   external set frame(HTMLFrameElement value);
   external HTMLFrameSetElement get frameset;
   external set frameset(HTMLFrameSetElement value);
-  external HTMLHeadingElement get h1;
-  external set h1(HTMLHeadingElement value);
-  external HTMLHeadingElement get h2;
-  external set h2(HTMLHeadingElement value);
-  external HTMLHeadingElement get h3;
-  external set h3(HTMLHeadingElement value);
-  external HTMLHeadingElement get h4;
-  external set h4(HTMLHeadingElement value);
-  external HTMLHeadingElement get h5;
-  external set h5(HTMLHeadingElement value);
-  external HTMLHeadingElement get h6;
-  external set h6(HTMLHeadingElement value);
-  external HTMLHeadElement get head;
-  external set head(HTMLHeadElement value);
-  external HTMLElement get header;
-  external set header(HTMLElement value);
-  external HTMLElement get hgroup;
-  external set hgroup(HTMLElement value);
-  external HTMLHRElement get hr;
-  external set hr(HTMLHRElement value);
-  external HTMLHtmlElement get html;
-  external set html(HTMLHtmlElement value);
-  external HTMLElement get i;
-  external set i(HTMLElement value);
-  external HTMLIFrameElement get iframe;
-  external set iframe(HTMLIFrameElement value);
-  external HTMLImageElement get img;
-  external set img(HTMLImageElement value);
-  external HTMLInputElement get input;
-  external set input(HTMLInputElement value);
-  external HTMLModElement get ins;
-  external set ins(HTMLModElement value);
-  external HTMLElement get kbd;
-  external set kbd(HTMLElement value);
-  external HTMLLabelElement get label;
-  external set label(HTMLLabelElement value);
-  external HTMLLegendElement get legend;
-  external set legend(HTMLLegendElement value);
-  external HTMLLIElement get li;
-  external set li(HTMLLIElement value);
-  external HTMLLinkElement get link;
-  external set link(HTMLLinkElement value);
-  external HTMLElement get main;
-  external set main(HTMLElement value);
-  external HTMLMapElement get map;
-  external set map(HTMLMapElement value);
-  external HTMLElement get mark;
-  external set mark(HTMLElement value);
+  external HeadingElement get h1;
+  external set h1(HeadingElement value);
+  external HeadingElement get h2;
+  external set h2(HeadingElement value);
+  external HeadingElement get h3;
+  external set h3(HeadingElement value);
+  external HeadingElement get h4;
+  external set h4(HeadingElement value);
+  external HeadingElement get h5;
+  external set h5(HeadingElement value);
+  external HeadingElement get h6;
+  external set h6(HeadingElement value);
+  external HeadElement get head;
+  external set head(HeadElement value);
+  external HtmlElement get header;
+  external set header(HtmlElement value);
+  external HtmlElement get hgroup;
+  external set hgroup(HtmlElement value);
+  external HRElement get hr;
+  external set hr(HRElement value);
+  external HtmlHtmlElement get html;
+  external set html(HtmlHtmlElement value);
+  external HtmlElement get i;
+  external set i(HtmlElement value);
+  external IFrameElement get iframe;
+  external set iframe(IFrameElement value);
+  external ImageElement get img;
+  external set img(ImageElement value);
+  external InputElement get input;
+  external set input(InputElement value);
+  external ModElement get ins;
+  external set ins(ModElement value);
+  external HtmlElement get kbd;
+  external set kbd(HtmlElement value);
+  external LabelElement get label;
+  external set label(LabelElement value);
+  external LegendElement get legend;
+  external set legend(LegendElement value);
+  external LIElement get li;
+  external set li(LIElement value);
+  external LinkElement get link;
+  external set link(LinkElement value);
+  external HtmlElement get main;
+  external set main(HtmlElement value);
+  external MapElement get map;
+  external set map(MapElement value);
+  external HtmlElement get mark;
+  external set mark(HtmlElement value);
   external HTMLMarqueeElement get marquee;
   external set marquee(HTMLMarqueeElement value);
-  external HTMLMenuElement get menu;
-  external set menu(HTMLMenuElement value);
-  external HTMLMetaElement get meta;
-  external set meta(HTMLMetaElement value);
-  external HTMLMeterElement get meter;
-  external set meter(HTMLMeterElement value);
-  external HTMLElement get nav;
-  external set nav(HTMLElement value);
-  external HTMLElement get noscript;
-  external set noscript(HTMLElement value);
-  external HTMLObjectElement get object;
-  external set object(HTMLObjectElement value);
-  external HTMLOListElement get ol;
-  external set ol(HTMLOListElement value);
-  external HTMLOptGroupElement get optgroup;
-  external set optgroup(HTMLOptGroupElement value);
-  external HTMLOptionElement get option;
-  external set option(HTMLOptionElement value);
-  external HTMLOutputElement get output;
-  external set output(HTMLOutputElement value);
-  external HTMLParagraphElement get p;
-  external set p(HTMLParagraphElement value);
-  external HTMLParamElement get param;
-  external set param(HTMLParamElement value);
-  external HTMLPictureElement get picture;
-  external set picture(HTMLPictureElement value);
-  external HTMLPreElement get pre;
-  external set pre(HTMLPreElement value);
-  external HTMLProgressElement get progress;
-  external set progress(HTMLProgressElement value);
-  external HTMLQuoteElement get q;
-  external set q(HTMLQuoteElement value);
-  external HTMLElement get rp;
-  external set rp(HTMLElement value);
-  external HTMLElement get rt;
-  external set rt(HTMLElement value);
-  external HTMLElement get ruby;
-  external set ruby(HTMLElement value);
-  external HTMLElement get s;
-  external set s(HTMLElement value);
-  external HTMLElement get samp;
-  external set samp(HTMLElement value);
-  external HTMLScriptElement get script;
-  external set script(HTMLScriptElement value);
-  external HTMLElement get section;
-  external set section(HTMLElement value);
-  external HTMLSelectElement get select;
-  external set select(HTMLSelectElement value);
+  external MenuElement get menu;
+  external set menu(MenuElement value);
+  external MetaElement get meta;
+  external set meta(MetaElement value);
+  external MeterElement get meter;
+  external set meter(MeterElement value);
+  external HtmlElement get nav;
+  external set nav(HtmlElement value);
+  external HtmlElement get noscript;
+  external set noscript(HtmlElement value);
+  external ObjectElement get object;
+  external set object(ObjectElement value);
+  external OListElement get ol;
+  external set ol(OListElement value);
+  external OptGroupElement get optgroup;
+  external set optgroup(OptGroupElement value);
+  external OptionElement get option;
+  external set option(OptionElement value);
+  external OutputElement get output;
+  external set output(OutputElement value);
+  external ParagraphElement get p;
+  external set p(ParagraphElement value);
+  external ParamElement get param;
+  external set param(ParamElement value);
+  external PictureElement get picture;
+  external set picture(PictureElement value);
+  external PreElement get pre;
+  external set pre(PreElement value);
+  external ProgressElement get progress;
+  external set progress(ProgressElement value);
+  external QuoteElement get q;
+  external set q(QuoteElement value);
+  external HtmlElement get rp;
+  external set rp(HtmlElement value);
+  external HtmlElement get rt;
+  external set rt(HtmlElement value);
+  external HtmlElement get ruby;
+  external set ruby(HtmlElement value);
+  external HtmlElement get s;
+  external set s(HtmlElement value);
+  external HtmlElement get samp;
+  external set samp(HtmlElement value);
+  external ScriptElement get script;
+  external set script(ScriptElement value);
+  external HtmlElement get section;
+  external set section(HtmlElement value);
+  external SelectElement get select;
+  external set select(SelectElement value);
   external HTMLSlotElement get slot;
   external set slot(HTMLSlotElement value);
-  external HTMLElement get small;
-  external set small(HTMLElement value);
-  external HTMLSourceElement get source;
-  external set source(HTMLSourceElement value);
-  external HTMLSpanElement get span;
-  external set span(HTMLSpanElement value);
-  external HTMLElement get strong;
-  external set strong(HTMLElement value);
-  external HTMLStyleElement get style;
-  external set style(HTMLStyleElement value);
-  external HTMLElement get sub;
-  external set sub(HTMLElement value);
-  external HTMLElement get summary;
-  external set summary(HTMLElement value);
-  external HTMLElement get sup;
-  external set sup(HTMLElement value);
-  external HTMLTableElement get table;
-  external set table(HTMLTableElement value);
-  external HTMLTableSectionElement get tbody;
-  external set tbody(HTMLTableSectionElement value);
-  external HTMLTableCellElement get td;
-  external set td(HTMLTableCellElement value);
-  external HTMLTemplateElement get template;
-  external set template(HTMLTemplateElement value);
-  external HTMLTextAreaElement get textarea;
-  external set textarea(HTMLTextAreaElement value);
-  external HTMLTableSectionElement get tfoot;
-  external set tfoot(HTMLTableSectionElement value);
-  external HTMLTableCellElement get th;
-  external set th(HTMLTableCellElement value);
-  external HTMLTableSectionElement get thead;
-  external set thead(HTMLTableSectionElement value);
+  external HtmlElement get small;
+  external set small(HtmlElement value);
+  external SourceElement get source;
+  external set source(SourceElement value);
+  external SpanElement get span;
+  external set span(SpanElement value);
+  external HtmlElement get strong;
+  external set strong(HtmlElement value);
+  external StyleElement get style;
+  external set style(StyleElement value);
+  external HtmlElement get sub;
+  external set sub(HtmlElement value);
+  external HtmlElement get summary;
+  external set summary(HtmlElement value);
+  external HtmlElement get sup;
+  external set sup(HtmlElement value);
+  external TableElement get table;
+  external set table(TableElement value);
+  external TableSectionElement get tbody;
+  external set tbody(TableSectionElement value);
+  external TableCellElement get td;
+  external set td(TableCellElement value);
+  external TemplateElement get template;
+  external set template(TemplateElement value);
+  external TextAreaElement get textarea;
+  external set textarea(TextAreaElement value);
+  external TableSectionElement get tfoot;
+  external set tfoot(TableSectionElement value);
+  external TableCellElement get th;
+  external set th(TableCellElement value);
+  external TableSectionElement get thead;
+  external set thead(TableSectionElement value);
   external HTMLTimeElement get time;
   external set time(HTMLTimeElement value);
-  external HTMLTitleElement get title;
-  external set title(HTMLTitleElement value);
-  external HTMLTableRowElement get tr;
-  external set tr(HTMLTableRowElement value);
-  external HTMLTrackElement get track;
-  external set track(HTMLTrackElement value);
-  external HTMLElement get u;
-  external set u(HTMLElement value);
-  external HTMLUListElement get ul;
-  external set ul(HTMLUListElement value);
-  external HTMLVideoElement get video;
-  external set video(HTMLVideoElement value);
-  external HTMLElement get wbr;
-  external set wbr(HTMLElement value);
+  external TitleElement get title;
+  external set title(TitleElement value);
+  external TableRowElement get tr;
+  external set tr(TableRowElement value);
+  external TrackElement get track;
+  external set track(TrackElement value);
+  external HtmlElement get u;
+  external set u(HtmlElement value);
+  external UListElement get ul;
+  external set ul(UListElement value);
+  external VideoElement get video;
+  external set video(VideoElement value);
+  external HtmlElement get wbr;
+  external set wbr(HtmlElement value);
   external factory HTMLElementTagNameMap({
-    HTMLAnchorElement a,
-    HTMLElement abbr,
-    HTMLElement address,
-    HTMLAreaElement area,
-    HTMLElement article,
-    HTMLElement aside,
-    HTMLAudioElement audio,
-    HTMLElement b,
-    HTMLBaseElement base,
-    HTMLElement bdi,
-    HTMLElement bdo,
-    HTMLQuoteElement blockquote,
-    HTMLBodyElement body,
-    HTMLBRElement br,
-    HTMLButtonElement button,
-    HTMLCanvasElement canvas,
-    HTMLTableCaptionElement caption,
-    HTMLElement cite,
-    HTMLElement code,
-    HTMLTableColElement col,
-    HTMLTableColElement colgroup,
+    AnchorElement a,
+    HtmlElement abbr,
+    HtmlElement address,
+    AreaElement area,
+    HtmlElement article,
+    HtmlElement aside,
+    AudioElement audio,
+    HtmlElement b,
+    BaseElement base,
+    HtmlElement bdi,
+    HtmlElement bdo,
+    QuoteElement blockquote,
+    BodyElement body,
+    BRElement br,
+    ButtonElement button,
+    CanvasElement canvas,
+    TableCaptionElement caption,
+    HtmlElement cite,
+    HtmlElement code,
+    TableColElement col,
+    TableColElement colgroup,
     HTMLDataElement data,
-    HTMLDataListElement datalist,
-    HTMLElement dd,
-    HTMLModElement del,
-    HTMLDetailsElement details,
-    HTMLElement dfn,
-    HTMLDialogElement dialog,
+    DataListElement datalist,
+    HtmlElement dd,
+    ModElement del,
+    DetailsElement details,
+    HtmlElement dfn,
+    DialogElement dialog,
     HTMLDirectoryElement dir,
-    HTMLDivElement div,
-    HTMLDListElement dl,
-    HTMLElement dt,
-    HTMLElement em,
-    HTMLEmbedElement embed,
-    HTMLFieldSetElement fieldset,
-    HTMLElement figcaption,
-    HTMLElement figure,
+    DivElement div,
+    DListElement dl,
+    HtmlElement dt,
+    HtmlElement em,
+    EmbedElement embed,
+    FieldSetElement fieldset,
+    HtmlElement figcaption,
+    HtmlElement figure,
     HTMLFontElement font,
-    HTMLElement footer,
-    HTMLFormElement form,
+    HtmlElement footer,
+    FormElement form,
     HTMLFrameElement frame,
     HTMLFrameSetElement frameset,
-    HTMLHeadingElement h1,
-    HTMLHeadingElement h2,
-    HTMLHeadingElement h3,
-    HTMLHeadingElement h4,
-    HTMLHeadingElement h5,
-    HTMLHeadingElement h6,
-    HTMLHeadElement head,
-    HTMLElement header,
-    HTMLElement hgroup,
-    HTMLHRElement hr,
-    HTMLHtmlElement html,
-    HTMLElement i,
-    HTMLIFrameElement iframe,
-    HTMLImageElement img,
-    HTMLInputElement input,
-    HTMLModElement ins,
-    HTMLElement kbd,
-    HTMLLabelElement label,
-    HTMLLegendElement legend,
-    HTMLLIElement li,
-    HTMLLinkElement link,
-    HTMLElement main,
-    HTMLMapElement map,
-    HTMLElement mark,
+    HeadingElement h1,
+    HeadingElement h2,
+    HeadingElement h3,
+    HeadingElement h4,
+    HeadingElement h5,
+    HeadingElement h6,
+    HeadElement head,
+    HtmlElement header,
+    HtmlElement hgroup,
+    HRElement hr,
+    HtmlHtmlElement html,
+    HtmlElement i,
+    IFrameElement iframe,
+    ImageElement img,
+    InputElement input,
+    ModElement ins,
+    HtmlElement kbd,
+    LabelElement label,
+    LegendElement legend,
+    LIElement li,
+    LinkElement link,
+    HtmlElement main,
+    MapElement map,
+    HtmlElement mark,
     HTMLMarqueeElement marquee,
-    HTMLMenuElement menu,
-    HTMLMetaElement meta,
-    HTMLMeterElement meter,
-    HTMLElement nav,
-    HTMLElement noscript,
-    HTMLObjectElement object,
-    HTMLOListElement ol,
-    HTMLOptGroupElement optgroup,
-    HTMLOptionElement option,
-    HTMLOutputElement output,
-    HTMLParagraphElement p,
-    HTMLParamElement param,
-    HTMLPictureElement picture,
-    HTMLPreElement pre,
-    HTMLProgressElement progress,
-    HTMLQuoteElement q,
-    HTMLElement rp,
-    HTMLElement rt,
-    HTMLElement ruby,
-    HTMLElement s,
-    HTMLElement samp,
-    HTMLScriptElement script,
-    HTMLElement section,
-    HTMLSelectElement select,
+    MenuElement menu,
+    MetaElement meta,
+    MeterElement meter,
+    HtmlElement nav,
+    HtmlElement noscript,
+    ObjectElement object,
+    OListElement ol,
+    OptGroupElement optgroup,
+    OptionElement option,
+    OutputElement output,
+    ParagraphElement p,
+    ParamElement param,
+    PictureElement picture,
+    PreElement pre,
+    ProgressElement progress,
+    QuoteElement q,
+    HtmlElement rp,
+    HtmlElement rt,
+    HtmlElement ruby,
+    HtmlElement s,
+    HtmlElement samp,
+    ScriptElement script,
+    HtmlElement section,
+    SelectElement select,
     HTMLSlotElement slot,
-    HTMLElement small,
-    HTMLSourceElement source,
-    HTMLSpanElement span,
-    HTMLElement strong,
-    HTMLStyleElement style,
-    HTMLElement sub,
-    HTMLElement summary,
-    HTMLElement sup,
-    HTMLTableElement table,
-    HTMLTableSectionElement tbody,
-    HTMLTableCellElement td,
-    HTMLTemplateElement template,
-    HTMLTextAreaElement textarea,
-    HTMLTableSectionElement tfoot,
-    HTMLTableCellElement th,
-    HTMLTableSectionElement thead,
+    HtmlElement small,
+    SourceElement source,
+    SpanElement span,
+    HtmlElement strong,
+    StyleElement style,
+    HtmlElement sub,
+    HtmlElement summary,
+    HtmlElement sup,
+    TableElement table,
+    TableSectionElement tbody,
+    TableCellElement td,
+    TemplateElement template,
+    TextAreaElement textarea,
+    TableSectionElement tfoot,
+    TableCellElement th,
+    TableSectionElement thead,
     HTMLTimeElement time,
-    HTMLTitleElement title,
-    HTMLTableRowElement tr,
-    HTMLTrackElement track,
-    HTMLElement u,
-    HTMLUListElement ul,
-    HTMLVideoElement video,
-    HTMLElement wbr,
+    TitleElement title,
+    TableRowElement tr,
+    TrackElement track,
+    HtmlElement u,
+    UListElement ul,
+    VideoElement video,
+    HtmlElement wbr,
   });
 }
 
 @JS()
 @anonymous
 class HTMLElementDeprecatedTagNameMap {
-  external HTMLPreElement get listing;
-  external set listing(HTMLPreElement value);
-  external HTMLPreElement get xmp;
-  external set xmp(HTMLPreElement value);
+  external PreElement get listing;
+  external set listing(PreElement value);
+  external PreElement get xmp;
+  external set xmp(PreElement value);
   external factory HTMLElementDeprecatedTagNameMap({
-    HTMLPreElement listing,
-    HTMLPreElement xmp,
+    PreElement listing,
+    PreElement xmp,
   });
 }
 
 @JS()
 @anonymous
 class SVGElementTagNameMap {
-  external SVGAElement get a;
-  external set a(SVGAElement value);
-  external SVGAnimateElement get animate;
-  external set animate(SVGAnimateElement value);
-  external SVGAnimateMotionElement get animateMotion;
-  external set animateMotion(SVGAnimateMotionElement value);
-  external SVGAnimateTransformElement get animateTransform;
-  external set animateTransform(SVGAnimateTransformElement value);
-  external SVGCircleElement get circle;
-  external set circle(SVGCircleElement value);
-  external SVGClipPathElement get clipPath;
-  external set clipPath(SVGClipPathElement value);
-  external SVGDefsElement get defs;
-  external set defs(SVGDefsElement value);
-  external SVGDescElement get desc;
-  external set desc(SVGDescElement value);
-  external SVGEllipseElement get ellipse;
-  external set ellipse(SVGEllipseElement value);
-  external SVGFEBlendElement get feBlend;
-  external set feBlend(SVGFEBlendElement value);
-  external SVGFEColorMatrixElement get feColorMatrix;
-  external set feColorMatrix(SVGFEColorMatrixElement value);
-  external SVGFEComponentTransferElement get feComponentTransfer;
-  external set feComponentTransfer(SVGFEComponentTransferElement value);
-  external SVGFECompositeElement get feComposite;
-  external set feComposite(SVGFECompositeElement value);
-  external SVGFEConvolveMatrixElement get feConvolveMatrix;
-  external set feConvolveMatrix(SVGFEConvolveMatrixElement value);
-  external SVGFEDiffuseLightingElement get feDiffuseLighting;
-  external set feDiffuseLighting(SVGFEDiffuseLightingElement value);
-  external SVGFEDisplacementMapElement get feDisplacementMap;
-  external set feDisplacementMap(SVGFEDisplacementMapElement value);
-  external SVGFEDistantLightElement get feDistantLight;
-  external set feDistantLight(SVGFEDistantLightElement value);
+  external AElement get a;
+  external set a(AElement value);
+  external AnimateElement get animate;
+  external set animate(AnimateElement value);
+  external AnimateMotionElement get animateMotion;
+  external set animateMotion(AnimateMotionElement value);
+  external AnimateTransformElement get animateTransform;
+  external set animateTransform(AnimateTransformElement value);
+  external CircleElement get circle;
+  external set circle(CircleElement value);
+  external ClipPathElement get clipPath;
+  external set clipPath(ClipPathElement value);
+  external DefsElement get defs;
+  external set defs(DefsElement value);
+  external DescElement get desc;
+  external set desc(DescElement value);
+  external EllipseElement get ellipse;
+  external set ellipse(EllipseElement value);
+  external FEBlendElement get feBlend;
+  external set feBlend(FEBlendElement value);
+  external FEColorMatrixElement get feColorMatrix;
+  external set feColorMatrix(FEColorMatrixElement value);
+  external FEComponentTransferElement get feComponentTransfer;
+  external set feComponentTransfer(FEComponentTransferElement value);
+  external FECompositeElement get feComposite;
+  external set feComposite(FECompositeElement value);
+  external FEConvolveMatrixElement get feConvolveMatrix;
+  external set feConvolveMatrix(FEConvolveMatrixElement value);
+  external FEDiffuseLightingElement get feDiffuseLighting;
+  external set feDiffuseLighting(FEDiffuseLightingElement value);
+  external FEDisplacementMapElement get feDisplacementMap;
+  external set feDisplacementMap(FEDisplacementMapElement value);
+  external FEDistantLightElement get feDistantLight;
+  external set feDistantLight(FEDistantLightElement value);
   external SVGFEDropShadowElement get feDropShadow;
   external set feDropShadow(SVGFEDropShadowElement value);
-  external SVGFEFloodElement get feFlood;
-  external set feFlood(SVGFEFloodElement value);
-  external SVGFEFuncAElement get feFuncA;
-  external set feFuncA(SVGFEFuncAElement value);
-  external SVGFEFuncBElement get feFuncB;
-  external set feFuncB(SVGFEFuncBElement value);
-  external SVGFEFuncGElement get feFuncG;
-  external set feFuncG(SVGFEFuncGElement value);
-  external SVGFEFuncRElement get feFuncR;
-  external set feFuncR(SVGFEFuncRElement value);
-  external SVGFEGaussianBlurElement get feGaussianBlur;
-  external set feGaussianBlur(SVGFEGaussianBlurElement value);
-  external SVGFEImageElement get feImage;
-  external set feImage(SVGFEImageElement value);
-  external SVGFEMergeElement get feMerge;
-  external set feMerge(SVGFEMergeElement value);
-  external SVGFEMergeNodeElement get feMergeNode;
-  external set feMergeNode(SVGFEMergeNodeElement value);
-  external SVGFEMorphologyElement get feMorphology;
-  external set feMorphology(SVGFEMorphologyElement value);
-  external SVGFEOffsetElement get feOffset;
-  external set feOffset(SVGFEOffsetElement value);
-  external SVGFEPointLightElement get fePointLight;
-  external set fePointLight(SVGFEPointLightElement value);
-  external SVGFESpecularLightingElement get feSpecularLighting;
-  external set feSpecularLighting(SVGFESpecularLightingElement value);
-  external SVGFESpotLightElement get feSpotLight;
-  external set feSpotLight(SVGFESpotLightElement value);
-  external SVGFETileElement get feTile;
-  external set feTile(SVGFETileElement value);
-  external SVGFETurbulenceElement get feTurbulence;
-  external set feTurbulence(SVGFETurbulenceElement value);
-  external SVGFilterElement get filter;
-  external set filter(SVGFilterElement value);
-  external SVGForeignObjectElement get foreignObject;
-  external set foreignObject(SVGForeignObjectElement value);
-  external SVGGElement get g;
-  external set g(SVGGElement value);
-  external SVGImageElement get image;
-  external set image(SVGImageElement value);
-  external SVGLineElement get line;
-  external set line(SVGLineElement value);
-  external SVGLinearGradientElement get linearGradient;
-  external set linearGradient(SVGLinearGradientElement value);
-  external SVGMarkerElement get marker;
-  external set marker(SVGMarkerElement value);
-  external SVGMaskElement get mask;
-  external set mask(SVGMaskElement value);
-  external SVGMetadataElement get metadata;
-  external set metadata(SVGMetadataElement value);
+  external FEFloodElement get feFlood;
+  external set feFlood(FEFloodElement value);
+  external FEFuncAElement get feFuncA;
+  external set feFuncA(FEFuncAElement value);
+  external FEFuncBElement get feFuncB;
+  external set feFuncB(FEFuncBElement value);
+  external FEFuncGElement get feFuncG;
+  external set feFuncG(FEFuncGElement value);
+  external FEFuncRElement get feFuncR;
+  external set feFuncR(FEFuncRElement value);
+  external FEGaussianBlurElement get feGaussianBlur;
+  external set feGaussianBlur(FEGaussianBlurElement value);
+  external FEImageElement get feImage;
+  external set feImage(FEImageElement value);
+  external FEMergeElement get feMerge;
+  external set feMerge(FEMergeElement value);
+  external FEMergeNodeElement get feMergeNode;
+  external set feMergeNode(FEMergeNodeElement value);
+  external FEMorphologyElement get feMorphology;
+  external set feMorphology(FEMorphologyElement value);
+  external FEOffsetElement get feOffset;
+  external set feOffset(FEOffsetElement value);
+  external FEPointLightElement get fePointLight;
+  external set fePointLight(FEPointLightElement value);
+  external FESpecularLightingElement get feSpecularLighting;
+  external set feSpecularLighting(FESpecularLightingElement value);
+  external FESpotLightElement get feSpotLight;
+  external set feSpotLight(FESpotLightElement value);
+  external FETileElement get feTile;
+  external set feTile(FETileElement value);
+  external FETurbulenceElement get feTurbulence;
+  external set feTurbulence(FETurbulenceElement value);
+  external FilterElement get filter;
+  external set filter(FilterElement value);
+  external ForeignObjectElement get foreignObject;
+  external set foreignObject(ForeignObjectElement value);
+  external GElement get g;
+  external set g(GElement value);
+  external ImageElement get image;
+  external set image(ImageElement value);
+  external LineElement get line;
+  external set line(LineElement value);
+  external LinearGradientElement get linearGradient;
+  external set linearGradient(LinearGradientElement value);
+  external MarkerElement get marker;
+  external set marker(MarkerElement value);
+  external MaskElement get mask;
+  external set mask(MaskElement value);
+  external MetadataElement get metadata;
+  external set metadata(MetadataElement value);
   external SVGMPathElement get mpath;
   external set mpath(SVGMPathElement value);
-  external SVGPathElement get path;
-  external set path(SVGPathElement value);
-  external SVGPatternElement get pattern;
-  external set pattern(SVGPatternElement value);
-  external SVGPolygonElement get polygon;
-  external set polygon(SVGPolygonElement value);
-  external SVGPolylineElement get polyline;
-  external set polyline(SVGPolylineElement value);
-  external SVGRadialGradientElement get radialGradient;
-  external set radialGradient(SVGRadialGradientElement value);
-  external SVGRectElement get rect;
-  external set rect(SVGRectElement value);
-  external SVGScriptElement get script;
-  external set script(SVGScriptElement value);
-  external SVGSetElement get set;
-  external set set(SVGSetElement value);
-  external SVGStopElement get stop;
-  external set stop(SVGStopElement value);
-  external SVGStyleElement get style;
-  external set style(SVGStyleElement value);
-  external SVGSVGElement get svg;
-  external set svg(SVGSVGElement value);
-  external SVGSymbolElement get symbol;
-  external set symbol(SVGSymbolElement value);
-  external SVGTextElement get text;
-  external set text(SVGTextElement value);
-  external SVGTextPathElement get textPath;
-  external set textPath(SVGTextPathElement value);
-  external SVGTitleElement get title;
-  external set title(SVGTitleElement value);
-  external SVGTSpanElement get tspan;
-  external set tspan(SVGTSpanElement value);
-  external SVGUseElement get use;
-  external set use(SVGUseElement value);
-  external SVGViewElement get view;
-  external set view(SVGViewElement value);
+  external PathElement get path;
+  external set path(PathElement value);
+  external PatternElement get pattern;
+  external set pattern(PatternElement value);
+  external PolygonElement get polygon;
+  external set polygon(PolygonElement value);
+  external PolylineElement get polyline;
+  external set polyline(PolylineElement value);
+  external RadialGradientElement get radialGradient;
+  external set radialGradient(RadialGradientElement value);
+  external RectElement get rect;
+  external set rect(RectElement value);
+  external ScriptElement get script;
+  external set script(ScriptElement value);
+  external SetElement get set;
+  external set set(SetElement value);
+  external StopElement get stop;
+  external set stop(StopElement value);
+  external StyleElement get style;
+  external set style(StyleElement value);
+  external SvgSvgElement get svg;
+  external set svg(SvgSvgElement value);
+  external SymbolElement get symbol;
+  external set symbol(SymbolElement value);
+  external TextElement get text;
+  external set text(TextElement value);
+  external TextPathElement get textPath;
+  external set textPath(TextPathElement value);
+  external TitleElement get title;
+  external set title(TitleElement value);
+  external TSpanElement get tspan;
+  external set tspan(TSpanElement value);
+  external UseElement get use;
+  external set use(UseElement value);
+  external ViewElement get view;
+  external set view(ViewElement value);
   external factory SVGElementTagNameMap({
-    SVGAElement a,
-    SVGAnimateElement animate,
-    SVGAnimateMotionElement animateMotion,
-    SVGAnimateTransformElement animateTransform,
-    SVGCircleElement circle,
-    SVGClipPathElement clipPath,
-    SVGDefsElement defs,
-    SVGDescElement desc,
-    SVGEllipseElement ellipse,
-    SVGFEBlendElement feBlend,
-    SVGFEColorMatrixElement feColorMatrix,
-    SVGFEComponentTransferElement feComponentTransfer,
-    SVGFECompositeElement feComposite,
-    SVGFEConvolveMatrixElement feConvolveMatrix,
-    SVGFEDiffuseLightingElement feDiffuseLighting,
-    SVGFEDisplacementMapElement feDisplacementMap,
-    SVGFEDistantLightElement feDistantLight,
+    AElement a,
+    AnimateElement animate,
+    AnimateMotionElement animateMotion,
+    AnimateTransformElement animateTransform,
+    CircleElement circle,
+    ClipPathElement clipPath,
+    DefsElement defs,
+    DescElement desc,
+    EllipseElement ellipse,
+    FEBlendElement feBlend,
+    FEColorMatrixElement feColorMatrix,
+    FEComponentTransferElement feComponentTransfer,
+    FECompositeElement feComposite,
+    FEConvolveMatrixElement feConvolveMatrix,
+    FEDiffuseLightingElement feDiffuseLighting,
+    FEDisplacementMapElement feDisplacementMap,
+    FEDistantLightElement feDistantLight,
     SVGFEDropShadowElement feDropShadow,
-    SVGFEFloodElement feFlood,
-    SVGFEFuncAElement feFuncA,
-    SVGFEFuncBElement feFuncB,
-    SVGFEFuncGElement feFuncG,
-    SVGFEFuncRElement feFuncR,
-    SVGFEGaussianBlurElement feGaussianBlur,
-    SVGFEImageElement feImage,
-    SVGFEMergeElement feMerge,
-    SVGFEMergeNodeElement feMergeNode,
-    SVGFEMorphologyElement feMorphology,
-    SVGFEOffsetElement feOffset,
-    SVGFEPointLightElement fePointLight,
-    SVGFESpecularLightingElement feSpecularLighting,
-    SVGFESpotLightElement feSpotLight,
-    SVGFETileElement feTile,
-    SVGFETurbulenceElement feTurbulence,
-    SVGFilterElement filter,
-    SVGForeignObjectElement foreignObject,
-    SVGGElement g,
-    SVGImageElement image,
-    SVGLineElement line,
-    SVGLinearGradientElement linearGradient,
-    SVGMarkerElement marker,
-    SVGMaskElement mask,
-    SVGMetadataElement metadata,
+    FEFloodElement feFlood,
+    FEFuncAElement feFuncA,
+    FEFuncBElement feFuncB,
+    FEFuncGElement feFuncG,
+    FEFuncRElement feFuncR,
+    FEGaussianBlurElement feGaussianBlur,
+    FEImageElement feImage,
+    FEMergeElement feMerge,
+    FEMergeNodeElement feMergeNode,
+    FEMorphologyElement feMorphology,
+    FEOffsetElement feOffset,
+    FEPointLightElement fePointLight,
+    FESpecularLightingElement feSpecularLighting,
+    FESpotLightElement feSpotLight,
+    FETileElement feTile,
+    FETurbulenceElement feTurbulence,
+    FilterElement filter,
+    ForeignObjectElement foreignObject,
+    GElement g,
+    ImageElement image,
+    LineElement line,
+    LinearGradientElement linearGradient,
+    MarkerElement marker,
+    MaskElement mask,
+    MetadataElement metadata,
     SVGMPathElement mpath,
-    SVGPathElement path,
-    SVGPatternElement pattern,
-    SVGPolygonElement polygon,
-    SVGPolylineElement polyline,
-    SVGRadialGradientElement radialGradient,
-    SVGRectElement rect,
-    SVGScriptElement script,
-    SVGSetElement set,
-    SVGStopElement stop,
-    SVGStyleElement style,
-    SVGSVGElement svg,
-    SVGSymbolElement symbol,
-    SVGTextElement text,
-    SVGTextPathElement textPath,
-    SVGTitleElement title,
-    SVGTSpanElement tspan,
-    SVGUseElement use,
-    SVGViewElement view,
+    PathElement path,
+    PatternElement pattern,
+    PolygonElement polygon,
+    PolylineElement polyline,
+    RadialGradientElement radialGradient,
+    RectElement rect,
+    ScriptElement script,
+    SetElement set,
+    StopElement stop,
+    StyleElement style,
+    SvgSvgElement svg,
+    SymbolElement symbol,
+    TextElement text,
+    TextPathElement textPath,
+    TitleElement title,
+    TSpanElement tspan,
+    UseElement use,
+    ViewElement view,
   });
 }
 
@@ -23349,7 +23355,7 @@ external bool confirm(String message);
 @JS(r'focus')
 external void focus();
 @JS(r'getComputedStyle')
-external CSSStyleDeclaration getComputedStyle(Element elt, String? pseudoElt);
+external CssStyleDeclaration getComputedStyle(Element elt, String? pseudoElt);
 @JS(r'getSelection')
 external Selection? getSelection();
 @JS(r'matchMedia')
@@ -23617,7 +23623,7 @@ external bool crossOriginIsolated;
 @JS(r'crypto')
 external Crypto crypto;
 @JS(r'indexedDB')
-external IDBFactory indexedDB;
+external IdbFactory indexedDB;
 @JS(r'isSecureContext')
 external bool isSecureContext;
 @JS(r'origin')
@@ -23680,7 +23686,7 @@ external void removeEventListener<K extends String>(K type, dynamic Function(dyn
 @JS(r'removeEventListener')
 external void removeEventListener1(String type, EventListenerOrEventListenerObject listener, dynamic options);
 typedef AlgorithmIdentifier = dynamic;
-typedef BigInteger = Uint8Array;
+typedef BigInteger = Uint8List;
 typedef BinaryData = dynamic;
 typedef BlobPart = dynamic;
 typedef BodyInit = dynamic;
@@ -24158,8 +24164,8 @@ class IByteLengthQueuingStrategy {
 @JS()
 @anonymous
 class ICDATASection {
-  external CDATASection get prototype;
-  external set prototype(CDATASection value);
+  external CDataSection get prototype;
+  external set prototype(CDataSection value);
   external factory ICDATASection();
 }
 
@@ -24190,8 +24196,8 @@ class ICSSCounterStyleRule {
 @JS()
 @anonymous
 class ICSSFontFaceRule {
-  external CSSFontFaceRule get prototype;
-  external set prototype(CSSFontFaceRule value);
+  external CssFontFaceRule get prototype;
+  external set prototype(CssFontFaceRule value);
   external factory ICSSFontFaceRule();
 }
 
@@ -24206,32 +24212,32 @@ class ICSSGroupingRule {
 @JS()
 @anonymous
 class ICSSImportRule {
-  external CSSImportRule get prototype;
-  external set prototype(CSSImportRule value);
+  external CssImportRule get prototype;
+  external set prototype(CssImportRule value);
   external factory ICSSImportRule();
 }
 
 @JS()
 @anonymous
 class ICSSKeyframeRule {
-  external CSSKeyframeRule get prototype;
-  external set prototype(CSSKeyframeRule value);
+  external CssKeyframeRule get prototype;
+  external set prototype(CssKeyframeRule value);
   external factory ICSSKeyframeRule();
 }
 
 @JS()
 @anonymous
 class ICSSKeyframesRule {
-  external CSSKeyframesRule get prototype;
-  external set prototype(CSSKeyframesRule value);
+  external CssKeyframesRule get prototype;
+  external set prototype(CssKeyframesRule value);
   external factory ICSSKeyframesRule();
 }
 
 @JS()
 @anonymous
 class ICSSMediaRule {
-  external CSSMediaRule get prototype;
-  external set prototype(CSSMediaRule value);
+  external CssMediaRule get prototype;
+  external set prototype(CssMediaRule value);
   external factory ICSSMediaRule();
 }
 
@@ -24246,16 +24252,16 @@ class ICSSNamespaceRule {
 @JS()
 @anonymous
 class ICSSPageRule {
-  external CSSPageRule get prototype;
-  external set prototype(CSSPageRule value);
+  external CssPageRule get prototype;
+  external set prototype(CssPageRule value);
   external factory ICSSPageRule();
 }
 
 @JS()
 @anonymous
 class ICSSRule {
-  external CSSRule get prototype;
-  external set prototype(CSSRule value);
+  external CssRule get prototype;
+  external set prototype(CssRule value);
   external factory ICSSRule();
   external num get CHARSET_RULE;
   external num get FONT_FACE_RULE;
@@ -24280,32 +24286,32 @@ class ICSSRuleList {
 @JS()
 @anonymous
 class ICSSStyleDeclaration {
-  external CSSStyleDeclaration get prototype;
-  external set prototype(CSSStyleDeclaration value);
+  external CssStyleDeclaration get prototype;
+  external set prototype(CssStyleDeclaration value);
   external factory ICSSStyleDeclaration();
 }
 
 @JS()
 @anonymous
 class ICSSStyleRule {
-  external CSSStyleRule get prototype;
-  external set prototype(CSSStyleRule value);
+  external CssStyleRule get prototype;
+  external set prototype(CssStyleRule value);
   external factory ICSSStyleRule();
 }
 
 @JS()
 @anonymous
 class ICSSStyleSheet {
-  external CSSStyleSheet get prototype;
-  external set prototype(CSSStyleSheet value);
+  external CssStyleSheet get prototype;
+  external set prototype(CssStyleSheet value);
   external factory ICSSStyleSheet();
 }
 
 @JS()
 @anonymous
 class ICSSSupportsRule {
-  external CSSSupportsRule get prototype;
-  external set prototype(CSSSupportsRule value);
+  external CssSupportsRule get prototype;
+  external set prototype(CssSupportsRule value);
   external factory ICSSSupportsRule();
 }
 
@@ -24384,8 +24390,8 @@ class ICharacterData {
 @JS()
 @anonymous
 class IClientRect {
-  external ClientRect get prototype;
-  external set prototype(ClientRect value);
+  external Rectangle get prototype;
+  external set prototype(Rectangle value);
   external factory IClientRect();
 }
 
@@ -24520,8 +24526,8 @@ class ICustomEvent {
 @JS()
 @anonymous
 class IDOMException {
-  external DOMException get prototype;
-  external set prototype(DOMException value);
+  external DomException get prototype;
+  external set prototype(DomException value);
   external factory IDOMException({String message, String name});
   external num get ABORT_ERR;
   external num get DATA_CLONE_ERR;
@@ -24553,31 +24559,31 @@ class IDOMException {
 @JS()
 @anonymous
 class IDOMImplementation {
-  external DOMImplementation get prototype;
-  external set prototype(DOMImplementation value);
+  external DomImplementation get prototype;
+  external set prototype(DomImplementation value);
   external factory IDOMImplementation();
 }
 
 @JS()
 @anonymous
 class IDOMMatrix {
-  external DOMMatrix get prototype;
-  external set prototype(DOMMatrix value);
+  external DomMatrix get prototype;
+  external set prototype(DomMatrix value);
   external factory IDOMMatrix({dynamic init});
-  external DOMMatrix fromFloat32Array(Float32Array array32);
-  external DOMMatrix fromFloat64Array(Float64Array array64);
-  external DOMMatrix fromMatrix(DOMMatrixInit other);
+  external DomMatrix fromFloat32Array(Float32List array32);
+  external DomMatrix fromFloat64Array(Float64List array64);
+  external DomMatrix fromMatrix(DOMMatrixInit other);
 }
 
 @JS()
 @anonymous
 class IDOMMatrixReadOnly {
-  external DOMMatrixReadOnly get prototype;
-  external set prototype(DOMMatrixReadOnly value);
+  external DomMatrixReadOnly get prototype;
+  external set prototype(DomMatrixReadOnly value);
   external factory IDOMMatrixReadOnly({dynamic init});
-  external DOMMatrixReadOnly fromFloat32Array(Float32Array array32);
-  external DOMMatrixReadOnly fromFloat64Array(Float64Array array64);
-  external DOMMatrixReadOnly fromMatrix(DOMMatrixInit other);
+  external DomMatrixReadOnly fromFloat32Array(Float32List array32);
+  external DomMatrixReadOnly fromFloat64Array(Float64List array64);
+  external DomMatrixReadOnly fromMatrix(DOMMatrixInit other);
   @override
   external String toString();
 }
@@ -24585,27 +24591,27 @@ class IDOMMatrixReadOnly {
 @JS()
 @anonymous
 class IDOMParser {
-  external DOMParser get prototype;
-  external set prototype(DOMParser value);
+  external DomParser get prototype;
+  external set prototype(DomParser value);
   external factory IDOMParser();
 }
 
 @JS()
 @anonymous
 class IDOMPoint {
-  external DOMPoint get prototype;
-  external set prototype(DOMPoint value);
+  external DomPoint get prototype;
+  external set prototype(DomPoint value);
   external factory IDOMPoint({num x, num y, num z, num w});
-  external DOMPoint fromPoint(DOMPointInit other);
+  external DomPoint fromPoint(DOMPointInit other);
 }
 
 @JS()
 @anonymous
 class IDOMPointReadOnly {
-  external DOMPointReadOnly get prototype;
-  external set prototype(DOMPointReadOnly value);
+  external DomPointReadOnly get prototype;
+  external set prototype(DomPointReadOnly value);
   external factory IDOMPointReadOnly({num x, num y, num z, num w});
-  external DOMPointReadOnly fromPoint(DOMPointInit other);
+  external DomPointReadOnly fromPoint(DOMPointInit other);
 }
 
 @JS()
@@ -24638,33 +24644,33 @@ class IDOMRectList {
 @JS()
 @anonymous
 class IDOMRectReadOnly {
-  external DOMRectReadOnly get prototype;
-  external set prototype(DOMRectReadOnly value);
+  external DomRectReadOnly get prototype;
+  external set prototype(DomRectReadOnly value);
   external factory IDOMRectReadOnly({num x, num y, num width, num height});
-  external DOMRectReadOnly fromRect(DOMRectInit other);
+  external DomRectReadOnly fromRect(DOMRectInit other);
 }
 
 @JS()
 @anonymous
 class IDOMStringList {
-  external DOMStringList get prototype;
-  external set prototype(DOMStringList value);
+  external DomStringList get prototype;
+  external set prototype(DomStringList value);
   external factory IDOMStringList();
 }
 
 @JS()
 @anonymous
 class IDOMStringMap {
-  external DOMStringMap get prototype;
-  external set prototype(DOMStringMap value);
+  external DomStringMap get prototype;
+  external set prototype(DomStringMap value);
   external factory IDOMStringMap();
 }
 
 @JS()
 @anonymous
 class IDOMTokenList {
-  external DOMTokenList get prototype;
-  external set prototype(DOMTokenList value);
+  external DomTokenList get prototype;
+  external set prototype(DomTokenList value);
   external factory IDOMTokenList();
 }
 
@@ -24923,7 +24929,7 @@ class IFontFaceSetLoadEvent {
 class IFormData {
   external FormData get prototype;
   external set prototype(FormData value);
-  external factory IFormData({HTMLFormElement form});
+  external factory IFormData({FormElement form});
 }
 
 @JS()
@@ -25028,80 +25034,80 @@ class IHTMLAllCollection {
 @JS()
 @anonymous
 class IHTMLAnchorElement {
-  external HTMLAnchorElement get prototype;
-  external set prototype(HTMLAnchorElement value);
+  external AnchorElement get prototype;
+  external set prototype(AnchorElement value);
   external factory IHTMLAnchorElement();
 }
 
 @JS()
 @anonymous
 class IHTMLAreaElement {
-  external HTMLAreaElement get prototype;
-  external set prototype(HTMLAreaElement value);
+  external AreaElement get prototype;
+  external set prototype(AreaElement value);
   external factory IHTMLAreaElement();
 }
 
 @JS()
 @anonymous
 class IHTMLAudioElement {
-  external HTMLAudioElement get prototype;
-  external set prototype(HTMLAudioElement value);
+  external AudioElement get prototype;
+  external set prototype(AudioElement value);
   external factory IHTMLAudioElement();
 }
 
 @JS()
 @anonymous
 class IHTMLBRElement {
-  external HTMLBRElement get prototype;
-  external set prototype(HTMLBRElement value);
+  external BRElement get prototype;
+  external set prototype(BRElement value);
   external factory IHTMLBRElement();
 }
 
 @JS()
 @anonymous
 class IHTMLBaseElement {
-  external HTMLBaseElement get prototype;
-  external set prototype(HTMLBaseElement value);
+  external BaseElement get prototype;
+  external set prototype(BaseElement value);
   external factory IHTMLBaseElement();
 }
 
 @JS()
 @anonymous
 class IHTMLBodyElement {
-  external HTMLBodyElement get prototype;
-  external set prototype(HTMLBodyElement value);
+  external BodyElement get prototype;
+  external set prototype(BodyElement value);
   external factory IHTMLBodyElement();
 }
 
 @JS()
 @anonymous
 class IHTMLButtonElement {
-  external HTMLButtonElement get prototype;
-  external set prototype(HTMLButtonElement value);
+  external ButtonElement get prototype;
+  external set prototype(ButtonElement value);
   external factory IHTMLButtonElement();
 }
 
 @JS()
 @anonymous
 class IHTMLCanvasElement {
-  external HTMLCanvasElement get prototype;
-  external set prototype(HTMLCanvasElement value);
+  external CanvasElement get prototype;
+  external set prototype(CanvasElement value);
   external factory IHTMLCanvasElement();
 }
 
 @JS()
 @anonymous
 class IHTMLCollection {
-  external HTMLCollection get prototype;
-  external set prototype(HTMLCollection value);
+  external HtmlCollection get prototype;
+  external set prototype(HtmlCollection value);
   external factory IHTMLCollection();
 }
 
 @JS()
 @anonymous
 class IHTMLDListElement {
-  external HTMLDListElement get prototype;
-  external set prototype(HTMLDListElement value);
+  external DListElement get prototype;
+  external set prototype(DListElement value);
   external factory IHTMLDListElement();
 }
 
@@ -25116,16 +25122,16 @@ class IHTMLDataElement {
 @JS()
 @anonymous
 class IHTMLDataListElement {
-  external HTMLDataListElement get prototype;
-  external set prototype(HTMLDataListElement value);
+  external DataListElement get prototype;
+  external set prototype(DataListElement value);
   external factory IHTMLDataListElement();
 }
 
 @JS()
 @anonymous
 class IHTMLDetailsElement {
-  external HTMLDetailsElement get prototype;
-  external set prototype(HTMLDetailsElement value);
+  external DetailsElement get prototype;
+  external set prototype(DetailsElement value);
   external factory IHTMLDetailsElement();
 }
 
@@ -25140,32 +25146,32 @@ class IHTMLDirectoryElement {
 @JS()
 @anonymous
 class IHTMLDivElement {
-  external HTMLDivElement get prototype;
-  external set prototype(HTMLDivElement value);
+  external DivElement get prototype;
+  external set prototype(DivElement value);
   external factory IHTMLDivElement();
 }
 
 @JS()
 @anonymous
 class IHTMLElement {
-  external HTMLElement get prototype;
-  external set prototype(HTMLElement value);
+  external HtmlElement get prototype;
+  external set prototype(HtmlElement value);
   external factory IHTMLElement();
 }
 
 @JS()
 @anonymous
 class IHTMLEmbedElement {
-  external HTMLEmbedElement get prototype;
-  external set prototype(HTMLEmbedElement value);
+  external EmbedElement get prototype;
+  external set prototype(EmbedElement value);
   external factory IHTMLEmbedElement();
 }
 
 @JS()
 @anonymous
 class IHTMLFieldSetElement {
-  external HTMLFieldSetElement get prototype;
-  external set prototype(HTMLFieldSetElement value);
+  external FieldSetElement get prototype;
+  external set prototype(FieldSetElement value);
   external factory IHTMLFieldSetElement();
 }
 
@@ -25180,16 +25186,16 @@ class IHTMLFontElement {
 @JS()
 @anonymous
 class IHTMLFormControlsCollection {
-  external HTMLFormControlsCollection get prototype;
-  external set prototype(HTMLFormControlsCollection value);
+  external HtmlFormControlsCollection get prototype;
+  external set prototype(HtmlFormControlsCollection value);
   external factory IHTMLFormControlsCollection();
 }
 
 @JS()
 @anonymous
 class IHTMLFormElement {
-  external HTMLFormElement get prototype;
-  external set prototype(HTMLFormElement value);
+  external FormElement get prototype;
+  external set prototype(FormElement value);
   external factory IHTMLFormElement();
 }
 
@@ -25212,96 +25218,96 @@ class IHTMLFrameSetElement {
 @JS()
 @anonymous
 class IHTMLHRElement {
-  external HTMLHRElement get prototype;
-  external set prototype(HTMLHRElement value);
+  external HRElement get prototype;
+  external set prototype(HRElement value);
   external factory IHTMLHRElement();
 }
 
 @JS()
 @anonymous
 class IHTMLHeadElement {
-  external HTMLHeadElement get prototype;
-  external set prototype(HTMLHeadElement value);
+  external HeadElement get prototype;
+  external set prototype(HeadElement value);
   external factory IHTMLHeadElement();
 }
 
 @JS()
 @anonymous
 class IHTMLHeadingElement {
-  external HTMLHeadingElement get prototype;
-  external set prototype(HTMLHeadingElement value);
+  external HeadingElement get prototype;
+  external set prototype(HeadingElement value);
   external factory IHTMLHeadingElement();
 }
 
 @JS()
 @anonymous
 class IHTMLHtmlElement {
-  external HTMLHtmlElement get prototype;
-  external set prototype(HTMLHtmlElement value);
+  external HtmlHtmlElement get prototype;
+  external set prototype(HtmlHtmlElement value);
   external factory IHTMLHtmlElement();
 }
 
 @JS()
 @anonymous
 class IHTMLIFrameElement {
-  external HTMLIFrameElement get prototype;
-  external set prototype(HTMLIFrameElement value);
+  external IFrameElement get prototype;
+  external set prototype(IFrameElement value);
   external factory IHTMLIFrameElement();
 }
 
 @JS()
 @anonymous
 class IHTMLImageElement {
-  external HTMLImageElement get prototype;
-  external set prototype(HTMLImageElement value);
+  external ImageElement get prototype;
+  external set prototype(ImageElement value);
   external factory IHTMLImageElement();
 }
 
 @JS()
 @anonymous
 class IHTMLInputElement {
-  external HTMLInputElement get prototype;
-  external set prototype(HTMLInputElement value);
+  external InputElement get prototype;
+  external set prototype(InputElement value);
   external factory IHTMLInputElement();
 }
 
 @JS()
 @anonymous
 class IHTMLLIElement {
-  external HTMLLIElement get prototype;
-  external set prototype(HTMLLIElement value);
+  external LIElement get prototype;
+  external set prototype(LIElement value);
   external factory IHTMLLIElement();
 }
 
 @JS()
 @anonymous
 class IHTMLLabelElement {
-  external HTMLLabelElement get prototype;
-  external set prototype(HTMLLabelElement value);
+  external LabelElement get prototype;
+  external set prototype(LabelElement value);
   external factory IHTMLLabelElement();
 }
 
 @JS()
 @anonymous
 class IHTMLLegendElement {
-  external HTMLLegendElement get prototype;
-  external set prototype(HTMLLegendElement value);
+  external LegendElement get prototype;
+  external set prototype(LegendElement value);
   external factory IHTMLLegendElement();
 }
 
 @JS()
 @anonymous
 class IHTMLLinkElement {
-  external HTMLLinkElement get prototype;
-  external set prototype(HTMLLinkElement value);
+  external LinkElement get prototype;
+  external set prototype(LinkElement value);
   external factory IHTMLLinkElement();
 }
 
 @JS()
 @anonymous
 class IHTMLMapElement {
-  external HTMLMapElement get prototype;
-  external set prototype(HTMLMapElement value);
+  external MapElement get prototype;
+  external set prototype(MapElement value);
   external factory IHTMLMapElement();
 }
 
@@ -25316,8 +25322,8 @@ class IHTMLMarqueeElement {
 @JS()
 @anonymous
 class IHTMLMediaElement {
-  external HTMLMediaElement get prototype;
-  external set prototype(HTMLMediaElement value);
+  external MediaElement get prototype;
+  external set prototype(MediaElement value);
   external factory IHTMLMediaElement();
   external num get HAVE_CURRENT_DATA;
   external num get HAVE_ENOUGH_DATA;
@@ -25333,144 +25339,144 @@ class IHTMLMediaElement {
 @JS()
 @anonymous
 class IHTMLMenuElement {
-  external HTMLMenuElement get prototype;
-  external set prototype(HTMLMenuElement value);
+  external MenuElement get prototype;
+  external set prototype(MenuElement value);
   external factory IHTMLMenuElement();
 }
 
 @JS()
 @anonymous
 class IHTMLMetaElement {
-  external HTMLMetaElement get prototype;
-  external set prototype(HTMLMetaElement value);
+  external MetaElement get prototype;
+  external set prototype(MetaElement value);
   external factory IHTMLMetaElement();
 }
 
 @JS()
 @anonymous
 class IHTMLMeterElement {
-  external HTMLMeterElement get prototype;
-  external set prototype(HTMLMeterElement value);
+  external MeterElement get prototype;
+  external set prototype(MeterElement value);
   external factory IHTMLMeterElement();
 }
 
 @JS()
 @anonymous
 class IHTMLModElement {
-  external HTMLModElement get prototype;
-  external set prototype(HTMLModElement value);
+  external ModElement get prototype;
+  external set prototype(ModElement value);
   external factory IHTMLModElement();
 }
 
 @JS()
 @anonymous
 class IHTMLOListElement {
-  external HTMLOListElement get prototype;
-  external set prototype(HTMLOListElement value);
+  external OListElement get prototype;
+  external set prototype(OListElement value);
   external factory IHTMLOListElement();
 }
 
 @JS()
 @anonymous
 class IHTMLObjectElement {
-  external HTMLObjectElement get prototype;
-  external set prototype(HTMLObjectElement value);
+  external ObjectElement get prototype;
+  external set prototype(ObjectElement value);
   external factory IHTMLObjectElement();
 }
 
 @JS()
 @anonymous
 class IHTMLOptGroupElement {
-  external HTMLOptGroupElement get prototype;
-  external set prototype(HTMLOptGroupElement value);
+  external OptGroupElement get prototype;
+  external set prototype(OptGroupElement value);
   external factory IHTMLOptGroupElement();
 }
 
 @JS()
 @anonymous
 class IHTMLOptionElement {
-  external HTMLOptionElement get prototype;
-  external set prototype(HTMLOptionElement value);
+  external OptionElement get prototype;
+  external set prototype(OptionElement value);
   external factory IHTMLOptionElement();
 }
 
 @JS()
 @anonymous
 class IHTMLOptionsCollection {
-  external HTMLOptionsCollection get prototype;
-  external set prototype(HTMLOptionsCollection value);
+  external HtmlOptionsCollection get prototype;
+  external set prototype(HtmlOptionsCollection value);
   external factory IHTMLOptionsCollection();
 }
 
 @JS()
 @anonymous
 class IHTMLOutputElement {
-  external HTMLOutputElement get prototype;
-  external set prototype(HTMLOutputElement value);
+  external OutputElement get prototype;
+  external set prototype(OutputElement value);
   external factory IHTMLOutputElement();
 }
 
 @JS()
 @anonymous
 class IHTMLParagraphElement {
-  external HTMLParagraphElement get prototype;
-  external set prototype(HTMLParagraphElement value);
+  external ParagraphElement get prototype;
+  external set prototype(ParagraphElement value);
   external factory IHTMLParagraphElement();
 }
 
 @JS()
 @anonymous
 class IHTMLParamElement {
-  external HTMLParamElement get prototype;
-  external set prototype(HTMLParamElement value);
+  external ParamElement get prototype;
+  external set prototype(ParamElement value);
   external factory IHTMLParamElement();
 }
 
 @JS()
 @anonymous
 class IHTMLPictureElement {
-  external HTMLPictureElement get prototype;
-  external set prototype(HTMLPictureElement value);
+  external PictureElement get prototype;
+  external set prototype(PictureElement value);
   external factory IHTMLPictureElement();
 }
 
 @JS()
 @anonymous
 class IHTMLPreElement {
-  external HTMLPreElement get prototype;
-  external set prototype(HTMLPreElement value);
+  external PreElement get prototype;
+  external set prototype(PreElement value);
   external factory IHTMLPreElement();
 }
 
 @JS()
 @anonymous
 class IHTMLProgressElement {
-  external HTMLProgressElement get prototype;
-  external set prototype(HTMLProgressElement value);
+  external ProgressElement get prototype;
+  external set prototype(ProgressElement value);
   external factory IHTMLProgressElement();
 }
 
 @JS()
 @anonymous
 class IHTMLQuoteElement {
-  external HTMLQuoteElement get prototype;
-  external set prototype(HTMLQuoteElement value);
+  external QuoteElement get prototype;
+  external set prototype(QuoteElement value);
   external factory IHTMLQuoteElement();
 }
 
 @JS()
 @anonymous
 class IHTMLScriptElement {
-  external HTMLScriptElement get prototype;
-  external set prototype(HTMLScriptElement value);
+  external ScriptElement get prototype;
+  external set prototype(ScriptElement value);
   external factory IHTMLScriptElement();
 }
 
 @JS()
 @anonymous
 class IHTMLSelectElement {
-  external HTMLSelectElement get prototype;
-  external set prototype(HTMLSelectElement value);
+  external SelectElement get prototype;
+  external set prototype(SelectElement value);
   external factory IHTMLSelectElement();
 }
 
@@ -25485,88 +25491,88 @@ class IHTMLSlotElement {
 @JS()
 @anonymous
 class IHTMLSourceElement {
-  external HTMLSourceElement get prototype;
-  external set prototype(HTMLSourceElement value);
+  external SourceElement get prototype;
+  external set prototype(SourceElement value);
   external factory IHTMLSourceElement();
 }
 
 @JS()
 @anonymous
 class IHTMLSpanElement {
-  external HTMLSpanElement get prototype;
-  external set prototype(HTMLSpanElement value);
+  external SpanElement get prototype;
+  external set prototype(SpanElement value);
   external factory IHTMLSpanElement();
 }
 
 @JS()
 @anonymous
 class IHTMLStyleElement {
-  external HTMLStyleElement get prototype;
-  external set prototype(HTMLStyleElement value);
+  external StyleElement get prototype;
+  external set prototype(StyleElement value);
   external factory IHTMLStyleElement();
 }
 
 @JS()
 @anonymous
 class IHTMLTableCaptionElement {
-  external HTMLTableCaptionElement get prototype;
-  external set prototype(HTMLTableCaptionElement value);
+  external TableCaptionElement get prototype;
+  external set prototype(TableCaptionElement value);
   external factory IHTMLTableCaptionElement();
 }
 
 @JS()
 @anonymous
 class IHTMLTableCellElement {
-  external HTMLTableCellElement get prototype;
-  external set prototype(HTMLTableCellElement value);
+  external TableCellElement get prototype;
+  external set prototype(TableCellElement value);
   external factory IHTMLTableCellElement();
 }
 
 @JS()
 @anonymous
 class IHTMLTableColElement {
-  external HTMLTableColElement get prototype;
-  external set prototype(HTMLTableColElement value);
+  external TableColElement get prototype;
+  external set prototype(TableColElement value);
   external factory IHTMLTableColElement();
 }
 
 @JS()
 @anonymous
 class IHTMLTableElement {
-  external HTMLTableElement get prototype;
-  external set prototype(HTMLTableElement value);
+  external TableElement get prototype;
+  external set prototype(TableElement value);
   external factory IHTMLTableElement();
 }
 
 @JS()
 @anonymous
 class IHTMLTableRowElement {
-  external HTMLTableRowElement get prototype;
-  external set prototype(HTMLTableRowElement value);
+  external TableRowElement get prototype;
+  external set prototype(TableRowElement value);
   external factory IHTMLTableRowElement();
 }
 
 @JS()
 @anonymous
 class IHTMLTableSectionElement {
-  external HTMLTableSectionElement get prototype;
-  external set prototype(HTMLTableSectionElement value);
+  external TableSectionElement get prototype;
+  external set prototype(TableSectionElement value);
   external factory IHTMLTableSectionElement();
 }
 
 @JS()
 @anonymous
 class IHTMLTemplateElement {
-  external HTMLTemplateElement get prototype;
-  external set prototype(HTMLTemplateElement value);
+  external TemplateElement get prototype;
+  external set prototype(TemplateElement value);
   external factory IHTMLTemplateElement();
 }
 
 @JS()
 @anonymous
 class IHTMLTextAreaElement {
-  external HTMLTextAreaElement get prototype;
-  external set prototype(HTMLTextAreaElement value);
+  external TextAreaElement get prototype;
+  external set prototype(TextAreaElement value);
   external factory IHTMLTextAreaElement();
 }
 
@@ -25581,16 +25587,16 @@ class IHTMLTimeElement {
 @JS()
 @anonymous
 class IHTMLTitleElement {
-  external HTMLTitleElement get prototype;
-  external set prototype(HTMLTitleElement value);
+  external TitleElement get prototype;
+  external set prototype(TitleElement value);
   external factory IHTMLTitleElement();
 }
 
 @JS()
 @anonymous
 class IHTMLTrackElement {
-  external HTMLTrackElement get prototype;
-  external set prototype(HTMLTrackElement value);
+  external TrackElement get prototype;
+  external set prototype(TrackElement value);
   external factory IHTMLTrackElement();
   external num get ERROR;
   external num get LOADED;
@@ -25601,24 +25607,24 @@ class IHTMLTrackElement {
 @JS()
 @anonymous
 class IHTMLUListElement {
-  external HTMLUListElement get prototype;
-  external set prototype(HTMLUListElement value);
+  external UListElement get prototype;
+  external set prototype(UListElement value);
   external factory IHTMLUListElement();
 }
 
 @JS()
 @anonymous
 class IHTMLUnknownElement {
-  external HTMLUnknownElement get prototype;
-  external set prototype(HTMLUnknownElement value);
+  external UnknownElement get prototype;
+  external set prototype(UnknownElement value);
   external factory IHTMLUnknownElement();
 }
 
 @JS()
 @anonymous
 class IHTMLVideoElement {
-  external HTMLVideoElement get prototype;
-  external set prototype(HTMLVideoElement value);
+  external VideoElement get prototype;
+  external set prototype(VideoElement value);
   external factory IHTMLVideoElement();
 }
 
@@ -25649,92 +25655,92 @@ class IHistory {
 @JS()
 @anonymous
 class IIDBCursor {
-  external IDBCursor get prototype;
-  external set prototype(IDBCursor value);
+  external Cursor get prototype;
+  external set prototype(Cursor value);
   external factory IIDBCursor();
 }
 
 @JS()
 @anonymous
 class IIDBCursorWithValue {
-  external IDBCursorWithValue get prototype;
-  external set prototype(IDBCursorWithValue value);
+  external CursorWithValue get prototype;
+  external set prototype(CursorWithValue value);
   external factory IIDBCursorWithValue();
 }
 
 @JS()
 @anonymous
 class IIDBDatabase {
-  external IDBDatabase get prototype;
-  external set prototype(IDBDatabase value);
+  external Database get prototype;
+  external set prototype(Database value);
   external factory IIDBDatabase();
 }
 
 @JS()
 @anonymous
 class IIDBFactory {
-  external IDBFactory get prototype;
-  external set prototype(IDBFactory value);
+  external IdbFactory get prototype;
+  external set prototype(IdbFactory value);
   external factory IIDBFactory();
 }
 
 @JS()
 @anonymous
 class IIDBIndex {
-  external IDBIndex get prototype;
-  external set prototype(IDBIndex value);
+  external Index get prototype;
+  external set prototype(Index value);
   external factory IIDBIndex();
 }
 
 @JS()
 @anonymous
 class IIDBKeyRange {
-  external IDBKeyRange get prototype;
-  external set prototype(IDBKeyRange value);
+  external KeyRange get prototype;
+  external set prototype(KeyRange value);
   external factory IIDBKeyRange();
-  external IDBKeyRange bound(dynamic lower, dynamic upper, bool lowerOpen, bool upperOpen);
-  external IDBKeyRange lowerBound(dynamic lower, bool open);
-  external IDBKeyRange only(dynamic value);
-  external IDBKeyRange upperBound(dynamic upper, bool open);
+  external KeyRange bound(dynamic lower, dynamic upper, bool lowerOpen, bool upperOpen);
+  external KeyRange lowerBound(dynamic lower, bool open);
+  external KeyRange only(dynamic value);
+  external KeyRange upperBound(dynamic upper, bool open);
 }
 
 @JS()
 @anonymous
 class IIDBObjectStore {
-  external IDBObjectStore get prototype;
-  external set prototype(IDBObjectStore value);
+  external ObjectStore get prototype;
+  external set prototype(ObjectStore value);
   external factory IIDBObjectStore();
 }
 
 @JS()
 @anonymous
 class IIDBOpenDBRequest {
-  external IDBOpenDBRequest get prototype;
-  external set prototype(IDBOpenDBRequest value);
+  external OpenDBRequest get prototype;
+  external set prototype(OpenDBRequest value);
   external factory IIDBOpenDBRequest();
 }
 
 @JS()
 @anonymous
 class IIDBRequest {
-  external IDBRequest get prototype;
-  external set prototype(IDBRequest value);
+  external Request get prototype;
+  external set prototype(Request value);
   external factory IIDBRequest();
 }
 
 @JS()
 @anonymous
 class IIDBTransaction {
-  external IDBTransaction get prototype;
-  external set prototype(IDBTransaction value);
+  external Transaction get prototype;
+  external set prototype(Transaction value);
   external factory IIDBTransaction();
 }
 
 @JS()
 @anonymous
 class IIDBVersionChangeEvent {
-  external IDBVersionChangeEvent get prototype;
-  external set prototype(IDBVersionChangeEvent value);
+  external VersionChangeEvent get prototype;
+  external set prototype(VersionChangeEvent value);
   external factory IIDBVersionChangeEvent({String type, IDBVersionChangeEventInit eventInitDict});
 }
 
@@ -26112,7 +26118,7 @@ class IModule {
   external Module get prototype;
   external set prototype(Module value);
   external factory IModule({BufferSource bytes});
-  external List<ArrayBuffer> customSections(Module moduleObject, String sectionName);
+  external List<ByteBuffer> customSections(Module moduleObject, String sectionName);
   external List<ModuleExportDescriptor> exports(Module moduleObject);
   external List<ModuleImportDescriptor> imports(Module moduleObject);
 }
@@ -26417,7 +26423,7 @@ class IPerformanceObserver {
   external PerformanceObserver get prototype;
   external set prototype(PerformanceObserver value);
   external factory IPerformanceObserver({PerformanceObserverCallback callback});
-  external ReadonlyArray<String> get supportedEntryTypes;
+  external List<String> get supportedEntryTypes;
 }
 
 @JS()
@@ -26563,7 +26569,7 @@ class IPushManager {
   external PushManager get prototype;
   external set prototype(PushManager value);
   external factory IPushManager();
-  external ReadonlyArray<String> get supportedContentEncodings;
+  external List<String> get supportedContentEncodings;
 }
 
 @JS()
@@ -26593,32 +26599,32 @@ class IRTCCertificate {
 @JS()
 @anonymous
 class IRTCDTMFSender {
-  external RTCDTMFSender get prototype;
-  external set prototype(RTCDTMFSender value);
+  external RtcDtmfSender get prototype;
+  external set prototype(RtcDtmfSender value);
   external factory IRTCDTMFSender();
 }
 
 @JS()
 @anonymous
 class IRTCDTMFToneChangeEvent {
-  external RTCDTMFToneChangeEvent get prototype;
-  external set prototype(RTCDTMFToneChangeEvent value);
+  external RtcDtmfToneChangeEvent get prototype;
+  external set prototype(RtcDtmfToneChangeEvent value);
   external factory IRTCDTMFToneChangeEvent({String type, RTCDTMFToneChangeEventInit eventInitDict});
 }
 
 @JS()
 @anonymous
 class IRTCDataChannel {
-  external RTCDataChannel get prototype;
-  external set prototype(RTCDataChannel value);
+  external RtcDataChannel get prototype;
+  external set prototype(RtcDataChannel value);
   external factory IRTCDataChannel();
 }
 
 @JS()
 @anonymous
 class IRTCDataChannelEvent {
-  external RTCDataChannelEvent get prototype;
-  external set prototype(RTCDataChannelEvent value);
+  external RtcDataChannelEvent get prototype;
+  external set prototype(RtcDataChannelEvent value);
   external factory IRTCDataChannelEvent({String type, RTCDataChannelEventInit eventInitDict});
 }
 
@@ -26633,8 +26639,8 @@ class IRTCDtlsTransport {
 @JS()
 @anonymous
 class IRTCIceCandidate {
-  external RTCIceCandidate get prototype;
-  external set prototype(RTCIceCandidate value);
+  external RtcIceCandidate get prototype;
+  external set prototype(RtcIceCandidate value);
   external factory IRTCIceCandidate({RTCIceCandidateInit candidateInitDict});
 }
 
@@ -26649,8 +26655,8 @@ class IRTCIceTransport {
 @JS()
 @anonymous
 class IRTCPeerConnection {
-  external RTCPeerConnection get prototype;
-  external set prototype(RTCPeerConnection value);
+  external RtcPeerConnection get prototype;
+  external set prototype(RtcPeerConnection value);
   external factory IRTCPeerConnection({RTCConfiguration configuration});
   external Promise<RTCCertificate> generateCertificate(AlgorithmIdentifier keygenAlgorithm);
 }
@@ -26700,16 +26706,16 @@ class IRTCRtpTransceiver {
 @JS()
 @anonymous
 class IRTCSessionDescription {
-  external RTCSessionDescription get prototype;
-  external set prototype(RTCSessionDescription value);
+  external RtcSessionDescription get prototype;
+  external set prototype(RtcSessionDescription value);
   external factory IRTCSessionDescription({RTCSessionDescriptionInit descriptionInitDict});
 }
 
 @JS()
 @anonymous
 class IRTCStatsReport {
-  external RTCStatsReport get prototype;
-  external set prototype(RTCStatsReport value);
+  external RtcStatsReport get prototype;
+  external set prototype(RtcStatsReport value);
   external factory IRTCStatsReport();
 }
 
@@ -26828,16 +26834,16 @@ class IRuntimeError {
 @JS()
 @anonymous
 class ISVGAElement {
-  external SVGAElement get prototype;
-  external set prototype(SVGAElement value);
+  external AElement get prototype;
+  external set prototype(AElement value);
   external factory ISVGAElement();
 }
 
 @JS()
 @anonymous
 class ISVGAngle {
-  external SVGAngle get prototype;
-  external set prototype(SVGAngle value);
+  external Angle get prototype;
+  external set prototype(Angle value);
   external factory ISVGAngle();
   external num get SVG_ANGLETYPE_DEG;
   external num get SVG_ANGLETYPE_GRAD;
@@ -26849,144 +26855,144 @@ class ISVGAngle {
 @JS()
 @anonymous
 class ISVGAnimateElement {
-  external SVGAnimateElement get prototype;
-  external set prototype(SVGAnimateElement value);
+  external AnimateElement get prototype;
+  external set prototype(AnimateElement value);
   external factory ISVGAnimateElement();
 }
 
 @JS()
 @anonymous
 class ISVGAnimateMotionElement {
-  external SVGAnimateMotionElement get prototype;
-  external set prototype(SVGAnimateMotionElement value);
+  external AnimateMotionElement get prototype;
+  external set prototype(AnimateMotionElement value);
   external factory ISVGAnimateMotionElement();
 }
 
 @JS()
 @anonymous
 class ISVGAnimateTransformElement {
-  external SVGAnimateTransformElement get prototype;
-  external set prototype(SVGAnimateTransformElement value);
+  external AnimateTransformElement get prototype;
+  external set prototype(AnimateTransformElement value);
   external factory ISVGAnimateTransformElement();
 }
 
 @JS()
 @anonymous
 class ISVGAnimatedAngle {
-  external SVGAnimatedAngle get prototype;
-  external set prototype(SVGAnimatedAngle value);
+  external AnimatedAngle get prototype;
+  external set prototype(AnimatedAngle value);
   external factory ISVGAnimatedAngle();
 }
 
 @JS()
 @anonymous
 class ISVGAnimatedBoolean {
-  external SVGAnimatedBoolean get prototype;
-  external set prototype(SVGAnimatedBoolean value);
+  external AnimatedBoolean get prototype;
+  external set prototype(AnimatedBoolean value);
   external factory ISVGAnimatedBoolean();
 }
 
 @JS()
 @anonymous
 class ISVGAnimatedEnumeration {
-  external SVGAnimatedEnumeration get prototype;
-  external set prototype(SVGAnimatedEnumeration value);
+  external AnimatedEnumeration get prototype;
+  external set prototype(AnimatedEnumeration value);
   external factory ISVGAnimatedEnumeration();
 }
 
 @JS()
 @anonymous
 class ISVGAnimatedInteger {
-  external SVGAnimatedInteger get prototype;
-  external set prototype(SVGAnimatedInteger value);
+  external AnimatedInteger get prototype;
+  external set prototype(AnimatedInteger value);
   external factory ISVGAnimatedInteger();
 }
 
 @JS()
 @anonymous
 class ISVGAnimatedLength {
-  external SVGAnimatedLength get prototype;
-  external set prototype(SVGAnimatedLength value);
+  external AnimatedLength get prototype;
+  external set prototype(AnimatedLength value);
   external factory ISVGAnimatedLength();
 }
 
 @JS()
 @anonymous
 class ISVGAnimatedLengthList {
-  external SVGAnimatedLengthList get prototype;
-  external set prototype(SVGAnimatedLengthList value);
+  external AnimatedLengthList get prototype;
+  external set prototype(AnimatedLengthList value);
   external factory ISVGAnimatedLengthList();
 }
 
 @JS()
 @anonymous
 class ISVGAnimatedNumber {
-  external SVGAnimatedNumber get prototype;
-  external set prototype(SVGAnimatedNumber value);
+  external AnimatedNumber get prototype;
+  external set prototype(AnimatedNumber value);
   external factory ISVGAnimatedNumber();
 }
 
 @JS()
 @anonymous
 class ISVGAnimatedNumberList {
-  external SVGAnimatedNumberList get prototype;
-  external set prototype(SVGAnimatedNumberList value);
+  external AnimatedNumberList get prototype;
+  external set prototype(AnimatedNumberList value);
   external factory ISVGAnimatedNumberList();
 }
 
 @JS()
 @anonymous
 class ISVGAnimatedPreserveAspectRatio {
-  external SVGAnimatedPreserveAspectRatio get prototype;
-  external set prototype(SVGAnimatedPreserveAspectRatio value);
+  external AnimatedPreserveAspectRatio get prototype;
+  external set prototype(AnimatedPreserveAspectRatio value);
   external factory ISVGAnimatedPreserveAspectRatio();
 }
 
 @JS()
 @anonymous
 class ISVGAnimatedRect {
-  external SVGAnimatedRect get prototype;
-  external set prototype(SVGAnimatedRect value);
+  external AnimatedRect get prototype;
+  external set prototype(AnimatedRect value);
   external factory ISVGAnimatedRect();
 }
 
 @JS()
 @anonymous
 class ISVGAnimatedString {
-  external SVGAnimatedString get prototype;
-  external set prototype(SVGAnimatedString value);
+  external AnimatedString get prototype;
+  external set prototype(AnimatedString value);
   external factory ISVGAnimatedString();
 }
 
 @JS()
 @anonymous
 class ISVGAnimatedTransformList {
-  external SVGAnimatedTransformList get prototype;
-  external set prototype(SVGAnimatedTransformList value);
+  external AnimatedTransformList get prototype;
+  external set prototype(AnimatedTransformList value);
   external factory ISVGAnimatedTransformList();
 }
 
 @JS()
 @anonymous
 class ISVGAnimationElement {
-  external SVGAnimationElement get prototype;
-  external set prototype(SVGAnimationElement value);
+  external AnimationElement get prototype;
+  external set prototype(AnimationElement value);
   external factory ISVGAnimationElement();
 }
 
 @JS()
 @anonymous
 class ISVGCircleElement {
-  external SVGCircleElement get prototype;
-  external set prototype(SVGCircleElement value);
+  external CircleElement get prototype;
+  external set prototype(CircleElement value);
   external factory ISVGCircleElement();
 }
 
 @JS()
 @anonymous
 class ISVGClipPathElement {
-  external SVGClipPathElement get prototype;
-  external set prototype(SVGClipPathElement value);
+  external ClipPathElement get prototype;
+  external set prototype(ClipPathElement value);
   external factory ISVGClipPathElement();
 }
 
@@ -27015,40 +27021,40 @@ class ISVGCursorElement {
 @JS()
 @anonymous
 class ISVGDefsElement {
-  external SVGDefsElement get prototype;
-  external set prototype(SVGDefsElement value);
+  external DefsElement get prototype;
+  external set prototype(DefsElement value);
   external factory ISVGDefsElement();
 }
 
 @JS()
 @anonymous
 class ISVGDescElement {
-  external SVGDescElement get prototype;
-  external set prototype(SVGDescElement value);
+  external DescElement get prototype;
+  external set prototype(DescElement value);
   external factory ISVGDescElement();
 }
 
 @JS()
 @anonymous
 class ISVGElement {
-  external SVGElement get prototype;
-  external set prototype(SVGElement value);
+  external SvgElement get prototype;
+  external set prototype(SvgElement value);
   external factory ISVGElement();
 }
 
 @JS()
 @anonymous
 class ISVGEllipseElement {
-  external SVGEllipseElement get prototype;
-  external set prototype(SVGEllipseElement value);
+  external EllipseElement get prototype;
+  external set prototype(EllipseElement value);
   external factory ISVGEllipseElement();
 }
 
 @JS()
 @anonymous
 class ISVGFEBlendElement {
-  external SVGFEBlendElement get prototype;
-  external set prototype(SVGFEBlendElement value);
+  external FEBlendElement get prototype;
+  external set prototype(FEBlendElement value);
   external factory ISVGFEBlendElement();
   external num get SVG_FEBLEND_MODE_COLOR;
   external num get SVG_FEBLEND_MODE_COLOR_BURN;
@@ -27072,8 +27078,8 @@ class ISVGFEBlendElement {
 @JS()
 @anonymous
 class ISVGFEColorMatrixElement {
-  external SVGFEColorMatrixElement get prototype;
-  external set prototype(SVGFEColorMatrixElement value);
+  external FEColorMatrixElement get prototype;
+  external set prototype(FEColorMatrixElement value);
   external factory ISVGFEColorMatrixElement();
   external num get SVG_FECOLORMATRIX_TYPE_HUEROTATE;
   external num get SVG_FECOLORMATRIX_TYPE_LUMINANCETOALPHA;
@@ -27085,16 +27091,16 @@ class ISVGFEColorMatrixElement {
 @JS()
 @anonymous
 class ISVGFEComponentTransferElement {
-  external SVGFEComponentTransferElement get prototype;
-  external set prototype(SVGFEComponentTransferElement value);
+  external FEComponentTransferElement get prototype;
+  external set prototype(FEComponentTransferElement value);
   external factory ISVGFEComponentTransferElement();
 }
 
 @JS()
 @anonymous
 class ISVGFECompositeElement {
-  external SVGFECompositeElement get prototype;
-  external set prototype(SVGFECompositeElement value);
+  external FECompositeElement get prototype;
+  external set prototype(FECompositeElement value);
   external factory ISVGFECompositeElement();
   external num get SVG_FECOMPOSITE_OPERATOR_ARITHMETIC;
   external num get SVG_FECOMPOSITE_OPERATOR_ATOP;
@@ -27108,8 +27114,8 @@ class ISVGFECompositeElement {
 @JS()
 @anonymous
 class ISVGFEConvolveMatrixElement {
-  external SVGFEConvolveMatrixElement get prototype;
-  external set prototype(SVGFEConvolveMatrixElement value);
+  external FEConvolveMatrixElement get prototype;
+  external set prototype(FEConvolveMatrixElement value);
   external factory ISVGFEConvolveMatrixElement();
   external num get SVG_EDGEMODE_DUPLICATE;
   external num get SVG_EDGEMODE_NONE;
@@ -27120,16 +27126,16 @@ class ISVGFEConvolveMatrixElement {
 @JS()
 @anonymous
 class ISVGFEDiffuseLightingElement {
-  external SVGFEDiffuseLightingElement get prototype;
-  external set prototype(SVGFEDiffuseLightingElement value);
+  external FEDiffuseLightingElement get prototype;
+  external set prototype(FEDiffuseLightingElement value);
   external factory ISVGFEDiffuseLightingElement();
 }
 
 @JS()
 @anonymous
 class ISVGFEDisplacementMapElement {
-  external SVGFEDisplacementMapElement get prototype;
-  external set prototype(SVGFEDisplacementMapElement value);
+  external FEDisplacementMapElement get prototype;
+  external set prototype(FEDisplacementMapElement value);
   external factory ISVGFEDisplacementMapElement();
   external num get SVG_CHANNEL_A;
   external num get SVG_CHANNEL_B;
@@ -27141,8 +27147,8 @@ class ISVGFEDisplacementMapElement {
 @JS()
 @anonymous
 class ISVGFEDistantLightElement {
-  external SVGFEDistantLightElement get prototype;
-  external set prototype(SVGFEDistantLightElement value);
+  external FEDistantLightElement get prototype;
+  external set prototype(FEDistantLightElement value);
   external factory ISVGFEDistantLightElement();
 }
 
@@ -27157,80 +27163,80 @@ class ISVGFEDropShadowElement {
 @JS()
 @anonymous
 class ISVGFEFloodElement {
-  external SVGFEFloodElement get prototype;
-  external set prototype(SVGFEFloodElement value);
+  external FEFloodElement get prototype;
+  external set prototype(FEFloodElement value);
   external factory ISVGFEFloodElement();
 }
 
 @JS()
 @anonymous
 class ISVGFEFuncAElement {
-  external SVGFEFuncAElement get prototype;
-  external set prototype(SVGFEFuncAElement value);
+  external FEFuncAElement get prototype;
+  external set prototype(FEFuncAElement value);
   external factory ISVGFEFuncAElement();
 }
 
 @JS()
 @anonymous
 class ISVGFEFuncBElement {
-  external SVGFEFuncBElement get prototype;
-  external set prototype(SVGFEFuncBElement value);
+  external FEFuncBElement get prototype;
+  external set prototype(FEFuncBElement value);
   external factory ISVGFEFuncBElement();
 }
 
 @JS()
 @anonymous
 class ISVGFEFuncGElement {
-  external SVGFEFuncGElement get prototype;
-  external set prototype(SVGFEFuncGElement value);
+  external FEFuncGElement get prototype;
+  external set prototype(FEFuncGElement value);
   external factory ISVGFEFuncGElement();
 }
 
 @JS()
 @anonymous
 class ISVGFEFuncRElement {
-  external SVGFEFuncRElement get prototype;
-  external set prototype(SVGFEFuncRElement value);
+  external FEFuncRElement get prototype;
+  external set prototype(FEFuncRElement value);
   external factory ISVGFEFuncRElement();
 }
 
 @JS()
 @anonymous
 class ISVGFEGaussianBlurElement {
-  external SVGFEGaussianBlurElement get prototype;
-  external set prototype(SVGFEGaussianBlurElement value);
+  external FEGaussianBlurElement get prototype;
+  external set prototype(FEGaussianBlurElement value);
   external factory ISVGFEGaussianBlurElement();
 }
 
 @JS()
 @anonymous
 class ISVGFEImageElement {
-  external SVGFEImageElement get prototype;
-  external set prototype(SVGFEImageElement value);
+  external FEImageElement get prototype;
+  external set prototype(FEImageElement value);
   external factory ISVGFEImageElement();
 }
 
 @JS()
 @anonymous
 class ISVGFEMergeElement {
-  external SVGFEMergeElement get prototype;
-  external set prototype(SVGFEMergeElement value);
+  external FEMergeElement get prototype;
+  external set prototype(FEMergeElement value);
   external factory ISVGFEMergeElement();
 }
 
 @JS()
 @anonymous
 class ISVGFEMergeNodeElement {
-  external SVGFEMergeNodeElement get prototype;
-  external set prototype(SVGFEMergeNodeElement value);
+  external FEMergeNodeElement get prototype;
+  external set prototype(FEMergeNodeElement value);
   external factory ISVGFEMergeNodeElement();
 }
 
 @JS()
 @anonymous
 class ISVGFEMorphologyElement {
-  external SVGFEMorphologyElement get prototype;
-  external set prototype(SVGFEMorphologyElement value);
+  external FEMorphologyElement get prototype;
+  external set prototype(FEMorphologyElement value);
   external factory ISVGFEMorphologyElement();
   external num get SVG_MORPHOLOGY_OPERATOR_DILATE;
   external num get SVG_MORPHOLOGY_OPERATOR_ERODE;
@@ -27240,48 +27246,48 @@ class ISVGFEMorphologyElement {
 @JS()
 @anonymous
 class ISVGFEOffsetElement {
-  external SVGFEOffsetElement get prototype;
-  external set prototype(SVGFEOffsetElement value);
+  external FEOffsetElement get prototype;
+  external set prototype(FEOffsetElement value);
   external factory ISVGFEOffsetElement();
 }
 
 @JS()
 @anonymous
 class ISVGFEPointLightElement {
-  external SVGFEPointLightElement get prototype;
-  external set prototype(SVGFEPointLightElement value);
+  external FEPointLightElement get prototype;
+  external set prototype(FEPointLightElement value);
   external factory ISVGFEPointLightElement();
 }
 
 @JS()
 @anonymous
 class ISVGFESpecularLightingElement {
-  external SVGFESpecularLightingElement get prototype;
-  external set prototype(SVGFESpecularLightingElement value);
+  external FESpecularLightingElement get prototype;
+  external set prototype(FESpecularLightingElement value);
   external factory ISVGFESpecularLightingElement();
 }
 
 @JS()
 @anonymous
 class ISVGFESpotLightElement {
-  external SVGFESpotLightElement get prototype;
-  external set prototype(SVGFESpotLightElement value);
+  external FESpotLightElement get prototype;
+  external set prototype(FESpotLightElement value);
   external factory ISVGFESpotLightElement();
 }
 
 @JS()
 @anonymous
 class ISVGFETileElement {
-  external SVGFETileElement get prototype;
-  external set prototype(SVGFETileElement value);
+  external FETileElement get prototype;
+  external set prototype(FETileElement value);
   external factory ISVGFETileElement();
 }
 
 @JS()
 @anonymous
 class ISVGFETurbulenceElement {
-  external SVGFETurbulenceElement get prototype;
-  external set prototype(SVGFETurbulenceElement value);
+  external FETurbulenceElement get prototype;
+  external set prototype(FETurbulenceElement value);
   external factory ISVGFETurbulenceElement();
   external num get SVG_STITCHTYPE_NOSTITCH;
   external num get SVG_STITCHTYPE_STITCH;
@@ -27294,32 +27300,32 @@ class ISVGFETurbulenceElement {
 @JS()
 @anonymous
 class ISVGFilterElement {
-  external SVGFilterElement get prototype;
-  external set prototype(SVGFilterElement value);
+  external FilterElement get prototype;
+  external set prototype(FilterElement value);
   external factory ISVGFilterElement();
 }
 
 @JS()
 @anonymous
 class ISVGForeignObjectElement {
-  external SVGForeignObjectElement get prototype;
-  external set prototype(SVGForeignObjectElement value);
+  external ForeignObjectElement get prototype;
+  external set prototype(ForeignObjectElement value);
   external factory ISVGForeignObjectElement();
 }
 
 @JS()
 @anonymous
 class ISVGGElement {
-  external SVGGElement get prototype;
-  external set prototype(SVGGElement value);
+  external GElement get prototype;
+  external set prototype(GElement value);
   external factory ISVGGElement();
 }
 
 @JS()
 @anonymous
 class ISVGGeometryElement {
-  external SVGGeometryElement get prototype;
-  external set prototype(SVGGeometryElement value);
+  external GeometryElement get prototype;
+  external set prototype(GeometryElement value);
   external factory ISVGGeometryElement();
 }
 
@@ -27338,24 +27344,24 @@ class ISVGGradientElement {
 @JS()
 @anonymous
 class ISVGGraphicsElement {
-  external SVGGraphicsElement get prototype;
-  external set prototype(SVGGraphicsElement value);
+  external GraphicsElement get prototype;
+  external set prototype(GraphicsElement value);
   external factory ISVGGraphicsElement();
 }
 
 @JS()
 @anonymous
 class ISVGImageElement {
-  external SVGImageElement get prototype;
-  external set prototype(SVGImageElement value);
+  external ImageElement get prototype;
+  external set prototype(ImageElement value);
   external factory ISVGImageElement();
 }
 
 @JS()
 @anonymous
 class ISVGLength {
-  external SVGLength get prototype;
-  external set prototype(SVGLength value);
+  external Length get prototype;
+  external set prototype(Length value);
   external factory ISVGLength();
   external num get SVG_LENGTHTYPE_CM;
   external num get SVG_LENGTHTYPE_EMS;
@@ -27373,24 +27379,24 @@ class ISVGLength {
 @JS()
 @anonymous
 class ISVGLengthList {
-  external SVGLengthList get prototype;
-  external set prototype(SVGLengthList value);
+  external LengthList get prototype;
+  external set prototype(LengthList value);
   external factory ISVGLengthList();
 }
 
 @JS()
 @anonymous
 class ISVGLineElement {
-  external SVGLineElement get prototype;
-  external set prototype(SVGLineElement value);
+  external LineElement get prototype;
+  external set prototype(LineElement value);
   external factory ISVGLineElement();
 }
 
 @JS()
 @anonymous
 class ISVGLinearGradientElement {
-  external SVGLinearGradientElement get prototype;
-  external set prototype(SVGLinearGradientElement value);
+  external LinearGradientElement get prototype;
+  external set prototype(LinearGradientElement value);
   external factory ISVGLinearGradientElement();
 }
 
@@ -27405,8 +27411,8 @@ class ISVGMPathElement {
 @JS()
 @anonymous
 class ISVGMarkerElement {
-  external SVGMarkerElement get prototype;
-  external set prototype(SVGMarkerElement value);
+  external MarkerElement get prototype;
+  external set prototype(MarkerElement value);
   external factory ISVGMarkerElement();
   external num get SVG_MARKERUNITS_STROKEWIDTH;
   external num get SVG_MARKERUNITS_UNKNOWN;
@@ -27419,80 +27425,80 @@ class ISVGMarkerElement {
 @JS()
 @anonymous
 class ISVGMaskElement {
-  external SVGMaskElement get prototype;
-  external set prototype(SVGMaskElement value);
+  external MaskElement get prototype;
+  external set prototype(MaskElement value);
   external factory ISVGMaskElement();
 }
 
 @JS()
 @anonymous
 class ISVGMetadataElement {
-  external SVGMetadataElement get prototype;
-  external set prototype(SVGMetadataElement value);
+  external MetadataElement get prototype;
+  external set prototype(MetadataElement value);
   external factory ISVGMetadataElement();
 }
 
 @JS()
 @anonymous
 class ISVGNumber {
-  external SVGNumber get prototype;
-  external set prototype(SVGNumber value);
+  external Number get prototype;
+  external set prototype(Number value);
   external factory ISVGNumber();
 }
 
 @JS()
 @anonymous
 class ISVGNumberList {
-  external SVGNumberList get prototype;
-  external set prototype(SVGNumberList value);
+  external NumberList get prototype;
+  external set prototype(NumberList value);
   external factory ISVGNumberList();
 }
 
 @JS()
 @anonymous
 class ISVGPathElement {
-  external SVGPathElement get prototype;
-  external set prototype(SVGPathElement value);
+  external PathElement get prototype;
+  external set prototype(PathElement value);
   external factory ISVGPathElement();
 }
 
 @JS()
 @anonymous
 class ISVGPatternElement {
-  external SVGPatternElement get prototype;
-  external set prototype(SVGPatternElement value);
+  external PatternElement get prototype;
+  external set prototype(PatternElement value);
   external factory ISVGPatternElement();
 }
 
 @JS()
 @anonymous
 class ISVGPointList {
-  external SVGPointList get prototype;
-  external set prototype(SVGPointList value);
+  external PointList get prototype;
+  external set prototype(PointList value);
   external factory ISVGPointList();
 }
 
 @JS()
 @anonymous
 class ISVGPolygonElement {
-  external SVGPolygonElement get prototype;
-  external set prototype(SVGPolygonElement value);
+  external PolygonElement get prototype;
+  external set prototype(PolygonElement value);
   external factory ISVGPolygonElement();
 }
 
 @JS()
 @anonymous
 class ISVGPolylineElement {
-  external SVGPolylineElement get prototype;
-  external set prototype(SVGPolylineElement value);
+  external PolylineElement get prototype;
+  external set prototype(PolylineElement value);
   external factory ISVGPolylineElement();
 }
 
 @JS()
 @anonymous
 class ISVGPreserveAspectRatio {
-  external SVGPreserveAspectRatio get prototype;
-  external set prototype(SVGPreserveAspectRatio value);
+  external PreserveAspectRatio get prototype;
+  external set prototype(PreserveAspectRatio value);
   external factory ISVGPreserveAspectRatio();
   external num get SVG_MEETORSLICE_MEET;
   external num get SVG_MEETORSLICE_SLICE;
@@ -27513,96 +27519,96 @@ class ISVGPreserveAspectRatio {
 @JS()
 @anonymous
 class ISVGRadialGradientElement {
-  external SVGRadialGradientElement get prototype;
-  external set prototype(SVGRadialGradientElement value);
+  external RadialGradientElement get prototype;
+  external set prototype(RadialGradientElement value);
   external factory ISVGRadialGradientElement();
 }
 
 @JS()
 @anonymous
 class ISVGRectElement {
-  external SVGRectElement get prototype;
-  external set prototype(SVGRectElement value);
+  external RectElement get prototype;
+  external set prototype(RectElement value);
   external factory ISVGRectElement();
 }
 
 @JS()
 @anonymous
 class ISVGSVGElement {
-  external SVGSVGElement get prototype;
-  external set prototype(SVGSVGElement value);
+  external SvgSvgElement get prototype;
+  external set prototype(SvgSvgElement value);
   external factory ISVGSVGElement();
 }
 
 @JS()
 @anonymous
 class ISVGScriptElement {
-  external SVGScriptElement get prototype;
-  external set prototype(SVGScriptElement value);
+  external ScriptElement get prototype;
+  external set prototype(ScriptElement value);
   external factory ISVGScriptElement();
 }
 
 @JS()
 @anonymous
 class ISVGSetElement {
-  external SVGSetElement get prototype;
-  external set prototype(SVGSetElement value);
+  external SetElement get prototype;
+  external set prototype(SetElement value);
   external factory ISVGSetElement();
 }
 
 @JS()
 @anonymous
 class ISVGStopElement {
-  external SVGStopElement get prototype;
-  external set prototype(SVGStopElement value);
+  external StopElement get prototype;
+  external set prototype(StopElement value);
   external factory ISVGStopElement();
 }
 
 @JS()
 @anonymous
 class ISVGStringList {
-  external SVGStringList get prototype;
-  external set prototype(SVGStringList value);
+  external StringList get prototype;
+  external set prototype(StringList value);
   external factory ISVGStringList();
 }
 
 @JS()
 @anonymous
 class ISVGStyleElement {
-  external SVGStyleElement get prototype;
-  external set prototype(SVGStyleElement value);
+  external StyleElement get prototype;
+  external set prototype(StyleElement value);
   external factory ISVGStyleElement();
 }
 
 @JS()
 @anonymous
 class ISVGSwitchElement {
-  external SVGSwitchElement get prototype;
-  external set prototype(SVGSwitchElement value);
+  external SwitchElement get prototype;
+  external set prototype(SwitchElement value);
   external factory ISVGSwitchElement();
 }
 
 @JS()
 @anonymous
 class ISVGSymbolElement {
-  external SVGSymbolElement get prototype;
-  external set prototype(SVGSymbolElement value);
+  external SymbolElement get prototype;
+  external set prototype(SymbolElement value);
   external factory ISVGSymbolElement();
 }
 
 @JS()
 @anonymous
 class ISVGTSpanElement {
-  external SVGTSpanElement get prototype;
-  external set prototype(SVGTSpanElement value);
+  external TSpanElement get prototype;
+  external set prototype(TSpanElement value);
   external factory ISVGTSpanElement();
 }
 
 @JS()
 @anonymous
 class ISVGTextContentElement {
-  external SVGTextContentElement get prototype;
-  external set prototype(SVGTextContentElement value);
+  external TextContentElement get prototype;
+  external set prototype(TextContentElement value);
   external factory ISVGTextContentElement();
   external num get LENGTHADJUST_SPACING;
   external num get LENGTHADJUST_SPACINGANDGLYPHS;
@@ -27612,16 +27618,16 @@ class ISVGTextContentElement {
 @JS()
 @anonymous
 class ISVGTextElement {
-  external SVGTextElement get prototype;
-  external set prototype(SVGTextElement value);
+  external TextElement get prototype;
+  external set prototype(TextElement value);
   external factory ISVGTextElement();
 }
 
 @JS()
 @anonymous
 class ISVGTextPathElement {
-  external SVGTextPathElement get prototype;
-  external set prototype(SVGTextPathElement value);
+  external TextPathElement get prototype;
+  external set prototype(TextPathElement value);
   external factory ISVGTextPathElement();
   external num get TEXTPATH_METHODTYPE_ALIGN;
   external num get TEXTPATH_METHODTYPE_STRETCH;
@@ -27634,24 +27640,24 @@ class ISVGTextPathElement {
 @JS()
 @anonymous
 class ISVGTextPositioningElement {
-  external SVGTextPositioningElement get prototype;
-  external set prototype(SVGTextPositioningElement value);
+  external TextPositioningElement get prototype;
+  external set prototype(TextPositioningElement value);
   external factory ISVGTextPositioningElement();
 }
 
 @JS()
 @anonymous
 class ISVGTitleElement {
-  external SVGTitleElement get prototype;
-  external set prototype(SVGTitleElement value);
+  external TitleElement get prototype;
+  external set prototype(TitleElement value);
   external factory ISVGTitleElement();
 }
 
 @JS()
 @anonymous
 class ISVGTransform {
-  external SVGTransform get prototype;
-  external set prototype(SVGTransform value);
+  external Transform get prototype;
+  external set prototype(Transform value);
   external factory ISVGTransform();
   external num get SVG_TRANSFORM_MATRIX;
   external num get SVG_TRANSFORM_ROTATE;
@@ -27665,16 +27671,16 @@ class ISVGTransform {
 @JS()
 @anonymous
 class ISVGTransformList {
-  external SVGTransformList get prototype;
-  external set prototype(SVGTransformList value);
+  external TransformList get prototype;
+  external set prototype(TransformList value);
   external factory ISVGTransformList();
 }
 
 @JS()
 @anonymous
 class ISVGUnitTypes {
-  external SVGUnitTypes get prototype;
-  external set prototype(SVGUnitTypes value);
+  external UnitTypes get prototype;
+  external set prototype(UnitTypes value);
   external factory ISVGUnitTypes();
   external num get SVG_UNIT_TYPE_OBJECTBOUNDINGBOX;
   external num get SVG_UNIT_TYPE_UNKNOWN;
@@ -27684,16 +27690,16 @@ class ISVGUnitTypes {
 @JS()
 @anonymous
 class ISVGUseElement {
-  external SVGUseElement get prototype;
-  external set prototype(SVGUseElement value);
+  external UseElement get prototype;
+  external set prototype(UseElement value);
   external factory ISVGUseElement();
 }
 
 @JS()
 @anonymous
 class ISVGViewElement {
-  external SVGViewElement get prototype;
-  external set prototype(SVGViewElement value);
+  external ViewElement get prototype;
+  external set prototype(ViewElement value);
   external factory ISVGViewElement();
 }
 
@@ -28119,8 +28125,8 @@ class IUIEvent {
 @JS()
 @anonymous
 class IURL {
-  external URL get prototype;
-  external set prototype(URL value);
+  external Url get prototype;
+  external set prototype(Url value);
   external factory IURL({dynamic url, dynamic base});
   external String createObjectURL(dynamic object);
   external void revokeObjectURL(String url);
@@ -28139,16 +28145,16 @@ class IURLSearchParams {
 @JS()
 @anonymous
 class IVTTCue {
-  external VTTCue get prototype;
-  external set prototype(VTTCue value);
+  external VttCue get prototype;
+  external set prototype(VttCue value);
   external factory IVTTCue({num startTime, num endTime, String text});
 }
 
 @JS()
 @anonymous
 class IVTTRegion {
-  external VTTRegion get prototype;
-  external set prototype(VTTRegion value);
+  external VttRegion get prototype;
+  external set prototype(VttRegion value);
   external factory IVTTRegion();
 }
 
@@ -28754,40 +28760,40 @@ class IWebGL2RenderingContext {
 @JS()
 @anonymous
 class IWebGLActiveInfo {
-  external WebGLActiveInfo get prototype;
-  external set prototype(WebGLActiveInfo value);
+  external ActiveInfo get prototype;
+  external set prototype(ActiveInfo value);
   external factory IWebGLActiveInfo();
 }
 
 @JS()
 @anonymous
 class IWebGLBuffer {
-  external WebGLBuffer get prototype;
-  external set prototype(WebGLBuffer value);
+  external Buffer get prototype;
+  external set prototype(Buffer value);
   external factory IWebGLBuffer();
 }
 
 @JS()
 @anonymous
 class IWebGLContextEvent {
-  external WebGLContextEvent get prototype;
-  external set prototype(WebGLContextEvent value);
+  external ContextEvent get prototype;
+  external set prototype(ContextEvent value);
   external factory IWebGLContextEvent({String type, WebGLContextEventInit eventInit});
 }
 
 @JS()
 @anonymous
 class IWebGLFramebuffer {
-  external WebGLFramebuffer get prototype;
-  external set prototype(WebGLFramebuffer value);
+  external Framebuffer get prototype;
+  external set prototype(Framebuffer value);
   external factory IWebGLFramebuffer();
 }
 
 @JS()
 @anonymous
 class IWebGLProgram {
-  external WebGLProgram get prototype;
-  external set prototype(WebGLProgram value);
+  external Program get prototype;
+  external set prototype(Program value);
   external factory IWebGLProgram();
 }
 
@@ -28802,16 +28808,16 @@ class IWebGLQuery {
 @JS()
 @anonymous
 class IWebGLRenderbuffer {
-  external WebGLRenderbuffer get prototype;
-  external set prototype(WebGLRenderbuffer value);
+  external Renderbuffer get prototype;
+  external set prototype(Renderbuffer value);
   external factory IWebGLRenderbuffer();
 }
 
 @JS()
 @anonymous
 class IWebGLRenderingContext {
-  external WebGLRenderingContext get prototype;
-  external set prototype(WebGLRenderingContext value);
+  external RenderingContext get prototype;
+  external set prototype(RenderingContext value);
   external factory IWebGLRenderingContext();
   external GLenum get ACTIVE_ATTRIBUTES;
   external GLenum get ACTIVE_TEXTURE;
@@ -29122,16 +29128,16 @@ class IWebGLSampler {
 @JS()
 @anonymous
 class IWebGLShader {
-  external WebGLShader get prototype;
-  external set prototype(WebGLShader value);
+  external Shader get prototype;
+  external set prototype(Shader value);
   external factory IWebGLShader();
 }
 
 @JS()
 @anonymous
 class IWebGLShaderPrecisionFormat {
-  external WebGLShaderPrecisionFormat get prototype;
-  external set prototype(WebGLShaderPrecisionFormat value);
+  external ShaderPrecisionFormat get prototype;
+  external set prototype(ShaderPrecisionFormat value);
   external factory IWebGLShaderPrecisionFormat();
 }
 
@@ -29146,8 +29152,8 @@ class IWebGLSync {
 @JS()
 @anonymous
 class IWebGLTexture {
-  external WebGLTexture get prototype;
-  external set prototype(WebGLTexture value);
+  external Texture get prototype;
+  external set prototype(Texture value);
   external factory IWebGLTexture();
 }
 
@@ -29162,8 +29168,8 @@ class IWebGLTransformFeedback {
 @JS()
 @anonymous
 class IWebGLUniformLocation {
-  external WebGLUniformLocation get prototype;
-  external set prototype(WebGLUniformLocation value);
+  external UniformLocation get prototype;
+  external set prototype(UniformLocation value);
   external factory IWebGLUniformLocation();
 }
 
@@ -29249,16 +29255,16 @@ class IWritableStreamDefaultWriter {
 @JS()
 @anonymous
 class IXMLDocument {
-  external XMLDocument get prototype;
-  external set prototype(XMLDocument value);
+  external XmlDocument get prototype;
+  external set prototype(XmlDocument value);
   external factory IXMLDocument();
 }
 
 @JS()
 @anonymous
 class IXMLHttpRequest {
-  external XMLHttpRequest get prototype;
-  external set prototype(XMLHttpRequest value);
+  external HttpRequest get prototype;
+  external set prototype(HttpRequest value);
   external factory IXMLHttpRequest();
   external num get DONE;
   external num get HEADERS_RECEIVED;
@@ -29270,24 +29276,24 @@ class IXMLHttpRequest {
 @JS()
 @anonymous
 class IXMLHttpRequestEventTarget {
-  external XMLHttpRequestEventTarget get prototype;
-  external set prototype(XMLHttpRequestEventTarget value);
+  external HttpRequestEventTarget get prototype;
+  external set prototype(HttpRequestEventTarget value);
   external factory IXMLHttpRequestEventTarget();
 }
 
 @JS()
 @anonymous
 class IXMLHttpRequestUpload {
-  external XMLHttpRequestUpload get prototype;
-  external set prototype(XMLHttpRequestUpload value);
+  external HttpRequestUpload get prototype;
+  external set prototype(HttpRequestUpload value);
   external factory IXMLHttpRequestUpload();
 }
 
 @JS()
 @anonymous
 class IXMLSerializer {
-  external XMLSerializer get prototype;
-  external set prototype(XMLSerializer value);
+  external XmlSerializer get prototype;
+  external set prototype(XmlSerializer value);
   external factory IXMLSerializer();
 }
 
@@ -29328,19 +29334,10 @@ class IXPathResult {
 @JS()
 @anonymous
 class IXSLTProcessor {
-  external XSLTProcessor get prototype;
-  external set prototype(XSLTProcessor value);
+  external XsltProcessor get prototype;
+  external set prototype(XsltProcessor value);
   external factory IXSLTProcessor();
 }
 
-typedef ArrayBuffer = dynamic;
-typedef ArrayBufferView = dynamic;
-typedef Date = dynamic;
 typedef Error = dynamic;
-typedef Float32Array = dynamic;
-typedef Float64Array = dynamic;
-typedef Promise<T> = dynamic;
-typedef ReadonlyArray<T> = dynamic;
 typedef Record<T, U> = dynamic;
-typedef Uint8Array = dynamic;
-typedef Uint8ClampedArray = dynamic;

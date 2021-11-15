@@ -6,12 +6,21 @@ import 'package:dart_style/dart_style.dart';
 import 'package:path/path.dart' as p;
 import 'package:args/args.dart';
 
+const base = 'dart_js_lib_gen';
+final path = Platform.isWindows
+    ? '$base.dll'
+    : Platform.isMacOS
+        ? 'lib$base.dylib'
+        : 'lib$base.so';
+
 final mode = Platform.environment['ENV'] ?? 'debug';
-final libPath = Platform.environment['LIBRARY'] ?? 'target/$mode/libdart_js_lib_gen.so';
-final lib = DynamicLibrary.open(libPath);
-final api = DartJsLibGen(lib);
+final libPath = Platform.environment['LIBRARY'] ?? p.join('..', path);
 
 Future<void> main(List<String> arguments) async {
+  final dylibPath = p.join(p.dirname(Platform.script.path), libPath);
+  // stderr.writeln('Finding dylib at $dylibPath');
+  final lib = DynamicLibrary.open(dylibPath);
+  final api = DartJsLibGen(lib);
   final columns =
       await Process.run('tput', const ['cols']).then((res) => int.tryParse(res.stdout) ?? 80).catchError((_) => 80);
   final parser = ArgParser(usageLineLength: columns)
@@ -35,6 +44,10 @@ If --no-write is specified, does not output anything.
       'crate[::module][=level]':
           'Specifies the amount of logging per module, defaulting to debug if level is not specified.'
     })
+    ..addOption('out-dir',
+        abbr: 'o',
+        aliases: const ['destination'],
+        help: 'Configure output directory, defaults to the same parent of each file.')
     ..addFlag('help', abbr: 'h', aliases: const ['?'], help: 'Displays this help message.', negatable: false);
 
   final args = parser.parse(arguments);
@@ -45,6 +58,13 @@ If --no-write is specified, does not output anything.
   final bool help = args['help'];
   final bool silent = args['silent'];
   final bool dynamicUndefs = args['dynamic-undefs'];
+  final String? outDir = args['out-dir'];
+  if (outDir != null) {
+    final dir = Directory(outDir);
+    if (!(await dir.exists())) {
+      await dir.create(recursive: true);
+    }
+  }
   final String prefix = args['prefix'] ?? '';
   final String suffix = args['suffix'] ?? '';
   String? log = args['log'];
@@ -54,12 +74,20 @@ If --no-write is specified, does not output anything.
 
   final lineLength = int.parse(args['line-length']);
   final rest = args.rest.where((e) => e.endsWith('ts'));
+  final emptyErr = rest.isEmpty && !help;
+  if (emptyErr) {
+    stderr.writeln('Error: Please provide at least 1 TypeScript definition file.');
+  }
 
   if (rest.isEmpty || help) {
     final exe = Platform.executable;
-    stderr.writeln('$exe <*.ts> [options]\nOptions:');
+    stderr.writeln('$exe <*.d.ts> [options]\nOptions:');
     stderr.writeln(parser.usage);
-    return;
+    if (emptyErr) {
+      exit(1);
+    } else {
+      return;
+    }
   }
 
   final config = Config(
@@ -78,7 +106,7 @@ If --no-write is specified, does not output anything.
     if (write == true) {
       final base = p.basenameWithoutExtension(file.key);
       final newBase = '$prefix$base$suffix.dart';
-      final path = p.join(p.dirname(file.key), newBase);
+      final path = p.join(outDir ?? p.dirname(file.key), newBase);
       stderr.writeln('Writing to $path...');
       File(path).writeAsString(formatted);
     } else if (write == null) {
