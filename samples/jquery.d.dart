@@ -1033,11 +1033,11 @@ class JQuery {
 external JQueryStatic jQuery;
 @JS(r'$')
 external JQueryStatic $;
-typedef Element = dynamic;
-typedef Object = dynamic;
-typedef Node = dynamic;
-typedef XMLHttpRequest = dynamic;
-typedef XMLDocument = dynamic;
 typedef Array<T> = dynamic;
 typedef Document = dynamic;
+typedef Element = dynamic;
 typedef Event = dynamic;
+typedef Node = dynamic;
+typedef Object = dynamic;
+typedef XMLDocument = dynamic;
+typedef XMLHttpRequest = dynamic;

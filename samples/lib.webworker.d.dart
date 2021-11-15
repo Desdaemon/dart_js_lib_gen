@@ -9288,13 +9288,13 @@ class IXMLHttpRequestUpload {
   external factory IXMLHttpRequestUpload();
 }
 
-typedef ArrayBufferView = dynamic;
-typedef ReadonlyArray<T> = dynamic;
-typedef Float64Array = dynamic;
-typedef Promise<T> = dynamic;
-typedef Float32Array = dynamic;
-typedef Uint8Array = dynamic;
 typedef Array<T> = dynamic;
 typedef ArrayBuffer = dynamic;
+typedef ArrayBufferView = dynamic;
+typedef Float32Array = dynamic;
+typedef Float64Array = dynamic;
+typedef Promise<T> = dynamic;
+typedef ReadonlyArray<T> = dynamic;
 typedef Record<T, U> = dynamic;
+typedef Uint8Array = dynamic;
 typedef Uint8ClampedArray = dynamic;

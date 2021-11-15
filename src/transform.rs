@@ -109,15 +109,17 @@ pub fn visit_program(
         warn!("The following types were used but not declared:\n{}", cls);
     }
     if gen_undecl_typedef {
-        for (ty, (params, _)) in &t.undecls {
+        let mut entries = t.undecls.into_iter().collect::<Vec<_>>();
+        entries.sort_by_cached_key(|x| x.0.clone());
+        for (ty, (params, _)) in entries {
             if ty == "Function" {
                 continue;
             }
             buf.push_str("typedef ");
-            buf.push_str(ty);
-            if *params > 0 {
+            buf.push_str(&ty);
+            if params > 0 {
                 buf.push('<');
-                for letter in generate_type_param(*params as usize) {
+                for letter in generate_type_param(params as usize) {
                     buf.push(letter);
                     buf.push(',')
                 }
@@ -892,16 +894,16 @@ impl Transformer {
 
     fn visit_rest_pat(&mut self, rest: &RestPat) {
         self.push_char('[');
-        let ty = self.collect(|s| s.visit_type_ann(&rest.type_ann));
-        let ty = if ty.starts_with("List<") {
-            &ty[5..(ty.len() - 1)]
-        } else {
-            &ty
-        };
-        let nullable = ty == "dynamic" || ty.ends_with('?');
-        let ty = format!("{}{} ", ty, if nullable { "" } else { "?" });
+        let mut ty = self.collect(|s| s.visit_type_ann(&rest.type_ann));
+        if ty.starts_with("List<") {
+            ty = String::from(&ty[5..(ty.len() - 1)]);
+        }
+        if !(ty == "dynamic" || ty.ends_with('?')) {
+            ty.push('?');
+        }
         for idx in '1'..='9' {
             self.push(&ty);
+            self.push_char(' ');
             self.push(parse_pat(&rest.arg).unwrap_or("_"));
             self.push_char(idx);
             self.push_char(',');

@@ -29333,14 +29333,14 @@ class IXSLTProcessor {
   external factory IXSLTProcessor();
 }
 
-typedef Record<T, U> = dynamic;
 typedef ArrayBuffer = dynamic;
-typedef Error = dynamic;
-typedef Date = dynamic;
-typedef Promise<T> = dynamic;
-typedef Uint8ClampedArray = dynamic;
-typedef ReadonlyArray<T> = dynamic;
 typedef ArrayBufferView = dynamic;
-typedef Uint8Array = dynamic;
+typedef Date = dynamic;
+typedef Error = dynamic;
 typedef Float32Array = dynamic;
 typedef Float64Array = dynamic;
+typedef Promise<T> = dynamic;
+typedef ReadonlyArray<T> = dynamic;
+typedef Record<T, U> = dynamic;
+typedef Uint8Array = dynamic;
+typedef Uint8ClampedArray = dynamic;
