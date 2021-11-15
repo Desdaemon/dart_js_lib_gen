@@ -16,4 +16,4 @@ run +args: build
 	./dart_js_lib_gen {{args}}
 
 build-samples: build
-	./dart_js_lib_gen -sw --rename-overloads samples/*.ts
+	./dart_js_lib_gen -sw --rename-overloads --dynamic-undefs samples/*.ts

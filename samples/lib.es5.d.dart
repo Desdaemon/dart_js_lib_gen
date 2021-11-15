@@ -4,31 +4,31 @@ library samples.lib.es5.d.ts;
 // ignore_for_file: non_constant_identifier_names, private_optional_parameter, unused_element
 import 'package:js/js.dart';
 
-@JS('NaN')
+@JS(r'NaN')
 external num JNaN;
-@JS('Infinity')
+@JS(r'Infinity')
 external num JInfinity;
-@JS('eval')
+@JS(r'eval')
 external dynamic eval(String x);
-@JS('parseInt')
+@JS(r'parseInt')
 external num parseInt(String string, num radix);
-@JS('parseFloat')
+@JS(r'parseFloat')
 external num parseFloat(String string);
-@JS('isNaN')
+@JS(r'isNaN')
 external bool isNaN(num number);
-@JS('isFinite')
+@JS(r'isFinite')
 external bool isFinite(num number);
-@JS('decodeURI')
+@JS(r'decodeURI')
 external String decodeURI(String encodedURI);
-@JS('decodeURIComponent')
+@JS(r'decodeURIComponent')
 external String decodeURIComponent(String encodedURIComponent);
-@JS('encodeURI')
+@JS(r'encodeURI')
 external String encodeURI(String uri);
-@JS('encodeURIComponent')
+@JS(r'encodeURIComponent')
 external String encodeURIComponent(dynamic uriComponent);
-@JS('escape')
+@JS(r'escape')
 external String escape(String string);
-@JS('unescape')
+@JS(r'unescape')
 external String unescape(String string);
 
 @JS()
@@ -37,6 +37,7 @@ class Symbol {
   @override
   external String toString();
   external dynamic valueOf();
+  external factory Symbol();
 }
 
 typedef PropertyKey = dynamic;
@@ -64,7 +65,9 @@ class PropertyDescriptor {
 
 @JS()
 @anonymous
-class PropertyDescriptorMap {}
+class PropertyDescriptorMap {
+  external factory PropertyDescriptorMap();
+}
 
 @JS()
 @anonymous
@@ -102,7 +105,7 @@ class ObjectConstructor {
   external List<String> keys(dynamic o);
 }
 
-@JS('Object')
+@JS(r'Object')
 external ObjectConstructor JObject;
 
 @JS()
@@ -166,14 +169,14 @@ class FunctionConstructor {
   external Function get prototype;
 }
 
-@JS('Function')
+@JS(r'Function')
 external FunctionConstructor JFunction;
 typedef ThisParameterType<T> = dynamic;
 typedef OmitThisParameter<T> = dynamic;
 
 @JS()
 @anonymous
-class CallableFunction {
+class CallableFunction extends Function {
   external R apply<T, R>(T thisArg);
   external R call<T, A extends List<dynamic>, R>(
     T thisArg, [
@@ -188,11 +191,12 @@ class CallableFunction {
     A? args9,
   ]);
   external OmitThisParameter<T> bind<T>(ThisParameterType<T> thisArg);
+  external factory CallableFunction();
 }
 
 @JS()
 @anonymous
-class NewableFunction {
+class NewableFunction extends Function {
   external void apply<T>(T thisArg);
   external void call<T, A extends List<dynamic>>(
     T thisArg, [
@@ -207,6 +211,7 @@ class NewableFunction {
     A? args9,
   ]);
   external T bind<T>(dynamic thisArg);
+  external factory NewableFunction();
 }
 
 @JS()
@@ -239,13 +244,14 @@ class StringConstructor {
   ]);
 }
 
-@JS('String')
+@JS(r'String')
 external StringConstructor JString;
 
 @JS()
 @anonymous
 class Boolean {
   external bool valueOf();
+  external factory Boolean();
 }
 
 @JS()
@@ -254,7 +260,7 @@ class BooleanConstructor {
   external Boolean get prototype;
 }
 
-@JS('Boolean')
+@JS(r'Boolean')
 external BooleanConstructor JBoolean;
 
 @JS()
@@ -266,6 +272,7 @@ class Number {
   external String toExponential(num fractionDigits);
   external String toPrecision(num precision);
   external num valueOf();
+  external factory Number();
 }
 
 @JS()
@@ -279,12 +286,12 @@ class NumberConstructor {
   external num get POSITIVE_INFINITY;
 }
 
-@JS('Number')
+@JS(r'Number')
 external NumberConstructor JNumber;
 
 @JS()
 @anonymous
-class TemplateStringsArray {
+class TemplateStringsArray extends ReadonlyArray<String> {
   external List<String> get raw;
   external factory TemplateStringsArray({
     List<String> raw,
@@ -293,7 +300,9 @@ class TemplateStringsArray {
 
 @JS()
 @anonymous
-class ImportMeta {}
+class ImportMeta {
+  external factory ImportMeta();
+}
 
 @JS()
 @anonymous
@@ -356,7 +365,7 @@ class Math {
   });
 }
 
-@JS('Math')
+@JS(r'Math')
 external Math JMath;
 
 @JS()
@@ -406,6 +415,7 @@ class Date {
   external String toUTCString();
   external String toISOString();
   external String toJSON(dynamic key);
+  external factory Date();
 }
 
 @JS()
@@ -417,12 +427,12 @@ class DateConstructor {
   external num now();
 }
 
-@JS('Date')
+@JS(r'Date')
 external DateConstructor JDate;
 
 @JS()
 @anonymous
-class RegExpMatchArray {
+class RegExpMatchArray extends Array<String> {
   external num? get index;
   external set index(num? value);
   external String? get input;
@@ -435,7 +445,7 @@ class RegExpMatchArray {
 
 @JS()
 @anonymous
-class RegExpExecArray {
+class RegExpExecArray extends Array<String> {
   external num get index;
   external set index(num value);
   external String get input;
@@ -493,7 +503,7 @@ class RegExpConstructor {
   external set lastMatch(String value);
 }
 
-@JS('RegExp')
+@JS(r'RegExp')
 external RegExpConstructor JRegExp;
 
 @JS()
@@ -518,85 +528,97 @@ class ErrorConstructor {
   external Error get prototype;
 }
 
-@JS('Error')
+@JS(r'Error')
 external ErrorConstructor JError;
 
 @JS()
 @anonymous
-class EvalError {}
+class EvalError extends Error {
+  external factory EvalError();
+}
 
 @JS()
-class EvalErrorConstructor {
+class EvalErrorConstructor extends ErrorConstructor {
   external factory EvalErrorConstructor({String message});
   external EvalError get prototype;
 }
 
-@JS('EvalError')
+@JS(r'EvalError')
 external EvalErrorConstructor JEvalError;
 
 @JS()
 @anonymous
-class RangeError {}
+class RangeError extends Error {
+  external factory RangeError();
+}
 
 @JS()
-class RangeErrorConstructor {
+class RangeErrorConstructor extends ErrorConstructor {
   external factory RangeErrorConstructor({String message});
   external RangeError get prototype;
 }
 
-@JS('RangeError')
+@JS(r'RangeError')
 external RangeErrorConstructor JRangeError;
 
 @JS()
 @anonymous
-class ReferenceError {}
+class ReferenceError extends Error {
+  external factory ReferenceError();
+}
 
 @JS()
-class ReferenceErrorConstructor {
+class ReferenceErrorConstructor extends ErrorConstructor {
   external factory ReferenceErrorConstructor({String message});
   external ReferenceError get prototype;
 }
 
-@JS('ReferenceError')
+@JS(r'ReferenceError')
 external ReferenceErrorConstructor JReferenceError;
 
 @JS()
 @anonymous
-class SyntaxError {}
+class SyntaxError extends Error {
+  external factory SyntaxError();
+}
 
 @JS()
-class SyntaxErrorConstructor {
+class SyntaxErrorConstructor extends ErrorConstructor {
   external factory SyntaxErrorConstructor({String message});
   external SyntaxError get prototype;
 }
 
-@JS('SyntaxError')
+@JS(r'SyntaxError')
 external SyntaxErrorConstructor JSyntaxError;
 
 @JS()
 @anonymous
-class TypeError {}
+class TypeError extends Error {
+  external factory TypeError();
+}
 
 @JS()
-class TypeErrorConstructor {
+class TypeErrorConstructor extends ErrorConstructor {
   external factory TypeErrorConstructor({String message});
   external TypeError get prototype;
 }
 
-@JS('TypeError')
+@JS(r'TypeError')
 external TypeErrorConstructor JTypeError;
 
 @JS()
 @anonymous
-class URIError {}
+class URIError extends Error {
+  external factory URIError();
+}
 
 @JS()
-class URIErrorConstructor {
+class URIErrorConstructor extends ErrorConstructor {
   external factory URIErrorConstructor({String message});
   external URIError get prototype;
 }
 
-@JS('URIError')
+@JS(r'URIError')
 external URIErrorConstructor JURIError;
 
 @JS()
@@ -604,9 +626,10 @@ external URIErrorConstructor JURIError;
 class JSON {
   external dynamic parse(String text, dynamic Function(String key, dynamic value) reviver);
   external String stringify(dynamic value, dynamic Function(String key, dynamic value) replacer, dynamic space);
+  external factory JSON();
 }
 
-@JS('JSON')
+@JS(r'JSON')
 external JSON JJSON;
 
 @JS()
@@ -723,7 +746,7 @@ class ArrayConstructor {
   external List<dynamic> get prototype;
 }
 
-@JS('Array')
+@JS(r'Array')
 external ArrayConstructor JArray;
 
 @JS()
@@ -763,6 +786,7 @@ typedef PromiseConstructorLike = dynamic Function();
 class PromiseLike<T> {
   external PromiseLike<dynamic> then<TResult1, TResult2>(
       dynamic Function(T value)? onfulfilled, dynamic Function(dynamic reason)? onrejected);
+  external factory PromiseLike();
 }
 
 @JS()
@@ -770,6 +794,7 @@ class PromiseLike<T> {
 class Promise<T> {
   external Promise<dynamic> then<TResult1, TResult2>(
       dynamic Function(T value)? onfulfilled, dynamic Function(dynamic reason)? onrejected);
+  external factory Promise();
 }
 
 @JS()
@@ -825,7 +850,9 @@ typedef Uncapitalize<S extends String> = dynamic;
 
 @JS()
 @anonymous
-class ThisType<T> {}
+class ThisType<T> {
+  external factory ThisType();
+}
 
 @JS()
 @anonymous
@@ -856,7 +883,7 @@ class ArrayBufferConstructor {
   external bool isView(dynamic arg);
 }
 
-@JS('ArrayBuffer')
+@JS(r'ArrayBuffer')
 external ArrayBufferConstructor JArrayBuffer;
 
 @JS()
@@ -910,7 +937,7 @@ class DataViewConstructor {
   external factory DataViewConstructor({ArrayBufferLike buffer, num byteOffset, num byteLength});
 }
 
-@JS('DataView')
+@JS(r'DataView')
 external DataViewConstructor JDataView;
 
 @JS()
@@ -973,7 +1000,7 @@ class Int8ArrayConstructor {
   external Int8Array from(ArrayLike<num> arrayLike);
 }
 
-@JS('Int8Array')
+@JS(r'Int8Array')
 external Int8ArrayConstructor JInt8Array;
 
 @JS()
@@ -1036,7 +1063,7 @@ class Uint8ArrayConstructor {
   external Uint8Array from(ArrayLike<num> arrayLike);
 }
 
-@JS('Uint8Array')
+@JS(r'Uint8Array')
 external Uint8ArrayConstructor JUint8Array;
 
 @JS()
@@ -1102,7 +1129,7 @@ class Uint8ClampedArrayConstructor {
   external Uint8ClampedArray from(ArrayLike<num> arrayLike);
 }
 
-@JS('Uint8ClampedArray')
+@JS(r'Uint8ClampedArray')
 external Uint8ClampedArrayConstructor JUint8ClampedArray;
 
 @JS()
@@ -1165,7 +1192,7 @@ class Int16ArrayConstructor {
   external Int16Array from(ArrayLike<num> arrayLike);
 }
 
-@JS('Int16Array')
+@JS(r'Int16Array')
 external Int16ArrayConstructor JInt16Array;
 
 @JS()
@@ -1229,7 +1256,7 @@ class Uint16ArrayConstructor {
   external Uint16Array from(ArrayLike<num> arrayLike);
 }
 
-@JS('Uint16Array')
+@JS(r'Uint16Array')
 external Uint16ArrayConstructor JUint16Array;
 
 @JS()
@@ -1292,7 +1319,7 @@ class Int32ArrayConstructor {
   external Int32Array from(ArrayLike<num> arrayLike);
 }
 
-@JS('Int32Array')
+@JS(r'Int32Array')
 external Int32ArrayConstructor JInt32Array;
 
 @JS()
@@ -1356,7 +1383,7 @@ class Uint32ArrayConstructor {
   external Uint32Array from(ArrayLike<num> arrayLike);
 }
 
-@JS('Uint32Array')
+@JS(r'Uint32Array')
 external Uint32ArrayConstructor JUint32Array;
 
 @JS()
@@ -1420,7 +1447,7 @@ class Float32ArrayConstructor {
   external Float32Array from(ArrayLike<num> arrayLike);
 }
 
-@JS('Float32Array')
+@JS(r'Float32Array')
 external Float32ArrayConstructor JFloat32Array;
 
 @JS()
@@ -1483,7 +1510,7 @@ class Float64ArrayConstructor {
   external Float64Array from(ArrayLike<num> arrayLike);
 }
 
-@JS('Float64Array')
+@JS(r'Float64Array')
 external Float64ArrayConstructor JFloat64Array;
 
 @JS()
@@ -1544,9 +1571,10 @@ class ResolvedCollatorOptions {
 class Collator {
   external num compare(String x, String y);
   external ResolvedCollatorOptions resolvedOptions();
+  external factory Collator();
 }
 
-@JS('Intl.Collator')
+@JS(r'Intl.Collator')
 external ICollator JCollator;
 
 @JS()
@@ -1634,9 +1662,10 @@ class ResolvedNumberFormatOptions {
 class NumberFormat {
   external String format(num value);
   external ResolvedNumberFormatOptions resolvedOptions();
+  external factory NumberFormat();
 }
 
-@JS('Intl.NumberFormat')
+@JS(r'Intl.NumberFormat')
 external INumberFormat JNumberFormat;
 
 @JS()
@@ -1739,15 +1768,17 @@ class ResolvedDateTimeFormatOptions {
 class DateTimeFormat {
   external String format(dynamic date);
   external ResolvedDateTimeFormatOptions resolvedOptions();
+  external factory DateTimeFormat();
 }
 
-@JS('Intl.DateTimeFormat')
+@JS(r'Intl.DateTimeFormat')
 external IDateTimeFormat JDateTimeFormat;
 
 @JS()
 @anonymous
 class Number {
   external String toLocaleString(dynamic locales, NumberFormatOptions options);
+  external factory Number();
 }
 
 @JS()
@@ -1756,6 +1787,7 @@ class Date {
   external String toLocaleString(dynamic locales, DateTimeFormatOptions options);
   external String toLocaleDateString(dynamic locales, DateTimeFormatOptions options);
   external String toLocaleTimeString(dynamic locales, DateTimeFormatOptions options);
+  external factory Date();
 }
 
 @JS()

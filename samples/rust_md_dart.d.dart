@@ -33,7 +33,7 @@ class Attribute {
   });
 }
 
-@JS('parse')
+@JS(r'parse')
 external List<Element>? parse(String markdown);
 typedef InitInput = dynamic;
 
@@ -51,3 +51,5 @@ class InitOutput {
     num Function(num a, num b, num c) __wbindgen_realloc,
   });
 }
+
+typedef Memory = dynamic;

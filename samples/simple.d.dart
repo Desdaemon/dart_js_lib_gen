@@ -24,6 +24,14 @@ class Example<T> {
 @anonymous
 class Foo {
   external bool foo();
+  external factory Foo();
+}
+
+@JS()
+@anonymous
+class Foo2 extends Foo {
+  external void foo2();
+  external factory Foo2();
 }
 
 @JS()
@@ -37,5 +45,5 @@ class Baz extends Example implements Foo, Bar {
   external bool foo();
 }
 
-@JS('simple_adder')
+@JS(r'simple_adder')
 external num simple_adder(num a, num b);

@@ -27,6 +27,8 @@ If --no-write is specified, does not output anything.
         help: 'Skips formatting the code, especially for longer files where it may be expensive.')
     ..addFlag('dynamic-undefs', help: 'Generate opaque typedefs for referenced undeclared types.')
     ..addFlag('rename-overloads', help: 'Polyfill function overloads by renaming the overloads.')
+    ..addOption('prefix', help: 'Prefix of the output files.')
+    ..addOption('suffix', help: 'Suffix of the output files.')
     ..addOption('line-length', abbr: 'l', defaultsTo: '120')
     ..addOption('log', help: 'Configure logging behavior.', allowedHelp: const {
       'debug|info|warn|error|off': 'Adjusts the level of logging, where debug logs everything and off logs nothing.',
@@ -43,6 +45,8 @@ If --no-write is specified, does not output anything.
   final bool help = args['help'];
   final bool silent = args['silent'];
   final bool dynamicUndefs = args['dynamic-undefs'];
+  final String prefix = args['prefix'] ?? '';
+  final String suffix = args['suffix'] ?? '';
   String? log = args['log'];
   if (silent) {
     log = 'off';
@@ -69,9 +73,12 @@ If --no-write is specified, does not output anything.
   final files = await api.parseLibrary(config: config);
   for (final file in files) {
     stderr.writeln("Formatting ${file.key}");
-    final formatted = format ? DartFormatter(pageWidth: lineLength).format(file.value) : file.value;
+    final value = file.value.splitMapJoin(';', onMatch: (_) => ';\n');
+    final formatted = format ? DartFormatter(pageWidth: lineLength).format(value) : value;
     if (write == true) {
-      final path = p.setExtension(file.key, '.dart');
+      final base = p.basenameWithoutExtension(file.key);
+      final newBase = '$prefix$base$suffix.dart';
+      final path = p.join(p.dirname(file.key), newBase);
       stderr.writeln('Writing to $path...');
       File(path).writeAsString(formatted);
     } else if (write == null) {

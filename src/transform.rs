@@ -110,6 +110,9 @@ pub fn visit_program(
     }
     if gen_undecl_typedef {
         for (ty, (params, _)) in &t.undecls {
+            if ty == "Function" {
+                continue;
+            }
             buf.push_str("typedef ");
             buf.push_str(ty);
             if *params > 0 {
@@ -189,7 +192,7 @@ impl Transformer {
     }
 
     fn annotate(&mut self, path_end: &str) {
-        self.push("@JS('");
+        self.push("@JS(r'");
         for item in &self.path {
             let buf = self.bufs.last_mut().unwrap();
             buf.push_str(item);
@@ -329,7 +332,8 @@ impl Transformer {
             ModuleDecl::ExportDefaultDecl(exp) => self.visit_default_decl(&exp.decl),
             ModuleDecl::Import(_)
             | ModuleDecl::TsExportAssignment(_)
-            | ModuleDecl::TsNamespaceExport(_) => {}
+            | ModuleDecl::TsNamespaceExport(_)
+            | ModuleDecl::ExportNamed(_) => {}
             _ => {
                 error!("Unhandled module declaration:\n{:?}", decl);
                 todo!();
@@ -479,6 +483,7 @@ impl Transformer {
             s.push("class ");
             s.push(id);
             s.visit_type_params(&decl.type_params);
+            s.visit_extends(decl.extends.first());
             s.push_char('{');
             {
                 s.visit_type_elements(&decl.body.body);
@@ -495,11 +500,31 @@ impl Transformer {
         self.push(&class_body);
     }
 
+    fn visit_extends(&mut self, extends: Option<&TsExprWithTypeArgs>) {
+        if let Some(TsExprWithTypeArgs {
+            expr, type_args, ..
+        }) = extends
+        {
+            self.push(" extends ");
+            let count = type_args.as_ref().map(|x| x.params.len());
+            self.visit_entity_name(expr, count);
+            if let Some(TsTypeParamInstantiation { params, .. }) = type_args {
+                self.push_char('<');
+                for typ in params {
+                    self.visit_type(typ);
+                    self.push_char(',')
+                }
+                self.pop();
+                self.push_char('>');
+            }
+        }
+    }
+
     /// `@JS(..) external R id<..>(..);`
     fn visit_function_decl(&mut self, decl: &FnDecl) {
         let id: &str = &decl.ident.sym;
         let conflicts = self.resolved_funcs.contains_key(id);
-        if conflicts {
+        if conflicts && !self.rename_overloads {
             if log_enabled!(Level::Warn) {
                 let (path, _) = &self.source;
                 let first_span = self.resolved_funcs.get(id).unwrap();
@@ -521,9 +546,7 @@ impl Transformer {
                     .eprint(&mut self.source)
                     .ok();
             }
-            if !self.rename_overloads {
-                return;
-            }
+            return;
         }
         let old_id = id;
         let id = if conflicts && self.rename_overloads {
@@ -575,7 +598,11 @@ impl Transformer {
                 self.annotate(id);
                 self.push("external ");
                 self.visit_type_ann(&ident.type_ann);
-                self.push(" J");
+                if matches!(id.chars().next().unwrap(), 'A'..='Z') {
+                    self.push(" J");
+                } else {
+                    self.push_char(' ');
+                }
                 self.push(id);
                 self.semi();
                 self.current_ident.take().unwrap();
@@ -610,6 +637,10 @@ impl Transformer {
     /// `typedef T<..> = ..;`
     fn visit_type_alias(&mut self, alias: &TsTypeAliasDecl) {
         let id: &str = &alias.id.sym;
+        if id == "Function" {
+            warn!("Invalid identifier: {}", id);
+            return;
+        }
         self.current_ident = Some(id.to_owned());
         self.register_type(id, self.range_of(alias.span), &alias.type_params);
         self.push("typedef ");
@@ -750,9 +781,6 @@ impl Transformer {
 
     /// `external factory C({ .. });`
     fn emit_factory_constr(&mut self) {
-        if self.class.as_ref().unwrap().fields.is_empty() {
-            return;
-        }
         let class = self.class.take().unwrap();
         self.emit_factory(&class.id, &class.fields);
         self.class = Some(class);
@@ -762,14 +790,20 @@ impl Transformer {
     fn emit_factory(&mut self, id: &str, fields: &[(String, String)]) {
         self.push("external factory ");
         self.push(id);
-        self.push("({");
+        self.push("(");
+        if !fields.is_empty() {
+            self.push_char('{');
+        }
         for (id, ty) in fields {
             self.push(ty);
             self.push_char(' ');
             self.push(id);
             self.push_char(',');
         }
-        self.push("});");
+        if !fields.is_empty() {
+            self.push_char('}');
+        }
+        self.push(");");
     }
 
     /// `<A, B extends .., ..>`
