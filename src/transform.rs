@@ -526,7 +526,7 @@ impl Transformer {
             }
         }
         let old_id = id;
-        let id = if conflicts & self.rename_overloads {
+        let id = if conflicts && self.rename_overloads {
             (1..20)
                 .find_map(|e| {
                     let id = format!("{}{}", id, e);
@@ -866,7 +866,7 @@ impl Transformer {
         };
         let nullable = ty == "dynamic" || ty.ends_with('?');
         let ty = format!("{}{} ", ty, if nullable { "" } else { "?" });
-        for idx in ['1', '2', '3', '4', '5', '6', '7', '8', '9'] {
+        for idx in '1'..='9' {
             self.push(&ty);
             self.push(parse_pat(&rest.arg).unwrap_or("_"));
             self.push_char(idx);
