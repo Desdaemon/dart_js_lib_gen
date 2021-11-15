@@ -26,6 +26,7 @@ If --no-write is specified, does not output anything.
     ..addFlag('skip-formatting',
         help: 'Skips formatting the code, especially for longer files where it may be expensive.')
     ..addFlag('dynamic-undefs', help: 'Generate opaque typedefs for referenced undeclared types.')
+    ..addFlag('rename-overloads', help: 'Polyfill function overloads by renaming the overloads.')
     ..addOption('line-length', abbr: 'l', defaultsTo: '120')
     ..addOption('log', help: 'Configure logging behavior.', allowedHelp: const {
       'debug|info|warn|error|off': 'Adjusts the level of logging, where debug logs everything and off logs nothing.',
@@ -37,6 +38,7 @@ If --no-write is specified, does not output anything.
   final args = parser.parse(arguments);
 
   final bool? write = args['write'];
+  final bool? renameOverloads = args['rename-overloads'];
   final bool format = !args['skip-formatting'];
   final bool help = args['help'];
   final bool silent = args['silent'];
@@ -60,6 +62,7 @@ If --no-write is specified, does not output anything.
     inputs: rest.toList(growable: false),
     logSpec: log,
     dynamicUndefs: dynamicUndefs,
+    renameOverloads: renameOverloads,
   );
   stderr.writeln("Parsing ${rest.length} modules.");
 

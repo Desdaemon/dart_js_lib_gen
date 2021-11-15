@@ -6881,7 +6881,7 @@ external Promise<Module> compileStreaming(dynamic source);
 @JS('WebAssembly.instantiate')
 external Promise<WebAssemblyInstantiatedSource> instantiate(BufferSource bytes, Imports importObject);
 @JS('WebAssembly.instantiate')
-external Promise<Instance> instantiate(Module moduleObject, Imports importObject);
+external Promise<Instance> instantiate1(Module moduleObject, Imports importObject);
 @JS('WebAssembly.instantiateStreaming')
 external Promise<WebAssemblyInstantiatedSource> instantiateStreaming(dynamic response, Imports importObject);
 @JS('WebAssembly.validate')
@@ -6958,7 +6958,7 @@ external void close();
 @JS('postMessage')
 external void postMessage(dynamic message, List<Transferable> transfer);
 @JS('postMessage')
-external void postMessage(dynamic message, PostMessageOptions options);
+external void postMessage1(dynamic message, PostMessageOptions options);
 @JS('dispatchEvent')
 external bool dispatchEvent(Event event);
 @JS('location')
@@ -6992,7 +6992,7 @@ external void importScripts([
   String? urls9,
 ]);
 @JS('dispatchEvent')
-external bool dispatchEvent(Event event);
+external bool dispatchEvent1(Event event);
 @JS('caches')
 external CacheStorage Jcaches;
 @JS('crypto')
@@ -7016,7 +7016,7 @@ external void clearTimeout(num handle);
 @JS('createImageBitmap')
 external Promise<ImageBitmap> createImageBitmap(ImageBitmapSource image, ImageBitmapOptions options);
 @JS('createImageBitmap')
-external Promise<ImageBitmap> createImageBitmap(
+external Promise<ImageBitmap> createImageBitmap1(
     ImageBitmapSource image, num sx, num sy, num sw, num sh, ImageBitmapOptions options);
 @JS('fetch')
 external Promise<Response> fetch(RequestInfo input, RequestInit init);
@@ -7057,11 +7057,11 @@ external num requestAnimationFrame(FrameRequestCallback callback);
 @JS('addEventListener')
 external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
 @JS('addEventListener')
-external void addEventListener(String type, EventListenerOrEventListenerObject listener, dynamic options);
+external void addEventListener1(String type, EventListenerOrEventListenerObject listener, dynamic options);
 @JS('removeEventListener')
 external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
 @JS('removeEventListener')
-external void removeEventListener(String type, EventListenerOrEventListenerObject listener, dynamic options);
+external void removeEventListener1(String type, EventListenerOrEventListenerObject listener, dynamic options);
 typedef HeadersInit = dynamic;
 typedef BodyInit = dynamic;
 typedef RequestInfo = dynamic;

@@ -266,7 +266,6 @@ dependencies = [
  "swc_common",
  "swc_ecma_ast",
  "swc_ecma_parser",
- "swc_ecma_visit",
 ]
 
 [[package]]

@@ -31,10 +31,13 @@ class Config {
   /// within the file.
   final bool? dynamicUndefs;
 
+  final bool? renameOverloads;
+
   Config({
     required this.inputs,
     this.logSpec,
     this.dynamicUndefs,
+    this.renameOverloads,
   });
 }
 
@@ -118,6 +121,7 @@ class DartJsLibGenImpl extends DartJsLibGen {
     wireObj.inputs = _api2wire_StringList(apiObj.inputs);
     wireObj.log_spec = _api2wire_opt_String(apiObj.logSpec);
     wireObj.dynamic_undefs = _api2wire_opt_box_autoadd_bool(apiObj.dynamicUndefs);
+    wireObj.rename_overloads = _api2wire_opt_box_autoadd_bool(apiObj.renameOverloads);
   }
 }
 
@@ -269,6 +273,8 @@ class wire_Config extends ffi.Struct {
   external ffi.Pointer<wire_uint_8_list> log_spec;
 
   external ffi.Pointer<ffi.Uint8> dynamic_undefs;
+
+  external ffi.Pointer<ffi.Uint8> rename_overloads;
 }
 
 typedef DartPostCObjectFnType = ffi.Pointer<ffi.NativeFunction<ffi.Uint8 Function(DartPort, ffi.Pointer<ffi.Void>)>>;

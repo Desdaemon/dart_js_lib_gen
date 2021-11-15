@@ -239,9 +239,122 @@ typedef ReactFragment = dynamic;
 typedef ReactNode = dynamic;
 @JS('React.createFactory')
 external HTMLFactory<T> createFactory<T extends HTMLElement>(String type);
+@JS('React.createFactory')
+external SVGFactory createFactory1(String type);
+@JS('React.createFactory')
+external DOMFactory<P, T> createFactory2<P extends DOMAttributes<T>, T extends Element>(String type);
+@JS('React.createFactory')
+external FunctionComponentFactory<P> createFactory3<P>(FunctionComponent<P> type);
+@JS('React.createFactory')
+external CFactory<P, ClassicComponent<P, ComponentState>> createFactory4<P>(
+    ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> type);
+@JS('React.createFactory')
+external CFactory<P, T> createFactory5<P, T extends Component<P, ComponentState>, C extends ComponentClass<P>>(
+    ClassType<P, T, C> type);
+@JS('React.createFactory')
+external Factory<P> createFactory6<P>(ComponentClass<P> type);
 @JS('React.createElement')
 external DetailedReactHTMLElement<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> createElement(
   String type,
+  dynamic props, [
+  ReactNode? children1,
+  ReactNode? children2,
+  ReactNode? children3,
+  ReactNode? children4,
+  ReactNode? children5,
+  ReactNode? children6,
+  ReactNode? children7,
+  ReactNode? children8,
+  ReactNode? children9,
+]);
+@JS('React.createElement')
+external DetailedReactHTMLElement<P, T> createElement1<P extends HTMLAttributes<T>, T extends HTMLElement>(
+  String type,
+  dynamic props, [
+  ReactNode? children1,
+  ReactNode? children2,
+  ReactNode? children3,
+  ReactNode? children4,
+  ReactNode? children5,
+  ReactNode? children6,
+  ReactNode? children7,
+  ReactNode? children8,
+  ReactNode? children9,
+]);
+@JS('React.createElement')
+external ReactSVGElement createElement2<P extends SVGAttributes<T>, T extends SVGElement>(
+  String type,
+  dynamic props, [
+  ReactNode? children1,
+  ReactNode? children2,
+  ReactNode? children3,
+  ReactNode? children4,
+  ReactNode? children5,
+  ReactNode? children6,
+  ReactNode? children7,
+  ReactNode? children8,
+  ReactNode? children9,
+]);
+@JS('React.createElement')
+external DOMElement<P, T> createElement3<P extends DOMAttributes<T>, T extends Element>(
+  String type,
+  dynamic props, [
+  ReactNode? children1,
+  ReactNode? children2,
+  ReactNode? children3,
+  ReactNode? children4,
+  ReactNode? children5,
+  ReactNode? children6,
+  ReactNode? children7,
+  ReactNode? children8,
+  ReactNode? children9,
+]);
+@JS('React.createElement')
+external FunctionComponentElement<P> createElement4<P extends dynamic>(
+  FunctionComponent<P> type,
+  dynamic props, [
+  ReactNode? children1,
+  ReactNode? children2,
+  ReactNode? children3,
+  ReactNode? children4,
+  ReactNode? children5,
+  ReactNode? children6,
+  ReactNode? children7,
+  ReactNode? children8,
+  ReactNode? children9,
+]);
+@JS('React.createElement')
+external CElement<P, ClassicComponent<P, ComponentState>> createElement5<P extends dynamic>(
+  ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>> type,
+  dynamic props, [
+  ReactNode? children1,
+  ReactNode? children2,
+  ReactNode? children3,
+  ReactNode? children4,
+  ReactNode? children5,
+  ReactNode? children6,
+  ReactNode? children7,
+  ReactNode? children8,
+  ReactNode? children9,
+]);
+@JS('React.createElement')
+external CElement<P, T>
+    createElement6<P extends dynamic, T extends Component<P, ComponentState>, C extends ComponentClass<P>>(
+  ClassType<P, T, C> type,
+  dynamic props, [
+  ReactNode? children1,
+  ReactNode? children2,
+  ReactNode? children3,
+  ReactNode? children4,
+  ReactNode? children5,
+  ReactNode? children6,
+  ReactNode? children7,
+  ReactNode? children8,
+  ReactNode? children9,
+]);
+@JS('React.createElement')
+external ReactElement<P> createElement7<P extends dynamic>(
+  dynamic type,
   dynamic props, [
   ReactNode? children1,
   ReactNode? children2,
@@ -257,6 +370,90 @@ external DetailedReactHTMLElement<InputHTMLAttributes<HTMLInputElement>, HTMLInp
 external DetailedReactHTMLElement<P, T> cloneElement<P extends HTMLAttributes<T>, T extends HTMLElement>(
   DetailedReactHTMLElement<P, T> element,
   P props, [
+  ReactNode? children1,
+  ReactNode? children2,
+  ReactNode? children3,
+  ReactNode? children4,
+  ReactNode? children5,
+  ReactNode? children6,
+  ReactNode? children7,
+  ReactNode? children8,
+  ReactNode? children9,
+]);
+@JS('React.cloneElement')
+external ReactHTMLElement<T> cloneElement1<P extends HTMLAttributes<T>, T extends HTMLElement>(
+  ReactHTMLElement<T> element,
+  P props, [
+  ReactNode? children1,
+  ReactNode? children2,
+  ReactNode? children3,
+  ReactNode? children4,
+  ReactNode? children5,
+  ReactNode? children6,
+  ReactNode? children7,
+  ReactNode? children8,
+  ReactNode? children9,
+]);
+@JS('React.cloneElement')
+external ReactSVGElement cloneElement2<P extends SVGAttributes<T>, T extends SVGElement>(
+  ReactSVGElement element,
+  P props, [
+  ReactNode? children1,
+  ReactNode? children2,
+  ReactNode? children3,
+  ReactNode? children4,
+  ReactNode? children5,
+  ReactNode? children6,
+  ReactNode? children7,
+  ReactNode? children8,
+  ReactNode? children9,
+]);
+@JS('React.cloneElement')
+external DOMElement<P, T> cloneElement3<P extends DOMAttributes<T>, T extends Element>(
+  DOMElement<P, T> element,
+  dynamic props, [
+  ReactNode? children1,
+  ReactNode? children2,
+  ReactNode? children3,
+  ReactNode? children4,
+  ReactNode? children5,
+  ReactNode? children6,
+  ReactNode? children7,
+  ReactNode? children8,
+  ReactNode? children9,
+]);
+@JS('React.cloneElement')
+external FunctionComponentElement<P> cloneElement4<P>(
+  FunctionComponentElement<P> element,
+  dynamic props, [
+  ReactNode? children1,
+  ReactNode? children2,
+  ReactNode? children3,
+  ReactNode? children4,
+  ReactNode? children5,
+  ReactNode? children6,
+  ReactNode? children7,
+  ReactNode? children8,
+  ReactNode? children9,
+]);
+@JS('React.cloneElement')
+external CElement<P, T> cloneElement5<P, T extends Component<P, ComponentState>>(
+  CElement<P, T> element,
+  dynamic props, [
+  ReactNode? children1,
+  ReactNode? children2,
+  ReactNode? children3,
+  ReactNode? children4,
+  ReactNode? children5,
+  ReactNode? children6,
+  ReactNode? children7,
+  ReactNode? children8,
+  ReactNode? children9,
+]);
+@JS('React.cloneElement')
+external ReactElement<P> cloneElement6<P>(
+  ReactElement<P> element,
+  dynamic props, [
   ReactNode? children1,
   ReactNode? children2,
   ReactNode? children3,
@@ -627,6 +824,9 @@ typedef MemoExoticComponent<T extends ComponentType<dynamic>> = dynamic;
 @JS('React.memo')
 external NamedExoticComponent<P> memo<P extends dynamic>(FunctionComponent<P> Component,
     bool Function(Readonly<PropsWithChildren<P>> prevProps, Readonly<PropsWithChildren<P>> nextProps) propsAreEqual);
+@JS('React.memo')
+external MemoExoticComponent<T> memo1<T extends ComponentType<dynamic>>(T Component,
+    bool Function(Readonly<ComponentProps<T>> prevProps, Readonly<ComponentProps<T>> nextProps) propsAreEqual);
 typedef LazyExoticComponent<T extends ComponentType<dynamic>> = dynamic;
 @JS('React.lazy')
 external LazyExoticComponent<T> lazy<T extends ComponentType<dynamic>>(Promise<dynamic> Function() factory);
@@ -655,11 +855,29 @@ class MutableRefObject<T> {
 external T useContext<T>(Context<T> context);
 @JS('React.useState')
 external List<dynamic> useState<S>(dynamic initialState);
+@JS('React.useState')
+external List<dynamic> useState1<S>();
 @JS('React.useReducer')
 external List<dynamic> useReducer<R extends ReducerWithoutAction<dynamic>, I>(
     R reducer, I initializerArg, ReducerStateWithoutAction<R> Function(I arg) initializer);
+@JS('React.useReducer')
+external List<dynamic> useReducer1<R extends ReducerWithoutAction<dynamic>>(
+    R reducer, ReducerStateWithoutAction<R> initializerArg, dynamic initializer);
+@JS('React.useReducer')
+external List<dynamic> useReducer2<R extends Reducer<dynamic, dynamic>, I>(
+    R reducer, dynamic initializerArg, ReducerState<R> Function(dynamic arg) initializer);
+@JS('React.useReducer')
+external List<dynamic> useReducer3<R extends Reducer<dynamic, dynamic>, I>(
+    R reducer, I initializerArg, ReducerState<R> Function(I arg) initializer);
+@JS('React.useReducer')
+external List<dynamic> useReducer4<R extends Reducer<dynamic, dynamic>>(
+    R reducer, ReducerState<R> initialState, dynamic initializer);
 @JS('React.useRef')
 external MutableRefObject<T> useRef<T>(T initialValue);
+@JS('React.useRef')
+external RefObject<T> useRef1<T>(T? initialValue);
+@JS('React.useRef')
+external MutableRefObject<T?> useRef2<T>();
 @JS('React.useLayoutEffect')
 external void useLayoutEffect(EffectCallback effect, DependencyList deps);
 @JS('React.useEffect')
@@ -5285,131 +5503,3 @@ class IStrictMode {
   external ReactNode? get children;
   external set children(ReactNode? value);
 }
-
-typedef HTMLHeadElement = dynamic;
-typedef HTMLAnchorElement = dynamic;
-typedef SVGRadialGradientElement = dynamic;
-typedef SVGFEOffsetElement = dynamic;
-typedef HTMLEmbedElement = dynamic;
-typedef Array<T> = dynamic;
-typedef SVGFEFuncGElement = dynamic;
-typedef SVGFEPointLightElement = dynamic;
-typedef SVGFEColorMatrixElement = dynamic;
-typedef HTMLBaseElement = dynamic;
-typedef SVGTextPathElement = dynamic;
-typedef HTMLHRElement = dynamic;
-typedef SVGFEBlendElement = dynamic;
-typedef Readonly<T> = dynamic;
-typedef StyleMedia = dynamic;
-typedef HTMLLIElement = dynamic;
-typedef HTMLMapElement = dynamic;
-typedef SVGClipPathElement = dynamic;
-typedef HTMLUListElement = dynamic;
-typedef SVGFEDistantLightElement = dynamic;
-typedef SVGElement = dynamic;
-typedef SVGLinearGradientElement = dynamic;
-typedef HTMLTextAreaElement = dynamic;
-typedef Partial<T> = dynamic;
-typedef SVGFEMorphologyElement = dynamic;
-typedef HTMLDataListElement = dynamic;
-typedef HTMLCanvasElement = dynamic;
-typedef SVGFESpotLightElement = dynamic;
-typedef HTMLPreElement = dynamic;
-typedef HTMLTableSectionElement = dynamic;
-typedef HTMLVideoElement = dynamic;
-typedef SVGFEDropShadowElement = dynamic;
-typedef SVGFilterElement = dynamic;
-typedef HTMLProgressElement = dynamic;
-typedef SVGPathElement = dynamic;
-typedef HTMLHtmlElement = dynamic;
-typedef HTMLDialogElement = dynamic;
-typedef HTMLAudioElement = dynamic;
-typedef SVGFEDiffuseLightingElement = dynamic;
-typedef HTMLTableRowElement = dynamic;
-typedef HTMLTitleElement = dynamic;
-typedef SVGUseElement = dynamic;
-typedef HTMLImageElement = dynamic;
-typedef EventTarget = dynamic;
-typedef SVGDescElement = dynamic;
-typedef HTMLOptionElement = dynamic;
-typedef HTMLSlotElement = dynamic;
-typedef SVGFEFuncRElement = dynamic;
-typedef Promise<T> = dynamic;
-typedef SVGSymbolElement = dynamic;
-typedef SVGSVGElement = dynamic;
-typedef HTMLTableElement = dynamic;
-typedef SVGFEComponentTransferElement = dynamic;
-typedef HTMLBRElement = dynamic;
-typedef HTMLFormElement = dynamic;
-typedef HTMLSelectElement = dynamic;
-typedef HTMLDListElement = dynamic;
-typedef SVGFEConvolveMatrixElement = dynamic;
-typedef HTMLOListElement = dynamic;
-typedef HTMLTableHeaderCellElement = dynamic;
-typedef HTMLOptGroupElement = dynamic;
-typedef HTMLFieldSetElement = dynamic;
-typedef SVGFECompositeElement = dynamic;
-typedef SVGEllipseElement = dynamic;
-typedef HTMLLabelElement = dynamic;
-typedef HTMLTableDataCellElement = dynamic;
-typedef SVGFEImageElement = dynamic;
-typedef HTMLBodyElement = dynamic;
-typedef HTMLElement = dynamic;
-typedef NonNullable<T> = dynamic;
-typedef HTMLDivElement = dynamic;
-typedef HTMLMetaElement = dynamic;
-typedef HTMLObjectElement = dynamic;
-typedef HTMLTrackElement = dynamic;
-typedef SVGLineElement = dynamic;
-typedef SVGFETurbulenceElement = dynamic;
-typedef SVGDefsElement = dynamic;
-typedef DataTransfer = dynamic;
-typedef ReadonlyArray<T> = dynamic;
-typedef HTMLLinkElement = dynamic;
-typedef HTMLScriptElement = dynamic;
-typedef HTMLParagraphElement = dynamic;
-typedef SVGViewElement = dynamic;
-typedef SVGFEGaussianBlurElement = dynamic;
-typedef HTMLModElement = dynamic;
-typedef SVGRectElement = dynamic;
-typedef SVGStopElement = dynamic;
-typedef Document = dynamic;
-typedef HTMLButtonElement = dynamic;
-typedef Error = dynamic;
-typedef HTMLTemplateElement = dynamic;
-typedef SVGFEFuncAElement = dynamic;
-typedef HTMLParamElement = dynamic;
-typedef HTMLDataElement = dynamic;
-typedef HTMLInputElement = dynamic;
-typedef HTMLHeadingElement = dynamic;
-typedef SVGFEFloodElement = dynamic;
-typedef SVGMarkerElement = dynamic;
-typedef SVGMaskElement = dynamic;
-typedef SVGImageElement = dynamic;
-typedef SVGGElement = dynamic;
-typedef Exclude<T, U> = dynamic;
-typedef SVGPatternElement = dynamic;
-typedef SchedulerInteraction = dynamic;
-typedef HTMLTableColElement = dynamic;
-typedef SVGPolygonElement = dynamic;
-typedef SVGPolylineElement = dynamic;
-typedef HTMLSpanElement = dynamic;
-typedef Set<T> = dynamic;
-typedef HTMLAreaElement = dynamic;
-typedef SVGFEMergeNodeElement = dynamic;
-typedef HTMLSourceElement = dynamic;
-typedef HTMLIFrameElement = dynamic;
-typedef HTMLQuoteElement = dynamic;
-typedef SVGFESpecularLightingElement = dynamic;
-typedef SVGForeignObjectElement = dynamic;
-typedef HTMLWebViewElement = dynamic;
-typedef SVGFEMergeElement = dynamic;
-typedef SVGCircleElement = dynamic;
-typedef SVGFEDisplacementMapElement = dynamic;
-typedef SVGFETileElement = dynamic;
-typedef SVGTextElement = dynamic;
-typedef HTMLLegendElement = dynamic;
-typedef SVGFEFuncBElement = dynamic;
-typedef HTMLStyleElement = dynamic;
-typedef SVGTSpanElement = dynamic;
-typedef SVGMetadataElement = dynamic;

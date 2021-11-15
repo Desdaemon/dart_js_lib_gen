@@ -22040,7 +22040,7 @@ external String escape(String ident);
 @JS('CSS.supports')
 external bool supports(String property, String value);
 @JS('CSS.supports')
-external bool supports(String conditionText);
+external bool supports1(String conditionText);
 
 @JS()
 @anonymous
@@ -22226,7 +22226,7 @@ external Promise<Module> compileStreaming(dynamic source);
 @JS('WebAssembly.instantiate')
 external Promise<WebAssemblyInstantiatedSource> instantiate(BufferSource bytes, Imports importObject);
 @JS('WebAssembly.instantiate')
-external Promise<Instance> instantiate(Module moduleObject, Imports importObject);
+external Promise<Instance> instantiate1(Module moduleObject, Imports importObject);
 @JS('WebAssembly.instantiateStreaming')
 external Promise<WebAssemblyInstantiatedSource> instantiateStreaming(dynamic source, Imports importObject);
 @JS('WebAssembly.validate')
@@ -23074,7 +23074,7 @@ external WindowProxy? open(dynamic url, String target, String features);
 @JS('postMessage')
 external void postMessage(dynamic message, String targetOrigin, List<Transferable> transfer);
 @JS('postMessage')
-external void postMessage(dynamic message, WindowPostMessageOptions options);
+external void postMessage1(dynamic message, WindowPostMessageOptions options);
 @JS('print')
 external void print();
 @JS('prompt')
@@ -23090,15 +23090,15 @@ external void resizeTo(num width, num height);
 @JS('scroll')
 external void scroll(ScrollToOptions options);
 @JS('scroll')
-external void scroll(num x, num y);
+external void scroll1(num x, num y);
 @JS('scrollBy')
 external void scrollBy(ScrollToOptions options);
 @JS('scrollBy')
-external void scrollBy(num x, num y);
+external void scrollBy1(num x, num y);
 @JS('scrollTo')
 external void scrollTo(ScrollToOptions options);
 @JS('scrollTo')
-external void scrollTo(num x, num y);
+external void scrollTo1(num x, num y);
 @JS('stop')
 external void stop();
 @JS('toString')
@@ -23346,7 +23346,7 @@ external void clearTimeout(num handle);
 @JS('createImageBitmap')
 external Promise<ImageBitmap> createImageBitmap(ImageBitmapSource image, ImageBitmapOptions options);
 @JS('createImageBitmap')
-external Promise<ImageBitmap> createImageBitmap(
+external Promise<ImageBitmap> createImageBitmap1(
     ImageBitmapSource image, num sx, num sy, num sw, num sh, ImageBitmapOptions options);
 @JS('fetch')
 external Promise<Response> fetch(RequestInfo input, RequestInit init);
@@ -23385,11 +23385,11 @@ external Storage JsessionStorage;
 @JS('addEventListener')
 external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
 @JS('addEventListener')
-external void addEventListener(String type, EventListenerOrEventListenerObject listener, dynamic options);
+external void addEventListener1(String type, EventListenerOrEventListenerObject listener, dynamic options);
 @JS('removeEventListener')
 external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
 @JS('removeEventListener')
-external void removeEventListener(String type, EventListenerOrEventListenerObject listener, dynamic options);
+external void removeEventListener1(String type, EventListenerOrEventListenerObject listener, dynamic options);
 typedef AlgorithmIdentifier = dynamic;
 typedef BigInteger = Uint8Array;
 typedef BinaryData = dynamic;

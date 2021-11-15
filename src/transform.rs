@@ -7,7 +7,7 @@ use ariadne::{Color, Fmt, Label, ReportKind, Source};
 use log::log_enabled;
 use log::{debug, error, info, warn, Level};
 use swc_common::{BytePos, SourceFile, Span};
-use swc_ecma_visit::{swc_ecma_ast::*, VisitMut};
+use swc_ecma_ast::*;
 
 #[cfg(feature = "alloc_counter")]
 #[global_allocator]
@@ -35,6 +35,7 @@ struct Transformer {
     errors: u32,
     file: Rc<SourceFile>,
     allocs: usize,
+    rename_overloads: bool,
 }
 
 struct Class {
@@ -60,16 +61,13 @@ fn generate_type_param(count: usize) -> impl Iterator<Item = char> {
     ('T'..'Z').chain('A'..'O').take(count)
 }
 
-impl VisitMut for Transformer {
-    fn visit_mut_params(&mut self, params: &mut Vec<Param>) {}
-}
-
 pub fn visit_program(
     module: &Module,
     file: Rc<SourceFile>,
     library_name: &str,
     size_hint: Option<usize>,
     gen_undecl_typedef: bool,
+    rename_overloads: bool,
 ) -> String {
     let buf = match size_hint {
         Some(size) => String::with_capacity(size),
@@ -91,6 +89,7 @@ pub fn visit_program(
         errors: 0,
         file,
         allocs: 0,
+        rename_overloads,
     };
 
     t.push("@JS() library ");
@@ -247,7 +246,7 @@ impl Transformer {
             }
             None
         } else {
-            Some(id.into())
+            Some(id)
         }
     }
 
@@ -478,7 +477,7 @@ impl Transformer {
         self.push("@JS() ");
         let class_body = self.collect(|s| {
             s.push("class ");
-            s.push(&id);
+            s.push(id);
             s.visit_type_params(&decl.type_params);
             s.push_char('{');
             {
@@ -499,32 +498,47 @@ impl Transformer {
     /// `@JS(..) external R id<..>(..);`
     fn visit_function_decl(&mut self, decl: &FnDecl) {
         let id: &str = &decl.ident.sym;
-        let conflict = self.resolved_funcs.contains_key(id);
-        if conflict && log_enabled!(Level::Warn) {
-            let (path, _) = &self.source;
-            let first_span = self.resolved_funcs.get(id).unwrap();
-            let span = decl.function.span;
-            Report::build(ReportKind::Warning, path, self.char_offset(span.lo))
-                .with_message("Function overload ignored")
-                .with_label(
-                    Label::new((path.clone(), self.range_of(span)))
-                        .with_message("Remove this definition".fg(Color::Yellow))
-                        .with_color(Color::Yellow),
-                )
-                .with_label(
-                    Label::new((path.clone(), first_span.clone()))
-                        .with_message("Function first defined here".fg(Color::Blue))
-                        .with_color(Color::Blue),
-                )
-                .with_note("Dart does not support function overloads.")
-                .finish()
-                .eprint(&mut self.source)
-                .ok();
-            return;
+        let conflicts = self.resolved_funcs.contains_key(id);
+        if conflicts {
+            if log_enabled!(Level::Warn) {
+                let (path, _) = &self.source;
+                let first_span = self.resolved_funcs.get(id).unwrap();
+                let span = decl.function.span;
+                Report::build(ReportKind::Warning, path, self.char_offset(span.lo))
+                    .with_message("Function overload ignored")
+                    .with_label(
+                        Label::new((path.clone(), self.range_of(span)))
+                            .with_message("Remove this definition".fg(Color::Yellow))
+                            .with_color(Color::Yellow),
+                    )
+                    .with_label(
+                        Label::new((path.clone(), first_span.clone()))
+                            .with_message("Function first defined here".fg(Color::Blue))
+                            .with_color(Color::Blue),
+                    )
+                    .with_note("Dart does not support function overloads.")
+                    .finish()
+                    .eprint(&mut self.source)
+                    .ok();
+            }
+            if !self.rename_overloads {
+                return;
+            }
         }
+        let old_id = id;
+        let id = if conflicts & self.rename_overloads {
+            (1..20)
+                .find_map(|e| {
+                    let id = format!("{}{}", id, e);
+                    (!self.resolved_funcs.contains_key(&id)).then(|| id)
+                })
+                .unwrap()
+        } else {
+            id.to_owned()
+        };
         self.resolved_funcs
-            .insert(id.to_owned(), self.range_of(decl.function.span));
-        self.visit_function(id, &decl.function, false, true);
+            .insert(id.clone(), self.range_of(decl.function.span));
+        self.visit_function(&id, &decl.function, false, true, Some(old_id));
     }
 
     /// `[@JS(id)] external [static] R id<..>(..);`
@@ -534,9 +548,11 @@ impl Transformer {
         function: &Function,
         is_static: bool,
         should_annotate: bool,
+        annotation: Option<&str>,
     ) {
         if should_annotate {
-            self.annotate(id);
+            let annotation = annotation.unwrap_or(id);
+            self.annotate(annotation);
         }
         self.push("external ");
         if is_static {
@@ -597,7 +613,7 @@ impl Transformer {
         self.current_ident = Some(id.to_owned());
         self.register_type(id, self.range_of(alias.span), &alias.type_params);
         self.push("typedef ");
-        self.push(&id);
+        self.push(id);
         self.visit_type_params(&alias.type_params);
         self.push_char('=');
         self.visit_type(alias.type_ann.as_ref());
@@ -649,9 +665,9 @@ impl Transformer {
                     s.optional();
                 }
             });
-            self.emit_getter(&ty, &id);
+            self.emit_getter(&ty, id);
             if !prop.readonly {
-                self.emit_setter(&ty, &id, None);
+                self.emit_setter(&ty, id, None);
             }
             self.class
                 .as_mut()
@@ -669,7 +685,7 @@ impl Transformer {
             self.class.as_mut().unwrap().anonymous = false;
             let params = self.collect(|s| s.visit_function_params(params));
             self.push("external factory ");
-            self.push(&id);
+            self.push(id);
             self.push_char('(');
             if !params.is_empty() {
                 if params.starts_with('[') {
@@ -723,7 +739,7 @@ impl Transformer {
             self.push("external ");
             self.visit_type_ann(&met.type_ann);
             self.push_char(' ');
-            self.push(&id);
+            self.push(id);
             self.visit_type_params(&met.type_params);
             self.push_char('(');
             self.visit_function_params(&met.params);
@@ -745,7 +761,7 @@ impl Transformer {
     /// `external factory id({ .. })`
     fn emit_factory(&mut self, id: &str, fields: &[(String, String)]) {
         self.push("external factory ");
-        self.push(&id);
+        self.push(id);
         self.push("({");
         for (id, ty) in fields {
             self.push(ty);
@@ -794,7 +810,7 @@ impl Transformer {
                     .with_color(Color::Red),
             )
             .with_label(
-                Label::new((path.clone(), old_range.clone()))
+                Label::new((path.clone(), old_range))
                     .with_message(first_decl_message.fg(Color::Blue))
                     .with_color(Color::Blue),
             )
@@ -1133,7 +1149,7 @@ impl Transformer {
                 if let Some(args) = &imp.type_args {
                     self.push_char('<');
                     for ty in &args.params {
-                        self.visit_type(&ty);
+                        self.visit_type(ty);
                         self.push_char(',')
                     }
                     self.pop();
@@ -1167,7 +1183,7 @@ impl Transformer {
                     PropName::Ident(id) => id.as_ref(),
                     _ => todo!(),
                 };
-                self.visit_function(id, &function, *is_static, false)
+                self.visit_function(id, function, *is_static, false, None)
             }
             ClassMember::Constructor(Constructor { params, .. }) => {
                 self.push("external factory ");
