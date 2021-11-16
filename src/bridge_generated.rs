@@ -43,6 +43,7 @@ pub struct wire_Config {
     log_spec: *mut wire_uint_8_list,
     dynamic_undefs: *mut bool,
     rename_overloads: *mut bool,
+    imports: *mut bool,
 }
 
 #[repr(C)]
@@ -145,6 +146,7 @@ impl Wire2Api<Config> for wire_Config {
             log_spec: self.log_spec.wire2api(),
             dynamic_undefs: self.dynamic_undefs.wire2api(),
             rename_overloads: self.rename_overloads.wire2api(),
+            imports: self.imports.wire2api(),
         }
     }
 }
@@ -183,6 +185,7 @@ impl NewWithNullPtr for wire_Config {
             log_spec: std::ptr::null_mut(),
             dynamic_undefs: std::ptr::null_mut(),
             rename_overloads: std::ptr::null_mut(),
+            imports: std::ptr::null_mut(),
         }
     }
 }

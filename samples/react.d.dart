@@ -21,7 +21,7 @@ typedef NativeUIEvent = UIEvent;
 typedef NativeWheelEvent = WheelEvent;
 typedef Booleanish = dynamic;
 @JS(r'UNDEFINED_VOID_ONLY')
-external dynamic JUNDEFINED_VOID_ONLY;
+external dynamic get JUNDEFINED_VOID_ONLY;
 typedef Destructor = dynamic Function();
 typedef ElementType<P> = dynamic;
 typedef ReactType<P> = ElementType<P>;
@@ -557,11 +557,11 @@ external Context<T> createContext<T>(T defaultValue);
 @JS(r'React.isValidElement')
 external bool isValidElement<P>(dynamic object);
 @JS(r'React.Children')
-external ReactChildren JChildren;
+external ReactChildren get JChildren;
 @JS(r'React.Fragment')
-external ExoticComponent<IFragment> JFragment;
+external ExoticComponent<IFragment> get JFragment;
 @JS(r'React.StrictMode')
-external ExoticComponent<IStrictMode> JStrictMode;
+external ExoticComponent<IStrictMode> get JStrictMode;
 
 @JS()
 @anonymous
@@ -577,9 +577,9 @@ class SuspenseProps {
 }
 
 @JS(r'React.Suspense')
-external ExoticComponent<SuspenseProps> JSuspense;
+external ExoticComponent<SuspenseProps> get JSuspense;
 @JS(r'React.version')
-external String version;
+external String get version;
 typedef ProfilerOnRenderCallback = void Function(String id, String phase, num actualDuration, num baseDuration,
     num startTime, num commitTime, Set<SchedulerInteraction> interactions);
 
@@ -600,7 +600,7 @@ class ProfilerProps {
 }
 
 @JS(r'React.Profiler')
-external ExoticComponent<ProfilerProps> JProfiler;
+external ExoticComponent<ProfilerProps> get JProfiler;
 typedef ReactInstance = dynamic;
 
 @JS()

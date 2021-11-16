@@ -1,5 +1,6 @@
 use std::ops::Range;
 use std::rc::Rc;
+use std::borrow::Cow;
 
 use ahash::{AHashMap, AHashSet};
 use ariadne::{Color, Fmt, Label, ReportKind, Source};
@@ -29,15 +30,18 @@ struct Transformer {
     resolved_funcs: AHashMap<String, Range<usize>>,
     /// Keeps track of the ident of the variable declaration being evaluated.
     current_ident: Option<String>,
+    /// Anonymous type literals.
     type_lits: AHashMap<String, String>,
+    /// The span of the parent element.
     span: Range<usize>,
+    /// Used by ariadne for reporting.
     source: (String, Source),
     warnings: u32,
     errors: u32,
     file: Rc<SourceFile>,
     allocs: usize,
     rename_overloads: bool,
-    imports: AHashSet<String>,
+    imports: Option<AHashSet<&'static str>>,
 }
 
 struct Class {
@@ -70,6 +74,7 @@ pub fn visit_program(
     size_hint: Option<usize>,
     gen_undecl_typedef: bool,
     rename_overloads: bool,
+    imports: bool,
 ) -> String {
     let buf = match size_hint {
         Some(size) => String::with_capacity(size),
@@ -91,7 +96,7 @@ pub fn visit_program(
         undecls: AHashMap::new(),
         resolved: AHashMap::new(),
         resolved_funcs: AHashMap::new(),
-        imports: AHashSet::new(),
+        imports: imports.then(AHashSet::new),
         type_lits: AHashMap::new(),
     };
     t.visit_module_items(&module.body);
@@ -134,8 +139,11 @@ pub fn visit_program(
 import 'package:js/js.dart';",
         library_name
     );
-    let mut imports = t.imports.into_iter().collect::<Vec<_>>();
-    imports.sort();
+    let imports = t.imports.map(|x| {
+        let mut x = x.into_iter().collect::<Vec<_>>();
+        x.sort();
+        x
+    }).unwrap_or_else(Vec::new);
     for imp in imports {
         header.push_str("import \"");
         header.push_str(&imp);
@@ -604,23 +612,27 @@ impl Transformer {
         self.semi();
     }
 
-    /// `@JS(..) external T variable;`
+    /// ```dart
+    /// @JS() external T get id;
+    /// @JS() external set id(T value);
+    /// ```
     fn visit_variable(&mut self, var: &VarDecl) {
         for item in &var.decls {
-            if let swc_ecma_ast::Pat::Ident(ident) = &item.name {
-                let id = ident.id.sym.as_ref();
+            if let Pat::Ident(ident) = &item.name {
+                let id: &str = &ident.id.sym;
                 self.current_ident = Some(id.to_owned());
-                self.annotate(id);
-                self.push("external ");
-                self.visit_type_ann(&ident.type_ann);
-                if matches!(id.chars().next().unwrap(), 'A'..='Z') {
-                    self.push(" J");
+                let dart_id = if matches!(id.chars().next().unwrap(), 'A'..='Z') {
+                    Cow::Owned(format!("J{}", id))
                 } else {
-                    self.push_char(' ');
+                    Cow::Borrowed(id)
+                };
+                let ty = self.collect(|s| s.visit_type_ann(&ident.type_ann));
+                self.annotate(id);
+                self.emit_getter(&ty, &dart_id);
+                if !matches!(var.kind, VarDeclKind::Const) {
+                    self.annotate(id);
+                    self.emit_setter(&ty, &dart_id, None);
                 }
-                self.push(id);
-                self.semi();
-                self.current_ident.take().unwrap();
             }
         }
     }
@@ -629,19 +641,19 @@ impl Transformer {
         if let Some(ns) = &module.body {
             if !module.global {
                 match &module.id {
-                    swc_ecma_ast::TsModuleName::Ident(ident) => {
+                    TsModuleName::Ident(ident) => {
                         self.path.push(String::from(&ident.sym as &str))
                     }
-                    swc_ecma_ast::TsModuleName::Str(string) => {
+                    TsModuleName::Str(string) => {
                         self.path.push(String::from(&string.value as &str))
                     }
                 }
             }
             match ns {
-                swc_ecma_ast::TsNamespaceBody::TsModuleBlock(blk) => {
+                TsNamespaceBody::TsModuleBlock(blk) => {
                     self.visit_module_items(&blk.body)
                 }
-                swc_ecma_ast::TsNamespaceBody::TsNamespaceDecl(_) => todo!(),
+                TsNamespaceBody::TsNamespaceDecl(_) => todo!(),
             }
             if !module.global {
                 self.path.pop();
@@ -874,27 +886,33 @@ impl Transformer {
             TsEntityName::TsQualifiedName(qn) => (&qn.right.sym, qn.right.span),
             TsEntityName::Ident(ident) => (&ident.sym, ident.span),
         };
-        let (replacement, library) = replacement_for(id);
-        if let Some(lib) = library {
-            if !self.imports.contains(lib) {
-                self.imports.insert(lib.to_owned());
+        let (resolved, id) = if self.imports.is_some() {
+            let (replacement, library) = replacement_for(id);
+            if let Some(lib) = library {
+                self.imports.as_mut().unwrap().insert(lib);
             }
-        }
-        let id = replacement.unwrap_or(id);
-        let count = param_count.unwrap_or(0);
-        let range = self.range_of(span);
-        if replacement.is_some() || library.is_some() || self.resolved.contains_key(id) {
+            (
+                replacement.is_some() || library.is_some() || self.resolved.contains_key(id),
+                replacement.unwrap_or(id)
+            )
+        } else {
+            (self.resolved.contains_key(id), id)
+        };
+        if resolved {
             self.push(id);
             return;
         }
+        let count = param_count.unwrap_or(0);
         match self.undecls.get(id).cloned() {
             Some((old, old_range)) if old != count => {
                 self.errors += 1;
                 if log_enabled!(Level::Error) {
+                    let range = self.range_of(span);
                     self.report_type_param_mismatch(count, old, range, old_range, None);
                 }
             }
             None => {
+                let range = self.range_of(span);
                 self.undecls.insert(id.to_owned(), (count, range));
             }
             _ => {}
@@ -933,6 +951,7 @@ impl Transformer {
 
     fn visit_function_param_single(&mut self, item: &TsFnParam) {
         match item {
+            TsFnParam::Rest(rest) => self.visit_rest_pat(rest),
             TsFnParam::Ident(ident) => {
                 let id: &str = &ident.id.sym;
                 if id == "this" {
@@ -943,7 +962,6 @@ impl Transformer {
                 self.push_char(' ');
                 self.push(id);
             }
-            TsFnParam::Rest(rest) => self.visit_rest_pat(rest),
             _ => {
                 error!("Unhandled function parameter:\n{:?}", item);
                 todo!()
@@ -956,8 +974,6 @@ impl Transformer {
     fn visit_type_ann(&mut self, type_ann: &Option<TsTypeAnn>) {
         if let Some(ann) = type_ann {
             self.visit_type(&ann.type_ann);
-        } else {
-            self.push("dynamic");
         }
     }
 

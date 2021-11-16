@@ -1031,7 +1031,11 @@ class JQuery {
 }
 
 @JS(r'jQuery')
-external JQueryStatic jQuery;
+external JQueryStatic get jQuery;
+@JS(r'jQuery')
+external set jQuery(JQueryStatic value);
 @JS(r'$')
-external JQueryStatic $;
+external JQueryStatic get $;
+@JS(r'$')
+external set $(JQueryStatic value);
 typedef Object = dynamic;

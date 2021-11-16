@@ -26,7 +26,10 @@ pub struct Config {
     /// Generate `typedef T = dynamic` definitions for types that were referenced but not defined
     /// within the file.
     pub dynamic_undefs: Option<bool>,
+    /// Polyfill overloads by renaming them.
     pub rename_overloads: Option<bool>,
+    /// Generate imports for web types.
+    pub imports: Option<bool>,
 }
 
 pub struct Entry {
@@ -40,6 +43,7 @@ pub fn parse_library(config: Config) -> Result<Vec<Entry>> {
         .start()?;
     let gen_undecl_typedef = config.dynamic_undefs.unwrap_or(false);
     let rename_overloads = config.rename_overloads.unwrap_or(false);
+    let imports = config.imports.unwrap_or(true);
     let modules = parse_modules(config);
     Ok(modules
         .into_iter()
@@ -53,6 +57,7 @@ pub fn parse_library(config: Config) -> Result<Vec<Entry>> {
                 Some(hint),
                 gen_undecl_typedef,
                 rename_overloads,
+                imports,
             );
             debug!(
                 "{}

@@ -27,7 +27,9 @@ class MapConstructor {
 }
 
 @JS(r'Map')
-external MapConstructor JMap;
+external MapConstructor get JMap;
+@JS(r'Map')
+external set JMap(MapConstructor value);
 
 @JS()
 @anonymous
@@ -58,7 +60,9 @@ class WeakMapConstructor {
 }
 
 @JS(r'WeakMap')
-external WeakMapConstructor JWeakMap;
+external WeakMapConstructor get JWeakMap;
+@JS(r'WeakMap')
+external set JWeakMap(WeakMapConstructor value);
 
 @JS()
 @anonymous
@@ -81,7 +85,9 @@ class SetConstructor {
 }
 
 @JS(r'Set')
-external SetConstructor JSet;
+external SetConstructor get JSet;
+@JS(r'Set')
+external set JSet(SetConstructor value);
 
 @JS()
 @anonymous
@@ -110,4 +116,6 @@ class WeakSetConstructor {
 }
 
 @JS(r'WeakSet')
-external WeakSetConstructor JWeakSet;
+external WeakSetConstructor get JWeakSet;
+@JS(r'WeakSet')
+external set JWeakSet(WeakSetConstructor value);

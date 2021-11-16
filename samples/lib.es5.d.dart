@@ -7,9 +7,13 @@ import "dart:typed_data";
 import "lib.es5.d.dart";
 
 @JS(r'NaN')
-external num JNaN;
+external num get JNaN;
+@JS(r'NaN')
+external set JNaN(num value);
 @JS(r'Infinity')
-external num JInfinity;
+external num get JInfinity;
+@JS(r'Infinity')
+external set JInfinity(num value);
 @JS(r'eval')
 external dynamic eval(String x);
 @JS(r'parseInt')
@@ -108,7 +112,9 @@ class ObjectConstructor {
 }
 
 @JS(r'Object')
-external ObjectConstructor JObject;
+external ObjectConstructor get JObject;
+@JS(r'Object')
+external set JObject(ObjectConstructor value);
 
 @JS()
 @anonymous
@@ -172,7 +178,9 @@ class FunctionConstructor {
 }
 
 @JS(r'Function')
-external FunctionConstructor JFunction;
+external FunctionConstructor get JFunction;
+@JS(r'Function')
+external set JFunction(FunctionConstructor value);
 typedef ThisParameterType<T> = dynamic;
 typedef OmitThisParameter<T> = dynamic;
 
@@ -247,7 +255,9 @@ class StringConstructor {
 }
 
 @JS(r'String')
-external StringConstructor JString;
+external StringConstructor get JString;
+@JS(r'String')
+external set JString(StringConstructor value);
 
 @JS()
 @anonymous
@@ -263,7 +273,9 @@ class BooleanConstructor {
 }
 
 @JS(r'Boolean')
-external BooleanConstructor JBoolean;
+external BooleanConstructor get JBoolean;
+@JS(r'Boolean')
+external set JBoolean(BooleanConstructor value);
 
 @JS()
 @anonymous
@@ -289,7 +301,9 @@ class NumberConstructor {
 }
 
 @JS(r'Number')
-external NumberConstructor JNumber;
+external NumberConstructor get JNumber;
+@JS(r'Number')
+external set JNumber(NumberConstructor value);
 
 @JS()
 @anonymous
@@ -368,7 +382,9 @@ class Math {
 }
 
 @JS(r'Math')
-external Math JMath;
+external Math get JMath;
+@JS(r'Math')
+external set JMath(Math value);
 
 @JS()
 @anonymous
@@ -430,7 +446,9 @@ class DateConstructor {
 }
 
 @JS(r'Date')
-external DateConstructor JDate;
+external DateConstructor get JDate;
+@JS(r'Date')
+external set JDate(DateConstructor value);
 
 @JS()
 @anonymous
@@ -506,7 +524,9 @@ class RegExpConstructor {
 }
 
 @JS(r'RegExp')
-external RegExpConstructor JRegExp;
+external RegExpConstructor get JRegExp;
+@JS(r'RegExp')
+external set JRegExp(RegExpConstructor value);
 
 @JS()
 @anonymous
@@ -531,7 +551,9 @@ class ErrorConstructor {
 }
 
 @JS(r'Error')
-external ErrorConstructor JError;
+external ErrorConstructor get JError;
+@JS(r'Error')
+external set JError(ErrorConstructor value);
 
 @JS()
 @anonymous
@@ -546,7 +568,9 @@ class EvalErrorConstructor extends ErrorConstructor {
 }
 
 @JS(r'EvalError')
-external EvalErrorConstructor JEvalError;
+external EvalErrorConstructor get JEvalError;
+@JS(r'EvalError')
+external set JEvalError(EvalErrorConstructor value);
 
 @JS()
 @anonymous
@@ -561,7 +585,9 @@ class RangeErrorConstructor extends ErrorConstructor {
 }
 
 @JS(r'RangeError')
-external RangeErrorConstructor JRangeError;
+external RangeErrorConstructor get JRangeError;
+@JS(r'RangeError')
+external set JRangeError(RangeErrorConstructor value);
 
 @JS()
 @anonymous
@@ -576,7 +602,9 @@ class ReferenceErrorConstructor extends ErrorConstructor {
 }
 
 @JS(r'ReferenceError')
-external ReferenceErrorConstructor JReferenceError;
+external ReferenceErrorConstructor get JReferenceError;
+@JS(r'ReferenceError')
+external set JReferenceError(ReferenceErrorConstructor value);
 
 @JS()
 @anonymous
@@ -591,7 +619,9 @@ class SyntaxErrorConstructor extends ErrorConstructor {
 }
 
 @JS(r'SyntaxError')
-external SyntaxErrorConstructor JSyntaxError;
+external SyntaxErrorConstructor get JSyntaxError;
+@JS(r'SyntaxError')
+external set JSyntaxError(SyntaxErrorConstructor value);
 
 @JS()
 @anonymous
@@ -606,7 +636,9 @@ class TypeErrorConstructor extends ErrorConstructor {
 }
 
 @JS(r'TypeError')
-external TypeErrorConstructor JTypeError;
+external TypeErrorConstructor get JTypeError;
+@JS(r'TypeError')
+external set JTypeError(TypeErrorConstructor value);
 
 @JS()
 @anonymous
@@ -621,7 +653,9 @@ class URIErrorConstructor extends ErrorConstructor {
 }
 
 @JS(r'URIError')
-external URIErrorConstructor JURIError;
+external URIErrorConstructor get JURIError;
+@JS(r'URIError')
+external set JURIError(URIErrorConstructor value);
 
 @JS()
 @anonymous
@@ -632,7 +666,9 @@ class JSON {
 }
 
 @JS(r'JSON')
-external JSON JJSON;
+external JSON get JJSON;
+@JS(r'JSON')
+external set JJSON(JSON value);
 
 @JS()
 @anonymous
@@ -749,7 +785,9 @@ class ArrayConstructor {
 }
 
 @JS(r'Array')
-external ArrayConstructor JArray;
+external ArrayConstructor get JArray;
+@JS(r'Array')
+external set JArray(ArrayConstructor value);
 
 @JS()
 @anonymous
@@ -886,7 +924,9 @@ class ArrayBufferConstructor {
 }
 
 @JS(r'ArrayBuffer')
-external ArrayBufferConstructor JArrayBuffer;
+external ArrayBufferConstructor get JArrayBuffer;
+@JS(r'ArrayBuffer')
+external set JArrayBuffer(ArrayBufferConstructor value);
 
 @JS()
 @anonymous
@@ -940,7 +980,9 @@ class DataViewConstructor {
 }
 
 @JS(r'DataView')
-external DataViewConstructor JDataView;
+external DataViewConstructor get JDataView;
+@JS(r'DataView')
+external set JDataView(DataViewConstructor value);
 
 @JS()
 @anonymous
@@ -1003,7 +1045,9 @@ class Int8ArrayConstructor {
 }
 
 @JS(r'Int8Array')
-external Int8ArrayConstructor JInt8Array;
+external Int8ArrayConstructor get JInt8Array;
+@JS(r'Int8Array')
+external set JInt8Array(Int8ArrayConstructor value);
 
 @JS()
 @anonymous
@@ -1066,7 +1110,9 @@ class Uint8ArrayConstructor {
 }
 
 @JS(r'Uint8Array')
-external Uint8ArrayConstructor JUint8Array;
+external Uint8ArrayConstructor get JUint8Array;
+@JS(r'Uint8Array')
+external set JUint8Array(Uint8ArrayConstructor value);
 
 @JS()
 @anonymous
@@ -1131,7 +1177,9 @@ class Uint8ClampedArrayConstructor {
 }
 
 @JS(r'Uint8ClampedArray')
-external Uint8ClampedArrayConstructor JUint8ClampedArray;
+external Uint8ClampedArrayConstructor get JUint8ClampedArray;
+@JS(r'Uint8ClampedArray')
+external set JUint8ClampedArray(Uint8ClampedArrayConstructor value);
 
 @JS()
 @anonymous
@@ -1194,7 +1242,9 @@ class Int16ArrayConstructor {
 }
 
 @JS(r'Int16Array')
-external Int16ArrayConstructor JInt16Array;
+external Int16ArrayConstructor get JInt16Array;
+@JS(r'Int16Array')
+external set JInt16Array(Int16ArrayConstructor value);
 
 @JS()
 @anonymous
@@ -1257,7 +1307,9 @@ class Uint16ArrayConstructor {
 }
 
 @JS(r'Uint16Array')
-external Uint16ArrayConstructor JUint16Array;
+external Uint16ArrayConstructor get JUint16Array;
+@JS(r'Uint16Array')
+external set JUint16Array(Uint16ArrayConstructor value);
 
 @JS()
 @anonymous
@@ -1320,7 +1372,9 @@ class Int32ArrayConstructor {
 }
 
 @JS(r'Int32Array')
-external Int32ArrayConstructor JInt32Array;
+external Int32ArrayConstructor get JInt32Array;
+@JS(r'Int32Array')
+external set JInt32Array(Int32ArrayConstructor value);
 
 @JS()
 @anonymous
@@ -1383,7 +1437,9 @@ class Uint32ArrayConstructor {
 }
 
 @JS(r'Uint32Array')
-external Uint32ArrayConstructor JUint32Array;
+external Uint32ArrayConstructor get JUint32Array;
+@JS(r'Uint32Array')
+external set JUint32Array(Uint32ArrayConstructor value);
 
 @JS()
 @anonymous
@@ -1447,7 +1503,9 @@ class Float32ArrayConstructor {
 }
 
 @JS(r'Float32Array')
-external Float32ArrayConstructor JFloat32Array;
+external Float32ArrayConstructor get JFloat32Array;
+@JS(r'Float32Array')
+external set JFloat32Array(Float32ArrayConstructor value);
 
 @JS()
 @anonymous
@@ -1510,7 +1568,9 @@ class Float64ArrayConstructor {
 }
 
 @JS(r'Float64Array')
-external Float64ArrayConstructor JFloat64Array;
+external Float64ArrayConstructor get JFloat64Array;
+@JS(r'Float64Array')
+external set JFloat64Array(Float64ArrayConstructor value);
 
 @JS()
 @anonymous
@@ -1574,7 +1634,9 @@ class Collator {
 }
 
 @JS(r'Intl.Collator')
-external ICollator JCollator;
+external ICollator get JCollator;
+@JS(r'Intl.Collator')
+external set JCollator(ICollator value);
 
 @JS()
 @anonymous
@@ -1665,7 +1727,9 @@ class NumberFormat {
 }
 
 @JS(r'Intl.NumberFormat')
-external INumberFormat JNumberFormat;
+external INumberFormat get JNumberFormat;
+@JS(r'Intl.NumberFormat')
+external set JNumberFormat(INumberFormat value);
 
 @JS()
 @anonymous
@@ -1771,7 +1835,9 @@ class DateTimeFormat {
 }
 
 @JS(r'Intl.DateTimeFormat')
-external IDateTimeFormat JDateTimeFormat;
+external IDateTimeFormat get JDateTimeFormat;
+@JS(r'Intl.DateTimeFormat')
+external set JDateTimeFormat(IDateTimeFormat value);
 
 @JS()
 @anonymous

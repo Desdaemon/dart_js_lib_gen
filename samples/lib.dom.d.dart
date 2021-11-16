@@ -4585,7 +4585,9 @@ class WorkletOptions {
 
 typedef NodeFilter = dynamic;
 @JS(r'NodeFilter')
-external INodeFilter JNodeFilter;
+external INodeFilter get JNodeFilter;
+@JS(r'NodeFilter')
+external set JNodeFilter(INodeFilter value);
 typedef XPathNSResolver = dynamic;
 
 @JS()
@@ -4726,7 +4728,9 @@ class AbortController {
 }
 
 @JS(r'AbortController')
-external IAbortController JAbortController;
+external IAbortController get JAbortController;
+@JS(r'AbortController')
+external set JAbortController(IAbortController value);
 
 @JS()
 @anonymous
@@ -4753,7 +4757,9 @@ class AbortSignal extends EventTarget {
 }
 
 @JS(r'AbortSignal')
-external IAbortSignal JAbortSignal;
+external IAbortSignal get JAbortSignal;
+@JS(r'AbortSignal')
+external set JAbortSignal(IAbortSignal value);
 
 @JS()
 @anonymous
@@ -4773,7 +4779,9 @@ class AbstractRange {
 }
 
 @JS(r'AbstractRange')
-external IAbstractRange JAbstractRange;
+external IAbstractRange get JAbstractRange;
+@JS(r'AbstractRange')
+external set JAbstractRange(IAbstractRange value);
 
 @JS()
 @anonymous
@@ -4823,7 +4831,9 @@ class AnalyserNode extends AudioNode {
 }
 
 @JS(r'AnalyserNode')
-external IAnalyserNode JAnalyserNode;
+external IAnalyserNode get JAnalyserNode;
+@JS(r'AnalyserNode')
+external set JAnalyserNode(IAnalyserNode value);
 
 @JS()
 @anonymous
@@ -4904,7 +4914,9 @@ class Animation extends EventTarget {
 }
 
 @JS(r'Animation')
-external IAnimation JAnimation;
+external IAnimation get JAnimation;
+@JS(r'Animation')
+external set JAnimation(IAnimation value);
 
 @JS()
 @anonymous
@@ -4916,7 +4928,9 @@ class AnimationEffect {
 }
 
 @JS(r'AnimationEffect')
-external IAnimationEffect JAnimationEffect;
+external IAnimationEffect get JAnimationEffect;
+@JS(r'AnimationEffect')
+external set JAnimationEffect(IAnimationEffect value);
 
 @JS()
 @anonymous
@@ -4932,7 +4946,9 @@ class AnimationEvent extends Event {
 }
 
 @JS(r'AnimationEvent')
-external IAnimationEvent JAnimationEvent;
+external IAnimationEvent get JAnimationEvent;
+@JS(r'AnimationEvent')
+external set JAnimationEvent(IAnimationEvent value);
 
 @JS()
 @anonymous
@@ -4954,7 +4970,9 @@ class AnimationPlaybackEvent extends Event {
 }
 
 @JS(r'AnimationPlaybackEvent')
-external IAnimationPlaybackEvent JAnimationPlaybackEvent;
+external IAnimationPlaybackEvent get JAnimationPlaybackEvent;
+@JS(r'AnimationPlaybackEvent')
+external set JAnimationPlaybackEvent(IAnimationPlaybackEvent value);
 
 @JS()
 @anonymous
@@ -4966,7 +4984,9 @@ class AnimationTimeline {
 }
 
 @JS(r'AnimationTimeline')
-external IAnimationTimeline JAnimationTimeline;
+external IAnimationTimeline get JAnimationTimeline;
+@JS(r'AnimationTimeline')
+external set JAnimationTimeline(IAnimationTimeline value);
 
 @JS()
 @anonymous
@@ -4993,7 +5013,9 @@ class Attr extends Node {
 }
 
 @JS(r'Attr')
-external IAttr JAttr;
+external IAttr get JAttr;
+@JS(r'Attr')
+external set JAttr(IAttr value);
 
 @JS()
 @anonymous
@@ -5014,7 +5036,9 @@ class AudioBuffer {
 }
 
 @JS(r'AudioBuffer')
-external IAudioBuffer JAudioBuffer;
+external IAudioBuffer get JAudioBuffer;
+@JS(r'AudioBuffer')
+external set JAudioBuffer(IAudioBuffer value);
 
 @JS()
 @anonymous
@@ -5043,7 +5067,9 @@ class AudioBufferSourceNode extends AudioScheduledSourceNode {
 }
 
 @JS(r'AudioBufferSourceNode')
-external IAudioBufferSourceNode JAudioBufferSourceNode;
+external IAudioBufferSourceNode get JAudioBufferSourceNode;
+@JS(r'AudioBufferSourceNode')
+external set JAudioBufferSourceNode(IAudioBufferSourceNode value);
 
 @JS()
 @anonymous
@@ -5064,7 +5090,9 @@ class AudioContext extends BaseAudioContext {
 }
 
 @JS(r'AudioContext')
-external IAudioContext JAudioContext;
+external IAudioContext get JAudioContext;
+@JS(r'AudioContext')
+external set JAudioContext(IAudioContext value);
 
 @JS()
 @anonymous
@@ -5076,7 +5104,9 @@ class AudioDestinationNode extends AudioNode {
 }
 
 @JS(r'AudioDestinationNode')
-external IAudioDestinationNode JAudioDestinationNode;
+external IAudioDestinationNode get JAudioDestinationNode;
+@JS(r'AudioDestinationNode')
+external set JAudioDestinationNode(IAudioDestinationNode value);
 
 @JS()
 @anonymous
@@ -5106,7 +5136,9 @@ class AudioListener {
 }
 
 @JS(r'AudioListener')
-external IAudioListener JAudioListener;
+external IAudioListener get JAudioListener;
+@JS(r'AudioListener')
+external set JAudioListener(IAudioListener value);
 
 @JS()
 @anonymous
@@ -5133,7 +5165,9 @@ class AudioNode extends EventTarget {
 }
 
 @JS(r'AudioNode')
-external IAudioNode JAudioNode;
+external IAudioNode get JAudioNode;
+@JS(r'AudioNode')
+external set JAudioNode(IAudioNode value);
 
 @JS()
 @anonymous
@@ -5162,7 +5196,9 @@ class AudioParam {
 }
 
 @JS(r'AudioParam')
-external IAudioParam JAudioParam;
+external IAudioParam get JAudioParam;
+@JS(r'AudioParam')
+external set JAudioParam(IAudioParam value);
 
 @JS()
 @anonymous
@@ -5172,7 +5208,9 @@ class AudioParamMap {
 }
 
 @JS(r'AudioParamMap')
-external IAudioParamMap JAudioParamMap;
+external IAudioParamMap get JAudioParamMap;
+@JS(r'AudioParamMap')
+external set JAudioParamMap(IAudioParamMap value);
 
 @JS()
 @anonymous
@@ -5188,7 +5226,9 @@ class AudioProcessingEvent extends Event {
 }
 
 @JS(r'AudioProcessingEvent')
-external IAudioProcessingEvent JAudioProcessingEvent;
+external IAudioProcessingEvent get JAudioProcessingEvent;
+@JS(r'AudioProcessingEvent')
+external set JAudioProcessingEvent(IAudioProcessingEvent value);
 
 @JS()
 @anonymous
@@ -5215,7 +5255,9 @@ class AudioScheduledSourceNode extends AudioNode {
 }
 
 @JS(r'AudioScheduledSourceNode')
-external IAudioScheduledSourceNode JAudioScheduledSourceNode;
+external IAudioScheduledSourceNode get JAudioScheduledSourceNode;
+@JS(r'AudioScheduledSourceNode')
+external set JAudioScheduledSourceNode(IAudioScheduledSourceNode value);
 
 @JS()
 @anonymous
@@ -5224,7 +5266,9 @@ class AudioWorklet extends Worklet {
 }
 
 @JS(r'AudioWorklet')
-external IAudioWorklet JAudioWorklet;
+external IAudioWorklet get JAudioWorklet;
+@JS(r'AudioWorklet')
+external set JAudioWorklet(IAudioWorklet value);
 
 @JS()
 @anonymous
@@ -5253,7 +5297,9 @@ class AudioWorkletNode extends AudioNode {
 }
 
 @JS(r'AudioWorkletNode')
-external IAudioWorkletNode JAudioWorkletNode;
+external IAudioWorkletNode get JAudioWorkletNode;
+@JS(r'AudioWorkletNode')
+external set JAudioWorkletNode(IAudioWorkletNode value);
 
 @JS()
 @anonymous
@@ -5269,7 +5315,9 @@ class AuthenticatorAssertionResponse extends AuthenticatorResponse {
 }
 
 @JS(r'AuthenticatorAssertionResponse')
-external IAuthenticatorAssertionResponse JAuthenticatorAssertionResponse;
+external IAuthenticatorAssertionResponse get JAuthenticatorAssertionResponse;
+@JS(r'AuthenticatorAssertionResponse')
+external set JAuthenticatorAssertionResponse(IAuthenticatorAssertionResponse value);
 
 @JS()
 @anonymous
@@ -5281,7 +5329,9 @@ class AuthenticatorAttestationResponse extends AuthenticatorResponse {
 }
 
 @JS(r'AuthenticatorAttestationResponse')
-external IAuthenticatorAttestationResponse JAuthenticatorAttestationResponse;
+external IAuthenticatorAttestationResponse get JAuthenticatorAttestationResponse;
+@JS(r'AuthenticatorAttestationResponse')
+external set JAuthenticatorAttestationResponse(IAuthenticatorAttestationResponse value);
 
 @JS()
 @anonymous
@@ -5293,7 +5343,9 @@ class AuthenticatorResponse {
 }
 
 @JS(r'AuthenticatorResponse')
-external IAuthenticatorResponse JAuthenticatorResponse;
+external IAuthenticatorResponse get JAuthenticatorResponse;
+@JS(r'AuthenticatorResponse')
+external set JAuthenticatorResponse(IAuthenticatorResponse value);
 
 @JS()
 @anonymous
@@ -5305,7 +5357,9 @@ class BarProp {
 }
 
 @JS(r'BarProp')
-external IBarProp JBarProp;
+external IBarProp get JBarProp;
+@JS(r'BarProp')
+external set JBarProp(IBarProp value);
 
 @JS()
 @anonymous
@@ -5363,7 +5417,9 @@ class BaseAudioContext extends EventTarget {
 }
 
 @JS(r'BaseAudioContext')
-external IBaseAudioContext JBaseAudioContext;
+external IBaseAudioContext get JBaseAudioContext;
+@JS(r'BaseAudioContext')
+external set JBaseAudioContext(IBaseAudioContext value);
 
 @JS()
 @anonymous
@@ -5376,7 +5432,9 @@ class BeforeUnloadEvent extends Event {
 }
 
 @JS(r'BeforeUnloadEvent')
-external IBeforeUnloadEvent JBeforeUnloadEvent;
+external IBeforeUnloadEvent get JBeforeUnloadEvent;
+@JS(r'BeforeUnloadEvent')
+external set JBeforeUnloadEvent(IBeforeUnloadEvent value);
 
 @JS()
 @anonymous
@@ -5398,7 +5456,9 @@ class BiquadFilterNode extends AudioNode {
 }
 
 @JS(r'BiquadFilterNode')
-external IBiquadFilterNode JBiquadFilterNode;
+external IBiquadFilterNode get JBiquadFilterNode;
+@JS(r'BiquadFilterNode')
+external set JBiquadFilterNode(IBiquadFilterNode value);
 
 @JS()
 @anonymous
@@ -5416,7 +5476,9 @@ class Blob {
 }
 
 @JS(r'Blob')
-external IBlob JBlob;
+external IBlob get JBlob;
+@JS(r'Blob')
+external set JBlob(IBlob value);
 
 @JS()
 @anonymous
@@ -5430,7 +5492,9 @@ class BlobEvent extends Event {
 }
 
 @JS(r'BlobEvent')
-external IBlobEvent JBlobEvent;
+external IBlobEvent get JBlobEvent;
+@JS(r'BlobEvent')
+external set JBlobEvent(IBlobEvent value);
 
 @JS()
 @anonymous
@@ -5481,7 +5545,9 @@ class BroadcastChannel extends EventTarget {
 }
 
 @JS(r'BroadcastChannel')
-external IBroadcastChannel JBroadcastChannel;
+external IBroadcastChannel get JBroadcastChannel;
+@JS(r'BroadcastChannel')
+external set JBroadcastChannel(IBroadcastChannel value);
 
 @JS()
 @anonymous
@@ -5495,7 +5561,9 @@ class ByteLengthQueuingStrategy extends QueuingStrategy<TypedData> {
 }
 
 @JS(r'ByteLengthQueuingStrategy')
-external IByteLengthQueuingStrategy JByteLengthQueuingStrategy;
+external IByteLengthQueuingStrategy get JByteLengthQueuingStrategy;
+@JS(r'ByteLengthQueuingStrategy')
+external set JByteLengthQueuingStrategy(IByteLengthQueuingStrategy value);
 
 @JS()
 @anonymous
@@ -5504,7 +5572,9 @@ class CDATASection extends Text {
 }
 
 @JS(r'CDATASection')
-external ICDATASection JCDATASection;
+external ICDATASection get JCDATASection;
+@JS(r'CDATASection')
+external set JCDATASection(ICDATASection value);
 
 @JS()
 @anonymous
@@ -5518,7 +5588,9 @@ class CSSAnimation extends Animation {
 }
 
 @JS(r'CSSAnimation')
-external ICSSAnimation JCSSAnimation;
+external ICSSAnimation get JCSSAnimation;
+@JS(r'CSSAnimation')
+external set JCSSAnimation(ICSSAnimation value);
 
 @JS()
 @anonymous
@@ -5531,7 +5603,9 @@ class CSSConditionRule extends CSSGroupingRule {
 }
 
 @JS(r'CSSConditionRule')
-external ICSSConditionRule JCSSConditionRule;
+external ICSSConditionRule get JCSSConditionRule;
+@JS(r'CSSConditionRule')
+external set JCSSConditionRule(ICSSConditionRule value);
 
 @JS()
 @anonymous
@@ -5574,7 +5648,9 @@ class CSSCounterStyleRule extends CssRule {
 }
 
 @JS(r'CSSCounterStyleRule')
-external ICSSCounterStyleRule JCSSCounterStyleRule;
+external ICSSCounterStyleRule get JCSSCounterStyleRule;
+@JS(r'CSSCounterStyleRule')
+external set JCSSCounterStyleRule(ICSSCounterStyleRule value);
 
 @JS()
 @anonymous
@@ -5586,7 +5662,9 @@ class CSSFontFaceRule extends CssRule {
 }
 
 @JS(r'CSSFontFaceRule')
-external ICSSFontFaceRule JCSSFontFaceRule;
+external ICSSFontFaceRule get JCSSFontFaceRule;
+@JS(r'CSSFontFaceRule')
+external set JCSSFontFaceRule(ICSSFontFaceRule value);
 
 @JS()
 @anonymous
@@ -5600,7 +5678,9 @@ class CSSGroupingRule extends CssRule {
 }
 
 @JS(r'CSSGroupingRule')
-external ICSSGroupingRule JCSSGroupingRule;
+external ICSSGroupingRule get JCSSGroupingRule;
+@JS(r'CSSGroupingRule')
+external set JCSSGroupingRule(ICSSGroupingRule value);
 
 @JS()
 @anonymous
@@ -5616,7 +5696,9 @@ class CSSImportRule extends CssRule {
 }
 
 @JS(r'CSSImportRule')
-external ICSSImportRule JCSSImportRule;
+external ICSSImportRule get JCSSImportRule;
+@JS(r'CSSImportRule')
+external set JCSSImportRule(ICSSImportRule value);
 
 @JS()
 @anonymous
@@ -5631,7 +5713,9 @@ class CSSKeyframeRule extends CssRule {
 }
 
 @JS(r'CSSKeyframeRule')
-external ICSSKeyframeRule JCSSKeyframeRule;
+external ICSSKeyframeRule get JCSSKeyframeRule;
+@JS(r'CSSKeyframeRule')
+external set JCSSKeyframeRule(ICSSKeyframeRule value);
 
 @JS()
 @anonymous
@@ -5649,7 +5733,9 @@ class CSSKeyframesRule extends CssRule {
 }
 
 @JS(r'CSSKeyframesRule')
-external ICSSKeyframesRule JCSSKeyframesRule;
+external ICSSKeyframesRule get JCSSKeyframesRule;
+@JS(r'CSSKeyframesRule')
+external set JCSSKeyframesRule(ICSSKeyframesRule value);
 
 @JS()
 @anonymous
@@ -5661,7 +5747,9 @@ class CSSMediaRule extends CSSConditionRule {
 }
 
 @JS(r'CSSMediaRule')
-external ICSSMediaRule JCSSMediaRule;
+external ICSSMediaRule get JCSSMediaRule;
+@JS(r'CSSMediaRule')
+external set JCSSMediaRule(ICSSMediaRule value);
 
 @JS()
 @anonymous
@@ -5675,7 +5763,9 @@ class CSSNamespaceRule extends CssRule {
 }
 
 @JS(r'CSSNamespaceRule')
-external ICSSNamespaceRule JCSSNamespaceRule;
+external ICSSNamespaceRule get JCSSNamespaceRule;
+@JS(r'CSSNamespaceRule')
+external set JCSSNamespaceRule(ICSSNamespaceRule value);
 
 @JS()
 @anonymous
@@ -5690,7 +5780,9 @@ class CSSPageRule extends CSSGroupingRule {
 }
 
 @JS(r'CSSPageRule')
-external ICSSPageRule JCSSPageRule;
+external ICSSPageRule get JCSSPageRule;
+@JS(r'CSSPageRule')
+external set JCSSPageRule(ICSSPageRule value);
 
 @JS()
 @anonymous
@@ -5729,7 +5821,9 @@ class CSSRule {
 }
 
 @JS(r'CSSRule')
-external ICSSRule JCSSRule;
+external ICSSRule get JCSSRule;
+@JS(r'CSSRule')
+external set JCSSRule(ICSSRule value);
 
 @JS()
 @anonymous
@@ -5742,7 +5836,9 @@ class CSSRuleList {
 }
 
 @JS(r'CSSRuleList')
-external ICSSRuleList JCSSRuleList;
+external ICSSRuleList get JCSSRuleList;
+@JS(r'CSSRuleList')
+external set JCSSRuleList(ICSSRuleList value);
 
 @JS()
 @anonymous
@@ -7096,7 +7192,9 @@ class CSSStyleDeclaration {
 }
 
 @JS(r'CSSStyleDeclaration')
-external ICSSStyleDeclaration JCSSStyleDeclaration;
+external ICSSStyleDeclaration get JCSSStyleDeclaration;
+@JS(r'CSSStyleDeclaration')
+external set JCSSStyleDeclaration(ICSSStyleDeclaration value);
 
 @JS()
 @anonymous
@@ -7111,7 +7209,9 @@ class CSSStyleRule extends CssRule {
 }
 
 @JS(r'CSSStyleRule')
-external ICSSStyleRule JCSSStyleRule;
+external ICSSStyleRule get JCSSStyleRule;
+@JS(r'CSSStyleRule')
+external set JCSSStyleRule(ICSSStyleRule value);
 
 @JS()
 @anonymous
@@ -7131,7 +7231,9 @@ class CSSStyleSheet extends StyleSheet {
 }
 
 @JS(r'CSSStyleSheet')
-external ICSSStyleSheet JCSSStyleSheet;
+external ICSSStyleSheet get JCSSStyleSheet;
+@JS(r'CSSStyleSheet')
+external set JCSSStyleSheet(ICSSStyleSheet value);
 
 @JS()
 @anonymous
@@ -7140,7 +7242,9 @@ class CSSSupportsRule extends CSSConditionRule {
 }
 
 @JS(r'CSSSupportsRule')
-external ICSSSupportsRule JCSSSupportsRule;
+external ICSSSupportsRule get JCSSSupportsRule;
+@JS(r'CSSSupportsRule')
+external set JCSSSupportsRule(ICSSSupportsRule value);
 
 @JS()
 @anonymous
@@ -7154,7 +7258,9 @@ class CSSTransition extends Animation {
 }
 
 @JS(r'CSSTransition')
-external ICSSTransition JCSSTransition;
+external ICSSTransition get JCSSTransition;
+@JS(r'CSSTransition')
+external set JCSSTransition(ICSSTransition value);
 
 @JS()
 @anonymous
@@ -7170,7 +7276,9 @@ class Cache {
 }
 
 @JS(r'Cache')
-external ICache JCache;
+external ICache get JCache;
+@JS(r'Cache')
+external set JCache(ICache value);
 
 @JS()
 @anonymous
@@ -7184,7 +7292,9 @@ class CacheStorage {
 }
 
 @JS(r'CacheStorage')
-external ICacheStorage JCacheStorage;
+external ICacheStorage get JCacheStorage;
+@JS(r'CacheStorage')
+external set JCacheStorage(ICacheStorage value);
 
 @JS()
 @anonymous
@@ -7252,7 +7362,9 @@ class CanvasGradient {
 }
 
 @JS(r'CanvasGradient')
-external ICanvasGradient JCanvasGradient;
+external ICanvasGradient get JCanvasGradient;
+@JS(r'CanvasGradient')
+external set JCanvasGradient(ICanvasGradient value);
 
 @JS()
 @anonymous
@@ -7324,7 +7436,9 @@ class CanvasPattern {
 }
 
 @JS(r'CanvasPattern')
-external ICanvasPattern JCanvasPattern;
+external ICanvasPattern get JCanvasPattern;
+@JS(r'CanvasPattern')
+external set JCanvasPattern(ICanvasPattern value);
 
 @JS()
 @anonymous
@@ -7345,7 +7459,9 @@ class CanvasRenderingContext2D extends CanvasCompositing {
 }
 
 @JS(r'CanvasRenderingContext2D')
-external ICanvasRenderingContext2D JCanvasRenderingContext2D;
+external ICanvasRenderingContext2D get JCanvasRenderingContext2D;
+@JS(r'CanvasRenderingContext2D')
+external set JCanvasRenderingContext2D(ICanvasRenderingContext2D value);
 
 @JS()
 @anonymous
@@ -7429,7 +7545,9 @@ class ChannelMergerNode extends AudioNode {
 }
 
 @JS(r'ChannelMergerNode')
-external IChannelMergerNode JChannelMergerNode;
+external IChannelMergerNode get JChannelMergerNode;
+@JS(r'ChannelMergerNode')
+external set JChannelMergerNode(IChannelMergerNode value);
 
 @JS()
 @anonymous
@@ -7438,7 +7556,9 @@ class ChannelSplitterNode extends AudioNode {
 }
 
 @JS(r'ChannelSplitterNode')
-external IChannelSplitterNode JChannelSplitterNode;
+external IChannelSplitterNode get JChannelSplitterNode;
+@JS(r'ChannelSplitterNode')
+external set JChannelSplitterNode(IChannelSplitterNode value);
 
 @JS()
 @anonymous
@@ -7460,7 +7580,9 @@ class CharacterData extends Node {
 }
 
 @JS(r'CharacterData')
-external ICharacterData JCharacterData;
+external ICharacterData get JCharacterData;
+@JS(r'CharacterData')
+external set JCharacterData(ICharacterData value);
 
 @JS()
 @anonymous
@@ -7526,7 +7648,9 @@ class ClientRect {
 }
 
 @JS(r'ClientRect')
-external IClientRect JClientRect;
+external IClientRect get JClientRect;
+@JS(r'ClientRect')
+external set JClientRect(IClientRect value);
 
 @JS()
 @anonymous
@@ -7539,7 +7663,9 @@ class Clipboard extends EventTarget {
 }
 
 @JS(r'Clipboard')
-external IClipboard JClipboard;
+external IClipboard get JClipboard;
+@JS(r'Clipboard')
+external set JClipboard(IClipboard value);
 
 @JS()
 @anonymous
@@ -7551,7 +7677,9 @@ class ClipboardEvent extends Event {
 }
 
 @JS(r'ClipboardEvent')
-external IClipboardEvent JClipboardEvent;
+external IClipboardEvent get JClipboardEvent;
+@JS(r'ClipboardEvent')
+external set JClipboardEvent(IClipboardEvent value);
 
 @JS()
 @anonymous
@@ -7564,7 +7692,9 @@ class ClipboardItem {
 }
 
 @JS(r'ClipboardItem')
-external IClipboardItem JClipboardItem;
+external IClipboardItem get JClipboardItem;
+@JS(r'ClipboardItem')
+external set JClipboardItem(IClipboardItem value);
 
 @JS()
 @anonymous
@@ -7580,7 +7710,9 @@ class CloseEvent extends Event {
 }
 
 @JS(r'CloseEvent')
-external ICloseEvent JCloseEvent;
+external ICloseEvent get JCloseEvent;
+@JS(r'CloseEvent')
+external set JCloseEvent(ICloseEvent value);
 
 @JS()
 @anonymous
@@ -7589,7 +7721,9 @@ class Comment extends CharacterData {
 }
 
 @JS(r'Comment')
-external IComment JComment;
+external IComment get JComment;
+@JS(r'Comment')
+external set JComment(IComment value);
 
 @JS()
 @anonymous
@@ -7603,7 +7737,9 @@ class CompositionEvent extends UIEvent {
 }
 
 @JS(r'CompositionEvent')
-external ICompositionEvent JCompositionEvent;
+external ICompositionEvent get JCompositionEvent;
+@JS(r'CompositionEvent')
+external set JCompositionEvent(ICompositionEvent value);
 
 @JS()
 @anonymous
@@ -7617,7 +7753,9 @@ class ConstantSourceNode extends AudioScheduledSourceNode {
 }
 
 @JS(r'ConstantSourceNode')
-external IConstantSourceNode JConstantSourceNode;
+external IConstantSourceNode get JConstantSourceNode;
+@JS(r'ConstantSourceNode')
+external set JConstantSourceNode(IConstantSourceNode value);
 
 @JS()
 @anonymous
@@ -7633,7 +7771,9 @@ class ConvolverNode extends AudioNode {
 }
 
 @JS(r'ConvolverNode')
-external IConvolverNode JConvolverNode;
+external IConvolverNode get JConvolverNode;
+@JS(r'ConvolverNode')
+external set JConvolverNode(IConvolverNode value);
 
 @JS()
 @anonymous
@@ -7647,7 +7787,9 @@ class CountQueuingStrategy extends QueuingStrategy {
 }
 
 @JS(r'CountQueuingStrategy')
-external ICountQueuingStrategy JCountQueuingStrategy;
+external ICountQueuingStrategy get JCountQueuingStrategy;
+@JS(r'CountQueuingStrategy')
+external set JCountQueuingStrategy(ICountQueuingStrategy value);
 
 @JS()
 @anonymous
@@ -7661,7 +7803,9 @@ class Credential {
 }
 
 @JS(r'Credential')
-external ICredential JCredential;
+external ICredential get JCredential;
+@JS(r'Credential')
+external set JCredential(ICredential value);
 
 @JS()
 @anonymous
@@ -7674,7 +7818,9 @@ class CredentialsContainer {
 }
 
 @JS(r'CredentialsContainer')
-external ICredentialsContainer JCredentialsContainer;
+external ICredentialsContainer get JCredentialsContainer;
+@JS(r'CredentialsContainer')
+external set JCredentialsContainer(ICredentialsContainer value);
 
 @JS()
 @anonymous
@@ -7687,7 +7833,9 @@ class Crypto {
 }
 
 @JS(r'Crypto')
-external ICrypto JCrypto;
+external ICrypto get JCrypto;
+@JS(r'Crypto')
+external set JCrypto(ICrypto value);
 
 @JS()
 @anonymous
@@ -7705,7 +7853,9 @@ class CryptoKey {
 }
 
 @JS(r'CryptoKey')
-external ICryptoKey JCryptoKey;
+external ICryptoKey get JCryptoKey;
+@JS(r'CryptoKey')
+external set JCryptoKey(ICryptoKey value);
 
 @JS()
 @anonymous
@@ -7718,7 +7868,9 @@ class CustomElementRegistry {
 }
 
 @JS(r'CustomElementRegistry')
-external ICustomElementRegistry JCustomElementRegistry;
+external ICustomElementRegistry get JCustomElementRegistry;
+@JS(r'CustomElementRegistry')
+external set JCustomElementRegistry(ICustomElementRegistry value);
 
 @JS()
 @anonymous
@@ -7731,7 +7883,9 @@ class CustomEvent<T> extends Event {
 }
 
 @JS(r'CustomEvent')
-external ICustomEvent JCustomEvent;
+external ICustomEvent get JCustomEvent;
+@JS(r'CustomEvent')
+external set JCustomEvent(ICustomEvent value);
 
 @JS()
 @anonymous
@@ -7797,7 +7951,9 @@ class DOMException {
 }
 
 @JS(r'DOMException')
-external IDOMException JDOMException;
+external IDOMException get JDOMException;
+@JS(r'DOMException')
+external set JDOMException(IDOMException value);
 
 @JS()
 @anonymous
@@ -7820,7 +7976,9 @@ class DOMImplementation {
 }
 
 @JS(r'DOMImplementation')
-external IDOMImplementation JDOMImplementation;
+external IDOMImplementation get JDOMImplementation;
+@JS(r'DOMImplementation')
+external set JDOMImplementation(IDOMImplementation value);
 
 @JS()
 @anonymous
@@ -7841,13 +7999,19 @@ class DOMMatrix extends DomMatrixReadOnly {
 }
 
 @JS(r'DOMMatrix')
-external IDOMMatrix JDOMMatrix;
+external IDOMMatrix get JDOMMatrix;
+@JS(r'DOMMatrix')
+external set JDOMMatrix(IDOMMatrix value);
 typedef SVGMatrix = DomMatrix;
 @JS(r'SVGMatrix')
-external dynamic JSVGMatrix;
+external dynamic get JSVGMatrix;
+@JS(r'SVGMatrix')
+external set JSVGMatrix(dynamic value);
 typedef WebKitCSSMatrix = DomMatrix;
 @JS(r'WebKitCSSMatrix')
-external dynamic JWebKitCSSMatrix;
+external dynamic get JWebKitCSSMatrix;
+@JS(r'WebKitCSSMatrix')
+external set JWebKitCSSMatrix(dynamic value);
 
 @JS()
 @anonymous
@@ -7924,7 +8088,9 @@ class DOMMatrixReadOnly {
 }
 
 @JS(r'DOMMatrixReadOnly')
-external IDOMMatrixReadOnly JDOMMatrixReadOnly;
+external IDOMMatrixReadOnly get JDOMMatrixReadOnly;
+@JS(r'DOMMatrixReadOnly')
+external set JDOMMatrixReadOnly(IDOMMatrixReadOnly value);
 
 @JS()
 @anonymous
@@ -7934,7 +8100,9 @@ class DOMParser {
 }
 
 @JS(r'DOMParser')
-external IDOMParser JDOMParser;
+external IDOMParser get JDOMParser;
+@JS(r'DOMParser')
+external set JDOMParser(IDOMParser value);
 
 @JS()
 @anonymous
@@ -7943,10 +8111,14 @@ class DOMPoint extends DomPointReadOnly {
 }
 
 @JS(r'DOMPoint')
-external IDOMPoint JDOMPoint;
+external IDOMPoint get JDOMPoint;
+@JS(r'DOMPoint')
+external set JDOMPoint(IDOMPoint value);
 typedef SVGPoint = DomPoint;
 @JS(r'SVGPoint')
-external dynamic JSVGPoint;
+external dynamic get JSVGPoint;
+@JS(r'SVGPoint')
+external set JSVGPoint(dynamic value);
 
 @JS()
 @anonymous
@@ -7966,7 +8138,9 @@ class DOMPointReadOnly {
 }
 
 @JS(r'DOMPointReadOnly')
-external IDOMPointReadOnly JDOMPointReadOnly;
+external IDOMPointReadOnly get JDOMPointReadOnly;
+@JS(r'DOMPointReadOnly')
+external set JDOMPointReadOnly(IDOMPointReadOnly value);
 
 @JS()
 @anonymous
@@ -7986,7 +8160,9 @@ class DOMQuad {
 }
 
 @JS(r'DOMQuad')
-external IDOMQuad JDOMQuad;
+external IDOMQuad get JDOMQuad;
+@JS(r'DOMQuad')
+external set JDOMQuad(IDOMQuad value);
 
 @JS()
 @anonymous
@@ -7995,10 +8171,14 @@ class DOMRect extends DomRectReadOnly {
 }
 
 @JS(r'DOMRect')
-external IDOMRect JDOMRect;
+external IDOMRect get JDOMRect;
+@JS(r'DOMRect')
+external set JDOMRect(IDOMRect value);
 typedef SVGRect = DOMRect;
 @JS(r'SVGRect')
-external dynamic JSVGRect;
+external dynamic get JSVGRect;
+@JS(r'SVGRect')
+external set JSVGRect(dynamic value);
 
 @JS()
 @anonymous
@@ -8011,7 +8191,9 @@ class DOMRectList {
 }
 
 @JS(r'DOMRectList')
-external IDOMRectList JDOMRectList;
+external IDOMRectList get JDOMRectList;
+@JS(r'DOMRectList')
+external set JDOMRectList(IDOMRectList value);
 
 @JS()
 @anonymous
@@ -8038,7 +8220,9 @@ class DOMRectReadOnly {
 }
 
 @JS(r'DOMRectReadOnly')
-external IDOMRectReadOnly JDOMRectReadOnly;
+external IDOMRectReadOnly get JDOMRectReadOnly;
+@JS(r'DOMRectReadOnly')
+external set JDOMRectReadOnly(IDOMRectReadOnly value);
 
 @JS()
 @anonymous
@@ -8052,7 +8236,9 @@ class DOMStringList {
 }
 
 @JS(r'DOMStringList')
-external IDOMStringList JDOMStringList;
+external IDOMStringList get JDOMStringList;
+@JS(r'DOMStringList')
+external set JDOMStringList(IDOMStringList value);
 
 @JS()
 @anonymous
@@ -8061,7 +8247,9 @@ class DOMStringMap {
 }
 
 @JS(r'DOMStringMap')
-external IDOMStringMap JDOMStringMap;
+external IDOMStringMap get JDOMStringMap;
+@JS(r'DOMStringMap')
+external set JDOMStringMap(IDOMStringMap value);
 
 @JS()
 @anonymous
@@ -8106,7 +8294,9 @@ class DOMTokenList {
 }
 
 @JS(r'DOMTokenList')
-external IDOMTokenList JDOMTokenList;
+external IDOMTokenList get JDOMTokenList;
+@JS(r'DOMTokenList')
+external set JDOMTokenList(IDOMTokenList value);
 
 @JS()
 @anonymous
@@ -8132,7 +8322,9 @@ class DataTransfer {
 }
 
 @JS(r'DataTransfer')
-external IDataTransfer JDataTransfer;
+external IDataTransfer get JDataTransfer;
+@JS(r'DataTransfer')
+external set JDataTransfer(IDataTransfer value);
 
 @JS()
 @anonymous
@@ -8149,7 +8341,9 @@ class DataTransferItem {
 }
 
 @JS(r'DataTransferItem')
-external IDataTransferItem JDataTransferItem;
+external IDataTransferItem get JDataTransferItem;
+@JS(r'DataTransferItem')
+external set JDataTransferItem(IDataTransferItem value);
 
 @JS()
 @anonymous
@@ -8164,7 +8358,9 @@ class DataTransferItemList {
 }
 
 @JS(r'DataTransferItemList')
-external IDataTransferItemList JDataTransferItemList;
+external IDataTransferItemList get JDataTransferItemList;
+@JS(r'DataTransferItemList')
+external set JDataTransferItemList(IDataTransferItemList value);
 
 @JS()
 @anonymous
@@ -8176,7 +8372,9 @@ class DelayNode extends AudioNode {
 }
 
 @JS(r'DelayNode')
-external IDelayNode JDelayNode;
+external IDelayNode get JDelayNode;
+@JS(r'DelayNode')
+external set JDelayNode(IDelayNode value);
 
 @JS()
 @anonymous
@@ -8194,7 +8392,9 @@ class DeviceMotionEvent extends Event {
 }
 
 @JS(r'DeviceMotionEvent')
-external IDeviceMotionEvent JDeviceMotionEvent;
+external IDeviceMotionEvent get JDeviceMotionEvent;
+@JS(r'DeviceMotionEvent')
+external set JDeviceMotionEvent(IDeviceMotionEvent value);
 
 @JS()
 @anonymous
@@ -8238,7 +8438,9 @@ class DeviceOrientationEvent extends Event {
 }
 
 @JS(r'DeviceOrientationEvent')
-external IDeviceOrientationEvent JDeviceOrientationEvent;
+external IDeviceOrientationEvent get JDeviceOrientationEvent;
+@JS(r'DeviceOrientationEvent')
+external set JDeviceOrientationEvent(IDeviceOrientationEvent value);
 
 @JS()
 @anonymous
@@ -8455,7 +8657,9 @@ class Document extends Node {
 }
 
 @JS(r'Document')
-external IDocument JDocument;
+external IDocument get JDocument;
+@JS(r'Document')
+external set JDocument(IDocument value);
 
 @JS()
 @anonymous
@@ -8498,7 +8702,9 @@ class DocumentFragment extends Node {
 }
 
 @JS(r'DocumentFragment')
-external IDocumentFragment JDocumentFragment;
+external IDocumentFragment get JDocumentFragment;
+@JS(r'DocumentFragment')
+external set JDocumentFragment(IDocumentFragment value);
 
 @JS()
 @anonymous
@@ -8525,7 +8731,9 @@ class DocumentTimeline extends AnimationTimeline {
 }
 
 @JS(r'DocumentTimeline')
-external IDocumentTimeline JDocumentTimeline;
+external IDocumentTimeline get JDocumentTimeline;
+@JS(r'DocumentTimeline')
+external set JDocumentTimeline(IDocumentTimeline value);
 
 @JS()
 @anonymous
@@ -8543,7 +8751,9 @@ class DocumentType extends Node {
 }
 
 @JS(r'DocumentType')
-external IDocumentType JDocumentType;
+external IDocumentType get JDocumentType;
+@JS(r'DocumentType')
+external set JDocumentType(IDocumentType value);
 
 @JS()
 @anonymous
@@ -8555,7 +8765,9 @@ class DragEvent extends MouseEvent {
 }
 
 @JS(r'DragEvent')
-external IDragEvent JDragEvent;
+external IDragEvent get JDragEvent;
+@JS(r'DragEvent')
+external set JDragEvent(IDragEvent value);
 
 @JS()
 @anonymous
@@ -8577,7 +8789,9 @@ class DynamicsCompressorNode extends AudioNode {
 }
 
 @JS(r'DynamicsCompressorNode')
-external IDynamicsCompressorNode JDynamicsCompressorNode;
+external IDynamicsCompressorNode get JDynamicsCompressorNode;
+@JS(r'DynamicsCompressorNode')
+external set JDynamicsCompressorNode(IDynamicsCompressorNode value);
 
 @JS()
 @anonymous
@@ -8784,7 +8998,9 @@ class Element extends Node {
 }
 
 @JS(r'Element')
-external IElement JElement;
+external IElement get JElement;
+@JS(r'Element')
+external set JElement(IElement value);
 
 @JS()
 @anonymous
@@ -8831,7 +9047,9 @@ class ErrorEvent extends Event {
 }
 
 @JS(r'ErrorEvent')
-external IErrorEvent JErrorEvent;
+external IErrorEvent get JErrorEvent;
+@JS(r'ErrorEvent')
+external set JErrorEvent(IErrorEvent value);
 
 @JS()
 @anonymous
@@ -8882,7 +9100,9 @@ class Event {
 }
 
 @JS(r'Event')
-external IEvent JEvent;
+external IEvent get JEvent;
+@JS(r'Event')
+external set JEvent(IEvent value);
 
 @JS()
 @anonymous
@@ -8945,7 +9165,9 @@ class EventSource extends EventTarget {
 }
 
 @JS(r'EventSource')
-external IEventSource JEventSource;
+external IEventSource get JEventSource;
+@JS(r'EventSource')
+external set JEventSource(IEventSource value);
 
 @JS()
 @anonymous
@@ -8957,7 +9179,9 @@ class EventTarget {
 }
 
 @JS(r'EventTarget')
-external IEventTarget JEventTarget;
+external IEventTarget get JEventTarget;
+@JS(r'EventTarget')
+external set JEventTarget(IEventTarget value);
 
 @JS()
 @anonymous
@@ -8968,7 +9192,9 @@ class External {
 }
 
 @JS(r'External')
-external IExternal JExternal;
+external IExternal get JExternal;
+@JS(r'External')
+external set JExternal(IExternal value);
 
 @JS()
 @anonymous
@@ -8984,7 +9210,9 @@ class File extends Blob {
 }
 
 @JS(r'File')
-external IFile JFile;
+external IFile get JFile;
+@JS(r'File')
+external set JFile(IFile value);
 
 @JS()
 @anonymous
@@ -8997,7 +9225,9 @@ class FileList {
 }
 
 @JS(r'FileList')
-external IFileList JFileList;
+external IFileList get JFileList;
+@JS(r'FileList')
+external set JFileList(IFileList value);
 
 @JS()
 @anonymous
@@ -9069,7 +9299,9 @@ class FileReader extends EventTarget {
 }
 
 @JS(r'FileReader')
-external IFileReader JFileReader;
+external IFileReader get JFileReader;
+@JS(r'FileReader')
+external set JFileReader(IFileReader value);
 
 @JS()
 @anonymous
@@ -9083,7 +9315,9 @@ class FileSystem {
 }
 
 @JS(r'FileSystem')
-external IFileSystem JFileSystem;
+external IFileSystem get JFileSystem;
+@JS(r'FileSystem')
+external set JFileSystem(IFileSystem value);
 
 @JS()
 @anonymous
@@ -9097,7 +9331,9 @@ class FileSystemDirectoryEntry extends FileSystemEntry {
 }
 
 @JS(r'FileSystemDirectoryEntry')
-external IFileSystemDirectoryEntry JFileSystemDirectoryEntry;
+external IFileSystemDirectoryEntry get JFileSystemDirectoryEntry;
+@JS(r'FileSystemDirectoryEntry')
+external set JFileSystemDirectoryEntry(IFileSystemDirectoryEntry value);
 
 @JS()
 @anonymous
@@ -9107,7 +9343,9 @@ class FileSystemDirectoryReader {
 }
 
 @JS(r'FileSystemDirectoryReader')
-external IFileSystemDirectoryReader JFileSystemDirectoryReader;
+external IFileSystemDirectoryReader get JFileSystemDirectoryReader;
+@JS(r'FileSystemDirectoryReader')
+external set JFileSystemDirectoryReader(IFileSystemDirectoryReader value);
 
 @JS()
 @anonymous
@@ -9128,7 +9366,9 @@ class FileSystemEntry {
 }
 
 @JS(r'FileSystemEntry')
-external IFileSystemEntry JFileSystemEntry;
+external IFileSystemEntry get JFileSystemEntry;
+@JS(r'FileSystemEntry')
+external set JFileSystemEntry(IFileSystemEntry value);
 
 @JS()
 @anonymous
@@ -9138,7 +9378,9 @@ class FileSystemFileEntry extends FileSystemEntry {
 }
 
 @JS(r'FileSystemFileEntry')
-external IFileSystemFileEntry JFileSystemFileEntry;
+external IFileSystemFileEntry get JFileSystemFileEntry;
+@JS(r'FileSystemFileEntry')
+external set JFileSystemFileEntry(IFileSystemFileEntry value);
 
 @JS()
 @anonymous
@@ -9150,7 +9392,9 @@ class FocusEvent extends UIEvent {
 }
 
 @JS(r'FocusEvent')
-external IFocusEvent JFocusEvent;
+external IFocusEvent get JFocusEvent;
+@JS(r'FocusEvent')
+external set JFocusEvent(IFocusEvent value);
 
 @JS()
 @anonymous
@@ -9201,7 +9445,9 @@ class FontFace {
 }
 
 @JS(r'FontFace')
-external IFontFace JFontFace;
+external IFontFace get JFontFace;
+@JS(r'FontFace')
+external set JFontFace(IFontFace value);
 
 @JS()
 @anonymous
@@ -9245,7 +9491,9 @@ class FontFaceSet extends EventTarget {
 }
 
 @JS(r'FontFaceSet')
-external IFontFaceSet JFontFaceSet;
+external IFontFaceSet get JFontFaceSet;
+@JS(r'FontFaceSet')
+external set JFontFaceSet(IFontFaceSet value);
 
 @JS()
 @anonymous
@@ -9257,7 +9505,9 @@ class FontFaceSetLoadEvent extends Event {
 }
 
 @JS(r'FontFaceSetLoadEvent')
-external IFontFaceSetLoadEvent JFontFaceSetLoadEvent;
+external IFontFaceSetLoadEvent get JFontFaceSetLoadEvent;
+@JS(r'FontFaceSetLoadEvent')
+external set JFontFaceSetLoadEvent(IFontFaceSetLoadEvent value);
 
 @JS()
 @anonymous
@@ -9283,7 +9533,9 @@ class FormData {
 }
 
 @JS(r'FormData')
-external IFormData JFormData;
+external IFormData get JFormData;
+@JS(r'FormData')
+external set JFormData(IFormData value);
 
 @JS()
 @anonymous
@@ -9295,7 +9547,9 @@ class FormDataEvent extends Event {
 }
 
 @JS(r'FormDataEvent')
-external IFormDataEvent JFormDataEvent;
+external IFormDataEvent get JFormDataEvent;
+@JS(r'FormDataEvent')
+external set JFormDataEvent(IFormDataEvent value);
 
 @JS()
 @anonymous
@@ -9307,7 +9561,9 @@ class GainNode extends AudioNode {
 }
 
 @JS(r'GainNode')
-external IGainNode JGainNode;
+external IGainNode get JGainNode;
+@JS(r'GainNode')
+external set JGainNode(IGainNode value);
 
 @JS()
 @anonymous
@@ -9333,7 +9589,9 @@ class Gamepad {
 }
 
 @JS(r'Gamepad')
-external IGamepad JGamepad;
+external IGamepad get JGamepad;
+@JS(r'Gamepad')
+external set JGamepad(IGamepad value);
 
 @JS()
 @anonymous
@@ -9349,7 +9607,9 @@ class GamepadButton {
 }
 
 @JS(r'GamepadButton')
-external IGamepadButton JGamepadButton;
+external IGamepadButton get JGamepadButton;
+@JS(r'GamepadButton')
+external set JGamepadButton(IGamepadButton value);
 
 @JS()
 @anonymous
@@ -9361,7 +9621,9 @@ class GamepadEvent extends Event {
 }
 
 @JS(r'GamepadEvent')
-external IGamepadEvent JGamepadEvent;
+external IGamepadEvent get JGamepadEvent;
+@JS(r'GamepadEvent')
+external set JGamepadEvent(IGamepadEvent value);
 
 @JS()
 @anonymous
@@ -9373,7 +9635,9 @@ class GamepadHapticActuator {
 }
 
 @JS(r'GamepadHapticActuator')
-external IGamepadHapticActuator JGamepadHapticActuator;
+external IGamepadHapticActuator get JGamepadHapticActuator;
+@JS(r'GamepadHapticActuator')
+external set JGamepadHapticActuator(IGamepadHapticActuator value);
 
 @JS()
 @anonymous
@@ -9398,7 +9662,9 @@ class Geolocation {
 }
 
 @JS(r'Geolocation')
-external IGeolocation JGeolocation;
+external IGeolocation get JGeolocation;
+@JS(r'Geolocation')
+external set JGeolocation(IGeolocation value);
 
 @JS()
 @anonymous
@@ -9422,7 +9688,9 @@ class GeolocationCoordinates {
 }
 
 @JS(r'GeolocationCoordinates')
-external IGeolocationCoordinates JGeolocationCoordinates;
+external IGeolocationCoordinates get JGeolocationCoordinates;
+@JS(r'GeolocationCoordinates')
+external set JGeolocationCoordinates(IGeolocationCoordinates value);
 
 @JS()
 @anonymous
@@ -9436,7 +9704,9 @@ class GeolocationPosition {
 }
 
 @JS(r'GeolocationPosition')
-external IGeolocationPosition JGeolocationPosition;
+external IGeolocationPosition get JGeolocationPosition;
+@JS(r'GeolocationPosition')
+external set JGeolocationPosition(IGeolocationPosition value);
 
 @JS()
 @anonymous
@@ -9456,7 +9726,9 @@ class GeolocationPositionError {
 }
 
 @JS(r'GeolocationPositionError')
-external IGeolocationPositionError JGeolocationPositionError;
+external IGeolocationPositionError get JGeolocationPositionError;
+@JS(r'GeolocationPositionError')
+external set JGeolocationPositionError(IGeolocationPositionError value);
 
 @JS()
 @anonymous
@@ -10029,7 +10301,9 @@ class HTMLAllCollection {
 }
 
 @JS(r'HTMLAllCollection')
-external IHTMLAllCollection JHTMLAllCollection;
+external IHTMLAllCollection get JHTMLAllCollection;
+@JS(r'HTMLAllCollection')
+external set JHTMLAllCollection(IHTMLAllCollection value);
 
 @JS()
 @anonymous
@@ -10082,7 +10356,9 @@ class HTMLAnchorElement extends HtmlElement {
 }
 
 @JS(r'HTMLAnchorElement')
-external IHTMLAnchorElement JHTMLAnchorElement;
+external IHTMLAnchorElement get JHTMLAnchorElement;
+@JS(r'HTMLAnchorElement')
+external set JHTMLAnchorElement(IHTMLAnchorElement value);
 
 @JS()
 @anonymous
@@ -10123,7 +10399,9 @@ class HTMLAreaElement extends HtmlElement {
 }
 
 @JS(r'HTMLAreaElement')
-external IHTMLAreaElement JHTMLAreaElement;
+external IHTMLAreaElement get JHTMLAreaElement;
+@JS(r'HTMLAreaElement')
+external set JHTMLAreaElement(IHTMLAreaElement value);
 
 @JS()
 @anonymous
@@ -10134,7 +10412,9 @@ class HTMLAudioElement extends MediaElement {
 }
 
 @JS(r'HTMLAudioElement')
-external IHTMLAudioElement JHTMLAudioElement;
+external IHTMLAudioElement get JHTMLAudioElement;
+@JS(r'HTMLAudioElement')
+external set JHTMLAudioElement(IHTMLAudioElement value);
 
 @JS()
 @anonymous
@@ -10149,7 +10429,9 @@ class HTMLBRElement extends HtmlElement {
 }
 
 @JS(r'HTMLBRElement')
-external IHTMLBRElement JHTMLBRElement;
+external IHTMLBRElement get JHTMLBRElement;
+@JS(r'HTMLBRElement')
+external set JHTMLBRElement(IHTMLBRElement value);
 
 @JS()
 @anonymous
@@ -10167,7 +10449,9 @@ class HTMLBaseElement extends HtmlElement {
 }
 
 @JS(r'HTMLBaseElement')
-external IHTMLBaseElement JHTMLBaseElement;
+external IHTMLBaseElement get JHTMLBaseElement;
+@JS(r'HTMLBaseElement')
+external set JHTMLBaseElement(IHTMLBaseElement value);
 
 @JS()
 @anonymous
@@ -10210,7 +10494,9 @@ class HTMLBodyElement extends HtmlElement {
 }
 
 @JS(r'HTMLBodyElement')
-external IHTMLBodyElement JHTMLBodyElement;
+external IHTMLBodyElement get JHTMLBodyElement;
+@JS(r'HTMLBodyElement')
+external set JHTMLBodyElement(IHTMLBodyElement value);
 
 @JS()
 @anonymous
@@ -10262,7 +10548,9 @@ class HTMLButtonElement extends HtmlElement {
 }
 
 @JS(r'HTMLButtonElement')
-external IHTMLButtonElement JHTMLButtonElement;
+external IHTMLButtonElement get JHTMLButtonElement;
+@JS(r'HTMLButtonElement')
+external set JHTMLButtonElement(IHTMLButtonElement value);
 
 @JS()
 @anonymous
@@ -10284,7 +10572,9 @@ class HTMLCanvasElement extends HtmlElement {
 }
 
 @JS(r'HTMLCanvasElement')
-external IHTMLCanvasElement JHTMLCanvasElement;
+external IHTMLCanvasElement get JHTMLCanvasElement;
+@JS(r'HTMLCanvasElement')
+external set JHTMLCanvasElement(IHTMLCanvasElement value);
 
 @JS()
 @anonymous
@@ -10304,7 +10594,9 @@ class HTMLCollection extends HTMLCollectionBase {
 }
 
 @JS(r'HTMLCollection')
-external IHTMLCollection JHTMLCollection;
+external IHTMLCollection get JHTMLCollection;
+@JS(r'HTMLCollection')
+external set JHTMLCollection(IHTMLCollection value);
 
 @JS()
 @anonymous
@@ -10327,7 +10619,9 @@ class HTMLDListElement extends HtmlElement {
 }
 
 @JS(r'HTMLDListElement')
-external IHTMLDListElement JHTMLDListElement;
+external IHTMLDListElement get JHTMLDListElement;
+@JS(r'HTMLDListElement')
+external set JHTMLDListElement(IHTMLDListElement value);
 
 @JS()
 @anonymous
@@ -10342,7 +10636,9 @@ class HTMLDataElement extends HtmlElement {
 }
 
 @JS(r'HTMLDataElement')
-external IHTMLDataElement JHTMLDataElement;
+external IHTMLDataElement get JHTMLDataElement;
+@JS(r'HTMLDataElement')
+external set JHTMLDataElement(IHTMLDataElement value);
 
 @JS()
 @anonymous
@@ -10356,7 +10652,9 @@ class HTMLDataListElement extends HtmlElement {
 }
 
 @JS(r'HTMLDataListElement')
-external IHTMLDataListElement JHTMLDataListElement;
+external IHTMLDataListElement get JHTMLDataListElement;
+@JS(r'HTMLDataListElement')
+external set JHTMLDataListElement(IHTMLDataListElement value);
 
 @JS()
 @anonymous
@@ -10371,7 +10669,9 @@ class HTMLDetailsElement extends HtmlElement {
 }
 
 @JS(r'HTMLDetailsElement')
-external IHTMLDetailsElement JHTMLDetailsElement;
+external IHTMLDetailsElement get JHTMLDetailsElement;
+@JS(r'HTMLDetailsElement')
+external set JHTMLDetailsElement(IHTMLDetailsElement value);
 
 @JS()
 @anonymous
@@ -10394,7 +10694,9 @@ class HTMLDirectoryElement extends HtmlElement {
 }
 
 @JS(r'HTMLDirectoryElement')
-external IHTMLDirectoryElement JHTMLDirectoryElement;
+external IHTMLDirectoryElement get JHTMLDirectoryElement;
+@JS(r'HTMLDirectoryElement')
+external set JHTMLDirectoryElement(IHTMLDirectoryElement value);
 
 @JS()
 @anonymous
@@ -10409,7 +10711,9 @@ class HTMLDivElement extends HtmlElement {
 }
 
 @JS(r'HTMLDivElement')
-external IHTMLDivElement JHTMLDivElement;
+external IHTMLDivElement get JHTMLDivElement;
+@JS(r'HTMLDivElement')
+external set JHTMLDivElement(IHTMLDivElement value);
 
 @JS()
 @anonymous
@@ -10481,7 +10785,9 @@ class HTMLElement extends Element {
 }
 
 @JS(r'HTMLElement')
-external IHTMLElement JHTMLElement;
+external IHTMLElement get JHTMLElement;
+@JS(r'HTMLElement')
+external set JHTMLElement(IHTMLElement value);
 
 @JS()
 @anonymous
@@ -10512,7 +10818,9 @@ class HTMLEmbedElement extends HtmlElement {
 }
 
 @JS(r'HTMLEmbedElement')
-external IHTMLEmbedElement JHTMLEmbedElement;
+external IHTMLEmbedElement get JHTMLEmbedElement;
+@JS(r'HTMLEmbedElement')
+external set JHTMLEmbedElement(IHTMLEmbedElement value);
 
 @JS()
 @anonymous
@@ -10545,7 +10853,9 @@ class HTMLFieldSetElement extends HtmlElement {
 }
 
 @JS(r'HTMLFieldSetElement')
-external IHTMLFieldSetElement JHTMLFieldSetElement;
+external IHTMLFieldSetElement get JHTMLFieldSetElement;
+@JS(r'HTMLFieldSetElement')
+external set JHTMLFieldSetElement(IHTMLFieldSetElement value);
 
 @JS()
 @anonymous
@@ -10566,7 +10876,9 @@ class HTMLFontElement extends HtmlElement {
 }
 
 @JS(r'HTMLFontElement')
-external IHTMLFontElement JHTMLFontElement;
+external IHTMLFontElement get JHTMLFontElement;
+@JS(r'HTMLFontElement')
+external set JHTMLFontElement(IHTMLFontElement value);
 
 @JS()
 @anonymous
@@ -10576,7 +10888,9 @@ class HTMLFormControlsCollection extends HTMLCollectionBase {
 }
 
 @JS(r'HTMLFormControlsCollection')
-external IHTMLFormControlsCollection JHTMLFormControlsCollection;
+external IHTMLFormControlsCollection get JHTMLFormControlsCollection;
+@JS(r'HTMLFormControlsCollection')
+external set JHTMLFormControlsCollection(IHTMLFormControlsCollection value);
 
 @JS()
 @anonymous
@@ -10624,7 +10938,9 @@ class HTMLFormElement extends HtmlElement {
 }
 
 @JS(r'HTMLFormElement')
-external IHTMLFormElement JHTMLFormElement;
+external IHTMLFormElement get JHTMLFormElement;
+@JS(r'HTMLFormElement')
+external set JHTMLFormElement(IHTMLFormElement value);
 
 @JS()
 @anonymous
@@ -10664,7 +10980,9 @@ class HTMLFrameElement extends HtmlElement {
 }
 
 @JS(r'HTMLFrameElement')
-external IHTMLFrameElement JHTMLFrameElement;
+external IHTMLFrameElement get JHTMLFrameElement;
+@JS(r'HTMLFrameElement')
+external set JHTMLFrameElement(IHTMLFrameElement value);
 
 @JS()
 @anonymous
@@ -10688,7 +11006,9 @@ class HTMLFrameSetElement extends HtmlElement {
 }
 
 @JS(r'HTMLFrameSetElement')
-external IHTMLFrameSetElement JHTMLFrameSetElement;
+external IHTMLFrameSetElement get JHTMLFrameSetElement;
+@JS(r'HTMLFrameSetElement')
+external set JHTMLFrameSetElement(IHTMLFrameSetElement value);
 
 @JS()
 @anonymous
@@ -10715,7 +11035,9 @@ class HTMLHRElement extends HtmlElement {
 }
 
 @JS(r'HTMLHRElement')
-external IHTMLHRElement JHTMLHRElement;
+external IHTMLHRElement get JHTMLHRElement;
+@JS(r'HTMLHRElement')
+external set JHTMLHRElement(IHTMLHRElement value);
 
 @JS()
 @anonymous
@@ -10726,7 +11048,9 @@ class HTMLHeadElement extends HtmlElement {
 }
 
 @JS(r'HTMLHeadElement')
-external IHTMLHeadElement JHTMLHeadElement;
+external IHTMLHeadElement get JHTMLHeadElement;
+@JS(r'HTMLHeadElement')
+external set JHTMLHeadElement(IHTMLHeadElement value);
 
 @JS()
 @anonymous
@@ -10741,7 +11065,9 @@ class HTMLHeadingElement extends HtmlElement {
 }
 
 @JS(r'HTMLHeadingElement')
-external IHTMLHeadingElement JHTMLHeadingElement;
+external IHTMLHeadingElement get JHTMLHeadingElement;
+@JS(r'HTMLHeadingElement')
+external set JHTMLHeadingElement(IHTMLHeadingElement value);
 
 @JS()
 @anonymous
@@ -10756,7 +11082,9 @@ class HTMLHtmlElement extends HtmlElement {
 }
 
 @JS(r'HTMLHtmlElement')
-external IHTMLHtmlElement JHTMLHtmlElement;
+external IHTMLHtmlElement get JHTMLHtmlElement;
+@JS(r'HTMLHtmlElement')
+external set JHTMLHtmlElement(IHTMLHtmlElement value);
 
 @JS()
 @anonymous
@@ -10858,7 +11186,9 @@ class HTMLIFrameElement extends HtmlElement {
 }
 
 @JS(r'HTMLIFrameElement')
-external IHTMLIFrameElement JHTMLIFrameElement;
+external IHTMLIFrameElement get JHTMLIFrameElement;
+@JS(r'HTMLIFrameElement')
+external set JHTMLIFrameElement(IHTMLIFrameElement value);
 
 @JS()
 @anonymous
@@ -10940,7 +11270,9 @@ class HTMLImageElement extends HtmlElement {
 }
 
 @JS(r'HTMLImageElement')
-external IHTMLImageElement JHTMLImageElement;
+external IHTMLImageElement get JHTMLImageElement;
+@JS(r'HTMLImageElement')
+external set JHTMLImageElement(IHTMLImageElement value);
 
 @JS()
 @anonymous
@@ -11097,7 +11429,9 @@ class HTMLInputElement extends HtmlElement {
 }
 
 @JS(r'HTMLInputElement')
-external IHTMLInputElement JHTMLInputElement;
+external IHTMLInputElement get JHTMLInputElement;
+@JS(r'HTMLInputElement')
+external set JHTMLInputElement(IHTMLInputElement value);
 
 @JS()
 @anonymous
@@ -11115,7 +11449,9 @@ class HTMLLIElement extends HtmlElement {
 }
 
 @JS(r'HTMLLIElement')
-external IHTMLLIElement JHTMLLIElement;
+external IHTMLLIElement get JHTMLLIElement;
+@JS(r'HTMLLIElement')
+external set JHTMLLIElement(IHTMLLIElement value);
 
 @JS()
 @anonymous
@@ -11134,7 +11470,9 @@ class HTMLLabelElement extends HtmlElement {
 }
 
 @JS(r'HTMLLabelElement')
-external IHTMLLabelElement JHTMLLabelElement;
+external IHTMLLabelElement get JHTMLLabelElement;
+@JS(r'HTMLLabelElement')
+external set JHTMLLabelElement(IHTMLLabelElement value);
 
 @JS()
 @anonymous
@@ -11151,7 +11489,9 @@ class HTMLLegendElement extends HtmlElement {
 }
 
 @JS(r'HTMLLegendElement')
-external IHTMLLegendElement JHTMLLegendElement;
+external IHTMLLegendElement get JHTMLLegendElement;
+@JS(r'HTMLLegendElement')
+external set JHTMLLegendElement(IHTMLLegendElement value);
 
 @JS()
 @anonymous
@@ -11212,7 +11552,9 @@ class HTMLLinkElement extends HtmlElement {
 }
 
 @JS(r'HTMLLinkElement')
-external IHTMLLinkElement JHTMLLinkElement;
+external IHTMLLinkElement get JHTMLLinkElement;
+@JS(r'HTMLLinkElement')
+external set JHTMLLinkElement(IHTMLLinkElement value);
 
 @JS()
 @anonymous
@@ -11229,7 +11571,9 @@ class HTMLMapElement extends HtmlElement {
 }
 
 @JS(r'HTMLMapElement')
-external IHTMLMapElement JHTMLMapElement;
+external IHTMLMapElement get JHTMLMapElement;
+@JS(r'HTMLMapElement')
+external set JHTMLMapElement(IHTMLMapElement value);
 
 @JS()
 @anonymous
@@ -11276,7 +11620,9 @@ class HTMLMarqueeElement extends HtmlElement {
 }
 
 @JS(r'HTMLMarqueeElement')
-external IHTMLMarqueeElement JHTMLMarqueeElement;
+external IHTMLMarqueeElement get JHTMLMarqueeElement;
+@JS(r'HTMLMarqueeElement')
+external set JHTMLMarqueeElement(IHTMLMarqueeElement value);
 
 @JS()
 @anonymous
@@ -11402,7 +11748,9 @@ class HTMLMediaElement extends HtmlElement {
 }
 
 @JS(r'HTMLMediaElement')
-external IHTMLMediaElement JHTMLMediaElement;
+external IHTMLMediaElement get JHTMLMediaElement;
+@JS(r'HTMLMediaElement')
+external set JHTMLMediaElement(IHTMLMediaElement value);
 
 @JS()
 @anonymous
@@ -11417,7 +11765,9 @@ class HTMLMenuElement extends HtmlElement {
 }
 
 @JS(r'HTMLMenuElement')
-external IHTMLMenuElement JHTMLMenuElement;
+external IHTMLMenuElement get JHTMLMenuElement;
+@JS(r'HTMLMenuElement')
+external set JHTMLMenuElement(IHTMLMenuElement value);
 
 @JS()
 @anonymous
@@ -11441,7 +11791,9 @@ class HTMLMetaElement extends HtmlElement {
 }
 
 @JS(r'HTMLMetaElement')
-external IHTMLMetaElement JHTMLMetaElement;
+external IHTMLMetaElement get JHTMLMetaElement;
+@JS(r'HTMLMetaElement')
+external set JHTMLMetaElement(IHTMLMetaElement value);
 
 @JS()
 @anonymous
@@ -11473,7 +11825,9 @@ class HTMLMeterElement extends HtmlElement {
 }
 
 @JS(r'HTMLMeterElement')
-external IHTMLMeterElement JHTMLMeterElement;
+external IHTMLMeterElement get JHTMLMeterElement;
+@JS(r'HTMLMeterElement')
+external set JHTMLMeterElement(IHTMLMeterElement value);
 
 @JS()
 @anonymous
@@ -11491,7 +11845,9 @@ class HTMLModElement extends HtmlElement {
 }
 
 @JS(r'HTMLModElement')
-external IHTMLModElement JHTMLModElement;
+external IHTMLModElement get JHTMLModElement;
+@JS(r'HTMLModElement')
+external set JHTMLModElement(IHTMLModElement value);
 
 @JS()
 @anonymous
@@ -11515,7 +11871,9 @@ class HTMLOListElement extends HtmlElement {
 }
 
 @JS(r'HTMLOListElement')
-external IHTMLOListElement JHTMLOListElement;
+external IHTMLOListElement get JHTMLOListElement;
+@JS(r'HTMLOListElement')
+external set JHTMLOListElement(IHTMLOListElement value);
 
 @JS()
 @anonymous
@@ -11591,7 +11949,9 @@ class HTMLObjectElement extends HtmlElement {
 }
 
 @JS(r'HTMLObjectElement')
-external IHTMLObjectElement JHTMLObjectElement;
+external IHTMLObjectElement get JHTMLObjectElement;
+@JS(r'HTMLObjectElement')
+external set JHTMLObjectElement(IHTMLObjectElement value);
 
 @JS()
 @anonymous
@@ -11609,7 +11969,9 @@ class HTMLOptGroupElement extends HtmlElement {
 }
 
 @JS(r'HTMLOptGroupElement')
-external IHTMLOptGroupElement JHTMLOptGroupElement;
+external IHTMLOptGroupElement get JHTMLOptGroupElement;
+@JS(r'HTMLOptGroupElement')
+external set JHTMLOptGroupElement(IHTMLOptGroupElement value);
 
 @JS()
 @anonymous
@@ -11643,7 +12005,9 @@ class HTMLOptionElement extends HtmlElement {
 }
 
 @JS(r'HTMLOptionElement')
-external IHTMLOptionElement JHTMLOptionElement;
+external IHTMLOptionElement get JHTMLOptionElement;
+@JS(r'HTMLOptionElement')
+external set JHTMLOptionElement(IHTMLOptionElement value);
 
 @JS()
 @anonymous
@@ -11661,7 +12025,9 @@ class HTMLOptionsCollection extends HTMLCollectionOf<OptionElement> {
 }
 
 @JS(r'HTMLOptionsCollection')
-external IHTMLOptionsCollection JHTMLOptionsCollection;
+external IHTMLOptionsCollection get JHTMLOptionsCollection;
+@JS(r'HTMLOptionsCollection')
+external set JHTMLOptionsCollection(IHTMLOptionsCollection value);
 
 @JS()
 @anonymous
@@ -11716,7 +12082,9 @@ class HTMLOutputElement extends HtmlElement {
 }
 
 @JS(r'HTMLOutputElement')
-external IHTMLOutputElement JHTMLOutputElement;
+external IHTMLOutputElement get JHTMLOutputElement;
+@JS(r'HTMLOutputElement')
+external set JHTMLOutputElement(IHTMLOutputElement value);
 
 @JS()
 @anonymous
@@ -11731,7 +12099,9 @@ class HTMLParagraphElement extends HtmlElement {
 }
 
 @JS(r'HTMLParagraphElement')
-external IHTMLParagraphElement JHTMLParagraphElement;
+external IHTMLParagraphElement get JHTMLParagraphElement;
+@JS(r'HTMLParagraphElement')
+external set JHTMLParagraphElement(IHTMLParagraphElement value);
 
 @JS()
 @anonymous
@@ -11755,7 +12125,9 @@ class HTMLParamElement extends HtmlElement {
 }
 
 @JS(r'HTMLParamElement')
-external IHTMLParamElement JHTMLParamElement;
+external IHTMLParamElement get JHTMLParamElement;
+@JS(r'HTMLParamElement')
+external set JHTMLParamElement(IHTMLParamElement value);
 
 @JS()
 @anonymous
@@ -11766,7 +12138,9 @@ class HTMLPictureElement extends HtmlElement {
 }
 
 @JS(r'HTMLPictureElement')
-external IHTMLPictureElement JHTMLPictureElement;
+external IHTMLPictureElement get JHTMLPictureElement;
+@JS(r'HTMLPictureElement')
+external set JHTMLPictureElement(IHTMLPictureElement value);
 
 @JS()
 @anonymous
@@ -11781,7 +12155,9 @@ class HTMLPreElement extends HtmlElement {
 }
 
 @JS(r'HTMLPreElement')
-external IHTMLPreElement JHTMLPreElement;
+external IHTMLPreElement get JHTMLPreElement;
+@JS(r'HTMLPreElement')
+external set JHTMLPreElement(IHTMLPreElement value);
 
 @JS()
 @anonymous
@@ -11803,7 +12179,9 @@ class HTMLProgressElement extends HtmlElement {
 }
 
 @JS(r'HTMLProgressElement')
-external IHTMLProgressElement JHTMLProgressElement;
+external IHTMLProgressElement get JHTMLProgressElement;
+@JS(r'HTMLProgressElement')
+external set JHTMLProgressElement(IHTMLProgressElement value);
 
 @JS()
 @anonymous
@@ -11818,7 +12196,9 @@ class HTMLQuoteElement extends HtmlElement {
 }
 
 @JS(r'HTMLQuoteElement')
-external IHTMLQuoteElement JHTMLQuoteElement;
+external IHTMLQuoteElement get JHTMLQuoteElement;
+@JS(r'HTMLQuoteElement')
+external set JHTMLQuoteElement(IHTMLQuoteElement value);
 
 @JS()
 @anonymous
@@ -11866,7 +12246,9 @@ class HTMLScriptElement extends HtmlElement {
 }
 
 @JS(r'HTMLScriptElement')
-external IHTMLScriptElement JHTMLScriptElement;
+external IHTMLScriptElement get JHTMLScriptElement;
+@JS(r'HTMLScriptElement')
+external set JHTMLScriptElement(IHTMLScriptElement value);
 
 @JS()
 @anonymous
@@ -11928,7 +12310,9 @@ class HTMLSelectElement extends HtmlElement {
 }
 
 @JS(r'HTMLSelectElement')
-external IHTMLSelectElement JHTMLSelectElement;
+external IHTMLSelectElement get JHTMLSelectElement;
+@JS(r'HTMLSelectElement')
+external set JHTMLSelectElement(IHTMLSelectElement value);
 
 @JS()
 @anonymous
@@ -11945,7 +12329,9 @@ class HTMLSlotElement extends HtmlElement {
 }
 
 @JS(r'HTMLSlotElement')
-external IHTMLSlotElement JHTMLSlotElement;
+external IHTMLSlotElement get JHTMLSlotElement;
+@JS(r'HTMLSlotElement')
+external set JHTMLSlotElement(IHTMLSlotElement value);
 
 @JS()
 @anonymous
@@ -11972,7 +12358,9 @@ class HTMLSourceElement extends HtmlElement {
 }
 
 @JS(r'HTMLSourceElement')
-external IHTMLSourceElement JHTMLSourceElement;
+external IHTMLSourceElement get JHTMLSourceElement;
+@JS(r'HTMLSourceElement')
+external set JHTMLSourceElement(IHTMLSourceElement value);
 
 @JS()
 @anonymous
@@ -11983,7 +12371,9 @@ class HTMLSpanElement extends HtmlElement {
 }
 
 @JS(r'HTMLSpanElement')
-external IHTMLSpanElement JHTMLSpanElement;
+external IHTMLSpanElement get JHTMLSpanElement;
+@JS(r'HTMLSpanElement')
+external set JHTMLSpanElement(IHTMLSpanElement value);
 
 @JS()
 @anonymous
@@ -12001,7 +12391,9 @@ class HTMLStyleElement extends HtmlElement {
 }
 
 @JS(r'HTMLStyleElement')
-external IHTMLStyleElement JHTMLStyleElement;
+external IHTMLStyleElement get JHTMLStyleElement;
+@JS(r'HTMLStyleElement')
+external set JHTMLStyleElement(IHTMLStyleElement value);
 
 @JS()
 @anonymous
@@ -12016,7 +12408,9 @@ class HTMLTableCaptionElement extends HtmlElement {
 }
 
 @JS(r'HTMLTableCaptionElement')
-external IHTMLTableCaptionElement JHTMLTableCaptionElement;
+external IHTMLTableCaptionElement get JHTMLTableCaptionElement;
+@JS(r'HTMLTableCaptionElement')
+external set JHTMLTableCaptionElement(IHTMLTableCaptionElement value);
 
 @JS()
 @anonymous
@@ -12072,7 +12466,9 @@ class HTMLTableCellElement extends HtmlElement {
 }
 
 @JS(r'HTMLTableCellElement')
-external IHTMLTableCellElement JHTMLTableCellElement;
+external IHTMLTableCellElement get JHTMLTableCellElement;
+@JS(r'HTMLTableCellElement')
+external set JHTMLTableCellElement(IHTMLTableCellElement value);
 
 @JS()
 @anonymous
@@ -12102,7 +12498,9 @@ class HTMLTableColElement extends HtmlElement {
 }
 
 @JS(r'HTMLTableColElement')
-external IHTMLTableColElement JHTMLTableColElement;
+external IHTMLTableColElement get JHTMLTableColElement;
+@JS(r'HTMLTableColElement')
+external set JHTMLTableColElement(IHTMLTableColElement value);
 
 @JS()
 @anonymous
@@ -12171,7 +12569,9 @@ class HTMLTableElement extends HtmlElement {
 }
 
 @JS(r'HTMLTableElement')
-external IHTMLTableElement JHTMLTableElement;
+external IHTMLTableElement get JHTMLTableElement;
+@JS(r'HTMLTableElement')
+external set JHTMLTableElement(IHTMLTableElement value);
 
 @JS()
 @anonymous
@@ -12214,7 +12614,9 @@ class HTMLTableRowElement extends HtmlElement {
 }
 
 @JS(r'HTMLTableRowElement')
-external IHTMLTableRowElement JHTMLTableRowElement;
+external IHTMLTableRowElement get JHTMLTableRowElement;
+@JS(r'HTMLTableRowElement')
+external set JHTMLTableRowElement(IHTMLTableRowElement value);
 
 @JS()
 @anonymous
@@ -12242,7 +12644,9 @@ class HTMLTableSectionElement extends HtmlElement {
 }
 
 @JS(r'HTMLTableSectionElement')
-external IHTMLTableSectionElement JHTMLTableSectionElement;
+external IHTMLTableSectionElement get JHTMLTableSectionElement;
+@JS(r'HTMLTableSectionElement')
+external set JHTMLTableSectionElement(IHTMLTableSectionElement value);
 
 @JS()
 @anonymous
@@ -12256,7 +12660,9 @@ class HTMLTemplateElement extends HtmlElement {
 }
 
 @JS(r'HTMLTemplateElement')
-external IHTMLTemplateElement JHTMLTemplateElement;
+external IHTMLTemplateElement get JHTMLTemplateElement;
+@JS(r'HTMLTemplateElement')
+external set JHTMLTemplateElement(IHTMLTemplateElement value);
 
 @JS()
 @anonymous
@@ -12339,7 +12745,9 @@ class HTMLTextAreaElement extends HtmlElement {
 }
 
 @JS(r'HTMLTextAreaElement')
-external IHTMLTextAreaElement JHTMLTextAreaElement;
+external IHTMLTextAreaElement get JHTMLTextAreaElement;
+@JS(r'HTMLTextAreaElement')
+external set JHTMLTextAreaElement(IHTMLTextAreaElement value);
 
 @JS()
 @anonymous
@@ -12354,7 +12762,9 @@ class HTMLTimeElement extends HtmlElement {
 }
 
 @JS(r'HTMLTimeElement')
-external IHTMLTimeElement JHTMLTimeElement;
+external IHTMLTimeElement get JHTMLTimeElement;
+@JS(r'HTMLTimeElement')
+external set JHTMLTimeElement(IHTMLTimeElement value);
 
 @JS()
 @anonymous
@@ -12369,7 +12779,9 @@ class HTMLTitleElement extends HtmlElement {
 }
 
 @JS(r'HTMLTitleElement')
-external IHTMLTitleElement JHTMLTitleElement;
+external IHTMLTitleElement get JHTMLTitleElement;
+@JS(r'HTMLTitleElement')
+external set JHTMLTitleElement(IHTMLTitleElement value);
 
 @JS()
 @anonymous
@@ -12405,7 +12817,9 @@ class HTMLTrackElement extends HtmlElement {
 }
 
 @JS(r'HTMLTrackElement')
-external IHTMLTrackElement JHTMLTrackElement;
+external IHTMLTrackElement get JHTMLTrackElement;
+@JS(r'HTMLTrackElement')
+external set JHTMLTrackElement(IHTMLTrackElement value);
 
 @JS()
 @anonymous
@@ -12423,7 +12837,9 @@ class HTMLUListElement extends HtmlElement {
 }
 
 @JS(r'HTMLUListElement')
-external IHTMLUListElement JHTMLUListElement;
+external IHTMLUListElement get JHTMLUListElement;
+@JS(r'HTMLUListElement')
+external set JHTMLUListElement(IHTMLUListElement value);
 
 @JS()
 @anonymous
@@ -12434,7 +12850,9 @@ class HTMLUnknownElement extends HtmlElement {
 }
 
 @JS(r'HTMLUnknownElement')
-external IHTMLUnknownElement JHTMLUnknownElement;
+external IHTMLUnknownElement get JHTMLUnknownElement;
+@JS(r'HTMLUnknownElement')
+external set JHTMLUnknownElement(IHTMLUnknownElement value);
 
 @JS()
 @anonymous
@@ -12486,7 +12904,9 @@ class HTMLVideoElement extends MediaElement {
 }
 
 @JS(r'HTMLVideoElement')
-external IHTMLVideoElement JHTMLVideoElement;
+external IHTMLVideoElement get JHTMLVideoElement;
+@JS(r'HTMLVideoElement')
+external set JHTMLVideoElement(IHTMLVideoElement value);
 
 @JS()
 @anonymous
@@ -12500,7 +12920,9 @@ class HashChangeEvent extends Event {
 }
 
 @JS(r'HashChangeEvent')
-external IHashChangeEvent JHashChangeEvent;
+external IHashChangeEvent get JHashChangeEvent;
+@JS(r'HashChangeEvent')
+external set JHashChangeEvent(IHashChangeEvent value);
 
 @JS()
 @anonymous
@@ -12515,7 +12937,9 @@ class Headers {
 }
 
 @JS(r'Headers')
-external IHeaders JHeaders;
+external IHeaders get JHeaders;
+@JS(r'Headers')
+external set JHeaders(IHeaders value);
 
 @JS()
 @anonymous
@@ -12537,7 +12961,9 @@ class History {
 }
 
 @JS(r'History')
-external IHistory JHistory;
+external IHistory get JHistory;
+@JS(r'History')
+external set JHistory(IHistory value);
 
 @JS()
 @anonymous
@@ -12561,7 +12987,9 @@ class IDBCursor {
 }
 
 @JS(r'IDBCursor')
-external IIDBCursor JIDBCursor;
+external IIDBCursor get JIDBCursor;
+@JS(r'IDBCursor')
+external set JIDBCursor(IIDBCursor value);
 
 @JS()
 @anonymous
@@ -12573,7 +13001,9 @@ class IDBCursorWithValue extends Cursor {
 }
 
 @JS(r'IDBCursorWithValue')
-external IIDBCursorWithValue JIDBCursorWithValue;
+external IIDBCursorWithValue get JIDBCursorWithValue;
+@JS(r'IDBCursorWithValue')
+external set JIDBCursorWithValue(IIDBCursorWithValue value);
 
 @JS()
 @anonymous
@@ -12626,7 +13056,9 @@ class IDBDatabase extends EventTarget {
 }
 
 @JS(r'IDBDatabase')
-external IIDBDatabase JIDBDatabase;
+external IIDBDatabase get JIDBDatabase;
+@JS(r'IDBDatabase')
+external set JIDBDatabase(IIDBDatabase value);
 
 @JS()
 @anonymous
@@ -12639,7 +13071,9 @@ class IDBFactory {
 }
 
 @JS(r'IDBFactory')
-external IIDBFactory JIDBFactory;
+external IIDBFactory get JIDBFactory;
+@JS(r'IDBFactory')
+external set JIDBFactory(IIDBFactory value);
 
 @JS()
 @anonymous
@@ -12667,7 +13101,9 @@ class IDBIndex {
 }
 
 @JS(r'IDBIndex')
-external IIDBIndex JIDBIndex;
+external IIDBIndex get JIDBIndex;
+@JS(r'IDBIndex')
+external set JIDBIndex(IIDBIndex value);
 
 @JS()
 @anonymous
@@ -12686,7 +13122,9 @@ class IDBKeyRange {
 }
 
 @JS(r'IDBKeyRange')
-external IIDBKeyRange JIDBKeyRange;
+external IIDBKeyRange get JIDBKeyRange;
+@JS(r'IDBKeyRange')
+external set JIDBKeyRange(IIDBKeyRange value);
 
 @JS()
 @anonymous
@@ -12721,7 +13159,9 @@ class IDBObjectStore {
 }
 
 @JS(r'IDBObjectStore')
-external IIDBObjectStore JIDBObjectStore;
+external IIDBObjectStore get JIDBObjectStore;
+@JS(r'IDBObjectStore')
+external set JIDBObjectStore(IIDBObjectStore value);
 
 @JS()
 @anonymous
@@ -12752,7 +13192,9 @@ class IDBOpenDBRequest extends Request<Database> {
 }
 
 @JS(r'IDBOpenDBRequest')
-external IIDBOpenDBRequest JIDBOpenDBRequest;
+external IIDBOpenDBRequest get JIDBOpenDBRequest;
+@JS(r'IDBOpenDBRequest')
+external set JIDBOpenDBRequest(IIDBOpenDBRequest value);
 
 @JS()
 @anonymous
@@ -12793,7 +13235,9 @@ class IDBRequest<T> extends EventTarget {
 }
 
 @JS(r'IDBRequest')
-external IIDBRequest JIDBRequest;
+external IIDBRequest get JIDBRequest;
+@JS(r'IDBRequest')
+external set JIDBRequest(IIDBRequest value);
 
 @JS()
 @anonymous
@@ -12841,7 +13285,9 @@ class IDBTransaction extends EventTarget {
 }
 
 @JS(r'IDBTransaction')
-external IIDBTransaction JIDBTransaction;
+external IIDBTransaction get JIDBTransaction;
+@JS(r'IDBTransaction')
+external set JIDBTransaction(IIDBTransaction value);
 
 @JS()
 @anonymous
@@ -12855,7 +13301,9 @@ class IDBVersionChangeEvent extends Event {
 }
 
 @JS(r'IDBVersionChangeEvent')
-external IIDBVersionChangeEvent JIDBVersionChangeEvent;
+external IIDBVersionChangeEvent get JIDBVersionChangeEvent;
+@JS(r'IDBVersionChangeEvent')
+external set JIDBVersionChangeEvent(IIDBVersionChangeEvent value);
 
 @JS()
 @anonymous
@@ -12865,7 +13313,9 @@ class IIRFilterNode extends AudioNode {
 }
 
 @JS(r'IIRFilterNode')
-external IIIRFilterNode JIIRFilterNode;
+external IIIRFilterNode get JIIRFilterNode;
+@JS(r'IIRFilterNode')
+external set JIIRFilterNode(IIIRFilterNode value);
 
 @JS()
 @anonymous
@@ -12878,7 +13328,9 @@ class IdleDeadline {
 }
 
 @JS(r'IdleDeadline')
-external IIdleDeadline JIdleDeadline;
+external IIdleDeadline get JIdleDeadline;
+@JS(r'IdleDeadline')
+external set JIdleDeadline(IIdleDeadline value);
 
 @JS()
 @anonymous
@@ -12893,7 +13345,9 @@ class ImageBitmap {
 }
 
 @JS(r'ImageBitmap')
-external IImageBitmap JImageBitmap;
+external IImageBitmap get JImageBitmap;
+@JS(r'ImageBitmap')
+external set JImageBitmap(IImageBitmap value);
 
 @JS()
 @anonymous
@@ -12906,7 +13360,9 @@ class ImageBitmapRenderingContext {
 }
 
 @JS(r'ImageBitmapRenderingContext')
-external IImageBitmapRenderingContext JImageBitmapRenderingContext;
+external IImageBitmapRenderingContext get JImageBitmapRenderingContext;
+@JS(r'ImageBitmapRenderingContext')
+external set JImageBitmapRenderingContext(IImageBitmapRenderingContext value);
 
 @JS()
 @anonymous
@@ -12922,7 +13378,9 @@ class ImageData {
 }
 
 @JS(r'ImageData')
-external IImageData JImageData;
+external IImageData get JImageData;
+@JS(r'ImageData')
+external set JImageData(IImageData value);
 
 @JS()
 @anonymous
@@ -12951,7 +13409,9 @@ class InputEvent extends UIEvent {
 }
 
 @JS(r'InputEvent')
-external IInputEvent JInputEvent;
+external IInputEvent get JInputEvent;
+@JS(r'InputEvent')
+external set JInputEvent(IInputEvent value);
 
 @JS()
 @anonymous
@@ -12971,7 +13431,9 @@ class IntersectionObserver {
 }
 
 @JS(r'IntersectionObserver')
-external IIntersectionObserver JIntersectionObserver;
+external IIntersectionObserver get JIntersectionObserver;
+@JS(r'IntersectionObserver')
+external set JIntersectionObserver(IIntersectionObserver value);
 
 @JS()
 @anonymous
@@ -12995,7 +13457,9 @@ class IntersectionObserverEntry {
 }
 
 @JS(r'IntersectionObserverEntry')
-external IIntersectionObserverEntry JIntersectionObserverEntry;
+external IIntersectionObserverEntry get JIntersectionObserverEntry;
+@JS(r'IntersectionObserverEntry')
+external set JIntersectionObserverEntry(IIntersectionObserverEntry value);
 
 @JS()
 @anonymous
@@ -13045,7 +13509,9 @@ class KeyboardEvent extends UIEvent {
 }
 
 @JS(r'KeyboardEvent')
-external IKeyboardEvent JKeyboardEvent;
+external IKeyboardEvent get JKeyboardEvent;
+@JS(r'KeyboardEvent')
+external set JKeyboardEvent(IKeyboardEvent value);
 
 @JS()
 @anonymous
@@ -13069,7 +13535,9 @@ class KeyframeEffect extends AnimationEffect {
 }
 
 @JS(r'KeyframeEffect')
-external IKeyframeEffect JKeyframeEffect;
+external IKeyframeEffect get JKeyframeEffect;
+@JS(r'KeyframeEffect')
+external set JKeyframeEffect(IKeyframeEffect value);
 
 @JS()
 @anonymous
@@ -13121,7 +13589,9 @@ class Location {
 }
 
 @JS(r'Location')
-external ILocation JLocation;
+external ILocation get JLocation;
+@JS(r'Location')
+external set JLocation(ILocation value);
 
 @JS()
 @anonymous
@@ -13138,7 +13608,9 @@ class MathMLElement extends Element {
 }
 
 @JS(r'MathMLElement')
-external IMathMLElement JMathMLElement;
+external IMathMLElement get JMathMLElement;
+@JS(r'MathMLElement')
+external set JMathMLElement(IMathMLElement value);
 
 @JS()
 @anonymous
@@ -13149,7 +13621,9 @@ class MediaCapabilities {
 }
 
 @JS(r'MediaCapabilities')
-external IMediaCapabilities JMediaCapabilities;
+external IMediaCapabilities get JMediaCapabilities;
+@JS(r'MediaCapabilities')
+external set JMediaCapabilities(IMediaCapabilities value);
 
 @JS()
 @anonymous
@@ -13168,7 +13642,9 @@ class MediaDeviceInfo {
 }
 
 @JS(r'MediaDeviceInfo')
-external IMediaDeviceInfo JMediaDeviceInfo;
+external IMediaDeviceInfo get JMediaDeviceInfo;
+@JS(r'MediaDeviceInfo')
+external set JMediaDeviceInfo(IMediaDeviceInfo value);
 
 @JS()
 @anonymous
@@ -13197,7 +13673,9 @@ class MediaDevices extends EventTarget {
 }
 
 @JS(r'MediaDevices')
-external IMediaDevices JMediaDevices;
+external IMediaDevices get JMediaDevices;
+@JS(r'MediaDevices')
+external set JMediaDevices(IMediaDevices value);
 
 @JS()
 @anonymous
@@ -13209,7 +13687,9 @@ class MediaElementAudioSourceNode extends AudioNode {
 }
 
 @JS(r'MediaElementAudioSourceNode')
-external IMediaElementAudioSourceNode JMediaElementAudioSourceNode;
+external IMediaElementAudioSourceNode get JMediaElementAudioSourceNode;
+@JS(r'MediaElementAudioSourceNode')
+external set JMediaElementAudioSourceNode(IMediaElementAudioSourceNode value);
 
 @JS()
 @anonymous
@@ -13223,7 +13703,9 @@ class MediaEncryptedEvent extends Event {
 }
 
 @JS(r'MediaEncryptedEvent')
-external IMediaEncryptedEvent JMediaEncryptedEvent;
+external IMediaEncryptedEvent get JMediaEncryptedEvent;
+@JS(r'MediaEncryptedEvent')
+external set JMediaEncryptedEvent(IMediaEncryptedEvent value);
 
 @JS()
 @anonymous
@@ -13245,7 +13727,9 @@ class MediaError {
 }
 
 @JS(r'MediaError')
-external IMediaError JMediaError;
+external IMediaError get JMediaError;
+@JS(r'MediaError')
+external set JMediaError(IMediaError value);
 
 @JS()
 @anonymous
@@ -13259,7 +13743,9 @@ class MediaKeyMessageEvent extends Event {
 }
 
 @JS(r'MediaKeyMessageEvent')
-external IMediaKeyMessageEvent JMediaKeyMessageEvent;
+external IMediaKeyMessageEvent get JMediaKeyMessageEvent;
+@JS(r'MediaKeyMessageEvent')
+external set JMediaKeyMessageEvent(IMediaKeyMessageEvent value);
 
 @JS()
 @anonymous
@@ -13303,7 +13789,9 @@ class MediaKeySession extends EventTarget {
 }
 
 @JS(r'MediaKeySession')
-external IMediaKeySession JMediaKeySession;
+external IMediaKeySession get JMediaKeySession;
+@JS(r'MediaKeySession')
+external set JMediaKeySession(IMediaKeySession value);
 
 @JS()
 @anonymous
@@ -13319,7 +13807,9 @@ class MediaKeyStatusMap {
 }
 
 @JS(r'MediaKeyStatusMap')
-external IMediaKeyStatusMap JMediaKeyStatusMap;
+external IMediaKeyStatusMap get JMediaKeyStatusMap;
+@JS(r'MediaKeyStatusMap')
+external set JMediaKeyStatusMap(IMediaKeyStatusMap value);
 
 @JS()
 @anonymous
@@ -13333,7 +13823,9 @@ class MediaKeySystemAccess {
 }
 
 @JS(r'MediaKeySystemAccess')
-external IMediaKeySystemAccess JMediaKeySystemAccess;
+external IMediaKeySystemAccess get JMediaKeySystemAccess;
+@JS(r'MediaKeySystemAccess')
+external set JMediaKeySystemAccess(IMediaKeySystemAccess value);
 
 @JS()
 @anonymous
@@ -13344,7 +13836,9 @@ class MediaKeys {
 }
 
 @JS(r'MediaKeys')
-external IMediaKeys JMediaKeys;
+external IMediaKeys get JMediaKeys;
+@JS(r'MediaKeys')
+external set JMediaKeys(IMediaKeys value);
 
 @JS()
 @anonymous
@@ -13364,7 +13858,9 @@ class MediaList {
 }
 
 @JS(r'MediaList')
-external IMediaList JMediaList;
+external IMediaList get JMediaList;
+@JS(r'MediaList')
+external set JMediaList(IMediaList value);
 
 @JS()
 @anonymous
@@ -13386,7 +13882,9 @@ class MediaMetadata {
 }
 
 @JS(r'MediaMetadata')
-external IMediaMetadata JMediaMetadata;
+external IMediaMetadata get JMediaMetadata;
+@JS(r'MediaMetadata')
+external set JMediaMetadata(IMediaMetadata value);
 
 @JS()
 @anonymous
@@ -13417,7 +13915,9 @@ class MediaQueryList extends EventTarget {
 }
 
 @JS(r'MediaQueryList')
-external IMediaQueryList JMediaQueryList;
+external IMediaQueryList get JMediaQueryList;
+@JS(r'MediaQueryList')
+external set JMediaQueryList(IMediaQueryList value);
 
 @JS()
 @anonymous
@@ -13431,7 +13931,9 @@ class MediaQueryListEvent extends Event {
 }
 
 @JS(r'MediaQueryListEvent')
-external IMediaQueryListEvent JMediaQueryListEvent;
+external IMediaQueryListEvent get JMediaQueryListEvent;
+@JS(r'MediaQueryListEvent')
+external set JMediaQueryListEvent(IMediaQueryListEvent value);
 
 @JS()
 @anonymous
@@ -13501,7 +14003,9 @@ class MediaRecorder extends EventTarget {
 }
 
 @JS(r'MediaRecorder')
-external IMediaRecorder JMediaRecorder;
+external IMediaRecorder get JMediaRecorder;
+@JS(r'MediaRecorder')
+external set JMediaRecorder(IMediaRecorder value);
 
 @JS()
 @anonymous
@@ -13513,7 +14017,9 @@ class MediaRecorderErrorEvent extends Event {
 }
 
 @JS(r'MediaRecorderErrorEvent')
-external IMediaRecorderErrorEvent JMediaRecorderErrorEvent;
+external IMediaRecorderErrorEvent get JMediaRecorderErrorEvent;
+@JS(r'MediaRecorderErrorEvent')
+external set JMediaRecorderErrorEvent(IMediaRecorderErrorEvent value);
 
 @JS()
 @anonymous
@@ -13531,7 +14037,9 @@ class MediaSession {
 }
 
 @JS(r'MediaSession')
-external IMediaSession JMediaSession;
+external IMediaSession get JMediaSession;
+@JS(r'MediaSession')
+external set JMediaSession(IMediaSession value);
 
 @JS()
 @anonymous
@@ -13582,7 +14090,9 @@ class MediaSource extends EventTarget {
 }
 
 @JS(r'MediaSource')
-external IMediaSource JMediaSource;
+external IMediaSource get JMediaSource;
+@JS(r'MediaSource')
+external set JMediaSource(IMediaSource value);
 
 @JS()
 @anonymous
@@ -13624,7 +14134,9 @@ class MediaStream extends EventTarget {
 }
 
 @JS(r'MediaStream')
-external IMediaStream JMediaStream;
+external IMediaStream get JMediaStream;
+@JS(r'MediaStream')
+external set JMediaStream(IMediaStream value);
 
 @JS()
 @anonymous
@@ -13636,7 +14148,9 @@ class MediaStreamAudioDestinationNode extends AudioNode {
 }
 
 @JS(r'MediaStreamAudioDestinationNode')
-external IMediaStreamAudioDestinationNode JMediaStreamAudioDestinationNode;
+external IMediaStreamAudioDestinationNode get JMediaStreamAudioDestinationNode;
+@JS(r'MediaStreamAudioDestinationNode')
+external set JMediaStreamAudioDestinationNode(IMediaStreamAudioDestinationNode value);
 
 @JS()
 @anonymous
@@ -13648,7 +14162,9 @@ class MediaStreamAudioSourceNode extends AudioNode {
 }
 
 @JS(r'MediaStreamAudioSourceNode')
-external IMediaStreamAudioSourceNode JMediaStreamAudioSourceNode;
+external IMediaStreamAudioSourceNode get JMediaStreamAudioSourceNode;
+@JS(r'MediaStreamAudioSourceNode')
+external set JMediaStreamAudioSourceNode(IMediaStreamAudioSourceNode value);
 
 @JS()
 @anonymous
@@ -13707,7 +14223,9 @@ class MediaStreamTrack extends EventTarget {
 }
 
 @JS(r'MediaStreamTrack')
-external IMediaStreamTrack JMediaStreamTrack;
+external IMediaStreamTrack get JMediaStreamTrack;
+@JS(r'MediaStreamTrack')
+external set JMediaStreamTrack(IMediaStreamTrack value);
 
 @JS()
 @anonymous
@@ -13719,7 +14237,9 @@ class MediaStreamTrackEvent extends Event {
 }
 
 @JS(r'MediaStreamTrackEvent')
-external IMediaStreamTrackEvent JMediaStreamTrackEvent;
+external IMediaStreamTrackEvent get JMediaStreamTrackEvent;
+@JS(r'MediaStreamTrackEvent')
+external set JMediaStreamTrackEvent(IMediaStreamTrackEvent value);
 
 @JS()
 @anonymous
@@ -13733,7 +14253,9 @@ class MessageChannel {
 }
 
 @JS(r'MessageChannel')
-external IMessageChannel JMessageChannel;
+external IMessageChannel get JMessageChannel;
+@JS(r'MessageChannel')
+external set JMessageChannel(IMessageChannel value);
 
 @JS()
 @anonymous
@@ -13755,7 +14277,9 @@ class MessageEvent<T> extends Event {
 }
 
 @JS(r'MessageEvent')
-external IMessageEvent JMessageEvent;
+external IMessageEvent get JMessageEvent;
+@JS(r'MessageEvent')
+external set JMessageEvent(IMessageEvent value);
 
 @JS()
 @anonymous
@@ -13789,7 +14313,9 @@ class MessagePort extends EventTarget {
 }
 
 @JS(r'MessagePort')
-external IMessagePort JMessagePort;
+external IMessagePort get JMessagePort;
+@JS(r'MessagePort')
+external set JMessagePort(IMessagePort value);
 
 @JS()
 @anonymous
@@ -13807,7 +14333,9 @@ class MimeType {
 }
 
 @JS(r'MimeType')
-external IMimeType JMimeType;
+external IMimeType get JMimeType;
+@JS(r'MimeType')
+external set JMimeType(IMimeType value);
 
 @JS()
 @anonymous
@@ -13821,7 +14349,9 @@ class MimeTypeArray {
 }
 
 @JS(r'MimeTypeArray')
-external IMimeTypeArray JMimeTypeArray;
+external IMimeTypeArray get JMimeTypeArray;
+@JS(r'MimeTypeArray')
+external set JMimeTypeArray(IMimeTypeArray value);
 
 @JS()
 @anonymous
@@ -13886,7 +14416,9 @@ class MouseEvent extends UIEvent {
 }
 
 @JS(r'MouseEvent')
-external IMouseEvent JMouseEvent;
+external IMouseEvent get JMouseEvent;
+@JS(r'MouseEvent')
+external set JMouseEvent(IMouseEvent value);
 
 @JS()
 @anonymous
@@ -13914,7 +14446,9 @@ class MutationEvent extends Event {
 }
 
 @JS(r'MutationEvent')
-external IMutationEvent JMutationEvent;
+external IMutationEvent get JMutationEvent;
+@JS(r'MutationEvent')
+external set JMutationEvent(IMutationEvent value);
 
 @JS()
 @anonymous
@@ -13926,7 +14460,9 @@ class MutationObserver {
 }
 
 @JS(r'MutationObserver')
-external IMutationObserver JMutationObserver;
+external IMutationObserver get JMutationObserver;
+@JS(r'MutationObserver')
+external set JMutationObserver(IMutationObserver value);
 
 @JS()
 @anonymous
@@ -13954,7 +14490,9 @@ class MutationRecord {
 }
 
 @JS(r'MutationRecord')
-external IMutationRecord JMutationRecord;
+external IMutationRecord get JMutationRecord;
+@JS(r'MutationRecord')
+external set JMutationRecord(IMutationRecord value);
 
 @JS()
 @anonymous
@@ -13973,7 +14511,9 @@ class NamedNodeMap {
 }
 
 @JS(r'NamedNodeMap')
-external INamedNodeMap JNamedNodeMap;
+external INamedNodeMap get JNamedNodeMap;
+@JS(r'NamedNodeMap')
+external set JNamedNodeMap(INamedNodeMap value);
 
 @JS()
 @anonymous
@@ -14011,7 +14551,9 @@ class Navigator extends NavigatorAutomationInformation {
 }
 
 @JS(r'Navigator')
-external INavigator JNavigator;
+external INavigator get JNavigator;
+@JS(r'Navigator')
+external set JNavigator(INavigator value);
 
 @JS()
 @anonymous
@@ -14132,7 +14674,9 @@ class NetworkInformation extends EventTarget {
 }
 
 @JS(r'NetworkInformation')
-external INetworkInformation JNetworkInformation;
+external INetworkInformation get JNetworkInformation;
+@JS(r'NetworkInformation')
+external set JNetworkInformation(INetworkInformation value);
 
 @JS()
 @anonymous
@@ -14223,7 +14767,9 @@ class Node extends EventTarget {
 }
 
 @JS(r'Node')
-external INode JNode;
+external INode get JNode;
+@JS(r'Node')
+external set JNode(INode value);
 
 @JS()
 @anonymous
@@ -14246,7 +14792,9 @@ class NodeIterator {
 }
 
 @JS(r'NodeIterator')
-external INodeIterator JNodeIterator;
+external INodeIterator get JNodeIterator;
+@JS(r'NodeIterator')
+external set JNodeIterator(INodeIterator value);
 
 @JS()
 @anonymous
@@ -14260,7 +14808,9 @@ class NodeList {
 }
 
 @JS(r'NodeList')
-external INodeList JNodeList;
+external INodeList get JNodeList;
+@JS(r'NodeList')
+external set JNodeList(INodeList value);
 
 @JS()
 @anonymous
@@ -14344,7 +14894,9 @@ class Notification extends EventTarget {
 }
 
 @JS(r'Notification')
-external INotification JNotification;
+external INotification get JNotification;
+@JS(r'Notification')
+external set JNotification(INotification value);
 
 @JS()
 @anonymous
@@ -14434,7 +14986,9 @@ class OfflineAudioCompletionEvent extends Event {
 }
 
 @JS(r'OfflineAudioCompletionEvent')
-external IOfflineAudioCompletionEvent JOfflineAudioCompletionEvent;
+external IOfflineAudioCompletionEvent get JOfflineAudioCompletionEvent;
+@JS(r'OfflineAudioCompletionEvent')
+external set JOfflineAudioCompletionEvent(IOfflineAudioCompletionEvent value);
 
 @JS()
 @anonymous
@@ -14464,7 +15018,9 @@ class OfflineAudioContext extends BaseAudioContext {
 }
 
 @JS(r'OfflineAudioContext')
-external IOfflineAudioContext JOfflineAudioContext;
+external IOfflineAudioContext get JOfflineAudioContext;
+@JS(r'OfflineAudioContext')
+external set JOfflineAudioContext(IOfflineAudioContext value);
 
 @JS()
 @anonymous
@@ -14490,7 +15046,9 @@ class OscillatorNode extends AudioScheduledSourceNode {
 }
 
 @JS(r'OscillatorNode')
-external IOscillatorNode JOscillatorNode;
+external IOscillatorNode get JOscillatorNode;
+@JS(r'OscillatorNode')
+external set JOscillatorNode(IOscillatorNode value);
 
 @JS()
 @anonymous
@@ -14502,7 +15060,9 @@ class OverconstrainedError extends Error {
 }
 
 @JS(r'OverconstrainedError')
-external IOverconstrainedError JOverconstrainedError;
+external IOverconstrainedError get JOverconstrainedError;
+@JS(r'OverconstrainedError')
+external set JOverconstrainedError(IOverconstrainedError value);
 
 @JS()
 @anonymous
@@ -14514,7 +15074,9 @@ class PageTransitionEvent extends Event {
 }
 
 @JS(r'PageTransitionEvent')
-external IPageTransitionEvent JPageTransitionEvent;
+external IPageTransitionEvent get JPageTransitionEvent;
+@JS(r'PageTransitionEvent')
+external set JPageTransitionEvent(IPageTransitionEvent value);
 
 @JS()
 @anonymous
@@ -14562,7 +15124,9 @@ class PannerNode extends AudioNode {
 }
 
 @JS(r'PannerNode')
-external IPannerNode JPannerNode;
+external IPannerNode get JPannerNode;
+@JS(r'PannerNode')
+external set JPannerNode(IPannerNode value);
 
 @JS()
 @anonymous
@@ -14622,7 +15186,9 @@ class Path2D extends CanvasPath {
 }
 
 @JS(r'Path2D')
-external IPath2D JPath2D;
+external IPath2D get JPath2D;
+@JS(r'Path2D')
+external set JPath2D(IPath2D value);
 
 @JS()
 @anonymous
@@ -14653,7 +15219,9 @@ class PaymentAddress {
 }
 
 @JS(r'PaymentAddress')
-external IPaymentAddress JPaymentAddress;
+external IPaymentAddress get JPaymentAddress;
+@JS(r'PaymentAddress')
+external set JPaymentAddress(IPaymentAddress value);
 
 @JS()
 @anonymous
@@ -14667,7 +15235,9 @@ class PaymentMethodChangeEvent extends PaymentRequestUpdateEvent {
 }
 
 @JS(r'PaymentMethodChangeEvent')
-external IPaymentMethodChangeEvent JPaymentMethodChangeEvent;
+external IPaymentMethodChangeEvent get JPaymentMethodChangeEvent;
+@JS(r'PaymentMethodChangeEvent')
+external set JPaymentMethodChangeEvent(IPaymentMethodChangeEvent value);
 
 @JS()
 @anonymous
@@ -14697,7 +15267,9 @@ class PaymentRequest extends EventTarget {
 }
 
 @JS(r'PaymentRequest')
-external IPaymentRequest JPaymentRequest;
+external IPaymentRequest get JPaymentRequest;
+@JS(r'PaymentRequest')
+external set JPaymentRequest(IPaymentRequest value);
 
 @JS()
 @anonymous
@@ -14707,7 +15279,9 @@ class PaymentRequestUpdateEvent extends Event {
 }
 
 @JS(r'PaymentRequestUpdateEvent')
-external IPaymentRequestUpdateEvent JPaymentRequestUpdateEvent;
+external IPaymentRequestUpdateEvent get JPaymentRequestUpdateEvent;
+@JS(r'PaymentRequestUpdateEvent')
+external set JPaymentRequestUpdateEvent(IPaymentRequestUpdateEvent value);
 
 @JS()
 @anonymous
@@ -14726,7 +15300,9 @@ class PaymentResponse extends EventTarget {
 }
 
 @JS(r'PaymentResponse')
-external IPaymentResponse JPaymentResponse;
+external IPaymentResponse get JPaymentResponse;
+@JS(r'PaymentResponse')
+external set JPaymentResponse(IPaymentResponse value);
 
 @JS()
 @anonymous
@@ -14768,7 +15344,9 @@ class Performance extends EventTarget {
 }
 
 @JS(r'Performance')
-external IPerformance JPerformance;
+external IPerformance get JPerformance;
+@JS(r'Performance')
+external set JPerformance(IPerformance value);
 
 @JS()
 @anonymous
@@ -14787,7 +15365,9 @@ class PerformanceEntry {
 }
 
 @JS(r'PerformanceEntry')
-external IPerformanceEntry JPerformanceEntry;
+external IPerformanceEntry get JPerformanceEntry;
+@JS(r'PerformanceEntry')
+external set JPerformanceEntry(IPerformanceEntry value);
 
 @JS()
 @anonymous
@@ -14805,7 +15385,9 @@ class PerformanceEventTiming extends PerformanceEntry {
 }
 
 @JS(r'PerformanceEventTiming')
-external IPerformanceEventTiming JPerformanceEventTiming;
+external IPerformanceEventTiming get JPerformanceEventTiming;
+@JS(r'PerformanceEventTiming')
+external set JPerformanceEventTiming(IPerformanceEventTiming value);
 
 @JS()
 @anonymous
@@ -14817,7 +15399,9 @@ class PerformanceMark extends PerformanceEntry {
 }
 
 @JS(r'PerformanceMark')
-external IPerformanceMark JPerformanceMark;
+external IPerformanceMark get JPerformanceMark;
+@JS(r'PerformanceMark')
+external set JPerformanceMark(IPerformanceMark value);
 
 @JS()
 @anonymous
@@ -14829,7 +15413,9 @@ class PerformanceMeasure extends PerformanceEntry {
 }
 
 @JS(r'PerformanceMeasure')
-external IPerformanceMeasure JPerformanceMeasure;
+external IPerformanceMeasure get JPerformanceMeasure;
+@JS(r'PerformanceMeasure')
+external set JPerformanceMeasure(IPerformanceMeasure value);
 
 @JS()
 @anonymous
@@ -14852,7 +15438,9 @@ class PerformanceNavigation {
 }
 
 @JS(r'PerformanceNavigation')
-external IPerformanceNavigation JPerformanceNavigation;
+external IPerformanceNavigation get JPerformanceNavigation;
+@JS(r'PerformanceNavigation')
+external set JPerformanceNavigation(IPerformanceNavigation value);
 
 @JS()
 @anonymous
@@ -14883,7 +15471,9 @@ class PerformanceNavigationTiming extends PerformanceResourceTiming {
 }
 
 @JS(r'PerformanceNavigationTiming')
-external IPerformanceNavigationTiming JPerformanceNavigationTiming;
+external IPerformanceNavigationTiming get JPerformanceNavigationTiming;
+@JS(r'PerformanceNavigationTiming')
+external set JPerformanceNavigationTiming(IPerformanceNavigationTiming value);
 
 @JS()
 @anonymous
@@ -14895,7 +15485,9 @@ class PerformanceObserver {
 }
 
 @JS(r'PerformanceObserver')
-external IPerformanceObserver JPerformanceObserver;
+external IPerformanceObserver get JPerformanceObserver;
+@JS(r'PerformanceObserver')
+external set JPerformanceObserver(IPerformanceObserver value);
 
 @JS()
 @anonymous
@@ -14907,7 +15499,9 @@ class PerformanceObserverEntryList {
 }
 
 @JS(r'PerformanceObserverEntryList')
-external IPerformanceObserverEntryList JPerformanceObserverEntryList;
+external IPerformanceObserverEntryList get JPerformanceObserverEntryList;
+@JS(r'PerformanceObserverEntryList')
+external set JPerformanceObserverEntryList(IPerformanceObserverEntryList value);
 
 @JS()
 @anonymous
@@ -14916,7 +15510,9 @@ class PerformancePaintTiming extends PerformanceEntry {
 }
 
 @JS(r'PerformancePaintTiming')
-external IPerformancePaintTiming JPerformancePaintTiming;
+external IPerformancePaintTiming get JPerformancePaintTiming;
+@JS(r'PerformancePaintTiming')
+external set JPerformancePaintTiming(IPerformancePaintTiming value);
 
 @JS()
 @anonymous
@@ -14963,7 +15559,9 @@ class PerformanceResourceTiming extends PerformanceEntry {
 }
 
 @JS(r'PerformanceResourceTiming')
-external IPerformanceResourceTiming JPerformanceResourceTiming;
+external IPerformanceResourceTiming get JPerformanceResourceTiming;
+@JS(r'PerformanceResourceTiming')
+external set JPerformanceResourceTiming(IPerformanceResourceTiming value);
 
 @JS()
 @anonymous
@@ -14980,7 +15578,9 @@ class PerformanceServerTiming {
 }
 
 @JS(r'PerformanceServerTiming')
-external IPerformanceServerTiming JPerformanceServerTiming;
+external IPerformanceServerTiming get JPerformanceServerTiming;
+@JS(r'PerformanceServerTiming')
+external set JPerformanceServerTiming(IPerformanceServerTiming value);
 
 @JS()
 @anonymous
@@ -15033,7 +15633,9 @@ class PerformanceTiming {
 }
 
 @JS(r'PerformanceTiming')
-external IPerformanceTiming JPerformanceTiming;
+external IPerformanceTiming get JPerformanceTiming;
+@JS(r'PerformanceTiming')
+external set JPerformanceTiming(IPerformanceTiming value);
 
 @JS()
 @anonymous
@@ -15042,7 +15644,9 @@ class PeriodicWave {
 }
 
 @JS(r'PeriodicWave')
-external IPeriodicWave JPeriodicWave;
+external IPeriodicWave get JPeriodicWave;
+@JS(r'PeriodicWave')
+external set JPeriodicWave(IPeriodicWave value);
 
 @JS()
 @anonymous
@@ -15069,7 +15673,9 @@ class PermissionStatus extends EventTarget {
 }
 
 @JS(r'PermissionStatus')
-external IPermissionStatus JPermissionStatus;
+external IPermissionStatus get JPermissionStatus;
+@JS(r'PermissionStatus')
+external set JPermissionStatus(IPermissionStatus value);
 
 @JS()
 @anonymous
@@ -15079,7 +15685,9 @@ class Permissions {
 }
 
 @JS(r'Permissions')
-external IPermissions JPermissions;
+external IPermissions get JPermissions;
+@JS(r'Permissions')
+external set JPermissions(IPermissions value);
 
 @JS()
 @anonymous
@@ -15108,7 +15716,9 @@ class PictureInPictureWindow extends EventTarget {
 }
 
 @JS(r'PictureInPictureWindow')
-external IPictureInPictureWindow JPictureInPictureWindow;
+external IPictureInPictureWindow get JPictureInPictureWindow;
+@JS(r'PictureInPictureWindow')
+external set JPictureInPictureWindow(IPictureInPictureWindow value);
 
 @JS()
 @anonymous
@@ -15128,7 +15738,9 @@ class Plugin {
 }
 
 @JS(r'Plugin')
-external IPlugin JPlugin;
+external IPlugin get JPlugin;
+@JS(r'Plugin')
+external set JPlugin(IPlugin value);
 
 @JS()
 @anonymous
@@ -15143,7 +15755,9 @@ class PluginArray {
 }
 
 @JS(r'PluginArray')
-external IPluginArray JPluginArray;
+external IPluginArray get JPluginArray;
+@JS(r'PluginArray')
+external set JPluginArray(IPluginArray value);
 
 @JS()
 @anonymous
@@ -15174,7 +15788,9 @@ class PointerEvent extends MouseEvent {
 }
 
 @JS(r'PointerEvent')
-external IPointerEvent JPointerEvent;
+external IPointerEvent get JPointerEvent;
+@JS(r'PointerEvent')
+external set JPointerEvent(IPointerEvent value);
 
 @JS()
 @anonymous
@@ -15186,7 +15802,9 @@ class PopStateEvent extends Event {
 }
 
 @JS(r'PopStateEvent')
-external IPopStateEvent JPopStateEvent;
+external IPopStateEvent get JPopStateEvent;
+@JS(r'PopStateEvent')
+external set JPopStateEvent(IPopStateEvent value);
 
 @JS()
 @anonymous
@@ -15200,7 +15818,9 @@ class ProcessingInstruction extends CharacterData {
 }
 
 @JS(r'ProcessingInstruction')
-external IProcessingInstruction JProcessingInstruction;
+external IProcessingInstruction get JProcessingInstruction;
+@JS(r'ProcessingInstruction')
+external set JProcessingInstruction(IProcessingInstruction value);
 
 @JS()
 @anonymous
@@ -15218,7 +15838,9 @@ class ProgressEvent<T extends EventTarget> extends Event {
 }
 
 @JS(r'ProgressEvent')
-external IProgressEvent JProgressEvent;
+external IProgressEvent get JProgressEvent;
+@JS(r'ProgressEvent')
+external set JProgressEvent(IProgressEvent value);
 
 @JS()
 @anonymous
@@ -15232,7 +15854,9 @@ class PromiseRejectionEvent extends Event {
 }
 
 @JS(r'PromiseRejectionEvent')
-external IPromiseRejectionEvent JPromiseRejectionEvent;
+external IPromiseRejectionEvent get JPromiseRejectionEvent;
+@JS(r'PromiseRejectionEvent')
+external set JPromiseRejectionEvent(IPromiseRejectionEvent value);
 
 @JS()
 @anonymous
@@ -15247,7 +15871,9 @@ class PublicKeyCredential extends Credential {
 }
 
 @JS(r'PublicKeyCredential')
-external IPublicKeyCredential JPublicKeyCredential;
+external IPublicKeyCredential get JPublicKeyCredential;
+@JS(r'PublicKeyCredential')
+external set JPublicKeyCredential(IPublicKeyCredential value);
 
 @JS()
 @anonymous
@@ -15259,7 +15885,9 @@ class PushManager {
 }
 
 @JS(r'PushManager')
-external IPushManager JPushManager;
+external IPushManager get JPushManager;
+@JS(r'PushManager')
+external set JPushManager(IPushManager value);
 
 @JS()
 @anonymous
@@ -15276,7 +15904,9 @@ class PushSubscription {
 }
 
 @JS(r'PushSubscription')
-external IPushSubscription JPushSubscription;
+external IPushSubscription get JPushSubscription;
+@JS(r'PushSubscription')
+external set JPushSubscription(IPushSubscription value);
 
 @JS()
 @anonymous
@@ -15288,7 +15918,9 @@ class PushSubscriptionOptions {
 }
 
 @JS(r'PushSubscriptionOptions')
-external IPushSubscriptionOptions JPushSubscriptionOptions;
+external IPushSubscriptionOptions get JPushSubscriptionOptions;
+@JS(r'PushSubscriptionOptions')
+external set JPushSubscriptionOptions(IPushSubscriptionOptions value);
 
 @JS()
 @anonymous
@@ -15301,7 +15933,9 @@ class RTCCertificate {
 }
 
 @JS(r'RTCCertificate')
-external IRTCCertificate JRTCCertificate;
+external IRTCCertificate get JRTCCertificate;
+@JS(r'RTCCertificate')
+external set JRTCCertificate(IRTCCertificate value);
 
 @JS()
 @anonymous
@@ -15331,7 +15965,9 @@ class RTCDTMFSender extends EventTarget {
 }
 
 @JS(r'RTCDTMFSender')
-external IRTCDTMFSender JRTCDTMFSender;
+external IRTCDTMFSender get JRTCDTMFSender;
+@JS(r'RTCDTMFSender')
+external set JRTCDTMFSender(IRTCDTMFSender value);
 
 @JS()
 @anonymous
@@ -15343,7 +15979,9 @@ class RTCDTMFToneChangeEvent extends Event {
 }
 
 @JS(r'RTCDTMFToneChangeEvent')
-external IRTCDTMFToneChangeEvent JRTCDTMFToneChangeEvent;
+external IRTCDTMFToneChangeEvent get JRTCDTMFToneChangeEvent;
+@JS(r'RTCDTMFToneChangeEvent')
+external set JRTCDTMFToneChangeEvent(IRTCDTMFToneChangeEvent value);
 
 @JS()
 @anonymous
@@ -15418,7 +16056,9 @@ class RTCDataChannel extends EventTarget {
 }
 
 @JS(r'RTCDataChannel')
-external IRTCDataChannel JRTCDataChannel;
+external IRTCDataChannel get JRTCDataChannel;
+@JS(r'RTCDataChannel')
+external set JRTCDataChannel(IRTCDataChannel value);
 
 @JS()
 @anonymous
@@ -15430,7 +16070,9 @@ class RTCDataChannelEvent extends Event {
 }
 
 @JS(r'RTCDataChannelEvent')
-external IRTCDataChannelEvent JRTCDataChannelEvent;
+external IRTCDataChannelEvent get JRTCDataChannelEvent;
+@JS(r'RTCDataChannelEvent')
+external set JRTCDataChannelEvent(IRTCDataChannelEvent value);
 
 @JS()
 @anonymous
@@ -15457,7 +16099,9 @@ class RTCDtlsTransport extends EventTarget {
 }
 
 @JS(r'RTCDtlsTransport')
-external IRTCDtlsTransport JRTCDtlsTransport;
+external IRTCDtlsTransport get JRTCDtlsTransport;
+@JS(r'RTCDtlsTransport')
+external set JRTCDtlsTransport(IRTCDtlsTransport value);
 
 @JS()
 @anonymous
@@ -15496,7 +16140,9 @@ class RTCIceCandidate {
 }
 
 @JS(r'RTCIceCandidate')
-external IRTCIceCandidate JRTCIceCandidate;
+external IRTCIceCandidate get JRTCIceCandidate;
+@JS(r'RTCIceCandidate')
+external set JRTCIceCandidate(IRTCIceCandidate value);
 
 @JS()
 @anonymous
@@ -15510,7 +16156,9 @@ class RTCIceTransport extends EventTarget {
 }
 
 @JS(r'RTCIceTransport')
-external IRTCIceTransport JRTCIceTransport;
+external IRTCIceTransport get JRTCIceTransport;
+@JS(r'RTCIceTransport')
+external set JRTCIceTransport(IRTCIceTransport value);
 
 @JS()
 @anonymous
@@ -15627,7 +16275,9 @@ class RTCPeerConnection extends EventTarget {
 }
 
 @JS(r'RTCPeerConnection')
-external IRTCPeerConnection JRTCPeerConnection;
+external IRTCPeerConnection get JRTCPeerConnection;
+@JS(r'RTCPeerConnection')
+external set JRTCPeerConnection(IRTCPeerConnection value);
 
 @JS()
 @anonymous
@@ -15643,7 +16293,9 @@ class RTCPeerConnectionIceErrorEvent extends Event {
 }
 
 @JS(r'RTCPeerConnectionIceErrorEvent')
-external IRTCPeerConnectionIceErrorEvent JRTCPeerConnectionIceErrorEvent;
+external IRTCPeerConnectionIceErrorEvent get JRTCPeerConnectionIceErrorEvent;
+@JS(r'RTCPeerConnectionIceErrorEvent')
+external set JRTCPeerConnectionIceErrorEvent(IRTCPeerConnectionIceErrorEvent value);
 
 @JS()
 @anonymous
@@ -15655,7 +16307,9 @@ class RTCPeerConnectionIceEvent extends Event {
 }
 
 @JS(r'RTCPeerConnectionIceEvent')
-external IRTCPeerConnectionIceEvent JRTCPeerConnectionIceEvent;
+external IRTCPeerConnectionIceEvent get JRTCPeerConnectionIceEvent;
+@JS(r'RTCPeerConnectionIceEvent')
+external set JRTCPeerConnectionIceEvent(IRTCPeerConnectionIceEvent value);
 
 @JS()
 @anonymous
@@ -15673,7 +16327,9 @@ class RTCRtpReceiver {
 }
 
 @JS(r'RTCRtpReceiver')
-external IRTCRtpReceiver JRTCRtpReceiver;
+external IRTCRtpReceiver get JRTCRtpReceiver;
+@JS(r'RTCRtpReceiver')
+external set JRTCRtpReceiver(IRTCRtpReceiver value);
 
 @JS()
 @anonymous
@@ -15704,7 +16360,9 @@ class RTCRtpSender {
 }
 
 @JS(r'RTCRtpSender')
-external IRTCRtpSender JRTCRtpSender;
+external IRTCRtpSender get JRTCRtpSender;
+@JS(r'RTCRtpSender')
+external set JRTCRtpSender(IRTCRtpSender value);
 
 @JS()
 @anonymous
@@ -15726,7 +16384,9 @@ class RTCRtpTransceiver {
 }
 
 @JS(r'RTCRtpTransceiver')
-external IRTCRtpTransceiver JRTCRtpTransceiver;
+external IRTCRtpTransceiver get JRTCRtpTransceiver;
+@JS(r'RTCRtpTransceiver')
+external set JRTCRtpTransceiver(IRTCRtpTransceiver value);
 
 @JS()
 @anonymous
@@ -15741,7 +16401,9 @@ class RTCSessionDescription {
 }
 
 @JS(r'RTCSessionDescription')
-external IRTCSessionDescription JRTCSessionDescription;
+external IRTCSessionDescription get JRTCSessionDescription;
+@JS(r'RTCSessionDescription')
+external set JRTCSessionDescription(IRTCSessionDescription value);
 
 @JS()
 @anonymous
@@ -15751,7 +16413,9 @@ class RTCStatsReport {
 }
 
 @JS(r'RTCStatsReport')
-external IRTCStatsReport JRTCStatsReport;
+external IRTCStatsReport get JRTCStatsReport;
+@JS(r'RTCStatsReport')
+external set JRTCStatsReport(IRTCStatsReport value);
 
 @JS()
 @anonymous
@@ -15769,7 +16433,9 @@ class RTCTrackEvent extends Event {
 }
 
 @JS(r'RTCTrackEvent')
-external IRTCTrackEvent JRTCTrackEvent;
+external IRTCTrackEvent get JRTCTrackEvent;
+@JS(r'RTCTrackEvent')
+external set JRTCTrackEvent(IRTCTrackEvent value);
 
 @JS()
 @anonymous
@@ -15782,7 +16448,9 @@ class RadioNodeList extends NodeList {
 }
 
 @JS(r'RadioNodeList')
-external IRadioNodeList JRadioNodeList;
+external IRadioNodeList get JRadioNodeList;
+@JS(r'RadioNodeList')
+external set JRadioNodeList(IRadioNodeList value);
 
 @JS()
 @anonymous
@@ -15827,7 +16495,9 @@ class Range extends AbstractRange {
 }
 
 @JS(r'Range')
-external IRange JRange;
+external IRange get JRange;
+@JS(r'Range')
+external set JRange(IRange value);
 
 @JS()
 @anonymous
@@ -15845,7 +16515,9 @@ class ReadableStream<R> {
 }
 
 @JS(r'ReadableStream')
-external IReadableStream JReadableStream;
+external IReadableStream get JReadableStream;
+@JS(r'ReadableStream')
+external set JReadableStream(IReadableStream value);
 
 @JS()
 @anonymous
@@ -15860,7 +16532,9 @@ class ReadableStreamDefaultController<R> {
 }
 
 @JS(r'ReadableStreamDefaultController')
-external IReadableStreamDefaultController JReadableStreamDefaultController;
+external IReadableStreamDefaultController get JReadableStreamDefaultController;
+@JS(r'ReadableStreamDefaultController')
+external set JReadableStreamDefaultController(IReadableStreamDefaultController value);
 
 @JS()
 @anonymous
@@ -15871,7 +16545,9 @@ class ReadableStreamDefaultReader<R> extends ReadableStreamGenericReader {
 }
 
 @JS(r'ReadableStreamDefaultReader')
-external IReadableStreamDefaultReader JReadableStreamDefaultReader;
+external IReadableStreamDefaultReader get JReadableStreamDefaultReader;
+@JS(r'ReadableStreamDefaultReader')
+external set JReadableStreamDefaultReader(IReadableStreamDefaultReader value);
 
 @JS()
 @anonymous
@@ -15923,7 +16599,9 @@ class RemotePlayback extends EventTarget {
 }
 
 @JS(r'RemotePlayback')
-external IRemotePlayback JRemotePlayback;
+external IRemotePlayback get JRemotePlayback;
+@JS(r'RemotePlayback')
+external set JRemotePlayback(IRemotePlayback value);
 
 @JS()
 @anonymous
@@ -15960,7 +16638,9 @@ class Request extends Body {
 }
 
 @JS(r'Request')
-external IRequest JRequest;
+external IRequest get JRequest;
+@JS(r'Request')
+external set JRequest(IRequest value);
 
 @JS()
 @anonymous
@@ -15972,7 +16652,9 @@ class ResizeObserver {
 }
 
 @JS(r'ResizeObserver')
-external IResizeObserver JResizeObserver;
+external IResizeObserver get JResizeObserver;
+@JS(r'ResizeObserver')
+external set JResizeObserver(IResizeObserver value);
 
 @JS()
 @anonymous
@@ -15990,7 +16672,9 @@ class ResizeObserverEntry {
 }
 
 @JS(r'ResizeObserverEntry')
-external IResizeObserverEntry JResizeObserverEntry;
+external IResizeObserverEntry get JResizeObserverEntry;
+@JS(r'ResizeObserverEntry')
+external set JResizeObserverEntry(IResizeObserverEntry value);
 
 @JS()
 @anonymous
@@ -16004,7 +16688,9 @@ class ResizeObserverSize {
 }
 
 @JS(r'ResizeObserverSize')
-external IResizeObserverSize JResizeObserverSize;
+external IResizeObserverSize get JResizeObserverSize;
+@JS(r'ResizeObserverSize')
+external set JResizeObserverSize(IResizeObserverSize value);
 
 @JS()
 @anonymous
@@ -16029,7 +16715,9 @@ class Response extends Body {
 }
 
 @JS(r'Response')
-external IResponse JResponse;
+external IResponse get JResponse;
+@JS(r'Response')
+external set JResponse(IResponse value);
 
 @JS()
 @anonymous
@@ -16048,7 +16736,9 @@ class SVGAElement extends GraphicsElement {
 }
 
 @JS(r'SVGAElement')
-external ISVGAElement JSVGAElement;
+external ISVGAElement get JSVGAElement;
+@JS(r'SVGAElement')
+external set JSVGAElement(ISVGAElement value);
 
 @JS()
 @anonymous
@@ -16081,7 +16771,9 @@ class SVGAngle {
 }
 
 @JS(r'SVGAngle')
-external ISVGAngle JSVGAngle;
+external ISVGAngle get JSVGAngle;
+@JS(r'SVGAngle')
+external set JSVGAngle(ISVGAngle value);
 
 @JS()
 @anonymous
@@ -16092,7 +16784,9 @@ class SVGAnimateElement extends AnimationElement {
 }
 
 @JS(r'SVGAnimateElement')
-external ISVGAnimateElement JSVGAnimateElement;
+external ISVGAnimateElement get JSVGAnimateElement;
+@JS(r'SVGAnimateElement')
+external set JSVGAnimateElement(ISVGAnimateElement value);
 
 @JS()
 @anonymous
@@ -16103,7 +16797,9 @@ class SVGAnimateMotionElement extends AnimationElement {
 }
 
 @JS(r'SVGAnimateMotionElement')
-external ISVGAnimateMotionElement JSVGAnimateMotionElement;
+external ISVGAnimateMotionElement get JSVGAnimateMotionElement;
+@JS(r'SVGAnimateMotionElement')
+external set JSVGAnimateMotionElement(ISVGAnimateMotionElement value);
 
 @JS()
 @anonymous
@@ -16114,7 +16810,9 @@ class SVGAnimateTransformElement extends AnimationElement {
 }
 
 @JS(r'SVGAnimateTransformElement')
-external ISVGAnimateTransformElement JSVGAnimateTransformElement;
+external ISVGAnimateTransformElement get JSVGAnimateTransformElement;
+@JS(r'SVGAnimateTransformElement')
+external set JSVGAnimateTransformElement(ISVGAnimateTransformElement value);
 
 @JS()
 @anonymous
@@ -16128,7 +16826,9 @@ class SVGAnimatedAngle {
 }
 
 @JS(r'SVGAnimatedAngle')
-external ISVGAnimatedAngle JSVGAnimatedAngle;
+external ISVGAnimatedAngle get JSVGAnimatedAngle;
+@JS(r'SVGAnimatedAngle')
+external set JSVGAnimatedAngle(ISVGAnimatedAngle value);
 
 @JS()
 @anonymous
@@ -16143,7 +16843,9 @@ class SVGAnimatedBoolean {
 }
 
 @JS(r'SVGAnimatedBoolean')
-external ISVGAnimatedBoolean JSVGAnimatedBoolean;
+external ISVGAnimatedBoolean get JSVGAnimatedBoolean;
+@JS(r'SVGAnimatedBoolean')
+external set JSVGAnimatedBoolean(ISVGAnimatedBoolean value);
 
 @JS()
 @anonymous
@@ -16158,7 +16860,9 @@ class SVGAnimatedEnumeration {
 }
 
 @JS(r'SVGAnimatedEnumeration')
-external ISVGAnimatedEnumeration JSVGAnimatedEnumeration;
+external ISVGAnimatedEnumeration get JSVGAnimatedEnumeration;
+@JS(r'SVGAnimatedEnumeration')
+external set JSVGAnimatedEnumeration(ISVGAnimatedEnumeration value);
 
 @JS()
 @anonymous
@@ -16173,7 +16877,9 @@ class SVGAnimatedInteger {
 }
 
 @JS(r'SVGAnimatedInteger')
-external ISVGAnimatedInteger JSVGAnimatedInteger;
+external ISVGAnimatedInteger get JSVGAnimatedInteger;
+@JS(r'SVGAnimatedInteger')
+external set JSVGAnimatedInteger(ISVGAnimatedInteger value);
 
 @JS()
 @anonymous
@@ -16187,7 +16893,9 @@ class SVGAnimatedLength {
 }
 
 @JS(r'SVGAnimatedLength')
-external ISVGAnimatedLength JSVGAnimatedLength;
+external ISVGAnimatedLength get JSVGAnimatedLength;
+@JS(r'SVGAnimatedLength')
+external set JSVGAnimatedLength(ISVGAnimatedLength value);
 
 @JS()
 @anonymous
@@ -16201,7 +16909,9 @@ class SVGAnimatedLengthList {
 }
 
 @JS(r'SVGAnimatedLengthList')
-external ISVGAnimatedLengthList JSVGAnimatedLengthList;
+external ISVGAnimatedLengthList get JSVGAnimatedLengthList;
+@JS(r'SVGAnimatedLengthList')
+external set JSVGAnimatedLengthList(ISVGAnimatedLengthList value);
 
 @JS()
 @anonymous
@@ -16216,7 +16926,9 @@ class SVGAnimatedNumber {
 }
 
 @JS(r'SVGAnimatedNumber')
-external ISVGAnimatedNumber JSVGAnimatedNumber;
+external ISVGAnimatedNumber get JSVGAnimatedNumber;
+@JS(r'SVGAnimatedNumber')
+external set JSVGAnimatedNumber(ISVGAnimatedNumber value);
 
 @JS()
 @anonymous
@@ -16230,7 +16942,9 @@ class SVGAnimatedNumberList {
 }
 
 @JS(r'SVGAnimatedNumberList')
-external ISVGAnimatedNumberList JSVGAnimatedNumberList;
+external ISVGAnimatedNumberList get JSVGAnimatedNumberList;
+@JS(r'SVGAnimatedNumberList')
+external set JSVGAnimatedNumberList(ISVGAnimatedNumberList value);
 
 @JS()
 @anonymous
@@ -16255,7 +16969,9 @@ class SVGAnimatedPreserveAspectRatio {
 }
 
 @JS(r'SVGAnimatedPreserveAspectRatio')
-external ISVGAnimatedPreserveAspectRatio JSVGAnimatedPreserveAspectRatio;
+external ISVGAnimatedPreserveAspectRatio get JSVGAnimatedPreserveAspectRatio;
+@JS(r'SVGAnimatedPreserveAspectRatio')
+external set JSVGAnimatedPreserveAspectRatio(ISVGAnimatedPreserveAspectRatio value);
 
 @JS()
 @anonymous
@@ -16269,7 +16985,9 @@ class SVGAnimatedRect {
 }
 
 @JS(r'SVGAnimatedRect')
-external ISVGAnimatedRect JSVGAnimatedRect;
+external ISVGAnimatedRect get JSVGAnimatedRect;
+@JS(r'SVGAnimatedRect')
+external set JSVGAnimatedRect(ISVGAnimatedRect value);
 
 @JS()
 @anonymous
@@ -16284,7 +17002,9 @@ class SVGAnimatedString {
 }
 
 @JS(r'SVGAnimatedString')
-external ISVGAnimatedString JSVGAnimatedString;
+external ISVGAnimatedString get JSVGAnimatedString;
+@JS(r'SVGAnimatedString')
+external set JSVGAnimatedString(ISVGAnimatedString value);
 
 @JS()
 @anonymous
@@ -16298,7 +17018,9 @@ class SVGAnimatedTransformList {
 }
 
 @JS(r'SVGAnimatedTransformList')
-external ISVGAnimatedTransformList JSVGAnimatedTransformList;
+external ISVGAnimatedTransformList get JSVGAnimatedTransformList;
+@JS(r'SVGAnimatedTransformList')
+external set JSVGAnimatedTransformList(ISVGAnimatedTransformList value);
 
 @JS()
 @anonymous
@@ -16319,7 +17041,9 @@ class SVGAnimationElement extends SvgElement {
 }
 
 @JS(r'SVGAnimationElement')
-external ISVGAnimationElement JSVGAnimationElement;
+external ISVGAnimationElement get JSVGAnimationElement;
+@JS(r'SVGAnimationElement')
+external set JSVGAnimationElement(ISVGAnimationElement value);
 
 @JS()
 @anonymous
@@ -16337,7 +17061,9 @@ class SVGCircleElement extends GeometryElement {
 }
 
 @JS(r'SVGCircleElement')
-external ISVGCircleElement JSVGCircleElement;
+external ISVGCircleElement get JSVGCircleElement;
+@JS(r'SVGCircleElement')
+external set JSVGCircleElement(ISVGCircleElement value);
 
 @JS()
 @anonymous
@@ -16353,7 +17079,9 @@ class SVGClipPathElement extends SvgElement {
 }
 
 @JS(r'SVGClipPathElement')
-external ISVGClipPathElement JSVGClipPathElement;
+external ISVGClipPathElement get JSVGClipPathElement;
+@JS(r'SVGClipPathElement')
+external set JSVGClipPathElement(ISVGClipPathElement value);
 
 @JS()
 @anonymous
@@ -16391,7 +17119,9 @@ class SVGComponentTransferFunctionElement extends SvgElement {
 }
 
 @JS(r'SVGComponentTransferFunctionElement')
-external ISVGComponentTransferFunctionElement JSVGComponentTransferFunctionElement;
+external ISVGComponentTransferFunctionElement get JSVGComponentTransferFunctionElement;
+@JS(r'SVGComponentTransferFunctionElement')
+external set JSVGComponentTransferFunctionElement(ISVGComponentTransferFunctionElement value);
 
 @JS()
 @anonymous
@@ -16407,7 +17137,9 @@ class SVGCursorElement extends SvgElement {
 }
 
 @JS(r'SVGCursorElement')
-external ISVGCursorElement JSVGCursorElement;
+external ISVGCursorElement get JSVGCursorElement;
+@JS(r'SVGCursorElement')
+external set JSVGCursorElement(ISVGCursorElement value);
 
 @JS()
 @anonymous
@@ -16418,7 +17150,9 @@ class SVGDefsElement extends GraphicsElement {
 }
 
 @JS(r'SVGDefsElement')
-external ISVGDefsElement JSVGDefsElement;
+external ISVGDefsElement get JSVGDefsElement;
+@JS(r'SVGDefsElement')
+external set JSVGDefsElement(ISVGDefsElement value);
 
 @JS()
 @anonymous
@@ -16429,7 +17163,9 @@ class SVGDescElement extends SvgElement {
 }
 
 @JS(r'SVGDescElement')
-external ISVGDescElement JSVGDescElement;
+external ISVGDescElement get JSVGDescElement;
+@JS(r'SVGDescElement')
+external set JSVGDescElement(ISVGDescElement value);
 
 @JS()
 @anonymous
@@ -16453,7 +17189,9 @@ class SVGElement extends Element {
 }
 
 @JS(r'SVGElement')
-external ISVGElement JSVGElement;
+external ISVGElement get JSVGElement;
+@JS(r'SVGElement')
+external set JSVGElement(ISVGElement value);
 
 @JS()
 @anonymous
@@ -16473,7 +17211,9 @@ class SVGEllipseElement extends GeometryElement {
 }
 
 @JS(r'SVGEllipseElement')
-external ISVGEllipseElement JSVGEllipseElement;
+external ISVGEllipseElement get JSVGEllipseElement;
+@JS(r'SVGEllipseElement')
+external set JSVGEllipseElement(ISVGEllipseElement value);
 
 @JS()
 @anonymous
@@ -16525,7 +17265,9 @@ class SVGFEBlendElement extends SvgElement {
 }
 
 @JS(r'SVGFEBlendElement')
-external ISVGFEBlendElement JSVGFEBlendElement;
+external ISVGFEBlendElement get JSVGFEBlendElement;
+@JS(r'SVGFEBlendElement')
+external set JSVGFEBlendElement(ISVGFEBlendElement value);
 
 @JS()
 @anonymous
@@ -16553,7 +17295,9 @@ class SVGFEColorMatrixElement extends SvgElement {
 }
 
 @JS(r'SVGFEColorMatrixElement')
-external ISVGFEColorMatrixElement JSVGFEColorMatrixElement;
+external ISVGFEColorMatrixElement get JSVGFEColorMatrixElement;
+@JS(r'SVGFEColorMatrixElement')
+external set JSVGFEColorMatrixElement(ISVGFEColorMatrixElement value);
 
 @JS()
 @anonymous
@@ -16567,7 +17311,9 @@ class SVGFEComponentTransferElement extends SvgElement {
 }
 
 @JS(r'SVGFEComponentTransferElement')
-external ISVGFEComponentTransferElement JSVGFEComponentTransferElement;
+external ISVGFEComponentTransferElement get JSVGFEComponentTransferElement;
+@JS(r'SVGFEComponentTransferElement')
+external set JSVGFEComponentTransferElement(ISVGFEComponentTransferElement value);
 
 @JS()
 @anonymous
@@ -16607,7 +17353,9 @@ class SVGFECompositeElement extends SvgElement {
 }
 
 @JS(r'SVGFECompositeElement')
-external ISVGFECompositeElement JSVGFECompositeElement;
+external ISVGFECompositeElement get JSVGFECompositeElement;
+@JS(r'SVGFECompositeElement')
+external set JSVGFECompositeElement(ISVGFECompositeElement value);
 
 @JS()
 @anonymous
@@ -16651,7 +17399,9 @@ class SVGFEConvolveMatrixElement extends SvgElement {
 }
 
 @JS(r'SVGFEConvolveMatrixElement')
-external ISVGFEConvolveMatrixElement JSVGFEConvolveMatrixElement;
+external ISVGFEConvolveMatrixElement get JSVGFEConvolveMatrixElement;
+@JS(r'SVGFEConvolveMatrixElement')
+external set JSVGFEConvolveMatrixElement(ISVGFEConvolveMatrixElement value);
 
 @JS()
 @anonymous
@@ -16673,7 +17423,9 @@ class SVGFEDiffuseLightingElement extends SvgElement {
 }
 
 @JS(r'SVGFEDiffuseLightingElement')
-external ISVGFEDiffuseLightingElement JSVGFEDiffuseLightingElement;
+external ISVGFEDiffuseLightingElement get JSVGFEDiffuseLightingElement;
+@JS(r'SVGFEDiffuseLightingElement')
+external set JSVGFEDiffuseLightingElement(ISVGFEDiffuseLightingElement value);
 
 @JS()
 @anonymous
@@ -16705,7 +17457,9 @@ class SVGFEDisplacementMapElement extends SvgElement {
 }
 
 @JS(r'SVGFEDisplacementMapElement')
-external ISVGFEDisplacementMapElement JSVGFEDisplacementMapElement;
+external ISVGFEDisplacementMapElement get JSVGFEDisplacementMapElement;
+@JS(r'SVGFEDisplacementMapElement')
+external set JSVGFEDisplacementMapElement(ISVGFEDisplacementMapElement value);
 
 @JS()
 @anonymous
@@ -16721,7 +17475,9 @@ class SVGFEDistantLightElement extends SvgElement {
 }
 
 @JS(r'SVGFEDistantLightElement')
-external ISVGFEDistantLightElement JSVGFEDistantLightElement;
+external ISVGFEDistantLightElement get JSVGFEDistantLightElement;
+@JS(r'SVGFEDistantLightElement')
+external set JSVGFEDistantLightElement(ISVGFEDistantLightElement value);
 
 @JS()
 @anonymous
@@ -16744,7 +17500,9 @@ class SVGFEDropShadowElement extends SvgElement {
 }
 
 @JS(r'SVGFEDropShadowElement')
-external ISVGFEDropShadowElement JSVGFEDropShadowElement;
+external ISVGFEDropShadowElement get JSVGFEDropShadowElement;
+@JS(r'SVGFEDropShadowElement')
+external set JSVGFEDropShadowElement(ISVGFEDropShadowElement value);
 
 @JS()
 @anonymous
@@ -16755,7 +17513,9 @@ class SVGFEFloodElement extends SvgElement {
 }
 
 @JS(r'SVGFEFloodElement')
-external ISVGFEFloodElement JSVGFEFloodElement;
+external ISVGFEFloodElement get JSVGFEFloodElement;
+@JS(r'SVGFEFloodElement')
+external set JSVGFEFloodElement(ISVGFEFloodElement value);
 
 @JS()
 @anonymous
@@ -16766,7 +17526,9 @@ class SVGFEFuncAElement extends SVGComponentTransferFunctionElement {
 }
 
 @JS(r'SVGFEFuncAElement')
-external ISVGFEFuncAElement JSVGFEFuncAElement;
+external ISVGFEFuncAElement get JSVGFEFuncAElement;
+@JS(r'SVGFEFuncAElement')
+external set JSVGFEFuncAElement(ISVGFEFuncAElement value);
 
 @JS()
 @anonymous
@@ -16777,7 +17539,9 @@ class SVGFEFuncBElement extends SVGComponentTransferFunctionElement {
 }
 
 @JS(r'SVGFEFuncBElement')
-external ISVGFEFuncBElement JSVGFEFuncBElement;
+external ISVGFEFuncBElement get JSVGFEFuncBElement;
+@JS(r'SVGFEFuncBElement')
+external set JSVGFEFuncBElement(ISVGFEFuncBElement value);
 
 @JS()
 @anonymous
@@ -16788,7 +17552,9 @@ class SVGFEFuncGElement extends SVGComponentTransferFunctionElement {
 }
 
 @JS(r'SVGFEFuncGElement')
-external ISVGFEFuncGElement JSVGFEFuncGElement;
+external ISVGFEFuncGElement get JSVGFEFuncGElement;
+@JS(r'SVGFEFuncGElement')
+external set JSVGFEFuncGElement(ISVGFEFuncGElement value);
 
 @JS()
 @anonymous
@@ -16799,7 +17565,9 @@ class SVGFEFuncRElement extends SVGComponentTransferFunctionElement {
 }
 
 @JS(r'SVGFEFuncRElement')
-external ISVGFEFuncRElement JSVGFEFuncRElement;
+external ISVGFEFuncRElement get JSVGFEFuncRElement;
+@JS(r'SVGFEFuncRElement')
+external set JSVGFEFuncRElement(ISVGFEFuncRElement value);
 
 @JS()
 @anonymous
@@ -16818,7 +17586,9 @@ class SVGFEGaussianBlurElement extends SvgElement {
 }
 
 @JS(r'SVGFEGaussianBlurElement')
-external ISVGFEGaussianBlurElement JSVGFEGaussianBlurElement;
+external ISVGFEGaussianBlurElement get JSVGFEGaussianBlurElement;
+@JS(r'SVGFEGaussianBlurElement')
+external set JSVGFEGaussianBlurElement(ISVGFEGaussianBlurElement value);
 
 @JS()
 @anonymous
@@ -16832,7 +17602,9 @@ class SVGFEImageElement extends SvgElement {
 }
 
 @JS(r'SVGFEImageElement')
-external ISVGFEImageElement JSVGFEImageElement;
+external ISVGFEImageElement get JSVGFEImageElement;
+@JS(r'SVGFEImageElement')
+external set JSVGFEImageElement(ISVGFEImageElement value);
 
 @JS()
 @anonymous
@@ -16843,7 +17615,9 @@ class SVGFEMergeElement extends SvgElement {
 }
 
 @JS(r'SVGFEMergeElement')
-external ISVGFEMergeElement JSVGFEMergeElement;
+external ISVGFEMergeElement get JSVGFEMergeElement;
+@JS(r'SVGFEMergeElement')
+external set JSVGFEMergeElement(ISVGFEMergeElement value);
 
 @JS()
 @anonymous
@@ -16857,7 +17631,9 @@ class SVGFEMergeNodeElement extends SvgElement {
 }
 
 @JS(r'SVGFEMergeNodeElement')
-external ISVGFEMergeNodeElement JSVGFEMergeNodeElement;
+external ISVGFEMergeNodeElement get JSVGFEMergeNodeElement;
+@JS(r'SVGFEMergeNodeElement')
+external set JSVGFEMergeNodeElement(ISVGFEMergeNodeElement value);
 
 @JS()
 @anonymous
@@ -16883,7 +17659,9 @@ class SVGFEMorphologyElement extends SvgElement {
 }
 
 @JS(r'SVGFEMorphologyElement')
-external ISVGFEMorphologyElement JSVGFEMorphologyElement;
+external ISVGFEMorphologyElement get JSVGFEMorphologyElement;
+@JS(r'SVGFEMorphologyElement')
+external set JSVGFEMorphologyElement(ISVGFEMorphologyElement value);
 
 @JS()
 @anonymous
@@ -16901,7 +17679,9 @@ class SVGFEOffsetElement extends SvgElement {
 }
 
 @JS(r'SVGFEOffsetElement')
-external ISVGFEOffsetElement JSVGFEOffsetElement;
+external ISVGFEOffsetElement get JSVGFEOffsetElement;
+@JS(r'SVGFEOffsetElement')
+external set JSVGFEOffsetElement(ISVGFEOffsetElement value);
 
 @JS()
 @anonymous
@@ -16919,7 +17699,9 @@ class SVGFEPointLightElement extends SvgElement {
 }
 
 @JS(r'SVGFEPointLightElement')
-external ISVGFEPointLightElement JSVGFEPointLightElement;
+external ISVGFEPointLightElement get JSVGFEPointLightElement;
+@JS(r'SVGFEPointLightElement')
+external set JSVGFEPointLightElement(ISVGFEPointLightElement value);
 
 @JS()
 @anonymous
@@ -16943,7 +17725,9 @@ class SVGFESpecularLightingElement extends SvgElement {
 }
 
 @JS(r'SVGFESpecularLightingElement')
-external ISVGFESpecularLightingElement JSVGFESpecularLightingElement;
+external ISVGFESpecularLightingElement get JSVGFESpecularLightingElement;
+@JS(r'SVGFESpecularLightingElement')
+external set JSVGFESpecularLightingElement(ISVGFESpecularLightingElement value);
 
 @JS()
 @anonymous
@@ -16971,7 +17755,9 @@ class SVGFESpotLightElement extends SvgElement {
 }
 
 @JS(r'SVGFESpotLightElement')
-external ISVGFESpotLightElement JSVGFESpotLightElement;
+external ISVGFESpotLightElement get JSVGFESpotLightElement;
+@JS(r'SVGFESpotLightElement')
+external set JSVGFESpotLightElement(ISVGFESpotLightElement value);
 
 @JS()
 @anonymous
@@ -16985,7 +17771,9 @@ class SVGFETileElement extends SvgElement {
 }
 
 @JS(r'SVGFETileElement')
-external ISVGFETileElement JSVGFETileElement;
+external ISVGFETileElement get JSVGFETileElement;
+@JS(r'SVGFETileElement')
+external set JSVGFETileElement(ISVGFETileElement value);
 
 @JS()
 @anonymous
@@ -17021,7 +17809,9 @@ class SVGFETurbulenceElement extends SvgElement {
 }
 
 @JS(r'SVGFETurbulenceElement')
-external ISVGFETurbulenceElement JSVGFETurbulenceElement;
+external ISVGFETurbulenceElement get JSVGFETurbulenceElement;
+@JS(r'SVGFETurbulenceElement')
+external set JSVGFETurbulenceElement(ISVGFETurbulenceElement value);
 
 @JS()
 @anonymous
@@ -17045,7 +17835,9 @@ class SVGFilterElement extends SvgElement {
 }
 
 @JS(r'SVGFilterElement')
-external ISVGFilterElement JSVGFilterElement;
+external ISVGFilterElement get JSVGFilterElement;
+@JS(r'SVGFilterElement')
+external set JSVGFilterElement(ISVGFilterElement value);
 
 @JS()
 @anonymous
@@ -17093,7 +17885,9 @@ class SVGForeignObjectElement extends GraphicsElement {
 }
 
 @JS(r'SVGForeignObjectElement')
-external ISVGForeignObjectElement JSVGForeignObjectElement;
+external ISVGForeignObjectElement get JSVGForeignObjectElement;
+@JS(r'SVGForeignObjectElement')
+external set JSVGForeignObjectElement(ISVGForeignObjectElement value);
 
 @JS()
 @anonymous
@@ -17104,7 +17898,9 @@ class SVGGElement extends GraphicsElement {
 }
 
 @JS(r'SVGGElement')
-external ISVGGElement JSVGGElement;
+external ISVGGElement get JSVGGElement;
+@JS(r'SVGGElement')
+external set JSVGGElement(ISVGGElement value);
 
 @JS()
 @anonymous
@@ -17122,7 +17918,9 @@ class SVGGeometryElement extends GraphicsElement {
 }
 
 @JS(r'SVGGeometryElement')
-external ISVGGeometryElement JSVGGeometryElement;
+external ISVGGeometryElement get JSVGGeometryElement;
+@JS(r'SVGGeometryElement')
+external set JSVGGeometryElement(ISVGGeometryElement value);
 
 @JS()
 @anonymous
@@ -17148,7 +17946,9 @@ class SVGGradientElement extends SvgElement {
 }
 
 @JS(r'SVGGradientElement')
-external ISVGGradientElement JSVGGradientElement;
+external ISVGGradientElement get JSVGGradientElement;
+@JS(r'SVGGradientElement')
+external set JSVGGradientElement(ISVGGradientElement value);
 
 @JS()
 @anonymous
@@ -17165,7 +17965,9 @@ class SVGGraphicsElement extends SvgElement {
 }
 
 @JS(r'SVGGraphicsElement')
-external ISVGGraphicsElement JSVGGraphicsElement;
+external ISVGGraphicsElement get JSVGGraphicsElement;
+@JS(r'SVGGraphicsElement')
+external set JSVGGraphicsElement(ISVGGraphicsElement value);
 
 @JS()
 @anonymous
@@ -17187,7 +17989,9 @@ class SVGImageElement extends GraphicsElement {
 }
 
 @JS(r'SVGImageElement')
-external ISVGImageElement JSVGImageElement;
+external ISVGImageElement get JSVGImageElement;
+@JS(r'SVGImageElement')
+external set JSVGImageElement(ISVGImageElement value);
 
 @JS()
 @anonymous
@@ -17232,7 +18036,9 @@ class SVGLength {
 }
 
 @JS(r'SVGLength')
-external ISVGLength JSVGLength;
+external ISVGLength get JSVGLength;
+@JS(r'SVGLength')
+external set JSVGLength(ISVGLength value);
 
 @JS()
 @anonymous
@@ -17253,7 +18059,9 @@ class SVGLengthList {
 }
 
 @JS(r'SVGLengthList')
-external ISVGLengthList JSVGLengthList;
+external ISVGLengthList get JSVGLengthList;
+@JS(r'SVGLengthList')
+external set JSVGLengthList(ISVGLengthList value);
 
 @JS()
 @anonymous
@@ -17273,7 +18081,9 @@ class SVGLineElement extends GeometryElement {
 }
 
 @JS(r'SVGLineElement')
-external ISVGLineElement JSVGLineElement;
+external ISVGLineElement get JSVGLineElement;
+@JS(r'SVGLineElement')
+external set JSVGLineElement(ISVGLineElement value);
 
 @JS()
 @anonymous
@@ -17293,7 +18103,9 @@ class SVGLinearGradientElement extends SVGGradientElement {
 }
 
 @JS(r'SVGLinearGradientElement')
-external ISVGLinearGradientElement JSVGLinearGradientElement;
+external ISVGLinearGradientElement get JSVGLinearGradientElement;
+@JS(r'SVGLinearGradientElement')
+external set JSVGLinearGradientElement(ISVGLinearGradientElement value);
 
 @JS()
 @anonymous
@@ -17304,7 +18116,9 @@ class SVGMPathElement extends SvgElement {
 }
 
 @JS(r'SVGMPathElement')
-external ISVGMPathElement JSVGMPathElement;
+external ISVGMPathElement get JSVGMPathElement;
+@JS(r'SVGMPathElement')
+external set JSVGMPathElement(ISVGMPathElement value);
 
 @JS()
 @anonymous
@@ -17344,7 +18158,9 @@ class SVGMarkerElement extends SvgElement {
 }
 
 @JS(r'SVGMarkerElement')
-external ISVGMarkerElement JSVGMarkerElement;
+external ISVGMarkerElement get JSVGMarkerElement;
+@JS(r'SVGMarkerElement')
+external set JSVGMarkerElement(ISVGMarkerElement value);
 
 @JS()
 @anonymous
@@ -17368,7 +18184,9 @@ class SVGMaskElement extends SvgElement {
 }
 
 @JS(r'SVGMaskElement')
-external ISVGMaskElement JSVGMaskElement;
+external ISVGMaskElement get JSVGMaskElement;
+@JS(r'SVGMaskElement')
+external set JSVGMaskElement(ISVGMaskElement value);
 
 @JS()
 @anonymous
@@ -17379,7 +18197,9 @@ class SVGMetadataElement extends SvgElement {
 }
 
 @JS(r'SVGMetadataElement')
-external ISVGMetadataElement JSVGMetadataElement;
+external ISVGMetadataElement get JSVGMetadataElement;
+@JS(r'SVGMetadataElement')
+external set JSVGMetadataElement(ISVGMetadataElement value);
 
 @JS()
 @anonymous
@@ -17392,7 +18212,9 @@ class SVGNumber {
 }
 
 @JS(r'SVGNumber')
-external ISVGNumber JSVGNumber;
+external ISVGNumber get JSVGNumber;
+@JS(r'SVGNumber')
+external set JSVGNumber(ISVGNumber value);
 
 @JS()
 @anonymous
@@ -17413,7 +18235,9 @@ class SVGNumberList {
 }
 
 @JS(r'SVGNumberList')
-external ISVGNumberList JSVGNumberList;
+external ISVGNumberList get JSVGNumberList;
+@JS(r'SVGNumberList')
+external set JSVGNumberList(ISVGNumberList value);
 
 @JS()
 @anonymous
@@ -17424,7 +18248,9 @@ class SVGPathElement extends GeometryElement {
 }
 
 @JS(r'SVGPathElement')
-external ISVGPathElement JSVGPathElement;
+external ISVGPathElement get JSVGPathElement;
+@JS(r'SVGPathElement')
+external set JSVGPathElement(ISVGPathElement value);
 
 @JS()
 @anonymous
@@ -17450,7 +18276,9 @@ class SVGPatternElement extends SvgElement {
 }
 
 @JS(r'SVGPatternElement')
-external ISVGPatternElement JSVGPatternElement;
+external ISVGPatternElement get JSVGPatternElement;
+@JS(r'SVGPatternElement')
+external set JSVGPatternElement(ISVGPatternElement value);
 
 @JS()
 @anonymous
@@ -17471,7 +18299,9 @@ class SVGPointList {
 }
 
 @JS(r'SVGPointList')
-external ISVGPointList JSVGPointList;
+external ISVGPointList get JSVGPointList;
+@JS(r'SVGPointList')
+external set JSVGPointList(ISVGPointList value);
 
 @JS()
 @anonymous
@@ -17482,7 +18312,9 @@ class SVGPolygonElement extends GeometryElement {
 }
 
 @JS(r'SVGPolygonElement')
-external ISVGPolygonElement JSVGPolygonElement;
+external ISVGPolygonElement get JSVGPolygonElement;
+@JS(r'SVGPolygonElement')
+external set JSVGPolygonElement(ISVGPolygonElement value);
 
 @JS()
 @anonymous
@@ -17493,7 +18325,9 @@ class SVGPolylineElement extends GeometryElement {
 }
 
 @JS(r'SVGPolylineElement')
-external ISVGPolylineElement JSVGPolylineElement;
+external ISVGPolylineElement get JSVGPolylineElement;
+@JS(r'SVGPolylineElement')
+external set JSVGPolylineElement(ISVGPolylineElement value);
 
 @JS()
 @anonymous
@@ -17537,7 +18371,9 @@ class SVGPreserveAspectRatio {
 }
 
 @JS(r'SVGPreserveAspectRatio')
-external ISVGPreserveAspectRatio JSVGPreserveAspectRatio;
+external ISVGPreserveAspectRatio get JSVGPreserveAspectRatio;
+@JS(r'SVGPreserveAspectRatio')
+external set JSVGPreserveAspectRatio(ISVGPreserveAspectRatio value);
 
 @JS()
 @anonymous
@@ -17561,7 +18397,9 @@ class SVGRadialGradientElement extends SVGGradientElement {
 }
 
 @JS(r'SVGRadialGradientElement')
-external ISVGRadialGradientElement JSVGRadialGradientElement;
+external ISVGRadialGradientElement get JSVGRadialGradientElement;
+@JS(r'SVGRadialGradientElement')
+external set JSVGRadialGradientElement(ISVGRadialGradientElement value);
 
 @JS()
 @anonymous
@@ -17585,7 +18423,9 @@ class SVGRectElement extends GeometryElement {
 }
 
 @JS(r'SVGRectElement')
-external ISVGRectElement JSVGRectElement;
+external ISVGRectElement get JSVGRectElement;
+@JS(r'SVGRectElement')
+external set JSVGRectElement(ISVGRectElement value);
 
 @JS()
 @anonymous
@@ -17639,7 +18479,9 @@ class SVGSVGElement extends GraphicsElement {
 }
 
 @JS(r'SVGSVGElement')
-external ISVGSVGElement JSVGSVGElement;
+external ISVGSVGElement get JSVGSVGElement;
+@JS(r'SVGSVGElement')
+external set JSVGSVGElement(ISVGSVGElement value);
 
 @JS()
 @anonymous
@@ -17654,7 +18496,9 @@ class SVGScriptElement extends SvgElement {
 }
 
 @JS(r'SVGScriptElement')
-external ISVGScriptElement JSVGScriptElement;
+external ISVGScriptElement get JSVGScriptElement;
+@JS(r'SVGScriptElement')
+external set JSVGScriptElement(ISVGScriptElement value);
 
 @JS()
 @anonymous
@@ -17665,7 +18509,9 @@ class SVGSetElement extends AnimationElement {
 }
 
 @JS(r'SVGSetElement')
-external ISVGSetElement JSVGSetElement;
+external ISVGSetElement get JSVGSetElement;
+@JS(r'SVGSetElement')
+external set JSVGSetElement(ISVGSetElement value);
 
 @JS()
 @anonymous
@@ -17679,7 +18525,9 @@ class SVGStopElement extends SvgElement {
 }
 
 @JS(r'SVGStopElement')
-external ISVGStopElement JSVGStopElement;
+external ISVGStopElement get JSVGStopElement;
+@JS(r'SVGStopElement')
+external set JSVGStopElement(ISVGStopElement value);
 
 @JS()
 @anonymous
@@ -17700,7 +18548,9 @@ class SVGStringList {
 }
 
 @JS(r'SVGStringList')
-external ISVGStringList JSVGStringList;
+external ISVGStringList get JSVGStringList;
+@JS(r'SVGStringList')
+external set JSVGStringList(ISVGStringList value);
 
 @JS()
 @anonymous
@@ -17724,7 +18574,9 @@ class SVGStyleElement extends SvgElement {
 }
 
 @JS(r'SVGStyleElement')
-external ISVGStyleElement JSVGStyleElement;
+external ISVGStyleElement get JSVGStyleElement;
+@JS(r'SVGStyleElement')
+external set JSVGStyleElement(ISVGStyleElement value);
 
 @JS()
 @anonymous
@@ -17735,7 +18587,9 @@ class SVGSwitchElement extends GraphicsElement {
 }
 
 @JS(r'SVGSwitchElement')
-external ISVGSwitchElement JSVGSwitchElement;
+external ISVGSwitchElement get JSVGSwitchElement;
+@JS(r'SVGSwitchElement')
+external set JSVGSwitchElement(ISVGSwitchElement value);
 
 @JS()
 @anonymous
@@ -17746,7 +18600,9 @@ class SVGSymbolElement extends SvgElement {
 }
 
 @JS(r'SVGSymbolElement')
-external ISVGSymbolElement JSVGSymbolElement;
+external ISVGSymbolElement get JSVGSymbolElement;
+@JS(r'SVGSymbolElement')
+external set JSVGSymbolElement(ISVGSymbolElement value);
 
 @JS()
 @anonymous
@@ -17757,7 +18613,9 @@ class SVGTSpanElement extends TextPositioningElement {
 }
 
 @JS(r'SVGTSpanElement')
-external ISVGTSpanElement JSVGTSpanElement;
+external ISVGTSpanElement get JSVGTSpanElement;
+@JS(r'SVGTSpanElement')
+external set JSVGTSpanElement(ISVGTSpanElement value);
 
 @JS()
 @anonymous
@@ -17799,7 +18657,9 @@ class SVGTextContentElement extends GraphicsElement {
 }
 
 @JS(r'SVGTextContentElement')
-external ISVGTextContentElement JSVGTextContentElement;
+external ISVGTextContentElement get JSVGTextContentElement;
+@JS(r'SVGTextContentElement')
+external set JSVGTextContentElement(ISVGTextContentElement value);
 
 @JS()
 @anonymous
@@ -17810,7 +18670,9 @@ class SVGTextElement extends TextPositioningElement {
 }
 
 @JS(r'SVGTextElement')
-external ISVGTextElement JSVGTextElement;
+external ISVGTextElement get JSVGTextElement;
+@JS(r'SVGTextElement')
+external set JSVGTextElement(ISVGTextElement value);
 
 @JS()
 @anonymous
@@ -17840,7 +18702,9 @@ class SVGTextPathElement extends TextContentElement {
 }
 
 @JS(r'SVGTextPathElement')
-external ISVGTextPathElement JSVGTextPathElement;
+external ISVGTextPathElement get JSVGTextPathElement;
+@JS(r'SVGTextPathElement')
+external set JSVGTextPathElement(ISVGTextPathElement value);
 
 @JS()
 @anonymous
@@ -17862,7 +18726,9 @@ class SVGTextPositioningElement extends TextContentElement {
 }
 
 @JS(r'SVGTextPositioningElement')
-external ISVGTextPositioningElement JSVGTextPositioningElement;
+external ISVGTextPositioningElement get JSVGTextPositioningElement;
+@JS(r'SVGTextPositioningElement')
+external set JSVGTextPositioningElement(ISVGTextPositioningElement value);
 
 @JS()
 @anonymous
@@ -17873,7 +18739,9 @@ class SVGTitleElement extends SvgElement {
 }
 
 @JS(r'SVGTitleElement')
-external ISVGTitleElement JSVGTitleElement;
+external ISVGTitleElement get JSVGTitleElement;
+@JS(r'SVGTitleElement')
+external set JSVGTitleElement(ISVGTitleElement value);
 
 @JS()
 @anonymous
@@ -17909,7 +18777,9 @@ class SVGTransform {
 }
 
 @JS(r'SVGTransform')
-external ISVGTransform JSVGTransform;
+external ISVGTransform get JSVGTransform;
+@JS(r'SVGTransform')
+external set JSVGTransform(ISVGTransform value);
 
 @JS()
 @anonymous
@@ -17932,7 +18802,9 @@ class SVGTransformList {
 }
 
 @JS(r'SVGTransformList')
-external ISVGTransformList JSVGTransformList;
+external ISVGTransformList get JSVGTransformList;
+@JS(r'SVGTransformList')
+external set JSVGTransformList(ISVGTransformList value);
 
 @JS()
 @anonymous
@@ -17957,7 +18829,9 @@ class SVGUnitTypes {
 }
 
 @JS(r'SVGUnitTypes')
-external ISVGUnitTypes JSVGUnitTypes;
+external ISVGUnitTypes get JSVGUnitTypes;
+@JS(r'SVGUnitTypes')
+external set JSVGUnitTypes(ISVGUnitTypes value);
 
 @JS()
 @anonymous
@@ -17977,7 +18851,9 @@ class SVGUseElement extends GraphicsElement {
 }
 
 @JS(r'SVGUseElement')
-external ISVGUseElement JSVGUseElement;
+external ISVGUseElement get JSVGUseElement;
+@JS(r'SVGUseElement')
+external set JSVGUseElement(ISVGUseElement value);
 
 @JS()
 @anonymous
@@ -17988,7 +18864,9 @@ class SVGViewElement extends SvgElement {
 }
 
 @JS(r'SVGViewElement')
-external ISVGViewElement JSVGViewElement;
+external ISVGViewElement get JSVGViewElement;
+@JS(r'SVGViewElement')
+external set JSVGViewElement(ISVGViewElement value);
 
 @JS()
 @anonymous
@@ -18012,7 +18890,9 @@ class Screen {
 }
 
 @JS(r'Screen')
-external IScreen JScreen;
+external IScreen get JScreen;
+@JS(r'Screen')
+external set JScreen(IScreen value);
 
 @JS()
 @anonymous
@@ -18043,7 +18923,9 @@ class ScreenOrientation extends EventTarget {
 }
 
 @JS(r'ScreenOrientation')
-external IScreenOrientation JScreenOrientation;
+external IScreenOrientation get JScreenOrientation;
+@JS(r'ScreenOrientation')
+external set JScreenOrientation(IScreenOrientation value);
 
 @JS()
 @anonymous
@@ -18070,7 +18952,9 @@ class ScriptProcessorNode extends AudioNode {
 }
 
 @JS(r'ScriptProcessorNode')
-external IScriptProcessorNode JScriptProcessorNode;
+external IScriptProcessorNode get JScriptProcessorNode;
+@JS(r'ScriptProcessorNode')
+external set JScriptProcessorNode(IScriptProcessorNode value);
 
 @JS()
 @anonymous
@@ -18104,7 +18988,9 @@ class SecurityPolicyViolationEvent extends Event {
 }
 
 @JS(r'SecurityPolicyViolationEvent')
-external ISecurityPolicyViolationEvent JSecurityPolicyViolationEvent;
+external ISecurityPolicyViolationEvent get JSecurityPolicyViolationEvent;
+@JS(r'SecurityPolicyViolationEvent')
+external set JSecurityPolicyViolationEvent(ISecurityPolicyViolationEvent value);
 
 @JS()
 @anonymous
@@ -18144,7 +19030,9 @@ class Selection {
 }
 
 @JS(r'Selection')
-external ISelection JSelection;
+external ISelection get JSelection;
+@JS(r'Selection')
+external set JSelection(ISelection value);
 
 @JS()
 @anonymous
@@ -18174,7 +19062,9 @@ class ServiceWorker extends EventTarget {
 }
 
 @JS(r'ServiceWorker')
-external IServiceWorker JServiceWorker;
+external IServiceWorker get JServiceWorker;
+@JS(r'ServiceWorker')
+external set JServiceWorker(IServiceWorker value);
 
 @JS()
 @anonymous
@@ -18219,7 +19109,9 @@ class ServiceWorkerContainer extends EventTarget {
 }
 
 @JS(r'ServiceWorkerContainer')
-external IServiceWorkerContainer JServiceWorkerContainer;
+external IServiceWorkerContainer get JServiceWorkerContainer;
+@JS(r'ServiceWorkerContainer')
+external set JServiceWorkerContainer(IServiceWorkerContainer value);
 
 @JS()
 @anonymous
@@ -18260,7 +19152,9 @@ class ServiceWorkerRegistration extends EventTarget {
 }
 
 @JS(r'ServiceWorkerRegistration')
-external IServiceWorkerRegistration JServiceWorkerRegistration;
+external IServiceWorkerRegistration get JServiceWorkerRegistration;
+@JS(r'ServiceWorkerRegistration')
+external set JServiceWorkerRegistration(IServiceWorkerRegistration value);
 
 @JS()
 @anonymous
@@ -18274,7 +19168,9 @@ class ShadowRoot extends DocumentFragment {
 }
 
 @JS(r'ShadowRoot')
-external IShadowRoot JShadowRoot;
+external IShadowRoot get JShadowRoot;
+@JS(r'ShadowRoot')
+external set JShadowRoot(IShadowRoot value);
 
 @JS()
 @anonymous
@@ -18288,7 +19184,9 @@ class SharedWorker extends EventTarget {
 }
 
 @JS(r'SharedWorker')
-external ISharedWorker JSharedWorker;
+external ISharedWorker get JSharedWorker;
+@JS(r'SharedWorker')
+external set JSharedWorker(ISharedWorker value);
 
 @JS()
 @anonymous
@@ -18366,7 +19264,9 @@ class SourceBuffer extends EventTarget {
 }
 
 @JS(r'SourceBuffer')
-external ISourceBuffer JSourceBuffer;
+external ISourceBuffer get JSourceBuffer;
+@JS(r'SourceBuffer')
+external set JSourceBuffer(ISourceBuffer value);
 
 @JS()
 @anonymous
@@ -18399,7 +19299,9 @@ class SourceBufferList extends EventTarget {
 }
 
 @JS(r'SourceBufferList')
-external ISourceBufferList JSourceBufferList;
+external ISourceBufferList get JSourceBufferList;
+@JS(r'SourceBufferList')
+external set JSourceBufferList(ISourceBufferList value);
 
 @JS()
 @anonymous
@@ -18413,7 +19315,9 @@ class SpeechRecognitionAlternative {
 }
 
 @JS(r'SpeechRecognitionAlternative')
-external ISpeechRecognitionAlternative JSpeechRecognitionAlternative;
+external ISpeechRecognitionAlternative get JSpeechRecognitionAlternative;
+@JS(r'SpeechRecognitionAlternative')
+external set JSpeechRecognitionAlternative(ISpeechRecognitionAlternative value);
 
 @JS()
 @anonymous
@@ -18427,7 +19331,9 @@ class SpeechRecognitionErrorEvent extends Event {
 }
 
 @JS(r'SpeechRecognitionErrorEvent')
-external ISpeechRecognitionErrorEvent JSpeechRecognitionErrorEvent;
+external ISpeechRecognitionErrorEvent get JSpeechRecognitionErrorEvent;
+@JS(r'SpeechRecognitionErrorEvent')
+external set JSpeechRecognitionErrorEvent(ISpeechRecognitionErrorEvent value);
 
 @JS()
 @anonymous
@@ -18442,7 +19348,9 @@ class SpeechRecognitionResult {
 }
 
 @JS(r'SpeechRecognitionResult')
-external ISpeechRecognitionResult JSpeechRecognitionResult;
+external ISpeechRecognitionResult get JSpeechRecognitionResult;
+@JS(r'SpeechRecognitionResult')
+external set JSpeechRecognitionResult(ISpeechRecognitionResult value);
 
 @JS()
 @anonymous
@@ -18455,7 +19363,9 @@ class SpeechRecognitionResultList {
 }
 
 @JS(r'SpeechRecognitionResultList')
-external ISpeechRecognitionResultList JSpeechRecognitionResultList;
+external ISpeechRecognitionResultList get JSpeechRecognitionResultList;
+@JS(r'SpeechRecognitionResultList')
+external set JSpeechRecognitionResultList(ISpeechRecognitionResultList value);
 
 @JS()
 @anonymous
@@ -18491,7 +19401,9 @@ class SpeechSynthesis extends EventTarget {
 }
 
 @JS(r'SpeechSynthesis')
-external ISpeechSynthesis JSpeechSynthesis;
+external ISpeechSynthesis get JSpeechSynthesis;
+@JS(r'SpeechSynthesis')
+external set JSpeechSynthesis(ISpeechSynthesis value);
 
 @JS()
 @anonymous
@@ -18503,7 +19415,9 @@ class SpeechSynthesisErrorEvent extends SpeechSynthesisEvent {
 }
 
 @JS(r'SpeechSynthesisErrorEvent')
-external ISpeechSynthesisErrorEvent JSpeechSynthesisErrorEvent;
+external ISpeechSynthesisErrorEvent get JSpeechSynthesisErrorEvent;
+@JS(r'SpeechSynthesisErrorEvent')
+external set JSpeechSynthesisErrorEvent(ISpeechSynthesisErrorEvent value);
 
 @JS()
 @anonymous
@@ -18523,7 +19437,9 @@ class SpeechSynthesisEvent extends Event {
 }
 
 @JS(r'SpeechSynthesisEvent')
-external ISpeechSynthesisEvent JSpeechSynthesisEvent;
+external ISpeechSynthesisEvent get JSpeechSynthesisEvent;
+@JS(r'SpeechSynthesisEvent')
+external set JSpeechSynthesisEvent(ISpeechSynthesisEvent value);
 
 @JS()
 @anonymous
@@ -18602,7 +19518,9 @@ class SpeechSynthesisUtterance extends EventTarget {
 }
 
 @JS(r'SpeechSynthesisUtterance')
-external ISpeechSynthesisUtterance JSpeechSynthesisUtterance;
+external ISpeechSynthesisUtterance get JSpeechSynthesisUtterance;
+@JS(r'SpeechSynthesisUtterance')
+external set JSpeechSynthesisUtterance(ISpeechSynthesisUtterance value);
 
 @JS()
 @anonymous
@@ -18620,7 +19538,9 @@ class SpeechSynthesisVoice {
 }
 
 @JS(r'SpeechSynthesisVoice')
-external ISpeechSynthesisVoice JSpeechSynthesisVoice;
+external ISpeechSynthesisVoice get JSpeechSynthesisVoice;
+@JS(r'SpeechSynthesisVoice')
+external set JSpeechSynthesisVoice(ISpeechSynthesisVoice value);
 
 @JS()
 @anonymous
@@ -18629,7 +19549,9 @@ class StaticRange extends AbstractRange {
 }
 
 @JS(r'StaticRange')
-external IStaticRange JStaticRange;
+external IStaticRange get JStaticRange;
+@JS(r'StaticRange')
+external set JStaticRange(IStaticRange value);
 
 @JS()
 @anonymous
@@ -18641,7 +19563,9 @@ class StereoPannerNode extends AudioNode {
 }
 
 @JS(r'StereoPannerNode')
-external IStereoPannerNode JStereoPannerNode;
+external IStereoPannerNode get JStereoPannerNode;
+@JS(r'StereoPannerNode')
+external set JStereoPannerNode(IStereoPannerNode value);
 
 @JS()
 @anonymous
@@ -18658,7 +19582,9 @@ class Storage {
 }
 
 @JS(r'Storage')
-external IStorage JStorage;
+external IStorage get JStorage;
+@JS(r'Storage')
+external set JStorage(IStorage value);
 
 @JS()
 @anonymous
@@ -18680,7 +19606,9 @@ class StorageEvent extends Event {
 }
 
 @JS(r'StorageEvent')
-external IStorageEvent JStorageEvent;
+external IStorageEvent get JStorageEvent;
+@JS(r'StorageEvent')
+external set JStorageEvent(IStorageEvent value);
 
 @JS()
 @anonymous
@@ -18692,7 +19620,9 @@ class StorageManager {
 }
 
 @JS(r'StorageManager')
-external IStorageManager JStorageManager;
+external IStorageManager get JStorageManager;
+@JS(r'StorageManager')
+external set JStorageManager(IStorageManager value);
 
 @JS()
 @anonymous
@@ -18706,7 +19636,9 @@ class StyleMedia {
 }
 
 @JS(r'StyleMedia')
-external IStyleMedia JStyleMedia;
+external IStyleMedia get JStyleMedia;
+@JS(r'StyleMedia')
+external set JStyleMedia(IStyleMedia value);
 
 @JS()
 @anonymous
@@ -18731,7 +19663,9 @@ class StyleSheet {
 }
 
 @JS(r'StyleSheet')
-external IStyleSheet JStyleSheet;
+external IStyleSheet get JStyleSheet;
+@JS(r'StyleSheet')
+external set JStyleSheet(IStyleSheet value);
 
 @JS()
 @anonymous
@@ -18744,7 +19678,9 @@ class StyleSheetList {
 }
 
 @JS(r'StyleSheetList')
-external IStyleSheetList JStyleSheetList;
+external IStyleSheetList get JStyleSheetList;
+@JS(r'StyleSheetList')
+external set JStyleSheetList(IStyleSheetList value);
 
 @JS()
 @anonymous
@@ -18756,7 +19692,9 @@ class SubmitEvent extends Event {
 }
 
 @JS(r'SubmitEvent')
-external ISubmitEvent JSubmitEvent;
+external ISubmitEvent get JSubmitEvent;
+@JS(r'SubmitEvent')
+external set JSubmitEvent(ISubmitEvent value);
 
 @JS()
 @anonymous
@@ -18780,7 +19718,9 @@ class SubtleCrypto {
 }
 
 @JS(r'SubtleCrypto')
-external ISubtleCrypto JSubtleCrypto;
+external ISubtleCrypto get JSubtleCrypto;
+@JS(r'SubtleCrypto')
+external set JSubtleCrypto(ISubtleCrypto value);
 
 @JS()
 @anonymous
@@ -18795,7 +19735,9 @@ class Text extends CharacterData {
 }
 
 @JS(r'Text')
-external IText JText;
+external IText get JText;
+@JS(r'Text')
+external set JText(IText value);
 
 @JS()
 @anonymous
@@ -18805,7 +19747,9 @@ class TextDecoder extends TextDecoderCommon {
 }
 
 @JS(r'TextDecoder')
-external ITextDecoder JTextDecoder;
+external ITextDecoder get JTextDecoder;
+@JS(r'TextDecoder')
+external set JTextDecoder(ITextDecoder value);
 
 @JS()
 @anonymous
@@ -18832,7 +19776,9 @@ class TextDecoderStream extends GenericTransformStream {
 }
 
 @JS(r'TextDecoderStream')
-external ITextDecoderStream JTextDecoderStream;
+external ITextDecoderStream get JTextDecoderStream;
+@JS(r'TextDecoderStream')
+external set JTextDecoderStream(ITextDecoderStream value);
 
 @JS()
 @anonymous
@@ -18843,7 +19789,9 @@ class TextEncoder extends TextEncoderCommon {
 }
 
 @JS(r'TextEncoder')
-external ITextEncoder JTextEncoder;
+external ITextEncoder get JTextEncoder;
+@JS(r'TextEncoder')
+external set JTextEncoder(ITextEncoder value);
 
 @JS()
 @anonymous
@@ -18866,7 +19814,9 @@ class TextEncoderStream extends GenericTransformStream {
 }
 
 @JS(r'TextEncoderStream')
-external ITextEncoderStream JTextEncoderStream;
+external ITextEncoderStream get JTextEncoderStream;
+@JS(r'TextEncoderStream')
+external set JTextEncoderStream(ITextEncoderStream value);
 
 @JS()
 @anonymous
@@ -18890,7 +19840,9 @@ class TextMetrics {
 }
 
 @JS(r'TextMetrics')
-external ITextMetrics JTextMetrics;
+external ITextMetrics get JTextMetrics;
+@JS(r'TextMetrics')
+external set JTextMetrics(ITextMetrics value);
 
 @JS()
 @anonymous
@@ -18934,7 +19886,9 @@ class TextTrack extends EventTarget {
 }
 
 @JS(r'TextTrack')
-external ITextTrack JTextTrack;
+external ITextTrack get JTextTrack;
+@JS(r'TextTrack')
+external set JTextTrack(ITextTrack value);
 
 @JS()
 @anonymous
@@ -18979,7 +19933,9 @@ class TextTrackCue extends EventTarget {
 }
 
 @JS(r'TextTrackCue')
-external ITextTrackCue JTextTrackCue;
+external ITextTrackCue get JTextTrackCue;
+@JS(r'TextTrackCue')
+external set JTextTrackCue(ITextTrackCue value);
 
 @JS()
 @anonymous
@@ -18992,7 +19948,9 @@ class TextTrackCueList {
 }
 
 @JS(r'TextTrackCueList')
-external ITextTrackCueList JTextTrackCueList;
+external ITextTrackCueList get JTextTrackCueList;
+@JS(r'TextTrackCueList')
+external set JTextTrackCueList(ITextTrackCueList value);
 
 @JS()
 @anonymous
@@ -19032,7 +19990,9 @@ class TextTrackList extends EventTarget {
 }
 
 @JS(r'TextTrackList')
-external ITextTrackList JTextTrackList;
+external ITextTrackList get JTextTrackList;
+@JS(r'TextTrackList')
+external set JTextTrackList(ITextTrackList value);
 
 @JS()
 @anonymous
@@ -19046,7 +20006,9 @@ class TimeRanges {
 }
 
 @JS(r'TimeRanges')
-external ITimeRanges JTimeRanges;
+external ITimeRanges get JTimeRanges;
+@JS(r'TimeRanges')
+external set JTimeRanges(ITimeRanges value);
 
 @JS()
 @anonymous
@@ -19080,7 +20042,9 @@ class Touch {
 }
 
 @JS(r'Touch')
-external ITouch JTouch;
+external ITouch get JTouch;
+@JS(r'Touch')
+external set JTouch(ITouch value);
 
 @JS()
 @anonymous
@@ -19104,7 +20068,9 @@ class TouchEvent extends UIEvent {
 }
 
 @JS(r'TouchEvent')
-external ITouchEvent JTouchEvent;
+external ITouchEvent get JTouchEvent;
+@JS(r'TouchEvent')
+external set JTouchEvent(ITouchEvent value);
 
 @JS()
 @anonymous
@@ -19117,7 +20083,9 @@ class TouchList {
 }
 
 @JS(r'TouchList')
-external ITouchList JTouchList;
+external ITouchList get JTouchList;
+@JS(r'TouchList')
+external set JTouchList(ITouchList value);
 
 @JS()
 @anonymous
@@ -19129,7 +20097,9 @@ class TrackEvent extends Event {
 }
 
 @JS(r'TrackEvent')
-external ITrackEvent JTrackEvent;
+external ITrackEvent get JTrackEvent;
+@JS(r'TrackEvent')
+external set JTrackEvent(ITrackEvent value);
 
 @JS()
 @anonymous
@@ -19143,7 +20113,9 @@ class TransformStream<I, O> {
 }
 
 @JS(r'TransformStream')
-external ITransformStream JTransformStream;
+external ITransformStream get JTransformStream;
+@JS(r'TransformStream')
+external set JTransformStream(ITransformStream value);
 
 @JS()
 @anonymous
@@ -19158,7 +20130,9 @@ class TransformStreamDefaultController<O> {
 }
 
 @JS(r'TransformStreamDefaultController')
-external ITransformStreamDefaultController JTransformStreamDefaultController;
+external ITransformStreamDefaultController get JTransformStreamDefaultController;
+@JS(r'TransformStreamDefaultController')
+external set JTransformStreamDefaultController(ITransformStreamDefaultController value);
 
 @JS()
 @anonymous
@@ -19174,7 +20148,9 @@ class TransitionEvent extends Event {
 }
 
 @JS(r'TransitionEvent')
-external ITransitionEvent JTransitionEvent;
+external ITransitionEvent get JTransitionEvent;
+@JS(r'TransitionEvent')
+external set JTransitionEvent(ITransitionEvent value);
 
 @JS()
 @anonymous
@@ -19200,7 +20176,9 @@ class TreeWalker {
 }
 
 @JS(r'TreeWalker')
-external ITreeWalker JTreeWalker;
+external ITreeWalker get JTreeWalker;
+@JS(r'TreeWalker')
+external set JTreeWalker(ITreeWalker value);
 
 @JS()
 @anonymous
@@ -19217,7 +20195,9 @@ class UIEvent extends Event {
 }
 
 @JS(r'UIEvent')
-external IUIEvent JUIEvent;
+external IUIEvent get JUIEvent;
+@JS(r'UIEvent')
+external set JUIEvent(IUIEvent value);
 
 @JS()
 @anonymous
@@ -19264,10 +20244,14 @@ class URL {
 }
 
 @JS(r'URL')
-external IURL JURL;
+external IURL get JURL;
+@JS(r'URL')
+external set JURL(IURL value);
 typedef webkitURL = Url;
 @JS(r'webkitURL')
-external dynamic webkitURL;
+external dynamic get webkitURL;
+@JS(r'webkitURL')
+external set webkitURL(dynamic value);
 
 @JS()
 @anonymous
@@ -19286,7 +20270,9 @@ class URLSearchParams {
 }
 
 @JS(r'URLSearchParams')
-external IURLSearchParams JURLSearchParams;
+external IURLSearchParams get JURLSearchParams;
+@JS(r'URLSearchParams')
+external set JURLSearchParams(IURLSearchParams value);
 
 @JS()
 @anonymous
@@ -19329,7 +20315,9 @@ class VTTCue extends TextTrackCue {
 }
 
 @JS(r'VTTCue')
-external IVTTCue JVTTCue;
+external IVTTCue get JVTTCue;
+@JS(r'VTTCue')
+external set JVTTCue(IVTTCue value);
 
 @JS()
 @anonymous
@@ -19363,7 +20351,9 @@ class VTTRegion {
 }
 
 @JS(r'VTTRegion')
-external IVTTRegion JVTTRegion;
+external IVTTRegion get JVTTRegion;
+@JS(r'VTTRegion')
+external set JVTTRegion(IVTTRegion value);
 
 @JS()
 @anonymous
@@ -19395,7 +20385,9 @@ class ValidityState {
 }
 
 @JS(r'ValidityState')
-external IValidityState JValidityState;
+external IValidityState get JValidityState;
+@JS(r'ValidityState')
+external set JValidityState(IValidityState value);
 
 @JS()
 @anonymous
@@ -19413,7 +20405,9 @@ class VideoPlaybackQuality {
 }
 
 @JS(r'VideoPlaybackQuality')
-external IVideoPlaybackQuality JVideoPlaybackQuality;
+external IVideoPlaybackQuality get JVideoPlaybackQuality;
+@JS(r'VideoPlaybackQuality')
+external set JVideoPlaybackQuality(IVideoPlaybackQuality value);
 
 @JS()
 @anonymous
@@ -19458,7 +20452,9 @@ class VisualViewport extends EventTarget {
 }
 
 @JS(r'VisualViewport')
-external IVisualViewport JVisualViewport;
+external IVisualViewport get JVisualViewport;
+@JS(r'VisualViewport')
+external set JVisualViewport(IVisualViewport value);
 
 @JS()
 @anonymous
@@ -19743,7 +20739,9 @@ class WaveShaperNode extends AudioNode {
 }
 
 @JS(r'WaveShaperNode')
-external IWaveShaperNode JWaveShaperNode;
+external IWaveShaperNode get JWaveShaperNode;
+@JS(r'WaveShaperNode')
+external set JWaveShaperNode(IWaveShaperNode value);
 
 @JS()
 @anonymous
@@ -19752,7 +20750,9 @@ class WebGL2RenderingContext extends WebGL2RenderingContextBase {
 }
 
 @JS(r'WebGL2RenderingContext')
-external IWebGL2RenderingContext JWebGL2RenderingContext;
+external IWebGL2RenderingContext get JWebGL2RenderingContext;
+@JS(r'WebGL2RenderingContext')
+external set JWebGL2RenderingContext(IWebGL2RenderingContext value);
 
 @JS()
 @anonymous
@@ -20438,7 +21438,9 @@ class WebGLActiveInfo {
 }
 
 @JS(r'WebGLActiveInfo')
-external IWebGLActiveInfo JWebGLActiveInfo;
+external IWebGLActiveInfo get JWebGLActiveInfo;
+@JS(r'WebGLActiveInfo')
+external set JWebGLActiveInfo(IWebGLActiveInfo value);
 
 @JS()
 @anonymous
@@ -20447,7 +21449,9 @@ class WebGLBuffer {
 }
 
 @JS(r'WebGLBuffer')
-external IWebGLBuffer JWebGLBuffer;
+external IWebGLBuffer get JWebGLBuffer;
+@JS(r'WebGLBuffer')
+external set JWebGLBuffer(IWebGLBuffer value);
 
 @JS()
 @anonymous
@@ -20459,7 +21463,9 @@ class WebGLContextEvent extends Event {
 }
 
 @JS(r'WebGLContextEvent')
-external IWebGLContextEvent JWebGLContextEvent;
+external IWebGLContextEvent get JWebGLContextEvent;
+@JS(r'WebGLContextEvent')
+external set JWebGLContextEvent(IWebGLContextEvent value);
 
 @JS()
 @anonymous
@@ -20468,7 +21474,9 @@ class WebGLFramebuffer {
 }
 
 @JS(r'WebGLFramebuffer')
-external IWebGLFramebuffer JWebGLFramebuffer;
+external IWebGLFramebuffer get JWebGLFramebuffer;
+@JS(r'WebGLFramebuffer')
+external set JWebGLFramebuffer(IWebGLFramebuffer value);
 
 @JS()
 @anonymous
@@ -20477,7 +21485,9 @@ class WebGLProgram {
 }
 
 @JS(r'WebGLProgram')
-external IWebGLProgram JWebGLProgram;
+external IWebGLProgram get JWebGLProgram;
+@JS(r'WebGLProgram')
+external set JWebGLProgram(IWebGLProgram value);
 
 @JS()
 @anonymous
@@ -20486,7 +21496,9 @@ class WebGLQuery {
 }
 
 @JS(r'WebGLQuery')
-external IWebGLQuery JWebGLQuery;
+external IWebGLQuery get JWebGLQuery;
+@JS(r'WebGLQuery')
+external set JWebGLQuery(IWebGLQuery value);
 
 @JS()
 @anonymous
@@ -20495,7 +21507,9 @@ class WebGLRenderbuffer {
 }
 
 @JS(r'WebGLRenderbuffer')
-external IWebGLRenderbuffer JWebGLRenderbuffer;
+external IWebGLRenderbuffer get JWebGLRenderbuffer;
+@JS(r'WebGLRenderbuffer')
+external set JWebGLRenderbuffer(IWebGLRenderbuffer value);
 
 @JS()
 @anonymous
@@ -20504,7 +21518,9 @@ class WebGLRenderingContext extends WebGLRenderingContextBase {
 }
 
 @JS(r'WebGLRenderingContext')
-external IWebGLRenderingContext JWebGLRenderingContext;
+external IWebGLRenderingContext get JWebGLRenderingContext;
+@JS(r'WebGLRenderingContext')
+external set JWebGLRenderingContext(IWebGLRenderingContext value);
 
 @JS()
 @anonymous
@@ -21267,7 +22283,9 @@ class WebGLSampler {
 }
 
 @JS(r'WebGLSampler')
-external IWebGLSampler JWebGLSampler;
+external IWebGLSampler get JWebGLSampler;
+@JS(r'WebGLSampler')
+external set JWebGLSampler(IWebGLSampler value);
 
 @JS()
 @anonymous
@@ -21276,7 +22294,9 @@ class WebGLShader {
 }
 
 @JS(r'WebGLShader')
-external IWebGLShader JWebGLShader;
+external IWebGLShader get JWebGLShader;
+@JS(r'WebGLShader')
+external set JWebGLShader(IWebGLShader value);
 
 @JS()
 @anonymous
@@ -21292,7 +22312,9 @@ class WebGLShaderPrecisionFormat {
 }
 
 @JS(r'WebGLShaderPrecisionFormat')
-external IWebGLShaderPrecisionFormat JWebGLShaderPrecisionFormat;
+external IWebGLShaderPrecisionFormat get JWebGLShaderPrecisionFormat;
+@JS(r'WebGLShaderPrecisionFormat')
+external set JWebGLShaderPrecisionFormat(IWebGLShaderPrecisionFormat value);
 
 @JS()
 @anonymous
@@ -21301,7 +22323,9 @@ class WebGLSync {
 }
 
 @JS(r'WebGLSync')
-external IWebGLSync JWebGLSync;
+external IWebGLSync get JWebGLSync;
+@JS(r'WebGLSync')
+external set JWebGLSync(IWebGLSync value);
 
 @JS()
 @anonymous
@@ -21310,7 +22334,9 @@ class WebGLTexture {
 }
 
 @JS(r'WebGLTexture')
-external IWebGLTexture JWebGLTexture;
+external IWebGLTexture get JWebGLTexture;
+@JS(r'WebGLTexture')
+external set JWebGLTexture(IWebGLTexture value);
 
 @JS()
 @anonymous
@@ -21319,7 +22345,9 @@ class WebGLTransformFeedback {
 }
 
 @JS(r'WebGLTransformFeedback')
-external IWebGLTransformFeedback JWebGLTransformFeedback;
+external IWebGLTransformFeedback get JWebGLTransformFeedback;
+@JS(r'WebGLTransformFeedback')
+external set JWebGLTransformFeedback(IWebGLTransformFeedback value);
 
 @JS()
 @anonymous
@@ -21328,7 +22356,9 @@ class WebGLUniformLocation {
 }
 
 @JS(r'WebGLUniformLocation')
-external IWebGLUniformLocation JWebGLUniformLocation;
+external IWebGLUniformLocation get JWebGLUniformLocation;
+@JS(r'WebGLUniformLocation')
+external set JWebGLUniformLocation(IWebGLUniformLocation value);
 
 @JS()
 @anonymous
@@ -21337,7 +22367,9 @@ class WebGLVertexArrayObject {
 }
 
 @JS(r'WebGLVertexArrayObject')
-external IWebGLVertexArrayObject JWebGLVertexArrayObject;
+external IWebGLVertexArrayObject get JWebGLVertexArrayObject;
+@JS(r'WebGLVertexArrayObject')
+external set JWebGLVertexArrayObject(IWebGLVertexArrayObject value);
 
 @JS()
 @anonymous
@@ -21409,7 +22441,9 @@ class WebSocket extends EventTarget {
 }
 
 @JS(r'WebSocket')
-external IWebSocket JWebSocket;
+external IWebSocket get JWebSocket;
+@JS(r'WebSocket')
+external set JWebSocket(IWebSocket value);
 
 @JS()
 @anonymous
@@ -21433,7 +22467,9 @@ class WheelEvent extends MouseEvent {
 }
 
 @JS(r'WheelEvent')
-external IWheelEvent JWheelEvent;
+external IWheelEvent get JWheelEvent;
+@JS(r'WheelEvent')
+external set JWheelEvent(IWheelEvent value);
 
 @JS()
 @anonymous
@@ -21587,7 +22623,9 @@ class Window extends EventTarget {
 }
 
 @JS(r'Window')
-external IWindow JWindow;
+external IWindow get JWindow;
+@JS(r'Window')
+external set JWindow(IWindow value);
 
 @JS()
 @anonymous
@@ -21816,7 +22854,9 @@ class Worker extends EventTarget {
 }
 
 @JS(r'Worker')
-external IWorker JWorker;
+external IWorker get JWorker;
+@JS(r'Worker')
+external set JWorker(IWorker value);
 
 @JS()
 @anonymous
@@ -21826,7 +22866,9 @@ class Worklet {
 }
 
 @JS(r'Worklet')
-external IWorklet JWorklet;
+external IWorklet get JWorklet;
+@JS(r'Worklet')
+external set JWorklet(IWorklet value);
 
 @JS()
 @anonymous
@@ -21841,7 +22883,9 @@ class WritableStream<W> {
 }
 
 @JS(r'WritableStream')
-external IWritableStream JWritableStream;
+external IWritableStream get JWritableStream;
+@JS(r'WritableStream')
+external set JWritableStream(IWritableStream value);
 
 @JS()
 @anonymous
@@ -21851,7 +22895,9 @@ class WritableStreamDefaultController {
 }
 
 @JS(r'WritableStreamDefaultController')
-external IWritableStreamDefaultController JWritableStreamDefaultController;
+external IWritableStreamDefaultController get JWritableStreamDefaultController;
+@JS(r'WritableStreamDefaultController')
+external set JWritableStreamDefaultController(IWritableStreamDefaultController value);
 
 @JS()
 @anonymous
@@ -21871,7 +22917,9 @@ class WritableStreamDefaultWriter<W> {
 }
 
 @JS(r'WritableStreamDefaultWriter')
-external IWritableStreamDefaultWriter JWritableStreamDefaultWriter;
+external IWritableStreamDefaultWriter get JWritableStreamDefaultWriter;
+@JS(r'WritableStreamDefaultWriter')
+external set JWritableStreamDefaultWriter(IWritableStreamDefaultWriter value);
 
 @JS()
 @anonymous
@@ -21882,7 +22930,9 @@ class XMLDocument extends Document {
 }
 
 @JS(r'XMLDocument')
-external IXMLDocument JXMLDocument;
+external IXMLDocument get JXMLDocument;
+@JS(r'XMLDocument')
+external set JXMLDocument(IXMLDocument value);
 
 @JS()
 @anonymous
@@ -21949,7 +22999,9 @@ class XMLHttpRequest extends HttpRequestEventTarget {
 }
 
 @JS(r'XMLHttpRequest')
-external IXMLHttpRequest JXMLHttpRequest;
+external IXMLHttpRequest get JXMLHttpRequest;
+@JS(r'XMLHttpRequest')
+external set JXMLHttpRequest(IXMLHttpRequest value);
 
 @JS()
 @anonymous
@@ -22010,7 +23062,9 @@ class XMLHttpRequestEventTarget extends EventTarget {
 }
 
 @JS(r'XMLHttpRequestEventTarget')
-external IXMLHttpRequestEventTarget JXMLHttpRequestEventTarget;
+external IXMLHttpRequestEventTarget get JXMLHttpRequestEventTarget;
+@JS(r'XMLHttpRequestEventTarget')
+external set JXMLHttpRequestEventTarget(IXMLHttpRequestEventTarget value);
 
 @JS()
 @anonymous
@@ -22021,7 +23075,9 @@ class XMLHttpRequestUpload extends HttpRequestEventTarget {
 }
 
 @JS(r'XMLHttpRequestUpload')
-external IXMLHttpRequestUpload JXMLHttpRequestUpload;
+external IXMLHttpRequestUpload get JXMLHttpRequestUpload;
+@JS(r'XMLHttpRequestUpload')
+external set JXMLHttpRequestUpload(IXMLHttpRequestUpload value);
 
 @JS()
 @anonymous
@@ -22031,7 +23087,9 @@ class XMLSerializer {
 }
 
 @JS(r'XMLSerializer')
-external IXMLSerializer JXMLSerializer;
+external IXMLSerializer get JXMLSerializer;
+@JS(r'XMLSerializer')
+external set JXMLSerializer(IXMLSerializer value);
 
 @JS()
 @anonymous
@@ -22040,7 +23098,9 @@ class XPathEvaluator extends XPathEvaluatorBase {
 }
 
 @JS(r'XPathEvaluator')
-external IXPathEvaluator JXPathEvaluator;
+external IXPathEvaluator get JXPathEvaluator;
+@JS(r'XPathEvaluator')
+external set JXPathEvaluator(IXPathEvaluator value);
 
 @JS()
 @anonymous
@@ -22060,7 +23120,9 @@ class XPathExpression {
 }
 
 @JS(r'XPathExpression')
-external IXPathExpression JXPathExpression;
+external IXPathExpression get JXPathExpression;
+@JS(r'XPathExpression')
+external set JXPathExpression(IXPathExpression value);
 
 @JS()
 @anonymous
@@ -22106,7 +23168,9 @@ class XPathResult {
 }
 
 @JS(r'XPathResult')
-external IXPathResult JXPathResult;
+external IXPathResult get JXPathResult;
+@JS(r'XPathResult')
+external set JXPathResult(IXPathResult value);
 
 @JS()
 @anonymous
@@ -22123,7 +23187,9 @@ class XSLTProcessor {
 }
 
 @JS(r'XSLTProcessor')
-external IXSLTProcessor JXSLTProcessor;
+external IXSLTProcessor get JXSLTProcessor;
+@JS(r'XSLTProcessor')
+external set JXSLTProcessor(IXSLTProcessor value);
 
 @JS()
 @anonymous
@@ -22252,7 +23318,9 @@ class Console {
 }
 
 @JS(r'console')
-external Console console;
+external Console get console;
+@JS(r'console')
+external set console(Console value);
 @JS(r'CSS.escape')
 external String escape(String ident);
 @JS(r'CSS.supports')
@@ -22267,7 +23335,9 @@ class CompileError extends Error {
 }
 
 @JS(r'WebAssembly.CompileError')
-external ICompileError JCompileError;
+external ICompileError get JCompileError;
+@JS(r'WebAssembly.CompileError')
+external set JCompileError(ICompileError value);
 
 @JS()
 @anonymous
@@ -22281,7 +23351,9 @@ class Global {
 }
 
 @JS(r'WebAssembly.Global')
-external IGlobal JGlobal;
+external IGlobal get JGlobal;
+@JS(r'WebAssembly.Global')
+external set JGlobal(IGlobal value);
 
 @JS()
 @anonymous
@@ -22293,7 +23365,9 @@ class Instance {
 }
 
 @JS(r'WebAssembly.Instance')
-external IInstance JInstance;
+external IInstance get JInstance;
+@JS(r'WebAssembly.Instance')
+external set JInstance(IInstance value);
 
 @JS()
 @anonymous
@@ -22302,7 +23376,9 @@ class LinkError extends Error {
 }
 
 @JS(r'WebAssembly.LinkError')
-external ILinkError JLinkError;
+external ILinkError get JLinkError;
+@JS(r'WebAssembly.LinkError')
+external set JLinkError(ILinkError value);
 
 @JS()
 @anonymous
@@ -22315,7 +23391,9 @@ class Memory {
 }
 
 @JS(r'WebAssembly.Memory')
-external IMemory JMemory;
+external IMemory get JMemory;
+@JS(r'WebAssembly.Memory')
+external set JMemory(IMemory value);
 
 @JS()
 @anonymous
@@ -22324,7 +23402,9 @@ class Module {
 }
 
 @JS(r'WebAssembly.Module')
-external IModule JModule;
+external IModule get JModule;
+@JS(r'WebAssembly.Module')
+external set JModule(IModule value);
 
 @JS()
 @anonymous
@@ -22333,7 +23413,9 @@ class RuntimeError extends Error {
 }
 
 @JS(r'WebAssembly.RuntimeError')
-external IRuntimeError JRuntimeError;
+external IRuntimeError get JRuntimeError;
+@JS(r'WebAssembly.RuntimeError')
+external set JRuntimeError(IRuntimeError value);
 
 @JS()
 @anonymous
@@ -22348,7 +23430,9 @@ class Table {
 }
 
 @JS(r'WebAssembly.Table')
-external ITable JTable;
+external ITable get JTable;
+@JS(r'WebAssembly.Table')
+external set JTable(ITable value);
 
 @JS()
 @anonymous
@@ -23246,101 +24330,195 @@ class SVGElementTagNameMap {
 
 typedef ElementTagNameMap = dynamic;
 @JS(r'Audio')
-external IAudio JAudio;
+external IAudio get JAudio;
+@JS(r'Audio')
+external set JAudio(IAudio value);
 @JS(r'Image')
-external IImage JImage;
+external IImage get JImage;
+@JS(r'Image')
+external set JImage(IImage value);
 @JS(r'Option')
-external IOption JOption;
+external IOption get JOption;
+@JS(r'Option')
+external set JOption(IOption value);
 @JS(r'HTMLDocument')
-external Document JHTMLDocument;
+external Document get JHTMLDocument;
+@JS(r'HTMLDocument')
+external set JHTMLDocument(Document value);
 @JS(r'closed')
-external bool closed;
+external bool get closed;
+@JS(r'closed')
+external set closed(bool value);
 @JS(r'customElements')
-external CustomElementRegistry customElements;
+external CustomElementRegistry get customElements;
+@JS(r'customElements')
+external set customElements(CustomElementRegistry value);
 @JS(r'devicePixelRatio')
-external num devicePixelRatio;
+external num get devicePixelRatio;
+@JS(r'devicePixelRatio')
+external set devicePixelRatio(num value);
 @JS(r'document')
-external Document document;
+external Document get document;
+@JS(r'document')
+external set document(Document value);
 @JS(r'event')
-external Event? event;
+external Event? get event;
+@JS(r'event')
+external set event(Event? value);
 @JS(r'external')
-external External external;
+external External get external;
+@JS(r'external')
+external set external(External value);
 @JS(r'frameElement')
-external Element? frameElement;
+external Element? get frameElement;
+@JS(r'frameElement')
+external set frameElement(Element? value);
 @JS(r'frames')
-external WindowProxy frames;
+external WindowProxy get frames;
+@JS(r'frames')
+external set frames(WindowProxy value);
 @JS(r'history')
-external History history;
+external History get history;
+@JS(r'history')
+external set history(History value);
 @JS(r'innerHeight')
-external num innerHeight;
+external num get innerHeight;
+@JS(r'innerHeight')
+external set innerHeight(num value);
 @JS(r'innerWidth')
-external num innerWidth;
+external num get innerWidth;
+@JS(r'innerWidth')
+external set innerWidth(num value);
 @JS(r'length')
-external num length;
+external num get length;
+@JS(r'length')
+external set length(num value);
 @JS(r'location')
-external Location location;
+external Location get location;
+@JS(r'location')
+external set location(Location value);
 @JS(r'locationbar')
-external BarProp locationbar;
+external BarProp get locationbar;
+@JS(r'locationbar')
+external set locationbar(BarProp value);
 @JS(r'menubar')
-external BarProp menubar;
+external BarProp get menubar;
+@JS(r'menubar')
+external set menubar(BarProp value);
 @JS(r'name')
-external void name;
+external void get name;
 @JS(r'navigator')
-external Navigator navigator;
+external Navigator get navigator;
+@JS(r'navigator')
+external set navigator(Navigator value);
 @JS(r'ondevicemotion')
-external dynamic Function(DeviceMotionEvent ev)? ondevicemotion;
+external dynamic Function(DeviceMotionEvent ev)? get ondevicemotion;
+@JS(r'ondevicemotion')
+external set ondevicemotion(dynamic Function(DeviceMotionEvent ev)? value);
 @JS(r'ondeviceorientation')
-external dynamic Function(DeviceOrientationEvent ev)? ondeviceorientation;
+external dynamic Function(DeviceOrientationEvent ev)? get ondeviceorientation;
+@JS(r'ondeviceorientation')
+external set ondeviceorientation(dynamic Function(DeviceOrientationEvent ev)? value);
 @JS(r'onorientationchange')
-external dynamic Function(Event ev)? onorientationchange;
+external dynamic Function(Event ev)? get onorientationchange;
+@JS(r'onorientationchange')
+external set onorientationchange(dynamic Function(Event ev)? value);
 @JS(r'opener')
-external dynamic opener;
+external dynamic get opener;
+@JS(r'opener')
+external set opener(dynamic value);
 @JS(r'orientation')
-external num orientation;
+external num get orientation;
+@JS(r'orientation')
+external set orientation(num value);
 @JS(r'outerHeight')
-external num outerHeight;
+external num get outerHeight;
+@JS(r'outerHeight')
+external set outerHeight(num value);
 @JS(r'outerWidth')
-external num outerWidth;
+external num get outerWidth;
+@JS(r'outerWidth')
+external set outerWidth(num value);
 @JS(r'pageXOffset')
-external num pageXOffset;
+external num get pageXOffset;
+@JS(r'pageXOffset')
+external set pageXOffset(num value);
 @JS(r'pageYOffset')
-external num pageYOffset;
+external num get pageYOffset;
+@JS(r'pageYOffset')
+external set pageYOffset(num value);
 @JS(r'parent')
-external WindowProxy? parent;
+external WindowProxy? get parent;
+@JS(r'parent')
+external set parent(WindowProxy? value);
 @JS(r'personalbar')
-external BarProp personalbar;
+external BarProp get personalbar;
+@JS(r'personalbar')
+external set personalbar(BarProp value);
 @JS(r'screen')
-external Screen screen;
+external Screen get screen;
+@JS(r'screen')
+external set screen(Screen value);
 @JS(r'screenLeft')
-external num screenLeft;
+external num get screenLeft;
+@JS(r'screenLeft')
+external set screenLeft(num value);
 @JS(r'screenTop')
-external num screenTop;
+external num get screenTop;
+@JS(r'screenTop')
+external set screenTop(num value);
 @JS(r'screenX')
-external num screenX;
+external num get screenX;
+@JS(r'screenX')
+external set screenX(num value);
 @JS(r'screenY')
-external num screenY;
+external num get screenY;
+@JS(r'screenY')
+external set screenY(num value);
 @JS(r'scrollX')
-external num scrollX;
+external num get scrollX;
+@JS(r'scrollX')
+external set scrollX(num value);
 @JS(r'scrollY')
-external num scrollY;
+external num get scrollY;
+@JS(r'scrollY')
+external set scrollY(num value);
 @JS(r'scrollbars')
-external BarProp scrollbars;
+external BarProp get scrollbars;
+@JS(r'scrollbars')
+external set scrollbars(BarProp value);
 @JS(r'self')
-external dynamic self;
+external dynamic get self;
+@JS(r'self')
+external set self(dynamic value);
 @JS(r'speechSynthesis')
-external SpeechSynthesis speechSynthesis;
+external SpeechSynthesis get speechSynthesis;
+@JS(r'speechSynthesis')
+external set speechSynthesis(SpeechSynthesis value);
 @JS(r'status')
-external String status;
+external String get status;
+@JS(r'status')
+external set status(String value);
 @JS(r'statusbar')
-external BarProp statusbar;
+external BarProp get statusbar;
+@JS(r'statusbar')
+external set statusbar(BarProp value);
 @JS(r'toolbar')
-external BarProp toolbar;
+external BarProp get toolbar;
+@JS(r'toolbar')
+external set toolbar(BarProp value);
 @JS(r'top')
-external WindowProxy? top;
+external WindowProxy? get top;
+@JS(r'top')
+external set top(WindowProxy? value);
 @JS(r'visualViewport')
-external VisualViewport visualViewport;
+external VisualViewport get visualViewport;
+@JS(r'visualViewport')
+external set visualViewport(VisualViewport value);
 @JS(r'window')
-external dynamic window;
+external dynamic get window;
+@JS(r'window')
+external set window(dynamic value);
 @JS(r'alert')
 external void alert(dynamic message);
 @JS(r'blur')
@@ -23406,231 +24584,457 @@ external void cancelAnimationFrame(num handle);
 @JS(r'requestAnimationFrame')
 external num requestAnimationFrame(FrameRequestCallback callback);
 @JS(r'onabort')
-external dynamic Function(UIEvent ev)? onabort;
+external dynamic Function(UIEvent ev)? get onabort;
+@JS(r'onabort')
+external set onabort(dynamic Function(UIEvent ev)? value);
 @JS(r'onanimationcancel')
-external dynamic Function(AnimationEvent ev)? onanimationcancel;
+external dynamic Function(AnimationEvent ev)? get onanimationcancel;
+@JS(r'onanimationcancel')
+external set onanimationcancel(dynamic Function(AnimationEvent ev)? value);
 @JS(r'onanimationend')
-external dynamic Function(AnimationEvent ev)? onanimationend;
+external dynamic Function(AnimationEvent ev)? get onanimationend;
+@JS(r'onanimationend')
+external set onanimationend(dynamic Function(AnimationEvent ev)? value);
 @JS(r'onanimationiteration')
-external dynamic Function(AnimationEvent ev)? onanimationiteration;
+external dynamic Function(AnimationEvent ev)? get onanimationiteration;
+@JS(r'onanimationiteration')
+external set onanimationiteration(dynamic Function(AnimationEvent ev)? value);
 @JS(r'onanimationstart')
-external dynamic Function(AnimationEvent ev)? onanimationstart;
+external dynamic Function(AnimationEvent ev)? get onanimationstart;
+@JS(r'onanimationstart')
+external set onanimationstart(dynamic Function(AnimationEvent ev)? value);
 @JS(r'onauxclick')
-external dynamic Function(MouseEvent ev)? onauxclick;
+external dynamic Function(MouseEvent ev)? get onauxclick;
+@JS(r'onauxclick')
+external set onauxclick(dynamic Function(MouseEvent ev)? value);
 @JS(r'onblur')
-external dynamic Function(FocusEvent ev)? onblur;
+external dynamic Function(FocusEvent ev)? get onblur;
+@JS(r'onblur')
+external set onblur(dynamic Function(FocusEvent ev)? value);
 @JS(r'oncanplay')
-external dynamic Function(Event ev)? oncanplay;
+external dynamic Function(Event ev)? get oncanplay;
+@JS(r'oncanplay')
+external set oncanplay(dynamic Function(Event ev)? value);
 @JS(r'oncanplaythrough')
-external dynamic Function(Event ev)? oncanplaythrough;
+external dynamic Function(Event ev)? get oncanplaythrough;
+@JS(r'oncanplaythrough')
+external set oncanplaythrough(dynamic Function(Event ev)? value);
 @JS(r'onchange')
-external dynamic Function(Event ev)? onchange;
+external dynamic Function(Event ev)? get onchange;
+@JS(r'onchange')
+external set onchange(dynamic Function(Event ev)? value);
 @JS(r'onclick')
-external dynamic Function(MouseEvent ev)? onclick;
+external dynamic Function(MouseEvent ev)? get onclick;
+@JS(r'onclick')
+external set onclick(dynamic Function(MouseEvent ev)? value);
 @JS(r'onclose')
-external dynamic Function(Event ev)? onclose;
+external dynamic Function(Event ev)? get onclose;
+@JS(r'onclose')
+external set onclose(dynamic Function(Event ev)? value);
 @JS(r'oncontextmenu')
-external dynamic Function(MouseEvent ev)? oncontextmenu;
+external dynamic Function(MouseEvent ev)? get oncontextmenu;
+@JS(r'oncontextmenu')
+external set oncontextmenu(dynamic Function(MouseEvent ev)? value);
 @JS(r'oncuechange')
-external dynamic Function(Event ev)? oncuechange;
+external dynamic Function(Event ev)? get oncuechange;
+@JS(r'oncuechange')
+external set oncuechange(dynamic Function(Event ev)? value);
 @JS(r'ondblclick')
-external dynamic Function(MouseEvent ev)? ondblclick;
+external dynamic Function(MouseEvent ev)? get ondblclick;
+@JS(r'ondblclick')
+external set ondblclick(dynamic Function(MouseEvent ev)? value);
 @JS(r'ondrag')
-external dynamic Function(DragEvent ev)? ondrag;
+external dynamic Function(DragEvent ev)? get ondrag;
+@JS(r'ondrag')
+external set ondrag(dynamic Function(DragEvent ev)? value);
 @JS(r'ondragend')
-external dynamic Function(DragEvent ev)? ondragend;
+external dynamic Function(DragEvent ev)? get ondragend;
+@JS(r'ondragend')
+external set ondragend(dynamic Function(DragEvent ev)? value);
 @JS(r'ondragenter')
-external dynamic Function(DragEvent ev)? ondragenter;
+external dynamic Function(DragEvent ev)? get ondragenter;
+@JS(r'ondragenter')
+external set ondragenter(dynamic Function(DragEvent ev)? value);
 @JS(r'ondragleave')
-external dynamic Function(DragEvent ev)? ondragleave;
+external dynamic Function(DragEvent ev)? get ondragleave;
+@JS(r'ondragleave')
+external set ondragleave(dynamic Function(DragEvent ev)? value);
 @JS(r'ondragover')
-external dynamic Function(DragEvent ev)? ondragover;
+external dynamic Function(DragEvent ev)? get ondragover;
+@JS(r'ondragover')
+external set ondragover(dynamic Function(DragEvent ev)? value);
 @JS(r'ondragstart')
-external dynamic Function(DragEvent ev)? ondragstart;
+external dynamic Function(DragEvent ev)? get ondragstart;
+@JS(r'ondragstart')
+external set ondragstart(dynamic Function(DragEvent ev)? value);
 @JS(r'ondrop')
-external dynamic Function(DragEvent ev)? ondrop;
+external dynamic Function(DragEvent ev)? get ondrop;
+@JS(r'ondrop')
+external set ondrop(dynamic Function(DragEvent ev)? value);
 @JS(r'ondurationchange')
-external dynamic Function(Event ev)? ondurationchange;
+external dynamic Function(Event ev)? get ondurationchange;
+@JS(r'ondurationchange')
+external set ondurationchange(dynamic Function(Event ev)? value);
 @JS(r'onemptied')
-external dynamic Function(Event ev)? onemptied;
+external dynamic Function(Event ev)? get onemptied;
+@JS(r'onemptied')
+external set onemptied(dynamic Function(Event ev)? value);
 @JS(r'onended')
-external dynamic Function(Event ev)? onended;
+external dynamic Function(Event ev)? get onended;
+@JS(r'onended')
+external set onended(dynamic Function(Event ev)? value);
 @JS(r'onerror')
-external OnErrorEventHandler onerror;
+external OnErrorEventHandler get onerror;
+@JS(r'onerror')
+external set onerror(OnErrorEventHandler value);
 @JS(r'onfocus')
-external dynamic Function(FocusEvent ev)? onfocus;
+external dynamic Function(FocusEvent ev)? get onfocus;
+@JS(r'onfocus')
+external set onfocus(dynamic Function(FocusEvent ev)? value);
 @JS(r'onformdata')
-external dynamic Function(FormDataEvent ev)? onformdata;
+external dynamic Function(FormDataEvent ev)? get onformdata;
+@JS(r'onformdata')
+external set onformdata(dynamic Function(FormDataEvent ev)? value);
 @JS(r'ongotpointercapture')
-external dynamic Function(PointerEvent ev)? ongotpointercapture;
+external dynamic Function(PointerEvent ev)? get ongotpointercapture;
+@JS(r'ongotpointercapture')
+external set ongotpointercapture(dynamic Function(PointerEvent ev)? value);
 @JS(r'oninput')
-external dynamic Function(Event ev)? oninput;
+external dynamic Function(Event ev)? get oninput;
+@JS(r'oninput')
+external set oninput(dynamic Function(Event ev)? value);
 @JS(r'oninvalid')
-external dynamic Function(Event ev)? oninvalid;
+external dynamic Function(Event ev)? get oninvalid;
+@JS(r'oninvalid')
+external set oninvalid(dynamic Function(Event ev)? value);
 @JS(r'onkeydown')
-external dynamic Function(KeyboardEvent ev)? onkeydown;
+external dynamic Function(KeyboardEvent ev)? get onkeydown;
+@JS(r'onkeydown')
+external set onkeydown(dynamic Function(KeyboardEvent ev)? value);
 @JS(r'onkeypress')
-external dynamic Function(KeyboardEvent ev)? onkeypress;
+external dynamic Function(KeyboardEvent ev)? get onkeypress;
+@JS(r'onkeypress')
+external set onkeypress(dynamic Function(KeyboardEvent ev)? value);
 @JS(r'onkeyup')
-external dynamic Function(KeyboardEvent ev)? onkeyup;
+external dynamic Function(KeyboardEvent ev)? get onkeyup;
+@JS(r'onkeyup')
+external set onkeyup(dynamic Function(KeyboardEvent ev)? value);
 @JS(r'onload')
-external dynamic Function(Event ev)? onload;
+external dynamic Function(Event ev)? get onload;
+@JS(r'onload')
+external set onload(dynamic Function(Event ev)? value);
 @JS(r'onloadeddata')
-external dynamic Function(Event ev)? onloadeddata;
+external dynamic Function(Event ev)? get onloadeddata;
+@JS(r'onloadeddata')
+external set onloadeddata(dynamic Function(Event ev)? value);
 @JS(r'onloadedmetadata')
-external dynamic Function(Event ev)? onloadedmetadata;
+external dynamic Function(Event ev)? get onloadedmetadata;
+@JS(r'onloadedmetadata')
+external set onloadedmetadata(dynamic Function(Event ev)? value);
 @JS(r'onloadstart')
-external dynamic Function(Event ev)? onloadstart;
+external dynamic Function(Event ev)? get onloadstart;
+@JS(r'onloadstart')
+external set onloadstart(dynamic Function(Event ev)? value);
 @JS(r'onlostpointercapture')
-external dynamic Function(PointerEvent ev)? onlostpointercapture;
+external dynamic Function(PointerEvent ev)? get onlostpointercapture;
+@JS(r'onlostpointercapture')
+external set onlostpointercapture(dynamic Function(PointerEvent ev)? value);
 @JS(r'onmousedown')
-external dynamic Function(MouseEvent ev)? onmousedown;
+external dynamic Function(MouseEvent ev)? get onmousedown;
+@JS(r'onmousedown')
+external set onmousedown(dynamic Function(MouseEvent ev)? value);
 @JS(r'onmouseenter')
-external dynamic Function(MouseEvent ev)? onmouseenter;
+external dynamic Function(MouseEvent ev)? get onmouseenter;
+@JS(r'onmouseenter')
+external set onmouseenter(dynamic Function(MouseEvent ev)? value);
 @JS(r'onmouseleave')
-external dynamic Function(MouseEvent ev)? onmouseleave;
+external dynamic Function(MouseEvent ev)? get onmouseleave;
+@JS(r'onmouseleave')
+external set onmouseleave(dynamic Function(MouseEvent ev)? value);
 @JS(r'onmousemove')
-external dynamic Function(MouseEvent ev)? onmousemove;
+external dynamic Function(MouseEvent ev)? get onmousemove;
+@JS(r'onmousemove')
+external set onmousemove(dynamic Function(MouseEvent ev)? value);
 @JS(r'onmouseout')
-external dynamic Function(MouseEvent ev)? onmouseout;
+external dynamic Function(MouseEvent ev)? get onmouseout;
+@JS(r'onmouseout')
+external set onmouseout(dynamic Function(MouseEvent ev)? value);
 @JS(r'onmouseover')
-external dynamic Function(MouseEvent ev)? onmouseover;
+external dynamic Function(MouseEvent ev)? get onmouseover;
+@JS(r'onmouseover')
+external set onmouseover(dynamic Function(MouseEvent ev)? value);
 @JS(r'onmouseup')
-external dynamic Function(MouseEvent ev)? onmouseup;
+external dynamic Function(MouseEvent ev)? get onmouseup;
+@JS(r'onmouseup')
+external set onmouseup(dynamic Function(MouseEvent ev)? value);
 @JS(r'onpause')
-external dynamic Function(Event ev)? onpause;
+external dynamic Function(Event ev)? get onpause;
+@JS(r'onpause')
+external set onpause(dynamic Function(Event ev)? value);
 @JS(r'onplay')
-external dynamic Function(Event ev)? onplay;
+external dynamic Function(Event ev)? get onplay;
+@JS(r'onplay')
+external set onplay(dynamic Function(Event ev)? value);
 @JS(r'onplaying')
-external dynamic Function(Event ev)? onplaying;
+external dynamic Function(Event ev)? get onplaying;
+@JS(r'onplaying')
+external set onplaying(dynamic Function(Event ev)? value);
 @JS(r'onpointercancel')
-external dynamic Function(PointerEvent ev)? onpointercancel;
+external dynamic Function(PointerEvent ev)? get onpointercancel;
+@JS(r'onpointercancel')
+external set onpointercancel(dynamic Function(PointerEvent ev)? value);
 @JS(r'onpointerdown')
-external dynamic Function(PointerEvent ev)? onpointerdown;
+external dynamic Function(PointerEvent ev)? get onpointerdown;
+@JS(r'onpointerdown')
+external set onpointerdown(dynamic Function(PointerEvent ev)? value);
 @JS(r'onpointerenter')
-external dynamic Function(PointerEvent ev)? onpointerenter;
+external dynamic Function(PointerEvent ev)? get onpointerenter;
+@JS(r'onpointerenter')
+external set onpointerenter(dynamic Function(PointerEvent ev)? value);
 @JS(r'onpointerleave')
-external dynamic Function(PointerEvent ev)? onpointerleave;
+external dynamic Function(PointerEvent ev)? get onpointerleave;
+@JS(r'onpointerleave')
+external set onpointerleave(dynamic Function(PointerEvent ev)? value);
 @JS(r'onpointermove')
-external dynamic Function(PointerEvent ev)? onpointermove;
+external dynamic Function(PointerEvent ev)? get onpointermove;
+@JS(r'onpointermove')
+external set onpointermove(dynamic Function(PointerEvent ev)? value);
 @JS(r'onpointerout')
-external dynamic Function(PointerEvent ev)? onpointerout;
+external dynamic Function(PointerEvent ev)? get onpointerout;
+@JS(r'onpointerout')
+external set onpointerout(dynamic Function(PointerEvent ev)? value);
 @JS(r'onpointerover')
-external dynamic Function(PointerEvent ev)? onpointerover;
+external dynamic Function(PointerEvent ev)? get onpointerover;
+@JS(r'onpointerover')
+external set onpointerover(dynamic Function(PointerEvent ev)? value);
 @JS(r'onpointerup')
-external dynamic Function(PointerEvent ev)? onpointerup;
+external dynamic Function(PointerEvent ev)? get onpointerup;
+@JS(r'onpointerup')
+external set onpointerup(dynamic Function(PointerEvent ev)? value);
 @JS(r'onprogress')
-external dynamic Function(ProgressEvent ev)? onprogress;
+external dynamic Function(ProgressEvent ev)? get onprogress;
+@JS(r'onprogress')
+external set onprogress(dynamic Function(ProgressEvent ev)? value);
 @JS(r'onratechange')
-external dynamic Function(Event ev)? onratechange;
+external dynamic Function(Event ev)? get onratechange;
+@JS(r'onratechange')
+external set onratechange(dynamic Function(Event ev)? value);
 @JS(r'onreset')
-external dynamic Function(Event ev)? onreset;
+external dynamic Function(Event ev)? get onreset;
+@JS(r'onreset')
+external set onreset(dynamic Function(Event ev)? value);
 @JS(r'onresize')
-external dynamic Function(UIEvent ev)? onresize;
+external dynamic Function(UIEvent ev)? get onresize;
+@JS(r'onresize')
+external set onresize(dynamic Function(UIEvent ev)? value);
 @JS(r'onscroll')
-external dynamic Function(Event ev)? onscroll;
+external dynamic Function(Event ev)? get onscroll;
+@JS(r'onscroll')
+external set onscroll(dynamic Function(Event ev)? value);
 @JS(r'onseeked')
-external dynamic Function(Event ev)? onseeked;
+external dynamic Function(Event ev)? get onseeked;
+@JS(r'onseeked')
+external set onseeked(dynamic Function(Event ev)? value);
 @JS(r'onseeking')
-external dynamic Function(Event ev)? onseeking;
+external dynamic Function(Event ev)? get onseeking;
+@JS(r'onseeking')
+external set onseeking(dynamic Function(Event ev)? value);
 @JS(r'onselect')
-external dynamic Function(Event ev)? onselect;
+external dynamic Function(Event ev)? get onselect;
+@JS(r'onselect')
+external set onselect(dynamic Function(Event ev)? value);
 @JS(r'onselectionchange')
-external dynamic Function(Event ev)? onselectionchange;
+external dynamic Function(Event ev)? get onselectionchange;
+@JS(r'onselectionchange')
+external set onselectionchange(dynamic Function(Event ev)? value);
 @JS(r'onselectstart')
-external dynamic Function(Event ev)? onselectstart;
+external dynamic Function(Event ev)? get onselectstart;
+@JS(r'onselectstart')
+external set onselectstart(dynamic Function(Event ev)? value);
 @JS(r'onstalled')
-external dynamic Function(Event ev)? onstalled;
+external dynamic Function(Event ev)? get onstalled;
+@JS(r'onstalled')
+external set onstalled(dynamic Function(Event ev)? value);
 @JS(r'onsubmit')
-external dynamic Function(Event ev)? onsubmit;
+external dynamic Function(Event ev)? get onsubmit;
+@JS(r'onsubmit')
+external set onsubmit(dynamic Function(Event ev)? value);
 @JS(r'onsuspend')
-external dynamic Function(Event ev)? onsuspend;
+external dynamic Function(Event ev)? get onsuspend;
+@JS(r'onsuspend')
+external set onsuspend(dynamic Function(Event ev)? value);
 @JS(r'ontimeupdate')
-external dynamic Function(Event ev)? ontimeupdate;
+external dynamic Function(Event ev)? get ontimeupdate;
+@JS(r'ontimeupdate')
+external set ontimeupdate(dynamic Function(Event ev)? value);
 @JS(r'ontoggle')
-external dynamic Function(Event ev)? ontoggle;
+external dynamic Function(Event ev)? get ontoggle;
+@JS(r'ontoggle')
+external set ontoggle(dynamic Function(Event ev)? value);
 @JS(r'ontouchcancel')
-external dynamic Function(TouchEvent ev)? ontouchcancel;
+external dynamic Function(TouchEvent ev)? get ontouchcancel;
+@JS(r'ontouchcancel')
+external set ontouchcancel(dynamic Function(TouchEvent ev)? value);
 @JS(r'ontouchend')
-external dynamic Function(TouchEvent ev)? ontouchend;
+external dynamic Function(TouchEvent ev)? get ontouchend;
+@JS(r'ontouchend')
+external set ontouchend(dynamic Function(TouchEvent ev)? value);
 @JS(r'ontouchmove')
-external dynamic Function(TouchEvent ev)? ontouchmove;
+external dynamic Function(TouchEvent ev)? get ontouchmove;
+@JS(r'ontouchmove')
+external set ontouchmove(dynamic Function(TouchEvent ev)? value);
 @JS(r'ontouchstart')
-external dynamic Function(TouchEvent ev)? ontouchstart;
+external dynamic Function(TouchEvent ev)? get ontouchstart;
+@JS(r'ontouchstart')
+external set ontouchstart(dynamic Function(TouchEvent ev)? value);
 @JS(r'ontransitioncancel')
-external dynamic Function(TransitionEvent ev)? ontransitioncancel;
+external dynamic Function(TransitionEvent ev)? get ontransitioncancel;
+@JS(r'ontransitioncancel')
+external set ontransitioncancel(dynamic Function(TransitionEvent ev)? value);
 @JS(r'ontransitionend')
-external dynamic Function(TransitionEvent ev)? ontransitionend;
+external dynamic Function(TransitionEvent ev)? get ontransitionend;
+@JS(r'ontransitionend')
+external set ontransitionend(dynamic Function(TransitionEvent ev)? value);
 @JS(r'ontransitionrun')
-external dynamic Function(TransitionEvent ev)? ontransitionrun;
+external dynamic Function(TransitionEvent ev)? get ontransitionrun;
+@JS(r'ontransitionrun')
+external set ontransitionrun(dynamic Function(TransitionEvent ev)? value);
 @JS(r'ontransitionstart')
-external dynamic Function(TransitionEvent ev)? ontransitionstart;
+external dynamic Function(TransitionEvent ev)? get ontransitionstart;
+@JS(r'ontransitionstart')
+external set ontransitionstart(dynamic Function(TransitionEvent ev)? value);
 @JS(r'onvolumechange')
-external dynamic Function(Event ev)? onvolumechange;
+external dynamic Function(Event ev)? get onvolumechange;
+@JS(r'onvolumechange')
+external set onvolumechange(dynamic Function(Event ev)? value);
 @JS(r'onwaiting')
-external dynamic Function(Event ev)? onwaiting;
+external dynamic Function(Event ev)? get onwaiting;
+@JS(r'onwaiting')
+external set onwaiting(dynamic Function(Event ev)? value);
 @JS(r'onwebkitanimationend')
-external dynamic Function(Event ev)? onwebkitanimationend;
+external dynamic Function(Event ev)? get onwebkitanimationend;
+@JS(r'onwebkitanimationend')
+external set onwebkitanimationend(dynamic Function(Event ev)? value);
 @JS(r'onwebkitanimationiteration')
-external dynamic Function(Event ev)? onwebkitanimationiteration;
+external dynamic Function(Event ev)? get onwebkitanimationiteration;
+@JS(r'onwebkitanimationiteration')
+external set onwebkitanimationiteration(dynamic Function(Event ev)? value);
 @JS(r'onwebkitanimationstart')
-external dynamic Function(Event ev)? onwebkitanimationstart;
+external dynamic Function(Event ev)? get onwebkitanimationstart;
+@JS(r'onwebkitanimationstart')
+external set onwebkitanimationstart(dynamic Function(Event ev)? value);
 @JS(r'onwebkittransitionend')
-external dynamic Function(Event ev)? onwebkittransitionend;
+external dynamic Function(Event ev)? get onwebkittransitionend;
+@JS(r'onwebkittransitionend')
+external set onwebkittransitionend(dynamic Function(Event ev)? value);
 @JS(r'onwheel')
-external dynamic Function(WheelEvent ev)? onwheel;
+external dynamic Function(WheelEvent ev)? get onwheel;
+@JS(r'onwheel')
+external set onwheel(dynamic Function(WheelEvent ev)? value);
 @JS(r'onafterprint')
-external dynamic Function(Event ev)? onafterprint;
+external dynamic Function(Event ev)? get onafterprint;
+@JS(r'onafterprint')
+external set onafterprint(dynamic Function(Event ev)? value);
 @JS(r'onbeforeprint')
-external dynamic Function(Event ev)? onbeforeprint;
+external dynamic Function(Event ev)? get onbeforeprint;
+@JS(r'onbeforeprint')
+external set onbeforeprint(dynamic Function(Event ev)? value);
 @JS(r'onbeforeunload')
-external dynamic Function(BeforeUnloadEvent ev)? onbeforeunload;
+external dynamic Function(BeforeUnloadEvent ev)? get onbeforeunload;
+@JS(r'onbeforeunload')
+external set onbeforeunload(dynamic Function(BeforeUnloadEvent ev)? value);
 @JS(r'ongamepadconnected')
-external dynamic Function(Event ev)? ongamepadconnected;
+external dynamic Function(Event ev)? get ongamepadconnected;
+@JS(r'ongamepadconnected')
+external set ongamepadconnected(dynamic Function(Event ev)? value);
 @JS(r'ongamepaddisconnected')
-external dynamic Function(Event ev)? ongamepaddisconnected;
+external dynamic Function(Event ev)? get ongamepaddisconnected;
+@JS(r'ongamepaddisconnected')
+external set ongamepaddisconnected(dynamic Function(Event ev)? value);
 @JS(r'onhashchange')
-external dynamic Function(Event ev)? onhashchange;
+external dynamic Function(Event ev)? get onhashchange;
+@JS(r'onhashchange')
+external set onhashchange(dynamic Function(Event ev)? value);
 @JS(r'onlanguagechange')
-external dynamic Function(Event ev)? onlanguagechange;
+external dynamic Function(Event ev)? get onlanguagechange;
+@JS(r'onlanguagechange')
+external set onlanguagechange(dynamic Function(Event ev)? value);
 @JS(r'onmessage')
-external dynamic Function(MessageEvent ev)? onmessage;
+external dynamic Function(MessageEvent ev)? get onmessage;
+@JS(r'onmessage')
+external set onmessage(dynamic Function(MessageEvent ev)? value);
 @JS(r'onmessageerror')
-external dynamic Function(MessageEvent ev)? onmessageerror;
+external dynamic Function(MessageEvent ev)? get onmessageerror;
+@JS(r'onmessageerror')
+external set onmessageerror(dynamic Function(MessageEvent ev)? value);
 @JS(r'onoffline')
-external dynamic Function(Event ev)? onoffline;
+external dynamic Function(Event ev)? get onoffline;
+@JS(r'onoffline')
+external set onoffline(dynamic Function(Event ev)? value);
 @JS(r'ononline')
-external dynamic Function(Event ev)? ononline;
+external dynamic Function(Event ev)? get ononline;
+@JS(r'ononline')
+external set ononline(dynamic Function(Event ev)? value);
 @JS(r'onpagehide')
-external dynamic Function(PageTransitionEvent ev)? onpagehide;
+external dynamic Function(PageTransitionEvent ev)? get onpagehide;
+@JS(r'onpagehide')
+external set onpagehide(dynamic Function(PageTransitionEvent ev)? value);
 @JS(r'onpageshow')
-external dynamic Function(PageTransitionEvent ev)? onpageshow;
+external dynamic Function(PageTransitionEvent ev)? get onpageshow;
+@JS(r'onpageshow')
+external set onpageshow(dynamic Function(PageTransitionEvent ev)? value);
 @JS(r'onpopstate')
-external dynamic Function(PopStateEvent ev)? onpopstate;
+external dynamic Function(PopStateEvent ev)? get onpopstate;
+@JS(r'onpopstate')
+external set onpopstate(dynamic Function(PopStateEvent ev)? value);
 @JS(r'onrejectionhandled')
-external dynamic Function(PromiseRejectionEvent ev)? onrejectionhandled;
+external dynamic Function(PromiseRejectionEvent ev)? get onrejectionhandled;
+@JS(r'onrejectionhandled')
+external set onrejectionhandled(dynamic Function(PromiseRejectionEvent ev)? value);
 @JS(r'onstorage')
-external dynamic Function(StorageEvent ev)? onstorage;
+external dynamic Function(StorageEvent ev)? get onstorage;
+@JS(r'onstorage')
+external set onstorage(dynamic Function(StorageEvent ev)? value);
 @JS(r'onunhandledrejection')
-external dynamic Function(PromiseRejectionEvent ev)? onunhandledrejection;
+external dynamic Function(PromiseRejectionEvent ev)? get onunhandledrejection;
+@JS(r'onunhandledrejection')
+external set onunhandledrejection(dynamic Function(PromiseRejectionEvent ev)? value);
 @JS(r'onunload')
-external dynamic Function(Event ev)? onunload;
+external dynamic Function(Event ev)? get onunload;
+@JS(r'onunload')
+external set onunload(dynamic Function(Event ev)? value);
 @JS(r'localStorage')
-external Storage localStorage;
+external Storage get localStorage;
+@JS(r'localStorage')
+external set localStorage(Storage value);
 @JS(r'caches')
-external CacheStorage caches;
+external CacheStorage get caches;
+@JS(r'caches')
+external set caches(CacheStorage value);
 @JS(r'crossOriginIsolated')
-external bool crossOriginIsolated;
+external bool get crossOriginIsolated;
+@JS(r'crossOriginIsolated')
+external set crossOriginIsolated(bool value);
 @JS(r'crypto')
-external Crypto crypto;
+external Crypto get crypto;
+@JS(r'crypto')
+external set crypto(Crypto value);
 @JS(r'indexedDB')
-external IdbFactory indexedDB;
+external IdbFactory get indexedDB;
+@JS(r'indexedDB')
+external set indexedDB(IdbFactory value);
 @JS(r'isSecureContext')
-external bool isSecureContext;
+external bool get isSecureContext;
+@JS(r'isSecureContext')
+external set isSecureContext(bool value);
 @JS(r'origin')
-external String origin;
+external String get origin;
+@JS(r'origin')
+external set origin(String value);
 @JS(r'performance')
-external Performance performance;
+external Performance get performance;
+@JS(r'performance')
+external set performance(Performance value);
 @JS(r'atob')
 external String atob(String data);
 @JS(r'btoa')
@@ -23677,7 +25081,9 @@ external num setTimeout(
   dynamic arguments9,
 ]);
 @JS(r'sessionStorage')
-external Storage sessionStorage;
+external Storage get sessionStorage;
+@JS(r'sessionStorage')
+external set sessionStorage(Storage value);
 @JS(r'addEventListener')
 external void addEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
 @JS(r'addEventListener')

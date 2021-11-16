@@ -31,13 +31,18 @@ class Config {
   /// within the file.
   final bool? dynamicUndefs;
 
+  /// Polyfill overloads by renaming them.
   final bool? renameOverloads;
+
+  /// Generate imports for web types.
+  final bool? imports;
 
   Config({
     required this.inputs,
     this.logSpec,
     this.dynamicUndefs,
     this.renameOverloads,
+    this.imports,
   });
 }
 
@@ -122,6 +127,7 @@ class DartJsLibGenImpl extends DartJsLibGen {
     wireObj.log_spec = _api2wire_opt_String(apiObj.logSpec);
     wireObj.dynamic_undefs = _api2wire_opt_box_autoadd_bool(apiObj.dynamicUndefs);
     wireObj.rename_overloads = _api2wire_opt_box_autoadd_bool(apiObj.renameOverloads);
+    wireObj.imports = _api2wire_opt_box_autoadd_bool(apiObj.imports);
   }
 }
 
@@ -275,6 +281,8 @@ class wire_Config extends ffi.Struct {
   external ffi.Pointer<ffi.Uint8> dynamic_undefs;
 
   external ffi.Pointer<ffi.Uint8> rename_overloads;
+
+  external ffi.Pointer<ffi.Uint8> imports;
 }
 
 typedef DartPostCObjectFnType = ffi.Pointer<ffi.NativeFunction<ffi.Uint8 Function(DartPort, ffi.Pointer<ffi.Void>)>>;

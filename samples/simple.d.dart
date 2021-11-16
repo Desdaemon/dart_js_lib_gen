@@ -10,10 +10,10 @@ class Example<T> {
   external static String readonlyStr;
   external static void staticFoo();
   external static bool staticGetter();
-  external static dynamic staticSetter(bool _);
+  external static staticSetter(bool _);
   external T property;
   external bool getter();
-  external dynamic setter(bool _);
+  external setter(bool _);
   external factory Example(
     num _one,
     String _two,

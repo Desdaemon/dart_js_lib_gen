@@ -15,12 +15,12 @@ final path = Platform.isWindows
 
 final mode = Platform.environment['ENV'] ?? 'debug';
 final libPath = Platform.environment['LIBRARY'] ?? p.join('..', path);
+final dylibPath = p.join(p.dirname(Platform.script.path), libPath);
+final lib = DynamicLibrary.open(dylibPath);
+final api = DartJsLibGen(lib);
 
 Future<void> main(List<String> arguments) async {
-  final dylibPath = p.join(p.dirname(Platform.script.path), libPath);
-  // stderr.writeln('Finding dylib at $dylibPath');
-  final lib = DynamicLibrary.open(dylibPath);
-  final api = DartJsLibGen(lib);
+  // Does not work on Windows.
   final columns =
       await Process.run('tput', const ['cols']).then((res) => int.tryParse(res.stdout) ?? 80).catchError((_) => 80);
   final parser = ArgParser(usageLineLength: columns)
@@ -34,8 +34,9 @@ If --no-write is specified, does not output anything.
     ..addFlag('silent', abbr: 's', help: 'Silences all logging. Overrides --log if defined.', negatable: false)
     ..addFlag('skip-formatting',
         help: 'Skips formatting the code, especially for longer files where it may be expensive.')
-    ..addFlag('dynamic-undefs', help: 'Generate opaque typedefs for referenced undeclared types.')
+    ..addFlag('dynamic-undefs', help: 'Generate opaque typedefs for undeclared types.')
     ..addFlag('rename-overloads', help: 'Polyfill function overloads by renaming the overloads.')
+    ..addFlag('imports', help: "Generate imports for web types from Dart's standard library.", defaultsTo: true)
     ..addOption('prefix', help: 'Prefix of the output files.')
     ..addOption('suffix', help: 'Suffix of the output files.')
     ..addOption('line-length', abbr: 'l', defaultsTo: '120')
@@ -47,17 +48,18 @@ If --no-write is specified, does not output anything.
     ..addOption('out-dir',
         abbr: 'o',
         aliases: const ['destination'],
-        help: 'Configure output directory, defaults to the same parent of each file.')
+        help: 'Configure output directory, defaults to the parent of each file.')
     ..addFlag('help', abbr: 'h', aliases: const ['?'], help: 'Displays this help message.', negatable: false);
 
   final args = parser.parse(arguments);
 
   final bool? write = args['write'];
-  final bool? renameOverloads = args['rename-overloads'];
+  final bool renameOverloads = args['rename-overloads'];
   final bool format = !args['skip-formatting'];
   final bool help = args['help'];
   final bool silent = args['silent'];
   final bool dynamicUndefs = args['dynamic-undefs'];
+  final bool imports = args['imports'];
   final String? outDir = args['out-dir'];
   if (outDir != null) {
     final dir = Directory(outDir);
@@ -95,6 +97,7 @@ If --no-write is specified, does not output anything.
     logSpec: log,
     dynamicUndefs: dynamicUndefs,
     renameOverloads: renameOverloads,
+    imports: imports,
   );
   stderr.writeln("Parsing ${rest.length} modules.");
 

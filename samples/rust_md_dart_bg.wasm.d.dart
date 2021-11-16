@@ -6,7 +6,7 @@ import 'package:js/js.dart';
 import "lib.dom.d.dart";
 
 @JS(r'memory')
-external Memory memory;
+external Memory get memory;
 @JS(r'parse')
 external num parse(num a, num b);
 @JS(r'__wbindgen_malloc')
