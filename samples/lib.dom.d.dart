@@ -10,6 +10,7 @@ import "dart:svg";
 import "dart:typed_data";
 import "dart:web_audio";
 import "dart:web_gl";
+import "lib.dom.d.dart";
 import "lib.es5.d.dart";
 
 @JS()

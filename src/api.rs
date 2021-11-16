@@ -5,6 +5,7 @@ use log::debug;
 use std::collections::HashMap;
 use std::path::Path;
 use std::rc::Rc;
+use swc_ecma_parser::TsConfig;
 
 use swc_common::{
     errors::{ColorConfig, Handler},
@@ -94,7 +95,10 @@ fn parse_modules(config: Config) -> HashMap<String, (Rc<SourceFile>, Module)> {
             .load_file(Path::new(&input))
             .unwrap_or_else(|_| panic!("failed to load file \"{:?}\"", input));
         let lexer = Lexer::new(
-            Syntax::Typescript(Default::default()),
+            Syntax::Typescript(TsConfig {
+                dts: true,
+                ..Default::default()
+            }),
             Default::default(),
             StringInput::from(&*fm),
             None,
