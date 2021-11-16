@@ -134,7 +134,9 @@ pub fn visit_program(
 import 'package:js/js.dart';",
         library_name
     );
-    for imp in t.imports {
+    let mut imports = t.imports.into_iter().collect::<Vec<_>>();
+    imports.sort();
+    for imp in imports {
         header.push_str("import \"");
         header.push_str(&imp);
         header.push_str("\";");

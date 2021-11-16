@@ -3,14 +3,14 @@ library samples.lib.dom.d.ts;
 
 // ignore_for_file: non_constant_identifier_names, private_optional_parameter, unused_element
 import 'package:js/js.dart';
-import "dart:indexed_db";
-import "dart:web_gl";
-import "dart:svg";
-import "lib.es5.d.dart";
-import "dart:typed_data";
 import "dart:html";
-import "dart:web_audio";
+import "dart:indexed_db";
 import "dart:math";
+import "dart:svg";
+import "dart:typed_data";
+import "dart:web_audio";
+import "dart:web_gl";
+import "lib.es5.d.dart";
 
 @JS()
 @anonymous

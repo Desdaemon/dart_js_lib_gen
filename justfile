@@ -23,7 +23,7 @@ build-release:
 	cp target/release/{{dylib}} ./
 
 run +args: build
-	dart bin/dart_js_lib_gen.dart {{args}}
+	dart run dart_js_lib_gen bin/dart_js_lib_gen.dart {{args}}
 
 build-samples: build
-	dart bin/dart_js_lib_gen.dart -sw --rename-overloads --dynamic-undefs samples/*.ts
+	dart run dart_js_lib_gen -sw --rename-overloads --dynamic-undefs samples/*.ts

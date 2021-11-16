@@ -698,7 +698,8 @@ define_atom_store!(DART_LIBRARIES_FOR_BROWSER_TYPES,
   "ReadonlyMap": "lib.es2015.collection.d.dart",
   "ReadonlySet": "lib.es2015.collection.d.dart",
   "WeakMap": "lib.es2015.collection.d.dart",
-  "WeakSet": "lib.es2015.collection.d.dart"
+  "WeakSet": "lib.es2015.collection.d.dart",
+  "Memory": "lib.dom.d.dart"
 );
 
 define_atom_store!(STDLIB_TYPE_REPLACEMENTS,

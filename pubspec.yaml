@@ -6,8 +6,8 @@ repository: https://github.com/Desdaemon/dart_js_lib_gen
 environment:
   sdk: '>=2.14.0 <3.0.0'
 
-# dependencies:
-#   path: ^1.8.0
+bin:
+  dart_js_lib_gen: main
 
 dev_dependencies:
   lints: ^1.0.0

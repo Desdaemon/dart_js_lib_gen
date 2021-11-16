@@ -3,11 +3,11 @@ library samples.lib.webworker.d.ts;
 
 // ignore_for_file: non_constant_identifier_names, private_optional_parameter, unused_element
 import 'package:js/js.dart';
+import "dart:html";
+import "dart:indexed_db";
 import "dart:typed_data";
 import "dart:web_gl";
 import "lib.es5.d.dart";
-import "dart:html";
-import "dart:indexed_db";
 
 @JS()
 @anonymous
