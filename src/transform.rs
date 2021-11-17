@@ -1,21 +1,23 @@
-use std::ops::Range;
-use std::rc::Rc;
+use crate::api::Report;
+use crate::api::Source;
 use std::borrow::Cow;
+use std::ops::Range;
+use std::sync::Arc;
 
 use ahash::{AHashMap, AHashSet};
-use ariadne::{Color, Fmt, Label, ReportKind, Source};
+use ariadne::{Color, Fmt, Label, ReportKind};
 use log::log_enabled;
 use log::{debug, error, info, warn, Level};
 use swc_common::{BytePos, SourceFile, Span};
 use swc_ecma_ast::*;
 
+use crate::api::Message;
 use crate::atoms::replacement_for;
 
 #[cfg(feature = "alloc_counter")]
 #[global_allocator]
 static A: alloc_counter::AllocCounterSystem = alloc_counter::AllocCounterSystem;
 
-type Report = ariadne::Report<(String, Range<usize>)>;
 /// Ident -> (# of parameters, span of original declaration)
 type TypeResolutionMap = AHashMap<String, (usize, Range<usize>)>;
 
@@ -35,13 +37,14 @@ struct Transformer {
     /// The span of the parent element.
     span: Range<usize>,
     /// Used by ariadne for reporting.
-    source: (String, Source),
+    source: Source,
     warnings: u32,
     errors: u32,
-    file: Rc<SourceFile>,
+    file: Arc<SourceFile>,
     allocs: usize,
     rename_overloads: bool,
     imports: Option<AHashSet<&'static str>>,
+    messages: Vec<Message>,
 }
 
 struct Class {
@@ -69,13 +72,13 @@ fn generate_type_param(count: usize) -> impl Iterator<Item = char> {
 
 pub fn visit_program(
     module: &Module,
-    file: Rc<SourceFile>,
+    file: Arc<SourceFile>,
     library_name: &str,
     size_hint: Option<usize>,
     gen_undecl_typedef: bool,
     rename_overloads: bool,
     imports: bool,
-) -> String {
+) -> (String, Vec<Message>, Source) {
     let buf = match size_hint {
         Some(size) => String::with_capacity(size),
         None => String::new(),
@@ -84,10 +87,11 @@ pub fn visit_program(
     let mut t = Transformer {
         path: vec![],
         bufs: vec![buf],
+        messages: vec![],
         class: None,
         current_ident: None,
         span: 0..0,
-        source: (file_path.to_string(), Source::from(&*file.src)),
+        source: (file_path.to_string(), ariadne::Source::from(&*file.src)),
         warnings: 0,
         errors: 0,
         file,
@@ -139,14 +143,17 @@ pub fn visit_program(
 import 'package:js/js.dart';",
         library_name
     );
-    let imports = t.imports.map(|x| {
-        let mut x = x.into_iter().collect::<Vec<_>>();
-        x.sort();
-        x
-    }).unwrap_or_else(Vec::new);
+    let imports = t
+        .imports
+        .map(|x| {
+            let mut x = x.into_iter().collect::<Vec<_>>();
+            x.sort_unstable();
+            x
+        })
+        .unwrap_or_else(Vec::new);
     for imp in imports {
         header.push_str("import \"");
-        header.push_str(&imp);
+        header.push_str(imp);
         header.push_str("\";");
     }
     if t.errors != 0 || t.warnings != 0 {
@@ -169,7 +176,7 @@ import 'package:js/js.dart';",
         (buf.len() as f64) / (buf.capacity() as f64),
     );
     header.push_str(&buf);
-    header
+    (header, t.messages, t.source)
 }
 
 impl Transformer {
@@ -235,23 +242,25 @@ impl Transformer {
             self.warnings += 1;
             if log_enabled!(Level::Warn) {
                 let (path, _) = &self.source;
-                Report::build(ReportKind::Warning, path, span.start)
+                let report = Report::build(ReportKind::Warning, path, span.start)
                     .with_message("Invalid character in identifier")
                     .with_label(
                         Label::new((path.clone(), span))
                             .with_message("Rename this identifier".fg(Color::Yellow))
                             .with_color(Color::Yellow),
                     )
-                    .finish()
-                    .eprint(&mut self.source)
-                    .ok();
+                    .finish();
+                self.messages.push(Message {
+                    report,
+                    kind: ReportKind::Warning,
+                });
             }
             None
         } else if FORBIDDEN_IDENTS.contains(&id) {
             self.warnings += 1;
             if log_enabled!(Level::Warn) {
                 let (path, _) = &self.source;
-                Report::build(ReportKind::Warning, path, span.start)
+                let report = Report::build(ReportKind::Warning, path, span.start)
                     .with_message("Dart reserved identifier")
                     .with_label(
                         Label::new((path.clone(), span))
@@ -266,9 +275,11 @@ impl Transformer {
                             )
                             .with_color(Color::Blue),
                     )
-                    .finish()
-                    .eprint(&mut self.source)
-                    .ok();
+                    .finish();
+                self.messages.push(Message {
+                    report,
+                    kind: ReportKind::Warning,
+                });
             }
             None
         } else {
@@ -410,24 +421,32 @@ impl Transformer {
                     let (path, _) = &self.source;
                     self.warnings += 1;
                     if log_enabled!(Level::Warn) {
-                        Report::build(ReportKind::Warning, path, self.char_offset(call.span.lo))
-                            .with_message("Unhandled call signature")
-                            .with_label(
-                                Label::new((path.clone(), self.range_of(call.span)))
-                                    .with_message("This call signature is not handled".fg(Color::Yellow))
-                                    .with_color(Color::Yellow),
-                            )
-                            .with_label(
-                                Label::new((path.clone(), self.span.clone()))
-                                    .with_message(
-                                        "This interface declares a call signature which is unhandled"
-                                            .fg(Color::Blue),
-                                    )
-                                    .with_color(Color::Blue),
-                            )
-                            .finish()
-                            .eprint(&mut self.source)
-                            .ok();
+                        let report = Report::build(
+                            ReportKind::Warning,
+                            path,
+                            self.char_offset(call.span.lo),
+                        )
+                        .with_message("Unhandled call signature")
+                        .with_label(
+                            Label::new((path.clone(), self.range_of(call.span)))
+                                .with_message(
+                                    "This call signature is not handled".fg(Color::Yellow),
+                                )
+                                .with_color(Color::Yellow),
+                        )
+                        .with_label(
+                            Label::new((path.clone(), self.span.clone()))
+                                .with_message(
+                                    "This interface declares a call signature which is unhandled"
+                                        .fg(Color::Blue),
+                                )
+                                .with_color(Color::Blue),
+                        )
+                        .finish();
+                        self.messages.push(Message {
+                            report,
+                            kind: ReportKind::Warning,
+                        });
                     }
                 }
             }
@@ -482,16 +501,19 @@ impl Transformer {
             self.errors += 1;
             if log_enabled!(Level::Error) {
                 let (path, _) = &self.source;
-                Report::build(ReportKind::Error, path, self.char_offset(decl.id.span.lo))
-                    .with_message("Forbidden interface name")
-                    .with_label(
-                        Label::new((path.clone(), self.range_of(decl.id.span)))
-                            .with_message("Rename this interface".fg(Color::Red))
-                            .with_color(Color::Red),
-                    )
-                    .finish()
-                    .eprint(&mut self.source)
-                    .ok();
+                let report =
+                    Report::build(ReportKind::Error, path, self.char_offset(decl.id.span.lo))
+                        .with_message("Forbidden interface name")
+                        .with_label(
+                            Label::new((path.clone(), self.range_of(decl.id.span)))
+                                .with_message("Rename this interface".fg(Color::Red))
+                                .with_color(Color::Red),
+                        )
+                        .finish();
+                self.messages.push(Message {
+                    report,
+                    kind: ReportKind::Error,
+                });
             }
             return;
         }
@@ -552,7 +574,7 @@ impl Transformer {
                 let (path, _) = &self.source;
                 let first_span = self.resolved_funcs.get(id).unwrap();
                 let span = decl.function.span;
-                Report::build(ReportKind::Warning, path, self.char_offset(span.lo))
+                let report = Report::build(ReportKind::Warning, path, self.char_offset(span.lo))
                     .with_message("Function overload ignored")
                     .with_label(
                         Label::new((path.clone(), self.range_of(span)))
@@ -565,9 +587,11 @@ impl Transformer {
                             .with_color(Color::Blue),
                     )
                     .with_note("Dart does not support function overloads.")
-                    .finish()
-                    .eprint(&mut self.source)
-                    .ok();
+                    .finish();
+                self.messages.push(Message {
+                    report,
+                    kind: ReportKind::Warning,
+                });
             }
             return;
         }
@@ -641,18 +665,14 @@ impl Transformer {
         if let Some(ns) = &module.body {
             if !module.global {
                 match &module.id {
-                    TsModuleName::Ident(ident) => {
-                        self.path.push(String::from(&ident.sym as &str))
-                    }
+                    TsModuleName::Ident(ident) => self.path.push(String::from(&ident.sym as &str)),
                     TsModuleName::Str(string) => {
                         self.path.push(String::from(&string.value as &str))
                     }
                 }
             }
             match ns {
-                TsNamespaceBody::TsModuleBlock(blk) => {
-                    self.visit_module_items(&blk.body)
-                }
+                TsNamespaceBody::TsModuleBlock(blk) => self.visit_module_items(&blk.body),
                 TsNamespaceBody::TsNamespaceDecl(_) => todo!(),
             }
             if !module.global {
@@ -863,7 +883,7 @@ impl Transformer {
         let (path, _) = &self.source;
         let first_decl_message = first_decl_message.unwrap_or("The type was first declared here.");
         let message = format!("This type was declared with {} parameter(s), but a previous declaration has {} parameter(s).", count, old);
-        Report::build(ReportKind::Error, path, range.start)
+        let report = Report::build(ReportKind::Error, path, range.start)
             .with_message("Type parameter length mismatch")
             .with_label(
                 Label::new((path.clone(), range))
@@ -876,9 +896,11 @@ impl Transformer {
                     .with_color(Color::Blue),
             )
             .with_note("Dart does not support default type parameters, so all declarations of the same type must have the same number of arguments.")
-            .finish()
-            .eprint(&mut self.source)
-            .ok();
+            .finish();
+        self.messages.push(Message {
+            report,
+            kind: ReportKind::Error,
+        });
     }
 
     fn visit_entity_name(&mut self, name: &TsEntityName, param_count: Option<usize>) {
@@ -893,7 +915,7 @@ impl Transformer {
             }
             (
                 replacement.is_some() || library.is_some() || self.resolved.contains_key(id),
-                replacement.unwrap_or(id)
+                replacement.unwrap_or(id),
             )
         } else {
             (self.resolved.contains_key(id), id)

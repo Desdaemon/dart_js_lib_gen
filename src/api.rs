@@ -1,10 +1,10 @@
 use crate::transform::visit_program;
-use anyhow::Result;
-use flexi_logger::Logger;
+use ariadne::ReportKind;
 use log::debug;
-use std::collections::HashMap;
+use rayon::prelude::*;
 use std::path::Path;
-use std::rc::Rc;
+use std::sync::Arc;
+use std::{collections::HashMap, ops::Range};
 use swc_ecma_parser::TsConfig;
 
 use swc_common::{
@@ -14,43 +14,51 @@ use swc_common::{
 use swc_ecma_ast::Module;
 use swc_ecma_parser::{lexer::Lexer, Parser, StringInput, Syntax};
 
-pub struct Config {
+pub struct Config<'a> {
     /// A list of paths to TypeScript definition files to process.
-    pub inputs: Vec<String>,
+    pub inputs: Vec<&'a str>,
     /// Specifies the logging behavior. Can be simply one of:
     /// - off, info, warn, error, debug; or
     /// - comma-separated key-value pairs of 'crate\[::module]\[=level]'
     ///
     /// Also see the [full specification](https://docs.rs/flexi_logger/0.20.0/flexi_logger/struct.LogSpecification.html#).
-    pub log_spec: Option<String>,
+    pub log_spec: Option<&'a str>,
     /// Generate `typedef T = dynamic` definitions for types that were referenced but not defined
     /// within the file.
-    pub dynamic_undefs: Option<bool>,
+    pub dynamic_undefs: bool,
     /// Polyfill overloads by renaming them.
-    pub rename_overloads: Option<bool>,
+    pub rename_overloads: bool,
     /// Generate imports for web types.
-    pub imports: Option<bool>,
+    pub imports: bool,
 }
 
-pub struct Entry {
-    pub key: String,
-    pub value: String,
+pub struct Library<'a> {
+    pub name: &'a str,
+    pub body: String,
+    pub errors: Vec<Message>,
 }
 
-pub fn parse_library(config: Config) -> Result<Vec<Entry>> {
-    let _handle = Logger::try_with_env_or_str(config.log_spec.as_deref().unwrap_or("info"))?
-        .write_mode(flexi_logger::WriteMode::Async)
-        .start()?;
-    let gen_undecl_typedef = config.dynamic_undefs.unwrap_or(false);
-    let rename_overloads = config.rename_overloads.unwrap_or(false);
-    let imports = config.imports.unwrap_or(true);
+pub struct Message {
+    pub kind: ReportKind,
+    pub report: Report,
+}
+
+pub type Report = ariadne::Report<(String, Range<usize>)>;
+pub type Source = (String, ariadne::Source);
+
+pub struct LibraryResult<'a>(pub &'a str, pub String, pub Vec<Message>, pub Source);
+
+pub fn parse_library(config: Config) -> Vec<LibraryResult> {
+    let gen_undecl_typedef = config.dynamic_undefs;
+    let rename_overloads = config.rename_overloads;
+    let imports = config.imports;
     let modules = parse_modules(config);
-    Ok(modules
-        .into_iter()
+    modules
+        .into_par_iter()
         .map(|(key, (file, val))| {
             let library_name = path_to_lib_name(Path::new(&key));
             let hint = (file.byte_length() / 3) as usize;
-            let value = visit_program(
+            let (value, messages, source) = visit_program(
                 &val,
                 file,
                 &library_name,
@@ -69,9 +77,9 @@ Hint\tLength\tCap.\tRatio
                 value.capacity(),
                 (value.len() as f64) / (value.capacity() as f64)
             );
-            Entry { key, value }
+            LibraryResult(key, value, messages, source)
         })
-        .collect())
+        .collect()
 }
 
 fn path_to_lib_name(buf: &Path) -> String {
@@ -90,8 +98,8 @@ fn to_dart_compat_ident(input: &str) -> String {
     input.replace("-", "_")
 }
 
-fn parse_modules(config: Config) -> HashMap<String, (Rc<SourceFile>, Module)> {
-    let cm: Rc<SourceMap> = Default::default();
+fn parse_modules(config: Config) -> HashMap<&str, (Arc<SourceFile>, Module)> {
+    let cm: Arc<SourceMap> = Default::default();
     let handler = Handler::with_tty_emitter(ColorConfig::Auto, true, false, Some(cm.clone()));
     let mut modules = HashMap::new();
 
@@ -119,7 +127,7 @@ fn parse_modules(config: Config) -> HashMap<String, (Rc<SourceFile>, Module)> {
             .parse_module()
             .map_err(|e| e.into_diagnostic(&handler).emit())
             .unwrap_or_else(|_| panic!("failed to parse module {}", input));
-        modules.entry(input).or_insert((fm, module));
+        modules.insert(input, (fm, module));
     }
     modules
 }

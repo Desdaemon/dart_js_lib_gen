@@ -5,9 +5,6 @@ edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-[lib]
-crate-type = ["cdylib"]
-
 [dependencies]
 ahash = "0.7.6"
 alloc_counter = { version = "0.0.4", optional = true }
@@ -18,7 +15,9 @@ flutter_rust_bridge = "1.6.0"
 # lasso = { version = "0.6.0", features = ["multi-threaded"] }
 lazy_static = "1.4.0"
 log = "0.4.14"
-swc_common = { version = "0.14.6", features = ["tty-emitter"] }
+swc_common = { version = "0.14.6", features = ["tty-emitter", "concurrent"] }
 swc_ecma_ast = "0.58.0"
 swc_ecma_parser = "0.78.2"
 clap = "2.33.3"
+rayon = "1.5.1"
+tempfile = "3.2.0"
