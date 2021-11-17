@@ -24,12 +24,11 @@ type TypeResolutionMap = AHashMap<String, (usize, Range<usize>)>;
 struct Transformer {
     path: Vec<String>,
     bufs: Vec<String>,
-    /// Should be filled when there are fields, or when the class is not anonymous.
     class: Option<Class>,
     /// Undeclared type usages, with some number of type parameters and span information.
     undecls: TypeResolutionMap,
     resolved: TypeResolutionMap,
-    resolved_funcs: AHashMap<String, Range<usize>>,
+    symbols: AHashMap<String, Range<usize>>,
     /// Keeps track of the ident of the variable declaration being evaluated.
     current_ident: Option<String>,
     /// Anonymous type literals.
@@ -99,7 +98,7 @@ pub fn visit_program(
         rename_overloads,
         undecls: AHashMap::new(),
         resolved: AHashMap::new(),
-        resolved_funcs: AHashMap::new(),
+        symbols: AHashMap::new(),
         imports: imports.then(AHashSet::new),
         type_lits: AHashMap::new(),
     };
@@ -235,6 +234,41 @@ impl Transformer {
     #[inline]
     fn semi(&mut self) {
         self.push_char(';');
+    }
+
+    fn valid_ts_prop_ident<'a>(&mut self, id: &'a str, span: Range<usize>) -> Option<&'a str> {
+        match self.valid_identifier(id, span.clone()) {
+            Some(id) if id.starts_with('_') => {
+                self.warnings += 1;
+                if log_enabled!(Level::Warn) {
+                    let (path, _) = &self.source;
+                    let intr_span = self.span.clone();
+                    let report = Report::build(ReportKind::Warning, path, span.start)
+                        .with_message("Dart private property in interface")
+                        .with_label(
+                            Label::new((path.clone(), span))
+                                .with_message("Remove or rename this property".fg(Color::Yellow))
+                                .with_color(Color::Yellow),
+                        )
+                        .with_label(
+                            Label::new((path.clone(), intr_span))
+                                .with_message(
+                                    "This interface includes a Dart private property."
+                                        .fg(Color::Blue),
+                                )
+                                .with_color(Color::Blue),
+                        )
+                        .with_note("dart2js does not permit private named parameters, so this interface cannot be constructed without modifications.")
+                        .finish();
+                    self.messages.push(Message {
+                        report,
+                        kind: ReportKind::Warning,
+                    });
+                }
+                None
+            }
+            id => id,
+        }
     }
 
     fn valid_identifier<'a>(&mut self, id: &'a str, span: Range<usize>) -> Option<&'a str> {
@@ -568,11 +602,11 @@ impl Transformer {
     /// `@JS(..) external R id<..>(..);`
     fn visit_function_decl(&mut self, decl: &FnDecl) {
         let id: &str = &decl.ident.sym;
-        let conflicts = self.resolved_funcs.contains_key(id);
+        let conflicts = self.symbols.contains_key(id);
         if conflicts && !self.rename_overloads {
             if log_enabled!(Level::Warn) {
                 let (path, _) = &self.source;
-                let first_span = self.resolved_funcs.get(id).unwrap();
+                let first_span = self.symbols.get(id).unwrap();
                 let span = decl.function.span;
                 let report = Report::build(ReportKind::Warning, path, self.char_offset(span.lo))
                     .with_message("Function overload ignored")
@@ -600,13 +634,13 @@ impl Transformer {
             (1..20)
                 .find_map(|e| {
                     let id = format!("{}{}", id, e);
-                    (!self.resolved_funcs.contains_key(&id)).then(|| id)
+                    (!self.symbols.contains_key(&id)).then(|| id)
                 })
                 .unwrap()
         } else {
             id.to_owned()
         };
-        self.resolved_funcs
+        self.symbols
             .insert(id.clone(), self.range_of(decl.function.span));
         self.visit_function(&id, &decl.function, false, true, Some(old_id));
     }
@@ -734,7 +768,7 @@ impl Transformer {
         if let Some(id) = self
             .parse_expression(&prop.key)
             .and_then(|e| self.register_member(e.0).map(|_| e))
-            .and_then(|e| self.valid_identifier(e.0, e.1))
+            .and_then(|e| self.valid_ts_prop_ident(e.0, e.1))
         {
             let ty = self.collect(|s| {
                 s.visit_type_params(&prop.type_params);

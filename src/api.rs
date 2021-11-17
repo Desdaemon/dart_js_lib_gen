@@ -1,6 +1,5 @@
 use crate::threads::map_par;
 use crate::transform::visit_program;
-use anyhow::Result;
 use ariadne::ReportKind;
 use log::debug;
 use std::path::Path;
@@ -49,7 +48,7 @@ pub type Source = (String, ariadne::Source);
 
 pub struct LibraryResult<'a>(pub &'a str, pub String, pub Vec<Message>, pub Source);
 
-pub fn parse_library(config: Config) -> Result<impl Iterator<Item = LibraryResult>> {
+pub fn parse_library(config: Config) -> impl Iterator<Item = LibraryResult> {
     let gen_undecl_typedef = config.dynamic_undefs;
     let rename_overloads = config.rename_overloads;
     let imports = config.imports;
@@ -68,8 +67,8 @@ pub fn parse_library(config: Config) -> Result<impl Iterator<Item = LibraryResul
         );
         debug!(
             "{}
-Hint\tLength\tCap.\tRatio
-{}\t{}\t{}\t{}",
+    Hint\tLength\tCap.\tRatio
+    {}\t{}\t{}\t{}",
             key,
             hint,
             value.len(),

@@ -93,7 +93,7 @@ If --no-write is specified, does not output anything."),
     let _handle = Logger::try_with_env_or_str(config.log_spec.as_deref().unwrap())?.start()?;
     let out_dir = out_dir.map(Path::new);
     map_par(
-        parse_library(config)?,
+        parse_library(config),
         None,
         |LibraryResult(lib, contents, mes, src)| -> Result<(Vec<Message>, Source)> {
             let mut contents = contents.split(';').collect::<Vec<_>>().join(";\n");
@@ -128,7 +128,7 @@ If --no-write is specified, does not output anything."),
             }
             Ok((mes, src))
         },
-    )?
+    )
     .for_each(|res| match res {
         Ok((messages, mut src)) => {
             for Message { kind, report } in messages {
