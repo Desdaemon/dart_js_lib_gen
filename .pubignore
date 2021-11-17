@@ -1,5 +1,0 @@
-samples
-target
-Cargo.*
-src/**/*.rs
-justfile
