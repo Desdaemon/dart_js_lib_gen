@@ -21,18 +21,10 @@ where
         let mut active = 0;
         for item in items {
             active += 1;
-            // if active == num_threads {
-            // for _ in 0..num_threads {
-            // res.push(rx.recv()?);
-            // }
-            // s.join_all();
-            // active = 0;
-            // }
             let tx = tx.clone();
             s.execute(move || {
                 tx.send(func(item)).unwrap();
             });
-            // active += 1;
         }
         for _ in 0..active {
             res.push(rx.recv()?);
