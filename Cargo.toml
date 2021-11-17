@@ -5,6 +5,9 @@ edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[[bin]]
+name = "dart_js_lib_gen"
+
 [dependencies]
 ahash = "0.7.6"
 alloc_counter = { version = "0.0.4", optional = true }
