@@ -3,7 +3,7 @@ use ariadne::ReportKind;
 use dart_js_lib_gen::api::{parse_library, LibraryResult, Message, Source};
 use dart_js_lib_gen::threads::map_par;
 use flexi_logger::{Level, Logger};
-use log::{error, log_enabled};
+use log::{error, info, log_enabled};
 use std::fs::File;
 use std::io::{Read, Write};
 
@@ -14,6 +14,12 @@ use clap::{crate_version, App, Arg};
 use dart_js_lib_gen::api::Config;
 
 fn main() {
+    if let Err(e) = run() {
+        eprintln!("{:?}", e);
+    }
+}
+
+fn run() -> Result<()> {
     let matches = App::new("main")
         .version(crate_version!())
         .about("Generate Dart bindings for JavaScript libraries.")
@@ -76,7 +82,7 @@ If --no-write is specified, does not output anything."),
         .into_iter()
         .filter(|x| x.ends_with(".ts"))
         .collect::<Vec<_>>();
-    eprintln!("Parsing {} modules.", inputs.len());
+    info!("Parsing {} modules.", inputs.len());
     let config = Config {
         inputs,
         log_spec,
@@ -84,13 +90,10 @@ If --no-write is specified, does not output anything."),
         rename_overloads,
         imports,
     };
-    let _handle = Logger::try_with_env_or_str(config.log_spec.as_deref().unwrap_or("info"))
-        .unwrap()
-        .start()
-        .unwrap();
+    let _handle = Logger::try_with_env_or_str(config.log_spec.as_deref().unwrap())?.start()?;
     let out_dir = out_dir.map(Path::new);
     map_par(
-        parse_library(config).into_iter(),
+        parse_library(config)?,
         None,
         |LibraryResult(lib, contents, mes, src)| -> Result<(Vec<Message>, Source)> {
             let mut contents = contents.split(';').collect::<Vec<_>>().join(";\n");
@@ -102,18 +105,18 @@ If --no-write is specified, does not output anything."),
                     let out_dir = out_dir.or_else(|| path.parent()).unwrap();
                     let path = out_dir.join(Path::new(&base));
                     let path_str = path.to_string_lossy().to_string();
-                    eprintln!("Writing to {}...", &path_str);
+                    info!("Writing to {}", &path_str);
                     let mut f = File::create(path)?;
                     f.write_all(contents.as_bytes())?;
                     f.flush()?;
                     if do_format {
-                        eprintln!("Formatting {}...", &path_str);
+                        info!("Formatting {}", &path_str);
                         dart_format(Either::Left((&path_str, f)), line_length)?;
                     }
                 }
                 None => {
                     if do_format {
-                        eprintln!("Formatting {}...", lib);
+                        info!("Formatting {}", lib);
                         let mut file = dart_format(Either::Right(&contents), line_length)?;
                         let mut buf = String::new();
                         file.read_to_string(&mut buf)?;
@@ -125,7 +128,7 @@ If --no-write is specified, does not output anything."),
             }
             Ok((mes, src))
         },
-    )
+    )?
     .for_each(|res| match res {
         Ok((messages, mut src)) => {
             for Message { kind, report } in messages {
@@ -141,9 +144,10 @@ If --no-write is specified, does not output anything."),
             }
         }
         Err(e) => {
-            error!("{}", e)
+            error!("{:?}", e)
         }
     });
+    Ok(())
 }
 
 pub enum Either<L, R> {

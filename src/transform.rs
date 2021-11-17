@@ -904,23 +904,22 @@ impl Transformer {
     }
 
     fn visit_entity_name(&mut self, name: &TsEntityName, param_count: Option<usize>) {
-        let (id, span): (&str, _) = match name {
+        let (mut id, span): (&str, _) = match name {
             TsEntityName::TsQualifiedName(qn) => (&qn.right.sym, qn.right.span),
             TsEntityName::Ident(ident) => (&ident.sym, ident.span),
         };
-        let (resolved, id) = if self.imports.is_some() {
-            let (replacement, library) = replacement_for(id);
-            if let Some(lib) = library {
-                self.imports.as_mut().unwrap().insert(lib);
+        let mut resolved = false;
+        if let Some(imports) = &mut self.imports {
+            let (replacement, lib) = replacement_for(id);
+            if let Some(replacement) = replacement {
+                id = replacement;
             }
-            (
-                replacement.is_some() || library.is_some() || self.resolved.contains_key(id),
-                replacement.unwrap_or(id),
-            )
-        } else {
-            (self.resolved.contains_key(id), id)
-        };
-        if resolved {
+            if let Some(lib) = lib {
+                imports.insert(lib);
+            }
+            resolved = resolved || replacement.is_some() || lib.is_some();
+        }
+        if resolved || self.resolved.contains_key(id) {
             self.push(id);
             return;
         }
