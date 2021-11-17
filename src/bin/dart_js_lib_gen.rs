@@ -1,9 +1,9 @@
 use anyhow::Result;
 use ariadne::ReportKind;
 use dart_js_lib_gen::api::{parse_library, LibraryResult, Message, Source};
+use dart_js_lib_gen::threads::map_par;
 use flexi_logger::{Level, Logger};
 use log::{error, log_enabled};
-use rayon::prelude::*;
 use std::fs::File;
 use std::io::{Read, Write};
 
@@ -86,68 +86,64 @@ If --no-write is specified, does not output anything."),
     };
     let _handle = Logger::try_with_env_or_str(config.log_spec.as_deref().unwrap_or("info"))
         .unwrap()
-        .write_mode(flexi_logger::WriteMode::Async)
         .start()
         .unwrap();
     let out_dir = out_dir.map(Path::new);
-    parse_library(config)
-        .into_par_iter()
-        .map(
-            |LibraryResult(lib, contents, mes, src)| -> Result<(Vec<Message>, Source)> {
-                let mut contents = contents.split(';').collect::<Vec<_>>().join(";\n");
-                match write {
-                    Some(true) => {
-                        let path = Path::new(lib);
-                        let base = path.file_stem().unwrap();
-                        let base =
-                            format!("{}{}{}.dart", &prefix, &base.to_str().unwrap(), &suffix);
-                        let out_dir = out_dir.or_else(|| path.parent()).unwrap();
-                        let path = out_dir.join(Path::new(&base));
-                        let path_str = path.to_string_lossy().to_string();
-                        eprintln!("Writing to {}...", &path_str);
-                        let mut f = File::create(path)?;
-                        f.write_all(contents.as_bytes())?;
-                        f.flush()?;
-                        if do_format {
-                            eprintln!("Formatting {}...", &path_str);
-                            dart_format(Either::Left((&path_str, f)), line_length)?;
-                        }
+    map_par(
+        parse_library(config).into_iter(),
+        None,
+        |LibraryResult(lib, contents, mes, src)| -> Result<(Vec<Message>, Source)> {
+            let mut contents = contents.split(';').collect::<Vec<_>>().join(";\n");
+            match write {
+                Some(true) => {
+                    let path = Path::new(lib);
+                    let base = path.file_stem().unwrap();
+                    let base = format!("{}{}{}.dart", &prefix, &base.to_str().unwrap(), &suffix);
+                    let out_dir = out_dir.or_else(|| path.parent()).unwrap();
+                    let path = out_dir.join(Path::new(&base));
+                    let path_str = path.to_string_lossy().to_string();
+                    eprintln!("Writing to {}...", &path_str);
+                    let mut f = File::create(path)?;
+                    f.write_all(contents.as_bytes())?;
+                    f.flush()?;
+                    if do_format {
+                        eprintln!("Formatting {}...", &path_str);
+                        dart_format(Either::Left((&path_str, f)), line_length)?;
                     }
-                    None => {
-                        if do_format {
-                            eprintln!("Formatting {}...", lib);
-                            let mut file = dart_format(Either::Right(&contents), line_length)?;
-                            let mut buf = String::new();
-                            file.read_to_string(&mut buf)?;
-                            contents = buf;
-                        }
-                        println!("{}", contents);
+                }
+                None => {
+                    if do_format {
+                        eprintln!("Formatting {}...", lib);
+                        let mut file = dart_format(Either::Right(&contents), line_length)?;
+                        let mut buf = String::new();
+                        file.read_to_string(&mut buf)?;
+                        contents = buf;
+                    }
+                    println!("{}", contents);
+                }
+                _ => {}
+            }
+            Ok((mes, src))
+        },
+    )
+    .for_each(|res| match res {
+        Ok((messages, mut src)) => {
+            for Message { kind, report } in messages {
+                match kind {
+                    ReportKind::Error if log_enabled!(Level::Error) => {
+                        report.eprint(&mut src).unwrap();
+                    }
+                    ReportKind::Warning if log_enabled!(Level::Warn) => {
+                        report.eprint(&mut src).unwrap();
                     }
                     _ => {}
                 }
-                Ok((mes, src))
-            },
-        )
-        .collect::<Vec<_>>()
-        .into_iter()
-        .for_each(|res| match res {
-            Ok((messages, mut src)) => {
-                for Message { kind, report } in messages {
-                    match kind {
-                        ReportKind::Error if log_enabled!(Level::Error) => {
-                            report.eprint(&mut src).unwrap();
-                        }
-                        ReportKind::Warning if log_enabled!(Level::Warn) => {
-                            report.eprint(&mut src).unwrap();
-                        }
-                        _ => {}
-                    }
-                }
             }
-            Err(e) => {
-                error!("{}", e)
-            }
-        });
+        }
+        Err(e) => {
+            error!("{}", e)
+        }
+    });
 }
 
 pub enum Either<L, R> {

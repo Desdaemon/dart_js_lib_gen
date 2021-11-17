@@ -1,7 +1,7 @@
+use crate::threads::map_par;
 use crate::transform::visit_program;
 use ariadne::ReportKind;
 use log::debug;
-use rayon::prelude::*;
 use std::path::Path;
 use std::sync::Arc;
 use std::{collections::HashMap, ops::Range};
@@ -53,33 +53,31 @@ pub fn parse_library(config: Config) -> Vec<LibraryResult> {
     let rename_overloads = config.rename_overloads;
     let imports = config.imports;
     let modules = parse_modules(config);
-    modules
-        .into_par_iter()
-        .map(|(key, (file, val))| {
-            let library_name = path_to_lib_name(Path::new(&key));
-            let hint = (file.byte_length() / 3) as usize;
-            let (value, messages, source) = visit_program(
-                &val,
-                file,
-                &library_name,
-                Some(hint),
-                gen_undecl_typedef,
-                rename_overloads,
-                imports,
-            );
-            debug!(
-                "{}
+    map_par(modules.into_iter(), None, |(key, (file, val))| {
+        let library_name = path_to_lib_name(Path::new(&key));
+        let hint = (file.byte_length() / 3) as usize;
+        let (value, messages, source) = visit_program(
+            &val,
+            file,
+            &library_name,
+            Some(hint),
+            gen_undecl_typedef,
+            rename_overloads,
+            imports,
+        );
+        debug!(
+            "{}
 Hint\tLength\tCap.\tRatio
 {}\t{}\t{}\t{}",
-                key,
-                hint,
-                value.len(),
-                value.capacity(),
-                (value.len() as f64) / (value.capacity() as f64)
-            );
-            LibraryResult(key, value, messages, source)
-        })
-        .collect()
+            key,
+            hint,
+            value.len(),
+            value.capacity(),
+            (value.len() as f64) / (value.capacity() as f64)
+        );
+        LibraryResult(key, value, messages, source)
+    })
+    .collect()
 }
 
 fn path_to_lib_name(buf: &Path) -> String {

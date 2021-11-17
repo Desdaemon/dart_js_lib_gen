@@ -1,7 +1,7 @@
 run +args:	
-	cargo build --bin main
+	cargo build --bin dart_js_lib_gen
 	./target/debug/dart_js_lib_gen {{args}}
 
 build-samples:
-	cargo build --bin main --release
+	cargo build --bin dart_js_lib_gen --release
 	./target/release/dart_js_lib_gen -sw --rename-overloads --dynamic-undefs samples/*.ts
