@@ -1,4 +1,4 @@
-use crate::threads::map_par;
+use crate::threads::MapPar;
 use crate::transform::visit_program;
 use ariadne::ReportKind;
 use log::debug;
@@ -53,7 +53,7 @@ pub fn parse_library(config: Config) -> impl Iterator<Item = LibraryResult> {
     let rename_overloads = config.rename_overloads;
     let imports = config.imports;
     let modules = parse_modules(config);
-    map_par(modules.into_iter(), None, move |(key, (file, val))| {
+    modules.into_iter().map_par(|(key, (file, val))| {
         let library_name = path_to_lib_name(Path::new(&key));
         let hint = (file.byte_length() / 3) as usize;
         let (value, messages, source) = visit_program(

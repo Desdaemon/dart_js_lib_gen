@@ -1,7 +1,7 @@
 use anyhow::Result;
 use ariadne::ReportKind;
-use dart_js_lib_gen::api::{parse_library, LibraryResult, Message, Source};
-use dart_js_lib_gen::threads::map_par;
+use dart_js_lib_gen::api::{parse_library, LibraryResult, Message};
+use dart_js_lib_gen::threads::MapPar;
 use flexi_logger::{Level, Logger};
 use log::{error, info, log_enabled};
 use std::fs::File;
@@ -92,10 +92,8 @@ If --no-write is specified, does not output anything."),
     };
     let _handle = Logger::try_with_env_or_str(config.log_spec.as_deref().unwrap())?.start()?;
     let out_dir = out_dir.map(Path::new);
-    map_par(
-        parse_library(config),
-        None,
-        |LibraryResult(lib, contents, mes, src)| -> Result<(Vec<Message>, Source)> {
+    parse_library(config)
+        .map_par(|LibraryResult(lib, contents, mes, src)| {
             let mut contents = contents.split(';').collect::<Vec<_>>().join(";\n");
             match write {
                 Some(true) => {
@@ -127,26 +125,25 @@ If --no-write is specified, does not output anything."),
                 _ => {}
             }
             Ok((mes, src))
-        },
-    )
-    .for_each(|res| match res {
-        Ok((messages, mut src)) => {
-            for Message { kind, report } in messages {
-                match kind {
-                    ReportKind::Error if log_enabled!(Level::Error) => {
-                        report.eprint(&mut src).unwrap();
+        })
+        .for_each(|res: Result<_>| match res {
+            Ok((messages, mut src)) => {
+                for Message { kind, report } in messages {
+                    match kind {
+                        ReportKind::Error if log_enabled!(Level::Error) => {
+                            report.eprint(&mut src).unwrap();
+                        }
+                        ReportKind::Warning if log_enabled!(Level::Warn) => {
+                            report.eprint(&mut src).unwrap();
+                        }
+                        _ => {}
                     }
-                    ReportKind::Warning if log_enabled!(Level::Warn) => {
-                        report.eprint(&mut src).unwrap();
-                    }
-                    _ => {}
                 }
             }
-        }
-        Err(e) => {
-            error!("{:?}", e)
-        }
-    });
+            Err(e) => {
+                error!("{:?}", e)
+            }
+        });
     Ok(())
 }
 
