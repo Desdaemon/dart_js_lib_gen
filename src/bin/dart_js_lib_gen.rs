@@ -1,6 +1,6 @@
 use anyhow::Result;
 use ariadne::ReportKind;
-use dart_js_lib_gen::api::{parse_library, LibraryResult, Message};
+use dart_js_lib_gen::api::{parse_library, Message};
 use dart_js_lib_gen::threads::MapPar;
 use flexi_logger::{Level, Logger};
 use log::{error, info, log_enabled};
@@ -93,7 +93,7 @@ If --no-write is specified, does not output anything."),
     let _handle = Logger::try_with_env_or_str(config.log_spec.as_deref().unwrap())?.start()?;
     let out_dir = out_dir.map(Path::new);
     parse_library(config)
-        .map_par(|LibraryResult(lib, contents, mes, src)| {
+        .map_par(|(lib, contents, mes, src)| {
             let mut contents = contents.split(';').collect::<Vec<_>>().join(";\n");
             match write {
                 Some(true) => {
@@ -140,9 +140,7 @@ If --no-write is specified, does not output anything."),
                     }
                 }
             }
-            Err(e) => {
-                error!("{:?}", e)
-            }
+            Err(e) => error!("{}", e),
         });
     Ok(())
 }
@@ -162,8 +160,11 @@ fn dart_format(file: Either<(&str, File), &str>, line_length: &str) -> Result<Fi
             (f.path().to_string_lossy().to_string(), f.into_file())
         }
     };
-    let _child = Command::new("dart")
+    let out = Command::new("dart")
         .args(&["format", "--fix", "-l", line_length, &path])
         .output()?;
-    Ok(file)
+    out.status
+        .success()
+        .then(|| file)
+        .ok_or_else(|| anyhow::anyhow!("{}", String::from_utf8(out.stderr).unwrap()))
 }

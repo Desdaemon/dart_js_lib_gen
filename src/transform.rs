@@ -8,6 +8,7 @@ use ahash::{AHashMap, AHashSet};
 use ariadne::{Color, Fmt, Label, ReportKind};
 use log::log_enabled;
 use log::{debug, error, info, warn, Level};
+use swc_common::SourceMap;
 use swc_common::{BytePos, SourceFile, Span};
 use swc_ecma_ast::*;
 
@@ -40,6 +41,7 @@ struct Transformer {
     warnings: u32,
     errors: u32,
     file: Arc<SourceFile>,
+    srcmap: Arc<SourceMap>,
     allocs: usize,
     rename_overloads: bool,
     imports: Option<AHashSet<&'static str>>,
@@ -69,14 +71,34 @@ fn generate_type_param(count: usize) -> impl Iterator<Item = char> {
     ('T'..'Z').chain('A'..'O').take(count)
 }
 
-pub fn visit_program(
-    module: &Module,
-    file: Arc<SourceFile>,
-    library_name: &str,
-    size_hint: Option<usize>,
-    gen_undecl_typedef: bool,
-    rename_overloads: bool,
-    imports: bool,
+pub struct ProgramVisitor<'a> {
+    pub module: Module,
+    pub file: Arc<SourceFile>,
+    pub srcmap: Arc<SourceMap>,
+    pub library_name: &'a str,
+    pub size_hint: Option<usize>,
+    pub gen_undecl_typedef: bool,
+    pub rename_overloads: bool,
+    pub imports: bool,
+}
+
+impl ProgramVisitor<'_> {
+    pub fn visit_program(self) -> (String, Vec<Message>, Source) {
+        visit_program(self)
+    }
+}
+
+fn visit_program(
+    ProgramVisitor {
+        module,
+        file,
+        srcmap,
+        library_name,
+        size_hint,
+        gen_undecl_typedef,
+        rename_overloads,
+        imports,
+    }: ProgramVisitor,
 ) -> (String, Vec<Message>, Source) {
     let buf = match size_hint {
         Some(size) => String::with_capacity(size),
@@ -94,6 +116,7 @@ pub fn visit_program(
         warnings: 0,
         errors: 0,
         file,
+        srcmap,
         allocs: 0,
         rename_overloads,
         undecls: AHashMap::new(),
@@ -355,8 +378,8 @@ impl Transformer {
         match expr {
             Expr::Ident(ident) => Some((&ident.sym, self.range_of(ident.span))),
             Expr::Lit(Lit::Str(string)) => Some((&string.value, self.range_of(string.span))),
-            other => {
-                error!("Unhandled expression:\n{:?}", other);
+            _ => {
+                error!("Unhandled expression:\n{:?}", expr);
                 None
             }
         }
@@ -371,8 +394,8 @@ impl Transformer {
 }
 
 /// Valid identifiers in JavaScript but not in Dart. Non-exhaustive.
-static FORBIDDEN_IDENTS: &[&str] = &[
-    "default", "switch", "in", "var", "is", "continue", "extends", "catch", "assert",
+const FORBIDDEN_IDENTS: &[&str] = &[
+    "default", "switch", "in", "var", "is", "continue", "extends", "catch", "assert", "class",
 ];
 
 macro_rules! gen_matcher {
@@ -401,7 +424,8 @@ impl Transformer {
             ModuleDecl::Import(_)
             | ModuleDecl::TsExportAssignment(_)
             | ModuleDecl::TsNamespaceExport(_)
-            | ModuleDecl::ExportNamed(_) => {}
+            | ModuleDecl::ExportNamed(_)
+            | ModuleDecl::ExportDefaultExpr(_) => {}
             _ => {
                 error!("Unhandled module declaration:\n{:?}", decl);
                 todo!();
@@ -430,9 +454,20 @@ impl Transformer {
             Decl::TsModule(module) => self.visit_module(module),
             Decl::TsTypeAlias(alias) => self.visit_type_alias(alias),
             Decl::Class(class) => self.visit_class(class),
-            _ => {
-                error!("Unhandled declaration:\n{:?}", decl);
-                todo!();
+            Decl::TsEnum(enu) => self.visit_enum(enu),
+        }
+    }
+
+    fn visit_enum(&mut self, enu: &TsEnumDecl) {
+        if let Some(id) = self.valid_identifier(&enu.id.sym, self.range_of(enu.id.span)) {
+            if enu.is_const {
+                self.push("typedef ");
+                self.push(id);
+                self.push_char('=');
+                self.push(type_of_enum_members(&enu.members));
+                self.semi();
+            } else {
+                self.annotate(id);
             }
         }
     }
@@ -1348,5 +1383,26 @@ impl Transformer {
                 todo!()
             }
         }
+    }
+}
+
+/// Returns the type of this enum's members.
+fn type_of_enum_members(members: &[TsEnumMember]) -> &'static str {
+    let typs = members
+        .iter()
+        .filter_map(|x| x.init.as_ref().map(expr_type))
+        .collect::<AHashSet<_>>();
+    match typs.len() {
+        0 => "num",
+        1 => typs.into_iter().next().unwrap(),
+        _ => "",
+    }
+}
+
+fn expr_type(expr: impl AsRef<Expr>) -> &'static str {
+    match expr.as_ref() {
+        Expr::Lit(Lit::Str(_)) => "String",
+        Expr::Lit(Lit::Num(_)) => "num",
+        _ => "",
     }
 }
