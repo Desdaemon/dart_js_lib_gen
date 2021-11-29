@@ -6930,6 +6930,8 @@ class XMLHttpRequestUpload extends HttpRequestEventTarget {
 external IXMLHttpRequestUpload get JXMLHttpRequestUpload;
 @JS(r'XMLHttpRequestUpload')
 external set JXMLHttpRequestUpload(IXMLHttpRequestUpload value);
+
+/// EventListener | EventListenerObject
 typedef EventListenerOrEventListenerObject = dynamic;
 
 @JS()
@@ -7239,13 +7241,24 @@ class WebAssemblyInstantiatedSource {
   });
 }
 
+/// "function" | "global" | "memory" | "table"
 typedef ImportExportKind = String;
+
 typedef TableKind = String;
+
+/// "f32" | "f64" | "i32" | "i64"
 typedef ValueType = String;
+
+/// Function | Global | Memory | Table
 typedef ExportValue = dynamic;
+
 typedef Exports = Record<String, ExportValue>;
+
+/// ExportValue | num
 typedef ImportValue = dynamic;
+
 typedef ModuleImports = Record<String, ImportValue>;
+
 typedef Imports = Record<String, ModuleImports>;
 @JS(r'WebAssembly.compile')
 external Promise<Module> compile(BufferSource bytes);
@@ -7501,88 +7514,234 @@ external void addEventListener1(String type, EventListenerOrEventListenerObject 
 external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
 @JS(r'removeEventListener')
 external void removeEventListener1(String type, EventListenerOrEventListenerObject listener, dynamic options);
+
+/// Headers | List<List<String>> | Record<String,String>
 typedef HeadersInit = dynamic;
+
+/// Blob | BufferSource | FormData | URLSearchParams | ReadableStream<Uint8List> | String
 typedef BodyInit = dynamic;
+
+/// Request | String
 typedef RequestInfo = dynamic;
+
+/// BufferSource | Blob | String
 typedef BlobPart = dynamic;
+
 typedef DOMHighResTimeStamp = num;
+
+/// ImageBitmap | OffscreenCanvas
 typedef CanvasImageSource = dynamic;
+
+/// OffscreenCanvasRenderingContext2D | ImageBitmapRenderingContext | RenderingContext | WebGL2RenderingContext
 typedef OffscreenRenderingContext = dynamic;
+
+/// MessagePort | ServiceWorker
 typedef MessageEventSource = dynamic;
+
+/// CanvasImageSource | Blob | ImageData
 typedef ImageBitmapSource = dynamic;
+
+/// OnErrorEventHandlerNonNull | null
 typedef OnErrorEventHandler = OnErrorEventHandlerNonNull?;
+
+/// String | Function
 typedef TimerHandler = dynamic;
+
 typedef PerformanceEntryList = List<PerformanceEntry>;
+
+/// BufferSource | String
 typedef PushMessageDataInit = dynamic;
+
 typedef ReadableStreamReader<T> = ReadableStreamDefaultReader<T>;
+
 typedef ReadableStreamController<T> = ReadableStreamDefaultController<T>;
+
+/// num | List<num>
 typedef VibratePattern = dynamic;
+
+/// String | Algorithm
 typedef AlgorithmIdentifier = dynamic;
+
 typedef HashAlgorithmIdentifier = AlgorithmIdentifier;
+
 typedef BigInteger = Uint8List;
+
 typedef NamedCurve = String;
+
 typedef GLenum = num;
+
 typedef GLboolean = bool;
+
 typedef GLbitfield = num;
+
 typedef GLint = num;
+
 typedef GLsizei = num;
+
 typedef GLintptr = num;
+
 typedef GLsizeiptr = num;
+
 typedef GLuint = num;
+
 typedef GLfloat = num;
+
 typedef GLclampf = num;
+
+/// ImageBitmap | ImageData | OffscreenCanvas
 typedef TexImageSource = dynamic;
+
+/// Float32List | List<GLfloat>
 typedef Float32List = dynamic;
+
+/// Int32List | List<GLint>
 typedef Int32List = dynamic;
+
 typedef GLint64 = num;
+
 typedef GLuint64 = num;
+
+/// Uint32List | List<GLuint>
 typedef Uint32List = dynamic;
+
+/// TypedData | ByteBuffer
 typedef BufferSource = dynamic;
+
 typedef DOMTimeStamp = num;
+
+/// File | String
 typedef FormDataEntryValue = dynamic;
+
+/// num | String | DateTime | BufferSource | IDBArrayKey
 typedef IDBValidKey = dynamic;
+
+/// ByteBuffer | MessagePort | ImageBitmap | OffscreenCanvas
 typedef Transferable = dynamic;
+
+/// ReadableStreamDefaultReadValueResult<T> | ReadableStreamDefaultReadDoneResult
 typedef ReadableStreamDefaultReadResult<T> = dynamic;
+
+/// "arraybuffer" | "blob"
 typedef BinaryType = String;
+
+/// "inherit" | "ltr" | "rtl"
 typedef CanvasDirection = String;
+
+/// "evenodd" | "nonzero"
 typedef CanvasFillRule = String;
+
+/// "butt" | "round" | "square"
 typedef CanvasLineCap = String;
+
+/// "bevel" | "miter" | "round"
 typedef CanvasLineJoin = String;
+
+/// "center" | "end" | "left" | "right" | "start"
 typedef CanvasTextAlign = String;
+
+/// "alphabetic" | "bottom" | "hanging" | "ideographic" | "middle" | "top"
 typedef CanvasTextBaseline = String;
+
+/// "all" | "sharedworker" | "window" | "worker"
 typedef ClientTypes = String;
+
+/// "default" | "none"
 typedef ColorSpaceConversion = String;
+
+/// "native" | "transparent"
 typedef EndingType = String;
+
+/// "auxiliary" | "nested" | "none" | "top-level"
 typedef FrameType = String;
+
+/// "next" | "nextunique" | "prev" | "prevunique"
 typedef IDBCursorDirection = String;
+
+/// "done" | "pending"
 typedef IDBRequestReadyState = String;
+
+/// "readonly" | "readwrite" | "versionchange"
 typedef IDBTransactionMode = String;
+
+/// "flipY" | "none"
 typedef ImageOrientation = String;
+
+/// "high" | "low" | "medium"
 typedef ImageSmoothingQuality = String;
+
+/// "jwk" | "pkcs8" | "raw" | "spki"
 typedef KeyFormat = String;
+
+/// "private" | "public" | "secret"
 typedef KeyType = String;
+
+/// "decrypt" | "deriveBits" | "deriveKey" | "encrypt" | "sign" | "unwrapKey" | "verify" | "wrapKey"
 typedef KeyUsage = String;
+
+/// "auto" | "ltr" | "rtl"
 typedef NotificationDirection = String;
+
+/// "default" | "denied" | "granted"
 typedef NotificationPermission = String;
+
+/// "2d" | "bitmaprenderer" | "webgl" | "webgl2"
 typedef OffscreenRenderingContextId = String;
+
+/// "accelerometer" | "ambient-light-sensor" | "background-fetch" | "background-sync" | "bluetooth" | "camera" | "clipboard-read" | "clipboard-write" | "device-info" | "display-capture" | "geolocation" | "gyroscope" | "magnetometer" | "microphone" | "midi" | "nfc" | "notifications" | "persistent-storage" | "push" | "speaker"
 typedef PermissionName = String;
+
+/// "denied" | "granted" | "prompt"
 typedef PermissionState = String;
+
+/// "default" | "none" | "premultiply"
 typedef PremultiplyAlpha = String;
+
+/// "auth" | "p256dh"
 typedef PushEncryptionKeyName = String;
+
+/// "denied" | "granted" | "prompt"
 typedef PushPermissionState = String;
+
+/// "" | "no-referrer" | "no-referrer-when-downgrade" | "origin" | "origin-when-cross-origin" | "same-origin" | "strict-origin" | "strict-origin-when-cross-origin" | "unsafe-url"
 typedef ReferrerPolicy = String;
+
+/// "default" | "force-cache" | "no-cache" | "no-store" | "only-if-cached" | "reload"
 typedef RequestCache = String;
+
+/// "include" | "omit" | "same-origin"
 typedef RequestCredentials = String;
+
+/// "" | "audio" | "audioworklet" | "document" | "embed" | "font" | "image" | "manifest" | "object" | "paintworklet" | "report" | "script" | "sharedworker" | "style" | "track" | "video" | "worker" | "xslt"
 typedef RequestDestination = String;
+
+/// "cors" | "navigate" | "no-cors" | "same-origin"
 typedef RequestMode = String;
+
+/// "error" | "follow" | "manual"
 typedef RequestRedirect = String;
+
+/// "high" | "low" | "medium" | "pixelated"
 typedef ResizeQuality = String;
+
+/// "basic" | "cors" | "default" | "error" | "opaque" | "opaqueredirect"
 typedef ResponseType = String;
+
+/// "activated" | "activating" | "installed" | "installing" | "parsed" | "redundant"
 typedef ServiceWorkerState = String;
+
+/// "all" | "imports" | "none"
 typedef ServiceWorkerUpdateViaCache = String;
+
+/// "hidden" | "visible"
 typedef VisibilityState = String;
+
+/// "default" | "high-performance" | "low-power"
 typedef WebGLPowerPreference = String;
+
+/// "classic" | "module"
 typedef WorkerType = String;
+
+/// "" | "arraybuffer" | "blob" | "document" | "json" | "text"
 typedef XMLHttpRequestResponseType = String;
 
 @JS()
@@ -9602,4 +9761,6 @@ class IXMLHttpRequestUpload {
   external factory IXMLHttpRequestUpload();
 }
 
+typedef ArrayBufferLike = dynamic;
+typedef PromiseLike<T> = dynamic;
 typedef Record<T, U> = dynamic;

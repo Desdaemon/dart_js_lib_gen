@@ -1,5 +1,4 @@
 use anyhow::Result;
-use ariadne::ReportKind;
 use dart_js_lib_gen::api::{parse_library, Message};
 use dart_js_lib_gen::threads::MapPar;
 use flexi_logger::{Level, Logger};
@@ -128,13 +127,13 @@ If --no-write is specified, does not output anything."),
         })
         .for_each(|res: Result<_>| match res {
             Ok((messages, mut src)) => {
-                for Message { kind, report } in messages {
-                    match kind {
-                        ReportKind::Error if log_enabled!(Level::Error) => {
-                            report.eprint(&mut src).unwrap();
+                for m in messages {
+                    match m {
+                        Message::Warning(warning) if log_enabled!(Level::Warn) => {
+                            warning.eprint(&mut src).unwrap();
                         }
-                        ReportKind::Warning if log_enabled!(Level::Warn) => {
-                            report.eprint(&mut src).unwrap();
+                        Message::Error(error) if log_enabled!(Level::Error) => {
+                            error.eprint(&mut src).unwrap();
                         }
                         _ => {}
                     }
@@ -160,8 +159,11 @@ fn dart_format(file: Either<(&str, File), &str>, line_length: &str) -> Result<Fi
             (f.path().to_string_lossy().to_string(), f.into_file())
         }
     };
-    let out = Command::new("dart")
-        .args(&["format", "--fix", "-l", line_length, &path])
+    let out = Command::new("sh")
+        .args([
+            "-c",
+            &format!("dart format --fix -l {} {}", line_length, path),
+        ])
         .output()?;
     out.status
         .success()

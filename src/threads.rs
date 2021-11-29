@@ -1,37 +1,92 @@
 use scoped_threadpool::Pool;
 use std::sync::mpsc;
 
-pub trait MapPar: Iterator + Sized {
-    fn map_par<'a, F, R>(self, func: F) -> Box<dyn Iterator<Item = R> + 'a>
-    where
-        Self::Item: Send,
-        F: FnMut(Self::Item) -> R + Send + Copy,
-        R: Send + Sync + 'a,
-    {
-        self.map_par_with(num_cpus::get() as u32, func)
-    }
+pub enum ParallelMap<I, F, R>
+where
+    I: Iterator,
+    F: FnMut(I::Item) -> R,
+{
+    Raw(ParallelMapRaw<I, F, R>),
+    Processed(std::vec::IntoIter<R>),
+}
 
-    fn map_par_with<'a, F, R>(self, threads: u32, mut func: F) -> Box<dyn Iterator<Item = R> + 'a>
-    where
-        Self::Item: Send,
-        F: FnMut(Self::Item) -> R + Send + Copy,
-        R: Send + Sync + 'a,
-    {
-        let mut pool = Pool::new(threads);
-        let (tx, rx): (mpsc::Sender<R>, _) = mpsc::channel();
-        Box::new(pool.scoped(move |scope| {
-            let count = self
-                .map(|item| {
-                    let tx = tx.clone();
-                    scope.execute(move || {
-                        tx.send(func(item)).unwrap();
+pub struct ParallelMapRaw<I, F, R>
+where
+    I: Iterator,
+    F: FnMut(I::Item) -> R,
+{
+    iter: I,
+    func: F,
+    threads: u32,
+}
+
+impl<I, F, R> Iterator for ParallelMap<I, F, R>
+where
+    I: Iterator,
+    I::Item: Send,
+    F: FnMut(I::Item) -> R + Send + Copy,
+    R: Send + Sync,
+{
+    type Item = R;
+    fn next(&mut self) -> Option<Self::Item> {
+        match self {
+            Self::Processed(iter) => iter.next(),
+            Self::Raw(ParallelMapRaw {
+                threads,
+                iter,
+                func,
+            }) => {
+                let proc = {
+                    let mut pool = Pool::new(*threads);
+                    let (tx, rx): (mpsc::Sender<R>, _) = mpsc::channel();
+                    pool.scoped(|scope| {
+                        let count = iter
+                            .map(|item| {
+                                let tx = tx.clone();
+                                let mut func = *func;
+                                scope.execute(move || {
+                                    tx.send(func(item)).unwrap();
+                                })
+                            })
+                            .count();
+                        (0..count)
+                            .map(move |_| rx.recv().unwrap())
+                            .collect::<Vec<_>>()
+                            .into_iter()
                     })
-                })
-                .count();
-            // Downgrading the closure's lifetime to be the same as R.
-            (0..count).map(Box::new(move |_| rx.recv().unwrap()) as Box<dyn Fn(_) -> _ + 'a>)
-        }))
+                };
+                *self = Self::Processed(proc);
+                self.next()
+            }
+        }
     }
 }
 
-impl<T: Iterator + Sized> MapPar for T {}
+pub trait MapPar: Iterator + Sized {
+    /// Similar to [MapPar::map_par], but allows specifying the number of threads to use.
+    fn map_par_with<F, R>(self, threads: u32, func: F) -> ParallelMap<Self, F, R>
+    where
+        Self::Item: Send,
+        F: FnMut(Self::Item) -> R + Send + Copy,
+        R: Send + Sync,
+    {
+        ParallelMap::Raw(ParallelMapRaw {
+            iter: self,
+            func,
+            threads,
+        })
+    }
+
+    /// Maps the elements of this iterator in parallel.
+    /// The iterator returned does not preserve encounter order.
+    fn map_par<F, R>(self, func: F) -> ParallelMap<Self, F, R>
+    where
+        Self::Item: Send,
+        F: FnMut(Self::Item) -> R + Send + Copy,
+        R: Send + Sync,
+    {
+        self.map_par_with(num_cpus::get() as u32, func)
+    }
+}
+
+impl<T> MapPar for T where T: Iterator + Sized {}

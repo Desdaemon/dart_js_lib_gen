@@ -37,6 +37,8 @@ class Attribute {
 
 @JS(r'parse')
 external List<Element>? parse(String markdown);
+
+/// RequestInfo | Url | Response | BufferSource | Module
 typedef InitInput = dynamic;
 
 @JS()
@@ -49,3 +51,7 @@ class InitOutput {
     num Function(num a, num b) parse,
   });
 }
+
+typedef BufferSource = dynamic;
+typedef Module = dynamic;
+typedef RequestInfo = dynamic;
