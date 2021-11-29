@@ -185,7 +185,6 @@ external set JFunction(FunctionConstructor value);
 
 /// dynamic | null
 typedef ThisParameterType<T> = dynamic;
-
 typedef OmitThisParameter<T> = dynamic;
 
 @JS()
@@ -830,7 +829,6 @@ typedef MethodDecorator = dynamic Function<T>(
 
 /// String | dynamic
 typedef ParameterDecorator = void Function(Object target, dynamic propertyKey, num parameterIndex);
-
 typedef PromiseConstructorLike = dynamic Function();
 
 @JS()
@@ -860,23 +858,14 @@ class ArrayLike<T> {
 
 /// TResult2 | PromiseLike<TResult2>
 typedef Partial<T> = dynamic;
-
 typedef Required<T> = dynamic;
-
 typedef Readonly<T> = dynamic;
-
 typedef Pick<T, K extends String> = dynamic;
-
 typedef Record<K extends String, T> = dynamic;
-
 typedef Exclude<T, U> = dynamic;
-
 typedef Extract<T, U> = dynamic;
-
 typedef Omit<T, K extends String> = Pick<T, Exclude<String, K>>;
-
 typedef NonNullable<T> = dynamic;
-
 typedef Parameters<
         T extends dynamic Function([
   dynamic args1,
@@ -890,9 +879,7 @@ typedef Parameters<
   dynamic args9,
 ])>
     = dynamic;
-
 typedef ConstructorParameters<T extends dynamic Function()> = dynamic;
-
 typedef ReturnType<
         T extends dynamic Function([
   dynamic args1,
@@ -906,15 +893,10 @@ typedef ReturnType<
   dynamic args9,
 ])>
     = dynamic;
-
 typedef InstanceType<T extends dynamic Function()> = dynamic;
-
 typedef Uppercase<S extends String> = dynamic;
-
 typedef Lowercase<S extends String> = dynamic;
-
 typedef Capitalize<S extends String> = dynamic;
-
 typedef Uncapitalize<S extends String> = dynamic;
 
 @JS()

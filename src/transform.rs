@@ -742,8 +742,8 @@ impl Transformer {
             for c in comments {
                 write!(buf, "\n/// {}", c).unwrap();
             }
+            self.push_char('\n');
         }
-        self.push_char('\n');
         self.push(&alias);
         self.current_ident.take().unwrap();
     }

@@ -8012,7 +8012,6 @@ typedef SVGMatrix = DomMatrix;
 external dynamic get JSVGMatrix;
 @JS(r'SVGMatrix')
 external set JSVGMatrix(dynamic value);
-
 typedef WebKitCSSMatrix = DomMatrix;
 @JS(r'WebKitCSSMatrix')
 external dynamic get JWebKitCSSMatrix;
@@ -8182,7 +8181,6 @@ class DOMRect extends DomRectReadOnly {
 external IDOMRect get JDOMRect;
 @JS(r'DOMRect')
 external set JDOMRect(IDOMRect value);
-
 typedef SVGRect = DOMRect;
 @JS(r'SVGRect')
 external dynamic get JSVGRect;
@@ -23543,14 +23541,11 @@ typedef ValueType = String;
 
 /// Function | Global | Memory | Table
 typedef ExportValue = dynamic;
-
 typedef Exports = Record<String, ExportValue>;
 
 /// ExportValue | num
 typedef ImportValue = dynamic;
-
 typedef Imports = Record<String, ModuleImports>;
-
 typedef ModuleImports = Record<String, ImportValue>;
 @JS(r'WebAssembly.compile')
 external Promise<Module> compile(BufferSource bytes);
@@ -25119,7 +25114,6 @@ external void removeEventListener1(String type, EventListenerOrEventListenerObje
 
 /// Algorithm | String
 typedef AlgorithmIdentifier = dynamic;
-
 typedef BigInteger = Uint8List;
 
 /// ByteBuffer | TypedData
@@ -25133,17 +25127,14 @@ typedef BodyInit = dynamic;
 
 /// TypedData | ByteBuffer
 typedef BufferSource = dynamic;
-
 typedef COSEAlgorithmIdentifier = num;
 
 /// HTMLOrSVGImageElement | VideoElement | CanvasElement | ImageBitmap | OffscreenCanvas
 typedef CanvasImageSource = dynamic;
-
 typedef ClipboardItemData = Promise<ClipboardItemDataType>;
 
 /// String | Blob
 typedef ClipboardItemDataType = dynamic;
-
 typedef ClipboardItems = List<ClipboardItem>;
 
 /// bool | ConstrainBooleanParameters
@@ -25157,9 +25148,7 @@ typedef ConstrainDouble = dynamic;
 
 /// num | ConstrainULongRange
 typedef ConstrainULong = dynamic;
-
 typedef DOMHighResTimeStamp = num;
-
 typedef DOMTimeStamp = num;
 
 /// EventListener | EventListenerObject
@@ -25170,29 +25159,17 @@ typedef Float32List = dynamic;
 
 /// File | String
 typedef FormDataEntryValue = dynamic;
-
 typedef GLbitfield = num;
-
 typedef GLboolean = bool;
-
 typedef GLclampf = num;
-
 typedef GLenum = num;
-
 typedef GLfloat = num;
-
 typedef GLint = num;
-
 typedef GLint64 = num;
-
 typedef GLintptr = num;
-
 typedef GLsizei = num;
-
 typedef GLsizeiptr = num;
-
 typedef GLuint = num;
-
 typedef GLuint64 = num;
 
 /// ImageElement | ImageElement
@@ -25200,7 +25177,6 @@ typedef HTMLOrSVGImageElement = dynamic;
 
 /// ScriptElement | ScriptElement
 typedef HTMLOrSVGScriptElement = dynamic;
-
 typedef HashAlgorithmIdentifier = AlgorithmIdentifier;
 
 /// List<List<String>> | Record<String,String> | Headers
@@ -25229,7 +25205,6 @@ typedef MessageEventSource = dynamic;
 
 /// "attributes" | "characterData" | "childList"
 typedef MutationRecordType = String;
-
 typedef NamedCurve = String;
 
 /// OnBeforeUnloadEventHandlerNonNull | null
@@ -25237,14 +25212,11 @@ typedef OnBeforeUnloadEventHandler = OnBeforeUnloadEventHandlerNonNull?;
 
 /// OnErrorEventHandlerNonNull | null
 typedef OnErrorEventHandler = OnErrorEventHandlerNonNull?;
-
 typedef PerformanceEntryList = List<PerformanceEntry>;
-
 typedef ReadableStreamController<T> = ReadableStreamDefaultController<T>;
 
 /// ReadableStreamDefaultReadValueResult<T> | ReadableStreamDefaultReadDoneResult
 typedef ReadableStreamDefaultReadResult<T> = dynamic;
-
 typedef ReadableStreamReader<T> = ReadableStreamDefaultReader<T>;
 
 /// CanvasRenderingContext2D | ImageBitmapRenderingContext | RenderingContext | WebGL2RenderingContext
@@ -25264,14 +25236,11 @@ typedef Transferable = dynamic;
 
 /// Uint32List | List<GLuint>
 typedef Uint32List = dynamic;
-
 typedef UvmEntries = List<UvmEntry>;
-
 typedef UvmEntry = List<num>;
 
 /// num | List<num>
 typedef VibratePattern = dynamic;
-
 typedef WindowProxy = Window;
 
 /// Blob | BufferSource | FormData | URLSearchParams | String
@@ -25303,7 +25272,6 @@ typedef AuthenticatorAttachment = String;
 
 /// "ble" | "internal" | "nfc" | "usb"
 typedef AuthenticatorTransport = String;
-
 typedef AutoKeyword = String;
 
 /// "a-rate" | "k-rate"
@@ -25407,7 +25375,6 @@ typedef FontFaceSetLoadStatus = String;
 
 /// "auto" | "hide" | "show"
 typedef FullscreenNavigationUI = String;
-
 typedef GamepadHapticActuatorType = String;
 
 /// "" | "standard" | "xr-standard"
@@ -25523,7 +25490,6 @@ typedef PremultiplyAlpha = String;
 
 /// "attachment" | "inline" | "unspecified"
 typedef PresentationStyle = String;
-
 typedef PublicKeyCredentialType = String;
 
 /// "auth" | "p256dh"
@@ -25552,7 +25518,6 @@ typedef RTCIceComponent = String;
 
 /// "checking" | "closed" | "completed" | "connected" | "disconnected" | "failed" | "new"
 typedef RTCIceConnectionState = String;
-
 typedef RTCIceCredentialType = String;
 
 /// "complete" | "gathering" | "new"
@@ -25578,7 +25543,6 @@ typedef RTCPeerConnectionState = String;
 
 /// "high" | "low" | "medium" | "very-low"
 typedef RTCPriorityType = String;
-
 typedef RTCRtcpMuxPolicy = String;
 
 /// "inactive" | "recvonly" | "sendonly" | "sendrecv" | "stopped"

@@ -7243,7 +7243,6 @@ class WebAssemblyInstantiatedSource {
 
 /// "function" | "global" | "memory" | "table"
 typedef ImportExportKind = String;
-
 typedef TableKind = String;
 
 /// "f32" | "f64" | "i32" | "i64"
@@ -7251,14 +7250,11 @@ typedef ValueType = String;
 
 /// Function | Global | Memory | Table
 typedef ExportValue = dynamic;
-
 typedef Exports = Record<String, ExportValue>;
 
 /// ExportValue | num
 typedef ImportValue = dynamic;
-
 typedef ModuleImports = Record<String, ImportValue>;
-
 typedef Imports = Record<String, ModuleImports>;
 @JS(r'WebAssembly.compile')
 external Promise<Module> compile(BufferSource bytes);
@@ -7526,7 +7522,6 @@ typedef RequestInfo = dynamic;
 
 /// BufferSource | Blob | String
 typedef BlobPart = dynamic;
-
 typedef DOMHighResTimeStamp = num;
 
 /// ImageBitmap | OffscreenCanvas
@@ -7546,14 +7541,11 @@ typedef OnErrorEventHandler = OnErrorEventHandlerNonNull?;
 
 /// String | Function
 typedef TimerHandler = dynamic;
-
 typedef PerformanceEntryList = List<PerformanceEntry>;
 
 /// BufferSource | String
 typedef PushMessageDataInit = dynamic;
-
 typedef ReadableStreamReader<T> = ReadableStreamDefaultReader<T>;
-
 typedef ReadableStreamController<T> = ReadableStreamDefaultController<T>;
 
 /// num | List<num>
@@ -7561,31 +7553,18 @@ typedef VibratePattern = dynamic;
 
 /// String | Algorithm
 typedef AlgorithmIdentifier = dynamic;
-
 typedef HashAlgorithmIdentifier = AlgorithmIdentifier;
-
 typedef BigInteger = Uint8List;
-
 typedef NamedCurve = String;
-
 typedef GLenum = num;
-
 typedef GLboolean = bool;
-
 typedef GLbitfield = num;
-
 typedef GLint = num;
-
 typedef GLsizei = num;
-
 typedef GLintptr = num;
-
 typedef GLsizeiptr = num;
-
 typedef GLuint = num;
-
 typedef GLfloat = num;
-
 typedef GLclampf = num;
 
 /// ImageBitmap | ImageData | OffscreenCanvas
@@ -7596,9 +7575,7 @@ typedef Float32List = dynamic;
 
 /// Int32List | List<GLint>
 typedef Int32List = dynamic;
-
 typedef GLint64 = num;
-
 typedef GLuint64 = num;
 
 /// Uint32List | List<GLuint>
@@ -7606,7 +7583,6 @@ typedef Uint32List = dynamic;
 
 /// TypedData | ByteBuffer
 typedef BufferSource = dynamic;
-
 typedef DOMTimeStamp = num;
 
 /// File | String
