@@ -116,7 +116,7 @@ If --no-write is specified, does not output anything."),
                     if do_format {
                         info!("Formatting {}", lib);
                         let mut file = dart_format(Either::Right(&contents), line_length)?;
-                        let mut buf = String::new();
+                        let mut buf = String::with_capacity(contents.len());
                         file.read_to_string(&mut buf)?;
                         contents = buf;
                     }

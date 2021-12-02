@@ -41,7 +41,7 @@ struct Transformer {
     warnings: u32,
     errors: u32,
     file: Arc<SourceFile>,
-    srcmap: Arc<SourceMap>,
+    // srcmap: Arc<SourceMap>,
     allocs: usize,
     rename_overloads: bool,
     imports: Option<AHashSet<&'static str>>,
@@ -116,7 +116,7 @@ fn visit_program(
         warnings: 0,
         errors: 0,
         file,
-        srcmap,
+        // srcmap,
         allocs: 0,
         rename_overloads,
         undecls: AHashMap::new(),
@@ -468,6 +468,7 @@ impl Transformer {
                 self.semi();
             } else {
                 self.annotate(id);
+                self.push("class ");
             }
         }
     }
@@ -1113,16 +1114,23 @@ impl Transformer {
     /// i.e. `'one' | 'two' | 'three'` or `1 | 2 | 3`
     fn visit_mono_union(&mut self, uni: &TsUnionType) -> bool {
         let ty: &TsType = uni.types.first().as_ref().unwrap();
+        #[allow(unused_parens)]
         let matcher = gen_matcher!(
             ty,
-            TsType::TsLitType(TsLitType {
+            (TsType::TsLitType(TsLitType {
                 lit: TsLit::Str(_),
                 ..
-            }),
-            TsType::TsLitType(TsLitType {
+            }) | TsType::TsKeywordType(TsKeywordType {
+                kind: TsKeywordTypeKind::TsStringKeyword,
+                ..
+            })),
+            (TsType::TsLitType(TsLitType {
                 lit: TsLit::Number(_),
                 ..
-            }),
+            }) | TsType::TsKeywordType(TsKeywordType {
+                kind: TsKeywordTypeKind::TsNumberKeyword,
+                ..
+            })),
             TsType::TsLitType(TsLitType {
                 lit: TsLit::Bool(_),
                 ..

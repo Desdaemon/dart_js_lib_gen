@@ -1,0 +1,3 @@
+interface Config {
+  inputs: string[];
+}

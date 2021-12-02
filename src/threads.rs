@@ -1,37 +1,76 @@
 use scoped_threadpool::Pool;
-use std::sync::mpsc;
+use std::sync::{
+    mpsc::{channel, Receiver, Sender},
+    Arc, Mutex, RwLock,
+};
 
-pub trait MapPar: Iterator + Sized {
-    fn map_par<'a, F, R>(self, func: F) -> Box<dyn Iterator<Item = R> + 'a>
-    where
-        Self::Item: Send,
-        F: FnMut(Self::Item) -> R + Send + Copy,
-        R: Send + Sync + 'a,
-    {
-        self.map_par_with(num_cpus::get() as u32, func)
-    }
+use lazy_static::lazy_static;
 
-    fn map_par_with<'a, F, R>(self, threads: u32, mut func: F) -> Box<dyn Iterator<Item = R> + 'a>
-    where
-        Self::Item: Send,
-        F: FnMut(Self::Item) -> R + Send + Copy,
-        R: Send + Sync + 'a,
-    {
-        let mut pool = Pool::new(threads);
-        let (tx, rx): (mpsc::Sender<R>, _) = mpsc::channel();
-        Box::new(pool.scoped(move |scope| {
-            let count = self
-                .map(|item| {
-                    let tx = tx.clone();
-                    scope.execute(move || {
-                        tx.send(func(item)).unwrap();
-                    })
-                })
-                .count();
-            // Downgrading the closure's lifetime to be the same as R.
-            (0..count).map(Box::new(move |_| rx.recv().unwrap()) as Box<dyn Fn(_) -> _ + 'a>)
-        }))
+lazy_static! {
+    static ref POOL: RwLock<Pool> = Arc::new(Mutex::new(Pool::new(num_cpus::get() as u32)));
+}
+
+pub struct ParIter<T>(T);
+
+pub trait IntoParIter: IntoIterator {
+    fn into_par_iter(self) -> ParIter<Self::IntoIter>;
+}
+
+impl<T> IntoParIter for T
+where
+    T: IntoIterator,
+{
+    fn into_par_iter(self) -> ParIter<Self::IntoIter> {
+        ParIter(self.into_iter())
     }
 }
 
-impl<T: Iterator + Sized> MapPar for T {}
+pub struct ParMap<I, F, R>
+where
+    I: Iterator,
+    F: Fn(I::Item) -> R,
+{
+    iter: I,
+    func: F,
+    channel: (Sender<R>, Receiver<R>),
+}
+
+impl<T> ParIter<T> {
+    fn map<F, R>(self, func: F) -> ParMap<T, F, R>
+    where
+        T: Iterator,
+        F: Fn(T::Item) -> R,
+    {
+        ParMap {
+            iter: self.0,
+            func,
+            channel: channel(),
+        }
+    }
+}
+
+impl<T, F, R> Iterator for ParMap<T, F, R>
+where
+    T: Iterator,
+    T::Item: Send,
+    F: Fn(T::Item) -> R + Copy + Send,
+    R: Send + Sync,
+{
+    type Item = R;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        let item = self.iter.next()?;
+        let (tx, rx) = &self.channel;
+        let pool = POOL.lock().expect("Failed to acquire pool");
+        let out = pool.scoped(|scope| {
+            let tx = tx.clone();
+            // We only need the mapper to be Send, so explicitly borrow f here.
+            let func = self.func;
+            scope.execute(move || {
+                tx.send(func(item)).expect("Failed to send");
+            });
+            rx.recv().expect("Failed to receive")
+        });
+        Some(out)
+    }
+}
