@@ -5,8 +5,10 @@ library samples.mermaidAPI.d.ts;
 import 'package:js/js.dart';
 import "dart:html";
 
+/// "default" | "forest" | "dark" | "neutral"
 typedef Theme = String;
 
+@JS(r'mermaidAPI.LogLevel')
 @JS()
 @anonymous
 class FlowChartConfig {

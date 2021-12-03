@@ -46,6 +46,7 @@ class Symbol {
   external factory Symbol();
 }
 
+/// String | num | dynamic
 typedef PropertyKey = dynamic;
 
 @JS()
@@ -181,6 +182,8 @@ class FunctionConstructor {
 external FunctionConstructor get JFunction;
 @JS(r'Function')
 external set JFunction(FunctionConstructor value);
+
+/// dynamic | null
 typedef ThisParameterType<T> = dynamic;
 typedef OmitThisParameter<T> = dynamic;
 
@@ -814,10 +817,17 @@ class TypedPropertyDescriptor<T> {
   });
 }
 
+/// TFunction | void
 typedef ClassDecorator = dynamic Function<TFunction extends Function>(TFunction target);
+
+/// String | dynamic
 typedef PropertyDecorator = void Function(Object target, dynamic propertyKey);
+
+/// String | dynamic
 typedef MethodDecorator = dynamic Function<T>(
     Object target, dynamic propertyKey, TypedPropertyDescriptor<T> descriptor);
+
+/// String | dynamic
 typedef ParameterDecorator = void Function(Object target, dynamic propertyKey, num parameterIndex);
 typedef PromiseConstructorLike = dynamic Function();
 
@@ -846,6 +856,7 @@ class ArrayLike<T> {
   });
 }
 
+/// TResult2 | PromiseLike<TResult2>
 typedef Partial<T> = dynamic;
 typedef Required<T> = dynamic;
 typedef Readonly<T> = dynamic;

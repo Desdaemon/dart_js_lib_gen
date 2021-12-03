@@ -4583,11 +4583,14 @@ class WorkletOptions {
   });
 }
 
+/// num Function(Node node) | INodeFilter
 typedef NodeFilter = dynamic;
 @JS(r'NodeFilter')
 external INodeFilter get JNodeFilter;
 @JS(r'NodeFilter')
 external set JNodeFilter(INodeFilter value);
+
+/// String? Function(String? prefix) | IXPathNSResolver
 typedef XPathNSResolver = dynamic;
 
 @JS()
@@ -8002,6 +8005,8 @@ class DOMMatrix extends DomMatrixReadOnly {
 external IDOMMatrix get JDOMMatrix;
 @JS(r'DOMMatrix')
 external set JDOMMatrix(IDOMMatrix value);
+
+/// String | List<num>
 typedef SVGMatrix = DomMatrix;
 @JS(r'SVGMatrix')
 external dynamic get JSVGMatrix;
@@ -8114,6 +8119,8 @@ class DOMPoint extends DomPointReadOnly {
 external IDOMPoint get JDOMPoint;
 @JS(r'DOMPoint')
 external set JDOMPoint(IDOMPoint value);
+
+/// String | List<num>
 typedef SVGPoint = DomPoint;
 @JS(r'SVGPoint')
 external dynamic get JSVGPoint;
@@ -20247,6 +20254,8 @@ class URL {
 external IURL get JURL;
 @JS(r'URL')
 external set JURL(IURL value);
+
+/// String | Url
 typedef webkitURL = Url;
 @JS(r'webkitURL')
 external dynamic get webkitURL;
@@ -23521,11 +23530,20 @@ class WebAssemblyInstantiatedSource {
   });
 }
 
+/// "function" | "global" | "memory" | "table"
 typedef ImportExportKind = String;
+
+/// "anyfunc" | "externref"
 typedef TableKind = String;
+
+/// "anyfunc" | "externref" | "f32" | "f64" | "i32" | "i64"
 typedef ValueType = String;
+
+/// Function | Global | Memory | Table
 typedef ExportValue = dynamic;
 typedef Exports = Record<String, ExportValue>;
+
+/// ExportValue | num
 typedef ImportValue = dynamic;
 typedef Imports = Record<String, ModuleImports>;
 typedef ModuleImports = Record<String, ImportValue>;
@@ -24328,6 +24346,7 @@ class SVGElementTagNameMap {
   });
 }
 
+/// Response | PromiseLike<Response>
 typedef ElementTagNameMap = dynamic;
 @JS(r'Audio')
 external IAudio get JAudio;
@@ -25092,25 +25111,53 @@ external void addEventListener1(String type, EventListenerOrEventListenerObject 
 external void removeEventListener<K extends String>(K type, dynamic Function(dynamic ev) listener, dynamic options);
 @JS(r'removeEventListener')
 external void removeEventListener1(String type, EventListenerOrEventListenerObject listener, dynamic options);
+
+/// Algorithm | String
 typedef AlgorithmIdentifier = dynamic;
 typedef BigInteger = Uint8List;
+
+/// ByteBuffer | TypedData
 typedef BinaryData = dynamic;
+
+/// BufferSource | Blob | String
 typedef BlobPart = dynamic;
+
+/// ReadableStream | XMLHttpRequestBodyInit
 typedef BodyInit = dynamic;
+
+/// TypedData | ByteBuffer
 typedef BufferSource = dynamic;
 typedef COSEAlgorithmIdentifier = num;
+
+/// HTMLOrSVGImageElement | VideoElement | CanvasElement | ImageBitmap | OffscreenCanvas
 typedef CanvasImageSource = dynamic;
 typedef ClipboardItemData = Promise<ClipboardItemDataType>;
+
+/// String | Blob
 typedef ClipboardItemDataType = dynamic;
 typedef ClipboardItems = List<ClipboardItem>;
+
+/// bool | ConstrainBooleanParameters
 typedef ConstrainBoolean = dynamic;
+
+/// String | List<String> | ConstrainDOMStringParameters
 typedef ConstrainDOMString = dynamic;
+
+/// num | ConstrainDoubleRange
 typedef ConstrainDouble = dynamic;
+
+/// num | ConstrainULongRange
 typedef ConstrainULong = dynamic;
 typedef DOMHighResTimeStamp = num;
 typedef DOMTimeStamp = num;
+
+/// EventListener | EventListenerObject
 typedef EventListenerOrEventListenerObject = dynamic;
+
+/// Float32List | List<GLfloat>
 typedef Float32List = dynamic;
+
+/// File | String
 typedef FormDataEntryValue = dynamic;
 typedef GLbitfield = num;
 typedef GLboolean = bool;
@@ -25124,178 +25171,498 @@ typedef GLsizei = num;
 typedef GLsizeiptr = num;
 typedef GLuint = num;
 typedef GLuint64 = num;
+
+/// ImageElement | ImageElement
 typedef HTMLOrSVGImageElement = dynamic;
+
+/// ScriptElement | ScriptElement
 typedef HTMLOrSVGScriptElement = dynamic;
 typedef HashAlgorithmIdentifier = AlgorithmIdentifier;
+
+/// List<List<String>> | Record<String,String> | Headers
 typedef HeadersInit = dynamic;
+
+/// num | String | DateTime | BufferSource | List<IDBValidKey>
 typedef IDBValidKey = dynamic;
+
+/// CanvasImageSource | Blob | ImageData
 typedef ImageBitmapSource = dynamic;
+
+/// "beforebegin" | "afterbegin" | "beforeend" | "afterend"
 typedef InsertPosition = String;
+
+/// Int32List | List<GLint>
 typedef Int32List = dynamic;
+
+/// num | AutoKeyword
 typedef LineAndPositionSetting = dynamic;
+
+/// MediaStream | MediaSource | Blob
 typedef MediaProvider = dynamic;
+
+/// WindowProxy | MessagePort | ServiceWorker
 typedef MessageEventSource = dynamic;
+
+/// "attributes" | "characterData" | "childList"
 typedef MutationRecordType = String;
 typedef NamedCurve = String;
+
+/// OnBeforeUnloadEventHandlerNonNull | null
 typedef OnBeforeUnloadEventHandler = OnBeforeUnloadEventHandlerNonNull?;
+
+/// OnErrorEventHandlerNonNull | null
 typedef OnErrorEventHandler = OnErrorEventHandlerNonNull?;
 typedef PerformanceEntryList = List<PerformanceEntry>;
 typedef ReadableStreamController<T> = ReadableStreamDefaultController<T>;
+
+/// ReadableStreamDefaultReadValueResult<T> | ReadableStreamDefaultReadDoneResult
 typedef ReadableStreamDefaultReadResult<T> = dynamic;
 typedef ReadableStreamReader<T> = ReadableStreamDefaultReader<T>;
+
+/// CanvasRenderingContext2D | ImageBitmapRenderingContext | RenderingContext | WebGL2RenderingContext
 typedef RenderingContext = dynamic;
+
+/// Request | String
 typedef RequestInfo = dynamic;
+
+/// ImageBitmap | ImageData | ImageElement | CanvasElement | VideoElement | OffscreenCanvas
 typedef TexImageSource = dynamic;
+
+/// String | Function
 typedef TimerHandler = dynamic;
+
+/// ByteBuffer | MessagePort | ImageBitmap
 typedef Transferable = dynamic;
+
+/// Uint32List | List<GLuint>
 typedef Uint32List = dynamic;
 typedef UvmEntries = List<UvmEntry>;
 typedef UvmEntry = List<num>;
+
+/// num | List<num>
 typedef VibratePattern = dynamic;
 typedef WindowProxy = Window;
+
+/// Blob | BufferSource | FormData | URLSearchParams | String
 typedef XMLHttpRequestBodyInit = dynamic;
+
+/// "center" | "end" | "left" | "right" | "start"
 typedef AlignSetting = String;
+
+/// "finished" | "idle" | "paused" | "running"
 typedef AnimationPlayState = String;
+
+/// "active" | "persisted" | "removed"
 typedef AnimationReplaceState = String;
+
+/// "segments" | "sequence"
 typedef AppendMode = String;
+
+/// "direct" | "enterprise" | "indirect" | "none"
 typedef AttestationConveyancePreference = String;
+
+/// "balanced" | "interactive" | "playback"
 typedef AudioContextLatencyCategory = String;
+
+/// "closed" | "running" | "suspended"
 typedef AudioContextState = String;
+
+/// "cross-platform" | "platform"
 typedef AuthenticatorAttachment = String;
+
+/// "ble" | "internal" | "nfc" | "usb"
 typedef AuthenticatorTransport = String;
 typedef AutoKeyword = String;
+
+/// "a-rate" | "k-rate"
 typedef AutomationRate = String;
+
+/// "arraybuffer" | "blob"
 typedef BinaryType = String;
+
+/// "allpass" | "bandpass" | "highpass" | "highshelf" | "lowpass" | "lowshelf" | "notch" | "peaking"
 typedef BiquadFilterType = String;
+
+/// "" | "maybe" | "probably"
 typedef CanPlayTypeResult = String;
+
+/// "inherit" | "ltr" | "rtl"
 typedef CanvasDirection = String;
+
+/// "evenodd" | "nonzero"
 typedef CanvasFillRule = String;
+
+/// "auto" | "none" | "normal"
 typedef CanvasFontKerning = String;
+
+/// "condensed" | "expanded" | "extra-condensed" | "extra-expanded" | "normal" | "semi-condensed" | "semi-expanded" | "ultra-condensed" | "ultra-expanded"
 typedef CanvasFontStretch = String;
+
+/// "all-petite-caps" | "all-small-caps" | "normal" | "petite-caps" | "small-caps" | "titling-caps" | "unicase"
 typedef CanvasFontVariantCaps = String;
+
+/// "butt" | "round" | "square"
 typedef CanvasLineCap = String;
+
+/// "bevel" | "miter" | "round"
 typedef CanvasLineJoin = String;
+
+/// "center" | "end" | "left" | "right" | "start"
 typedef CanvasTextAlign = String;
+
+/// "alphabetic" | "bottom" | "hanging" | "ideographic" | "middle" | "top"
 typedef CanvasTextBaseline = String;
+
+/// "auto" | "geometricPrecision" | "optimizeLegibility" | "optimizeSpeed"
 typedef CanvasTextRendering = String;
+
+/// "clamped-max" | "explicit" | "max"
 typedef ChannelCountMode = String;
+
+/// "discrete" | "speakers"
 typedef ChannelInterpretation = String;
+
+/// "all" | "sharedworker" | "window" | "worker"
 typedef ClientTypes = String;
+
+/// "p3" | "rec2020" | "srgb"
 typedef ColorGamut = String;
+
+/// "default" | "none"
 typedef ColorSpaceConversion = String;
+
+/// "accumulate" | "add" | "replace"
 typedef CompositeOperation = String;
+
+/// "accumulate" | "add" | "auto" | "replace"
 typedef CompositeOperationOrAuto = String;
+
+/// "bluetooth" | "cellular" | "ethernet" | "mixed" | "none" | "other" | "unknown" | "wifi"
 typedef ConnectionType = String;
+
+/// "optional" | "required" | "silent"
 typedef CredentialMediationRequirement = String;
+
+/// "application/xhtml+xml" | "application/xml" | "image/svg+xml" | "text/html" | "text/xml"
 typedef DOMParserSupportedType = String;
+
+/// "" | "lr" | "rl"
 typedef DirectionSetting = String;
+
+/// "application" | "browser" | "monitor" | "window"
 typedef DisplayCaptureSurfaceType = String;
+
+/// "exponential" | "inverse" | "linear"
 typedef DistanceModelType = String;
+
+/// "complete" | "interactive" | "loading"
 typedef DocumentReadyState = String;
+
+/// "decode" | "network"
 typedef EndOfStreamError = String;
+
+/// "native" | "transparent"
 typedef EndingType = String;
+
+/// "auto" | "backwards" | "both" | "forwards" | "none"
 typedef FillMode = String;
+
+/// "error" | "loaded" | "loading" | "unloaded"
 typedef FontFaceLoadStatus = String;
+
+/// "loaded" | "loading"
 typedef FontFaceSetLoadStatus = String;
+
+/// "auto" | "hide" | "show"
 typedef FullscreenNavigationUI = String;
 typedef GamepadHapticActuatorType = String;
+
+/// "" | "standard" | "xr-standard"
 typedef GamepadMappingType = String;
+
+/// "smpteSt2086" | "smpteSt2094-10" | "smpteSt2094-40"
 typedef HdrMetadataType = String;
+
+/// "next" | "nextunique" | "prev" | "prevunique"
 typedef IDBCursorDirection = String;
+
+/// "done" | "pending"
 typedef IDBRequestReadyState = String;
+
+/// "readonly" | "readwrite" | "versionchange"
 typedef IDBTransactionMode = String;
+
+/// "flipY" | "none"
 typedef ImageOrientation = String;
+
+/// "high" | "low" | "medium"
 typedef ImageSmoothingQuality = String;
+
+/// "accumulate" | "replace"
 typedef IterationCompositeOperation = String;
+
+/// "jwk" | "pkcs8" | "raw" | "spki"
 typedef KeyFormat = String;
+
+/// "private" | "public" | "secret"
 typedef KeyType = String;
+
+/// "decrypt" | "deriveBits" | "deriveKey" | "encrypt" | "sign" | "unwrapKey" | "verify" | "wrapKey"
 typedef KeyUsage = String;
+
+/// "center" | "end" | "start"
 typedef LineAlignSetting = String;
+
+/// "file" | "media-source" | "webrtc"
 typedef MediaDecodingType = String;
+
+/// "audioinput" | "audiooutput" | "videoinput"
 typedef MediaDeviceKind = String;
+
+/// "record" | "webrtc"
 typedef MediaEncodingType = String;
+
+/// "individualization-request" | "license-release" | "license-renewal" | "license-request"
 typedef MediaKeyMessageType = String;
+
+/// "persistent-license" | "temporary"
 typedef MediaKeySessionType = String;
+
+/// "expired" | "internal-error" | "output-downscaled" | "output-restricted" | "released" | "status-pending" | "usable" | "usable-in-future"
 typedef MediaKeyStatus = String;
+
+/// "not-allowed" | "optional" | "required"
 typedef MediaKeysRequirement = String;
+
+/// "hangup" | "nexttrack" | "pause" | "play" | "previoustrack" | "seekbackward" | "seekforward" | "seekto" | "skipad" | "stop" | "togglecamera" | "togglemicrophone"
 typedef MediaSessionAction = String;
+
+/// "none" | "paused" | "playing"
 typedef MediaSessionPlaybackState = String;
+
+/// "ended" | "live"
 typedef MediaStreamTrackState = String;
+
+/// "back_forward" | "navigate" | "prerender" | "reload"
 typedef NavigationType = String;
+
+/// "auto" | "ltr" | "rtl"
 typedef NotificationDirection = String;
+
+/// "default" | "denied" | "granted"
 typedef NotificationPermission = String;
+
+/// "any" | "landscape" | "landscape-primary" | "landscape-secondary" | "natural" | "portrait" | "portrait-primary" | "portrait-secondary"
 typedef OrientationLockType = String;
+
+/// "landscape-primary" | "landscape-secondary" | "portrait-primary" | "portrait-secondary"
 typedef OrientationType = String;
+
+/// "custom" | "sawtooth" | "sine" | "square" | "triangle"
 typedef OscillatorType = String;
+
+/// "2x" | "4x" | "none"
 typedef OverSampleType = String;
+
+/// "HRTF" | "equalpower"
 typedef PanningModelType = String;
+
+/// "fail" | "success" | "unknown"
 typedef PaymentComplete = String;
+
+/// "geolocation" | "notifications" | "persistent-storage" | "push"
 typedef PermissionName = String;
+
+/// "denied" | "granted" | "prompt"
 typedef PermissionState = String;
+
+/// "alternate" | "alternate-reverse" | "normal" | "reverse"
 typedef PlaybackDirection = String;
+
+/// "auto" | "center" | "line-left" | "line-right"
 typedef PositionAlignSetting = String;
+
+/// "display-p3" | "srgb"
 typedef PredefinedColorSpace = String;
+
+/// "default" | "none" | "premultiply"
 typedef PremultiplyAlpha = String;
+
+/// "attachment" | "inline" | "unspecified"
 typedef PresentationStyle = String;
 typedef PublicKeyCredentialType = String;
+
+/// "auth" | "p256dh"
 typedef PushEncryptionKeyName = String;
+
+/// "denied" | "granted" | "prompt"
 typedef PushPermissionState = String;
+
+/// "balanced" | "max-bundle" | "max-compat"
 typedef RTCBundlePolicy = String;
+
+/// "closed" | "closing" | "connecting" | "open"
 typedef RTCDataChannelState = String;
+
+/// "balanced" | "maintain-framerate" | "maintain-resolution"
 typedef RTCDegradationPreference = String;
+
+/// "closed" | "connected" | "connecting" | "failed" | "new"
 typedef RTCDtlsTransportState = String;
+
+/// "host" | "prflx" | "relay" | "srflx"
 typedef RTCIceCandidateType = String;
+
+/// "rtcp" | "rtp"
 typedef RTCIceComponent = String;
+
+/// "checking" | "closed" | "completed" | "connected" | "disconnected" | "failed" | "new"
 typedef RTCIceConnectionState = String;
 typedef RTCIceCredentialType = String;
+
+/// "complete" | "gathering" | "new"
 typedef RTCIceGathererState = String;
+
+/// "complete" | "gathering" | "new"
 typedef RTCIceGatheringState = String;
+
+/// "tcp" | "udp"
 typedef RTCIceProtocol = String;
+
+/// "active" | "passive" | "so"
 typedef RTCIceTcpCandidateType = String;
+
+/// "all" | "relay"
 typedef RTCIceTransportPolicy = String;
+
+/// "checking" | "closed" | "completed" | "connected" | "disconnected" | "failed" | "new"
 typedef RTCIceTransportState = String;
+
+/// "closed" | "connected" | "connecting" | "disconnected" | "failed" | "new"
 typedef RTCPeerConnectionState = String;
+
+/// "high" | "low" | "medium" | "very-low"
 typedef RTCPriorityType = String;
 typedef RTCRtcpMuxPolicy = String;
+
+/// "inactive" | "recvonly" | "sendonly" | "sendrecv" | "stopped"
 typedef RTCRtpTransceiverDirection = String;
+
+/// "answer" | "offer" | "pranswer" | "rollback"
 typedef RTCSdpType = String;
+
+/// "closed" | "have-local-offer" | "have-local-pranswer" | "have-remote-offer" | "have-remote-pranswer" | "stable"
 typedef RTCSignalingState = String;
+
+/// "failed" | "frozen" | "in-progress" | "inprogress" | "succeeded" | "waiting"
 typedef RTCStatsIceCandidatePairState = String;
+
+/// "candidate-pair" | "certificate" | "codec" | "csrc" | "data-channel" | "inbound-rtp" | "local-candidate" | "media-source" | "outbound-rtp" | "peer-connection" | "remote-candidate" | "remote-inbound-rtp" | "remote-outbound-rtp" | "track" | "transport"
 typedef RTCStatsType = String;
+
+/// "closed" | "ended" | "open"
 typedef ReadyState = String;
+
+/// "inactive" | "paused" | "recording"
 typedef RecordingState = String;
+
+/// "" | "no-referrer" | "no-referrer-when-downgrade" | "origin" | "origin-when-cross-origin" | "same-origin" | "strict-origin" | "strict-origin-when-cross-origin" | "unsafe-url"
 typedef ReferrerPolicy = String;
+
+/// "connected" | "connecting" | "disconnected"
 typedef RemotePlaybackState = String;
+
+/// "default" | "force-cache" | "no-cache" | "no-store" | "only-if-cached" | "reload"
 typedef RequestCache = String;
+
+/// "include" | "omit" | "same-origin"
 typedef RequestCredentials = String;
+
+/// "" | "audio" | "audioworklet" | "document" | "embed" | "font" | "frame" | "iframe" | "image" | "manifest" | "object" | "paintworklet" | "report" | "script" | "sharedworker" | "style" | "track" | "video" | "worker" | "xslt"
 typedef RequestDestination = String;
+
+/// "cors" | "navigate" | "no-cors" | "same-origin"
 typedef RequestMode = String;
+
+/// "error" | "follow" | "manual"
 typedef RequestRedirect = String;
+
+/// "discouraged" | "preferred" | "required"
 typedef ResidentKeyRequirement = String;
+
+/// "border-box" | "content-box" | "device-pixel-content-box"
 typedef ResizeObserverBoxOptions = String;
+
+/// "high" | "low" | "medium" | "pixelated"
 typedef ResizeQuality = String;
+
+/// "basic" | "cors" | "default" | "error" | "opaque" | "opaqueredirect"
 typedef ResponseType = String;
+
+/// "auto" | "smooth"
 typedef ScrollBehavior = String;
+
+/// "center" | "end" | "nearest" | "start"
 typedef ScrollLogicalPosition = String;
+
+/// "auto" | "manual"
 typedef ScrollRestoration = String;
+
+/// "" | "up"
 typedef ScrollSetting = String;
+
+/// "enforce" | "report"
 typedef SecurityPolicyViolationEventDisposition = String;
+
+/// "end" | "preserve" | "select" | "start"
 typedef SelectionMode = String;
+
+/// "activated" | "activating" | "installed" | "installing" | "parsed" | "redundant"
 typedef ServiceWorkerState = String;
+
+/// "all" | "imports" | "none"
 typedef ServiceWorkerUpdateViaCache = String;
+
+/// "closed" | "open"
 typedef ShadowRootMode = String;
+
+/// "manual" | "named"
 typedef SlotAssignmentMode = String;
+
+/// "aborted" | "audio-capture" | "bad-grammar" | "language-not-supported" | "network" | "no-speech" | "not-allowed" | "service-not-allowed"
 typedef SpeechRecognitionErrorCode = String;
+
+/// "audio-busy" | "audio-hardware" | "canceled" | "interrupted" | "invalid-argument" | "language-unavailable" | "network" | "not-allowed" | "synthesis-failed" | "synthesis-unavailable" | "text-too-long" | "voice-unavailable"
 typedef SpeechSynthesisErrorCode = String;
+
+/// "captions" | "chapters" | "descriptions" | "metadata" | "subtitles"
 typedef TextTrackKind = String;
+
+/// "disabled" | "hidden" | "showing"
 typedef TextTrackMode = String;
+
+/// "direct" | "stylus"
 typedef TouchType = String;
+
+/// "hlg" | "pq" | "srgb"
 typedef TransferFunction = String;
+
+/// "discouraged" | "preferred" | "required"
 typedef UserVerificationRequirement = String;
+
+/// "environment" | "left" | "right" | "user"
 typedef VideoFacingModeEnum = String;
+
+/// "hidden" | "visible"
 typedef VisibilityState = String;
+
+/// "default" | "high-performance" | "low-power"
 typedef WebGLPowerPreference = String;
+
+/// "classic" | "module"
 typedef WorkerType = String;
+
+/// "" | "arraybuffer" | "blob" | "document" | "json" | "text"
 typedef XMLHttpRequestResponseType = String;
 
 @JS()
@@ -27618,22 +27985,7 @@ class INode {
 @JS()
 @anonymous
 class INodeFilter {
-  external num get FILTER_ACCEPT;
-  external num get FILTER_REJECT;
-  external num get FILTER_SKIP;
-  external num get SHOW_ALL;
-  external num get SHOW_ATTRIBUTE;
-  external num get SHOW_CDATA_SECTION;
-  external num get SHOW_COMMENT;
-  external num get SHOW_DOCUMENT;
-  external num get SHOW_DOCUMENT_FRAGMENT;
-  external num get SHOW_DOCUMENT_TYPE;
-  external num get SHOW_ELEMENT;
-  external num get SHOW_ENTITY;
-  external num get SHOW_ENTITY_REFERENCE;
-  external num get SHOW_NOTATION;
-  external num get SHOW_PROCESSING_INSTRUCTION;
-  external num get SHOW_TEXT;
+  external num acceptNode(Node node);
 }
 
 @JS()
@@ -30722,6 +31074,12 @@ class IXPathExpression {
 
 @JS()
 @anonymous
+class IXPathNSResolver {
+  external String? lookupNamespaceURI(String? prefix);
+}
+
+@JS()
+@anonymous
 class IXPathResult {
   external XPathResult get prototype;
   external set prototype(XPathResult value);
@@ -30746,5 +31104,7 @@ class IXSLTProcessor {
   external factory IXSLTProcessor();
 }
 
+typedef ArrayBufferLike = dynamic;
 typedef Error = dynamic;
+typedef PromiseLike<T> = dynamic;
 typedef Record<T, U> = dynamic;

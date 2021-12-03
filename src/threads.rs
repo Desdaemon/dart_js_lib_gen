@@ -77,6 +77,8 @@ pub trait MapPar: Iterator + Sized {
         })
     }
 
+    /// Maps the elements of this iterator in parallel.
+    /// The iterator returned does not preserve encounter order.
     fn map_par<F, R>(self, func: F) -> ParallelMap<Self, F, R>
     where
         Self::Item: Send,
