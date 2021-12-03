@@ -1,6 +1,5 @@
 use crate::threads::MapPar;
 use crate::transform::ProgramVisitor;
-use ariadne::ReportKind;
 use log::debug;
 use std::path::Path;
 use std::sync::Arc;
@@ -38,50 +37,45 @@ pub struct Library<'a> {
     pub errors: Vec<Message>,
 }
 
-pub struct Message {
-    pub kind: ReportKind,
-    pub report: Report,
+pub enum Message {
+    Warning(Report),
+    Error(Report),
 }
 
 pub type Report = ariadne::Report<(String, Range<usize>)>;
-pub type Source = (String, ariadne::Source);
-pub type LibraryResult<'a> = (&'a str, String, Vec<Message>, Source);
-
-// pub struct LibraryResult<'a>(pub &'a str, pub String, pub Vec<Message>, pub Source);
+pub type LibraryResult<'a> = (&'a str, String, Vec<Message>, (String, ariadne::Source));
 
 pub fn parse_library(config: Config) -> impl Iterator<Item = LibraryResult> {
     let gen_undecl_typedef = config.dynamic_undefs;
     let rename_overloads = config.rename_overloads;
     let imports = config.imports;
     let modules = parse_modules(config);
-    modules
-        .into_iter()
-        .map_par(|(key, (srcmap, file, module))| {
-            let library_name = &path_to_lib_name(Path::new(&key));
-            let hint = (file.byte_length() / 3) as usize;
-            let (value, messages, source) = ProgramVisitor {
-                srcmap,
-                file,
-                module,
-                library_name,
-                gen_undecl_typedef,
-                rename_overloads,
-                imports,
-                size_hint: Some(hint),
-            }
-            .visit_program();
-            debug!(
-                "{}
+    modules.into_iter().map_par(move |(key, (file, module))| {
+        let library_name = &path_to_lib_name(Path::new(&key));
+        let hint = (file.byte_length() / 3) as usize;
+        let ariadne_src = ariadne::Source::from(&*file.src);
+        let (value, messages, source) = ProgramVisitor {
+            file,
+            module,
+            library_name,
+            gen_undecl_typedef,
+            rename_overloads,
+            imports,
+            size_hint: Some(hint),
+        }
+        .visit_program();
+        debug!(
+            "{}
     Hint\tLength\tCap.\tRatio
     {}\t{}\t{}\t{}",
-                key,
-                hint,
-                value.len(),
-                value.capacity(),
-                (value.len() as f64) / (value.capacity() as f64)
-            );
-            (key, value, messages, source)
-        })
+            key,
+            hint,
+            value.len(),
+            value.capacity(),
+            (value.len() as f64) / (value.capacity() as f64)
+        );
+        (key, value, messages, (source, ariadne_src))
+    })
 }
 
 fn path_to_lib_name(buf: &Path) -> String {
@@ -100,7 +94,7 @@ fn to_dart_compat_ident(input: &str) -> String {
     input.replace("-", "_")
 }
 
-pub type ModuleSrc = (Arc<SourceMap>, Arc<SourceFile>, Module);
+pub type ModuleSrc = (Arc<SourceFile>, Module);
 
 fn parse_modules(config: Config) -> HashMap<&str, ModuleSrc> {
     let cm: Arc<SourceMap> = Default::default();
@@ -131,7 +125,7 @@ fn parse_modules(config: Config) -> HashMap<&str, ModuleSrc> {
             .parse_module()
             .map_err(|e| e.into_diagnostic(&handler).emit())
             .unwrap_or_else(|_| panic!("failed to parse module {}", input));
-        modules.insert(input, (Arc::clone(&cm), fm, module));
+        modules.insert(input, (fm, module));
     }
     modules
 }

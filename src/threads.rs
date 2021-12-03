@@ -1,76 +1,90 @@
 use scoped_threadpool::Pool;
-use std::sync::{
-    mpsc::{channel, Receiver, Sender},
-    Arc, Mutex, RwLock,
-};
+use std::sync::mpsc::{channel, Sender};
 
-use lazy_static::lazy_static;
-
-lazy_static! {
-    static ref POOL: RwLock<Pool> = Arc::new(Mutex::new(Pool::new(num_cpus::get() as u32)));
-}
-
-pub struct ParIter<T>(T);
-
-pub trait IntoParIter: IntoIterator {
-    fn into_par_iter(self) -> ParIter<Self::IntoIter>;
-}
-
-impl<T> IntoParIter for T
-where
-    T: IntoIterator,
-{
-    fn into_par_iter(self) -> ParIter<Self::IntoIter> {
-        ParIter(self.into_iter())
-    }
-}
-
-pub struct ParMap<I, F, R>
+pub enum ParallelMap<I, F, R>
 where
     I: Iterator,
-    F: Fn(I::Item) -> R,
+    F: FnMut(I::Item) -> R,
+{
+    Raw(ParallelMapRaw<I, F, R>),
+    Processed(std::vec::IntoIter<R>),
+}
+
+pub struct ParallelMapRaw<I, F, R>
+where
+    I: Iterator,
+    F: FnMut(I::Item) -> R,
 {
     iter: I,
     func: F,
-    channel: (Sender<R>, Receiver<R>),
+    threads: u32,
 }
 
-impl<T> ParIter<T> {
-    fn map<F, R>(self, func: F) -> ParMap<T, F, R>
-    where
-        T: Iterator,
-        F: Fn(T::Item) -> R,
-    {
-        ParMap {
-            iter: self.0,
-            func,
-            channel: channel(),
+impl<I, F, R> Iterator for ParallelMap<I, F, R>
+where
+    I: Iterator,
+    I::Item: Send,
+    F: FnMut(I::Item) -> R + Send + Copy,
+    R: Send + Sync,
+{
+    type Item = R;
+    fn next(&mut self) -> Option<Self::Item> {
+        match self {
+            Self::Processed(iter) => iter.next(),
+            Self::Raw(ParallelMapRaw {
+                threads,
+                iter,
+                func,
+            }) => {
+                let proc = {
+                    let mut pool = Pool::new(*threads);
+                    let (tx, rx): (Sender<R>, _) = channel();
+                    pool.scoped(|scope| {
+                        let count = iter
+                            .map(|item| {
+                                let tx = tx.clone();
+                                let mut func = *func;
+                                scope.execute(move || {
+                                    tx.send(func(item)).unwrap();
+                                })
+                            })
+                            .count();
+                        (0..count)
+                            .map(move |_| rx.recv().unwrap())
+                            .collect::<Vec<_>>()
+                            .into_iter()
+                    })
+                };
+                *self = Self::Processed(proc);
+                self.next()
+            }
         }
     }
 }
 
-impl<T, F, R> Iterator for ParMap<T, F, R>
-where
-    T: Iterator,
-    T::Item: Send,
-    F: Fn(T::Item) -> R + Copy + Send,
-    R: Send + Sync,
-{
-    type Item = R;
+pub trait MapPar: Iterator + Sized {
+    /// Similar to [map_par](MapPar::map_par), but allows specifying the number of threads to use.
+    fn map_par_with<F, R>(self, threads: u32, func: F) -> ParallelMap<Self, F, R>
+    where
+        Self::Item: Send,
+        F: FnMut(Self::Item) -> R + Send + Copy,
+        R: Send + Sync,
+    {
+        ParallelMap::Raw(ParallelMapRaw {
+            iter: self,
+            func,
+            threads,
+        })
+    }
 
-    fn next(&mut self) -> Option<Self::Item> {
-        let item = self.iter.next()?;
-        let (tx, rx) = &self.channel;
-        let pool = POOL.lock().expect("Failed to acquire pool");
-        let out = pool.scoped(|scope| {
-            let tx = tx.clone();
-            // We only need the mapper to be Send, so explicitly borrow f here.
-            let func = self.func;
-            scope.execute(move || {
-                tx.send(func(item)).expect("Failed to send");
-            });
-            rx.recv().expect("Failed to receive")
-        });
-        Some(out)
+    fn map_par<F, R>(self, func: F) -> ParallelMap<Self, F, R>
+    where
+        Self::Item: Send,
+        F: FnMut(Self::Item) -> R + Send + Copy,
+        R: Send + Sync,
+    {
+        self.map_par_with(num_cpus::get() as u32, func)
     }
 }
+
+impl<T> MapPar for T where T: Iterator + Sized {}

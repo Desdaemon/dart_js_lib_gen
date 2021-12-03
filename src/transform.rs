@@ -1,6 +1,6 @@
 use crate::api::Report;
-use crate::api::Source;
 use std::borrow::Cow;
+use std::fmt::Write;
 use std::ops::Range;
 use std::sync::Arc;
 
@@ -8,7 +8,6 @@ use ahash::{AHashMap, AHashSet};
 use ariadne::{Color, Fmt, Label, ReportKind};
 use log::log_enabled;
 use log::{debug, error, info, warn, Level};
-use swc_common::SourceMap;
 use swc_common::{BytePos, SourceFile, Span};
 use swc_ecma_ast::*;
 
@@ -29,6 +28,7 @@ struct Transformer {
     /// Undeclared type usages, with some number of type parameters and span information.
     undecls: TypeResolutionMap,
     resolved: TypeResolutionMap,
+    /// Functions and globals.
     symbols: AHashMap<String, Range<usize>>,
     /// Keeps track of the ident of the variable declaration being evaluated.
     current_ident: Option<String>,
@@ -37,15 +37,16 @@ struct Transformer {
     /// The span of the parent element.
     span: Range<usize>,
     /// Used by ariadne for reporting.
-    source: Source,
-    warnings: u32,
-    errors: u32,
+    source: String,
     file: Arc<SourceFile>,
     // srcmap: Arc<SourceMap>,
     allocs: usize,
     rename_overloads: bool,
     imports: Option<AHashSet<&'static str>>,
     messages: Vec<Message>,
+    /// Comments to annotate the current item.
+    /// Currently only used for type aliases.
+    comments: Option<Vec<String>>,
 }
 
 struct Class {
@@ -60,21 +61,21 @@ struct Class {
 }
 
 /// Parses a pattern as an ident.
-fn parse_pat(pat: &Pat) -> Option<&str> {
+fn extract_ident_from(pat: &Pat) -> Option<&str> {
     match pat {
         Pat::Ident(id) => Some(id.id.sym.as_ref()),
         _ => None,
     }
 }
 
+/// Generates up to 26 type parameters starting from T, wrapping to A then up to S.
 fn generate_type_param(count: usize) -> impl Iterator<Item = char> {
-    ('T'..'Z').chain('A'..'O').take(count)
+    ('T'..='Z').chain('A'..='S').take(count)
 }
 
 pub struct ProgramVisitor<'a> {
     pub module: Module,
     pub file: Arc<SourceFile>,
-    pub srcmap: Arc<SourceMap>,
     pub library_name: &'a str,
     pub size_hint: Option<usize>,
     pub gen_undecl_typedef: bool,
@@ -83,7 +84,7 @@ pub struct ProgramVisitor<'a> {
 }
 
 impl ProgramVisitor<'_> {
-    pub fn visit_program(self) -> (String, Vec<Message>, Source) {
+    pub fn visit_program(self) -> (String, Vec<Message>, String) {
         visit_program(self)
     }
 }
@@ -92,14 +93,13 @@ fn visit_program(
     ProgramVisitor {
         module,
         file,
-        srcmap,
         library_name,
         size_hint,
         gen_undecl_typedef,
         rename_overloads,
         imports,
     }: ProgramVisitor,
-) -> (String, Vec<Message>, Source) {
+) -> (String, Vec<Message>, String) {
     let buf = match size_hint {
         Some(size) => String::with_capacity(size),
         None => String::new(),
@@ -111,12 +111,10 @@ fn visit_program(
         messages: vec![],
         class: None,
         current_ident: None,
+        comments: None,
         span: 0..0,
-        source: (file_path.to_string(), ariadne::Source::from(&*file.src)),
-        warnings: 0,
-        errors: 0,
+        source: file_path.to_string(),
         file,
-        // srcmap,
         allocs: 0,
         rename_overloads,
         undecls: AHashMap::new(),
@@ -178,18 +176,25 @@ import 'package:js/js.dart';",
         header.push_str(imp);
         header.push_str("\";");
     }
-    if t.errors != 0 || t.warnings != 0 {
+    let (errors, warnings) = t.messages.iter().fold((0, 0), |mut acc, x| {
+        match x {
+            Message::Error(_) => {
+                acc.0 += 1;
+            }
+            Message::Warning(_) => {
+                acc.1 += 1;
+            }
+        }
+        acc
+    });
+    if errors != 0 || warnings != 0 {
         info!(
             "Parsed {} with {} {} and {} {}.",
             &file_path,
-            t.errors,
-            if t.errors == 1 { "error" } else { "errors" },
-            t.warnings,
-            if t.warnings == 1 {
-                "warning"
-            } else {
-                "warnings"
-            }
+            errors,
+            if errors == 1 { "error" } else { "errors" },
+            warnings,
+            if warnings == 1 { "warning" } else { "warnings" }
         );
     }
     debug!(
@@ -202,13 +207,14 @@ import 'package:js/js.dart';",
 }
 
 impl Transformer {
-    fn buf(&self) -> &String {
-        self.bufs.last().unwrap()
+    #[inline]
+    fn buf(&mut self) -> &mut String {
+        self.bufs.last_mut().unwrap()
     }
 
     fn push(&mut self, input: &str) {
         #[cfg(not(feature = "alloc_counter"))]
-        self.bufs.last_mut().unwrap().push_str(input);
+        self.buf().push_str(input);
 
         #[cfg(feature = "alloc_counter")]
         {
@@ -220,7 +226,7 @@ impl Transformer {
 
     fn push_char(&mut self, c: char) {
         #[cfg(not(feature = "alloc_counter"))]
-        self.bufs.last_mut().unwrap().push(c);
+        self.buf().push(c);
 
         #[cfg(feature = "alloc_counter")]
         {
@@ -232,7 +238,7 @@ impl Transformer {
 
     /// Remove a single character from the buffer.
     fn pop(&mut self) {
-        self.bufs.last_mut().unwrap().pop();
+        self.buf().pop();
     }
 
     /// Performs [fun] in a temporary buffer and
@@ -262,32 +268,25 @@ impl Transformer {
     fn valid_ts_prop_ident<'a>(&mut self, id: &'a str, span: Range<usize>) -> Option<&'a str> {
         match self.valid_identifier(id, span.clone()) {
             Some(id) if id.starts_with('_') => {
-                self.warnings += 1;
-                if log_enabled!(Level::Warn) {
-                    let (path, _) = &self.source;
-                    let intr_span = self.span.clone();
-                    let report = Report::build(ReportKind::Warning, path, span.start)
-                        .with_message("Dart private property in interface")
-                        .with_label(
-                            Label::new((path.clone(), span))
-                                .with_message("Remove or rename this property".fg(Color::Yellow))
-                                .with_color(Color::Yellow),
-                        )
-                        .with_label(
-                            Label::new((path.clone(), intr_span))
-                                .with_message(
-                                    "This interface includes a Dart private property."
-                                        .fg(Color::Blue),
-                                )
-                                .with_color(Color::Blue),
-                        )
-                        .with_note("dart2js does not permit private named parameters, so this interface cannot be constructed without modifications.")
-                        .finish();
-                    self.messages.push(Message {
-                        report,
-                        kind: ReportKind::Warning,
-                    });
-                }
+                let path = &self.source;
+                let intr_span = self.span.clone();
+                let report = Report::build(ReportKind::Warning, path, span.start)
+                    .with_message("Dart private property in interface")
+                    .with_label(
+                        Label::new((path.clone(), span))
+                            .with_message("Remove or rename this property".fg(Color::Yellow))
+                            .with_color(Color::Yellow),
+                    )
+                    .with_label(
+                        Label::new((path.clone(), intr_span))
+                            .with_message(
+                                "This interface includes a Dart private property.".fg(Color::Blue),
+                            )
+                            .with_color(Color::Blue),
+                    )
+                    .with_note("Interface members staring with underscores are invalid in Dart.")
+                    .finish();
+                self.messages.push(Message::Warning(report));
                 None
             }
             id => id,
@@ -296,48 +295,35 @@ impl Transformer {
 
     fn valid_identifier<'a>(&mut self, id: &'a str, span: Range<usize>) -> Option<&'a str> {
         if id.contains('-') {
-            self.warnings += 1;
-            if log_enabled!(Level::Warn) {
-                let (path, _) = &self.source;
-                let report = Report::build(ReportKind::Warning, path, span.start)
-                    .with_message("Invalid character in identifier")
-                    .with_label(
-                        Label::new((path.clone(), span))
-                            .with_message("Rename this identifier".fg(Color::Yellow))
-                            .with_color(Color::Yellow),
-                    )
-                    .finish();
-                self.messages.push(Message {
-                    report,
-                    kind: ReportKind::Warning,
-                });
-            }
+            let path = &self.source;
+            let report = Report::build(ReportKind::Warning, path, span.start)
+                .with_message("Invalid character in identifier")
+                .with_label(
+                    Label::new((path.clone(), span))
+                        .with_message("Rename this identifier".fg(Color::Yellow))
+                        .with_color(Color::Yellow),
+                )
+                .finish();
+            self.messages.push(Message::Warning(report));
             None
         } else if FORBIDDEN_IDENTS.contains(&id) {
-            self.warnings += 1;
-            if log_enabled!(Level::Warn) {
-                let (path, _) = &self.source;
-                let report = Report::build(ReportKind::Warning, path, span.start)
-                    .with_message("Dart reserved identifier")
-                    .with_label(
-                        Label::new((path.clone(), span))
-                            .with_message(format!("{} is reserved by Dart.", id).fg(Color::Yellow))
-                            .with_color(Color::Yellow),
-                    )
-                    .with_label(
-                        Label::new((path.clone(), self.span.clone()))
-                            .with_message(
-                                "This interface/class contains the invalid identifier."
-                                    .fg(Color::Blue),
-                            )
-                            .with_color(Color::Blue),
-                    )
-                    .finish();
-                self.messages.push(Message {
-                    report,
-                    kind: ReportKind::Warning,
-                });
-            }
+            let path = &self.source;
+            let report = Report::build(ReportKind::Warning, path, span.start)
+                .with_message("Dart reserved identifier")
+                .with_label(
+                    Label::new((path.clone(), span))
+                        .with_message(format!("{} is reserved by Dart.", id).fg(Color::Yellow))
+                        .with_color(Color::Yellow),
+                )
+                .with_label(
+                    Label::new((path.clone(), self.span.clone()))
+                        .with_message(
+                            "This interface/class contains the invalid identifier.".fg(Color::Blue),
+                        )
+                        .with_color(Color::Blue),
+                )
+                .finish();
+            self.messages.push(Message::Warning(report));
             None
         } else {
             Some(id)
@@ -399,12 +385,12 @@ const FORBIDDEN_IDENTS: &[&str] = &[
 ];
 
 macro_rules! gen_matcher {
-    ($ty:ident, $($pat:pat),*) => {
+    ($ty:ident, $ret:expr, $($pat:pat),*) => {
         match $ty {
             $(
                 $pat => |ty: &Box<TsType>| matches!(ty.as_ref(), $pat),
              )*
-            _ => { return false; }
+            _ => { return $ret; }
         }
     };
 }
@@ -461,14 +447,16 @@ impl Transformer {
     fn visit_enum(&mut self, enu: &TsEnumDecl) {
         if let Some(id) = self.valid_identifier(&enu.id.sym, self.range_of(enu.id.span)) {
             if enu.is_const {
-                self.push("typedef ");
-                self.push(id);
-                self.push_char('=');
-                self.push(type_of_enum_members(&enu.members));
-                self.semi();
+                write!(
+                    self.buf(),
+                    "typedef {} = {};",
+                    id,
+                    type_of_enum_members(&enu.members)
+                )
+                .unwrap();
             } else {
-                self.annotate(id);
-                self.push("class ");
+                // self.annotate(id);
+                // self.push("class ");
             }
         }
     }
@@ -488,36 +476,28 @@ impl Transformer {
                     debug!("{:?}", call)
                 }
                 TsTypeElement::TsCallSignatureDecl(call) => {
-                    let (path, _) = &self.source;
-                    self.warnings += 1;
-                    if log_enabled!(Level::Warn) {
-                        let report = Report::build(
-                            ReportKind::Warning,
-                            path,
-                            self.char_offset(call.span.lo),
-                        )
-                        .with_message("Unhandled call signature")
-                        .with_label(
-                            Label::new((path.clone(), self.range_of(call.span)))
-                                .with_message(
-                                    "This call signature is not handled".fg(Color::Yellow),
-                                )
-                                .with_color(Color::Yellow),
-                        )
-                        .with_label(
-                            Label::new((path.clone(), self.span.clone()))
-                                .with_message(
-                                    "This interface declares a call signature which is unhandled"
-                                        .fg(Color::Blue),
-                                )
-                                .with_color(Color::Blue),
-                        )
-                        .finish();
-                        self.messages.push(Message {
-                            report,
-                            kind: ReportKind::Warning,
-                        });
-                    }
+                    let path = &self.source;
+                    let report = Report::build(
+                        ReportKind::Warning,
+                        path,
+                        self.char_offset(call.span.lo),
+                    )
+                    .with_message("Unhandled call signature")
+                    .with_label(
+                        Label::new((path.clone(), self.range_of(call.span)))
+                            .with_message("This call signature is not handled".fg(Color::Yellow))
+                            .with_color(Color::Yellow),
+                    )
+                    .with_label(
+                        Label::new((path.clone(), self.span.clone()))
+                            .with_message(
+                                "This interface declares a call signature which is unhandled"
+                                    .fg(Color::Blue),
+                            )
+                            .with_color(Color::Blue),
+                    )
+                    .finish();
+                    self.messages.push(Message::Warning(report));
                 }
             }
             first = false;
@@ -568,23 +548,16 @@ impl Transformer {
         let id: &str = &decl.id.sym;
         self.register_type(id, self.range_of(decl.id.span), &decl.type_params);
         if ["String"].contains(&id) {
-            self.errors += 1;
-            if log_enabled!(Level::Error) {
-                let (path, _) = &self.source;
-                let report =
-                    Report::build(ReportKind::Error, path, self.char_offset(decl.id.span.lo))
-                        .with_message("Forbidden interface name")
-                        .with_label(
-                            Label::new((path.clone(), self.range_of(decl.id.span)))
-                                .with_message("Rename this interface".fg(Color::Red))
-                                .with_color(Color::Red),
-                        )
-                        .finish();
-                self.messages.push(Message {
-                    report,
-                    kind: ReportKind::Error,
-                });
-            }
+            let path = &self.source;
+            let report = Report::build(ReportKind::Error, path, self.char_offset(decl.id.span.lo))
+                .with_message("Forbidden interface name")
+                .with_label(
+                    Label::new((path.clone(), self.range_of(decl.id.span)))
+                        .with_message("Rename this interface".fg(Color::Red))
+                        .with_color(Color::Red),
+                )
+                .finish();
+            self.messages.push(Message::Warning(report));
             return;
         }
         self.class = Some(Class {
@@ -641,7 +614,7 @@ impl Transformer {
         let conflicts = self.symbols.contains_key(id);
         if conflicts && !self.rename_overloads {
             if log_enabled!(Level::Warn) {
-                let (path, _) = &self.source;
+                let path = &self.source;
                 let first_span = self.symbols.get(id).unwrap();
                 let span = decl.function.span;
                 let report = Report::build(ReportKind::Warning, path, self.char_offset(span.lo))
@@ -658,10 +631,7 @@ impl Transformer {
                     )
                     .with_note("Dart does not support function overloads.")
                     .finish();
-                self.messages.push(Message {
-                    report,
-                    kind: ReportKind::Warning,
-                });
+                self.messages.push(Message::Warning(report));
             }
             return;
         }
@@ -760,44 +730,44 @@ impl Transformer {
         }
         self.current_ident = Some(id.to_owned());
         self.register_type(id, self.range_of(alias.span), &alias.type_params);
-        self.push("typedef ");
-        self.push(id);
-        self.visit_type_params(&alias.type_params);
-        self.push_char('=');
-        self.visit_type(alias.type_ann.as_ref());
-        self.semi();
+        let alias = self.collect(|s| {
+            s.push("typedef ");
+            s.push(id);
+            s.visit_type_params(&alias.type_params);
+            s.push_char('=');
+            s.visit_type(alias.type_ann.as_ref());
+            s.semi();
+        });
+        if let Some(comments) = self.comments.take() {
+            let buf = self.buf();
+            for c in comments {
+                write!(buf, "\n/// {}", c).unwrap();
+            }
+            self.push_char('\n');
+        }
+        self.push(&alias);
         self.current_ident.take().unwrap();
     }
 
     /// `external T get id;`
     fn emit_getter(&mut self, typ: &str, id: &str) {
-        self.push("external ");
-        self.push(typ);
-        self.push(" get ");
-        self.push(id);
-        self.semi();
+        write!(self.buf(), "external {} get {};", typ, id).unwrap();
     }
 
     /// `external set id(T value);`
     fn emit_setter(&mut self, typ: &str, id: &str, param_name: Option<&str>) {
         let param_name = param_name.unwrap_or("value");
-        self.push("external set ");
-        self.push(id);
-        self.push_char('(');
-        self.push(typ);
-        self.push_char(' ');
-        self.push(param_name);
-        self.push(");");
+        write!(self.buf(), "external set {}({} {});", id, typ, param_name).unwrap();
     }
 
     /// Returns None is [id] is already a member of the current class.
     fn register_member<'a>(&mut self, id: &'a str) -> Option<&'a str> {
-        let res = self.class.as_mut().unwrap().members.insert(id.to_owned());
-        if !res {
+        let unique = self.class.as_mut().unwrap().members.insert(id.to_owned());
+        if !unique {
             let class = &self.class.as_ref().unwrap().id;
             debug!("{}#{} is already defined.", class, id);
         }
-        res.then(|| id)
+        unique.then(|| id)
     }
 
     fn visit_ts_prop_sig(&mut self, prop: &TsPropertySignature) {
@@ -905,22 +875,18 @@ impl Transformer {
 
     /// `external factory id({ .. })`
     fn emit_factory(&mut self, id: &str, fields: &[(String, String)]) {
-        self.push("external factory ");
-        self.push(id);
-        self.push("(");
+        let buf = self.buf();
+        write!(buf, "external factory {}(", id).unwrap();
         if !fields.is_empty() {
-            self.push_char('{');
+            buf.push('{');
         }
         for (id, ty) in fields {
-            self.push(ty);
-            self.push_char(' ');
-            self.push(id);
-            self.push_char(',');
+            write!(buf, "{} {},", ty, id).unwrap();
         }
         if !fields.is_empty() {
-            self.push_char('}');
+            buf.push('}');
         }
-        self.push(");");
+        buf.push_str(");");
     }
 
     /// `<A, B extends .., ..>`
@@ -950,7 +916,7 @@ impl Transformer {
         old_range: Range<usize>,
         first_decl_message: Option<&str>,
     ) {
-        let (path, _) = &self.source;
+        let path = &self.source;
         let first_decl_message = first_decl_message.unwrap_or("The type was first declared here.");
         let message = format!("This type was declared with {} parameter(s), but a previous declaration has {} parameter(s).", count, old);
         let report = Report::build(ReportKind::Error, path, range.start)
@@ -967,10 +933,7 @@ impl Transformer {
             )
             .with_note("Dart does not support default type parameters, so all declarations of the same type must have the same number of arguments.")
             .finish();
-        self.messages.push(Message {
-            report,
-            kind: ReportKind::Error,
-        });
+        self.messages.push(Message::Warning(report));
     }
 
     fn visit_entity_name(&mut self, name: &TsEntityName, param_count: Option<usize>) {
@@ -996,11 +959,8 @@ impl Transformer {
         let count = param_count.unwrap_or(0);
         match self.undecls.get(id).cloned() {
             Some((old, old_range)) if old != count => {
-                self.errors += 1;
-                if log_enabled!(Level::Error) {
-                    let range = self.range_of(span);
-                    self.report_type_param_mismatch(count, old, range, old_range, None);
-                }
+                let range = self.range_of(span);
+                self.report_type_param_mismatch(count, old, range, old_range, None);
             }
             None => {
                 let range = self.range_of(span);
@@ -1030,12 +990,12 @@ impl Transformer {
         if !(ty == "dynamic" || ty.ends_with('?')) {
             ty.push('?');
         }
-        for idx in '1'..='9' {
-            self.push(&ty);
-            self.push_char(' ');
-            self.push(parse_pat(&rest.arg).unwrap_or("_"));
-            self.push_char(idx);
-            self.push_char(',');
+        {
+            let buf = self.buf();
+            for idx in '1'..='9' {
+                let ident = extract_ident_from(&rest.arg).unwrap_or("_");
+                write!(buf, "{} {}{},", ty, ident, idx).unwrap();
+            }
         }
         self.push_char(']');
     }
@@ -1061,7 +1021,6 @@ impl Transformer {
         self.push_char(',');
     }
 
-    /// Visits the type annotation if present, or pushes 'dynamic'.
     fn visit_type_ann(&mut self, type_ann: &Option<TsTypeAnn>) {
         if let Some(ann) = type_ann {
             self.visit_type(&ann.type_ann);
@@ -1117,6 +1076,7 @@ impl Transformer {
         #[allow(unused_parens)]
         let matcher = gen_matcher!(
             ty,
+            false,
             (TsType::TsLitType(TsLitType {
                 lit: TsLit::Str(_),
                 ..
@@ -1259,6 +1219,7 @@ impl Transformer {
         self.push("dynamic");
     }
 
+    /// [id_span] is usually the output from [range_of].
     fn register_type(
         &mut self,
         id: &str,
@@ -1268,25 +1229,19 @@ impl Transformer {
         let size = type_params.as_ref().map(|x| x.params.len()).unwrap_or(0);
         match self.undecls.remove(id) {
             Some((old, old_range)) if old != size => {
-                self.errors += 1;
-                if log_enabled!(Level::Error) {
-                    self.report_type_param_mismatch(size, old, id_span.clone(), old_range, None);
-                }
+                self.report_type_param_mismatch(size, old, id_span.clone(), old_range, None);
             }
             _ => {}
         }
         match self.resolved.get(id).cloned() {
             Some((old, old_range)) if old != size => {
-                self.errors += 1;
-                if log_enabled!(Level::Error) {
-                    self.report_type_param_mismatch(
-                        size,
-                        old,
-                        id_span,
-                        old_range,
-                        Some("This type's effective declaration was resolved here."),
-                    );
-                }
+                self.report_type_param_mismatch(
+                    size,
+                    old,
+                    id_span,
+                    old_range,
+                    Some("This type's effective declaration was resolved here."),
+                );
             }
             None => {
                 self.resolved.insert(id.to_owned(), (size, id_span));
@@ -1356,9 +1311,8 @@ impl Transformer {
                 self.visit_function(id, function, *is_static, false, None)
             }
             ClassMember::Constructor(Constructor { params, .. }) => {
-                self.push("external factory ");
-                self.push(&self.class.as_ref().map(|x| x.id.clone()).unwrap());
-                self.push_char('(');
+                let class_name = self.class.as_ref().map(|x| x.id.clone()).unwrap();
+                write!(self.buf(), "external factory {}(", class_name).unwrap();
                 for param in params {
                     match param {
                         ParamOrTsParamProp::Param(param) => self.visit_param_single(param),
@@ -1392,6 +1346,36 @@ impl Transformer {
             }
         }
     }
+
+    fn emit_union_repr(&mut self, union: &TsUnionType) -> String {
+        union
+            .types
+            .iter()
+            .map(|mem| match mem.as_ref() {
+                TsType::TsLitType(TsLitType {
+                    lit: TsLit::Str(Str { value, .. }),
+                    ..
+                }) => format!("\"{}\"", value),
+                TsType::TsLitType(TsLitType {
+                    lit: TsLit::Number(Number { value, .. }),
+                    ..
+                }) => value.to_string(),
+                TsType::TsLitType(
+                    TsLitType {
+                        lit: TsLit::Bool(Bool { value, .. }),
+                        ..
+                    },
+                    ..,
+                ) => value.to_string(),
+                TsType::TsKeywordType(TsKeywordType {
+                    kind: TsKeywordTypeKind::TsNullKeyword | TsKeywordTypeKind::TsUndefinedKeyword,
+                    ..
+                }) => "null".to_owned(),
+                _ => self.collect(|s| s.visit_type(mem)),
+            })
+            .collect::<Vec<_>>()
+            .join(" | ")
+    }
 }
 
 /// Returns the type of this enum's members.
@@ -1407,7 +1391,7 @@ fn type_of_enum_members(members: &[TsEnumMember]) -> &'static str {
     }
 }
 
-fn expr_type(expr: impl AsRef<Expr>) -> &'static str {
+fn expr_type(expr: &impl AsRef<Expr>) -> &'static str {
     match expr.as_ref() {
         Expr::Lit(Lit::Str(_)) => "String",
         Expr::Lit(Lit::Num(_)) => "num",
