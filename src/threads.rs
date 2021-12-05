@@ -1,5 +1,5 @@
 use scoped_threadpool::Pool;
-use std::sync::mpsc;
+use std::sync::mpsc::{channel, Sender};
 
 pub enum ParallelMap<I, F, R>
 where
@@ -34,7 +34,7 @@ where
             }) => {
                 let proc = {
                     let mut pool = Pool::new(*threads);
-                    let (tx, rx): (mpsc::Sender<R>, _) = mpsc::channel();
+                    let (tx, rx): (Sender<R>, _) = channel();
                     pool.scoped(|scope| {
                         let count = iter
                             .map(|item| {
@@ -59,7 +59,7 @@ where
 }
 
 pub trait MapPar: Iterator + Sized {
-    /// Similar to [MapPar::map_par], but allows specifying the number of threads to use.
+    /// Similar to [map_par](MapPar::map_par), but allows specifying the number of threads to use.
     fn map_par_with<F, R>(self, threads: u32, func: F) -> ParallelMap<Self, F, R>
     where
         Self::Item: Send,

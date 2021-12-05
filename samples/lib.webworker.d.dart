@@ -4346,10 +4346,10 @@ class SubtleCrypto {
   external Promise<CryptoKey> importKey(
       String format, JsonWebKey keyData, dynamic algorithm, bool extractable, List<KeyUsage> keyUsages);
   external Promise<ByteBuffer> sign(dynamic algorithm, CryptoKey key, dynamic data);
-  external Promise<CryptoKey> unwrapKey(dynamic format, dynamic wrappedKey, CryptoKey unwrappingKey,
+  external Promise<CryptoKey> unwrapKey(String format, dynamic wrappedKey, CryptoKey unwrappingKey,
       dynamic unwrapAlgorithm, dynamic unwrappedKeyAlgorithm, bool extractable, List<KeyUsage> keyUsages);
   external Promise<bool> verify(dynamic algorithm, CryptoKey key, dynamic signature, dynamic data);
-  external Promise<ByteBuffer> wrapKey(dynamic format, CryptoKey key, CryptoKey wrappingKey, dynamic wrapAlgorithm);
+  external Promise<ByteBuffer> wrapKey(String format, CryptoKey key, CryptoKey wrappingKey, dynamic wrapAlgorithm);
   external factory SubtleCrypto();
 }
 

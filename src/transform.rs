@@ -455,7 +455,8 @@ impl Transformer {
                 )
                 .unwrap();
             } else {
-                self.annotate(id);
+                // self.annotate(id);
+                // self.push("class ");
             }
         }
     }
@@ -1072,18 +1073,24 @@ impl Transformer {
     /// i.e. `'one' | 'two' | 'three'` or `1 | 2 | 3`
     fn visit_mono_union(&mut self, uni: &TsUnionType) -> bool {
         let ty: &TsType = uni.types.first().as_ref().unwrap();
-        self.comments = Some(vec![self.emit_union_repr(uni)]);
+        #[allow(unused_parens)]
         let matcher = gen_matcher!(
             ty,
             false,
-            TsType::TsLitType(TsLitType {
+            (TsType::TsLitType(TsLitType {
                 lit: TsLit::Str(_),
                 ..
-            }),
-            TsType::TsLitType(TsLitType {
+            }) | TsType::TsKeywordType(TsKeywordType {
+                kind: TsKeywordTypeKind::TsStringKeyword,
+                ..
+            })),
+            (TsType::TsLitType(TsLitType {
                 lit: TsLit::Number(_),
                 ..
-            }),
+            }) | TsType::TsKeywordType(TsKeywordType {
+                kind: TsKeywordTypeKind::TsNumberKeyword,
+                ..
+            })),
             TsType::TsLitType(TsLitType {
                 lit: TsLit::Bool(_),
                 ..
