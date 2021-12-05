@@ -6,15 +6,11 @@ where
     I: Iterator,
     F: FnMut(I::Item) -> R,
 {
-    Raw(ParallelMapRaw<I, F, R>),
+    Raw(ParallelMapRaw<I, F>),
     Processed(std::vec::IntoIter<R>),
 }
 
-pub struct ParallelMapRaw<I, F, R>
-where
-    I: Iterator,
-    F: FnMut(I::Item) -> R,
-{
+pub struct ParallelMapRaw<I, F> {
     iter: I,
     func: F,
     threads: u32,
