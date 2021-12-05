@@ -210,11 +210,11 @@ dependencies = [
 name = "dart_js_lib_gen"
 version = "0.1.0"
 dependencies = [
- "ahash",
  "alloc_counter",
  "anyhow",
  "ariadne",
  "clap",
+ "dart_js_lib_gen_atoms",
  "flexi_logger",
  "lasso",
  "lazy_static",
@@ -225,6 +225,15 @@ dependencies = [
  "swc_ecma_ast",
  "swc_ecma_parser",
  "tempfile",
+]
+
+[[package]]
+name = "dart_js_lib_gen_atoms"
+version = "0.1.0"
+dependencies = [
+ "ahash",
+ "lasso",
+ "lazy_static",
 ]
 
 [[package]]

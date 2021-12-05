@@ -159,12 +159,15 @@ fn dart_format(file: Either<(&str, File), &str>, line_length: &str) -> Result<Fi
             (f.path().to_string_lossy().to_string(), f.into_file())
         }
     };
-    let out = Command::new("sh")
-        .args([
-            "-c",
-            &format!("dart format --fix -l {} {}", line_length, path),
-        ])
-        .output()?;
+
+    let dart_format = format!("dart format --fix -l {} {}", line_length, path);
+
+    #[cfg(target_os = "windows")]
+    let out = Command::new("cmd").arg("/C").arg(dart_format).output()?;
+
+    #[cfg(not(target_os = "windows"))]
+    let out = Command::new("sh").arg("-c").arg(dart_format).output()?;
+
     out.status
         .success()
         .then(|| file)

@@ -1,10 +1,10 @@
 use crate::api::Report;
 use std::borrow::Cow;
+use std::collections::{HashMap, HashSet};
 use std::fmt::Write;
 use std::ops::Range;
 use std::sync::Arc;
 
-use ahash::{AHashMap, AHashSet};
 use ariadne::{Color, Fmt, Label, ReportKind};
 use log::log_enabled;
 use log::{debug, error, info, warn, Level};
@@ -12,14 +12,14 @@ use swc_common::{BytePos, SourceFile, Span};
 use swc_ecma_ast::*;
 
 use crate::api::Message;
-use crate::atoms::replacement_for;
+use dart_js_lib_gen_atoms::replacement_for;
 
 #[cfg(feature = "alloc_counter")]
 #[global_allocator]
 static A: alloc_counter::AllocCounterSystem = alloc_counter::AllocCounterSystem;
 
 /// Ident -> (# of parameters, span of original declaration)
-type TypeResolutionMap = AHashMap<String, (usize, Range<usize>)>;
+type TypeResolutionMap = HashMap<String, (usize, Range<usize>)>;
 
 struct Transformer {
     path: Vec<String>,
@@ -29,11 +29,11 @@ struct Transformer {
     undecls: TypeResolutionMap,
     resolved: TypeResolutionMap,
     /// Functions and globals.
-    symbols: AHashMap<String, Range<usize>>,
+    symbols: HashMap<String, Range<usize>>,
     /// Keeps track of the ident of the variable declaration being evaluated.
     current_ident: Option<String>,
     /// Anonymous type literals.
-    type_lits: AHashMap<String, String>,
+    type_lits: HashMap<String, String>,
     /// The span of the parent element.
     span: Range<usize>,
     /// Used by ariadne for reporting.
@@ -42,7 +42,7 @@ struct Transformer {
     // srcmap: Arc<SourceMap>,
     allocs: usize,
     rename_overloads: bool,
-    imports: Option<AHashSet<&'static str>>,
+    imports: Option<HashSet<&'static str>>,
     messages: Vec<Message>,
     /// Comments to annotate the current item.
     /// Currently only used for type aliases.
@@ -57,7 +57,7 @@ struct Class {
     /// Whether this class only exists on the type level, i.e. a pure interface with
     /// no constructors in TypeScript.
     anonymous: bool,
-    members: AHashSet<String>,
+    members: HashSet<String>,
 }
 
 /// Parses a pattern as an ident.
@@ -117,11 +117,11 @@ fn visit_program(
         file,
         allocs: 0,
         rename_overloads,
-        undecls: AHashMap::new(),
-        resolved: AHashMap::new(),
-        symbols: AHashMap::new(),
-        imports: imports.then(AHashSet::new),
-        type_lits: AHashMap::new(),
+        undecls: HashMap::new(),
+        resolved: HashMap::new(),
+        symbols: HashMap::new(),
+        imports: imports.then(HashSet::new),
+        type_lits: HashMap::new(),
     };
     t.visit_module_items(&module.body);
 
@@ -564,7 +564,7 @@ impl Transformer {
             anonymous: true,
             fields: vec![],
             id: String::from(decl.id.sym.as_ref()),
-            members: AHashSet::new(),
+            members: HashSet::new(),
         });
         self.push("@JS() ");
         let class_body = self.collect(|s| {
@@ -1198,7 +1198,7 @@ impl Transformer {
                 let temp = s.class.take();
                 s.class = Some(Class {
                     id: id.to_owned(),
-                    members: AHashSet::new(),
+                    members: HashSet::new(),
                     fields: vec![],
                     anonymous: true,
                 });
@@ -1257,7 +1257,7 @@ impl Transformer {
             fields: vec![],
             id: id.to_owned(),
             anonymous: false,
-            members: AHashSet::new(),
+            members: HashSet::new(),
         });
         self.push("@JS() class ");
         self.push(id);
@@ -1383,7 +1383,7 @@ fn type_of_enum_members(members: &[TsEnumMember]) -> &'static str {
     let typs = members
         .iter()
         .filter_map(|x| x.init.as_ref().map(expr_type))
-        .collect::<AHashSet<_>>();
+        .collect::<HashSet<_>>();
     match typs.len() {
         0 => "num",
         1 => typs.into_iter().next().unwrap(),

@@ -18,7 +18,7 @@ macro_rules! count_tts {
     ($($tts:tt)*) => {<[()]>::len(&[$(replace_expr!($tts ())),*])};
 }
 
-pub struct Atoms {
+struct Atoms {
     reader: RodeoReader<Spur, RandomState>,
     map: AHashMap<Spur, Spur>,
 }
@@ -33,7 +33,7 @@ impl Atoms {
 macro_rules! define_atom_store {
     ($store:ident, $( $k:literal : $v:literal ),*) => {
         lazy_static! {
-            pub static ref $store: Atoms = {
+            static ref $store: Atoms = {
                 #[allow(unused_mut)]
                 let mut rodeo = Rodeo::with_hasher(RandomState::new());
                 #[allow(unused_mut)]
@@ -49,20 +49,6 @@ macro_rules! define_atom_store {
         }
     };
 }
-
-/// Create a new map from `Copy` types.
-// macro_rules! lit_map {
-// ($( $k:literal: $v:literal ),*) => {
-// {
-// #[allow(unused_mut)]
-// let mut map = AHashMap::with_capacity(count_tts!($( $k )*));
-// $(
-// map.insert($k, $v);
-// )*
-// map
-// }
-// }
-// }
 
 /// Finds the replacement type for [typ] and the Dart library where it was defined.
 pub fn replacement_for(typ: &str) -> (Option<&'static str>, Option<&'static str>) {
@@ -1048,15 +1034,3 @@ define_atom_store!(STDLIB_TYPE_REPLACEMENTS,
 "Boolean": "bool",
 "Number": "num"
 );
-
-/*
-lazy_static! {
-    static ref DART_LIBRARIES_FOR_BROWSER_TYPES: AtomMap = lit_map! {
-    };
-}
-
-lazy_static! {
-    static ref STDLIB_TYPE_REPLACEMENTS: AtomMap = lit_map! {
-    };
-}
-*/
