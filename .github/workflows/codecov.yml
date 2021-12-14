@@ -16,12 +16,9 @@ jobs:
       - name: Set up Dart
         uses: dart-lang/setup-dart@v1
       - name: Install grcov
-        run: |
-          curl -L https://github.com/mozilla/grcov/releases/download/v0.8.2/grcov-linux-x86_64.tar.bz2 -o grcov.tar.bz2
-          tar -xf grcov.tar.bz2
-          chmod +x ./grcov
+        run: curl -L https://github.com/mozilla/grcov/releases/download/v0.8.2/grcov-linux-x86_64.tar.bz2 | tar jxf -
       - name: Build transformer
-        run: cargo +nightly build
+        run: cargo +nightly build --verbose
         env:
           RUSTFLAGS: "-Zinstrument-coverage"
       - name: Transform samples
@@ -36,7 +33,7 @@ jobs:
       - name: Generate code coverage report
         run: |
           ./grcov . \
-            --binary-path target/debug \
+            --binary-path ./target/debug \
             --source-dir . \
             --output-type lcov \
             --branch \
