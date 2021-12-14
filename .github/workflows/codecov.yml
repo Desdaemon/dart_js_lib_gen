@@ -18,7 +18,7 @@ jobs:
       - name: Install grcov
         run: curl -L https://github.com/mozilla/grcov/releases/download/v0.8.2/grcov-linux-x86_64.tar.bz2 | tar jxf -
       - name: Build transformer
-        run: cargo +nightly build --verbose
+        run: cargo +nightly build
         env:
           RUSTFLAGS: "-Zinstrument-coverage"
       - name: Transform samples
@@ -30,6 +30,7 @@ jobs:
             samples/*.ts
         env:
           LLVM_PROFILE_FILE: "dart_js_lib_gen-%p-%m.profraw"
+      - run: "ls *.profraw"
       - name: Generate code coverage report
         run: |
           ./grcov . \
