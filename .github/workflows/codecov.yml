@@ -12,8 +12,7 @@ jobs:
           profile: minimal
           toolchain: nightly
           components: llvm-tools-preview
-      - name: Cache Rust dependencies
-        uses: Swatinem/rust-cache@v1
+      - run: rustup default nightly
       - name: Set up Dart
         uses: dart-lang/setup-dart@v1
       - name: Install grcov
