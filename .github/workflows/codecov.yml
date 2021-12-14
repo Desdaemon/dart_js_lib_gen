@@ -11,7 +11,13 @@ jobs:
           profile: minimal
           toolchain: nightly
           components: llvm-tools-preview
-      - run: cargo install grcov
+      - name: Cache Rust dependencies
+        uses: Swatinem/rust-cache@v1
+      - name: Install grcov
+        run: |
+          curl https://github.com/mozilla/grcov/releases/download/v0.8.2/grcov-linux-x86_64.tar.bz2 -o grcov.tar.bz2
+          tar -xf grcov.tar.bz2
+          chmod +x ./grcov
       - name: Build transformer
         run: cargo +nightly build
         env:
@@ -24,13 +30,14 @@ jobs:
             --rename-overloads \
             --dynamic-undefs \
             samples/*.ts
-      - name: Generate and upload to codecov
+      - name: Generate code coverage report
         run: |
-          grcov . \
+          ./grcov . \
             --binary-path target/debug \
             -s . \
             -t lcov \
             --branch \
             --ignore-not-existing \
             -o lcov.info
-          bash <(curl -s https://codecov.io/bash) -f lcov.info
+      - name: Upload coverage report
+        run: bash <(curl -s https://codecov.io/bash) -f lcov.info
