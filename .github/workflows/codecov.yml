@@ -5,7 +5,6 @@ jobs:
   code-coverage:
     runs-on: ubuntu-latest
     env:
-      RUSTFLAGS: -Zinstrument-coverage
       LLVM_PROFILE_FILE: "dart_js_lib_gen-%p-%m.profraw"
     steps:
       - uses: actions/checkout@v2
@@ -19,7 +18,7 @@ jobs:
           RUSTFLAGS: ''
           LLVM_PROFILE_FILE: ''
       - name: Build transformer
-        run: cargo build
+        run: cargo build +nightly -Zinstrument-coverage
       - name: Transform samples
         run: |
           target/debug/dart_js_lib_gen \
