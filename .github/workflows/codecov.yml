@@ -30,7 +30,7 @@ jobs:
             samples/*.ts
         env:
           LLVM_PROFILE_FILE: "dart_js_lib_gen-%p-%m.profraw"
-      - run: "ls *.profraw"
+      - run: rm default.profraw
       - name: Generate code coverage report
         run: |
           ./grcov . \
