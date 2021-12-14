@@ -4,6 +4,9 @@ on:
 jobs:
   code-coverage:
     runs-on: ubuntu-latest
+    env:
+      RUSTFLAGS: -Zinstrument-coverage
+      LLVM_PROFILE_FILE: "dart_js_lib_gen-%p-%m.profraw"
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
@@ -11,7 +14,26 @@ jobs:
           profile: minimal
           toolchain: nightly
           components: llvm-tools-preview
-      - uses: Swatinem/fucov@v1
-      - uses: codecov/codecov-action@v1
-        with:
-          directory: coverage
+      - run: cargo install grcov
+        env:
+          RUSTFLAGS: ''
+          LLVM_PROFILE_FILE: ''
+      - name: Build transformer
+        run: cargo build
+      - name: Transform samples
+        run: |
+          target/debug/dart_js_lib_gen \
+            --log error -w \
+            --rename-overloads \
+            --dynamic-undefs \
+            samples/*.ts
+      - name: Generate and upload to codecov
+        run: |
+          grcov . \
+            --binary-path target/debug \
+            -s . \
+            -t lcov \
+            --branch \
+            --ignore-not-existing \
+            -o lcov.info
+          bash <(curl -s https://codecov.io/bash) -f lcov.info
