@@ -4,8 +4,6 @@ on:
 jobs:
   code-coverage:
     runs-on: ubuntu-latest
-    env:
-      LLVM_PROFILE_FILE: "dart_js_lib_gen-%p-%m.profraw"
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
@@ -14,11 +12,11 @@ jobs:
           toolchain: nightly
           components: llvm-tools-preview
       - run: cargo install grcov
-        env:
-          RUSTFLAGS: ''
-          LLVM_PROFILE_FILE: ''
       - name: Build transformer
-        run: cargo build +nightly -Zinstrument-coverage
+        run: cargo +nightly build
+        env:
+          RUSTFLAGS: "-Z instrument-coverage"
+          LLVM_PROFILE_FILE: "dart_js_lib_gen-%p-%m.profraw"
       - name: Transform samples
         run: |
           target/debug/dart_js_lib_gen \
