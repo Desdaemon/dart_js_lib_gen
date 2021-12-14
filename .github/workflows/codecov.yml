@@ -4,6 +4,9 @@ on:
 jobs:
   code-coverage:
     runs-on: ubuntu-latest
+    env:
+      RUSTFLAGS: "-Z instrument-coverage"
+      LLVM_PROFILE_FILE: "dart_js_lib_gen-%p-%m.profraw"
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
@@ -15,14 +18,11 @@ jobs:
         uses: Swatinem/rust-cache@v1
       - name: Install grcov
         run: |
-          curl https://github.com/mozilla/grcov/releases/download/v0.8.2/grcov-linux-x86_64.tar.bz2 -o grcov.tar.bz2
+          curl -L https://github.com/mozilla/grcov/releases/download/v0.8.2/grcov-linux-x86_64.tar.bz2 -o grcov.tar.bz2
           tar -xf grcov.tar.bz2
           chmod +x ./grcov
       - name: Build transformer
         run: cargo +nightly build
-        env:
-          RUSTFLAGS: "-Z instrument-coverage"
-          LLVM_PROFILE_FILE: "dart_js_lib_gen-%p-%m.profraw"
       - name: Transform samples
         run: |
           target/debug/dart_js_lib_gen \
