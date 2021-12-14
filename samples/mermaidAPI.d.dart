@@ -8,7 +8,6 @@ import "dart:html";
 /// "default" | "forest" | "dark" | "neutral"
 typedef Theme = String;
 
-@JS(r'mermaidAPI.LogLevel')
 @JS()
 @anonymous
 class FlowChartConfig {

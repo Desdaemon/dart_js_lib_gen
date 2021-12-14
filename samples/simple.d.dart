@@ -47,3 +47,6 @@ class Baz extends Example implements Foo, Bar {
 
 @JS(r'simple_adder')
 external num simple_adder(num a, num b);
+
+/// "foo" | "bar" | "baz"
+typedef SimpleUnion = String;

@@ -39,7 +39,6 @@ struct Transformer {
     /// Used by ariadne for reporting.
     source: String,
     file: Arc<SourceFile>,
-    // srcmap: Arc<SourceMap>,
     allocs: usize,
     rename_overloads: bool,
     imports: Option<HashSet<&'static str>>,
@@ -1028,6 +1027,7 @@ impl Transformer {
     }
 
     fn visit_union(&mut self, uni: &TsUnionType) -> bool {
+        self.comments = Some(vec![self.emit_union_repr(uni)]);
         let is_parseable_union = self.visit_mono_union(uni) || self.visit_nullable_union(uni);
         if !is_parseable_union {
             self.push("dynamic");
