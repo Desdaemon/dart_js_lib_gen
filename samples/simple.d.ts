@@ -33,3 +33,8 @@ declare class Baz extends Example<string> implements Foo, Bar {
 export function simple_adder(a: number, b: number): number;
 
 type SimpleUnion = "foo" | "bar" | "baz";
+
+declare const enum ConstEnum {
+  foo = "foo",
+  bar = "bar",
+}
