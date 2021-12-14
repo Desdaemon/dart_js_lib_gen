@@ -4,9 +4,6 @@ on:
 jobs:
   code-coverage:
     runs-on: ubuntu-latest
-    env:
-      RUSTFLAGS: "-Z instrument-coverage"
-      LLVM_PROFILE_FILE: "dart_js_lib_gen-%p-%m.profraw"
     steps:
       - uses: actions/checkout@v2
       - name: Set up Rust
@@ -26,6 +23,8 @@ jobs:
           chmod +x ./grcov
       - name: Build transformer
         run: cargo +nightly build
+        env:
+          RUSTFLAGS: "-Zinstrument-coverage"
       - name: Transform samples
         run: |
           target/debug/dart_js_lib_gen \
@@ -33,12 +32,14 @@ jobs:
             --rename-overloads \
             --dynamic-undefs \
             samples/*.ts
+        env:
+          LLVM_PROFILE_FILE: "dart_js_lib_gen-%p-%m.profraw"
       - name: Generate code coverage report
         run: |
           ./grcov . \
             --binary-path target/debug \
-            -s . \
-            -t lcov \
+            --source-dir . \
+            --output-type lcov \
             --branch \
             --ignore-not-existing \
             -o lcov.info
