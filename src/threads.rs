@@ -1,5 +1,5 @@
 use scoped_threadpool::Pool;
-use std::sync::mpsc::{channel, Sender};
+use std::sync::mpsc::channel;
 
 pub enum ParallelMap<I, F, R>
 where
@@ -34,7 +34,7 @@ where
             }) => {
                 let proc = {
                     let mut pool = Pool::new(*threads);
-                    let (tx, rx): (Sender<R>, _) = channel();
+                    let (tx, rx) = channel::<R>();
                     pool.scoped(|scope| {
                         let count = iter
                             .map(|item| {

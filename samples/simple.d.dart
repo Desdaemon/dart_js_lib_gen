@@ -50,3 +50,4 @@ external num simple_adder(num a, num b);
 
 /// "foo" | "bar" | "baz"
 typedef SimpleUnion = String;
+typedef ConstEnum = String;

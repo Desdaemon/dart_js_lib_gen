@@ -23,7 +23,7 @@ type TypeResolutionMap = HashMap<String, (usize, Range<usize>)>;
 
 struct Transformer {
     path: Vec<String>,
-    bufs: Vec<String>,
+    buf: String,
     class: Option<Class>,
     /// Undeclared type usages, with some number of type parameters and span information.
     undecls: TypeResolutionMap,
@@ -106,7 +106,7 @@ fn visit_program(
     let file_path = file.unmapped_path.as_ref().unwrap().clone();
     let mut t = Transformer {
         path: vec![],
-        bufs: vec![buf],
+        buf,
         messages: vec![],
         class: None,
         current_ident: None,
@@ -124,7 +124,8 @@ fn visit_program(
     };
     t.visit_module_items(&module.body);
 
-    let mut buf = t.bufs.pop().unwrap();
+    // let mut buf = t.bufs.pop().unwrap();
+    let mut buf = t.buf;
     let mut entries = t.type_lits.iter().collect::<Vec<_>>();
     entries.sort_by(Ord::cmp);
 
@@ -208,7 +209,7 @@ import 'package:js/js.dart';",
 impl Transformer {
     #[inline]
     fn buf(&mut self) -> &mut String {
-        self.bufs.last_mut().unwrap()
+        &mut self.buf
     }
 
     fn push(&mut self, input: &str) {
@@ -243,15 +244,17 @@ impl Transformer {
     /// Performs [fun] in a temporary buffer and
     /// returns that buffer when [fun] goes out of scope.
     fn collect(&mut self, mut fun: impl FnMut(&mut Self)) -> String {
-        self.bufs.push(String::new());
+        let mut temp = String::new();
+        std::mem::swap(&mut self.buf, &mut temp);
         fun(self);
-        self.bufs.pop().unwrap()
+        std::mem::swap(&mut self.buf, &mut temp);
+        temp
     }
 
     fn annotate(&mut self, path_end: &str) {
         self.push("@JS(r'");
         for item in &self.path {
-            let buf = self.bufs.last_mut().unwrap();
+            let buf = &mut self.buf;
             buf.push_str(item);
             buf.push('.');
         }
