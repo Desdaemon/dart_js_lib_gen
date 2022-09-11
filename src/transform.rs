@@ -478,31 +478,10 @@ impl Transformer {
                     debug!("{:?}", call)
                 }
                 TsTypeElement::TsCallSignatureDecl(call) => {
-                    let path = &self.source;
-                    let report = Report::build(
-                        ReportKind::Warning,
-                        path,
-                        self.char_offset(call.span.lo),
-                    )
-                    .with_message("Unhandled call signature")
-                    .with_label(
-                        Label::new((path.clone(), self.range_of(call.span)))
-                            .with_message("This call signature is not handled".fg(Color::Yellow))
-                            .with_color(Color::Yellow),
-                    )
-                    .with_label(
-                        Label::new((path.clone(), self.span.clone()))
-                            .with_message(
-                                "This interface declares a call signature which is unhandled"
-                                    .fg(Color::Blue),
-                            )
-                            .with_color(Color::Blue),
-                    )
-                    .finish();
-                    self.messages.push(Message::Warning(report));
+                    first = false;
+                    self.visit_ts_call_sig(call)
                 }
             }
-            first = false;
         }
     }
 
@@ -694,10 +673,10 @@ impl Transformer {
                 };
                 let ty = self.collect(|s| s.visit_type_ann(&ident.type_ann));
                 self.annotate(id);
-                self.emit_getter(&ty, &dart_id);
-                if !matches!(var.kind, VarDeclKind::Const) {
-                    self.annotate(id);
-                    self.emit_setter(&ty, &dart_id, None);
+                if matches!(var.kind, VarDeclKind::Const) {
+                    self.emit_getter(&ty, &dart_id);
+                } else {
+                    self.emit_attribute(&ty, &dart_id);
                 }
             }
         }
@@ -756,6 +735,10 @@ impl Transformer {
         write!(self.buf(), "external {} get {};", typ, id).unwrap();
     }
 
+    fn emit_attribute(&mut self, typ: &str, id: &str) {
+        write!(self.buf(), "external {} {};", typ, id).unwrap();
+    }
+
     /// `external set id(T value);`
     fn emit_setter(&mut self, typ: &str, id: &str, param_name: Option<&str>) {
         let param_name = param_name.unwrap_or("value");
@@ -785,9 +768,10 @@ impl Transformer {
                     s.optional();
                 }
             });
-            self.emit_getter(&ty, id);
-            if !prop.readonly {
-                self.emit_setter(&ty, id, None);
+            if prop.readonly {
+                self.emit_getter(&ty, id);
+            } else {
+                self.emit_attribute(&ty, id);
             }
             self.class
                 .as_mut()
@@ -1348,6 +1332,16 @@ impl Transformer {
                 todo!()
             }
         }
+    }
+
+    fn visit_ts_call_sig(&mut self, call: &TsCallSignatureDecl) {
+        self.push("external ");
+        self.visit_type_ann(&call.type_ann);
+        self.push(" call");
+        self.visit_type_params(&call.type_params);
+        self.push_char('(');
+        self.visit_function_params(&call.params);
+        self.push(");");
     }
 
     fn emit_union_repr(&mut self, union: &TsUnionType) -> String {

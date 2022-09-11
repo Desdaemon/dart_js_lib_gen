@@ -9,12 +9,9 @@ import "lib.dom.d.dart";
 @JS()
 @anonymous
 class Element {
-  external String get tag;
-  external set tag(String value);
-  external List<Attribute>? get attributes;
-  external set attributes(List<Attribute>? value);
-  external List<Element>? get children;
-  external set children(List<Element>? value);
+  external String tag;
+  external List<Attribute>? attributes;
+  external List<Element>? children;
   external factory Element({
     String tag,
     List<Attribute>? attributes,
@@ -25,10 +22,8 @@ class Element {
 @JS()
 @anonymous
 class Attribute {
-  external String get key;
-  external set key(String value);
-  external String get value;
-  external set value(String value);
+  external String key;
+  external String value;
   external factory Attribute({
     String key,
     String value,

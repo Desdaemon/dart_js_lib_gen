@@ -7,13 +7,9 @@ import "dart:typed_data";
 import "lib.es5.d.dart";
 
 @JS(r'NaN')
-external num get JNaN;
-@JS(r'NaN')
-external set JNaN(num value);
+external num JNaN;
 @JS(r'Infinity')
-external num get JInfinity;
-@JS(r'Infinity')
-external set JInfinity(num value);
+external num JInfinity;
 @JS(r'eval')
 external dynamic eval(String x);
 @JS(r'parseInt')
@@ -52,14 +48,10 @@ typedef PropertyKey = dynamic;
 @JS()
 @anonymous
 class PropertyDescriptor {
-  external bool? get configurable;
-  external set configurable(bool? value);
-  external bool? get enumerable;
-  external set enumerable(bool? value);
-  external dynamic get value;
-  external set value(dynamic value);
-  external bool? get writable;
-  external set writable(bool? value);
+  external bool? configurable;
+  external bool? enumerable;
+  external dynamic value;
+  external bool? writable;
   external dynamic get();
   external void set(dynamic v);
   external factory PropertyDescriptor({
@@ -79,8 +71,7 @@ class PropertyDescriptorMap {
 @JS()
 @anonymous
 class Object {
-  external Function get constructor;
-  external set constructor(Function value);
+  external Function constructor;
   @override
   external String toString();
   external String toLocaleString();
@@ -96,6 +87,7 @@ class Object {
 @JS()
 class ObjectConstructor {
   external factory ObjectConstructor({dynamic value});
+  external dynamic call();
   external Object get prototype;
   external dynamic getPrototypeOf(dynamic o);
   external PropertyDescriptor? getOwnPropertyDescriptor(dynamic o, PropertyKey p);
@@ -113,9 +105,7 @@ class ObjectConstructor {
 }
 
 @JS(r'Object')
-external ObjectConstructor get JObject;
-@JS(r'Object')
-external set JObject(ObjectConstructor value);
+external ObjectConstructor JObject;
 
 @JS()
 @anonymous
@@ -147,13 +137,10 @@ class Function {
   ]);
   @override
   external String toString();
-  external dynamic get prototype;
-  external set prototype(dynamic value);
+  external dynamic prototype;
   external num get length;
-  external dynamic get arguments;
-  external set arguments(dynamic value);
-  external Function get caller;
-  external set caller(Function value);
+  external dynamic arguments;
+  external Function caller;
   external factory Function({
     dynamic prototype,
     num length,
@@ -175,13 +162,22 @@ class FunctionConstructor {
     String? args8,
     String? args9,
   ]);
+  external Function call([
+    String? args1,
+    String? args2,
+    String? args3,
+    String? args4,
+    String? args5,
+    String? args6,
+    String? args7,
+    String? args8,
+    String? args9,
+  ]);
   external Function get prototype;
 }
 
 @JS(r'Function')
-external FunctionConstructor get JFunction;
-@JS(r'Function')
-external set JFunction(FunctionConstructor value);
+external FunctionConstructor JFunction;
 
 /// dynamic | null
 typedef ThisParameterType<T> = dynamic;
@@ -230,10 +226,8 @@ class NewableFunction extends Function {
 @JS()
 @anonymous
 class IArguments {
-  external num get length;
-  external set length(num value);
-  external Function get callee;
-  external set callee(Function value);
+  external num length;
+  external Function callee;
   external factory IArguments({
     num length,
     Function callee,
@@ -243,6 +237,7 @@ class IArguments {
 @JS()
 class StringConstructor {
   external factory StringConstructor({dynamic value});
+  external String call(dynamic value);
   external String get prototype;
   external String fromCharCode([
     num? codes1,
@@ -258,9 +253,7 @@ class StringConstructor {
 }
 
 @JS(r'String')
-external StringConstructor get JString;
-@JS(r'String')
-external set JString(StringConstructor value);
+external StringConstructor JString;
 
 @JS()
 @anonymous
@@ -272,13 +265,12 @@ class Boolean {
 @JS()
 class BooleanConstructor {
   external factory BooleanConstructor({dynamic value});
+  external bool call<T>(T value);
   external bool get prototype;
 }
 
 @JS(r'Boolean')
-external BooleanConstructor get JBoolean;
-@JS(r'Boolean')
-external set JBoolean(BooleanConstructor value);
+external BooleanConstructor JBoolean;
 
 @JS()
 @anonymous
@@ -295,6 +287,7 @@ class Number {
 @JS()
 class NumberConstructor {
   external factory NumberConstructor({dynamic value});
+  external num call(dynamic value);
   external num get prototype;
   external num get MAX_VALUE;
   external num get MIN_VALUE;
@@ -304,9 +297,7 @@ class NumberConstructor {
 }
 
 @JS(r'Number')
-external NumberConstructor get JNumber;
-@JS(r'Number')
-external set JNumber(NumberConstructor value);
+external NumberConstructor JNumber;
 
 @JS()
 @anonymous
@@ -385,9 +376,7 @@ class Math {
 }
 
 @JS(r'Math')
-external Math get JMath;
-@JS(r'Math')
-external set JMath(Math value);
+external Math JMath;
 
 @JS()
 @anonymous
@@ -442,6 +431,7 @@ class Date {
 @JS()
 class DateConstructor {
   external factory DateConstructor();
+  external String call();
   external DateTime get prototype;
   external num parse(String s);
   external num UTC(num year, num month, num date, num hours, num minutes, num seconds, num ms);
@@ -449,17 +439,13 @@ class DateConstructor {
 }
 
 @JS(r'Date')
-external DateConstructor get JDate;
-@JS(r'Date')
-external set JDate(DateConstructor value);
+external DateConstructor JDate;
 
 @JS()
 @anonymous
 class RegExpMatchArray extends List<String> {
-  external num? get index;
-  external set index(num? value);
-  external String? get input;
-  external set input(String? value);
+  external num? index;
+  external String? input;
   external factory RegExpMatchArray({
     num? index,
     String? input,
@@ -469,10 +455,8 @@ class RegExpMatchArray extends List<String> {
 @JS()
 @anonymous
 class RegExpExecArray extends List<String> {
-  external num get index;
-  external set index(num value);
-  external String get input;
-  external set input(String value);
+  external num index;
+  external String input;
   external factory RegExpExecArray({
     num index,
     String input,
@@ -488,8 +472,7 @@ class RegExp {
   external bool get global;
   external bool get ignoreCase;
   external bool get multiline;
-  external num get lastIndex;
-  external set lastIndex(num value);
+  external num lastIndex;
   external RegExp compile();
   external factory RegExp({
     String source,
@@ -503,43 +486,29 @@ class RegExp {
 @JS()
 class RegExpConstructor {
   external factory RegExpConstructor({dynamic pattern});
+  external RegExp call(dynamic pattern);
   external RegExp get prototype;
-  external String get $1;
-  external set $1(String value);
-  external String get $2;
-  external set $2(String value);
-  external String get $3;
-  external set $3(String value);
-  external String get $4;
-  external set $4(String value);
-  external String get $5;
-  external set $5(String value);
-  external String get $6;
-  external set $6(String value);
-  external String get $7;
-  external set $7(String value);
-  external String get $8;
-  external set $8(String value);
-  external String get $9;
-  external set $9(String value);
-  external String get lastMatch;
-  external set lastMatch(String value);
+  external String $1;
+  external String $2;
+  external String $3;
+  external String $4;
+  external String $5;
+  external String $6;
+  external String $7;
+  external String $8;
+  external String $9;
+  external String lastMatch;
 }
 
 @JS(r'RegExp')
-external RegExpConstructor get JRegExp;
-@JS(r'RegExp')
-external set JRegExp(RegExpConstructor value);
+external RegExpConstructor JRegExp;
 
 @JS()
 @anonymous
 class Error {
-  external String get name;
-  external set name(String value);
-  external String get message;
-  external set message(String value);
-  external String? get stack;
-  external set stack(String? value);
+  external String name;
+  external String message;
+  external String? stack;
   external factory Error({
     String name,
     String message,
@@ -550,13 +519,12 @@ class Error {
 @JS()
 class ErrorConstructor {
   external factory ErrorConstructor({String message});
+  external Error call(String message);
   external Error get prototype;
 }
 
 @JS(r'Error')
-external ErrorConstructor get JError;
-@JS(r'Error')
-external set JError(ErrorConstructor value);
+external ErrorConstructor JError;
 
 @JS()
 @anonymous
@@ -567,13 +535,12 @@ class EvalError extends Error {
 @JS()
 class EvalErrorConstructor extends ErrorConstructor {
   external factory EvalErrorConstructor({String message});
+  external EvalError call(String message);
   external EvalError get prototype;
 }
 
 @JS(r'EvalError')
-external EvalErrorConstructor get JEvalError;
-@JS(r'EvalError')
-external set JEvalError(EvalErrorConstructor value);
+external EvalErrorConstructor JEvalError;
 
 @JS()
 @anonymous
@@ -584,13 +551,12 @@ class RangeError extends Error {
 @JS()
 class RangeErrorConstructor extends ErrorConstructor {
   external factory RangeErrorConstructor({String message});
+  external RangeError call(String message);
   external RangeError get prototype;
 }
 
 @JS(r'RangeError')
-external RangeErrorConstructor get JRangeError;
-@JS(r'RangeError')
-external set JRangeError(RangeErrorConstructor value);
+external RangeErrorConstructor JRangeError;
 
 @JS()
 @anonymous
@@ -601,13 +567,12 @@ class ReferenceError extends Error {
 @JS()
 class ReferenceErrorConstructor extends ErrorConstructor {
   external factory ReferenceErrorConstructor({String message});
+  external ReferenceError call(String message);
   external ReferenceError get prototype;
 }
 
 @JS(r'ReferenceError')
-external ReferenceErrorConstructor get JReferenceError;
-@JS(r'ReferenceError')
-external set JReferenceError(ReferenceErrorConstructor value);
+external ReferenceErrorConstructor JReferenceError;
 
 @JS()
 @anonymous
@@ -618,13 +583,12 @@ class SyntaxError extends Error {
 @JS()
 class SyntaxErrorConstructor extends ErrorConstructor {
   external factory SyntaxErrorConstructor({String message});
+  external SyntaxError call(String message);
   external SyntaxError get prototype;
 }
 
 @JS(r'SyntaxError')
-external SyntaxErrorConstructor get JSyntaxError;
-@JS(r'SyntaxError')
-external set JSyntaxError(SyntaxErrorConstructor value);
+external SyntaxErrorConstructor JSyntaxError;
 
 @JS()
 @anonymous
@@ -635,13 +599,12 @@ class TypeError extends Error {
 @JS()
 class TypeErrorConstructor extends ErrorConstructor {
   external factory TypeErrorConstructor({String message});
+  external TypeError call(String message);
   external TypeError get prototype;
 }
 
 @JS(r'TypeError')
-external TypeErrorConstructor get JTypeError;
-@JS(r'TypeError')
-external set JTypeError(TypeErrorConstructor value);
+external TypeErrorConstructor JTypeError;
 
 @JS()
 @anonymous
@@ -652,13 +615,12 @@ class URIError extends Error {
 @JS()
 class URIErrorConstructor extends ErrorConstructor {
   external factory URIErrorConstructor({String message});
+  external URIError call(String message);
   external URIError get prototype;
 }
 
 @JS(r'URIError')
-external URIErrorConstructor get JURIError;
-@JS(r'URIError')
-external set JURIError(URIErrorConstructor value);
+external URIErrorConstructor JURIError;
 
 @JS()
 @anonymous
@@ -669,9 +631,7 @@ class JSON {
 }
 
 @JS(r'JSON')
-external JSON get JJSON;
-@JS(r'JSON')
-external set JJSON(JSON value);
+external JSON JJSON;
 
 @JS()
 @anonymous
@@ -721,8 +681,7 @@ class ConcatArray<T> {
 @JS()
 @anonymous
 class Array<T> {
-  external num get length;
-  external set length(num value);
+  external num length;
   @override
   external String toString();
   external String toLocaleString();
@@ -783,30 +742,23 @@ class Array<T> {
 @JS()
 class ArrayConstructor {
   external factory ArrayConstructor({num arrayLength});
+  external List<dynamic> call(num arrayLength);
   external bool isArray(dynamic arg);
   external List<dynamic> get prototype;
 }
 
 @JS(r'Array')
-external ArrayConstructor get JArray;
-@JS(r'Array')
-external set JArray(ArrayConstructor value);
+external ArrayConstructor JArray;
 
 @JS()
 @anonymous
 class TypedPropertyDescriptor<T> {
-  external bool? get enumerable;
-  external set enumerable(bool? value);
-  external bool? get configurable;
-  external set configurable(bool? value);
-  external bool? get writable;
-  external set writable(bool? value);
-  external T? get value;
-  external set value(T? value);
-  external T Function()? get get;
-  external set get(T Function()? value);
-  external void Function(T value)? get set;
-  external set set(void Function(T value)? value);
+  external bool? enumerable;
+  external bool? configurable;
+  external bool? writable;
+  external T? value;
+  external T Function()? get;
+  external void Function(T value)? set;
   external factory TypedPropertyDescriptor({
     bool? enumerable,
     bool? configurable,
@@ -918,8 +870,7 @@ class ArrayBuffer {
 @JS()
 @anonymous
 class ArrayBufferTypes {
-  external ByteBuffer get ArrayBuffer;
-  external set ArrayBuffer(ByteBuffer value);
+  external ByteBuffer ArrayBuffer;
   external factory ArrayBufferTypes({
     ByteBuffer ArrayBuffer,
   });
@@ -935,19 +886,14 @@ class ArrayBufferConstructor {
 }
 
 @JS(r'ArrayBuffer')
-external ArrayBufferConstructor get JArrayBuffer;
-@JS(r'ArrayBuffer')
-external set JArrayBuffer(ArrayBufferConstructor value);
+external ArrayBufferConstructor JArrayBuffer;
 
 @JS()
 @anonymous
 class ArrayBufferView {
-  external ArrayBufferLike get buffer;
-  external set buffer(ArrayBufferLike value);
-  external num get byteLength;
-  external set byteLength(num value);
-  external num get byteOffset;
-  external set byteOffset(num value);
+  external ArrayBufferLike buffer;
+  external num byteLength;
+  external num byteOffset;
   external factory ArrayBufferView({
     ArrayBufferLike buffer,
     num byteLength,
@@ -991,9 +937,7 @@ class DataViewConstructor {
 }
 
 @JS(r'DataView')
-external DataViewConstructor get JDataView;
-@JS(r'DataView')
-external set JDataView(DataViewConstructor value);
+external DataViewConstructor JDataView;
 
 @JS()
 @anonymous
@@ -1056,9 +1000,7 @@ class Int8ArrayConstructor {
 }
 
 @JS(r'Int8Array')
-external Int8ArrayConstructor get JInt8Array;
-@JS(r'Int8Array')
-external set JInt8Array(Int8ArrayConstructor value);
+external Int8ArrayConstructor JInt8Array;
 
 @JS()
 @anonymous
@@ -1121,9 +1063,7 @@ class Uint8ArrayConstructor {
 }
 
 @JS(r'Uint8Array')
-external Uint8ArrayConstructor get JUint8Array;
-@JS(r'Uint8Array')
-external set JUint8Array(Uint8ArrayConstructor value);
+external Uint8ArrayConstructor JUint8Array;
 
 @JS()
 @anonymous
@@ -1188,9 +1128,7 @@ class Uint8ClampedArrayConstructor {
 }
 
 @JS(r'Uint8ClampedArray')
-external Uint8ClampedArrayConstructor get JUint8ClampedArray;
-@JS(r'Uint8ClampedArray')
-external set JUint8ClampedArray(Uint8ClampedArrayConstructor value);
+external Uint8ClampedArrayConstructor JUint8ClampedArray;
 
 @JS()
 @anonymous
@@ -1253,9 +1191,7 @@ class Int16ArrayConstructor {
 }
 
 @JS(r'Int16Array')
-external Int16ArrayConstructor get JInt16Array;
-@JS(r'Int16Array')
-external set JInt16Array(Int16ArrayConstructor value);
+external Int16ArrayConstructor JInt16Array;
 
 @JS()
 @anonymous
@@ -1318,9 +1254,7 @@ class Uint16ArrayConstructor {
 }
 
 @JS(r'Uint16Array')
-external Uint16ArrayConstructor get JUint16Array;
-@JS(r'Uint16Array')
-external set JUint16Array(Uint16ArrayConstructor value);
+external Uint16ArrayConstructor JUint16Array;
 
 @JS()
 @anonymous
@@ -1383,9 +1317,7 @@ class Int32ArrayConstructor {
 }
 
 @JS(r'Int32Array')
-external Int32ArrayConstructor get JInt32Array;
-@JS(r'Int32Array')
-external set JInt32Array(Int32ArrayConstructor value);
+external Int32ArrayConstructor JInt32Array;
 
 @JS()
 @anonymous
@@ -1448,9 +1380,7 @@ class Uint32ArrayConstructor {
 }
 
 @JS(r'Uint32Array')
-external Uint32ArrayConstructor get JUint32Array;
-@JS(r'Uint32Array')
-external set JUint32Array(Uint32ArrayConstructor value);
+external Uint32ArrayConstructor JUint32Array;
 
 @JS()
 @anonymous
@@ -1514,9 +1444,7 @@ class Float32ArrayConstructor {
 }
 
 @JS(r'Float32Array')
-external Float32ArrayConstructor get JFloat32Array;
-@JS(r'Float32Array')
-external set JFloat32Array(Float32ArrayConstructor value);
+external Float32ArrayConstructor JFloat32Array;
 
 @JS()
 @anonymous
@@ -1579,25 +1507,17 @@ class Float64ArrayConstructor {
 }
 
 @JS(r'Float64Array')
-external Float64ArrayConstructor get JFloat64Array;
-@JS(r'Float64Array')
-external set JFloat64Array(Float64ArrayConstructor value);
+external Float64ArrayConstructor JFloat64Array;
 
 @JS()
 @anonymous
 class CollatorOptions {
-  external String? get usage;
-  external set usage(String? value);
-  external String? get localeMatcher;
-  external set localeMatcher(String? value);
-  external bool? get numeric;
-  external set numeric(bool? value);
-  external String? get caseFirst;
-  external set caseFirst(String? value);
-  external String? get sensitivity;
-  external set sensitivity(String? value);
-  external bool? get ignorePunctuation;
-  external set ignorePunctuation(bool? value);
+  external String? usage;
+  external String? localeMatcher;
+  external bool? numeric;
+  external String? caseFirst;
+  external String? sensitivity;
+  external bool? ignorePunctuation;
   external factory CollatorOptions({
     String? usage,
     String? localeMatcher,
@@ -1611,20 +1531,13 @@ class CollatorOptions {
 @JS()
 @anonymous
 class ResolvedCollatorOptions {
-  external String get locale;
-  external set locale(String value);
-  external String get usage;
-  external set usage(String value);
-  external String get sensitivity;
-  external set sensitivity(String value);
-  external bool get ignorePunctuation;
-  external set ignorePunctuation(bool value);
-  external String get collation;
-  external set collation(String value);
-  external String get caseFirst;
-  external set caseFirst(String value);
-  external bool get numeric;
-  external set numeric(bool value);
+  external String locale;
+  external String usage;
+  external String sensitivity;
+  external bool ignorePunctuation;
+  external String collation;
+  external String caseFirst;
+  external bool numeric;
   external factory ResolvedCollatorOptions({
     String locale,
     String usage,
@@ -1645,35 +1558,22 @@ class Collator {
 }
 
 @JS(r'Intl.Collator')
-external ICollator get JCollator;
-@JS(r'Intl.Collator')
-external set JCollator(ICollator value);
+external ICollator JCollator;
 
 @JS()
 @anonymous
 class NumberFormatOptions {
-  external String? get localeMatcher;
-  external set localeMatcher(String? value);
-  external String? get style;
-  external set style(String? value);
-  external String? get currency;
-  external set currency(String? value);
-  external String? get currencyDisplay;
-  external set currencyDisplay(String? value);
-  external String? get currencySign;
-  external set currencySign(String? value);
-  external bool? get useGrouping;
-  external set useGrouping(bool? value);
-  external num? get minimumIntegerDigits;
-  external set minimumIntegerDigits(num? value);
-  external num? get minimumFractionDigits;
-  external set minimumFractionDigits(num? value);
-  external num? get maximumFractionDigits;
-  external set maximumFractionDigits(num? value);
-  external num? get minimumSignificantDigits;
-  external set minimumSignificantDigits(num? value);
-  external num? get maximumSignificantDigits;
-  external set maximumSignificantDigits(num? value);
+  external String? localeMatcher;
+  external String? style;
+  external String? currency;
+  external String? currencyDisplay;
+  external String? currencySign;
+  external bool? useGrouping;
+  external num? minimumIntegerDigits;
+  external num? minimumFractionDigits;
+  external num? maximumFractionDigits;
+  external num? minimumSignificantDigits;
+  external num? maximumSignificantDigits;
   external factory NumberFormatOptions({
     String? localeMatcher,
     String? style,
@@ -1692,28 +1592,17 @@ class NumberFormatOptions {
 @JS()
 @anonymous
 class ResolvedNumberFormatOptions {
-  external String get locale;
-  external set locale(String value);
-  external String get numberingSystem;
-  external set numberingSystem(String value);
-  external String get style;
-  external set style(String value);
-  external String? get currency;
-  external set currency(String? value);
-  external String? get currencyDisplay;
-  external set currencyDisplay(String? value);
-  external num get minimumIntegerDigits;
-  external set minimumIntegerDigits(num value);
-  external num get minimumFractionDigits;
-  external set minimumFractionDigits(num value);
-  external num get maximumFractionDigits;
-  external set maximumFractionDigits(num value);
-  external num? get minimumSignificantDigits;
-  external set minimumSignificantDigits(num? value);
-  external num? get maximumSignificantDigits;
-  external set maximumSignificantDigits(num? value);
-  external bool get useGrouping;
-  external set useGrouping(bool value);
+  external String locale;
+  external String numberingSystem;
+  external String style;
+  external String? currency;
+  external String? currencyDisplay;
+  external num minimumIntegerDigits;
+  external num minimumFractionDigits;
+  external num maximumFractionDigits;
+  external num? minimumSignificantDigits;
+  external num? maximumSignificantDigits;
+  external bool useGrouping;
   external factory ResolvedNumberFormatOptions({
     String locale,
     String numberingSystem,
@@ -1738,39 +1627,24 @@ class NumberFormat {
 }
 
 @JS(r'Intl.NumberFormat')
-external INumberFormat get JNumberFormat;
-@JS(r'Intl.NumberFormat')
-external set JNumberFormat(INumberFormat value);
+external INumberFormat JNumberFormat;
 
 @JS()
 @anonymous
 class DateTimeFormatOptions {
-  external String? get localeMatcher;
-  external set localeMatcher(String? value);
-  external String? get weekday;
-  external set weekday(String? value);
-  external String? get era;
-  external set era(String? value);
-  external String? get year;
-  external set year(String? value);
-  external String? get month;
-  external set month(String? value);
-  external String? get day;
-  external set day(String? value);
-  external String? get hour;
-  external set hour(String? value);
-  external String? get minute;
-  external set minute(String? value);
-  external String? get second;
-  external set second(String? value);
-  external String? get timeZoneName;
-  external set timeZoneName(String? value);
-  external String? get formatMatcher;
-  external set formatMatcher(String? value);
-  external bool? get hour12;
-  external set hour12(bool? value);
-  external String? get timeZone;
-  external set timeZone(String? value);
+  external String? localeMatcher;
+  external String? weekday;
+  external String? era;
+  external String? year;
+  external String? month;
+  external String? day;
+  external String? hour;
+  external String? minute;
+  external String? second;
+  external String? timeZoneName;
+  external String? formatMatcher;
+  external bool? hour12;
+  external String? timeZone;
   external factory DateTimeFormatOptions({
     String? localeMatcher,
     String? weekday,
@@ -1791,34 +1665,20 @@ class DateTimeFormatOptions {
 @JS()
 @anonymous
 class ResolvedDateTimeFormatOptions {
-  external String get locale;
-  external set locale(String value);
-  external String get calendar;
-  external set calendar(String value);
-  external String get numberingSystem;
-  external set numberingSystem(String value);
-  external String get timeZone;
-  external set timeZone(String value);
-  external bool? get hour12;
-  external set hour12(bool? value);
-  external String? get weekday;
-  external set weekday(String? value);
-  external String? get era;
-  external set era(String? value);
-  external String? get year;
-  external set year(String? value);
-  external String? get month;
-  external set month(String? value);
-  external String? get day;
-  external set day(String? value);
-  external String? get hour;
-  external set hour(String? value);
-  external String? get minute;
-  external set minute(String? value);
-  external String? get second;
-  external set second(String? value);
-  external String? get timeZoneName;
-  external set timeZoneName(String? value);
+  external String locale;
+  external String calendar;
+  external String numberingSystem;
+  external String timeZone;
+  external bool? hour12;
+  external String? weekday;
+  external String? era;
+  external String? year;
+  external String? month;
+  external String? day;
+  external String? hour;
+  external String? minute;
+  external String? second;
+  external String? timeZoneName;
   external factory ResolvedDateTimeFormatOptions({
     String locale,
     String calendar,
@@ -1846,9 +1706,7 @@ class DateTimeFormat {
 }
 
 @JS(r'Intl.DateTimeFormat')
-external IDateTimeFormat get JDateTimeFormat;
-@JS(r'Intl.DateTimeFormat')
-external set JDateTimeFormat(IDateTimeFormat value);
+external IDateTimeFormat JDateTimeFormat;
 
 @JS()
 @anonymous
@@ -1870,6 +1728,7 @@ class Date {
 @anonymous
 class ICollator {
   external factory ICollator({dynamic locales, CollatorOptions options});
+  external Collator call(dynamic locales, CollatorOptions options);
   external List<String> supportedLocalesOf(dynamic locales, CollatorOptions options);
 }
 
@@ -1877,6 +1736,7 @@ class ICollator {
 @anonymous
 class IDateTimeFormat {
   external factory IDateTimeFormat({dynamic locales, DateTimeFormatOptions options});
+  external DateTimeFormat call(dynamic locales, DateTimeFormatOptions options);
   external List<String> supportedLocalesOf(dynamic locales, DateTimeFormatOptions options);
 }
 
@@ -1884,5 +1744,6 @@ class IDateTimeFormat {
 @anonymous
 class INumberFormat {
   external factory INumberFormat({dynamic locales, NumberFormatOptions options});
+  external NumberFormat call(dynamic locales, NumberFormatOptions options);
   external List<String> supportedLocalesOf(dynamic locales, NumberFormatOptions options);
 }

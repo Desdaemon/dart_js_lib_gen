@@ -8,69 +8,40 @@ import "dart:html";
 @JS()
 @anonymous
 class JQueryAjaxSettings {
-  external dynamic get accepts;
-  external set accepts(dynamic value);
-  external bool? get async;
-  external set async(bool? value);
+  external dynamic accepts;
+  external bool? async;
   external dynamic beforeSend(JQueryXHR jqXHR, JQueryAjaxSettings settings);
-  external bool? get cache;
-  external set cache(bool? value);
+  external bool? cache;
   external dynamic complete(JQueryXHR jqXHR, String textStatus);
-  external dynamic get contents;
-  external set contents(dynamic value);
-  external dynamic get contentType;
-  external set contentType(dynamic value);
-  external dynamic get context;
-  external set context(dynamic value);
-  external dynamic get converters;
-  external set converters(dynamic value);
-  external bool? get crossDomain;
-  external set crossDomain(bool? value);
-  external dynamic get data;
-  external set data(dynamic value);
+  external dynamic contents;
+  external dynamic contentType;
+  external dynamic context;
+  external dynamic converters;
+  external bool? crossDomain;
+  external dynamic data;
   external dynamic dataFilter(dynamic data, dynamic ty);
-  external String? get dataType;
-  external set dataType(String? value);
+  external String? dataType;
   external dynamic error(JQueryXHR jqXHR, String textStatus, String errorThrown);
-  external bool? get global;
-  external set global(bool? value);
-  external dynamic get headers;
-  external set headers(dynamic value);
-  external bool? get ifModified;
-  external set ifModified(bool? value);
-  external bool? get isLocal;
-  external set isLocal(bool? value);
-  external dynamic get jsonp;
-  external set jsonp(dynamic value);
-  external dynamic get jsonpCallback;
-  external set jsonpCallback(dynamic value);
-  external String? get method;
-  external set method(String? value);
-  external String? get mimeType;
-  external set mimeType(String? value);
-  external String? get password;
-  external set password(String? value);
-  external bool? get processData;
-  external set processData(bool? value);
-  external String? get scriptCharset;
-  external set scriptCharset(String? value);
-  external dynamic get statusCode;
-  external set statusCode(dynamic value);
+  external bool? global;
+  external dynamic headers;
+  external bool? ifModified;
+  external bool? isLocal;
+  external dynamic jsonp;
+  external dynamic jsonpCallback;
+  external String? method;
+  external String? mimeType;
+  external String? password;
+  external bool? processData;
+  external String? scriptCharset;
+  external dynamic statusCode;
   external dynamic success(dynamic data, String textStatus, JQueryXHR jqXHR);
-  external num? get timeout;
-  external set timeout(num? value);
-  external bool? get traditional;
-  external set traditional(bool? value);
-  external String? get type;
-  external set type(String? value);
-  external String? get url;
-  external set url(String? value);
-  external String? get username;
-  external set username(String? value);
-  external dynamic get xhr;
-  external set xhr(dynamic value);
-  external dynamic get xhrFields;
-  external set xhrFields(dynamic value);
+  external num? timeout;
+  external bool? traditional;
+  external String? type;
+  external String? url;
+  external String? username;
+  external dynamic xhr;
+  external dynamic xhrFields;
   external factory JQueryAjaxSettings({
     dynamic accepts,
     bool? async,
@@ -111,8 +82,7 @@ class JQueryXHR extends HttpRequest {
   external void abort(String statusText);
   external JQueryPromise<R> then<R>(dynamic Function(dynamic data, String textStatus, JQueryXHR jqXHR) doneCallback,
       void Function(JQueryXHR jqXHR, String textStatus, dynamic errorThrown) failCallback);
-  external dynamic get responseJSON;
-  external set responseJSON(dynamic value);
+  external dynamic responseJSON;
   external void error(JQueryXHR xhr, String textStatus, String errorThrown);
   external factory JQueryXHR({
     dynamic responseJSON,
@@ -193,12 +163,36 @@ class JQueryGenericPromise<T> {
 @JS()
 @anonymous
 class JQueryPromiseCallback<T> {
+  external void call(
+    T value, [
+    dynamic args1,
+    dynamic args2,
+    dynamic args3,
+    dynamic args4,
+    dynamic args5,
+    dynamic args6,
+    dynamic args7,
+    dynamic args8,
+    dynamic args9,
+  ]);
   external factory JQueryPromiseCallback();
 }
 
 @JS()
 @anonymous
 class JQueryPromiseOperator<T, U> {
+  external JQueryPromise<U> call(
+    dynamic callback1, [
+    dynamic callbacksN1,
+    dynamic callbacksN2,
+    dynamic callbacksN3,
+    dynamic callbacksN4,
+    dynamic callbacksN5,
+    dynamic callbacksN6,
+    dynamic callbacksN7,
+    dynamic callbacksN8,
+    dynamic callbacksN9,
+  ]);
   external factory JQueryPromiseOperator();
 }
 
@@ -360,36 +354,24 @@ class JQueryDeferred<T> extends JQueryGenericPromise<T> {
 @JS()
 @anonymous
 class BaseJQueryEventObject extends Event {
-  external Element get currentTarget;
-  external set currentTarget(Element value);
-  external dynamic get data;
-  external set data(dynamic value);
-  external Element get delegateTarget;
-  external set delegateTarget(Element value);
+  external Element currentTarget;
+  external dynamic data;
+  external Element delegateTarget;
   external bool isDefaultPrevented();
   external bool isImmediatePropagationStopped();
   external bool isPropagationStopped();
-  external String get namespace;
-  external set namespace(String value);
-  external Event get originalEvent;
-  external set originalEvent(Event value);
+  external String namespace;
+  external Event originalEvent;
   external dynamic preventDefault();
-  external Element get relatedTarget;
-  external set relatedTarget(Element value);
-  external dynamic get result;
-  external set result(dynamic value);
+  external Element relatedTarget;
+  external dynamic result;
   external void stopImmediatePropagation();
   external void stopPropagation();
-  external Element get target;
-  external set target(Element value);
-  external num get pageX;
-  external set pageX(num value);
-  external num get pageY;
-  external set pageY(num value);
-  external num get which;
-  external set which(num value);
-  external bool get metaKey;
-  external set metaKey(bool value);
+  external Element target;
+  external num pageX;
+  external num pageY;
+  external num which;
+  external bool metaKey;
   external factory BaseJQueryEventObject({
     Element currentTarget,
     dynamic data,
@@ -409,8 +391,7 @@ class BaseJQueryEventObject extends Event {
 @JS()
 @anonymous
 class JQueryCustomEventObject extends BaseJQueryEventObject {
-  external dynamic get detail;
-  external set detail(dynamic value);
+  external dynamic detail;
   external factory JQueryCustomEventObject({
     dynamic detail,
   });
@@ -419,14 +400,10 @@ class JQueryCustomEventObject extends BaseJQueryEventObject {
 @JS()
 @anonymous
 class JQueryInputEventObject extends BaseJQueryEventObject {
-  external bool get altKey;
-  external set altKey(bool value);
-  external bool get ctrlKey;
-  external set ctrlKey(bool value);
-  external bool get metaKey;
-  external set metaKey(bool value);
-  external bool get shiftKey;
-  external set shiftKey(bool value);
+  external bool altKey;
+  external bool ctrlKey;
+  external bool metaKey;
+  external bool shiftKey;
   external factory JQueryInputEventObject({
     bool altKey,
     bool ctrlKey,
@@ -438,24 +415,15 @@ class JQueryInputEventObject extends BaseJQueryEventObject {
 @JS()
 @anonymous
 class JQueryMouseEventObject extends JQueryInputEventObject {
-  external num get button;
-  external set button(num value);
-  external num get clientX;
-  external set clientX(num value);
-  external num get clientY;
-  external set clientY(num value);
-  external num get offsetX;
-  external set offsetX(num value);
-  external num get offsetY;
-  external set offsetY(num value);
-  external num get pageX;
-  external set pageX(num value);
-  external num get pageY;
-  external set pageY(num value);
-  external num get screenX;
-  external set screenX(num value);
-  external num get screenY;
-  external set screenY(num value);
+  external num button;
+  external num clientX;
+  external num clientY;
+  external num offsetX;
+  external num offsetY;
+  external num pageX;
+  external num pageY;
+  external num screenX;
+  external num screenY;
   external factory JQueryMouseEventObject({
     num button,
     num clientX,
@@ -472,16 +440,11 @@ class JQueryMouseEventObject extends JQueryInputEventObject {
 @JS()
 @anonymous
 class JQueryKeyEventObject extends JQueryInputEventObject {
-  external String get char;
-  external set char(String value);
-  external num get charCode;
-  external set charCode(num value);
-  external String get code;
-  external set code(String value);
-  external String get key;
-  external set key(String value);
-  external num get keyCode;
-  external set keyCode(num value);
+  external String char;
+  external num charCode;
+  external String code;
+  external String key;
+  external num keyCode;
   external factory JQueryKeyEventObject({
     String char,
     num charCode,
@@ -500,43 +463,25 @@ class JQueryEventObject extends BaseJQueryEventObject {
 @JS()
 @anonymous
 class JQuerySupport {
-  external bool? get ajax;
-  external set ajax(bool? value);
-  external bool? get boxModel;
-  external set boxModel(bool? value);
-  external bool? get changeBubbles;
-  external set changeBubbles(bool? value);
-  external bool? get checkClone;
-  external set checkClone(bool? value);
-  external bool? get checkOn;
-  external set checkOn(bool? value);
-  external bool? get cors;
-  external set cors(bool? value);
-  external bool? get cssFloat;
-  external set cssFloat(bool? value);
-  external bool? get hrefNormalized;
-  external set hrefNormalized(bool? value);
-  external bool? get htmlSerialize;
-  external set htmlSerialize(bool? value);
-  external bool? get leadingWhitespace;
-  external set leadingWhitespace(bool? value);
-  external bool? get noCloneChecked;
-  external set noCloneChecked(bool? value);
-  external bool? get noCloneEvent;
-  external set noCloneEvent(bool? value);
-  external bool? get opacity;
-  external set opacity(bool? value);
-  external bool? get optDisabled;
-  external set optDisabled(bool? value);
-  external bool? get optSelected;
-  external set optSelected(bool? value);
+  external bool? ajax;
+  external bool? boxModel;
+  external bool? changeBubbles;
+  external bool? checkClone;
+  external bool? checkOn;
+  external bool? cors;
+  external bool? cssFloat;
+  external bool? hrefNormalized;
+  external bool? htmlSerialize;
+  external bool? leadingWhitespace;
+  external bool? noCloneChecked;
+  external bool? noCloneEvent;
+  external bool? opacity;
+  external bool? optDisabled;
+  external bool? optSelected;
   external bool scriptEval();
-  external bool? get style;
-  external set style(bool? value);
-  external bool? get submitBubbles;
-  external set submitBubbles(bool? value);
-  external bool? get tbody;
-  external set tbody(bool? value);
+  external bool? style;
+  external bool? submitBubbles;
+  external bool? tbody;
   external factory JQuerySupport({
     bool? ajax,
     bool? boxModel,
@@ -562,21 +507,21 @@ class JQuerySupport {
 @JS()
 @anonymous
 class JQueryParam {
+  external String call(dynamic obj);
   external factory JQueryParam();
 }
 
 @JS()
 class JQueryEventConstructor {
+  external JQueryEventObject call(String name, dynamic eventProperties);
   external factory JQueryEventConstructor({String name, dynamic eventProperties});
 }
 
 @JS()
 @anonymous
 class JQueryCoordinates {
-  external num get left;
-  external set left(num value);
-  external num get top;
-  external set top(num value);
+  external num left;
+  external num top;
   external factory JQueryCoordinates({
     num left,
     num top,
@@ -586,6 +531,7 @@ class JQueryCoordinates {
 @JS()
 @anonymous
 class cssPropertySetter {
+  external dynamic call(num index, String value);
   external factory cssPropertySetter();
 }
 
@@ -598,10 +544,8 @@ class JQueryCssProperties {
 @JS()
 @anonymous
 class JQuerySerializeArrayElement {
-  external String get name;
-  external set name(String value);
-  external String get value;
-  external set value(String value);
+  external String name;
+  external String value;
   external factory JQuerySerializeArrayElement({
     String name,
     String value,
@@ -611,28 +555,17 @@ class JQuerySerializeArrayElement {
 @JS()
 @anonymous
 class JQueryAnimationOptions {
-  external dynamic get duration;
-  external set duration(dynamic value);
-  external String? get easing;
-  external set easing(String? value);
-  external Function? get complete;
-  external set complete(Function? value);
-  external dynamic Function(num now, dynamic tween)? get step;
-  external set step(dynamic Function(num now, dynamic tween)? value);
-  external dynamic Function(JQueryPromise<dynamic> animation, num progress, num remainingMs)? get progress;
-  external set progress(dynamic Function(JQueryPromise<dynamic> animation, num progress, num remainingMs)? value);
-  external dynamic Function(JQueryPromise<dynamic> animation)? get start;
-  external set start(dynamic Function(JQueryPromise<dynamic> animation)? value);
-  external dynamic Function(JQueryPromise<dynamic> animation, bool jumpedToEnd)? get done;
-  external set done(dynamic Function(JQueryPromise<dynamic> animation, bool jumpedToEnd)? value);
-  external dynamic Function(JQueryPromise<dynamic> animation, bool jumpedToEnd)? get fail;
-  external set fail(dynamic Function(JQueryPromise<dynamic> animation, bool jumpedToEnd)? value);
-  external dynamic Function(JQueryPromise<dynamic> animation, bool jumpedToEnd)? get always;
-  external set always(dynamic Function(JQueryPromise<dynamic> animation, bool jumpedToEnd)? value);
-  external dynamic get queue;
-  external set queue(dynamic value);
-  external Object? get specialEasing;
-  external set specialEasing(Object? value);
+  external dynamic duration;
+  external String? easing;
+  external Function? complete;
+  external dynamic Function(num now, dynamic tween)? step;
+  external dynamic Function(JQueryPromise<dynamic> animation, num progress, num remainingMs)? progress;
+  external dynamic Function(JQueryPromise<dynamic> animation)? start;
+  external dynamic Function(JQueryPromise<dynamic> animation, bool jumpedToEnd)? done;
+  external dynamic Function(JQueryPromise<dynamic> animation, bool jumpedToEnd)? fail;
+  external dynamic Function(JQueryPromise<dynamic> animation, bool jumpedToEnd)? always;
+  external dynamic queue;
+  external Object? specialEasing;
   external factory JQueryAnimationOptions({
     dynamic duration,
     String? easing,
@@ -651,16 +584,15 @@ class JQueryAnimationOptions {
 @JS()
 @anonymous
 class JQueryEasingFunction {
+  external num call(num percent);
   external factory JQueryEasingFunction();
 }
 
 @JS()
 @anonymous
 class JQueryEasingFunctions {
-  external JQueryEasingFunction get linear;
-  external set linear(JQueryEasingFunction value);
-  external JQueryEasingFunction get swing;
-  external set swing(JQueryEasingFunction value);
+  external JQueryEasingFunction linear;
+  external JQueryEasingFunction swing;
   external factory JQueryEasingFunctions({
     JQueryEasingFunction linear,
     JQueryEasingFunction swing,
@@ -675,19 +607,18 @@ class JQueryStatic {
       String dataTypes, dynamic Function(dynamic opts, JQueryAjaxSettings originalOpts, JQueryXHR jqXHR) handler);
   external void ajaxTransport(
       String dataType, dynamic Function(dynamic opts, JQueryAjaxSettings originalOpts, JQueryXHR jqXHR) handler);
-  external JQueryAjaxSettings get ajaxSettings;
-  external set ajaxSettings(JQueryAjaxSettings value);
+  external JQueryAjaxSettings ajaxSettings;
   external void ajaxSetup(JQueryAjaxSettings options);
   external JQueryXHR get(
       String url, dynamic Function(dynamic data, String textStatus, JQueryXHR jqXHR) success, String dataType);
   external JQueryXHR getJSON(String url, dynamic Function(dynamic data, String textStatus, JQueryXHR jqXHR) success);
   external JQueryXHR getScript(String url, dynamic Function(String script, String textStatus, JQueryXHR jqXHR) success);
-  external JQueryParam get param;
-  external set param(JQueryParam value);
+  external JQueryParam param;
   external JQueryXHR post(
       String url, dynamic Function(dynamic data, String textStatus, JQueryXHR jqXHR) success, String dataType);
   external JQueryCallback Callbacks(String flags);
   external void holdReady(bool hold);
+  external JQuery call(String selector, dynamic context);
   external JQueryStatic noConflict(bool removeAll);
   external JQueryPromise<T> when<T>([
     dynamic deferreds1,
@@ -700,20 +631,16 @@ class JQueryStatic {
     dynamic deferreds8,
     dynamic deferreds9,
   ]);
-  external dynamic get cssHooks;
-  external set cssHooks(dynamic value);
-  external dynamic get cssNumber;
-  external set cssNumber(dynamic value);
+  external dynamic cssHooks;
+  external dynamic cssNumber;
   external T data<T>(Element element, String key, T value);
   external void dequeue(Element element, String queueName);
   external bool hasData(Element element);
   external List<dynamic> queue(Element element, String queueName);
   external JQuery removeData(Element element, String name);
   external JQueryDeferred<T> Deferred<T>(dynamic Function(JQueryDeferred<T> deferred) beforeStart);
-  external JQueryEasingFunctions get easing;
-  external set easing(JQueryEasingFunctions value);
-  external dynamic get fx;
-  external set fx(dynamic value);
+  external JQueryEasingFunctions easing;
+  external dynamic fx;
   external dynamic proxy(
     dynamic Function([
       dynamic args1,
@@ -738,16 +665,12 @@ class JQueryStatic {
     dynamic additionalArguments8,
     dynamic additionalArguments9,
   ]);
-  external JQueryEventConstructor get Event;
-  external set Event(JQueryEventConstructor value);
+  external JQueryEventConstructor Event;
   external JQuery error(dynamic message);
-  external dynamic get expr;
-  external set expr(dynamic value);
+  external dynamic expr;
   external JQuery get fn;
-  external bool get isReady;
-  external set isReady(bool value);
-  external JQuerySupport get support;
-  external set support(JQuerySupport value);
+  external bool isReady;
+  external JQuerySupport support;
   external bool contains(Element container, Element contained);
   external List<T> each<T>(List<T> collection, dynamic Function(num indexInArray, T valueOfElement) callback);
   external dynamic extend(
@@ -918,10 +841,8 @@ class JQuery {
   external JQuery unbind(String eventType, dynamic Function(JQueryEventObject eventObject) handler);
   external JQuery undelegate();
   external JQuery unload(dynamic Function(JQueryEventObject eventObject) handler);
-  external Element get context;
-  external set context(Element value);
-  external String get jquery;
-  external set jquery(String value);
+  external Element context;
+  external String jquery;
   external JQuery error(dynamic Function(JQueryEventObject eventObject) handler);
   external JQuery pushStack(List<dynamic> elements);
   external JQuery after(
@@ -991,10 +912,8 @@ class JQuery {
   external JQuery each(dynamic Function(num index, Element elem) func);
   external Element get(num index);
   external num index();
-  external num get length;
-  external set length(num value);
-  external String get selector;
-  external set selector(String value);
+  external num length;
+  external String selector;
   external JQuery add(String selector, Element context);
   external JQuery children(String selector);
   external JQuery closest(String selector);
@@ -1031,11 +950,7 @@ class JQuery {
 }
 
 @JS(r'jQuery')
-external JQueryStatic get jQuery;
-@JS(r'jQuery')
-external set jQuery(JQueryStatic value);
+external JQueryStatic jQuery;
 @JS(r'$')
-external JQueryStatic get $;
-@JS(r'$')
-external set $(JQueryStatic value);
+external JQueryStatic $;
 typedef Object = dynamic;
