@@ -4,3 +4,4 @@ target
 
 dart_js_lib_gen
 *.so
+flamegraph.svg

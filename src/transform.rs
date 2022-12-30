@@ -286,7 +286,7 @@ impl Transformer {
                             )
                             .with_color(Color::Blue),
                     )
-                    .with_note("Interface members staring with underscores are invalid in Dart.")
+                    .with_note("Interface members starting with underscores are invalid in Dart.")
                     .finish();
                 self.messages.push(Message::Warning(report));
                 None
@@ -658,8 +658,9 @@ impl Transformer {
     }
 
     /// ```dart
+    /// @JS() external T id;
+    /// # readonly
     /// @JS() external T get id;
-    /// @JS() external set id(T value);
     /// ```
     fn visit_variable(&mut self, var: &VarDecl) {
         for item in &var.decls {
@@ -740,10 +741,10 @@ impl Transformer {
     }
 
     /// `external set id(T value);`
-    fn emit_setter(&mut self, typ: &str, id: &str, param_name: Option<&str>) {
-        let param_name = param_name.unwrap_or("value");
-        write!(self.buf(), "external set {}({} {});", id, typ, param_name).unwrap();
-    }
+    // fn emit_setter(&mut self, typ: &str, id: &str, param_name: Option<&str>) {
+    //     let param_name = param_name.unwrap_or("value");
+    //     write!(self.buf(), "external set {}({} {});", id, typ, param_name).unwrap();
+    // }
 
     /// Returns None is [id] is already a member of the current class.
     fn register_member<'a>(&mut self, id: &'a str) -> Option<&'a str> {
